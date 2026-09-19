@@ -4,6 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="PARROT 669 — property services in Barcelona. Verification, property visits, document checks and local support." />
+  <link rel="canonical" href="https://parrot669.com/" />
+  <meta property="og:title" content="PARROT 669 — Property services in Barcelona" />
+  <meta property="og:description" content="Independent verification, property visits, document checks and local support in Barcelona." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://parrot669.com/" />
   <title>PARROT 669 — Property services in Barcelona</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,6 +95,13 @@
       </div>
     </section>
 
+    <section class="trust-strip" aria-label="Company facts">
+      <div><strong>PARROT 669 S.L.</strong><span data-i18n="factCompany">Barcelona-based company</span></div>
+      <div><strong>2023</strong><span data-i18n="factSince">Established</span></div>
+      <div><strong>EN · ES · CA · RU</strong><span data-i18n="factLanguages">We speak your language</span></div>
+      <div><strong data-i18n="factIndependentTitle">Independent</strong><span data-i18n="factIndependent">Local support & verification</span></div>
+    </section>
+
     <section class="section section-light" id="services">
       <div class="section-heading">
         <div>
@@ -106,42 +118,42 @@
           <div class="service-art art-search">⌕</div>
           <h3 data-i18n="service1Title">Verify a rental</h3>
           <p data-i18n="service1Text">Check the property, owner and documents before you send a deposit.</p>
-          <a href="#contact" aria-label="Request rental verification">→</a>
+          <a href="#contact" data-service="rental" aria-label="Request rental verification">→</a>
         </article>
 
         <article class="service-card">
           <div class="service-art art-home">⌂</div>
           <h3 data-i18n="service2Title">Visit a property for me</h3>
           <p data-i18n="service2Text">We go to the property, take photos and prepare a clear report.</p>
-          <a href="#contact" aria-label="Request a property visit">→</a>
+          <a href="#contact" data-service="visit" aria-label="Request a property visit">→</a>
         </article>
 
         <article class="service-card">
           <div class="service-art art-doc">▤</div>
           <h3 data-i18n="service3Title">Check property documents</h3>
           <p data-i18n="service3Text">Contracts, ownership, registrations and document consistency checks.</p>
-          <a href="#contact" aria-label="Request document check">→</a>
+          <a href="#contact" data-service="documents" aria-label="Request document check">→</a>
         </article>
 
         <article class="service-card">
           <div class="service-art art-city">⌖</div>
           <h3 data-i18n="service4Title">Help me find a property</h3>
           <p data-i18n="service4Text">Personalized support in your property search in Barcelona.</p>
-          <a href="#contact" aria-label="Request property search support">→</a>
+          <a href="#contact" data-service="search" aria-label="Request property search support">→</a>
         </article>
 
         <article class="service-card">
           <div class="service-art art-owner">◎</div>
           <h3 data-i18n="service5Title">I’m a property owner</h3>
           <p data-i18n="service5Text">Local support, property oversight and help coordinating practical tasks.</p>
-          <a href="#contact" aria-label="Owner services">→</a>
+          <a href="#contact" data-service="owner" aria-label="Owner services">→</a>
         </article>
 
         <article class="service-card">
           <div class="service-art art-more">•••</div>
           <h3 data-i18n="service6Title">Something else</h3>
           <p data-i18n="service6Text">Have a different request? Contact us and we’ll see what we can do.</p>
-          <a href="#contact" aria-label="Custom request">→</a>
+          <a href="#contact" data-service="other" aria-label="Custom request">→</a>
         </article>
       </div>
     </section>
@@ -184,11 +196,16 @@
       </div>
 
       <div class="vision-copy">
-        <p class="eyebrow dark" data-i18n="visionEyebrow">A BIGGER PICTURE</p>
-        <h2 data-i18n-html="visionTitle">Building trust<br>for real-world deals.</h2>
+        <p class="eyebrow dark" data-i18n="visionEyebrow">ABOUT PARROT 669</p>
+        <h2 data-i18n-html="visionTitle">Local presence.<br>A bigger ambition.</h2>
         <p data-i18n="visionText">
-          Today we help people with property and local services in Barcelona. Our long-term goal is bigger: make transactions between strangers safer and simpler — in real estate and beyond.
+          PARROT 669 S.L. is a Barcelona-based company established in 2023. We started in real estate and are building practical services around verification, local presence and trust in real-world transactions.
         </p>
+        <div class="about-facts">
+          <span data-i18n="aboutFact1">Real company. Local presence.</span>
+          <span data-i18n="aboutFact2">Practical help before grand promises.</span>
+          <span data-i18n="aboutFact3">Barcelona first. Wider trust infrastructure later.</span>
+        </div>
         <p class="vision-quote" data-i18n="visionQuote">Trust is infrastructure.</p>
       </div>
     </section>
@@ -203,6 +220,7 @@
         <div class="contact-note">
           <strong>PARROT 669 S.L.</strong>
           <span>Barcelona, Spain</span>
+          <a href="mailto:hello@parrot669.com">hello@parrot669.com</a>
         </div>
       </div>
 
@@ -245,6 +263,7 @@
 
   <footer>
     <span>© <span id="year"></span> PARROT 669 S.L.</span>
+    <a href="mailto:hello@parrot669.com">hello@parrot669.com</a>
     <span data-i18n="footerNote">Barcelona is where we start.</span>
   </footer>
 
