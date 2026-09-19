@@ -1094,3 +1094,13 @@ footer{
     font-size:16px;
   }
 }
+
+
+/* Simplify brand feature background: keep the emblem clean and stop suggesting a hidden image. */
+.brand-feature{
+  background:#0a1517;
+}
+.brand-feature-art::before,
+.brand-feature-art::after{
+  display:none;
+}
