@@ -8,6 +8,7 @@ Internal checklist for Barcelona rental-verification cases.
 - [ ] Record client name/contact
 - [ ] Record deadline
 - [ ] Record listing URL / source
+- [ ] Capture a durable copy of the listing (screenshots/PDF/export) before doing anything else
 - [ ] Record property address or best-known location
 - [ ] Record advertised rent
 - [ ] Record requested deposit / reservation / advance payment
