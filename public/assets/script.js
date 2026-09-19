@@ -240,3 +240,30 @@ document.querySelectorAll("[data-service-card]").forEach(card => {
     }
   });
 });
+
+
+const menuToggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+
+function setMobileMenu(open){
+  if (!menuToggle || !mobileMenu) return;
+  menuToggle.setAttribute("aria-expanded", String(open));
+  mobileMenu.setAttribute("aria-hidden", String(!open));
+  mobileMenu.classList.toggle("open", open);
+}
+
+menuToggle?.addEventListener("click", () => {
+  setMobileMenu(menuToggle.getAttribute("aria-expanded") !== "true");
+});
+
+mobileMenu?.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => setMobileMenu(false));
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") setMobileMenu(false);
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 980) setMobileMenu(false);
+});
