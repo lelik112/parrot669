@@ -6,6 +6,8 @@ const translations = {
     tellUs:"Tell us what you need", viewServices:"View our services",
     point1:"Independent and unbiased", point2:"Local presence in Barcelona", point3:"Clear reports and documentation",
     heroNote:"Barcelona<br>is where<br>we start.", sideNote:"REAL PEOPLE.<br>REAL PLACES.<br>SAFER DEALS.",
+    factCompany:"Barcelona-based company", factSince:"Established", factLanguages:"We speak your language", factIndependentTitle:"Independent", factIndependent:"Local support & verification",
+    aboutFact1:"Real company. Local presence.", aboutFact2:"Practical help before grand promises.", aboutFact3:"Barcelona first. Wider trust infrastructure later.",
     servicesEyebrow:"HOW CAN WE HELP?", servicesTitle:"Our services",
     servicesIntro:"Choose what you need or contact us with a custom request. We’ll find the best next step.",
     service1Title:"Verify a rental", service1Text:"Check the property, owner and documents before you send a deposit.",
@@ -19,9 +21,9 @@ const translations = {
     step2Title:"We check the case", step2Text:"We review the details and agree on next steps and price.",
     step3Title:"We do the work", step3Text:"Visits, verification, documentation and coordination where appropriate.",
     step4Title:"You get a clear result", step4Text:"Photos, documents, findings and the information needed for your next decision.",
-    visionArtText:"Barcelona<br>is where<br>we start.", visionEyebrow:"A BIGGER PICTURE",
-    visionTitle:"Building trust<br>for real-world deals.",
-    visionText:"Today we help people with property and local services in Barcelona. Our long-term goal is bigger: make transactions between strangers safer and simpler — in real estate and beyond.",
+    visionArtText:"Barcelona<br>is where<br>we start.", visionEyebrow:"ABOUT PARROT 669",
+    visionTitle:"Local presence.<br>A bigger ambition.",
+    visionText:"PARROT 669 S.L. is a Barcelona-based company established in 2023. We started in real estate and are building practical services around verification, local presence and trust in real-world transactions.",
     visionQuote:"Trust is infrastructure.",
     contactEyebrow:"CONTACT", contactTitle:"Tell us what you need.", contactText:"Send us the details. We’ll reply with the next step, scope and price before any paid work begins.",
     formName:"Name", formContact:"Email or WhatsApp", formNeed:"What do you need?", formMessage:"Tell us a little more",
@@ -36,6 +38,8 @@ const translations = {
     tellUs:"Cuéntanos qué necesitas", viewServices:"Ver servicios",
     point1:"Independiente e imparcial", point2:"Presencia local en Barcelona", point3:"Informes y documentación claros",
     heroNote:"Barcelona<br>es donde<br>empezamos.", sideNote:"PERSONAS REALES.<br>LUGARES REALES.<br>NEGOCIOS MÁS SEGUROS.",
+    factCompany:"Empresa con base en Barcelona", factSince:"Fundada", factLanguages:"Hablamos tu idioma", factIndependentTitle:"Independiente", factIndependent:"Apoyo local y verificación",
+    aboutFact1:"Empresa real. Presencia local.", aboutFact2:"Ayuda práctica antes que grandes promesas.", aboutFact3:"Primero Barcelona. Después, una infraestructura de confianza más amplia.",
     servicesEyebrow:"¿CÓMO PODEMOS AYUDAR?", servicesTitle:"Nuestros servicios",
     servicesIntro:"Elige lo que necesitas o contáctanos con una solicitud especial. Buscaremos el mejor siguiente paso.",
     service1Title:"Verificar un alquiler", service1Text:"Comprobamos la propiedad, el propietario y los documentos antes de que envíes un depósito.",
@@ -49,9 +53,9 @@ const translations = {
     step2Title:"Revisamos el caso", step2Text:"Revisamos los detalles y acordamos próximos pasos y precio.",
     step3Title:"Hacemos el trabajo", step3Text:"Visitas, verificaciones, documentación y coordinación cuando corresponda.",
     step4Title:"Recibes un resultado claro", step4Text:"Fotos, documentos, hallazgos e información para tomar tu siguiente decisión.",
-    visionArtText:"Barcelona<br>es donde<br>empezamos.", visionEyebrow:"UNA VISIÓN MÁS AMPLIA",
-    visionTitle:"Construimos confianza<br>para acuerdos reales.",
-    visionText:"Hoy ayudamos con propiedades y servicios locales en Barcelona. Nuestro objetivo a largo plazo es mayor: hacer que las transacciones entre desconocidos sean más seguras y sencillas, en el sector inmobiliario y más allá.",
+    visionArtText:"Barcelona<br>es donde<br>empezamos.", visionEyebrow:"SOBRE PARROT 669",
+    visionTitle:"Presencia local.<br>Una ambición mayor.",
+    visionText:"PARROT 669 S.L. es una empresa con base en Barcelona, fundada en 2023. Empezamos en el sector inmobiliario y estamos construyendo servicios prácticos alrededor de la verificación, la presencia local y la confianza en transacciones reales.",
     visionQuote:"La confianza es infraestructura.",
     contactEyebrow:"CONTACTO", contactTitle:"Cuéntanos qué necesitas.", contactText:"Envíanos los detalles. Te responderemos con el siguiente paso, alcance y precio antes de empezar cualquier trabajo de pago.",
     formName:"Nombre", formContact:"Email o WhatsApp", formNeed:"¿Qué necesitas?", formMessage:"Cuéntanos un poco más",
@@ -66,6 +70,8 @@ const translations = {
     tellUs:"Explica'ns què necessites", viewServices:"Veure serveis",
     point1:"Independent i imparcial", point2:"Presència local a Barcelona", point3:"Informes i documentació clars",
     heroNote:"Barcelona<br>és on<br>comencem.", sideNote:"PERSONES REALS.<br>LLOCS REALS.<br>ACORDS MÉS SEGURS.",
+    factCompany:"Empresa amb base a Barcelona", factSince:"Fundada", factLanguages:"Parlem el teu idioma", factIndependentTitle:"Independent", factIndependent:"Suport local i verificació",
+    aboutFact1:"Empresa real. Presència local.", aboutFact2:"Ajuda pràctica abans que grans promeses.", aboutFact3:"Primer Barcelona. Després, una infraestructura de confiança més àmplia.",
     servicesEyebrow:"COM ET PODEM AJUDAR?", servicesTitle:"Els nostres serveis",
     servicesIntro:"Tria què necessites o contacta'ns amb una petició especial. Trobarem el millor següent pas.",
     service1Title:"Verificar un lloguer", service1Text:"Comprovem la propietat, el propietari i els documents abans que enviïs un dipòsit.",
@@ -79,9 +85,9 @@ const translations = {
     step2Title:"Revisem el cas", step2Text:"Revisem els detalls i acordem els passos següents i el preu.",
     step3Title:"Fem la feina", step3Text:"Visites, verificació, documentació i coordinació quan correspongui.",
     step4Title:"Reps un resultat clar", step4Text:"Fotos, documents, conclusions i informació per prendre la teva següent decisió.",
-    visionArtText:"Barcelona<br>és on<br>comencem.", visionEyebrow:"UNA VISIÓ MÉS ÀMPLIA",
-    visionTitle:"Construïm confiança<br>per a acords reals.",
-    visionText:"Avui ajudem persones amb propietats i serveis locals a Barcelona. El nostre objectiu a llarg termini és més gran: fer que les transaccions entre desconeguts siguin més segures i senzilles, en l'àmbit immobiliari i més enllà.",
+    visionArtText:"Barcelona<br>és on<br>comencem.", visionEyebrow:"SOBRE PARROT 669",
+    visionTitle:"Presència local.<br>Una ambició més gran.",
+    visionText:"PARROT 669 S.L. és una empresa amb base a Barcelona, fundada el 2023. Vam començar en el sector immobiliari i estem construint serveis pràctics al voltant de la verificació, la presència local i la confiança en transaccions reals.",
     visionQuote:"La confiança és infraestructura.",
     contactEyebrow:"CONTACTE", contactTitle:"Explica'ns què necessites.", contactText:"Envia'ns els detalls. Et respondrem amb el següent pas, l'abast i el preu abans de començar qualsevol feina de pagament.",
     formName:"Nom", formContact:"Email o WhatsApp", formNeed:"Què necessites?", formMessage:"Explica'ns una mica més",
@@ -96,6 +102,8 @@ const translations = {
     tellUs:"Расскажите, что вам нужно", viewServices:"Посмотреть услуги",
     point1:"Независимо и без предвзятости", point2:"Мы находимся в Барселоне", point3:"Понятные отчёты и документы",
     heroNote:"Барселона —<br>это только<br>начало.", sideNote:"РЕАЛЬНЫЕ ЛЮДИ.<br>РЕАЛЬНЫЕ ОБЪЕКТЫ.<br>БОЛЕЕ БЕЗОПАСНЫЕ СДЕЛКИ.",
+    factCompany:"Компания из Барселоны", factSince:"Основана", factLanguages:"Говорим на вашем языке", factIndependentTitle:"Независимо", factIndependent:"Локальная помощь и проверка",
+    aboutFact1:"Реальная компания. Локальное присутствие.", aboutFact2:"Практическая помощь до больших обещаний.", aboutFact3:"Сначала Барселона. Потом более широкая инфраструктура доверия.",
     servicesEyebrow:"ЧЕМ МЫ МОЖЕМ ПОМОЧЬ?", servicesTitle:"Наши услуги",
     servicesIntro:"Выберите нужную услугу или опишите нестандартную задачу. Мы предложим следующий шаг.",
     service1Title:"Проверить аренду", service1Text:"Проверим объект, владельца и документы до того, как вы отправите депозит.",
@@ -109,9 +117,9 @@ const translations = {
     step2Title:"Мы изучаем задачу", step2Text:"Проверяем детали и заранее согласовываем следующие шаги и цену.",
     step3Title:"Выполняем работу", step3Text:"Осмотры, проверки, документы и координация там, где это уместно.",
     step4Title:"Вы получаете результат", step4Text:"Фотографии, документы, найденные факты и информация для следующего решения.",
-    visionArtText:"Барселона —<br>это только<br>начало.", visionEyebrow:"БОЛЬШАЯ КАРТИНА",
-    visionTitle:"Строим доверие<br>для реальных сделок.",
-    visionText:"Сегодня мы помогаем с недвижимостью и локальными услугами в Барселоне. Долгосрочная цель шире: сделать сделки между незнакомыми людьми безопаснее и проще — в недвижимости и за её пределами.",
+    visionArtText:"Барселона —<br>это только<br>начало.", visionEyebrow:"О PARROT 669",
+    visionTitle:"Локально сейчас.<br>Амбиции шире.",
+    visionText:"PARROT 669 S.L. — компания из Барселоны, основанная в 2023 году. Мы начали с недвижимости и строим практические сервисы вокруг проверки, локального присутствия и доверия в реальных сделках.",
     visionQuote:"Доверие — это инфраструктура.",
     contactEyebrow:"КОНТАКТЫ", contactTitle:"Расскажите, что вам нужно.", contactText:"Отправьте детали. До начала любой платной работы мы согласуем следующий шаг, объём и цену.",
     formName:"Имя", formContact:"Email или WhatsApp", formNeed:"Что вам нужно?", formMessage:"Расскажите немного подробнее",
@@ -186,4 +194,12 @@ form.addEventListener("submit", async (event) => {
   } finally {
     submit.disabled = false;
   }
+});
+
+
+document.querySelectorAll("[data-service]").forEach(link => {
+  link.addEventListener("click", () => {
+    const select = document.querySelector('select[name="service"]');
+    if (select) select.value = link.dataset.service;
+  });
 });
