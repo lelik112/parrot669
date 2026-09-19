@@ -26,7 +26,7 @@ const translations = {
     contactEyebrow:"CONTACT", contactTitle:"Tell us what you need.", contactText:"Send us the details. We’ll reply with the next step, scope and price before any paid work begins.",
     formName:"Name", formContact:"Email or WhatsApp", formNeed:"What do you need?", formMessage:"Tell us a little more",
     optionRental:"Rental verification", optionVisit:"Property visit", optionDocs:"Document check", optionSearch:"Property search support", optionOwner:"Owner services", optionOther:"Something else",
-    formSubmit:"Prepare request", formStatus:"This first version does not send data to a server yet. Your request will be prepared for copying.",
+    formSubmit:"Send request", formStatus:"We’ll use these details only to respond to your request.",
     footerNote:"Barcelona is where we start."
   },
   es: {
@@ -56,7 +56,7 @@ const translations = {
     contactEyebrow:"CONTACTO", contactTitle:"Cuéntanos qué necesitas.", contactText:"Envíanos los detalles. Te responderemos con el siguiente paso, alcance y precio antes de empezar cualquier trabajo de pago.",
     formName:"Nombre", formContact:"Email o WhatsApp", formNeed:"¿Qué necesitas?", formMessage:"Cuéntanos un poco más",
     optionRental:"Verificación de alquiler", optionVisit:"Visita a propiedad", optionDocs:"Revisión documental", optionSearch:"Apoyo en búsqueda", optionOwner:"Servicios para propietarios", optionOther:"Otra cosa",
-    formSubmit:"Preparar solicitud", formStatus:"Esta primera versión todavía no envía datos a un servidor. Prepararemos tu solicitud para copiarla.",
+    formSubmit:"Enviar solicitud", formStatus:"Usaremos estos datos únicamente para responder a tu solicitud.",
     footerNote:"Barcelona es donde empezamos."
   },
   ca: {
@@ -86,7 +86,7 @@ const translations = {
     contactEyebrow:"CONTACTE", contactTitle:"Explica'ns què necessites.", contactText:"Envia'ns els detalls. Et respondrem amb el següent pas, l'abast i el preu abans de començar qualsevol feina de pagament.",
     formName:"Nom", formContact:"Email o WhatsApp", formNeed:"Què necessites?", formMessage:"Explica'ns una mica més",
     optionRental:"Verificació de lloguer", optionVisit:"Visita a propietat", optionDocs:"Revisió documental", optionSearch:"Suport en la cerca", optionOwner:"Serveis per a propietaris", optionOther:"Una altra cosa",
-    formSubmit:"Preparar petició", formStatus:"Aquesta primera versió encara no envia dades a un servidor. Prepararem la teva petició perquè la puguis copiar.",
+    formSubmit:"Enviar petició", formStatus:"Farem servir aquestes dades únicament per respondre a la teva petició.",
     footerNote:"Barcelona és on comencem."
   },
   ru: {
@@ -116,7 +116,7 @@ const translations = {
     contactEyebrow:"КОНТАКТЫ", contactTitle:"Расскажите, что вам нужно.", contactText:"Отправьте детали. До начала любой платной работы мы согласуем следующий шаг, объём и цену.",
     formName:"Имя", formContact:"Email или WhatsApp", formNeed:"Что вам нужно?", formMessage:"Расскажите немного подробнее",
     optionRental:"Проверка аренды", optionVisit:"Осмотр объекта", optionDocs:"Проверка документов", optionSearch:"Помощь с поиском", optionOwner:"Услуги для владельцев", optionOther:"Что-то другое",
-    formSubmit:"Подготовить заявку", formStatus:"Первая версия сайта пока не отправляет данные на сервер. Заявка будет подготовлена для копирования.",
+    formSubmit:"Отправить заявку", formStatus:"Мы используем эти данные только для ответа на вашу заявку.",
     footerNote:"Барселона — это только начало."
   }
 };
@@ -151,23 +151,39 @@ document.getElementById("year").textContent = new Date().getFullYear();
 const form = document.getElementById("lead-form");
 const status = document.getElementById("form-status");
 
+const formMessages = {
+  en: {sending:"Sending…", success:"Thanks. Your request has been sent.", error:"Could not send the request. Please try again in a moment."},
+  es: {sending:"Enviando…", success:"Gracias. Tu solicitud ha sido enviada.", error:"No se pudo enviar la solicitud. Inténtalo de nuevo en un momento."},
+  ca: {sending:"Enviant…", success:"Gràcies. La teva petició s'ha enviat.", error:"No s'ha pogut enviar la petició. Torna-ho a provar d'aquí a un moment."},
+  ru: {sending:"Отправляем…", success:"Спасибо. Заявка отправлена.", error:"Не удалось отправить заявку. Попробуйте ещё раз через минуту."}
+};
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const submit = form.querySelector('button[type="submit"]');
+  const lang = document.documentElement.lang || "en";
+  const messages = formMessages[lang] || formMessages.en;
   const data = Object.fromEntries(new FormData(form).entries());
-  const text = [
-    "PARROT 669 request",
-    "",
-    `Name: ${data.name}`,
-    `Contact: ${data.contact}`,
-    `Service: ${data.service}`,
-    "",
-    data.message
-  ].join("\n");
+
+  submit.disabled = true;
+  status.textContent = messages.sending;
 
   try {
-    await navigator.clipboard.writeText(text);
-    status.textContent = "Request copied to clipboard. Connect the form to email/Formspree before launch.";
-  } catch {
-    status.textContent = text;
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    form.reset();
+    status.textContent = messages.success;
+  } catch (error) {
+    console.error("Contact form error:", error);
+    status.textContent = messages.error;
+  } finally {
+    submit.disabled = false;
   }
 });

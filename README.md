@@ -1,56 +1,38 @@
-# PARROT 669 — first static website
+# PARROT 669 v2
 
-This is a no-backend first version of parrot669.com.
+Static site + Cloudflare Worker contact endpoint.
 
-## What's included
-- Responsive one-page website
-- EN / ES / CA / RU language switcher
-- Services, process, vision and contact sections
-- No analytics, cookies or third-party tracking
-- Contact form currently prepares/copies a request instead of sending it
+## What changed
+- The public form now POSTs to `/api/contact`.
+- The Worker sends the request to a verified Cloudflare Email Routing destination.
+- The private Gmail address is NOT stored in the repository.
+- `hello@parrot669.com` is used as the sender.
+- Basic validation + honeypot spam trap are included.
 
-## Local preview
-Just open `index.html` in a browser.
+## One required Cloudflare setting
+In the `parrot669` Worker:
 
-For a more realistic local preview:
-```bash
-python3 -m http.server 8000
-```
-Then open http://localhost:8000
+**Settings → Variables & Secrets → Add**
 
-## Cloudflare Pages deployment
+- Name: `NOTIFY_TO`
+- Value: your verified destination Gmail address
+- Type: Secret
 
-### Easiest route: Direct Upload
-1. Sign in to Cloudflare.
-2. Go to **Workers & Pages**.
-3. Click **Create application**.
-4. Choose **Pages**.
-5. Choose **Upload assets / Direct Upload**.
-6. Name the project, for example `parrot669`.
-7. Upload the contents of this folder.
-8. Deploy.
+Do not put the Gmail address in the repository.
 
-Cloudflare will give you a temporary `*.pages.dev` address.
+## Git deployment
+Replace the repository contents with this project and push to the connected production branch.
 
-### Connect parrot669.com
-1. Open the Pages project in Cloudflare.
-2. Go to **Custom domains**.
-3. Click **Set up a custom domain**.
-4. Enter `parrot669.com`.
-5. Because the domain is already on Cloudflare, DNS setup should be straightforward.
-6. Also add `www.parrot669.com` if you want it, and redirect one version to the other.
+Cloudflare Workers Builds normally deploys with:
+`npx wrangler deploy`
 
-## Before public launch
-- Ask your gestor/lawyer which exact services PARROT 669 S.L. can advertise/provide.
-- Replace any service wording that falls outside the approved scope.
-- Add legal notice / privacy policy.
-- Connect the form to an actual inbox or form service.
-- Add a real business contact email / WhatsApp.
-- Consider adding business registration details where legally required.
+The project includes `wrangler.jsonc`, so the static site in `public/` and the Worker in `src/` are deployed together.
 
-## Form options later
-- Formspree
-- Cloudflare Pages Functions
-- Email/CRM integration
+## Test after deploy
+1. Open the site.
+2. Send a test request through the form.
+3. Confirm it arrives at the verified Gmail destination.
+4. Check Worker logs if the form reports an error.
 
-Do not add analytics/cookies until you actually need them. It keeps the first legal/privacy setup much simpler.
+## If email sending fails
+The sender must be on a domain with Email Routing enabled, and the destination must be verified in the same Cloudflare account.

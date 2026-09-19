@@ -230,7 +230,12 @@
           <span data-i18n="formMessage">Tell us a little more</span>
           <textarea name="message" rows="5" required></textarea>
         </label>
-        <button class="button" type="submit" data-i18n="formSubmit">Prepare request</button>
+
+        <label class="hp-field" aria-hidden="true">
+          Website
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </label>
+        <button class="button" type="submit" data-i18n="formSubmit">Send request</button>
         <p class="form-status" id="form-status" data-i18n="formStatus">
           This first version does not send data to a server yet. Your request will be prepared for copying.
         </p>
