@@ -1104,3 +1104,16 @@ footer{
 .brand-feature-art::after{
   display:none;
 }
+
+
+/* Blend the approved emblem into the normal site background instead of showing its dark image rectangle. */
+.brand-feature{
+  background:#0a1517;
+}
+.brand-feature-art{
+  background:transparent;
+}
+.brand-feature-art img{
+  mix-blend-mode:screen;
+  filter:none;
+}
