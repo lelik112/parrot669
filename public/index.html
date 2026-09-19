@@ -51,6 +51,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-copy">
+          <div class="hero-kicker"><span class="status-dot"></span><span data-i18n="heroStatus">Barcelona · Independent local service</span></div>
           <p class="eyebrow" data-i18n="heroEyebrow">PROPERTY SERVICES IN BARCELONA</p>
           <h1 data-i18n-html="heroTitle">Find. Check.<br>Move with <span>confidence.</span></h1>
           <p class="hero-lead" data-i18n="heroLead">
@@ -114,42 +115,42 @@
       </div>
 
       <div class="service-grid">
-        <article class="service-card">
+        <article class="service-card" data-service-card="rental" tabindex="0" role="button" aria-label="Request rental verification">
           <div class="service-art art-search">⌕</div>
           <h3 data-i18n="service1Title">Verify a rental</h3>
           <p data-i18n="service1Text">Check the property, owner and documents before you send a deposit.</p>
           <a href="#contact" data-service="rental" aria-label="Request rental verification">→</a>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-service-card="visit" tabindex="0" role="button" aria-label="Request a property visit">
           <div class="service-art art-home">⌂</div>
           <h3 data-i18n="service2Title">Visit a property for me</h3>
           <p data-i18n="service2Text">We go to the property, take photos and prepare a clear report.</p>
           <a href="#contact" data-service="visit" aria-label="Request a property visit">→</a>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-service-card="documents" tabindex="0" role="button" aria-label="Request document check">
           <div class="service-art art-doc">▤</div>
           <h3 data-i18n="service3Title">Check property documents</h3>
           <p data-i18n="service3Text">Contracts, ownership, registrations and document consistency checks.</p>
           <a href="#contact" data-service="documents" aria-label="Request document check">→</a>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-service-card="search" tabindex="0" role="button" aria-label="Request property search support">
           <div class="service-art art-city">⌖</div>
           <h3 data-i18n="service4Title">Help me find a property</h3>
           <p data-i18n="service4Text">Personalized support in your property search in Barcelona.</p>
           <a href="#contact" data-service="search" aria-label="Request property search support">→</a>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-service-card="owner" tabindex="0" role="button" aria-label="Owner services">
           <div class="service-art art-owner">◎</div>
           <h3 data-i18n="service5Title">I’m a property owner</h3>
           <p data-i18n="service5Text">Local support, property oversight and help coordinating practical tasks.</p>
           <a href="#contact" data-service="owner" aria-label="Owner services">→</a>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-service-card="other" tabindex="0" role="button" aria-label="Custom request">
           <div class="service-art art-more">•••</div>
           <h3 data-i18n="service6Title">Something else</h3>
           <p data-i18n="service6Text">Have a different request? Contact us and we’ll see what we can do.</p>
@@ -189,6 +190,24 @@
       </div>
     </section>
 
+    <section class="credibility">
+      <div>
+        <span class="credibility-label" data-i18n="credLabel1">BEFORE YOU PAY</span>
+        <strong data-i18n="credTitle1">We agree the scope first.</strong>
+        <p data-i18n="credText1">You know what we will check and what it costs before paid work begins.</p>
+      </div>
+      <div>
+        <span class="credibility-label" data-i18n="credLabel2">WHAT YOU GET</span>
+        <strong data-i18n="credTitle2">Facts, evidence and a clear result.</strong>
+        <p data-i18n="credText2">We separate what is verified from what could not be verified.</p>
+      </div>
+      <div>
+        <span class="credibility-label" data-i18n="credLabel3">NO FALSE CERTAINTY</span>
+        <strong data-i18n="credTitle3">Verification reduces uncertainty.</strong>
+        <p data-i18n="credText3">We do not present an incomplete check as a guarantee.</p>
+      </div>
+    </section>
+
     <section class="section section-light vision" id="about">
       <div class="vision-art">
         <div class="vision-city"></div>
@@ -220,7 +239,6 @@
         <div class="contact-note">
           <strong>PARROT 669 S.L.</strong>
           <span>Barcelona, Spain</span>
-          <a href="mailto:hello@parrot669.com">hello@parrot669.com</a>
         </div>
       </div>
 
@@ -263,7 +281,6 @@
 
   <footer>
     <span>© <span id="year"></span> PARROT 669 S.L.</span>
-    <a href="mailto:hello@parrot669.com">hello@parrot669.com</a>
     <span data-i18n="footerNote">Barcelona is where we start.</span>
   </footer>
 
