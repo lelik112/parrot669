@@ -972,41 +972,125 @@ footer{
 }
 
 
-/* Large brand emblem: isolated band, intentionally simple to avoid layout coupling. */
-.brand-emblem-band{
+
+
+/* Integrated brand/About section: large emblem with content, no dead black space. */
+.brand-feature{
   display:grid;
-  place-items:center;
-  min-height:430px;
-  padding:34px 5vw 38px;
-  overflow:hidden;
+  grid-template-columns:minmax(380px,.9fr) minmax(460px,1.1fr);
+  gap:72px;
+  align-items:center;
+  padding:72px 5vw 76px;
   background:
-    radial-gradient(circle at 50% 48%,rgba(216,255,99,.055),transparent 27%),
-    #070d0e;
+    radial-gradient(circle at 24% 52%,rgba(216,255,99,.055),transparent 24%),
+    #0a1517;
   border-bottom:1px solid rgba(255,255,255,.06);
 }
-.brand-emblem-band img{
+.brand-feature-art{
+  position:relative;
+  min-height:500px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.brand-feature-art::before{
+  content:"";
+  position:absolute;
+  width:min(38vw,520px);
+  aspect-ratio:1;
+  border:1px solid rgba(216,255,99,.09);
+  border-radius:50%;
+}
+.brand-feature-art::after{
+  content:"669";
+  position:absolute;
+  left:2%;
+  bottom:4%;
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(70px,8vw,132px);
+  line-height:.8;
+  letter-spacing:-.09em;
+  color:rgba(216,255,99,.035);
+  pointer-events:none;
+}
+.brand-feature-art img{
+  position:relative;
+  z-index:1;
   display:block;
-  width:min(68vw,430px);
+  width:min(34vw,460px);
   max-width:100%;
   height:auto;
   margin:0 auto;
   object-fit:contain;
-  filter:drop-shadow(0 26px 42px rgba(0,0,0,.34));
+  filter:drop-shadow(0 30px 48px rgba(0,0,0,.34));
 }
-.brand{gap:0}
-.footer-brand{gap:0}
+.brand-feature-copy{
+  max-width:760px;
+}
+.brand-feature-copy h2{
+  margin:0;
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(42px,4.6vw,68px);
+  line-height:.98;
+  letter-spacing:-.05em;
+}
+.brand-feature-lead{
+  max-width:690px;
+  margin:24px 0 0;
+  color:#9ba9a5;
+  font-size:18px;
+  line-height:1.7;
+}
+.brand-feature .about-facts{
+  margin-top:28px;
+}
+.brand-feature .vision-quote{
+  margin-top:30px;
+  color:#e9efeb;
+}
 
 @media (max-width:980px){
-  .brand-emblem-band{
-    min-height:390px;
-    padding:28px 5vw 32px;
+  .brand-feature{
+    grid-template-columns:1fr;
+    gap:24px;
+    padding:58px 5vw 64px;
   }
-  .brand-emblem-band img{width:min(72vw,390px)}
+  .brand-feature-art{
+    min-height:410px;
+  }
+  .brand-feature-art::before{
+    width:min(70vw,460px);
+  }
+  .brand-feature-art img{
+    width:min(68vw,410px);
+  }
+  .brand-feature-copy{
+    max-width:800px;
+  }
 }
+
 @media (max-width:640px){
-  .brand-emblem-band{
-    min-height:330px;
-    padding:22px 20px 26px;
+  .brand-feature{
+    padding:44px 20px 52px;
   }
-  .brand-emblem-band img{width:min(88vw,330px)}
+  .brand-feature-art{
+    min-height:330px;
+  }
+  .brand-feature-art::before{
+    width:min(88vw,360px);
+  }
+  .brand-feature-art img{
+    width:min(82vw,330px);
+  }
+  .brand-feature-art::after{
+    font-size:78px;
+    left:0;
+    bottom:2%;
+  }
+  .brand-feature-copy h2{
+    font-size:44px;
+  }
+  .brand-feature-lead{
+    font-size:16px;
+  }
 }
