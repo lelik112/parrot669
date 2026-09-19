@@ -942,3 +942,31 @@ footer{
     transition-duration:.01ms!important;
   }
 }
+
+/* Brand artwork: concept 2 used at display size; micro-mark remains deliberately simple. */
+.brand-art{
+  background:
+    radial-gradient(circle at 50% 42%,rgba(216,255,99,.055),transparent 30%),
+    #070d0e;
+  display:grid;
+  place-items:center;
+  padding:28px;
+}
+.brand-art img{
+  width:min(100%,560px);
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 28px 44px rgba(0,0,0,.34));
+}
+.brand-art span{
+  left:auto;
+  right:7%;
+  bottom:8%;
+  font-size:22px;
+  color:rgba(242,244,239,.72);
+  transform:rotate(-5deg);
+}
+@media (max-width:640px){
+  .brand-art{padding:18px}
+  .brand-art span{font-size:18px}
+}
