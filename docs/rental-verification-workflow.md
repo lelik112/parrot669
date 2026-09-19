@@ -20,7 +20,7 @@ The deliverable is an evidence-based report showing:
 
 Minimum information requested from the client:
 
-- listing URL or screenshots;
+- listing URL **and** a saved copy (screenshots/PDF/export) captured at intake;
 - property address, if known;
 - name and contact details of the person offering the property;
 - proposed rent, deposit, reservation payment or other requested payment;
@@ -82,7 +82,7 @@ Where appropriate and with a lawful basis:
 
 ## 4. Evidence handling
 
-Every relevant item gets an evidence ID.
+Every relevant item gets an evidence ID. Public listing pages must be snapshotted at intake because links can become unavailable, change, or block automated access.
 
 Example:
 
