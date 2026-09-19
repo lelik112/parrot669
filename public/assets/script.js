@@ -1,6 +1,10 @@
 const translations = {
   en: {
     brandTag:"REAL-WORLD DEALS. SAFER.", navHome:"Home", navServices:"Services", navAbout:"About", navContact:"Contact", contactUs:"Contact us",
+    heroStatus:"Barcelona · Independent local service",
+    credLabel1:"BEFORE YOU PAY", credTitle1:"We agree the scope first.", credText1:"You know what we will check and what it costs before paid work begins.",
+    credLabel2:"WHAT YOU GET", credTitle2:"Facts, evidence and a clear result.", credText2:"We separate what is verified from what could not be verified.",
+    credLabel3:"NO FALSE CERTAINTY", credTitle3:"Verification reduces uncertainty.", credText3:"We do not present an incomplete check as a guarantee.",
     heroEyebrow:"PROPERTY SERVICES IN BARCELONA", heroTitle:"Find. Check.<br>Move with <span>confidence.</span>",
     heroLead:"Independent verification, property visits, document checks and local support for tenants, owners and newcomers in Barcelona.",
     tellUs:"Tell us what you need", viewServices:"View our services",
@@ -33,6 +37,10 @@ const translations = {
   },
   es: {
     brandTag:"NEGOCIOS REALES. MÁS SEGUROS.", navHome:"Inicio", navServices:"Servicios", navAbout:"Nosotros", navContact:"Contacto", contactUs:"Contáctanos",
+    heroStatus:"Barcelona · Servicio local independiente",
+    credLabel1:"ANTES DE PAGAR", credTitle1:"Primero acordamos el alcance.", credText1:"Sabrás qué vamos a comprobar y cuánto cuesta antes de empezar cualquier trabajo de pago.",
+    credLabel2:"QUÉ RECIBES", credTitle2:"Hechos, pruebas y un resultado claro.", credText2:"Separamos lo verificado de lo que no se ha podido verificar.",
+    credLabel3:"SIN FALSA CERTEZA", credTitle3:"La verificación reduce la incertidumbre.", credText3:"No presentamos una comprobación incompleta como una garantía.",
     heroEyebrow:"SERVICIOS INMOBILIARIOS EN BARCELONA", heroTitle:"Encuentra. Comprueba.<br>Avanza con <span>confianza.</span>",
     heroLead:"Verificación independiente, visitas a propiedades, revisión documental y apoyo local para inquilinos, propietarios y recién llegados a Barcelona.",
     tellUs:"Cuéntanos qué necesitas", viewServices:"Ver servicios",
@@ -65,6 +73,10 @@ const translations = {
   },
   ca: {
     brandTag:"ACORDS REALS. MÉS SEGURS.", navHome:"Inici", navServices:"Serveis", navAbout:"Nosaltres", navContact:"Contacte", contactUs:"Contacta'ns",
+    heroStatus:"Barcelona · Servei local independent",
+    credLabel1:"ABANS DE PAGAR", credTitle1:"Primer acordem l'abast.", credText1:"Sabràs què comprovarem i quant costa abans de començar qualsevol feina de pagament.",
+    credLabel2:"QUÈ REPS", credTitle2:"Fets, proves i un resultat clar.", credText2:"Separem el que s'ha verificat del que no s'ha pogut verificar.",
+    credLabel3:"SENSE FALSA CERTESA", credTitle3:"La verificació redueix la incertesa.", credText3:"No presentem una comprovació incompleta com una garantia.",
     heroEyebrow:"SERVEIS IMMOBILIARIS A BARCELONA", heroTitle:"Troba. Comprova.<br>Avança amb <span>confiança.</span>",
     heroLead:"Verificació independent, visites a propietats, revisió documental i suport local per a llogaters, propietaris i persones que arriben a Barcelona.",
     tellUs:"Explica'ns què necessites", viewServices:"Veure serveis",
@@ -97,6 +109,10 @@ const translations = {
   },
   ru: {
     brandTag:"РЕАЛЬНЫЕ СДЕЛКИ. БЕЗОПАСНЕЕ.", navHome:"Главная", navServices:"Услуги", navAbout:"О нас", navContact:"Контакты", contactUs:"Связаться",
+    heroStatus:"Барселона · Независимый локальный сервис",
+    credLabel1:"ДО ОПЛАТЫ", credTitle1:"Сначала согласуем объём.", credText1:"До начала платной работы вы знаете, что именно мы проверяем и сколько это стоит.",
+    credLabel2:"ЧТО ВЫ ПОЛУЧАЕТЕ", credTitle2:"Факты, подтверждения и понятный результат.", credText2:"Мы отделяем подтверждённое от того, что проверить не удалось.",
+    credLabel3:"БЕЗ ЛОЖНОЙ УВЕРЕННОСТИ", credTitle3:"Проверка снижает неопределённость.", credText3:"Мы не выдаём неполную проверку за гарантию.",
     heroEyebrow:"УСЛУГИ С НЕДВИЖИМОСТЬЮ В БАРСЕЛОНЕ", heroTitle:"Найти. Проверить.<br>Действовать <span>уверенно.</span>",
     heroLead:"Независимая проверка, осмотр объектов, проверка документов и локальная поддержка для арендаторов, владельцев и тех, кто переезжает в Барселону.",
     tellUs:"Расскажите, что вам нужно", viewServices:"Посмотреть услуги",
@@ -201,5 +217,26 @@ document.querySelectorAll("[data-service]").forEach(link => {
   link.addEventListener("click", () => {
     const select = document.querySelector('select[name="service"]');
     if (select) select.value = link.dataset.service;
+  });
+});
+
+
+document.querySelectorAll("[data-service-card]").forEach(card => {
+  const activate = () => {
+    const select = document.querySelector('select[name="service"]');
+    if (select) select.value = card.dataset.serviceCard;
+    document.getElementById("contact")?.scrollIntoView({behavior:"smooth"});
+  };
+
+  card.addEventListener("click", (event) => {
+    if (event.target.closest("a")) return;
+    activate();
+  });
+
+  card.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      activate();
+    }
   });
 });
