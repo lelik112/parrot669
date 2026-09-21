@@ -1479,3 +1479,30 @@ footer{
 .host-property-form{grid-template-columns:1.35fr .8fr .55fr .65fr .7fr auto}
 @media(max-width:1100px){.host-property-form{grid-template-columns:repeat(3,1fr)}.host-property-form .button{grid-column:1/-1}}
 @media(max-width:640px){.host-property-form{grid-template-columns:1fr}}
+
+.housing-tabs{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  padding:18px 5vw 0;
+  background:#050c0e;
+}
+.housing-tabs a{
+  padding:10px 18px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;
+  color:#83918d;
+  font-size:13px;
+  font-weight:600;
+}
+.housing-tabs a:hover{color:#e9efeb;border-color:rgba(255,255,255,.16)}
+.housing-tabs a.active{background:rgba(216,255,99,.1);border-color:rgba(216,255,99,.28);color:var(--lime)}
+.host-listing-actions{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.host-listing-actions .host-saved-link{min-width:0;flex:1}
+.availability-owner{color:#b8c3bf;font-size:13px;margin-top:-8px}
+.host-form input[readonly]{color:#8d9b97;cursor:not-allowed}
+@media(max-width:640px){
+  .housing-tabs{justify-content:stretch;padding:12px 20px 0}
+  .housing-tabs a{flex:1;text-align:center}
+  .host-listing-actions{align-items:flex-start;flex-direction:column}
+}

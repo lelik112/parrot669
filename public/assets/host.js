@@ -3,7 +3,7 @@ const LANG_KEY = "parrot669-language";
 
 const copy = {
   en: {
-    title:"PARROT 669 — Host console", consoleLabel:"HOST CONSOLE", backToSite:"← Back to site",
+    title:"PARROT 669 — Host console", consoleLabel:"HOST CONSOLE", backToSite:"← Back to site", tabSearch:"Find availability", tabHost:"For hosts", deleteProperty:"Delete property", deleteListing:"Remove external listing",
     toolsEyebrow:"HOST TOOLS", heroTitle:"Publish availability.<br><span>Keep the deal elsewhere.</span>",
     heroLead:"Add a property, link the original Airbnb listing and maintain only the dates when the property is physically free.",
     identityTitle:"Host identity", identityHelp:"The edit token stays in this browser. PARROT stores only its hash.",
@@ -16,12 +16,12 @@ const copy = {
     sessionRemoved:"Local host session removed.", savingListing:"Saving external listing…", listingSaved:"Airbnb link saved.",
     addingAvailability:"Adding availability…", availabilityAdded:"Availability added.", updatingAvailability:"Updating availability…",
     availabilityUpdated:"Availability updated.", deletingAvailability:"Deleting availability…", availabilityDeleted:"Availability deleted.",
-    deleteConfirm:(a,b)=>`Delete ${a} → ${b}?`, noProperties:"No properties yet.", externalListing:"External listing",
-    saveAirbnb:"Save Airbnb ID", airbnbIdHelp:"Open the public Airbnb listing and copy the number after /rooms/. Example: 910841261983250037", airbnbIdPlaceholder:"Airbnb listing ID", availability:"Availability", addDates:"Add dates", loading:"Loading…",
+    deleteConfirm:(a,b)=>`Delete ${a} → ${b}?`, deletePropertyConfirm:n=>`Delete property “${n}” and all its PARROT availability data?`, deleteListingConfirm:"Remove the external Airbnb listing from this property?", propertyDeleted:"Property deleted.", listingDeleted:"External listing removed.", noProperties:"No properties yet.", externalListing:"External listing",
+    saveAirbnb:"Save Airbnb ID", airbnbIdHelp:"Open the public Airbnb listing and copy the number after /rooms/. Example: 910841261983250037", airbnbIdPlaceholder:"Airbnb listing ID", availability:"PARROT availability", addDates:"Add dates", loading:"Loading…",
     noPeriods:"No availability periods.", save:"Save", remove:"Delete", bedroom:n=>n===1?"1 bedroom":`${n} bedrooms`, sleepSummary:n=>n===1?"1 sleeping place":`${n} sleeping places`, minSummary:n=>`minimum ${n} day${n===1?"":"s"}`
   },
   es: {
-    title:"PARROT 669 — Panel de propietarios", consoleLabel:"PANEL DE PROPIETARIOS", backToSite:"← Volver al sitio",
+    title:"PARROT 669 — Panel de propietarios", consoleLabel:"PANEL DE PROPIETARIOS", backToSite:"← Volver al sitio", tabSearch:"Buscar disponibilidad", tabHost:"Para propietarios", deleteProperty:"Eliminar vivienda", deleteListing:"Eliminar anuncio externo",
     toolsEyebrow:"HERRAMIENTAS PARA PROPIETARIOS", heroTitle:"Publica la disponibilidad.<br><span>La operación ocurre fuera.</span>",
     heroLead:"Añade una vivienda, enlaza el anuncio original de Airbnb y mantén únicamente las fechas en las que está físicamente libre.",
     identityTitle:"Identidad del propietario", identityHelp:"El token de edición se queda en este navegador. PARROT solo guarda su hash.",
@@ -34,12 +34,12 @@ const copy = {
     sessionRemoved:"Sesión local eliminada.", savingListing:"Guardando anuncio externo…", listingSaved:"Enlace de Airbnb guardado.",
     addingAvailability:"Añadiendo disponibilidad…", availabilityAdded:"Disponibilidad añadida.", updatingAvailability:"Actualizando disponibilidad…",
     availabilityUpdated:"Disponibilidad actualizada.", deletingAvailability:"Eliminando disponibilidad…", availabilityDeleted:"Disponibilidad eliminada.",
-    deleteConfirm:(a,b)=>`¿Eliminar ${a} → ${b}?`, noProperties:"Todavía no hay viviendas.", externalListing:"Anuncio externo",
-    saveAirbnb:"Guardar ID de Airbnb", airbnbIdHelp:"Abre el anuncio público de Airbnb y copia el número que aparece después de /rooms/. Ejemplo: 910841261983250037", airbnbIdPlaceholder:"ID del anuncio de Airbnb", availability:"Disponibilidad", addDates:"Añadir fechas", loading:"Cargando…",
+    deleteConfirm:(a,b)=>`¿Eliminar ${a} → ${b}?`, deletePropertyConfirm:n=>`¿Eliminar “${n}” y todos sus datos de disponibilidad en PARROT?`, deleteListingConfirm:"¿Eliminar el anuncio externo de Airbnb de esta vivienda?", propertyDeleted:"Vivienda eliminada.", listingDeleted:"Anuncio externo eliminado.", noProperties:"Todavía no hay viviendas.", externalListing:"Anuncio externo",
+    saveAirbnb:"Guardar ID de Airbnb", airbnbIdHelp:"Abre el anuncio público de Airbnb y copia el número que aparece después de /rooms/. Ejemplo: 910841261983250037", airbnbIdPlaceholder:"ID del anuncio de Airbnb", availability:"Disponibilidad en PARROT", addDates:"Añadir fechas", loading:"Cargando…",
     noPeriods:"No hay periodos de disponibilidad.", save:"Guardar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitorio":`${n} dormitorios`, sleepSummary:n=>n===1?"1 plaza":`${n} plazas`, minSummary:n=>`mínimo ${n} día${n===1?"":"s"}`
   },
   ca: {
-    title:"PARROT 669 — Panell de propietaris", consoleLabel:"PANELL DE PROPIETARIS", backToSite:"← Tornar al web",
+    title:"PARROT 669 — Panell de propietaris", consoleLabel:"PANELL DE PROPIETARIS", backToSite:"← Tornar al web", tabSearch:"Cercar disponibilitat", tabHost:"Per a propietaris", deleteProperty:"Eliminar habitatge", deleteListing:"Eliminar anunci extern",
     toolsEyebrow:"EINES PER A PROPIETARIS", heroTitle:"Publica la disponibilitat.<br><span>L'operació passa fora.</span>",
     heroLead:"Afegeix un habitatge, enllaça l'anunci original d'Airbnb i mantén només les dates en què està físicament lliure.",
     identityTitle:"Identitat del propietari", identityHelp:"El token d'edició es queda en aquest navegador. PARROT només en desa el hash.",
@@ -52,12 +52,12 @@ const copy = {
     sessionRemoved:"Sessió local eliminada.", savingListing:"Desant l'anunci extern…", listingSaved:"Enllaç d'Airbnb desat.",
     addingAvailability:"Afegint disponibilitat…", availabilityAdded:"Disponibilitat afegida.", updatingAvailability:"Actualitzant disponibilitat…",
     availabilityUpdated:"Disponibilitat actualitzada.", deletingAvailability:"Eliminant disponibilitat…", availabilityDeleted:"Disponibilitat eliminada.",
-    deleteConfirm:(a,b)=>`Eliminar ${a} → ${b}?`, noProperties:"Encara no hi ha habitatges.", externalListing:"Anunci extern",
-    saveAirbnb:"Desar ID d'Airbnb", airbnbIdHelp:"Obre l'anunci públic d'Airbnb i copia el número que hi ha després de /rooms/. Exemple: 910841261983250037", airbnbIdPlaceholder:"ID de l'anunci d'Airbnb", availability:"Disponibilitat", addDates:"Afegir dates", loading:"Carregant…",
+    deleteConfirm:(a,b)=>`Eliminar ${a} → ${b}?`, deletePropertyConfirm:n=>`Eliminar “${n}” i totes les seves dades de disponibilitat de PARROT?`, deleteListingConfirm:"Eliminar l'anunci extern d'Airbnb d'aquest habitatge?", propertyDeleted:"Habitatge eliminat.", listingDeleted:"Anunci extern eliminat.", noProperties:"Encara no hi ha habitatges.", externalListing:"Anunci extern",
+    saveAirbnb:"Desar ID d'Airbnb", airbnbIdHelp:"Obre l'anunci públic d'Airbnb i copia el número que hi ha després de /rooms/. Exemple: 910841261983250037", airbnbIdPlaceholder:"ID de l'anunci d'Airbnb", availability:"Disponibilitat a PARROT", addDates:"Afegir dates", loading:"Carregant…",
     noPeriods:"No hi ha períodes de disponibilitat.", save:"Desar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitori":`${n} dormitoris`, sleepSummary:n=>n===1?"1 plaça":`${n} places`, minSummary:n=>`mínim ${n} dia${n===1?"":"s"}`
   },
   ru: {
-    title:"PARROT 669 — Кабинет владельца", consoleLabel:"КАБИНЕТ ВЛАДЕЛЬЦА", backToSite:"← Назад на сайт",
+    title:"PARROT 669 — Кабинет владельца", consoleLabel:"КАБИНЕТ ВЛАДЕЛЬЦА", backToSite:"← Назад на сайт", tabSearch:"Найти жильё", tabHost:"Владельцам", deleteProperty:"Удалить объект", deleteListing:"Удалить внешнее объявление",
     toolsEyebrow:"ИНСТРУМЕНТЫ ВЛАДЕЛЬЦА", heroTitle:"Публикуйте свободные даты.<br><span>Сделка остаётся снаружи.</span>",
     heroLead:"Добавьте объект, укажите исходное объявление Airbnb и поддерживайте только даты, когда жильё физически свободно.",
     identityTitle:"Профиль владельца", identityHelp:"Токен редактирования остаётся в этом браузере. PARROT хранит только его hash.",
@@ -70,8 +70,8 @@ const copy = {
     sessionRemoved:"Локальная сессия удалена.", savingListing:"Сохраняем внешнее объявление…", listingSaved:"Ссылка Airbnb сохранена.",
     addingAvailability:"Добавляем свободные даты…", availabilityAdded:"Свободные даты добавлены.", updatingAvailability:"Обновляем даты…",
     availabilityUpdated:"Даты обновлены.", deletingAvailability:"Удаляем даты…", availabilityDeleted:"Даты удалены.",
-    deleteConfirm:(a,b)=>`Удалить период ${a} → ${b}?`, noProperties:"Объектов пока нет.", externalListing:"Внешнее объявление",
-    saveAirbnb:"Сохранить ID Airbnb", airbnbIdHelp:"Откройте публичную страницу объявления Airbnb и скопируйте число после /rooms/. Например: 910841261983250037", airbnbIdPlaceholder:"ID объявления Airbnb", availability:"Свободные даты", addDates:"Добавить даты", loading:"Загрузка…",
+    deleteConfirm:(a,b)=>`Удалить период ${a} → ${b}?`, deletePropertyConfirm:n=>`Удалить объект «${n}» и все его данные о свободных датах из PARROT?`, deleteListingConfirm:"Удалить внешнее объявление Airbnb у этого объекта?", propertyDeleted:"Объект удалён.", listingDeleted:"Внешнее объявление удалено.", noProperties:"Объектов пока нет.", externalListing:"Внешнее объявление",
+    saveAirbnb:"Сохранить ID Airbnb", airbnbIdHelp:"Откройте публичную страницу объявления Airbnb и скопируйте число после /rooms/. Например: 910841261983250037", airbnbIdPlaceholder:"ID объявления Airbnb", availability:"Свободные даты в PARROT", addDates:"Добавить даты", loading:"Загрузка…",
     noPeriods:"Свободных периодов пока нет.", save:"Сохранить", remove:"Удалить", bedroom:n=>n===1?"1 спальня":n<5?`${n} спальни`:`${n} спален`, sleepSummary:n=>`${n} спальных мест`, minSummary:n=>`минимум ${n} дн.`
   }
 };
@@ -332,6 +332,34 @@ async function deleteAvailability(property, period){
   }
 }
 
+async function deleteProperty(property){
+  if (!confirm(tr("deletePropertyConfirm", property.title))) return;
+  message(tr("deletingAvailability"));
+  try {
+    await api(`/properties/${property.id}`, {method:"DELETE"});
+    state.properties = state.properties.filter(item => item.id !== property.id);
+    saveState();
+    message(tr("propertyDeleted"), "success");
+    renderProperties();
+  } catch (error) {
+    message(error.message, "error");
+  }
+}
+
+async function deleteListing(property){
+  if (!property.listing?.id || !confirm(tr("deleteListingConfirm"))) return;
+  message(tr("savingListing"));
+  try {
+    await api(`/listings/${property.listing.id}`, {method:"DELETE"});
+    property.listing = null;
+    saveState();
+    message(tr("listingDeleted"), "success");
+    renderProperties();
+  } catch (error) {
+    message(error.message, "error");
+  }
+}
+
 function renderProperties(){
   if (!propertiesNode) return;
   propertiesNode.replaceChildren();
@@ -360,7 +388,12 @@ function renderProperties(){
     const minStay = Number(property.minStayDays || 1);
     meta.textContent = `${property.city} · ${tr("bedroom", Number(property.bedrooms))} · ${tr("sleepSummary", sleeps)} · ${tr("minSummary", minStay)}`;
     title.append(strong, meta);
-    head.append(title);
+    const deletePropertyButton = document.createElement("button");
+    deletePropertyButton.type = "button";
+    deletePropertyButton.className = "text-button danger";
+    deletePropertyButton.textContent = tr("deleteProperty");
+    deletePropertyButton.addEventListener("click", () => deleteProperty(property));
+    head.append(title, deletePropertyButton);
 
     const listing = document.createElement("div");
     listing.className = "host-subpanel";
@@ -375,7 +408,15 @@ function renderProperties(){
       a.rel = "noopener noreferrer";
       a.className = "host-saved-link";
       a.textContent = property.listing.url;
-      listing.append(a);
+      const actions = document.createElement("div");
+      actions.className = "host-listing-actions";
+      const removeListing = document.createElement("button");
+      removeListing.type = "button";
+      removeListing.className = "text-button danger";
+      removeListing.textContent = tr("deleteListing");
+      removeListing.addEventListener("click", () => deleteListing(property));
+      actions.append(a, removeListing);
+      listing.append(actions);
     } else {
       const form = document.createElement("form");
       form.className = "host-inline-form";

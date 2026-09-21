@@ -203,6 +203,11 @@ Object.assign(translations.es, { navAvailability:"Disponibilidad", navHost:"Para
 Object.assign(translations.ca, { navAvailability:"Disponibilitat", navHost:"Per a propietaris" });
 Object.assign(translations.ru, { navAvailability:"Свободные даты", navHost:"Владельцам" });
 
+Object.assign(translations.en, { navHousing:"Housing" });
+Object.assign(translations.es, { navHousing:"Vivienda" });
+Object.assign(translations.ca, { navHousing:"Habitatge" });
+Object.assign(translations.ru, { navHousing:"Жильё" });
+
 const htmlNodes = document.querySelectorAll("[data-i18n-html]");
 const textNodes = document.querySelectorAll("[data-i18n]");
 const langButtons = document.querySelectorAll("[data-lang]");

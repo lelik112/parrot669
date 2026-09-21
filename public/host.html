@@ -32,6 +32,11 @@
     </div>
   </header>
 
+  <nav class="housing-tabs" aria-label="Housing">
+    <a href="/search.html" data-host-i18n="tabSearch">Find availability</a>
+    <a href="/host.html" class="active" data-host-i18n="tabHost">For hosts</a>
+  </nav>
+
   <main class="host-shell">
     <section class="host-hero">
       <p class="eyebrow" data-host-i18n="toolsEyebrow">HOST TOOLS</p>
@@ -78,7 +83,7 @@
         </label>
         <label>
           <span data-host-i18n="cityLabel">City</span>
-          <input name="city" required value="Barcelona" maxlength="120" />
+          <input name="city" required value="Barcelona" maxlength="120" readonly />
         </label>
         <label>
           <span data-host-i18n="bedroomsLabel">Bedrooms</span>
