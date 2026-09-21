@@ -1,6 +1,6 @@
 const translations = {
   en: {
-    brandTag:"REAL-WORLD DEALS. SAFER.", navHome:"Home", navServices:"Services", navAbout:"About", navContact:"Contact", contactUs:"Contact us",
+    brandTag:"REAL-WORLD DEALS. SAFER.", navHome:"Home", navAvailability:"Availability", navHost:"For hosts", navServices:"Services", navAbout:"About", navContact:"Contact", contactUs:"Contact us",
     heroStatus:"Barcelona · Independent local service",
     credLabel1:"BEFORE YOU PAY", credTitle1:"We agree the scope first.", credText1:"You know what we will check and what it costs before paid work begins.",
     credLabel2:"WHAT YOU GET", credTitle2:"Facts, evidence and a clear result.", credText2:"We separate what is verified from what could not be verified.",
@@ -72,7 +72,7 @@ const translations = {
     footerNote:"Barcelona es donde empezamos."
   },
   ca: {
-    brandTag:"ACORDS REALS. MÉS SEGURS.", navHome:"Inici", navServices:"Serveis", navAbout:"Nosaltres", navContact:"Contacte", contactUs:"Contacta'ns",
+    brandTag:"ACORDS REALS. MÉS SEGURS.", navHome:"Inici", navAvailability:"Disponibilitat", navHost:"Per a propietaris", navServices:"Serveis", navAbout:"Nosaltres", navContact:"Contacte", contactUs:"Contacta'ns",
     heroStatus:"Barcelona · Servei local independent",
     credLabel1:"ABANS DE PAGAR", credTitle1:"Primer acordem l'abast.", credText1:"Sabràs què comprovarem i quant costa abans de començar qualsevol feina de pagament.",
     credLabel2:"QUÈ REPS", credTitle2:"Fets, proves i un resultat clar.", credText2:"Separem el que s'ha verificat del que no s'ha pogut verificar.",
@@ -108,7 +108,7 @@ const translations = {
     footerNote:"Barcelona és on comencem."
   },
   ru: {
-    brandTag:"РЕАЛЬНЫЕ СДЕЛКИ. БЕЗОПАСНЕЕ.", navHome:"Главная", navServices:"Услуги", navAbout:"О нас", navContact:"Контакты", contactUs:"Связаться",
+    brandTag:"РЕАЛЬНЫЕ СДЕЛКИ. БЕЗОПАСНЕЕ.", navHome:"Главная", navAvailability:"Свободные даты", navHost:"Владельцам", navServices:"Услуги", navAbout:"О нас", navContact:"Контакты", contactUs:"Связаться",
     heroStatus:"Барселона · Независимый локальный сервис",
     credLabel1:"ДО ОПЛАТЫ", credTitle1:"Сначала согласуем объём.", credText1:"До начала платной работы вы знаете, что именно мы проверяем и сколько это стоит.",
     credLabel2:"ЧТО ВЫ ПОЛУЧАЕТЕ", credTitle2:"Факты, подтверждения и понятный результат.", credText2:"Мы отделяем подтверждённое от того, что проверить не удалось.",

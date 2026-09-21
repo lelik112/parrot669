@@ -28,11 +28,11 @@
 
     <nav class="nav" aria-label="Primary navigation">
       <a href="#top" data-i18n="navHome">Home</a>
-      <a href="#availability" data-i18n="navAvailability">Availability</a>
+      <a href="/search.html" data-i18n="navAvailability">Availability</a>
       <a href="#services" data-i18n="navServices">Services</a>
       <a href="#about" data-i18n="navAbout">About</a>
       <a href="#contact" data-i18n="navContact">Contact</a>
-      <a href="/host.html">Host console</a>
+      <a href="/host.html" data-i18n="navHost">Host console</a>
     </nav>
 
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -52,11 +52,11 @@
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <nav aria-label="Mobile navigation">
       <a href="#top" data-i18n="navHome">Home</a>
-      <a href="#availability" data-i18n="navAvailability">Availability</a>
+      <a href="/search.html" data-i18n="navAvailability">Availability</a>
       <a href="#services" data-i18n="navServices">Services</a>
       <a href="#about" data-i18n="navAbout">About</a>
       <a href="#contact" data-i18n="navContact">Contact</a>
-      <a href="/host.html">Host console</a>
+      <a href="/host.html" data-i18n="navHost">Host console</a>
     </nav>
     <a class="button" href="#contact" data-i18n="contactUs">Contact us</a>
   </div>
@@ -144,51 +144,6 @@
         </div>
         <p class="vision-quote" data-i18n="visionQuote">Trust is infrastructure.</p>
       </div>
-    </section>
-
-    <section class="availability-search" id="availability">
-      <div class="availability-intro">
-        <p class="eyebrow" data-i18n="availabilityEyebrow">LIVE AVAILABILITY</p>
-        <h2 data-i18n-html="availabilityTitle">Find a property that is<br><span>actually free.</span></h2>
-        <p data-i18n="availabilityLead">
-          Search host-reported availability in Barcelona and continue to the original external listing for rental terms.
-        </p>
-      </div>
-
-      <form class="availability-form" id="availability-form">
-        <label>
-          <span data-i18n="availabilityCity">City</span>
-          <input type="text" name="city" value="Barcelona" autocomplete="address-level2" required />
-        </label>
-        <label>
-          <span data-i18n="availabilityFrom">From</span>
-          <input type="date" name="from" required />
-        </label>
-        <label>
-          <span data-i18n="availabilityTo">To</span>
-          <input type="date" name="to" required />
-        </label>
-        <label>
-          <span data-i18n="availabilityBedrooms">Bedrooms</span>
-          <select name="bedrooms" required>
-            <option value="1">1+</option>
-            <option value="2">2+</option>
-            <option value="3">3+</option>
-            <option value="4">4+</option>
-          </select>
-        </label>
-        <button class="button availability-submit" type="submit">
-          <span data-i18n="availabilitySearch">Search availability</span>
-          <span aria-hidden="true">→</span>
-        </button>
-      </form>
-
-      <div class="availability-meta">
-        <span class="availability-live"><span class="status-dot"></span><span data-i18n="availabilityLive">Connected to the live PARROT availability index</span></span>
-        <span data-i18n="availabilityDisclaimer">Availability does not itself mean a stay of your requested duration is legally or contractually available. Check the external listing and host terms.</span>
-      </div>
-
-      <div class="availability-results" id="availability-results" aria-live="polite"></div>
     </section>
 
     <section class="section section-light" id="services">
@@ -354,7 +309,7 @@
       <a href="#services" data-i18n="navServices">Services</a>
       <a href="#about" data-i18n="navAbout">About</a>
       <a href="#contact" data-i18n="navContact">Contact</a>
-      <a href="/host.html">Host console</a>
+      <a href="/host.html" data-i18n="navHost">Host console</a>
     </nav>
     <div class="footer-meta">© <span id="year"></span> PARROT 669 S.L. · Barcelona</div>
   </footer>

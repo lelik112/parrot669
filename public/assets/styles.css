@@ -1458,3 +1458,24 @@ footer{
   .host-topbar-actions{align-items:flex-end;flex-direction:column-reverse;gap:8px}
   .host-lang-switcher{display:flex}
 }
+
+.search-page{min-height:100vh;background:#050c0e}
+.search-shell{max-width:1500px;margin:0 auto}
+.standalone-search{min-height:calc(100vh - 76px);padding-top:70px}
+.standalone-search .availability-intro h1{
+  margin:8px 0 20px;
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(46px,6vw,80px);
+  line-height:.98;
+  letter-spacing:-.055em;
+}
+.standalone-search .availability-intro h1 span{color:var(--lime)}
+.search-form{grid-template-columns:minmax(170px,1.15fr) repeat(4,minmax(125px,.72fr)) auto}
+.availability-stay{color:#81908c;font-size:12px;margin-top:-8px}
+.host-listing-help{margin:0 0 10px;line-height:1.5}
+@media(max-width:1200px){.search-form{grid-template-columns:repeat(3,minmax(0,1fr))}.search-form .availability-submit{grid-column:1/-1}}
+@media(max-width:700px){.search-form{grid-template-columns:1fr}}
+
+.host-property-form{grid-template-columns:1.35fr .8fr .55fr .65fr .7fr auto}
+@media(max-width:1100px){.host-property-form{grid-template-columns:repeat(3,1fr)}.host-property-form .button{grid-column:1/-1}}
+@media(max-width:640px){.host-property-form{grid-template-columns:1fr}}

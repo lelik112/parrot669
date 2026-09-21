@@ -10,14 +10,14 @@ const copy = {
     nameLabel:"Name / host label", contactLabel:"Contact", contactPlaceholder:"Email or WhatsApp", createProfile:"Create host profile →",
     forgetSession:"Forget this browser session", propertiesTitle:"Properties",
     propertiesHelp:"No photos, prices or copied descriptions. Only enough data to search availability.",
-    internalLabel:"Internal label", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", bedroomsLabel:"Bedrooms", addProperty:"Add property →",
+    internalLabel:"Internal label", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", addProperty:"Add property →",
     creatingProfile:"Creating host profile…", profileCreated:"Host profile created. This browser now holds the edit token; there is no recovery yet.",
     addingProperty:"Adding property…", propertyAdded:"Property added.", resetConfirm:"Forget the PARROT edit token and local property list from this browser?",
     sessionRemoved:"Local host session removed.", savingListing:"Saving external listing…", listingSaved:"Airbnb link saved.",
     addingAvailability:"Adding availability…", availabilityAdded:"Availability added.", updatingAvailability:"Updating availability…",
     availabilityUpdated:"Availability updated.", deletingAvailability:"Deleting availability…", availabilityDeleted:"Availability deleted.",
     deleteConfirm:(a,b)=>`Delete ${a} → ${b}?`, noProperties:"No properties yet.", externalListing:"External listing",
-    saveAirbnb:"Save Airbnb link", availability:"Availability", addDates:"Add dates", loading:"Loading…",
+    saveAirbnb:"Save Airbnb ID", airbnbIdHelp:"Open the public Airbnb listing and copy the number after /rooms/. Example: 910841261983250037", airbnbIdPlaceholder:"Airbnb listing ID", availability:"Availability", addDates:"Add dates", loading:"Loading…",
     noPeriods:"No availability periods.", save:"Save", remove:"Delete", bedroom:n=>n===1?"1 bedroom":`${n} bedrooms`
   },
   es: {
@@ -28,14 +28,14 @@ const copy = {
     nameLabel:"Nombre / etiqueta", contactLabel:"Contacto", contactPlaceholder:"Email o WhatsApp", createProfile:"Crear perfil →",
     forgetSession:"Olvidar esta sesión del navegador", propertiesTitle:"Viviendas",
     propertiesHelp:"Sin fotos, precios ni descripciones copiadas. Solo los datos mínimos para buscar disponibilidad.",
-    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", bedroomsLabel:"Dormitorios", addProperty:"Añadir vivienda →",
+    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", addProperty:"Añadir vivienda →",
     creatingProfile:"Creando perfil…", profileCreated:"Perfil creado. Este navegador guarda ahora el token de edición; todavía no hay recuperación.",
     addingProperty:"Añadiendo vivienda…", propertyAdded:"Vivienda añadida.", resetConfirm:"¿Olvidar el token de edición de PARROT y la lista local de viviendas de este navegador?",
     sessionRemoved:"Sesión local eliminada.", savingListing:"Guardando anuncio externo…", listingSaved:"Enlace de Airbnb guardado.",
     addingAvailability:"Añadiendo disponibilidad…", availabilityAdded:"Disponibilidad añadida.", updatingAvailability:"Actualizando disponibilidad…",
     availabilityUpdated:"Disponibilidad actualizada.", deletingAvailability:"Eliminando disponibilidad…", availabilityDeleted:"Disponibilidad eliminada.",
     deleteConfirm:(a,b)=>`¿Eliminar ${a} → ${b}?`, noProperties:"Todavía no hay viviendas.", externalListing:"Anuncio externo",
-    saveAirbnb:"Guardar enlace de Airbnb", availability:"Disponibilidad", addDates:"Añadir fechas", loading:"Cargando…",
+    saveAirbnb:"Guardar ID de Airbnb", airbnbIdHelp:"Abre el anuncio público de Airbnb y copia el número que aparece después de /rooms/. Ejemplo: 910841261983250037", airbnbIdPlaceholder:"ID del anuncio de Airbnb", availability:"Disponibilidad", addDates:"Añadir fechas", loading:"Cargando…",
     noPeriods:"No hay periodos de disponibilidad.", save:"Guardar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitorio":`${n} dormitorios`
   },
   ca: {
@@ -46,14 +46,14 @@ const copy = {
     nameLabel:"Nom / etiqueta", contactLabel:"Contacte", contactPlaceholder:"Email o WhatsApp", createProfile:"Crear perfil →",
     forgetSession:"Oblidar aquesta sessió del navegador", propertiesTitle:"Habitatges",
     propertiesHelp:"Sense fotos, preus ni descripcions copiades. Només les dades mínimes per cercar disponibilitat.",
-    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", bedroomsLabel:"Dormitoris", addProperty:"Afegir habitatge →",
+    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", addProperty:"Afegir habitatge →",
     creatingProfile:"Creant perfil…", profileCreated:"Perfil creat. Aquest navegador desa ara el token d'edició; encara no hi ha recuperació.",
     addingProperty:"Afegint habitatge…", propertyAdded:"Habitatge afegit.", resetConfirm:"Oblidar el token d'edició de PARROT i la llista local d'habitatges d'aquest navegador?",
     sessionRemoved:"Sessió local eliminada.", savingListing:"Desant l'anunci extern…", listingSaved:"Enllaç d'Airbnb desat.",
     addingAvailability:"Afegint disponibilitat…", availabilityAdded:"Disponibilitat afegida.", updatingAvailability:"Actualitzant disponibilitat…",
     availabilityUpdated:"Disponibilitat actualitzada.", deletingAvailability:"Eliminant disponibilitat…", availabilityDeleted:"Disponibilitat eliminada.",
     deleteConfirm:(a,b)=>`Eliminar ${a} → ${b}?`, noProperties:"Encara no hi ha habitatges.", externalListing:"Anunci extern",
-    saveAirbnb:"Desar enllaç d'Airbnb", availability:"Disponibilitat", addDates:"Afegir dates", loading:"Carregant…",
+    saveAirbnb:"Desar ID d'Airbnb", airbnbIdHelp:"Obre l'anunci públic d'Airbnb i copia el número que hi ha després de /rooms/. Exemple: 910841261983250037", airbnbIdPlaceholder:"ID de l'anunci d'Airbnb", availability:"Disponibilitat", addDates:"Afegir dates", loading:"Carregant…",
     noPeriods:"No hi ha períodes de disponibilitat.", save:"Desar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitori":`${n} dormitoris`
   },
   ru: {
@@ -64,14 +64,14 @@ const copy = {
     nameLabel:"Имя / название", contactLabel:"Контакт", contactPlaceholder:"Email или WhatsApp", createProfile:"Создать профиль →",
     forgetSession:"Забыть сессию в этом браузере", propertiesTitle:"Объекты",
     propertiesHelp:"Без фотографий, цен и скопированных описаний. Только минимум данных для поиска свободных дат.",
-    internalLabel:"Название для себя", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", bedroomsLabel:"Спальни", addProperty:"Добавить объект →",
+    internalLabel:"Название для себя", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", addProperty:"Добавить объект →",
     creatingProfile:"Создаём профиль…", profileCreated:"Профиль создан. Токен редактирования теперь хранится в этом браузере; восстановления пока нет.",
     addingProperty:"Добавляем объект…", propertyAdded:"Объект добавлен.", resetConfirm:"Забыть токен PARROT и локальный список объектов в этом браузере?",
     sessionRemoved:"Локальная сессия удалена.", savingListing:"Сохраняем внешнее объявление…", listingSaved:"Ссылка Airbnb сохранена.",
     addingAvailability:"Добавляем свободные даты…", availabilityAdded:"Свободные даты добавлены.", updatingAvailability:"Обновляем даты…",
     availabilityUpdated:"Даты обновлены.", deletingAvailability:"Удаляем даты…", availabilityDeleted:"Даты удалены.",
     deleteConfirm:(a,b)=>`Удалить период ${a} → ${b}?`, noProperties:"Объектов пока нет.", externalListing:"Внешнее объявление",
-    saveAirbnb:"Сохранить ссылку Airbnb", availability:"Свободные даты", addDates:"Добавить даты", loading:"Загрузка…",
+    saveAirbnb:"Сохранить ID Airbnb", airbnbIdHelp:"Откройте публичную страницу объявления Airbnb и скопируйте число после /rooms/. Например: 910841261983250037", airbnbIdPlaceholder:"ID объявления Airbnb", availability:"Свободные даты", addDates:"Добавить даты", loading:"Загрузка…",
     noPeriods:"Свободных периодов пока нет.", save:"Сохранить", remove:"Удалить", bedroom:n=>n===1?"1 спальня":n<5?`${n} спальни`:`${n} спален`
   }
 };
@@ -218,7 +218,9 @@ propertyForm.addEventListener("submit", async event => {
       body:JSON.stringify({
         title:String(form.get("title") || "").trim(),
         city:String(form.get("city") || "").trim(),
-        bedrooms:Number(form.get("bedrooms"))
+        bedrooms:Number(form.get("bedrooms")),
+        sleeps:Number(form.get("sleeps")),
+        minStayDays:Number(form.get("minStayDays"))
       })
     });
 
@@ -227,6 +229,8 @@ propertyForm.addEventListener("submit", async event => {
       title:created.title,
       city:created.city,
       bedrooms:created.bedrooms,
+      sleeps:created.sleeps,
+      minStayDays:created.minStayDays,
       listing:null
     });
     saveState();
@@ -258,10 +262,10 @@ async function addListing(property, form){
       method:"POST",
       body:JSON.stringify({
         platform:"airbnb",
-        url:String(data.get("url") || "").trim()
+        externalId:String(data.get("externalId") || "").trim()
       })
     });
-    property.listing = {id:created.id, platform:created.platform, url:created.url};
+    property.listing = {id:created.id, platform:created.platform, externalId:created.externalId, url:created.url};
     saveState();
     message(tr("listingSaved"), "success");
     renderProperties();
@@ -352,7 +356,9 @@ function renderProperties(){
     const strong = document.createElement("strong");
     strong.textContent = property.title;
     const meta = document.createElement("span");
-    meta.textContent = `${property.city} · ${tr("bedroom", Number(property.bedrooms))}`;
+    const sleeps = Number(property.sleeps || property.bedrooms || 1);
+    const minStay = Number(property.minStayDays || 1);
+    meta.textContent = `${property.city} · ${tr("bedroom", Number(property.bedrooms))} · ${sleeps} sleeps · min ${minStay} d`;
     title.append(strong, meta);
     head.append(title);
 
@@ -373,11 +379,18 @@ function renderProperties(){
     } else {
       const form = document.createElement("form");
       form.className = "host-inline-form";
+      const help = document.createElement("p");
+      help.className = "host-inline-muted host-listing-help";
+      help.textContent = tr("airbnbIdHelp");
+      listing.append(help);
+
       const input = document.createElement("input");
-      input.type = "url";
-      input.name = "url";
+      input.type = "text";
+      input.inputMode = "numeric";
+      input.pattern = "[0-9]+";
+      input.name = "externalId";
       input.required = true;
-      input.placeholder = "https://www.airbnb.com/rooms/…";
+      input.placeholder = tr("airbnbIdPlaceholder");
       const button = document.createElement("button");
       button.className = "button button-small";
       button.type = "submit";

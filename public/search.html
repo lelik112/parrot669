@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050c0e" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="description" content="Search host-reported property availability in Barcelona with PARROT 669." />
+  <title>PARROT 669 — Availability search</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body class="search-page">
+  <header class="host-topbar">
+    <a class="brand" href="/" aria-label="PARROT 669 home">
+      <span class="brand-copy"><strong>PARROT 669</strong><small data-search-i18n="label">AVAILABILITY</small></span>
+    </a>
+    <div class="host-topbar-actions">
+      <div class="lang-switcher host-lang-switcher" aria-label="Language">
+        <button type="button" data-search-lang="en">EN</button>
+        <button type="button" data-search-lang="es">ES</button>
+        <button type="button" data-search-lang="ca">CA</button>
+        <button type="button" data-search-lang="ru">RU</button>
+      </div>
+      <a class="button button-ghost button-small" href="/" data-search-i18n="back">← Back to site</a>
+    </div>
+  </header>
+
+  <main class="search-shell">
+    <section class="availability-search standalone-search">
+      <div class="availability-intro">
+        <p class="eyebrow" data-search-i18n="eyebrow">LIVE AVAILABILITY</p>
+        <h1 data-search-i18n-html="title">Find a property that is<br><span>actually free.</span></h1>
+        <p data-search-i18n="lead">Search host-reported availability and continue to the original Airbnb listing for rental terms.</p>
+      </div>
+
+      <form class="availability-form search-form" id="availability-form">
+        <label><span data-search-i18n="city">City</span><input type="text" name="city" value="Barcelona" required /></label>
+        <label><span data-search-i18n="from">From</span><input type="date" name="from" required /></label>
+        <label><span data-search-i18n="to">To</span><input type="date" name="to" required /></label>
+        <label>
+          <span data-search-i18n="bedrooms">Bedrooms</span>
+          <select name="bedrooms"><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select>
+        </label>
+        <label>
+          <span data-search-i18n="sleeps">Sleeping places</span>
+          <select name="sleeps"><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option><option value="6">6+</option></select>
+        </label>
+        <button class="button availability-submit" type="submit"><span data-search-i18n="search">Search availability</span><span>→</span></button>
+      </form>
+
+      <div class="availability-meta">
+        <span class="availability-live"><span class="status-dot"></span><span data-search-i18n="live">Connected to the live PARROT availability index</span></span>
+        <span data-search-i18n="disclaimer">Availability is physical availability. Rental terms and permitted stay duration are defined by the host and the external listing.</span>
+      </div>
+
+      <div class="availability-results" id="availability-results" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/assets/search.js"></script>
+</body>
+</html>
