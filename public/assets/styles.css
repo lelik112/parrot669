@@ -1328,3 +1328,125 @@ footer{
   .availability-live{white-space:normal}
   .availability-results{grid-template-columns:1fr}
 }
+
+
+/* v7 — host console */
+.host-page{min-height:100vh;background:#050c0e}
+.host-topbar{
+  min-height:76px;
+  padding:0 5vw;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  background:rgba(5,12,14,.92);
+  border-bottom:1px solid rgba(255,255,255,.075);
+}
+.host-shell{max-width:1280px;margin:0 auto;padding:70px 5vw 100px}
+.host-hero{max-width:900px;margin-bottom:42px}
+.host-hero h1{
+  margin:8px 0 20px;
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(46px,6vw,80px);
+  line-height:.98;
+  letter-spacing:-.055em;
+}
+.host-hero h1 span{color:var(--lime)}
+.host-hero>p:last-child{max-width:720px;color:#9ba9a5;font-size:17px;line-height:1.65}
+.host-status{
+  min-height:22px;
+  margin:0 0 18px;
+  color:#83928e;
+  font-size:13px;
+}
+.host-status.success{color:var(--lime)}
+.host-status.error{color:#f2b5a8}
+.host-panel{
+  margin-top:18px;
+  padding:26px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  background:#0a1719;
+}
+.host-panel-heading{
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  align-items:flex-start;
+  margin-bottom:24px;
+}
+.host-panel-heading>div{display:flex;align-items:center;gap:12px}
+.host-panel-heading h2{margin:0;font-family:"Space Grotesk",sans-serif;font-size:28px}
+.host-panel-heading p{max-width:520px;margin:3px 0 0;color:#7f8f8a;font-size:12px;line-height:1.55;text-align:right}
+.host-step{
+  display:grid;
+  place-items:center;
+  width:34px;height:34px;
+  border:1px solid rgba(216,255,99,.28);
+  border-radius:50%;
+  color:var(--lime);
+  font-size:11px;
+}
+.host-form{
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:12px;
+  align-items:end;
+}
+.host-property-form{grid-template-columns:1.4fr 1fr .55fr auto}
+.host-form label{display:grid;gap:8px;color:#84938f;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.host-form input,
+.host-form select,
+.host-inline-form input,
+.host-period input{
+  min-height:46px;
+  box-sizing:border-box;
+  padding:0 13px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:11px;
+  background:#061012;
+  color:#eef2ee;
+  color-scheme:dark;
+}
+.host-form input:focus,
+.host-inline-form input:focus,
+.host-period input:focus{
+  outline:none;border-color:rgba(216,255,99,.58);box-shadow:0 0 0 3px rgba(216,255,99,.07)
+}
+.host-session{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:16px;border-radius:14px;background:#071214}
+.host-session>div{display:grid;gap:4px}
+.host-session span{color:#75847f;font-size:10px;letter-spacing:.09em}
+.host-session strong{font-family:"Space Grotesk",sans-serif;color:var(--lime)}
+.text-button{padding:0;border:0;background:none;color:#cdd5d1;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.text-button:hover{color:var(--lime)}
+.text-button.danger:hover{color:#f2b5a8}
+.host-properties{display:grid;gap:16px;margin-top:24px}
+.host-property{padding:20px;border:1px solid rgba(255,255,255,.075);border-radius:18px;background:#071214}
+.host-property-head{display:flex;justify-content:space-between;gap:16px;margin-bottom:18px}
+.host-property-head>div{display:grid;gap:5px}
+.host-property-head strong{font-family:"Space Grotesk",sans-serif;font-size:21px}
+.host-property-head span{color:#7f8f8a;font-size:12px}
+.host-subpanel{padding-top:17px;margin-top:17px;border-top:1px solid rgba(255,255,255,.065)}
+.host-subpanel h3{margin:0 0 12px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:#8b9b96}
+.host-inline-form{display:grid;grid-template-columns:1fr auto;gap:10px}
+.host-dates{grid-template-columns:1fr 1fr auto}
+.host-saved-link{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--lime);font-size:13px}
+.host-periods{display:grid;gap:8px;margin-top:12px}
+.host-period{display:grid;grid-template-columns:1fr 1fr auto auto;gap:8px;align-items:center}
+.host-period input{min-height:40px}
+.host-empty,.host-inline-muted,.host-inline-error{color:#74837e;font-size:13px}
+.host-inline-error{color:#f2b5a8}
+@media(max-width:900px){
+  .host-form,.host-property-form{grid-template-columns:1fr 1fr}
+  .host-form .button{grid-column:1/-1}
+}
+@media(max-width:640px){
+  .host-topbar{padding:12px 20px;min-height:72px}
+  .host-shell{padding:48px 20px 70px}
+  .host-panel{padding:18px}
+  .host-panel-heading{display:grid;gap:12px}
+  .host-panel-heading p{text-align:left}
+  .host-form,.host-property-form,.host-inline-form,.host-dates{grid-template-columns:1fr}
+  .host-period{grid-template-columns:1fr 1fr}
+  .host-session{align-items:flex-start;flex-direction:column}
+}

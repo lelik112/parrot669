@@ -35,6 +35,37 @@ const escapeHtml = (value) =>
     "'": "&#39;",
   })[c]);
 
+const proxyBackend = async (request, targetPath) => {
+  const sourceUrl = new URL(request.url);
+  const upstream = new URL(`https://api.parrot669.com${targetPath}`);
+  upstream.search = sourceUrl.search;
+
+  const headers = new Headers();
+  const contentType = request.headers.get("Content-Type");
+  const token = request.headers.get("X-Parrot-Token");
+  if (contentType) headers.set("Content-Type", contentType);
+  if (token) headers.set("X-Parrot-Token", token);
+  headers.set("Accept", "application/json");
+
+  const init = {
+    method: request.method,
+    headers,
+  };
+
+  if (!["GET", "HEAD"].includes(request.method)) {
+    init.body = request.body;
+  }
+
+  const response = await fetch(upstream.toString(), init);
+  return new Response(response.body, {
+    status: response.status,
+    headers: {
+      "Content-Type": response.headers.get("Content-Type") || "application/json; charset=utf-8",
+      "Cache-Control": "no-store",
+    },
+  });
+};
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -65,6 +96,28 @@ export default {
         return json({ error: "Availability service unavailable" }, 502);
       }
     }
+
+    if (url.pathname.startsWith("/api/host/")) {
+      const path = url.pathname.slice("/api/host".length);
+      const allowed =
+        (path === "/profiles" && request.method === "POST") ||
+        (/^\/profiles\/[0-9a-f-]+\/properties$/i.test(path) && request.method === "POST") ||
+        (/^\/properties\/[0-9a-f-]+\/listings$/i.test(path) && request.method === "POST") ||
+        (/^\/properties\/[0-9a-f-]+\/availability$/i.test(path) && ["GET", "POST"].includes(request.method)) ||
+        (/^\/availability\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method));
+
+      if (!allowed) {
+        return json({ error: "Not found" }, 404);
+      }
+
+      try {
+        return await proxyBackend(request, `/api${path}`);
+      } catch (error) {
+        console.error("Host API proxy failed", error?.message);
+        return json({ error: "Host service unavailable" }, 502);
+      }
+    }
+
 
     if (url.pathname !== "/api/contact") {
       return env.ASSETS.fetch(request);
