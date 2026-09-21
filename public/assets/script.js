@@ -198,6 +198,11 @@ Object.assign(translations.ru, {
   availabilityDisclaimer:"Свободные даты сами по себе не означают, что объект можно законно или по договору арендовать именно на запрошенный срок. Проверяйте исходное объявление и условия владельца."
 });
 
+Object.assign(translations.en, { navAvailability:"Availability", navHost:"For hosts" });
+Object.assign(translations.es, { navAvailability:"Disponibilidad", navHost:"Para propietarios" });
+Object.assign(translations.ca, { navAvailability:"Disponibilitat", navHost:"Per a propietaris" });
+Object.assign(translations.ru, { navAvailability:"Свободные даты", navHost:"Владельцам" });
+
 const htmlNodes = document.querySelectorAll("[data-i18n-html]");
 const textNodes = document.querySelectorAll("[data-i18n]");
 const langButtons = document.querySelectorAll("[data-lang]");

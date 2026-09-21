@@ -18,7 +18,7 @@ const copy = {
     availabilityUpdated:"Availability updated.", deletingAvailability:"Deleting availability…", availabilityDeleted:"Availability deleted.",
     deleteConfirm:(a,b)=>`Delete ${a} → ${b}?`, noProperties:"No properties yet.", externalListing:"External listing",
     saveAirbnb:"Save Airbnb ID", airbnbIdHelp:"Open the public Airbnb listing and copy the number after /rooms/. Example: 910841261983250037", airbnbIdPlaceholder:"Airbnb listing ID", availability:"Availability", addDates:"Add dates", loading:"Loading…",
-    noPeriods:"No availability periods.", save:"Save", remove:"Delete", bedroom:n=>n===1?"1 bedroom":`${n} bedrooms`
+    noPeriods:"No availability periods.", save:"Save", remove:"Delete", bedroom:n=>n===1?"1 bedroom":`${n} bedrooms`, sleepSummary:n=>n===1?"1 sleeping place":`${n} sleeping places`, minSummary:n=>`minimum ${n} day${n===1?"":"s"}`
   },
   es: {
     title:"PARROT 669 — Panel de propietarios", consoleLabel:"PANEL DE PROPIETARIOS", backToSite:"← Volver al sitio",
@@ -36,7 +36,7 @@ const copy = {
     availabilityUpdated:"Disponibilidad actualizada.", deletingAvailability:"Eliminando disponibilidad…", availabilityDeleted:"Disponibilidad eliminada.",
     deleteConfirm:(a,b)=>`¿Eliminar ${a} → ${b}?`, noProperties:"Todavía no hay viviendas.", externalListing:"Anuncio externo",
     saveAirbnb:"Guardar ID de Airbnb", airbnbIdHelp:"Abre el anuncio público de Airbnb y copia el número que aparece después de /rooms/. Ejemplo: 910841261983250037", airbnbIdPlaceholder:"ID del anuncio de Airbnb", availability:"Disponibilidad", addDates:"Añadir fechas", loading:"Cargando…",
-    noPeriods:"No hay periodos de disponibilidad.", save:"Guardar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitorio":`${n} dormitorios`
+    noPeriods:"No hay periodos de disponibilidad.", save:"Guardar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitorio":`${n} dormitorios`, sleepSummary:n=>n===1?"1 plaza":`${n} plazas`, minSummary:n=>`mínimo ${n} día${n===1?"":"s"}`
   },
   ca: {
     title:"PARROT 669 — Panell de propietaris", consoleLabel:"PANELL DE PROPIETARIS", backToSite:"← Tornar al web",
@@ -54,7 +54,7 @@ const copy = {
     availabilityUpdated:"Disponibilitat actualitzada.", deletingAvailability:"Eliminant disponibilitat…", availabilityDeleted:"Disponibilitat eliminada.",
     deleteConfirm:(a,b)=>`Eliminar ${a} → ${b}?`, noProperties:"Encara no hi ha habitatges.", externalListing:"Anunci extern",
     saveAirbnb:"Desar ID d'Airbnb", airbnbIdHelp:"Obre l'anunci públic d'Airbnb i copia el número que hi ha després de /rooms/. Exemple: 910841261983250037", airbnbIdPlaceholder:"ID de l'anunci d'Airbnb", availability:"Disponibilitat", addDates:"Afegir dates", loading:"Carregant…",
-    noPeriods:"No hi ha períodes de disponibilitat.", save:"Desar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitori":`${n} dormitoris`
+    noPeriods:"No hi ha períodes de disponibilitat.", save:"Desar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitori":`${n} dormitoris`, sleepSummary:n=>n===1?"1 plaça":`${n} places`, minSummary:n=>`mínim ${n} dia${n===1?"":"s"}`
   },
   ru: {
     title:"PARROT 669 — Кабинет владельца", consoleLabel:"КАБИНЕТ ВЛАДЕЛЬЦА", backToSite:"← Назад на сайт",
@@ -72,7 +72,7 @@ const copy = {
     availabilityUpdated:"Даты обновлены.", deletingAvailability:"Удаляем даты…", availabilityDeleted:"Даты удалены.",
     deleteConfirm:(a,b)=>`Удалить период ${a} → ${b}?`, noProperties:"Объектов пока нет.", externalListing:"Внешнее объявление",
     saveAirbnb:"Сохранить ID Airbnb", airbnbIdHelp:"Откройте публичную страницу объявления Airbnb и скопируйте число после /rooms/. Например: 910841261983250037", airbnbIdPlaceholder:"ID объявления Airbnb", availability:"Свободные даты", addDates:"Добавить даты", loading:"Загрузка…",
-    noPeriods:"Свободных периодов пока нет.", save:"Сохранить", remove:"Удалить", bedroom:n=>n===1?"1 спальня":n<5?`${n} спальни`:`${n} спален`
+    noPeriods:"Свободных периодов пока нет.", save:"Сохранить", remove:"Удалить", bedroom:n=>n===1?"1 спальня":n<5?`${n} спальни`:`${n} спален`, sleepSummary:n=>`${n} спальных мест`, minSummary:n=>`минимум ${n} дн.`
   }
 };
 
@@ -358,7 +358,7 @@ function renderProperties(){
     const meta = document.createElement("span");
     const sleeps = Number(property.sleeps || property.bedrooms || 1);
     const minStay = Number(property.minStayDays || 1);
-    meta.textContent = `${property.city} · ${tr("bedroom", Number(property.bedrooms))} · ${sleeps} sleeps · min ${minStay} d`;
+    meta.textContent = `${property.city} · ${tr("bedroom", Number(property.bedrooms))} · ${tr("sleepSummary", sleeps)} · ${tr("minSummary", minStay)}`;
     title.append(strong, meta);
     head.append(title);
 
