@@ -1138,3 +1138,193 @@ footer{
 @media (max-width:640px){
   .brand-feature-bird{width:min(82vw,330px)}
 }
+
+
+/* v6 — live availability search */
+#availability{scroll-margin-top:90px}
+.availability-search{
+  padding:76px 5vw 82px;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(216,255,99,.065),transparent 24%),
+    #071214;
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.availability-intro{
+  max-width:900px;
+  margin-bottom:34px;
+}
+.availability-intro h2{
+  margin:8px 0 20px;
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(42px,5vw,72px);
+  line-height:1;
+  letter-spacing:-.05em;
+}
+.availability-intro h2 span{color:var(--lime)}
+.availability-intro>p:last-child{
+  max-width:720px;
+  margin:0;
+  color:#9ba9a5;
+  font-size:17px;
+  line-height:1.65;
+}
+.availability-form{
+  display:grid;
+  grid-template-columns:minmax(180px,1.2fr) repeat(3,minmax(145px,.8fr)) auto;
+  gap:12px;
+  align-items:end;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:20px;
+  background:#0b181a;
+  box-shadow:0 22px 54px rgba(0,0,0,.2);
+}
+.availability-form label{
+  display:grid;
+  gap:8px;
+  color:#8e9d98;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.availability-form input,
+.availability-form select{
+  width:100%;
+  min-height:48px;
+  box-sizing:border-box;
+  padding:0 14px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:12px;
+  background:#061012;
+  color:#eef2ee;
+  font:inherit;
+  font-size:14px;
+  color-scheme:dark;
+}
+.availability-form input:focus,
+.availability-form select:focus{
+  border-color:rgba(216,255,99,.58);
+  outline:none;
+  box-shadow:0 0 0 3px rgba(216,255,99,.07);
+}
+.availability-submit{
+  min-height:48px;
+  white-space:nowrap;
+}
+.availability-submit:disabled{
+  opacity:.55;
+  cursor:wait;
+}
+.availability-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  margin-top:14px;
+  color:#71807c;
+  font-size:11px;
+  line-height:1.5;
+}
+.availability-meta>span:last-child{
+  max-width:720px;
+  text-align:right;
+}
+.availability-live{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+.availability-results{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin-top:28px;
+}
+.availability-card,
+.availability-state{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.01)),#0c191b;
+}
+.availability-card{
+  min-height:168px;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.availability-card-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:16px;
+}
+.availability-card-heading strong{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:22px;
+}
+.availability-card-heading span{
+  color:#879691;
+  font-size:12px;
+}
+.availability-period{
+  color:#dbe3df;
+  font-size:14px;
+}
+.availability-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:auto;
+}
+.availability-link{
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  padding:0 14px;
+  border-radius:999px;
+  background:rgba(216,255,99,.09);
+  color:var(--lime);
+  font-size:12px;
+  font-weight:600;
+}
+.availability-link:hover{
+  background:var(--lime);
+  color:#061012;
+}
+.availability-state{
+  grid-column:1/-1;
+  padding:24px;
+  color:#95a39f;
+}
+.availability-state.error{color:#f2b5a8}
+.availability-state.loading::after{
+  content:"";
+  display:inline-block;
+  width:6px;
+  height:6px;
+  margin-left:8px;
+  border-radius:50%;
+  background:var(--lime);
+  animation:availabilityPulse 1s ease-in-out infinite alternate;
+}
+@keyframes availabilityPulse{
+  from{opacity:.25;transform:scale(.8)}
+  to{opacity:1;transform:scale(1.15)}
+}
+@media (max-width:1100px){
+  .availability-form{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .availability-submit{grid-column:1/-1}
+  .availability-results{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .availability-search{padding:54px 20px 60px}
+  .availability-form{grid-template-columns:1fr;padding:14px}
+  .availability-submit{grid-column:auto}
+  .availability-meta{flex-direction:column;gap:10px}
+  .availability-meta>span:last-child{text-align:left}
+  .availability-live{white-space:normal}
+  .availability-results{grid-template-columns:1fr}
+}

@@ -145,6 +145,59 @@ const translations = {
   }
 };
 
+Object.assign(translations.en, {
+  navAvailability:"Availability",
+  availabilityEyebrow:"LIVE AVAILABILITY",
+  availabilityTitle:"Find a property that is<br><span>actually free.</span>",
+  availabilityLead:"Search host-reported availability in Barcelona and continue to the original external listing for rental terms.",
+  availabilityCity:"City",
+  availabilityFrom:"From",
+  availabilityTo:"To",
+  availabilityBedrooms:"Bedrooms",
+  availabilitySearch:"Search availability",
+  availabilityLive:"Connected to the live PARROT availability index",
+  availabilityDisclaimer:"Availability does not itself mean a stay of your requested duration is legally or contractually available. Check the external listing and host terms."
+});
+Object.assign(translations.es, {
+  navAvailability:"Disponibilidad",
+  availabilityEyebrow:"DISPONIBILIDAD EN DIRECTO",
+  availabilityTitle:"Encuentra una vivienda que esté<br><span>realmente libre.</span>",
+  availabilityLead:"Busca disponibilidad declarada por propietarios en Barcelona y continúa al anuncio externo original para consultar las condiciones del alquiler.",
+  availabilityCity:"Ciudad",
+  availabilityFrom:"Desde",
+  availabilityTo:"Hasta",
+  availabilityBedrooms:"Dormitorios",
+  availabilitySearch:"Buscar disponibilidad",
+  availabilityLive:"Conectado al índice de disponibilidad de PARROT",
+  availabilityDisclaimer:"La disponibilidad no significa por sí sola que una estancia de la duración solicitada esté permitida legal o contractualmente. Consulta el anuncio externo y las condiciones del propietario."
+});
+Object.assign(translations.ca, {
+  navAvailability:"Disponibilitat",
+  availabilityEyebrow:"DISPONIBILITAT EN DIRECTE",
+  availabilityTitle:"Troba un habitatge que estigui<br><span>realment lliure.</span>",
+  availabilityLead:"Cerca disponibilitat declarada pels propietaris a Barcelona i continua a l'anunci extern original per consultar les condicions del lloguer.",
+  availabilityCity:"Ciutat",
+  availabilityFrom:"Des de",
+  availabilityTo:"Fins a",
+  availabilityBedrooms:"Dormitoris",
+  availabilitySearch:"Cercar disponibilitat",
+  availabilityLive:"Connectat a l'índex de disponibilitat de PARROT",
+  availabilityDisclaimer:"La disponibilitat no implica per si sola que una estada de la durada sol·licitada estigui permesa legalment o contractualment. Consulta l'anunci extern i les condicions del propietari."
+});
+Object.assign(translations.ru, {
+  navAvailability:"Свободные даты",
+  availabilityEyebrow:"АКТУАЛЬНАЯ ДОСТУПНОСТЬ",
+  availabilityTitle:"Найдите жильё, которое<br><span>реально свободно.</span>",
+  availabilityLead:"Ищите свободные даты, указанные владельцами в Барселоне, а условия аренды смотрите в исходном объявлении.",
+  availabilityCity:"Город",
+  availabilityFrom:"С",
+  availabilityTo:"По",
+  availabilityBedrooms:"Спальни",
+  availabilitySearch:"Найти свободное",
+  availabilityLive:"Подключено к живому индексу доступности PARROT",
+  availabilityDisclaimer:"Свободные даты сами по себе не означают, что объект можно законно или по договору арендовать именно на запрошенный срок. Проверяйте исходное объявление и условия владельца."
+});
+
 const htmlNodes = document.querySelectorAll("[data-i18n-html]");
 const textNodes = document.querySelectorAll("[data-i18n]");
 const langButtons = document.querySelectorAll("[data-lang]");
@@ -241,6 +294,114 @@ document.querySelectorAll("[data-service-card]").forEach(card => {
   });
 });
 
+
+const availabilityForm = document.getElementById("availability-form");
+const availabilityResults = document.getElementById("availability-results");
+
+const availabilityMessages = {
+  en: {loading:"Searching live availability…", empty:"No matching availability yet.", error:"Availability search is temporarily unavailable.", bedrooms:n=>n === 1 ? "1 bedroom" : `${n} bedrooms`, available:(a,b)=>`Available ${a} → ${b}`, view:p=>`View on ${p}`},
+  es: {loading:"Buscando disponibilidad…", empty:"Todavía no hay disponibilidad que coincida.", error:"La búsqueda de disponibilidad no está disponible temporalmente.", bedrooms:n=>n === 1 ? "1 dormitorio" : `${n} dormitorios`, available:(a,b)=>`Disponible ${a} → ${b}`, view:p=>`Ver en ${p}`},
+  ca: {loading:"Cercant disponibilitat…", empty:"Encara no hi ha disponibilitat coincident.", error:"La cerca de disponibilitat no està disponible temporalment.", bedrooms:n=>n === 1 ? "1 dormitori" : `${n} dormitoris`, available:(a,b)=>`Disponible ${a} → ${b}`, view:p=>`Veure a ${p}`},
+  ru: {loading:"Ищем свободные даты…", empty:"Подходящих свободных объектов пока нет.", error:"Поиск доступности временно недоступен.", bedrooms:n=>n === 1 ? "1 спальня" : `${n} спальни`, available:(a,b)=>`Свободно ${a} → ${b}`, view:p=>`Открыть на ${p}`}
+};
+
+const availabilityMessage = () => availabilityMessages[document.documentElement.lang] || availabilityMessages.en;
+
+function renderAvailabilityStatus(message, kind = ""){
+  if (!availabilityResults) return;
+  availabilityResults.replaceChildren();
+  const node = document.createElement("div");
+  node.className = `availability-state ${kind}`.trim();
+  node.textContent = message;
+  availabilityResults.append(node);
+}
+
+function renderAvailabilityResults(items){
+  if (!availabilityResults) return;
+  const m = availabilityMessage();
+  availabilityResults.replaceChildren();
+
+  if (!items.length) {
+    renderAvailabilityStatus(m.empty, "empty");
+    return;
+  }
+
+  items.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "availability-card";
+
+    const heading = document.createElement("div");
+    heading.className = "availability-card-heading";
+
+    const place = document.createElement("strong");
+    place.textContent = item.city || "Barcelona";
+    const beds = document.createElement("span");
+    beds.textContent = m.bedrooms(Number(item.bedrooms || 0));
+    heading.append(place, beds);
+
+    const period = document.createElement("div");
+    period.className = "availability-period";
+    period.textContent = m.available(item.availableFrom, item.availableTo);
+
+    const links = document.createElement("div");
+    links.className = "availability-links";
+
+    (item.links || []).forEach(link => {
+      let parsed;
+      try { parsed = new URL(link.url); } catch { return; }
+      if (parsed.protocol !== "https:") return;
+
+      const anchor = document.createElement("a");
+      anchor.className = "availability-link";
+      anchor.href = parsed.toString();
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+      const platform = String(link.platform || "listing");
+      anchor.textContent = m.view(platform.charAt(0).toUpperCase() + platform.slice(1));
+      links.append(anchor);
+    });
+
+    card.append(heading, period, links);
+    availabilityResults.append(card);
+  });
+}
+
+if (availabilityForm) {
+  const fromInput = availabilityForm.elements.from;
+  const toInput = availabilityForm.elements.to;
+
+  fromInput?.addEventListener("change", () => {
+    if (toInput) toInput.min = fromInput.value;
+    if (toInput?.value && toInput.value < fromInput.value) toInput.value = fromInput.value;
+  });
+
+  availabilityForm.addEventListener("submit", async event => {
+    event.preventDefault();
+    const submit = availabilityForm.querySelector('button[type="submit"]');
+    const data = new FormData(availabilityForm);
+    const params = new URLSearchParams({
+      city: String(data.get("city") || "").trim(),
+      from: String(data.get("from") || ""),
+      to: String(data.get("to") || ""),
+      bedrooms: String(data.get("bedrooms") || "1")
+    });
+
+    submit.disabled = true;
+    renderAvailabilityStatus(availabilityMessage().loading, "loading");
+
+    try {
+      const response = await fetch(`/api/search?${params.toString()}`, {headers:{Accept:"application/json"}});
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const items = await response.json();
+      renderAvailabilityResults(Array.isArray(items) ? items : []);
+    } catch (error) {
+      console.error("Availability search error:", error);
+      renderAvailabilityStatus(availabilityMessage().error, "error");
+    } finally {
+      submit.disabled = false;
+    }
+  });
+}
 
 const menuToggle = document.querySelector(".menu-toggle");
 const mobileMenu = document.getElementById("mobile-menu");

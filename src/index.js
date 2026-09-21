@@ -39,6 +39,33 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === "/api/search") {
+      if (request.method !== "GET") {
+        return json({ error: "Method not allowed" }, 405);
+      }
+
+      const upstream = new URL("https://api.parrot669.com/api/search");
+      upstream.search = url.search;
+
+      try {
+        const response = await fetch(upstream.toString(), {
+          method: "GET",
+          headers: { "Accept": "application/json" },
+        });
+
+        return new Response(response.body, {
+          status: response.status,
+          headers: {
+            "Content-Type": response.headers.get("Content-Type") || "application/json; charset=utf-8",
+            "Cache-Control": "no-store",
+          },
+        });
+      } catch (error) {
+        console.error("Availability API proxy failed", error?.message);
+        return json({ error: "Availability service unavailable" }, 502);
+      }
+    }
+
     if (url.pathname !== "/api/contact") {
       return env.ASSETS.fetch(request);
     }
