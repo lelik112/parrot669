@@ -26,6 +26,8 @@ Current MVP principle:
    - host-reported PARROT availability,
    - external Airbnb link.
 4. Minimum stay is enforced by backend search.
+5. Property title shown to guests is the same title entered by the owner; Barcelona is not used as the result title.
+6. Date ranges use hotel-style [check-in, checkout) semantics: checkout day is not occupied and same-day check-in/check-out is invalid.
 
 ### Host
 1. Open `/host.html`.
@@ -36,6 +38,7 @@ Current MVP principle:
 6. Add/update/delete PARROT availability periods.
 7. Delete external listing or whole property.
 8. Edit token is currently kept in browser localStorage; backend stores only token hash.
+9. On every host-page load, property/listing/availability state is fetched from the backend owner dashboard. localStorage stores credentials only and is not the source of truth for listings or availability.
 
 ## Barcelona scope
 
@@ -79,9 +82,11 @@ Important migrations:
 - V2 availability search + bedrooms
 - V3 sleeping places + minimum stay + Airbnb external listing ID
 - V4 Barcelona-only internal city code
+- V5 exclusive checkout semantics and owner-dashboard support; existing inclusive availability end dates are shifted +1 day to preserve their meaning
 
 Current important endpoints:
 - `POST /api/profiles`
+- `GET /api/profiles/:profileId/dashboard` (owner-only, token required)
 - `POST /api/profiles/:profileId/properties`
 - `DELETE /api/properties/:propertyId`
 - `POST /api/properties/:propertyId/listings`
@@ -155,5 +160,4 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 - Investigate Airbnb iCal import and source reconciliation.
 - Replace localStorage edit-token auth with real auth/recovery.
 - Add owner messaging/privacy preferences.
-- Make host/property state recoverable from backend instead of relying on local browser state.
 - Upgrade Flyway or align Postgres version (Railway currently warns PostgreSQL 18 is newer than tested Flyway support).

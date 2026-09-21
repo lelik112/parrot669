@@ -101,6 +101,7 @@ export default {
       const path = url.pathname.slice("/api/host".length);
       const allowed =
         (path === "/profiles" && request.method === "POST") ||
+        (/^\/profiles\/[0-9a-f-]+\/dashboard$/i.test(path) && request.method === "GET") ||
         (/^\/profiles\/[0-9a-f-]+\/properties$/i.test(path) && request.method === "POST") ||
         (/^\/properties\/[0-9a-f-]+$/i.test(path) && request.method === "DELETE") ||
         (/^\/properties\/[0-9a-f-]+\/listings$/i.test(path) && request.method === "POST") ||

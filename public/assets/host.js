@@ -94,7 +94,7 @@ function loadState(){
   try {
     const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
     return parsed && typeof parsed === "object"
-      ? {...emptyState(), ...parsed, properties:Array.isArray(parsed.properties) ? parsed.properties : []}
+      ? {...emptyState(), profileId:parsed.profileId || "", parrotId:parsed.parrotId || "", editToken:parsed.editToken || "", properties:[]}
       : emptyState();
   } catch {
     return emptyState();
@@ -133,7 +133,11 @@ function applyLanguage(next){
 }
 
 function saveState(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    profileId: state.profileId,
+    parrotId: state.parrotId,
+    editToken: state.editToken
+  }));
 }
 
 function message(text, kind = ""){
@@ -160,7 +164,28 @@ function setBusy(form, busy){
   form?.querySelectorAll("button,input,select").forEach(node => node.disabled = busy);
 }
 
-function boot(){
+async function syncDashboard(){
+  message(tr("loading"));
+  try {
+    const dashboard = await api(`/profiles/${state.profileId}/dashboard`);
+    state.parrotId = dashboard.profile.parrotId || state.parrotId;
+    state.properties = (dashboard.properties || []).map(property => ({
+      ...property,
+      listing: Array.isArray(property.listings) ? (property.listings[0] || null) : null,
+      availability: Array.isArray(property.availability) ? property.availability : []
+    }));
+    saveState();
+    hostParrotId.textContent = state.parrotId || state.profileId;
+    renderProperties();
+    message("");
+  } catch (error) {
+    message(error.message, "error");
+    state.properties = [];
+    renderProperties();
+  }
+}
+
+async function boot(){
   const ready = Boolean(state.profileId && state.editToken);
   profileForm.hidden = ready;
   hostSession.hidden = !ready;
@@ -168,8 +193,10 @@ function boot(){
 
   if (ready) {
     hostParrotId.textContent = state.parrotId || state.profileId;
+    await syncDashboard();
+  } else {
+    renderProperties();
   }
-  renderProperties();
 }
 
 profileForm.addEventListener("submit", async event => {
@@ -231,7 +258,8 @@ propertyForm.addEventListener("submit", async event => {
       bedrooms:created.bedrooms,
       sleeps:created.sleeps,
       minStayDays:created.minStayDays,
-      listing:null
+      listing:null,
+      availability:[]
     });
     saveState();
     propertyForm.elements.title.value = "";
@@ -274,6 +302,14 @@ async function addListing(property, form){
   } finally {
     setBusy(form, false);
   }
+}
+
+function plusDays(iso, days){
+  if (!iso) return "";
+  const [year, month, day] = iso.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
 }
 
 async function addAvailability(property, form){
@@ -460,6 +496,11 @@ function renderProperties(){
     toInput.type = "date";
     toInput.name = "to";
     toInput.required = true;
+    fromInput.addEventListener("change", () => {
+      const minCheckout = plusDays(fromInput.value, 1);
+      toInput.min = minCheckout;
+      if (!toInput.value || toInput.value <= fromInput.value) toInput.value = minCheckout;
+    });
     const addButton = document.createElement("button");
     addButton.className = "button button-small";
     addButton.type = "submit";
@@ -501,6 +542,12 @@ function renderProperties(){
         const to = document.createElement("input");
         to.type = "date";
         to.value = period.to;
+        to.min = plusDays(period.from, 1);
+        from.addEventListener("change", () => {
+          const minCheckout = plusDays(from.value, 1);
+          to.min = minCheckout;
+          if (!to.value || to.value <= from.value) to.value = minCheckout;
+        });
 
         const save = document.createElement("button");
         save.type = "button";
