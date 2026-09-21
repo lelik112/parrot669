@@ -163,6 +163,7 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 ## Immediate TODO
 
+- Before opening availability writes to meaningful concurrent traffic: clean up any legacy overlapping periods and add a PostgreSQL exclusion constraint on `daterange(date_from, date_to, '[)')` per property. API-level overlap checks remain useful for friendly errors, but are not sufficient against concurrent inserts/updates.
 - Improve visual design of housing/search/host UI.
 - Investigate Airbnb iCal import and source reconciliation.
 - Replace localStorage edit-token auth with real auth/recovery.
