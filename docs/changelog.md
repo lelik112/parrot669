@@ -1,5 +1,16 @@
 # PARROT 669 changelog
 
+## 2026-09-21 — Airbnb iCal synchronization
+
+- Hosts can connect an Airbnb iCal export URL after attaching the matching Airbnb listing.
+- The backend validates that the listing id inside the iCal URL matches the property's Airbnb listing id.
+- Sync happens immediately on connect, manually on demand, and automatically about once per hour.
+- Imported iCal data is normalized to event kind + date range + UID; reservation descriptions/phone fragments are not stored.
+- `Reserved` events block PARROT search for overlapping nights.
+- `Airbnb (Not available)` events are retained for host visibility but do not block PARROT physical availability.
+- Unknown summaries are retained as unknown and do not silently block availability.
+- Calendar URLs remain server-side and are never returned by dashboard/public APIs.
+
 ## 2026-09-21 — optional pricing and interval stitching
 
 - Availability periods can carry an optional nightly price in EUR cents.

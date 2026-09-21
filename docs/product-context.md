@@ -9,6 +9,7 @@ PARROT 669 is evolving from a Barcelona property verification/local-service site
 Current MVP principle:
 
 - PARROT shows host-reported physical availability.
+- A host may connect an Airbnb iCal export. PARROT imports Airbnb events but only `SUMMARY:Reserved` events reduce physical availability. `Airbnb (Not available)` is stored as platform-specific unavailability and does not block PARROT physical availability.
 - PARROT does not book, take payment, copy listing descriptions/photos/prices, or define the legal rental term.
 - Rental terms live with the host / external platform.
 - Airbnb is currently the first external transaction/listing endpoint.
@@ -43,7 +44,9 @@ Current MVP principle:
 6b. Search stitches adjacent periods together by requested night, so a stay may span multiple adjacent rows as long as every night is covered.
 7. Delete external listing or whole property.
 8. Edit token is currently kept in browser localStorage; backend stores only token hash.
-9. On every host-page load, property/listing/availability state is fetched from the backend owner dashboard. localStorage stores credentials only and is not the source of truth for listings or availability.
+9. On every host-page load, property/listing/availability/calendar-sync state is fetched from the backend owner dashboard. localStorage stores credentials only and is not the source of truth for listings or availability.
+10. After adding an Airbnb listing, the host can paste Airbnb's private iCal export URL. The listing id embedded in the iCal URL must match the Airbnb listing id already attached to the property.
+11. Calendar sync runs immediately on connect, manually via "Sync now", and automatically about once per hour. The raw iCal URL is never returned by the API or rendered back to the browser after connection.
 
 ## Barcelona scope
 
@@ -89,6 +92,7 @@ Important migrations:
 - V4 Barcelona-only internal city code
 - V5 exclusive checkout semantics and owner-dashboard support; existing inclusive availability end dates are shifted +1 day to preserve their meaning
 - V6 optional nightly pricing + external-listing cleaning fee; search stitches adjacent availability periods and supports priced-only filtering
+- V7 external calendars + imported event snapshots; Airbnb Reserved events block search, Airbnb (Not available) events are retained but ignored for physical availability
 
 Current important endpoints:
 - `POST /api/profiles`
@@ -101,6 +105,9 @@ Current important endpoints:
 - `PUT|DELETE /api/availability/:availabilityId`
 - `PUT /api/listings/:listingId` updates optional cleaning fee
 - `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&pricedOnly=true|false`
+- `POST /api/properties/:propertyId/calendars` connects/upserts an Airbnb iCal source and immediately syncs it
+- `POST /api/calendars/:calendarId/sync` manually refreshes the source
+- `DELETE /api/calendars/:calendarId` disconnects it
 
 CI runs compile + PostgreSQL end-to-end smoke test + Docker image build.
 
@@ -120,20 +127,21 @@ Languages:
 - CA
 - RU
 
-## Known product issue: PARROT availability vs Airbnb availability
+## Airbnb iCal semantics
 
-PARROT availability is currently independent host-reported data.
+Airbnb iCal is connected as an external signal, not as PARROT's authoritative calendar.
 
-Therefore it is possible that:
-- PARROT says a period is physically free;
-- Airbnb itself shows no availability for those dates.
+Observed Airbnb export distinguishes:
+- `SUMMARY:Reserved`: treated as a real reservation and subtracted from PARROT physical availability.
+- `SUMMARY:Airbnb (Not available)`: treated as platform-specific unavailability and stored for visibility, but not subtracted from PARROT physical availability.
+- any unknown summary: stored as `unknown` and not used to block physical availability until explicitly understood.
 
-This is not currently a synchronization bug; it is a data-source mismatch. The UI should call this "PARROT availability" / "host-reported availability".
+PARROT intentionally discards DESCRIPTION and other reservation metadata; it stores only UID, date range, classified kind and observation time.
 
-Likely next step:
-- import Airbnb iCal as a second availability source;
-- keep provenance/freshness, e.g. source=host or source=airbnb_ical, observedAt;
-- decide conflict policy instead of silently pretending sources agree.
+Search logic is therefore:
+`host offer covers every requested night AND no imported reservation covers any requested night`.
+
+The iCal URL is a secret capability link. It is stored server-side because it must be fetched, but never returned in dashboard/public APIs. TODO before serious scale: encrypt calendar URLs at rest with an application-managed key.
 
 ## Auth / contact direction
 
@@ -165,7 +173,6 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 - Before opening availability writes to meaningful concurrent traffic: clean up any legacy overlapping periods and add a PostgreSQL exclusion constraint on `daterange(date_from, date_to, '[)')` per property. API-level overlap checks remain useful for friendly errors, but are not sufficient against concurrent inserts/updates.
 - Improve visual design of housing/search/host UI.
-- Investigate Airbnb iCal import and source reconciliation.
 - Replace localStorage edit-token auth with real auth/recovery.
 - Add owner messaging/privacy preferences.
 - Upgrade Flyway or align Postgres version (Railway currently warns PostgreSQL 18 is newer than tested Flyway support).

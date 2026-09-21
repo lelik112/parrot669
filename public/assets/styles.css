@@ -1547,3 +1547,25 @@ footer{
   .host-pricing-edit{width:100%;flex-wrap:wrap}
   .host-pricing-edit input{width:100%}
 }
+
+.host-calendar-sync{background:rgba(216,255,99,.018)}
+.host-calendar-form{grid-template-columns:1fr auto}
+.host-calendar-status{
+  display:grid;gap:12px;padding:14px 16px;border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;background:#061012;
+}
+.host-calendar-status>div:first-child{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.host-calendar-status strong{font-size:13px;color:#dce5e1}
+.host-calendar-status.connected strong{color:var(--lime)}
+.host-calendar-status span{font-size:11px;color:#82918c}
+.host-calendar-stats{display:flex;flex-wrap:wrap;gap:8px 16px}
+.host-calendar-blocks{display:flex;flex-wrap:wrap;gap:7px}
+.host-calendar-blocks span{
+  padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.045);
+  color:#aeb9b5;font-size:10px;
+}
+.host-calendar-actions{display:flex;align-items:center;gap:14px;margin-top:12px}
+@media(max-width:640px){
+  .host-calendar-form{grid-template-columns:1fr}
+  .host-calendar-status>div:first-child{align-items:flex-start;flex-direction:column;gap:5px}
+}
