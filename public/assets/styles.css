@@ -1450,3 +1450,11 @@ footer{
   .host-period{grid-template-columns:1fr 1fr}
   .host-session{align-items:flex-start;flex-direction:column}
 }
+
+.host-topbar-actions{display:flex;align-items:center;gap:18px}
+.host-lang-switcher{flex-shrink:0}
+@media(max-width:640px){
+  .host-topbar{align-items:flex-start}
+  .host-topbar-actions{align-items:flex-end;flex-direction:column-reverse;gap:8px}
+  .host-lang-switcher{display:flex}
+}

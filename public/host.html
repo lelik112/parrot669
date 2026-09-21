@@ -17,50 +17,74 @@
     <a class="brand" href="/" aria-label="PARROT 669 home">
       <span class="brand-copy">
         <strong>PARROT 669</strong>
-        <small>HOST CONSOLE</small>
+        <small data-host-i18n="consoleLabel">HOST CONSOLE</small>
       </span>
     </a>
-    <a class="button button-ghost button-small" href="/">← Back to site</a>
+
+    <div class="host-topbar-actions">
+      <div class="lang-switcher host-lang-switcher" aria-label="Language">
+        <button type="button" data-host-lang="en">EN</button>
+        <button type="button" data-host-lang="es">ES</button>
+        <button type="button" data-host-lang="ca">CA</button>
+        <button type="button" data-host-lang="ru">RU</button>
+      </div>
+      <a class="button button-ghost button-small" href="/" data-host-i18n="backToSite">← Back to site</a>
+    </div>
   </header>
 
   <main class="host-shell">
     <section class="host-hero">
-      <p class="eyebrow">HOST TOOLS</p>
-      <h1>Publish availability.<br><span>Keep the deal elsewhere.</span></h1>
-      <p>Add a property, link the original Airbnb listing and maintain only the dates when the property is physically free.</p>
+      <p class="eyebrow" data-host-i18n="toolsEyebrow">HOST TOOLS</p>
+      <h1 data-host-i18n-html="heroTitle">Publish availability.<br><span>Keep the deal elsewhere.</span></h1>
+      <p data-host-i18n="heroLead">Add a property, link the original Airbnb listing and maintain only the dates when the property is physically free.</p>
     </section>
 
     <div class="host-status" id="host-status" aria-live="polite"></div>
 
     <section class="host-panel" id="profile-panel">
       <div class="host-panel-heading">
-        <div><span class="host-step">01</span><h2>Host identity</h2></div>
-        <p>The edit token stays in this browser. PARROT stores only its hash.</p>
+        <div><span class="host-step">01</span><h2 data-host-i18n="identityTitle">Host identity</h2></div>
+        <p data-host-i18n="identityHelp">The edit token stays in this browser. PARROT stores only its hash.</p>
       </div>
 
       <form class="host-form" id="profile-form">
-        <label><span>Name / host label</span><input name="displayName" required maxlength="120" /></label>
-        <label><span>Contact</span><input name="contact" required maxlength="200" placeholder="Email or WhatsApp" /></label>
-        <button class="button" type="submit">Create host profile →</button>
+        <label>
+          <span data-host-i18n="nameLabel">Name / host label</span>
+          <input name="displayName" required maxlength="120" />
+        </label>
+        <label>
+          <span data-host-i18n="contactLabel">Contact</span>
+          <input name="contact" required maxlength="200" data-host-placeholder="contactPlaceholder" placeholder="Email or WhatsApp" />
+        </label>
+        <button class="button" type="submit" data-host-i18n="createProfile">Create host profile →</button>
       </form>
 
       <div class="host-session" id="host-session" hidden>
         <div><span>PARROT ID</span><strong id="host-parrot-id"></strong></div>
-        <button class="text-button" id="reset-host" type="button">Forget this browser session</button>
+        <button class="text-button" id="reset-host" type="button" data-host-i18n="forgetSession">Forget this browser session</button>
       </div>
     </section>
 
     <section class="host-panel" id="property-panel" hidden>
       <div class="host-panel-heading">
-        <div><span class="host-step">02</span><h2>Properties</h2></div>
-        <p>No photos, prices or copied descriptions. Only enough data to search availability.</p>
+        <div><span class="host-step">02</span><h2 data-host-i18n="propertiesTitle">Properties</h2></div>
+        <p data-host-i18n="propertiesHelp">No photos, prices or copied descriptions. Only enough data to search availability.</p>
       </div>
 
       <form class="host-form host-property-form" id="property-form">
-        <label><span>Internal label</span><input name="title" required maxlength="160" placeholder="Poblenou apartment" /></label>
-        <label><span>City</span><input name="city" required value="Barcelona" maxlength="120" /></label>
-        <label><span>Bedrooms</span><input name="bedrooms" type="number" min="1" max="20" value="1" required /></label>
-        <button class="button" type="submit">Add property →</button>
+        <label>
+          <span data-host-i18n="internalLabel">Internal label</span>
+          <input name="title" required maxlength="160" data-host-placeholder="propertyPlaceholder" placeholder="Poblenou apartment" />
+        </label>
+        <label>
+          <span data-host-i18n="cityLabel">City</span>
+          <input name="city" required value="Barcelona" maxlength="120" />
+        </label>
+        <label>
+          <span data-host-i18n="bedroomsLabel">Bedrooms</span>
+          <input name="bedrooms" type="number" min="1" max="20" value="1" required />
+        </label>
+        <button class="button" type="submit" data-host-i18n="addProperty">Add property →</button>
       </form>
 
       <div class="host-properties" id="host-properties"></div>
