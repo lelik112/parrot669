@@ -1,3 +1,5 @@
+# PARROT 669 changelog
+
 ## 2026-09-21 — optional pricing and interval stitching
 
 - Availability periods can carry an optional nightly price in EUR cents.
@@ -9,8 +11,6 @@
 - Adjacent half-open periods are allowed and search now stitches them across boundaries by night.
 - Kept interval rows rather than one database row per day; requested nights are expanded only inside the search query.
 - Main-site Housing entry is visually separated from ordinary service/navigation links.
-
-# PARROT 669 changelog
 
 ## 2026-09-21 — owner state and date semantics
 
