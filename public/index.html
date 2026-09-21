@@ -28,7 +28,6 @@
 
     <nav class="nav" aria-label="Primary navigation">
       <a href="#top" data-i18n="navHome">Home</a>
-      <a href="/search.html" data-i18n="navHousing">Housing</a>
       <a href="#services" data-i18n="navServices">Services</a>
       <a href="#about" data-i18n="navAbout">About</a>
       <a href="#contact" data-i18n="navContact">Contact</a>
@@ -46,7 +45,12 @@
       <button type="button" data-lang="ru">RU</button>
     </div>
 
-    <a class="button button-small" href="#contact" data-i18n="contactUs">Contact us</a>
+    <div class="topbar-actions">
+      <a class="housing-entry" href="/search.html">
+        <span data-i18n="navHousing">Housing</span><span aria-hidden="true">↗</span>
+      </a>
+      <a class="button button-small" href="#contact" data-i18n="contactUs">Contact us</a>
+    </div>
   </header>
 
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
@@ -58,7 +62,10 @@
       <a href="#contact" data-i18n="navContact">Contact</a>
       
     </nav>
-    <a class="button" href="#contact" data-i18n="contactUs">Contact us</a>
+    <div class="mobile-product-actions">
+      <a class="housing-entry" href="/search.html"><span data-i18n="navHousing">Housing</span><span aria-hidden="true">↗</span></a>
+      <a class="button" href="#contact" data-i18n="contactUs">Contact us</a>
+    </div>
   </div>
 
   <main id="top">

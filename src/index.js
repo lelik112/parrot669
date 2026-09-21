@@ -105,7 +105,7 @@ export default {
         (/^\/profiles\/[0-9a-f-]+\/properties$/i.test(path) && request.method === "POST") ||
         (/^\/properties\/[0-9a-f-]+$/i.test(path) && request.method === "DELETE") ||
         (/^\/properties\/[0-9a-f-]+\/listings$/i.test(path) && request.method === "POST") ||
-        (/^\/listings\/[0-9a-f-]+$/i.test(path) && request.method === "DELETE") ||
+        (/^\/listings\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
         (/^\/properties\/[0-9a-f-]+\/availability$/i.test(path) && ["GET", "POST"].includes(request.method)) ||
         (/^\/availability\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method));
 

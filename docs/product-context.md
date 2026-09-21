@@ -24,8 +24,11 @@ Current MVP principle:
    - sleeping places,
    - host minimum stay,
    - host-reported PARROT availability,
+   - optional indicative price when every requested night has a nightly price,
    - external Airbnb link.
 4. Minimum stay is enforced by backend search.
+4a. Guest can choose all results or only results with complete nightly pricing. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only search.
+4b. Optional cleaning fee belongs to the external listing and is included in the displayed estimate when known.
 5. Property title shown to guests is the same title entered by the owner; Barcelona is not used as the result title.
 6. Date ranges use hotel-style [check-in, checkout) semantics: checkout day is not occupied and same-day check-in/check-out is invalid.
 
@@ -35,7 +38,9 @@ Current MVP principle:
 3. Create a Barcelona property.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL.
 5. PARROT generates the canonical Airbnb URL.
-6. Add/update/delete PARROT availability periods.
+6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR.
+6a. New/updated availability periods may not overlap. Adjacent periods are allowed and can have different prices.
+6b. Search stitches adjacent periods together by requested night, so a stay may span multiple adjacent rows as long as every night is covered.
 7. Delete external listing or whole property.
 8. Edit token is currently kept in browser localStorage; backend stores only token hash.
 9. On every host-page load, property/listing/availability state is fetched from the backend owner dashboard. localStorage stores credentials only and is not the source of truth for listings or availability.
@@ -83,6 +88,7 @@ Important migrations:
 - V3 sleeping places + minimum stay + Airbnb external listing ID
 - V4 Barcelona-only internal city code
 - V5 exclusive checkout semantics and owner-dashboard support; existing inclusive availability end dates are shifted +1 day to preserve their meaning
+- V6 optional nightly pricing + external-listing cleaning fee; search stitches adjacent availability periods and supports priced-only filtering
 
 Current important endpoints:
 - `POST /api/profiles`
@@ -93,7 +99,8 @@ Current important endpoints:
 - `DELETE /api/listings/:listingId`
 - `GET|POST /api/properties/:propertyId/availability`
 - `PUT|DELETE /api/availability/:availabilityId`
-- `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...`
+- `PUT /api/listings/:listingId` updates optional cleaning fee
+- `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&pricedOnly=true|false`
 
 CI runs compile + PostgreSQL end-to-end smoke test + Docker image build.
 

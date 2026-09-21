@@ -1,3 +1,15 @@
+## 2026-09-21 — optional pricing and interval stitching
+
+- Availability periods can carry an optional nightly price in EUR cents.
+- External listings can carry an optional cleaning fee.
+- Guest search can show all results or only results with complete pricing.
+- If any requested night has no price, the result has no price estimate; priced-only mode excludes it.
+- Price is explicitly indicative; final terms and other charges remain with the host/external listing.
+- New and edited availability periods cannot overlap.
+- Adjacent half-open periods are allowed and search now stitches them across boundaries by night.
+- Kept interval rows rather than one database row per day; requested nights are expanded only inside the search query.
+- Main-site Housing entry is visually separated from ordinary service/navigation links.
+
 # PARROT 669 changelog
 
 ## 2026-09-21 — owner state and date semantics
