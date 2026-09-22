@@ -46,27 +46,50 @@
 
     <div class="host-status" id="host-status" aria-live="polite"></div>
 
-    <section class="host-panel" id="profile-panel">
+    <section class="host-panel" id="auth-panel">
       <div class="host-panel-heading">
-        <div><span class="host-step">01</span><h2 data-host-i18n="identityTitle">Host identity</h2></div>
-        <p data-host-i18n="identityHelp">The edit token stays in this browser. PARROT stores only its hash.</p>
+        <div><span class="host-step">01</span><h2 data-host-i18n="accountTitle">Host account</h2></div>
+        <p data-host-i18n="accountHelp">Sign in with email and password. Your session is kept in a secure HttpOnly cookie.</p>
       </div>
 
-      <form class="host-form" id="profile-form">
-        <label>
-          <span data-host-i18n="nameLabel">Name / host label</span>
-          <input name="displayName" required maxlength="120" />
-        </label>
-        <label>
-          <span data-host-i18n="contactLabel">Contact</span>
-          <input name="contact" required maxlength="200" data-host-placeholder="contactPlaceholder" placeholder="Email or WhatsApp" />
-        </label>
-        <button class="button" type="submit" data-host-i18n="createProfile">Create host profile →</button>
-      </form>
+      <div class="host-auth-grid" id="host-auth-forms">
+        <form class="host-form host-auth-form" id="login-form">
+          <h3 data-host-i18n="loginTitle">Log in</h3>
+          <label>
+            <span data-host-i18n="emailLabel">Email</span>
+            <input name="email" type="email" autocomplete="email" required maxlength="254" />
+          </label>
+          <label>
+            <span data-host-i18n="passwordLabel">Password</span>
+            <input name="password" type="password" autocomplete="current-password" required maxlength="256" />
+          </label>
+          <button class="button" type="submit" data-host-i18n="loginButton">Log in →</button>
+        </form>
+
+        <form class="host-form host-auth-form" id="register-form">
+          <h3 data-host-i18n="signupTitle">Create account</h3>
+          <label>
+            <span data-host-i18n="nameLabel">Name / host label</span>
+            <input name="displayName" autocomplete="name" required maxlength="120" />
+          </label>
+          <label>
+            <span data-host-i18n="emailLabel">Email</span>
+            <input name="email" type="email" autocomplete="email" required maxlength="254" />
+          </label>
+          <label>
+            <span data-host-i18n="passwordLabel">Password</span>
+            <input name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="256" />
+          </label>
+          <button class="button" type="submit" data-host-i18n="signupButton">Create account →</button>
+        </form>
+      </div>
+
+      <p class="host-inline-muted host-auth-note" id="recovery-note" data-host-i18n="recoveryNote">Password recovery is not available yet.</p>
 
       <div class="host-session" id="host-session" hidden>
+        <div><span data-host-i18n="signedInAs">Signed in as</span><strong id="host-account-email"></strong></div>
         <div><span>PARROT ID</span><strong id="host-parrot-id"></strong></div>
-        <button class="text-button" id="reset-host" type="button" data-host-i18n="forgetSession">Forget this browser session</button>
+        <button class="text-button" id="logout-host" type="button" data-host-i18n="logoutButton">Log out</button>
       </div>
     </section>
 
