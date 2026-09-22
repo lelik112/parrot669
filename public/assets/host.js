@@ -7,7 +7,7 @@ const copy = {
     heroLead:"Add a property, link the original Airbnb listing and maintain only the dates when the property is physically free.",
     identityTitle:"Host account", identityHelp:"Sign in to manage your properties securely from this browser.",
     nameLabel:"Name / host label", loginTitle:"Log in", registerTitle:"Create account", emailLabel:"Email", passwordLabel:"Password", passwordHelp:"At least 10 characters.", loginButton:"Log in →", registerButton:"Create account →", accountLabel:"ACCOUNT", logoutButton:"Log out",
-    loggingIn:"Logging in…", registering:"Creating account…", loggedIn:"Logged in.", registered:"Account created.", loggedOut:"Logged out.",
+    loggingIn:"Logging in…", registering:"Creating account…", loggedIn:"Logged in.", registered:"Account created. Check your email to verify it.", verifyingEmail:"Verifying email…", emailVerified:"Email verified. You are logged in.", loggedOut:"Logged out.",
     propertiesTitle:"Properties",
     propertiesHelp:"No photos or copied descriptions. Only enough data to search availability.",
     internalLabel:"Property name", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", accommodationTypeLabel:"Accommodation type", entirePlace:"Entire place", privateRoom:"Private room", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", propertySettings:"Property characteristics", savePropertySettings:"Save characteristics", saveStaySettings:"Save conditions", propertySettingsSaved:"Property settings saved.", enableCalendar:"Enable", disableCalendar:"Disable", calendarEnabled:"Airbnb calendar enabled.", calendarDisabled:"Airbnb calendar disabled.", calendarDisabledStatus:"Disabled", calendarConnectedStatus:"Connected", expandProperty:"Expand", collapseProperty:"Collapse", addProperty:"Add property →",
@@ -25,7 +25,7 @@ const copy = {
     heroLead:"Añade una vivienda, enlaza el anuncio original de Airbnb y mantén únicamente las fechas en las que está físicamente libre.",
     identityTitle:"Cuenta del propietario", identityHelp:"Inicia sesión para gestionar tus viviendas de forma segura desde este navegador.",
     nameLabel:"Nombre / etiqueta", loginTitle:"Iniciar sesión", registerTitle:"Crear cuenta", emailLabel:"Email", passwordLabel:"Contraseña", passwordHelp:"Al menos 10 caracteres.", loginButton:"Entrar →", registerButton:"Crear cuenta →", accountLabel:"CUENTA", logoutButton:"Cerrar sesión",
-    loggingIn:"Iniciando sesión…", registering:"Creando cuenta…", loggedIn:"Sesión iniciada.", registered:"Cuenta creada.", loggedOut:"Sesión cerrada.",
+    loggingIn:"Iniciando sesión…", registering:"Creando cuenta…", loggedIn:"Sesión iniciada.", registered:"Cuenta creada. Revisa tu correo para verificarla.", verifyingEmail:"Verificando correo…", emailVerified:"Correo verificado. Has iniciado sesión.", loggedOut:"Sesión cerrada.",
     propertiesTitle:"Viviendas",
     propertiesHelp:"Sin fotos ni descripciones copiadas. Solo los datos mínimos para buscar disponibilidad.",
     internalLabel:"Nombre de la vivienda", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", accommodationTypeLabel:"Tipo de alojamiento", entirePlace:"Alojamiento entero", privateRoom:"Habitación privada", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", propertySettings:"Características de la vivienda", savePropertySettings:"Guardar características", saveStaySettings:"Guardar condiciones", propertySettingsSaved:"Ajustes guardados.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendario de Airbnb activado.", calendarDisabled:"Calendario de Airbnb desactivado.", calendarDisabledStatus:"Desactivado", calendarConnectedStatus:"Conectado", expandProperty:"Expandir", collapseProperty:"Contraer", addProperty:"Añadir vivienda →",
@@ -43,7 +43,7 @@ const copy = {
     heroLead:"Afegeix un habitatge, enllaça l'anunci original d'Airbnb i mantén només les dates en què està físicament lliure.",
     identityTitle:"Compte del propietari", identityHelp:"Inicia sessió per gestionar els habitatges de manera segura des d'aquest navegador.",
     nameLabel:"Nom / etiqueta", loginTitle:"Iniciar sessió", registerTitle:"Crear compte", emailLabel:"Email", passwordLabel:"Contrasenya", passwordHelp:"Com a mínim 10 caràcters.", loginButton:"Entrar →", registerButton:"Crear compte →", accountLabel:"COMPTE", logoutButton:"Tancar sessió",
-    loggingIn:"Iniciant sessió…", registering:"Creant compte…", loggedIn:"Sessió iniciada.", registered:"Compte creat.", loggedOut:"Sessió tancada.",
+    loggingIn:"Iniciant sessió…", registering:"Creant compte…", loggedIn:"Sessió iniciada.", registered:"Compte creat. Revisa el correu per verificar-lo.", verifyingEmail:"Verificant el correu…", emailVerified:"Correu verificat. Has iniciat sessió.", loggedOut:"Sessió tancada.",
     propertiesTitle:"Habitatges",
     propertiesHelp:"Sense fotos ni descripcions copiades. Només les dades mínimes per cercar disponibilitat.",
     internalLabel:"Nom de l'habitatge", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", accommodationTypeLabel:"Tipus d'allotjament", entirePlace:"Allotjament sencer", privateRoom:"Habitació privada", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", propertySettings:"Característiques de l'habitatge", savePropertySettings:"Desar característiques", saveStaySettings:"Desar condicions", propertySettingsSaved:"Configuració desada.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendari d'Airbnb activat.", calendarDisabled:"Calendari d'Airbnb desactivat.", calendarDisabledStatus:"Desactivat", calendarConnectedStatus:"Connectat", expandProperty:"Desplegar", collapseProperty:"Plegar", addProperty:"Afegir habitatge →",
@@ -61,7 +61,7 @@ const copy = {
     heroLead:"Добавьте объект, укажите исходное объявление Airbnb и поддерживайте только даты, когда жильё физически свободно.",
     identityTitle:"Аккаунт владельца", identityHelp:"Войдите, чтобы безопасно управлять своими объектами с этого браузера.",
     nameLabel:"Имя / название", loginTitle:"Войти", registerTitle:"Создать аккаунт", emailLabel:"Email", passwordLabel:"Пароль", passwordHelp:"Не менее 10 символов.", loginButton:"Войти →", registerButton:"Создать аккаунт →", accountLabel:"АККАУНТ", logoutButton:"Выйти",
-    loggingIn:"Входим…", registering:"Создаём аккаунт…", loggedIn:"Вы вошли.", registered:"Аккаунт создан.", loggedOut:"Вы вышли.",
+    loggingIn:"Входим…", registering:"Создаём аккаунт…", loggedIn:"Вы вошли.", registered:"Аккаунт создан. Проверьте почту и подтвердите email.", verifyingEmail:"Подтверждаем email…", emailVerified:"Email подтверждён. Вы вошли.", loggedOut:"Вы вышли.",
     propertiesTitle:"Объекты",
     propertiesHelp:"Без фотографий и скопированных описаний. Только минимум данных для поиска свободных дат.",
     internalLabel:"Название объекта", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", accommodationTypeLabel:"Тип жилья", entirePlace:"Жильё целиком", privateRoom:"Отдельная комната", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", propertySettings:"Характеристики объекта", savePropertySettings:"Сохранить характеристики", saveStaySettings:"Сохранить условия", propertySettingsSaved:"Настройки объекта сохранены.", enableCalendar:"Включить", disableCalendar:"Выключить", calendarEnabled:"Календарь Airbnb включён.", calendarDisabled:"Календарь Airbnb выключен.", calendarDisabledStatus:"Выключен", calendarConnectedStatus:"Подключён", expandProperty:"Развернуть", collapseProperty:"Свернуть", addProperty:"Добавить объект →",
@@ -244,6 +244,36 @@ async function syncDashboard(){
 }
 
 async function boot(){
+  const params = new URLSearchParams(window.location.search);
+  const verificationToken = params.get("verifyEmail");
+
+  if (verificationToken) {
+    message(tr("verifyingEmail"));
+    try {
+      const user = await api("/auth/verify-email", {
+        method:"POST",
+        body:JSON.stringify({token:verificationToken})
+      });
+      setAuthenticated(user);
+      renderAuthState();
+      await syncDashboard();
+      params.delete("verifyEmail");
+      const query = params.toString();
+      history.replaceState(null, "", window.location.pathname + (query ? `?${query}` : "") + window.location.hash);
+      message(tr("emailVerified"), "success");
+      return;
+    } catch (error) {
+      params.delete("verifyEmail");
+      const query = params.toString();
+      history.replaceState(null, "", window.location.pathname + (query ? `?${query}` : "") + window.location.hash);
+      state = emptyState();
+      renderAuthState();
+      renderProperties();
+      message(error.message, "error");
+      return;
+    }
+  }
+
   try {
     const user = await api("/auth/me");
     setAuthenticated(user);
@@ -302,7 +332,7 @@ registerForm.addEventListener("submit", async event => {
   message(tr("registering"));
 
   try {
-    const user = await api("/auth/register", {
+    await api("/auth/register", {
       method:"POST",
       body:JSON.stringify({
         displayName:String(form.get("displayName") || "").trim(),
@@ -310,11 +340,11 @@ registerForm.addEventListener("submit", async event => {
         password:String(form.get("password") || "")
       })
     });
-    setAuthenticated(user);
-    renderAuthState();
-    await syncDashboard();
     registerForm.elements.password.value = "";
     closeAuth();
+    state = emptyState();
+    renderAuthState();
+    renderProperties();
     message(tr("registered"), "success");
   } catch (error) {
     setFormError(registerForm, error.message);
