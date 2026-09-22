@@ -1,24 +1,22 @@
 # PARROT 669 v2
 
-Static site + Cloudflare Worker contact endpoint.
+Static site + Cloudflare Worker API proxy/contact endpoint.
 
 ## What changed
 - The public form now POSTs to `/api/contact`.
-- The Worker sends the request to a verified Cloudflare Email Routing destination.
+- The Worker sends contact requests through Resend.
 - The private Gmail address is NOT stored in the repository.
-- `hello@parrot669.com` is used as the sender.
+- `hello@parrot669.com` is the default Resend sender.
 - Basic validation + honeypot spam trap are included.
 
-## One required Cloudflare setting
-In the `parrot669` Worker:
+## Required Worker secrets
+In the `parrot669` Worker, configure:
 
-**Settings → Variables & Secrets → Add**
+- `NOTIFY_TO` — destination email address.
+- `RESEND_API_KEY` — Resend API key.
+- `RESEND_FROM` — optional sender override; defaults to `PARROT 669 website <hello@parrot669.com>`.
 
-- Name: `NOTIFY_TO`
-- Value: your verified destination Gmail address
-- Type: Secret
-
-Do not put the Gmail address in the repository.
+Keep addresses and API keys in Worker secrets/variables, not in the repository.
 
 ## Git deployment
 Production is intended to deploy through **Cloudflare Workers Builds** from the GitHub repository `lelik112/parrot669`.
@@ -48,4 +46,4 @@ The project includes `wrangler.jsonc`, so the static site in `public/` and the W
 4. Check Worker logs if the form reports an error.
 
 ## If email sending fails
-The sender must be on a domain with Email Routing enabled, and the destination must be verified in the same Cloudflare account.
+Verify `parrot669.com` in Resend, confirm `RESEND_API_KEY` is configured, and make sure the sender address belongs to the verified domain.
