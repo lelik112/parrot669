@@ -1394,6 +1394,11 @@ footer{
   align-items:end;
 }
 .host-property-form{grid-template-columns:1.4fr 1fr .55fr auto}
+.host-auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.host-auth-form{grid-template-columns:1fr}
+.host-auth-form h3{margin:0 0 4px;font-family:"Space Grotesk",sans-serif;font-size:18px}
+.host-auth-form .button{justify-self:start}
+.host-auth-note{margin:14px 0 0}
 .host-form label{display:grid;gap:8px;color:#84938f;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
 .host-form input,
 .host-form select,
@@ -1445,6 +1450,8 @@ footer{
 .host-form-error{grid-column:1/-1;margin:0}
 @media(max-width:900px){
   .host-form,.host-property-form{grid-template-columns:1fr 1fr}
+  .host-auth-grid{grid-template-columns:1fr}
+  .host-auth-form{grid-template-columns:1fr}
   .host-form .button{grid-column:1/-1}
 }
 @media(max-width:640px){
