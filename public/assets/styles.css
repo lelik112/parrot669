@@ -1719,3 +1719,46 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
   .availability-link{justify-content:center;width:100%;box-sizing:border-box}
   .availability-link-missing{max-width:none;text-align:left}
 }
+
+/* Keep native pickers, but size the closed controls consistently on iOS too.
+   These overrides follow component backgrounds so the arrow is not reset. */
+:is(.availability-form,.search-filters,.host-page) select{
+  -webkit-appearance:none;
+  appearance:none;
+  height:48px;
+  min-height:48px;
+  padding-right:40px;
+  font-size:16px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='m5 7.5 5 5 5-5' fill='none' stroke='%23cdd5d1' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  background-size:20px;
+}
+:is(.availability-form,.host-form,.host-settings-form,.host-inline-form,.host-period) label{min-width:0}
+:is(.availability-form,.host-form,.host-settings-form,.host-inline-form,.host-period) :is(input,select){
+  min-width:0;
+  max-width:100%;
+  width:100%;
+}
+:is(.availability-form,.host-page) input[type="date"]{
+  -webkit-appearance:none;
+  appearance:none;
+  min-inline-size:0;
+  height:48px;
+}
+:is(.availability-form,.host-page) input[type="date"]::-webkit-date-and-time-value{
+  min-width:0;
+  text-align:left;
+}
+@media(max-width:760px){
+  :is(.availability-form,.search-filters,.host-page) input:not([type="checkbox"]):not([type="radio"]){font-size:16px;min-height:48px}
+}
+@media(max-width:700px){
+  .availability-form,.search-form{grid-template-columns:minmax(0,1fr)}
+  .search-filters{align-items:stretch;flex-direction:column}
+  .price-range-filter,.price-range-filter input,.search-select-filter,.search-select-filter select{min-width:0;width:100%}
+}
+@media(max-width:640px){
+  .host-form,.host-property-form,.host-inline-form,.host-settings-form,.host-dates{grid-template-columns:minmax(0,1fr)}
+  .host-period{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
