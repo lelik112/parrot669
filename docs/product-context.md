@@ -42,6 +42,7 @@ Current MVP principle:
 6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR. Existing periods show a Save action only after their dates or nightly price have actually changed.
 6a. New/updated availability periods may not overlap. Adjacent periods are allowed and can have different prices.
 6b. Search stitches adjacent periods together by requested night, so a stay may span multiple adjacent rows as long as every night is covered.
+6c. Overlapping availability periods for the same property are rejected twice: application-level checks provide friendly 409 responses, while PostgreSQL V13 enforces the invariant so concurrent writes cannot race past the check.
 7. Delete external listing or whole property.
 8. On every host-page load, the frontend calls `GET /api/auth/me` and then fetches the owner dashboard through the authenticated session.
 9. Owner authentication is account/session-only. The pre-account edit-token migration path has been removed.
@@ -99,6 +100,7 @@ Important migrations:
 - V10 adds per-listing search-link visibility and removes orphan external calendars
 - V11 adds accounts, server-side sessions, profile ownership by account and the reserved password-reset-token model
 - V12 removes pre-account edit-token authentication, deletes any remaining unowned legacy profiles, makes `profiles.account_id` mandatory and drops `access_token_hash`
+- V13 enforces non-overlapping property availability in PostgreSQL with a GiST exclusion constraint over `[date_from, date_to)`
 
 Current important endpoints:
 - `POST /api/auth/register`
@@ -194,7 +196,6 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 ## Immediate TODO
 
-- Before opening availability writes to meaningful concurrent traffic: clean up any legacy overlapping periods and add a PostgreSQL exclusion constraint on `daterange(date_from, date_to, '[)')` per property. API-level overlap checks remain useful for friendly errors, but are not sufficient against concurrent inserts/updates.
 - Improve visual design of housing/search/host UI.
 - Connect a backend email provider and add real password-reset request/confirm endpoints using the reserved reset-token model.
 - Add owner messaging/privacy preferences.

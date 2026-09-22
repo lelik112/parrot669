@@ -1,5 +1,12 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Database-enforced availability integrity
+
+- Added Flyway V13 with a PostgreSQL GiST exclusion constraint preventing overlapping `[date_from, date_to)` availability periods for the same property.
+- Migration aborts with a clear error if legacy overlapping rows already exist instead of silently deleting user data.
+- Existing application overlap checks remain for friendly validation, while PostgreSQL now closes the concurrent check-then-insert/update race.
+- PostgreSQL exclusion violations are mapped back to HTTP 409 Conflict instead of surfacing as 500 errors.
+
 ## 2026-09-22 — Live housing filters and dirty period saves
 
 - Accommodation type now behaves as a true result filter: repeat searches always use its current selected value instead of the value captured in the previous base-search snapshot.
