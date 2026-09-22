@@ -1,5 +1,12 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Editable accommodation type and result filters
+
+- Accommodation type can now be changed from each property's settings together with minimum stay and cleaning fee.
+- Moved `Only with a price` out of the primary search form into a separate result-filter area, leaving room for future filters.
+- After an initial search, changing `Only with a price` immediately re-runs the same search with the new filter state.
+- Documented the host API proxy contract: browser `/api/host/*` requests are intentionally forwarded to backend `/api/*`; the different visible paths are not separate APIs.
+
 ## 2026-09-22 — Editable property settings and calendar toggles
 
 - Minimum stay is no longer requested while creating a property; new properties default to one day and the value is editable from each property card.

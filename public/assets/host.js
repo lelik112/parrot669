@@ -151,6 +151,8 @@ async function api(path, options = {}){
   if (options.body) headers.set("Content-Type", "application/json");
   if (state.editToken) headers.set("X-Parrot-Token", state.editToken);
 
+  // Browser host API is namespaced under /api/host; the Worker strips /api/host
+  // and forwards the same request to the backend under /api.
   const response = await fetch(`/api/host${path}`, {...options, headers});
   if (response.status === 204) return null;
 
@@ -317,10 +319,12 @@ async function updatePropertySettings(property, form){
     const updated=await api(`/properties/${property.id}`,{
       method:"PUT",
       body:JSON.stringify({
+        accommodationType:String(data.get("accommodationType")||"entire_place"),
         minStayDays:Number(data.get("minStayDays")),
         cleaningFeeCents:eurosToCents(data.get("cleaningFee"))
       })
     });
+    property.accommodationType=updated.accommodationType;
     property.minStayDays=updated.minStayDays;
     property.cleaningFeeCents=updated.cleaningFeeCents;
     saveState();
@@ -542,6 +546,18 @@ function renderProperties(){
     settingsTitle.textContent=tr("propertySettings");
     const settingsForm=document.createElement("form");
     settingsForm.className="host-settings-form";
+    const accommodationLabel=document.createElement("label");
+    const accommodationText=document.createElement("span");
+    accommodationText.textContent=tr("accommodationTypeLabel");
+    const accommodationSelect=document.createElement("select");
+    accommodationSelect.name="accommodationType";
+    const entireOption=document.createElement("option");
+    entireOption.value="entire_place";entireOption.textContent=tr("entirePlace");
+    const roomOption=document.createElement("option");
+    roomOption.value="private_room";roomOption.textContent=tr("privateRoom");
+    accommodationSelect.append(entireOption,roomOption);
+    accommodationSelect.value=property.accommodationType==="private_room"?"private_room":"entire_place";
+    accommodationLabel.append(accommodationText,accommodationSelect);
     const minStayLabel=document.createElement("label");
     const minStayText=document.createElement("span");
     minStayText.textContent=tr("minStayLabel");
@@ -556,7 +572,7 @@ function renderProperties(){
     cleaningLabel.append(cleaningText,propertyCleaningInput);
     const saveSettings=document.createElement("button");
     saveSettings.className="button button-small";saveSettings.type="submit";saveSettings.textContent=tr("savePropertySettings");
-    settingsForm.append(minStayLabel,cleaningLabel,saveSettings);
+    settingsForm.append(accommodationLabel,minStayLabel,cleaningLabel,saveSettings);
     settingsForm.addEventListener("submit",event=>{event.preventDefault();updatePropertySettings(property,settingsForm)});
     settings.append(settingsTitle,settingsForm);
 

@@ -18,7 +18,7 @@ Current MVP principle:
 
 ### Guest
 1. Open `/search.html`.
-2. Search Barcelona by dates, accommodation type (`entire_place` or `private_room`), bedrooms and sleeping places. Accommodation type defaults to any in guest search.
+2. Search Barcelona by dates, accommodation type (`entire_place` or `private_room`), bedrooms and sleeping places. Accommodation type defaults to any in guest search. Result filters live separately from the primary search form; changing a result filter after a search re-runs that search immediately.
 3. Results show:
    - host nickname,
    - bedrooms,
@@ -37,7 +37,7 @@ Current MVP principle:
 1. Open `/host.html`.
 2. Create host profile.
 3. Create a Barcelona property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
-3a. Minimum stay and optional cleaning fee are visible property settings and can be edited after creation, independently of any external listing.
+3a. Accommodation type, minimum stay and optional cleaning fee are visible property settings and can be edited after creation, independently of any external listing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL.
 5. PARROT generates the canonical Airbnb URL.
 6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR.
@@ -125,7 +125,7 @@ Hosted on Cloudflare Workers/static assets.
 
 Worker proxies:
 - public `/api/search` to Railway
-- restricted host CRUD routes under `/api/host/*`
+- restricted browser host CRUD routes under `/api/host/*`; the Worker strips the `/api/host` prefix and forwards them to Railway backend `/api/*`. Example: browser `PUT /api/host/calendars/:id` becomes backend `PUT /api/calendars/:id`.
 
 Languages:
 - EN
