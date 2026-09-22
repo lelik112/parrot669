@@ -44,7 +44,13 @@ const proxyBackend = async (request, targetPath) => {
   const contentType = request.headers.get("Content-Type");
   const cookie = request.headers.get("Cookie");
   if (contentType) headers.set("Content-Type", contentType);
-  if (cookie) headers.set("Cookie", cookie);
+  if (cookie) {
+    const sessionCookie = cookie
+      .split(";")
+      .map((part) => part.trim())
+      .find((part) => part.startsWith("parrot_session="));
+    if (sessionCookie) headers.set("Cookie", sessionCookie);
+  }
   headers.set("Accept", "application/json");
 
   const init = {
@@ -119,8 +125,6 @@ export default {
         (path === "/auth/claim-legacy" && request.method === "POST") ||
         (path === "/dashboard" && request.method === "GET") ||
         (path === "/properties" && request.method === "POST") ||
-        (/^\/profiles\/[0-9a-f-]+\/dashboard$/i.test(path) && request.method === "GET") ||
-        (/^\/profiles\/[0-9a-f-]+\/properties$/i.test(path) && request.method === "POST") ||
         (/^\/profiles\/[0-9a-f-]+\/dashboard$/i.test(path) && request.method === "GET") ||
         (/^\/profiles\/[0-9a-f-]+\/properties$/i.test(path) && request.method === "POST") ||
         (/^\/properties\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
