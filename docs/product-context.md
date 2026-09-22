@@ -171,7 +171,7 @@ Owner authentication is account/session based:
 - New registrations do not receive a session until email verification succeeds. Verification tokens are 256-bit random values, stored only as SHA-256 hashes, expire after 24 hours and are one-time use. Verification immediately creates the first authenticated session.
 - Sessions expire after 30 days, multiple active sessions are allowed, verified login creates a fresh session, and logout deletes the server-side session.
 - Login errors do not distinguish unknown email from wrong password. A simple per-instance limiter caps repeated failures per normalized email; a distributed limiter can replace it if traffic or horizontal scaling justifies it.
-- Verification email delivery is implemented through a backend transactional-email sender. Production currently expects Cloudflare Email Service credentials; tests use a logging sender. V11 already reserves a hashed, expiring `password_reset_tokens` model for the next auth step.
+- Verification email delivery is implemented through a backend transactional-email sender. Production supports Resend (preferred for the current low-volume/free setup) or Cloudflare Email Service; tests use a logging sender. V11 already reserves a hashed, expiring `password_reset_tokens` model for the next auth step.
 - The pre-account `editToken`/`access_token_hash` mechanism and its compatibility routes have been removed.
 
 Before exposing owner contact or messaging broadly, add profile/privacy controls.
