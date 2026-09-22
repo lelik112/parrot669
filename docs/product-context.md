@@ -129,6 +129,14 @@ Repository: `lelik112/parrot669`
 
 Hosted on Cloudflare Workers/static assets.
 
+Frontend release path:
+- intended CI/CD is Cloudflare Workers Builds Git integration from `lelik112/parrot669`
+- production branch must be `main`
+- deploy command is `npx wrangler deploy`
+- there is currently no GitHub Actions workflow for frontend deployment
+- do not treat a GitHub push as proof of production deployment; verify the matching Cloudflare Workers Build/deployment
+- if recent pushes produce no Cloudflare build/check signal, inspect Worker `parrot669` → Settings → Builds and reconnect/repair the Git integration before debugging browser cache
+
 Worker proxies:
 - public `/api/search` to Railway
 - restricted browser auth/host routes under `/api/host/*`; the Worker strips the `/api/host` prefix and forwards them to Railway backend `/api/*`. Example: browser `PUT /api/host/calendars/:id` becomes backend `PUT /api/calendars/:id`.

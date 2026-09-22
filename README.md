@@ -21,10 +21,23 @@ In the `parrot669` Worker:
 Do not put the Gmail address in the repository.
 
 ## Git deployment
-Replace the repository contents with this project and push to the connected production branch.
+Production is intended to deploy through **Cloudflare Workers Builds** from the GitHub repository `lelik112/parrot669`.
 
-Cloudflare Workers Builds normally deploys with:
-`npx wrangler deploy`
+Required Cloudflare Worker settings:
+- Worker: `parrot669` (must match `name` in `wrangler.jsonc`)
+- Git repository: `lelik112/parrot669`
+- Production branch: `main`
+- Root directory: repository root
+- Deploy command: `npx wrangler deploy` (Cloudflare's default is fine)
+- Build command: none required for this vanilla JS/static-assets project
+
+A Git push is **not** considered a verified production release by itself. After each frontend release, verify the Workers Build/deployment for the same commit in Cloudflare. If Git integration is healthy, pushes to `main` should trigger the build automatically.
+
+If pushes stop deploying:
+1. Cloudflare → Workers & Pages → `parrot669` → Settings → Builds.
+2. Confirm the Git repository is connected and the production branch is `main`.
+3. If the repository is missing or stale, reconnect GitHub access and select `lelik112/parrot669`.
+4. Check Build History for the expected commit before treating the release as live.
 
 The project includes `wrangler.jsonc`, so the static site in `public/` and the Worker in `src/` are deployed together.
 
