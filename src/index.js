@@ -119,6 +119,8 @@ export default {
 
       const allowed =
         (path === "/auth/register" && request.method === "POST") ||
+        (path === "/auth/verify-email" && request.method === "POST") ||
+        (path === "/auth/resend-verification" && request.method === "POST") ||
         (path === "/auth/login" && request.method === "POST") ||
         (path === "/auth/logout" && request.method === "POST") ||
         (path === "/auth/me" && request.method === "GET") ||
