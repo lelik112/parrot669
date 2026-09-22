@@ -1625,3 +1625,7 @@ footer{
 @media(max-width:640px){
   .host-listing-controls{align-items:flex-start;flex-direction:column}
 }
+
+/* 2026-09-22 search filter alignment */
+.price-filter{align-self:flex-end}
+@media(max-width:700px){.price-filter{align-self:stretch}}

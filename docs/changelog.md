@@ -1,5 +1,14 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Search copy and city selector cleanup
+
+- Removed the claim that host properties do not contain prices; PARROT can now store optional pricing.
+- Results without a price now say to ask the host and no longer show the indicative-price disclaimer.
+- Removed unconditional wording that assumed an external listing exists; general rental terms are attributed to the host, while external links are shown only when actually attached and published.
+- Removed minimum-stay text from the compact host property summary because the value is already visible in property settings.
+- Aligned the `Only with a price` checkbox with the other result-filter controls.
+- Added a real city selector to guest search and property creation. Barcelona is currently the only available city.
+
 ## 2026-09-22 — External listing lifecycle and filter cleanup
 
 - Calendar sync is now shown only when an external Airbnb listing exists.

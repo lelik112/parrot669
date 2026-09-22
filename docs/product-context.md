@@ -18,7 +18,7 @@ Current MVP principle:
 
 ### Guest
 1. Open `/search.html`.
-2. Search Barcelona by dates, bedrooms and sleeping places. Accommodation type is a result filter alongside pricing filters and defaults to any. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Changing any result filter after a search re-runs that search immediately.
+2. Choose a city (currently only Barcelona), then search by dates, bedrooms and sleeping places. Accommodation type is a result filter alongside pricing filters and defaults to any. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Changing any result filter after a search re-runs that search immediately.
 3. Results show:
    - host nickname,
    - bedrooms,
@@ -36,7 +36,7 @@ Current MVP principle:
 ### Host
 1. Open `/host.html`.
 2. Create host profile.
-3. Create a Barcelona property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
+3. Choose a city (currently only Barcelona), create a property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
 3a. Accommodation type, minimum stay and optional cleaning fee are visible property settings and can be edited after creation, independently of any external listing. Property cards are collapsed by default to a compact summary and can be expanded for editing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
 5. PARROT generates the canonical Airbnb URL. The host may hide that URL from guest search without disconnecting the listing or calendar.
