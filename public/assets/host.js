@@ -214,11 +214,11 @@ function renderAuthState(){
 }
 
 async function migrateLegacyIfNeeded(){
-  if (!state.user || !legacyState) return false;
+  if (!state.user || !legacyState) return null;
 
   if (state.user.profile?.id === legacyState.profileId) {
     clearLegacyState();
-    return false;
+    return "same";
   }
 
   try {
@@ -231,11 +231,9 @@ async function migrateLegacyIfNeeded(){
     });
     state.user = user;
     clearLegacyState();
-    message(tr("legacyMigrated"), "success");
-    return true;
-  } catch (error) {
-    message(tr("legacyMigrationFailed"), "error");
-    return false;
+    return "claimed";
+  } catch {
+    return "failed";
   }
 }
 
@@ -272,10 +270,11 @@ async function syncDashboard(){
 async function finishAuthentication(user){
   state.user = user;
   renderAuthState();
-  const migrated = await migrateLegacyIfNeeded();
+  const migration = await migrateLegacyIfNeeded();
   renderAuthState();
   await syncDashboard();
-  return migrated;
+  if (migration === "claimed") message(tr("legacyMigrated"), "success");
+  if (migration === "failed") message(tr("legacyMigrationFailed"), "error");
 }
 
 async function boot(){
@@ -283,9 +282,11 @@ async function boot(){
     const user = await api("/auth/me");
     state.user = user;
     renderAuthState();
-    await migrateLegacyIfNeeded();
+    const migration = await migrateLegacyIfNeeded();
     renderAuthState();
     await syncDashboard();
+    if (migration === "claimed") message(tr("legacyMigrated"), "success");
+    if (migration === "failed") message(tr("legacyMigrationFailed"), "error");
   } catch (error) {
     if (error.status !== 401) message(error.message, "error");
     state = emptyState();
