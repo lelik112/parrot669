@@ -1,5 +1,13 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Search without external links and accommodation type
+
+- Properties remain in availability search after their external Airbnb listing is removed; search results return `links: []` and the guest UI explains that no external link has been added yet.
+- Added `accommodationType` with the values `entire_place` and `private_room` across property creation, owner dashboard, public profile and search results.
+- Existing properties migrate to `entire_place`.
+- Host creation uses a compact two-option select; guest search uses `Any type / Entire place / Private room`, and result cards show the selected type.
+- Added backend smoke coverage for type filtering, invalid type rejection and search after deleting an external listing.
+
 ## 2026-09-22 — Localized Airbnb calendar links and visible errors
 
 - Airbnb iCal export links on localized hosts such as `airbnb.ru`, `airbnb.es` and `airbnb.co.uk` are accepted and normalized to `www.airbnb.com` before fetch; redirects stay disabled and lookalike hosts remain rejected.

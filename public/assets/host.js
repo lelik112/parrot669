@@ -10,7 +10,7 @@ const copy = {
     nameLabel:"Name / host label", contactLabel:"Contact", contactPlaceholder:"Email or WhatsApp", createProfile:"Create host profile →",
     forgetSession:"Forget this browser session", propertiesTitle:"Properties",
     propertiesHelp:"No photos, prices or copied descriptions. Only enough data to search availability.",
-    internalLabel:"Internal label", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", addProperty:"Add property →",
+    internalLabel:"Internal label", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", accommodationTypeLabel:"Accommodation type", entirePlace:"Entire place", privateRoom:"Private room", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", addProperty:"Add property →",
     creatingProfile:"Creating host profile…", profileCreated:"Host profile created. This browser now holds the edit token; there is no recovery yet.",
     addingProperty:"Adding property…", propertyAdded:"Property added.", resetConfirm:"Forget the PARROT edit token and local property list from this browser?",
     sessionRemoved:"Local host session removed.", savingListing:"Saving external listing…", listingSaved:"Airbnb link saved.",
@@ -28,7 +28,7 @@ const copy = {
     nameLabel:"Nombre / etiqueta", contactLabel:"Contacto", contactPlaceholder:"Email o WhatsApp", createProfile:"Crear perfil →",
     forgetSession:"Olvidar esta sesión del navegador", propertiesTitle:"Viviendas",
     propertiesHelp:"Sin fotos, precios ni descripciones copiadas. Solo los datos mínimos para buscar disponibilidad.",
-    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", addProperty:"Añadir vivienda →",
+    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", accommodationTypeLabel:"Tipo de alojamiento", entirePlace:"Alojamiento entero", privateRoom:"Habitación privada", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", addProperty:"Añadir vivienda →",
     creatingProfile:"Creando perfil…", profileCreated:"Perfil creado. Este navegador guarda ahora el token de edición; todavía no hay recuperación.",
     addingProperty:"Añadiendo vivienda…", propertyAdded:"Vivienda añadida.", resetConfirm:"¿Olvidar el token de edición de PARROT y la lista local de viviendas de este navegador?",
     sessionRemoved:"Sesión local eliminada.", savingListing:"Guardando anuncio externo…", listingSaved:"Enlace de Airbnb guardado.",
@@ -46,7 +46,7 @@ const copy = {
     nameLabel:"Nom / etiqueta", contactLabel:"Contacte", contactPlaceholder:"Email o WhatsApp", createProfile:"Crear perfil →",
     forgetSession:"Oblidar aquesta sessió del navegador", propertiesTitle:"Habitatges",
     propertiesHelp:"Sense fotos, preus ni descripcions copiades. Només les dades mínimes per cercar disponibilitat.",
-    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", addProperty:"Afegir habitatge →",
+    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", accommodationTypeLabel:"Tipus d'allotjament", entirePlace:"Allotjament sencer", privateRoom:"Habitació privada", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", addProperty:"Afegir habitatge →",
     creatingProfile:"Creant perfil…", profileCreated:"Perfil creat. Aquest navegador desa ara el token d'edició; encara no hi ha recuperació.",
     addingProperty:"Afegint habitatge…", propertyAdded:"Habitatge afegit.", resetConfirm:"Oblidar el token d'edició de PARROT i la llista local d'habitatges d'aquest navegador?",
     sessionRemoved:"Sessió local eliminada.", savingListing:"Desant l'anunci extern…", listingSaved:"Enllaç d'Airbnb desat.",
@@ -64,7 +64,7 @@ const copy = {
     nameLabel:"Имя / название", contactLabel:"Контакт", contactPlaceholder:"Email или WhatsApp", createProfile:"Создать профиль →",
     forgetSession:"Забыть сессию в этом браузере", propertiesTitle:"Объекты",
     propertiesHelp:"Без фотографий, цен и скопированных описаний. Только минимум данных для поиска свободных дат.",
-    internalLabel:"Название для себя", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", addProperty:"Добавить объект →",
+    internalLabel:"Название для себя", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", accommodationTypeLabel:"Тип жилья", entirePlace:"Жильё целиком", privateRoom:"Отдельная комната", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", addProperty:"Добавить объект →",
     creatingProfile:"Создаём профиль…", profileCreated:"Профиль создан. Токен редактирования теперь хранится в этом браузере; восстановления пока нет.",
     addingProperty:"Добавляем объект…", propertyAdded:"Объект добавлен.", resetConfirm:"Забыть токен PARROT и локальный список объектов в этом браузере?",
     sessionRemoved:"Локальная сессия удалена.", savingListing:"Сохраняем внешнее объявление…", listingSaved:"Ссылка Airbnb сохранена.",
@@ -260,6 +260,7 @@ propertyForm.addEventListener("submit", async event => {
       body:JSON.stringify({
         title:String(form.get("title") || "").trim(),
         city:String(form.get("city") || "").trim(),
+        accommodationType:String(form.get("accommodationType") || "entire_place"),
         bedrooms:Number(form.get("bedrooms")),
         sleeps:Number(form.get("sleeps")),
         minStayDays:Number(form.get("minStayDays"))
@@ -270,6 +271,7 @@ propertyForm.addEventListener("submit", async event => {
       id:created.id,
       title:created.title,
       city:created.city,
+      accommodationType:created.accommodationType,
       bedrooms:created.bedrooms,
       sleeps:created.sleeps,
       minStayDays:created.minStayDays,
@@ -495,7 +497,8 @@ function renderProperties(){
     const meta = document.createElement("span");
     const sleeps = Number(property.sleeps || property.bedrooms || 1);
     const minStay = Number(property.minStayDays || 1);
-    meta.textContent = `${property.city} · ${tr("bedroom", Number(property.bedrooms))} · ${tr("sleepSummary", sleeps)} · ${tr("minSummary", minStay)}`;
+    const accommodationType = property.accommodationType === "private_room" ? tr("privateRoom") : tr("entirePlace");
+    meta.textContent = `${property.city} · ${accommodationType} · ${tr("bedroom", Number(property.bedrooms))} · ${tr("sleepSummary", sleeps)} · ${tr("minSummary", minStay)}`;
     title.append(strong, meta);
     const deletePropertyButton = document.createElement("button");
     deletePropertyButton.type = "button";

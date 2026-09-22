@@ -1409,6 +1409,7 @@ footer{
   color-scheme:dark;
 }
 .host-form input:focus,
+.host-form select:focus,
 .host-inline-form input:focus,
 .host-period input:focus{
   outline:none;border-color:rgba(216,255,99,.58);box-shadow:0 0 0 3px rgba(216,255,99,.07)
@@ -1471,13 +1472,18 @@ footer{
   letter-spacing:-.055em;
 }
 .standalone-search .availability-intro h1 span{color:var(--lime)}
-.search-form{grid-template-columns:minmax(170px,1.15fr) repeat(4,minmax(125px,.72fr)) auto}
+.search-form{grid-template-columns:repeat(5,minmax(120px,1fr)) minmax(150px,.9fr) auto}
 .availability-stay{color:#81908c;font-size:12px;margin-top:-8px}
+.availability-type{
+  align-self:flex-start;padding:5px 9px;border:1px solid rgba(216,255,99,.2);border-radius:999px;
+  background:rgba(216,255,99,.06);color:var(--lime);font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+}
+.availability-link-missing{align-self:center;color:#74837e;font-size:11px}
 .host-listing-help{margin:0 0 10px;line-height:1.5}
-@media(max-width:1200px){.search-form{grid-template-columns:repeat(3,minmax(0,1fr))}.search-form .availability-submit{grid-column:1/-1}}
+@media(max-width:1280px){.search-form{grid-template-columns:repeat(3,minmax(0,1fr))}.search-form .availability-submit{grid-column:1/-1}}
 @media(max-width:700px){.search-form{grid-template-columns:1fr}}
 
-.host-property-form{grid-template-columns:1.35fr .8fr .55fr .65fr .7fr auto}
+.host-property-form{grid-template-columns:1.35fr .8fr 1fr .55fr .65fr .7fr auto}
 @media(max-width:1100px){.host-property-form{grid-template-columns:repeat(3,1fr)}.host-property-form .button{grid-column:1/-1}}
 @media(max-width:640px){.host-property-form{grid-template-columns:1fr}}
 
@@ -1508,8 +1514,8 @@ footer{
   .host-listing-actions{align-items:flex-start;flex-direction:column}
 }
 
-.search-form{grid-template-columns:repeat(4,minmax(130px,1fr)) auto}
-@media(max-width:1200px){.search-form{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.search-form{grid-template-columns:repeat(5,minmax(120px,1fr)) minmax(150px,.9fr) auto}
+@media(max-width:1280px){.search-form{grid-template-columns:repeat(3,minmax(0,1fr))}.search-form .availability-submit{grid-column:1/-1}}
 @media(max-width:700px){.search-form{grid-template-columns:1fr}}
 
 .topbar-actions{display:flex;align-items:center;gap:10px}

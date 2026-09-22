@@ -12,13 +12,13 @@ Current MVP principle:
 - A host may connect an Airbnb iCal export. PARROT imports Airbnb events but only `SUMMARY:Reserved` events reduce physical availability. `Airbnb (Not available)` is stored as platform-specific unavailability and does not block PARROT physical availability.
 - PARROT does not book, take payment, copy listing descriptions/photos/prices, or define the legal rental term.
 - Rental terms live with the host / external platform.
-- Airbnb is currently the first external transaction/listing endpoint.
+- Airbnb is currently the first external transaction/listing endpoint. An external listing is optional: a property with host-reported availability remains searchable when no outbound link is attached.
 
 ## Current user flows
 
 ### Guest
 1. Open `/search.html`.
-2. Search Barcelona by dates, bedrooms, sleeping places.
+2. Search Barcelona by dates, accommodation type (`entire_place` or `private_room`), bedrooms and sleeping places. Accommodation type defaults to any in guest search.
 3. Results show:
    - host nickname,
    - bedrooms,
@@ -26,7 +26,7 @@ Current MVP principle:
    - host minimum stay,
    - host-reported PARROT availability,
    - optional indicative price when every requested night has a nightly price,
-   - external Airbnb link.
+   - external Airbnb link when the host has attached one; otherwise the result explicitly says that no external link is available yet.
 4. Minimum stay is enforced by backend search.
 4a. Guest can choose all results or only results with complete nightly pricing. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only search.
 4b. Optional cleaning fee belongs to the external listing and is included in the displayed estimate when known.
@@ -36,7 +36,7 @@ Current MVP principle:
 ### Host
 1. Open `/host.html`.
 2. Create host profile.
-3. Create a Barcelona property.
+3. Create a Barcelona property and choose whether it is an entire place or a private room.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL.
 5. PARROT generates the canonical Airbnb URL.
 6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR.
@@ -94,6 +94,7 @@ Important migrations:
 - V5 exclusive checkout semantics and owner-dashboard support; existing inclusive availability end dates are shifted +1 day to preserve their meaning
 - V6 optional nightly pricing + external-listing cleaning fee; search stitches adjacent availability periods and supports priced-only filtering
 - V7 external calendars + imported event snapshots; Airbnb Reserved events block search, Airbnb (Not available) events are retained but ignored for physical availability
+- V8 property accommodation type (`entire_place` or `private_room`); existing properties are migrated to `entire_place`
 
 Current important endpoints:
 - `POST /api/profiles`
@@ -105,7 +106,7 @@ Current important endpoints:
 - `GET|POST /api/properties/:propertyId/availability`
 - `PUT|DELETE /api/availability/:availabilityId`
 - `PUT /api/listings/:listingId` updates optional cleaning fee
-- `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&pricedOnly=true|false`
+- `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&accommodationType=any|entire_place|private_room&pricedOnly=true|false`
 - `POST /api/properties/:propertyId/calendars` connects/upserts an Airbnb iCal source and immediately syncs it
 - `POST /api/calendars/:calendarId/sync` manually refreshes the source
 - `DELETE /api/calendars/:calendarId` disconnects it
