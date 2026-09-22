@@ -44,7 +44,7 @@ Current MVP principle:
 6b. Search stitches adjacent periods together by requested night, so a stay may span multiple adjacent rows as long as every night is covered.
 7. Delete external listing or whole property.
 8. On every host-page load, the frontend calls `GET /api/auth/me` and then fetches the owner dashboard through the authenticated session.
-9. Legacy profiles created before account auth remain claimable with their old `profileId + editToken` exactly once. Successful claim attaches the legacy profile to the current account, deletes the newly-created empty profile, clears the legacy token hash, and frontend removes the old localStorage credentials. The edit token is not accepted by normal owner endpoints.
+9. Owner authentication is account/session-only. The pre-account edit-token migration path has been removed.
 10. After adding an Airbnb listing, the host can paste Airbnb's private iCal export URL. The listing id embedded in the iCal URL must match the Airbnb listing id already attached to the property.
 11. Calendar sync runs immediately on connect, manually via "Sync now", and automatically about once per hour while the calendar is enabled. A disabled calendar keeps its imported snapshot for later re-enable but does not block search and is skipped by automatic sync. Re-enabling triggers an immediate refresh. The raw iCal URL is never returned by the API or rendered back to the browser after connection.
 12. Calendar connection errors, including a listing-id mismatch, are shown directly under the calendar form as well as in the page status.
@@ -97,17 +97,16 @@ Important migrations:
 - V8 property accommodation type (`entire_place` or `private_room`); existing properties are migrated to `entire_place`
 - V9 moves cleaning fee to the property and adds enabled/disabled state for external calendars
 - V10 adds per-listing search-link visibility and removes orphan external calendars
-- V11 adds accounts, server-side sessions, optional profile ownership by account, nullable legacy edit-token hashes, and the reserved password-reset-token model
+- V11 adds accounts, server-side sessions, profile ownership by account and the reserved password-reset-token model
+- V12 removes pre-account edit-token authentication, deletes any remaining unowned legacy profiles, makes `profiles.account_id` mandatory and drops `access_token_hash`
 
 Current important endpoints:
 - `POST /api/auth/register`
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
-- `POST /api/auth/claim-legacy` is the temporary authenticated migration path for old edit-token profiles
 - `GET /api/dashboard` (owner-only, session required)
 - `POST /api/properties` (owner-only, session required)
-- `GET /api/profiles/:profileId/dashboard` and `POST /api/profiles/:profileId/properties` remain authenticated compatibility aliases; the profile id is checked against the session identity and is not a credential
 - `PUT /api/properties/:propertyId` updates accommodation type, bedrooms, sleeping places, minimum stay and optional property cleaning fee
 - `DELETE /api/properties/:propertyId`
 - `POST /api/properties/:propertyId/listings`
@@ -132,7 +131,7 @@ Hosted on Cloudflare Workers/static assets.
 Worker proxies:
 - public `/api/search` to Railway
 - restricted browser auth/host routes under `/api/host/*`; the Worker strips the `/api/host` prefix and forwards them to Railway backend `/api/*`. Example: browser `PUT /api/host/calendars/:id` becomes backend `PUT /api/calendars/:id`.
-- Host proxy forwards the session Cookie upstream and Set-Cookie back to the browser, does not forward the old `X-Parrot-Token`, and rejects cross-origin state-changing browser requests when an Origin header is present.
+- Host proxy forwards only the `parrot_session` Cookie upstream and Set-Cookie back to the browser, and rejects cross-origin state-changing browser requests when an Origin header is present.
 
 Languages:
 - EN
@@ -169,7 +168,7 @@ Owner authentication is account/session based:
 - Sessions expire after 30 days, multiple active sessions are allowed, login creates a fresh session, and logout deletes the server-side session.
 - Login errors do not distinguish unknown email from wrong password. A simple per-instance limiter caps repeated failures per normalized email; a distributed limiter can replace it if traffic or horizontal scaling justifies it.
 - Password recovery is not exposed yet because the backend has no mail provider. V11 reserves a hashed, expiring `password_reset_tokens` model so request/confirm endpoints can be added together with real email delivery rather than a fake reset flow.
-- Legacy `access_token_hash` is migration-only. Normal owner routes ignore `X-Parrot-Token`; successful legacy claim nulls the old hash.
+- The pre-account `editToken`/`access_token_hash` mechanism and its compatibility routes have been removed.
 
 Before exposing owner contact or messaging broadly, add profile/privacy controls.
 
