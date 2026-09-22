@@ -122,11 +122,8 @@ export default {
         (path === "/auth/login" && request.method === "POST") ||
         (path === "/auth/logout" && request.method === "POST") ||
         (path === "/auth/me" && request.method === "GET") ||
-        (path === "/auth/claim-legacy" && request.method === "POST") ||
         (path === "/dashboard" && request.method === "GET") ||
         (path === "/properties" && request.method === "POST") ||
-        (/^\/profiles\/[0-9a-f-]+\/dashboard$/i.test(path) && request.method === "GET") ||
-        (/^\/profiles\/[0-9a-f-]+\/properties$/i.test(path) && request.method === "POST") ||
         (/^\/properties\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
         (/^\/properties\/[0-9a-f-]+\/listings$/i.test(path) && request.method === "POST") ||
         (/^\/listings\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
