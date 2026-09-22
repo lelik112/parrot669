@@ -3,7 +3,7 @@ const LANG_KEY = "parrot669-language";
 
 const copy = {
   en: {
-    title:"PARROT 669 — Host console", consoleLabel:"HOST CONSOLE", backToSite:"← Back to site", tabSearch:"Find availability", tabHost:"For hosts", deleteProperty:"Delete property", deleteListing:"Remove external listing",
+    title:"PARROT 669 — Host console", consoleLabel:"HOST CONSOLE", backToSite:"← Back to site", tabSearch:"Find availability", tabHost:"For hosts", deleteProperty:"Delete property", deleteListing:"Remove external listing", showListingInSearch:"Show external link in search results", listingVisibilitySaved:"External link visibility updated.",
     toolsEyebrow:"HOST TOOLS", heroTitle:"Publish availability.<br><span>Keep the deal elsewhere.</span>",
     heroLead:"Add a property, link the original Airbnb listing and maintain only the dates when the property is physically free.",
     identityTitle:"Host identity", identityHelp:"The edit token stays in this browser. PARROT stores only its hash.",
@@ -21,7 +21,7 @@ const copy = {
     noPeriods:"No availability periods.", save:"Save", remove:"Delete", bedroom:n=>n===1?"1 bedroom":`${n} bedrooms`, sleepSummary:n=>n===1?"1 sleeping place":`${n} sleeping places`, minSummary:n=>`minimum ${n} day${n===1?"":"s"}`
   },
   es: {
-    title:"PARROT 669 — Panel de propietarios", consoleLabel:"PANEL DE PROPIETARIOS", backToSite:"← Volver al sitio", tabSearch:"Buscar disponibilidad", tabHost:"Para propietarios", deleteProperty:"Eliminar vivienda", deleteListing:"Eliminar anuncio externo",
+    title:"PARROT 669 — Panel de propietarios", consoleLabel:"PANEL DE PROPIETARIOS", backToSite:"← Volver al sitio", tabSearch:"Buscar disponibilidad", tabHost:"Para propietarios", deleteProperty:"Eliminar vivienda", deleteListing:"Eliminar anuncio externo", showListingInSearch:"Mostrar enlace externo en los resultados", listingVisibilitySaved:"Visibilidad del enlace actualizada.",
     toolsEyebrow:"HERRAMIENTAS PARA PROPIETARIOS", heroTitle:"Publica la disponibilidad.<br><span>La operación ocurre fuera.</span>",
     heroLead:"Añade una vivienda, enlaza el anuncio original de Airbnb y mantén únicamente las fechas en las que está físicamente libre.",
     identityTitle:"Identidad del propietario", identityHelp:"El token de edición se queda en este navegador. PARROT solo guarda su hash.",
@@ -39,7 +39,7 @@ const copy = {
     noPeriods:"No hay periodos de disponibilidad.", save:"Guardar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitorio":`${n} dormitorios`, sleepSummary:n=>n===1?"1 plaza":`${n} plazas`, minSummary:n=>`mínimo ${n} día${n===1?"":"s"}`
   },
   ca: {
-    title:"PARROT 669 — Panell de propietaris", consoleLabel:"PANELL DE PROPIETARIS", backToSite:"← Tornar al web", tabSearch:"Cercar disponibilitat", tabHost:"Per a propietaris", deleteProperty:"Eliminar habitatge", deleteListing:"Eliminar anunci extern",
+    title:"PARROT 669 — Panell de propietaris", consoleLabel:"PANELL DE PROPIETARIS", backToSite:"← Tornar al web", tabSearch:"Cercar disponibilitat", tabHost:"Per a propietaris", deleteProperty:"Eliminar habitatge", deleteListing:"Eliminar anunci extern", showListingInSearch:"Mostrar l'enllaç extern als resultats", listingVisibilitySaved:"Visibilitat de l'enllaç actualitzada.",
     toolsEyebrow:"EINES PER A PROPIETARIS", heroTitle:"Publica la disponibilitat.<br><span>L'operació passa fora.</span>",
     heroLead:"Afegeix un habitatge, enllaça l'anunci original d'Airbnb i mantén només les dates en què està físicament lliure.",
     identityTitle:"Identitat del propietari", identityHelp:"El token d'edició es queda en aquest navegador. PARROT només en desa el hash.",
@@ -57,7 +57,7 @@ const copy = {
     noPeriods:"No hi ha períodes de disponibilitat.", save:"Desar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitori":`${n} dormitoris`, sleepSummary:n=>n===1?"1 plaça":`${n} places`, minSummary:n=>`mínim ${n} dia${n===1?"":"s"}`
   },
   ru: {
-    title:"PARROT 669 — Кабинет владельца", consoleLabel:"КАБИНЕТ ВЛАДЕЛЬЦА", backToSite:"← Назад на сайт", tabSearch:"Найти жильё", tabHost:"Владельцам", deleteProperty:"Удалить объект", deleteListing:"Удалить внешнее объявление",
+    title:"PARROT 669 — Кабинет владельца", consoleLabel:"КАБИНЕТ ВЛАДЕЛЬЦА", backToSite:"← Назад на сайт", tabSearch:"Найти жильё", tabHost:"Владельцам", deleteProperty:"Удалить объект", deleteListing:"Удалить внешнее объявление", showListingInSearch:"Показывать внешнюю ссылку в поиске", listingVisibilitySaved:"Видимость внешней ссылки обновлена.",
     toolsEyebrow:"ИНСТРУМЕНТЫ ВЛАДЕЛЬЦА", heroTitle:"Публикуйте свободные даты.<br><span>Сделка остаётся снаружи.</span>",
     heroLead:"Добавьте объект, укажите исходное объявление Airbnb и поддерживайте только даты, когда жильё физически свободно.",
     identityTitle:"Профиль владельца", identityHelp:"Токен редактирования остаётся в этом браузере. PARROT хранит только его hash.",
@@ -349,7 +349,7 @@ async function addListing(property, form){
         externalId:String(data.get("externalId") || "").trim()
       })
     });
-    property.listing = {id:created.id, platform:created.platform, externalId:created.externalId, url:created.url};
+    property.listing = {id:created.id, platform:created.platform, externalId:created.externalId, url:created.url, showInSearch:created.showInSearch!==false};
     saveState();
     message(tr("listingSaved"), "success");
     renderProperties();
@@ -439,12 +439,32 @@ async function deleteProperty(property){
   }
 }
 
+async function updateListingVisibility(property, checkbox){
+  if(!property.listing?.id) return;
+  checkbox.disabled=true;
+  try{
+    const updated=await api(`/listings/${property.listing.id}`,{
+      method:"PUT",
+      body:JSON.stringify({showInSearch:checkbox.checked})
+    });
+    property.listing.showInSearch=updated.showInSearch!==false;
+    checkbox.checked=property.listing.showInSearch;
+    message(tr("listingVisibilitySaved"),"success");
+  }catch(error){
+    checkbox.checked=property.listing.showInSearch!==false;
+    message(error.message,"error");
+  }finally{
+    checkbox.disabled=false;
+  }
+}
+
 async function deleteListing(property){
   if (!property.listing?.id || !confirm(tr("deleteListingConfirm"))) return;
   message(tr("savingListing"));
   try {
     await api(`/listings/${property.listing.id}`, {method:"DELETE"});
     property.listing = null;
+    property.calendars = [];
     saveState();
     message(tr("listingDeleted"), "success");
     renderProperties();
@@ -541,8 +561,10 @@ function renderProperties(){
     headActions.className="host-property-head-actions";
     const togglePropertyButton=document.createElement("button");
     togglePropertyButton.type="button";
-    togglePropertyButton.className="button button-ghost button-small";
-    togglePropertyButton.textContent=tr(expanded?"collapseProperty":"expandProperty");
+    togglePropertyButton.className="host-property-toggle";
+    togglePropertyButton.textContent=expanded?"▴":"▾";
+    togglePropertyButton.title=tr(expanded?"collapseProperty":"expandProperty");
+    togglePropertyButton.setAttribute("aria-label",tr(expanded?"collapseProperty":"expandProperty"));
     togglePropertyButton.addEventListener("click",()=>{
       if(expanded) expandedPropertyIds.delete(property.id);
       else expandedPropertyIds.add(property.id);
@@ -615,12 +637,24 @@ function renderProperties(){
       a.textContent = property.listing.url;
       const actions = document.createElement("div");
       actions.className = "host-listing-actions";
+      const visibility=document.createElement("label");
+      visibility.className="host-listing-visibility";
+      const visibilityCheckbox=document.createElement("input");
+      visibilityCheckbox.type="checkbox";
+      visibilityCheckbox.checked=property.listing.showInSearch!==false;
+      visibilityCheckbox.addEventListener("change",()=>updateListingVisibility(property,visibilityCheckbox));
+      const visibilityText=document.createElement("span");
+      visibilityText.textContent=tr("showListingInSearch");
+      visibility.append(visibilityCheckbox,visibilityText);
       const removeListing = document.createElement("button");
       removeListing.type = "button";
       removeListing.className = "text-button danger";
       removeListing.textContent = tr("deleteListing");
       removeListing.addEventListener("click", () => deleteListing(property));
-      actions.append(a, removeListing);
+      const listingControls=document.createElement("div");
+      listingControls.className="host-listing-controls";
+      listingControls.append(visibility,removeListing);
+      actions.append(a, listingControls);
       listing.append(actions);
     } else {
       const form = document.createElement("form");
@@ -712,11 +746,6 @@ function renderProperties(){
       }
 
       syncPanel.append(status,actions);
-    }else if(!property.listing){
-      const note=document.createElement("p");
-      note.className="host-inline-muted";
-      note.textContent=tr("calendarHelp");
-      syncPanel.append(note);
     }else{
       const help=document.createElement("p");
       help.className="host-inline-muted host-listing-help";
@@ -824,7 +853,9 @@ function renderProperties(){
     }
 
     calendar.append(periods);
-    card.append(settings, listing, syncPanel, calendar);
+    card.append(settings, listing);
+    if(property.listing) card.append(syncPanel);
+    card.append(calendar);
     propertiesNode.append(card);
   });
 }

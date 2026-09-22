@@ -18,7 +18,7 @@ Current MVP principle:
 
 ### Guest
 1. Open `/search.html`.
-2. Search Barcelona by dates, accommodation type (`entire_place` or `private_room`), bedrooms and sleeping places. Accommodation type defaults to any in guest search. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Result filters live separately from the primary search form; changing a result filter after a search re-runs that search immediately.
+2. Search Barcelona by dates, bedrooms and sleeping places. Accommodation type is a result filter alongside pricing filters and defaults to any. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Changing any result filter after a search re-runs that search immediately.
 3. Results show:
    - host nickname,
    - bedrooms,
@@ -29,7 +29,7 @@ Current MVP principle:
    - external Airbnb link when the host has attached one; otherwise the result explicitly says that no external link is available yet.
 4. Minimum stay is enforced by backend search.
 4a. Guest can choose all results or only results with complete nightly pricing, and may filter by minimum/maximum estimated total price for the requested stay. Results with a known price are sorted cheapest first; results without a complete price come last. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only and price-range search.
-4b. Optional cleaning fee belongs to the PARROT property, not to the external listing, and is included in the displayed estimate when known.
+4b. Optional cleaning fee belongs to the PARROT property, not to the external listing, and is included in the displayed estimate when known. An external listing has an independent `showInSearch` flag: it may remain connected for calendar sync while its outbound URL is hidden from guest search results.
 5. Property title shown to guests is the same title entered by the owner; Barcelona is not used as the result title.
 6. Date ranges use hotel-style [check-in, checkout) semantics: checkout day is not occupied and same-day check-in/check-out is invalid.
 
@@ -38,8 +38,8 @@ Current MVP principle:
 2. Create host profile.
 3. Create a Barcelona property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
 3a. Accommodation type, minimum stay and optional cleaning fee are visible property settings and can be edited after creation, independently of any external listing. Property cards are collapsed by default to a compact summary and can be expanded for editing.
-4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL.
-5. PARROT generates the canonical Airbnb URL.
+4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
+5. PARROT generates the canonical Airbnb URL. The host may hide that URL from guest search without disconnecting the listing or calendar.
 6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR.
 6a. New/updated availability periods may not overlap. Adjacent periods are allowed and can have different prices.
 6b. Search stitches adjacent periods together by requested night, so a stay may span multiple adjacent rows as long as every night is covered.
@@ -97,6 +97,7 @@ Important migrations:
 - V7 external calendars + imported event snapshots; Airbnb Reserved events block search, Airbnb (Not available) events are retained but ignored for physical availability
 - V8 property accommodation type (`entire_place` or `private_room`); existing properties are migrated to `entire_place`
 - V9 moves cleaning fee to the property and adds enabled/disabled state for external calendars
+- V10 adds per-listing search-link visibility and removes orphan external calendars
 
 Current important endpoints:
 - `POST /api/profiles`
@@ -108,7 +109,7 @@ Current important endpoints:
 - `DELETE /api/listings/:listingId`
 - `GET|POST /api/properties/:propertyId/availability`
 - `PUT|DELETE /api/availability/:availabilityId`
-- `PUT /api/listings/:listingId` remains for legacy listing-level fee compatibility; new host UI and search use the property cleaning fee from `PUT /api/properties/:propertyId`
+- `PUT /api/listings/:listingId` updates whether the external link is shown in guest search; the listing can remain connected for calendar sync while hidden
 - `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&accommodationType=any|entire_place|private_room&pricedOnly=true|false&minPriceCents=...&maxPriceCents=...`; results are sorted by final estimated stay price ascending, with unknown prices last
 - `POST /api/properties/:propertyId/calendars` connects/upserts an Airbnb iCal source and immediately syncs it
 - `POST /api/calendars/:calendarId/sync` manually refreshes an enabled source

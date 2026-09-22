@@ -18,6 +18,7 @@ const housingCopy = {
 let lang=(()=>{const saved=localStorage.getItem(LANG_KEY);if(saved&&copy[saved])return saved;const b=(navigator.language||"en").slice(0,2);return copy[b]?b:"en"})();
 const form=document.getElementById("availability-form");
 const results=document.getElementById("availability-results");
+const accommodationTypeFilter=document.getElementById("filter-accommodation-type");
 const pricedOnlyFilter=document.getElementById("filter-priced-only");
 const minPriceFilter=document.getElementById("filter-price-from");
 const maxPriceFilter=document.getElementById("filter-price-to");
@@ -46,7 +47,7 @@ function eurosToCents(value){
 function saveSearchState(){
   const fd=new FormData(form);
   localStorage.setItem(SEARCH_STATE_KEY,JSON.stringify({
-    accommodationType:String(fd.get("accommodationType")||"any"),
+    accommodationType:String(accommodationTypeFilter?.value||"any"),
     from:String(fd.get("from")||""),
     to:String(fd.get("to")||""),
     bedrooms:String(fd.get("bedrooms")||"1"),
@@ -61,7 +62,7 @@ function restoreSearchState(){
   try{
     const saved=JSON.parse(localStorage.getItem(SEARCH_STATE_KEY)||"null");
     if(!saved||typeof saved!=="object") return;
-    if(saved.accommodationType) form.elements.accommodationType.value=saved.accommodationType;
+    if(saved.accommodationType&&accommodationTypeFilter) accommodationTypeFilter.value=saved.accommodationType;
     if(saved.from) form.elements.from.value=saved.from;
     if(saved.to) form.elements.to.value=saved.to;
     if(saved.bedrooms) form.elements.bedrooms.value=saved.bedrooms;
@@ -126,7 +127,7 @@ function currentSearchParams(){
     to:String(fd.get("to")||""),
     bedrooms:String(fd.get("bedrooms")||"1"),
     sleeps:String(fd.get("sleeps")||"1"),
-    accommodationType:String(fd.get("accommodationType")||"any")
+    accommodationType:String(accommodationTypeFilter?.value||"any")
   });
 }
 async function runSearch(baseParams,{disableSubmit=false}={}){
@@ -168,7 +169,7 @@ form.addEventListener("submit",async e=>{
 });
 form.addEventListener("change",saveSearchState);
 form.addEventListener("input",saveSearchState);
-[pricedOnlyFilter,minPriceFilter,maxPriceFilter].forEach(filter=>{
+[accommodationTypeFilter,pricedOnlyFilter,minPriceFilter,maxPriceFilter].forEach(filter=>{
   filter?.addEventListener("change",()=>{
     saveSearchState();
     if(lastSearchParams) runSearch(lastSearchParams);

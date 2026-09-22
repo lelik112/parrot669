@@ -1,5 +1,13 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — External listing lifecycle and filter cleanup
+
+- Calendar sync is now shown only when an external Airbnb listing exists.
+- Deleting the external listing also deletes its Airbnb calendar atomically; migration V10 removes any already orphaned calendars.
+- Added a host checkbox to keep an Airbnb listing connected for sync while hiding its outbound link from guest search results.
+- Replaced the property Expand/Collapse text button with a compact up/down chevron control.
+- Moved accommodation type from the primary search form into the result-filter group. After an initial search, changing it immediately re-runs the search like the other filters.
+
 ## 2026-09-22 — Persistent search, price ordering and compact host cards
 
 - Availability search now persists criteria and result filters in localStorage. Returning from the host screen restores the previous search state and automatically re-runs the last performed search.
