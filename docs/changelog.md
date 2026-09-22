@@ -2,7 +2,7 @@
 
 ## 2026-09-22 — Harden Airbnb iCal connection
 
-- Calendar listing IDs must now equal the attached Airbnb listing ID; substring matches are rejected.
+- Added regression coverage confirming that a calendar listing ID must exactly match the attached Airbnb listing ID; mismatches are rejected before fetch.
 - Calendar fetches accept only `airbnb.com` and its subdomains with the exact `/calendar/ical/<listingId>.ics` path, closing lookalike-host SSRF bypasses.
 - A failed calendar reconnect keeps the last successful event snapshot and last-success timestamp, so known reservations remain blocked.
 - End-to-end smoke coverage now protects URL validation, exact listing matching and failed-reconnect behavior.
