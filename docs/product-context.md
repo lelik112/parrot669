@@ -143,6 +143,8 @@ Search logic is therefore:
 
 The iCal URL is a secret capability link. It is stored server-side because it must be fetched, but never returned in dashboard/public APIs. TODO before serious scale: encrypt calendar URLs at rest with an application-managed key.
 
+Calendar connection validation is deliberately strict: the listing id must match the property's Airbnb listing id exactly, and production fetches accept only HTTPS URLs on `airbnb.com` or its subdomains with the exact `/calendar/ical/<listingId>.ics` path. Redirects remain disabled. If reconnecting or replacing a calendar URL fails, PARROT keeps the last successful event snapshot, so known reservations continue to block search until a later successful sync replaces them.
+
 ## Auth / contact direction
 
 Current edit-token-in-localStorage auth is MVP only.
