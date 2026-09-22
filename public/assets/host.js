@@ -216,6 +216,7 @@ function renderAuthState(){
   if (ready) {
     hostAccountEmail.textContent = state.accountEmail;
     hostParrotId.textContent = state.parrotId || state.profileId;
+    if (legacyCredentials?.profileId === state.profileId) clearLegacyCredentials();
   }
 
   legacyClaimPanel.hidden = !(
