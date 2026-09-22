@@ -69,6 +69,14 @@
           <input type="checkbox" id="filter-priced-only" />
           <span data-search-i18n="pricedOnly">Only with a price</span>
         </label>
+        <label class="price-range-filter">
+          <span data-search-i18n="priceFrom">Price from, €</span>
+          <input type="number" id="filter-price-from" min="0" step="1" inputmode="decimal" />
+        </label>
+        <label class="price-range-filter">
+          <span data-search-i18n="priceTo">Price to, €</span>
+          <input type="number" id="filter-price-to" min="0" step="1" inputmode="decimal" />
+        </label>
       </div>
 
       <div class="availability-meta">

@@ -1,5 +1,15 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Persistent search, price ordering and compact host cards
+
+- Availability search now persists criteria and result filters in localStorage. Returning from the host screen restores the previous search state and automatically re-runs the last performed search.
+- Search results are sorted by final estimated stay price ascending; properties without a complete price are placed last.
+- Added estimated total price filters from/to in EUR. Changing a result filter after a search immediately re-runs it.
+- Calendar connected status is localized; Russian now shows `Подключён` instead of `Connected`.
+- Calendar destructive action is labelled Delete/Удалить rather than Disconnect/Отключить.
+- Enable/disable controls are visually grouped separately from calendar deletion.
+- Host property cards are collapsed by default to their main summary and expose Expand/Collapse controls; expanded state survives internal rerenders.
+
 ## 2026-09-22 — Editable accommodation type and result filters
 
 - Accommodation type can now be changed from each property's settings together with minimum stay and cleaning fee.
