@@ -1,4 +1,3 @@
-const STORAGE_KEY = "parrot669-host-state";
 const LANG_KEY = "parrot669-language";
 
 const copy = {
@@ -8,7 +7,7 @@ const copy = {
     heroLead:"Add a property, link the original Airbnb listing and maintain only the dates when the property is physically free.",
     identityTitle:"Host account", identityHelp:"Sign in to manage your properties securely from this browser.",
     nameLabel:"Name / host label", loginTitle:"Log in", registerTitle:"Create account", emailLabel:"Email", passwordLabel:"Password", passwordHelp:"At least 10 characters.", loginButton:"Log in →", registerButton:"Create account →", accountLabel:"ACCOUNT", logoutButton:"Log out",
-    loggingIn:"Logging in…", registering:"Creating account…", loggedIn:"Logged in.", registered:"Account created.", loggedOut:"Logged out.", legacyClaimHelp:"An older PARROT host profile was found in this browser. You can attach it to this account.", legacyClaimButton:"Attach existing profile", legacyClaiming:"Attaching existing profile…", legacyClaimed:"Existing host profile attached.",
+    loggingIn:"Logging in…", registering:"Creating account…", loggedIn:"Logged in.", registered:"Account created.", loggedOut:"Logged out.",
     propertiesTitle:"Properties",
     propertiesHelp:"No photos or copied descriptions. Only enough data to search availability.",
     internalLabel:"Property name", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", accommodationTypeLabel:"Accommodation type", entirePlace:"Entire place", privateRoom:"Private room", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", propertySettings:"Property characteristics", savePropertySettings:"Save characteristics", saveStaySettings:"Save conditions", propertySettingsSaved:"Property settings saved.", enableCalendar:"Enable", disableCalendar:"Disable", calendarEnabled:"Airbnb calendar enabled.", calendarDisabled:"Airbnb calendar disabled.", calendarDisabledStatus:"Disabled", calendarConnectedStatus:"Connected", expandProperty:"Expand", collapseProperty:"Collapse", addProperty:"Add property →",
@@ -26,7 +25,7 @@ const copy = {
     heroLead:"Añade una vivienda, enlaza el anuncio original de Airbnb y mantén únicamente las fechas en las que está físicamente libre.",
     identityTitle:"Cuenta del propietario", identityHelp:"Inicia sesión para gestionar tus viviendas de forma segura desde este navegador.",
     nameLabel:"Nombre / etiqueta", loginTitle:"Iniciar sesión", registerTitle:"Crear cuenta", emailLabel:"Email", passwordLabel:"Contraseña", passwordHelp:"Al menos 10 caracteres.", loginButton:"Entrar →", registerButton:"Crear cuenta →", accountLabel:"CUENTA", logoutButton:"Cerrar sesión",
-    loggingIn:"Iniciando sesión…", registering:"Creando cuenta…", loggedIn:"Sesión iniciada.", registered:"Cuenta creada.", loggedOut:"Sesión cerrada.", legacyClaimHelp:"Se encontró un perfil antiguo de PARROT en este navegador. Puedes asociarlo a esta cuenta.", legacyClaimButton:"Asociar perfil existente", legacyClaiming:"Asociando perfil existente…", legacyClaimed:"Perfil existente asociado.",
+    loggingIn:"Iniciando sesión…", registering:"Creando cuenta…", loggedIn:"Sesión iniciada.", registered:"Cuenta creada.", loggedOut:"Sesión cerrada.",
     propertiesTitle:"Viviendas",
     propertiesHelp:"Sin fotos ni descripciones copiadas. Solo los datos mínimos para buscar disponibilidad.",
     internalLabel:"Nombre de la vivienda", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", accommodationTypeLabel:"Tipo de alojamiento", entirePlace:"Alojamiento entero", privateRoom:"Habitación privada", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", propertySettings:"Características de la vivienda", savePropertySettings:"Guardar características", saveStaySettings:"Guardar condiciones", propertySettingsSaved:"Ajustes guardados.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendario de Airbnb activado.", calendarDisabled:"Calendario de Airbnb desactivado.", calendarDisabledStatus:"Desactivado", calendarConnectedStatus:"Conectado", expandProperty:"Expandir", collapseProperty:"Contraer", addProperty:"Añadir vivienda →",
@@ -44,7 +43,7 @@ const copy = {
     heroLead:"Afegeix un habitatge, enllaça l'anunci original d'Airbnb i mantén només les dates en què està físicament lliure.",
     identityTitle:"Compte del propietari", identityHelp:"Inicia sessió per gestionar els habitatges de manera segura des d'aquest navegador.",
     nameLabel:"Nom / etiqueta", loginTitle:"Iniciar sessió", registerTitle:"Crear compte", emailLabel:"Email", passwordLabel:"Contrasenya", passwordHelp:"Com a mínim 10 caràcters.", loginButton:"Entrar →", registerButton:"Crear compte →", accountLabel:"COMPTE", logoutButton:"Tancar sessió",
-    loggingIn:"Iniciant sessió…", registering:"Creant compte…", loggedIn:"Sessió iniciada.", registered:"Compte creat.", loggedOut:"Sessió tancada.", legacyClaimHelp:"S'ha trobat un perfil antic de PARROT en aquest navegador. El pots associar a aquest compte.", legacyClaimButton:"Associar perfil existent", legacyClaiming:"Associant perfil existent…", legacyClaimed:"Perfil existent associat.",
+    loggingIn:"Iniciant sessió…", registering:"Creant compte…", loggedIn:"Sessió iniciada.", registered:"Compte creat.", loggedOut:"Sessió tancada.",
     propertiesTitle:"Habitatges",
     propertiesHelp:"Sense fotos ni descripcions copiades. Només les dades mínimes per cercar disponibilitat.",
     internalLabel:"Nom de l'habitatge", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", accommodationTypeLabel:"Tipus d'allotjament", entirePlace:"Allotjament sencer", privateRoom:"Habitació privada", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", propertySettings:"Característiques de l'habitatge", savePropertySettings:"Desar característiques", saveStaySettings:"Desar condicions", propertySettingsSaved:"Configuració desada.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendari d'Airbnb activat.", calendarDisabled:"Calendari d'Airbnb desactivat.", calendarDisabledStatus:"Desactivat", calendarConnectedStatus:"Connectat", expandProperty:"Desplegar", collapseProperty:"Plegar", addProperty:"Afegir habitatge →",
@@ -62,7 +61,7 @@ const copy = {
     heroLead:"Добавьте объект, укажите исходное объявление Airbnb и поддерживайте только даты, когда жильё физически свободно.",
     identityTitle:"Аккаунт владельца", identityHelp:"Войдите, чтобы безопасно управлять своими объектами с этого браузера.",
     nameLabel:"Имя / название", loginTitle:"Войти", registerTitle:"Создать аккаунт", emailLabel:"Email", passwordLabel:"Пароль", passwordHelp:"Не менее 10 символов.", loginButton:"Войти →", registerButton:"Создать аккаунт →", accountLabel:"АККАУНТ", logoutButton:"Выйти",
-    loggingIn:"Входим…", registering:"Создаём аккаунт…", loggedIn:"Вы вошли.", registered:"Аккаунт создан.", loggedOut:"Вы вышли.", legacyClaimHelp:"В этом браузере найден старый профиль PARROT. Его можно привязать к этому аккаунту.", legacyClaimButton:"Привязать существующий профиль", legacyClaiming:"Привязываем существующий профиль…", legacyClaimed:"Существующий профиль привязан.",
+    loggingIn:"Входим…", registering:"Создаём аккаунт…", loggedIn:"Вы вошли.", registered:"Аккаунт создан.", loggedOut:"Вы вышли.",
     propertiesTitle:"Объекты",
     propertiesHelp:"Без фотографий и скопированных описаний. Только минимум данных для поиска свободных дат.",
     internalLabel:"Название объекта", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", accommodationTypeLabel:"Тип жилья", entirePlace:"Жильё целиком", privateRoom:"Отдельная комната", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", propertySettings:"Характеристики объекта", savePropertySettings:"Сохранить характеристики", saveStaySettings:"Сохранить условия", propertySettingsSaved:"Настройки объекта сохранены.", enableCalendar:"Включить", disableCalendar:"Выключить", calendarEnabled:"Календарь Airbnb включён.", calendarDisabled:"Календарь Airbnb выключен.", calendarDisabledStatus:"Выключен", calendarConnectedStatus:"Подключён", expandProperty:"Развернуть", collapseProperty:"Свернуть", addProperty:"Добавить объект →",
@@ -76,43 +75,28 @@ const copy = {
   }
 };
 
-const emptyState = () => ({authenticated:false, accountEmail:"", profileId:"", parrotId:"", properties:[]});
+const emptyState = () => ({authenticated:false, accountEmail:"", properties:[]});
 let state = emptyState();
-let legacyCredentials = loadLegacyCredentials();
 let lang = loadLanguage();
+let authMode = "login";
 const expandedPropertyIds = new Set();
 
 const statusNode = document.getElementById("host-status");
-const authForms = document.getElementById("auth-forms");
+const authDialog = document.getElementById("auth-dialog");
+const authDialogTitle = document.getElementById("auth-dialog-title");
 const loginForm = document.getElementById("login-form");
 const registerForm = document.getElementById("register-form");
+const openLoginButton = document.getElementById("open-login");
+const openRegisterButton = document.getElementById("open-register");
+const closeAuthDialogButton = document.getElementById("close-auth-dialog");
+const hostAuthLinks = document.getElementById("host-auth-links");
+const hostAccountSession = document.getElementById("host-account-session");
 const propertyPanel = document.getElementById("property-panel");
 const propertyForm = document.getElementById("property-form");
-const hostSession = document.getElementById("host-session");
 const hostAccountEmail = document.getElementById("host-account-email");
-const hostParrotId = document.getElementById("host-parrot-id");
 const propertiesNode = document.getElementById("host-properties");
 const resetButton = document.getElementById("reset-host");
-const legacyClaimPanel = document.getElementById("legacy-claim");
-const legacyClaimButton = document.getElementById("claim-legacy");
 const langButtons = document.querySelectorAll("[data-host-lang]");
-
-function loadLegacyCredentials(){
-  try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-    if (!parsed || typeof parsed !== "object") return null;
-    const profileId = String(parsed.profileId || "");
-    const editToken = String(parsed.editToken || "");
-    return profileId && editToken ? {profileId, editToken} : null;
-  } catch {
-    return null;
-  }
-}
-
-function clearLegacyCredentials(){
-  localStorage.removeItem(STORAGE_KEY);
-  legacyCredentials = null;
-}
 
 function loadLanguage(){
   const saved = localStorage.getItem(LANG_KEY);
@@ -142,6 +126,7 @@ function applyLanguage(next){
     node.placeholder = tr(node.dataset.hostPlaceholder);
   });
   langButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.hostLang === lang));
+  updateAuthDialog();
   renderProperties();
 }
 
@@ -201,43 +186,49 @@ function setAuthenticated(user){
   state = {
     ...emptyState(),
     authenticated:true,
-    accountEmail:String(user?.email || ""),
-    profileId:String(user?.profile?.id || ""),
-    parrotId:String(user?.profile?.parrotId || "")
+    accountEmail:String(user?.email || "")
   };
 }
 
 function renderAuthState(){
-  const ready = Boolean(state.authenticated && state.profileId);
-  authForms.hidden = ready;
-  hostSession.hidden = !ready;
+  const ready = Boolean(state.authenticated);
+  hostAuthLinks.hidden = ready;
+  hostAccountSession.hidden = !ready;
   propertyPanel.hidden = !ready;
+  hostAccountEmail.textContent = ready ? state.accountEmail : "";
+}
 
-  if (ready) {
-    hostAccountEmail.textContent = state.accountEmail;
-    hostParrotId.textContent = state.parrotId || state.profileId;
-    if (legacyCredentials?.profileId === state.profileId) clearLegacyCredentials();
-  }
+function updateAuthDialog(){
+  const login = authMode === "login";
+  authDialogTitle.textContent = tr(login ? "loginTitle" : "registerTitle");
+  loginForm.hidden = !login;
+  registerForm.hidden = login;
+}
 
-  legacyClaimPanel.hidden = !(
-    ready &&
-    legacyCredentials &&
-    legacyCredentials.profileId !== state.profileId
-  );
+function openAuth(mode){
+  authMode = mode === "register" ? "register" : "login";
+  setFormError(loginForm);
+  setFormError(registerForm);
+  updateAuthDialog();
+  if (typeof authDialog.showModal === "function") authDialog.showModal();
+  else authDialog.setAttribute("open", "");
+}
+
+function closeAuth(){
+  if (typeof authDialog.close === "function") authDialog.close();
+  else authDialog.removeAttribute("open");
 }
 
 async function syncDashboard(){
   message(tr("loading"));
   try {
     const dashboard = await api("/dashboard");
-    state.parrotId = dashboard.profile.parrotId || state.parrotId;
     state.properties = (dashboard.properties || []).map(property => ({
       ...property,
       listing: Array.isArray(property.listings) ? (property.listings[0] || null) : null,
       availability: Array.isArray(property.availability) ? property.availability : [],
       calendars: Array.isArray(property.calendars) ? property.calendars : []
     }));
-    hostParrotId.textContent = state.parrotId || state.profileId;
     renderProperties();
     message("");
   } catch (error) {
@@ -267,6 +258,13 @@ async function boot(){
   }
 }
 
+openLoginButton.addEventListener("click", () => openAuth("login"));
+openRegisterButton.addEventListener("click", () => openAuth("register"));
+closeAuthDialogButton.addEventListener("click", closeAuth);
+authDialog.addEventListener("click", event => {
+  if (event.target === authDialog) closeAuth();
+});
+
 loginForm.addEventListener("submit", async event => {
   event.preventDefault();
   const form = new FormData(loginForm);
@@ -286,6 +284,7 @@ loginForm.addEventListener("submit", async event => {
     renderAuthState();
     await syncDashboard();
     loginForm.elements.password.value = "";
+    closeAuth();
     message(tr("loggedIn"), "success");
   } catch (error) {
     setFormError(loginForm, error.message);
@@ -315,34 +314,13 @@ registerForm.addEventListener("submit", async event => {
     renderAuthState();
     await syncDashboard();
     registerForm.elements.password.value = "";
+    closeAuth();
     message(tr("registered"), "success");
   } catch (error) {
     setFormError(registerForm, error.message);
     message(error.message, "error");
   } finally {
     setBusy(registerForm, false);
-  }
-});
-
-legacyClaimButton.addEventListener("click", async () => {
-  if (!legacyCredentials) return;
-  legacyClaimButton.disabled = true;
-  message(tr("legacyClaiming"));
-
-  try {
-    const user = await api("/auth/claim-legacy", {
-      method:"POST",
-      body:JSON.stringify(legacyCredentials)
-    });
-    clearLegacyCredentials();
-    setAuthenticated(user);
-    renderAuthState();
-    await syncDashboard();
-    message(tr("legacyClaimed"), "success");
-  } catch (error) {
-    message(error.message, "error");
-  } finally {
-    legacyClaimButton.disabled = false;
   }
 });
 
@@ -634,7 +612,7 @@ function renderProperties(){
   if (!propertiesNode) return;
   propertiesNode.replaceChildren();
 
-  if (!state.profileId) return;
+  if (!state.authenticated) return;
 
   if (!state.properties.length) {
     const empty = document.createElement("div");
