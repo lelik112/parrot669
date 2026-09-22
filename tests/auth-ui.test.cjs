@@ -47,7 +47,7 @@ function setup(routes = {}, search = '') {
   const nodes = new Map([...html.matchAll(/id="([^"]+)"/g)].map(match => [match[1], element()]));
   for (const id of ['login-form', 'register-form']) {
     const form = nodes.get(id);
-    for (const key of ['email', 'password', 'displayName']) {
+    for (const key of ['login', 'username', 'email', 'password', 'displayName']) {
       form.elements[key] = element();
       form.elements[key].value = key === 'email' ? 'test@example.test' : 'test-value-123';
       form.controls.push(form.elements[key]);
@@ -60,6 +60,7 @@ function setup(routes = {}, search = '') {
     return node;
   });
   const calls = [];
+  const requests = [];
   const sandbox = {
     document: {
       documentElement: {},
@@ -76,9 +77,10 @@ function setup(routes = {}, search = '') {
       constructor(form) {this.form = form;}
       get(key) {return this.form.elements[key]?.value;}
     },
-    fetch: async url => {
+    fetch: async (url, options) => {
       const route = url.replace('/api/host', '');
       calls.push(route);
+      requests.push({route, body: options.body ? JSON.parse(options.body) : null});
       const result = typeof routes[route] === 'function' ? await routes[route]() : routes[route];
       const status = result?.status ?? (!result && route === '/auth/me' ? 401 : 200);
       return {status, ok:status < 400, json:async () => result?.body ?? {error:'Test error'}};
@@ -86,10 +88,39 @@ function setup(routes = {}, search = '') {
   };
   vm.createContext(sandbox);
   vm.runInContext(source, sandbox);
-  return {nodes, modes, calls, run: code => vm.runInContext(code, sandbox)};
+  return {nodes, modes, calls, requests, run: code => vm.runInContext(code, sandbox)};
 }
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
+
+test('login sends either email or username in the login field', async () => {
+  for (const value of ['  My Name  ', '  test@example.test  ']) {
+    const app = setup({'/auth/login':{body:{...user, username:'My Name'}}, '/dashboard':{body:{properties:[]}}});
+    await settle();
+    app.nodes.get('login-form').elements.login.value = value;
+    await app.nodes.get('login-form').emit('submit');
+    const request = app.requests.find(r => r.route === '/auth/login');
+    assert.equal(request.body.login, value.trim());
+    assert.equal(request.body.email, undefined);
+    assert.equal(app.nodes.get('host-account-email').textContent, 'My Name');
+    assert.equal(app.nodes.get('host-account-email').title, user.email);
+  }
+  assert.match(html, /name="login" type="text" autocomplete="username"/);
+});
+
+test('registration sends username separately from display name and email', async () => {
+  const app = setup({'/auth/register':{status:201, body:{}}});
+  await settle();
+  const form = app.nodes.get('register-form');
+  form.elements.username.value = '  Aleksey  ';
+  form.elements.displayName.value = 'Host name';
+  await form.emit('submit');
+  const request = app.requests.find(r => r.route === '/auth/register');
+  assert.equal(request.body.username, 'Aleksey');
+  assert.equal(request.body.displayName, 'Host name');
+  assert.equal(request.body.email, user.email);
+  assert.equal(app.nodes.get('host-account-session').hidden, true);
+});
 
 test('hidden overrides all author display rules and initial auth links are hidden', () => {
   assert.match(css, /\[hidden\]\s*\{\s*display:\s*none\s*!important\s*\}/);

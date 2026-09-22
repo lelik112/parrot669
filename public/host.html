@@ -69,8 +69,8 @@
 
       <form class="host-form host-auth-card" id="login-form">
         <label>
-          <span data-host-i18n="emailLabel">Email</span>
-          <input name="email" type="email" autocomplete="email" required maxlength="254" />
+          <span data-host-i18n="loginLabel">Email or username</span>
+          <input name="login" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required maxlength="254" />
         </label>
         <label>
           <span data-host-i18n="passwordLabel">Password</span>
@@ -80,6 +80,11 @@
       </form>
 
       <form class="host-form host-auth-card" id="register-form" hidden>
+        <label>
+          <span data-host-i18n="usernameLabel">Username</span>
+          <input name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required maxlength="120" pattern="[^@]+" aria-describedby="username-help" />
+        </label>
+        <p class="host-inline-muted" id="username-help" data-host-i18n="usernameHelp">Unique, case-insensitive. No @ symbol.</p>
         <label>
           <span data-host-i18n="nameLabel">Name / host label</span>
           <input name="displayName" autocomplete="name" required maxlength="120" />

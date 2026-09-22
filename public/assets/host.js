@@ -2,6 +2,7 @@ const LANG_KEY = "parrot669-language";
 
 const copy = {
   en: {
+    usernameLabel:"Username", loginLabel:"Email or username", usernameHelp:"Unique, case-insensitive. No @ symbol.",
     title:"PARROT 669 — Host console", consoleLabel:"HOST CONSOLE", backToSite:"← Back to site", tabSearch:"Find availability", tabHost:"For hosts", deleteProperty:"Delete property", deleteListing:"Remove external listing", showListingInSearch:"Show external link in search results", listingVisibilitySaved:"External link visibility updated.",
     toolsEyebrow:"HOST TOOLS", heroTitle:"Publish availability.<br><span>Keep the deal elsewhere.</span>",
     heroLead:"Add a property, link the original Airbnb listing and maintain only the dates when the property is physically free.",
@@ -20,6 +21,7 @@ const copy = {
     noPeriods:"No availability periods.", save:"Save", remove:"Delete", bedroom:n=>n===1?"1 bedroom":`${n} bedrooms`, sleepSummary:n=>n===1?"1 sleeping place":`${n} sleeping places`, minSummary:n=>`minimum ${n} day${n===1?"":"s"}`
   },
   es: {
+    usernameLabel:"Nombre de usuario", loginLabel:"Email o nombre de usuario", usernameHelp:"Único, sin distinguir mayúsculas. Sin el símbolo @.",
     title:"PARROT 669 — Panel de propietarios", consoleLabel:"PANEL DE PROPIETARIOS", backToSite:"← Volver al sitio", tabSearch:"Buscar disponibilidad", tabHost:"Para propietarios", deleteProperty:"Eliminar vivienda", deleteListing:"Eliminar anuncio externo", showListingInSearch:"Mostrar enlace externo en los resultados", listingVisibilitySaved:"Visibilidad del enlace actualizada.",
     toolsEyebrow:"HERRAMIENTAS PARA PROPIETARIOS", heroTitle:"Publica la disponibilidad.<br><span>La operación ocurre fuera.</span>",
     heroLead:"Añade una vivienda, enlaza el anuncio original de Airbnb y mantén únicamente las fechas en las que está físicamente libre.",
@@ -38,6 +40,7 @@ const copy = {
     noPeriods:"No hay periodos de disponibilidad.", save:"Guardar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitorio":`${n} dormitorios`, sleepSummary:n=>n===1?"1 plaza":`${n} plazas`, minSummary:n=>`mínimo ${n} día${n===1?"":"s"}`
   },
   ca: {
+    usernameLabel:"Nom d’usuari", loginLabel:"Email o nom d’usuari", usernameHelp:"Únic, sense distingir majúscules. Sense el símbol @.",
     title:"PARROT 669 — Panell de propietaris", consoleLabel:"PANELL DE PROPIETARIS", backToSite:"← Tornar al web", tabSearch:"Cercar disponibilitat", tabHost:"Per a propietaris", deleteProperty:"Eliminar habitatge", deleteListing:"Eliminar anunci extern", showListingInSearch:"Mostrar l'enllaç extern als resultats", listingVisibilitySaved:"Visibilitat de l'enllaç actualitzada.",
     toolsEyebrow:"EINES PER A PROPIETARIS", heroTitle:"Publica la disponibilitat.<br><span>L'operació passa fora.</span>",
     heroLead:"Afegeix un habitatge, enllaça l'anunci original d'Airbnb i mantén només les dates en què està físicament lliure.",
@@ -56,6 +59,7 @@ const copy = {
     noPeriods:"No hi ha períodes de disponibilitat.", save:"Desar", remove:"Eliminar", bedroom:n=>n===1?"1 dormitori":`${n} dormitoris`, sleepSummary:n=>n===1?"1 plaça":`${n} places`, minSummary:n=>`mínim ${n} dia${n===1?"":"s"}`
   },
   ru: {
+    usernameLabel:"Логин", loginLabel:"Email или логин", usernameHelp:"Уникальный, без учёта регистра. Без символа @.",
     title:"PARROT 669 — Кабинет владельца", consoleLabel:"КАБИНЕТ ВЛАДЕЛЬЦА", backToSite:"← Назад на сайт", tabSearch:"Найти жильё", tabHost:"Владельцам", deleteProperty:"Удалить объект", deleteListing:"Удалить внешнее объявление", showListingInSearch:"Показывать внешнюю ссылку в поиске", listingVisibilitySaved:"Видимость внешней ссылки обновлена.",
     toolsEyebrow:"ИНСТРУМЕНТЫ ВЛАДЕЛЬЦА", heroTitle:"Публикуйте свободные даты.<br><span>Сделка остаётся снаружи.</span>",
     heroLead:"Добавьте объект, укажите исходное объявление Airbnb и поддерживайте только даты, когда жильё физически свободно.",
@@ -75,7 +79,7 @@ const copy = {
   }
 };
 
-const emptyState = () => ({authenticated:false, accountEmail:"", properties:[]});
+const emptyState = () => ({authenticated:false, accountEmail:"", username:"", properties:[]});
 let state = emptyState();
 let lang = loadLanguage();
 let authMode = "login";
@@ -189,7 +193,8 @@ function setAuthenticated(user){
   state = {
     ...emptyState(),
     authenticated:true,
-    accountEmail:String(user?.email || "")
+    accountEmail:String(user?.email || ""),
+    username:String(user?.username || "")
   };
 }
 
@@ -198,7 +203,8 @@ function renderAuthState(){
   hostAuthLinks.hidden = sessionLoading || ready;
   hostAccountSession.hidden = !ready;
   propertyPanel.hidden = !ready;
-  hostAccountEmail.textContent = ready ? state.accountEmail : "";
+  hostAccountEmail.textContent = ready ? (state.username || state.accountEmail) : "";
+  hostAccountEmail.title = ready ? state.accountEmail : "";
   if (ready && authDialog.open) closeAuth();
 }
 
@@ -337,7 +343,7 @@ loginForm.addEventListener("submit", async event => {
     const user = await api("/auth/login", {
       method:"POST",
       body:JSON.stringify({
-        email:String(form.get("email") || "").trim(),
+        login:String(form.get("login") || "").trim(),
         password:String(form.get("password") || "")
       })
     });
@@ -367,6 +373,7 @@ registerForm.addEventListener("submit", async event => {
     await api("/auth/register", {
       method:"POST",
       body:JSON.stringify({
+        username:String(form.get("username") || "").trim(),
         displayName:String(form.get("displayName") || "").trim(),
         email:String(form.get("email") || "").trim(),
         password:String(form.get("password") || "")
