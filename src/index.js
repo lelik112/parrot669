@@ -43,10 +43,8 @@ const proxyBackend = async (request, targetPath) => {
   const headers = new Headers();
   const contentType = request.headers.get("Content-Type");
   const cookie = request.headers.get("Cookie");
-  const clientIp = request.headers.get("CF-Connecting-IP");
   if (contentType) headers.set("Content-Type", contentType);
   if (cookie) headers.set("Cookie", cookie);
-  if (clientIp) headers.set("X-Parrot-Client-IP", clientIp);
   headers.set("Accept", "application/json");
 
   const init = {
