@@ -10,7 +10,7 @@ const copy = {
     nameLabel:"Name / host label", contactLabel:"Contact", contactPlaceholder:"Email or WhatsApp", createProfile:"Create host profile →",
     forgetSession:"Forget this browser session", propertiesTitle:"Properties",
     propertiesHelp:"No photos, prices or copied descriptions. Only enough data to search availability.",
-    internalLabel:"Internal label", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", accommodationTypeLabel:"Accommodation type", entirePlace:"Entire place", privateRoom:"Private room", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", addProperty:"Add property →",
+    internalLabel:"Internal label", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", accommodationTypeLabel:"Accommodation type", entirePlace:"Entire place", privateRoom:"Private room", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", propertySettings:"Property settings", savePropertySettings:"Save settings", propertySettingsSaved:"Property settings saved.", enableCalendar:"Enable", disableCalendar:"Disable", calendarEnabled:"Airbnb calendar enabled.", calendarDisabled:"Airbnb calendar disabled.", calendarDisabledStatus:"Disabled", addProperty:"Add property →",
     creatingProfile:"Creating host profile…", profileCreated:"Host profile created. This browser now holds the edit token; there is no recovery yet.",
     addingProperty:"Adding property…", propertyAdded:"Property added.", resetConfirm:"Forget the PARROT edit token and local property list from this browser?",
     sessionRemoved:"Local host session removed.", savingListing:"Saving external listing…", listingSaved:"Airbnb link saved.",
@@ -28,7 +28,7 @@ const copy = {
     nameLabel:"Nombre / etiqueta", contactLabel:"Contacto", contactPlaceholder:"Email o WhatsApp", createProfile:"Crear perfil →",
     forgetSession:"Olvidar esta sesión del navegador", propertiesTitle:"Viviendas",
     propertiesHelp:"Sin fotos, precios ni descripciones copiadas. Solo los datos mínimos para buscar disponibilidad.",
-    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", accommodationTypeLabel:"Tipo de alojamiento", entirePlace:"Alojamiento entero", privateRoom:"Habitación privada", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", addProperty:"Añadir vivienda →",
+    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", accommodationTypeLabel:"Tipo de alojamiento", entirePlace:"Alojamiento entero", privateRoom:"Habitación privada", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", propertySettings:"Ajustes de la vivienda", savePropertySettings:"Guardar ajustes", propertySettingsSaved:"Ajustes guardados.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendario de Airbnb activado.", calendarDisabled:"Calendario de Airbnb desactivado.", calendarDisabledStatus:"Desactivado", addProperty:"Añadir vivienda →",
     creatingProfile:"Creando perfil…", profileCreated:"Perfil creado. Este navegador guarda ahora el token de edición; todavía no hay recuperación.",
     addingProperty:"Añadiendo vivienda…", propertyAdded:"Vivienda añadida.", resetConfirm:"¿Olvidar el token de edición de PARROT y la lista local de viviendas de este navegador?",
     sessionRemoved:"Sesión local eliminada.", savingListing:"Guardando anuncio externo…", listingSaved:"Enlace de Airbnb guardado.",
@@ -46,7 +46,7 @@ const copy = {
     nameLabel:"Nom / etiqueta", contactLabel:"Contacte", contactPlaceholder:"Email o WhatsApp", createProfile:"Crear perfil →",
     forgetSession:"Oblidar aquesta sessió del navegador", propertiesTitle:"Habitatges",
     propertiesHelp:"Sense fotos, preus ni descripcions copiades. Només les dades mínimes per cercar disponibilitat.",
-    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", accommodationTypeLabel:"Tipus d'allotjament", entirePlace:"Allotjament sencer", privateRoom:"Habitació privada", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", addProperty:"Afegir habitatge →",
+    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", accommodationTypeLabel:"Tipus d'allotjament", entirePlace:"Allotjament sencer", privateRoom:"Habitació privada", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", propertySettings:"Configuració de l'habitatge", savePropertySettings:"Desar configuració", propertySettingsSaved:"Configuració desada.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendari d'Airbnb activat.", calendarDisabled:"Calendari d'Airbnb desactivat.", calendarDisabledStatus:"Desactivat", addProperty:"Afegir habitatge →",
     creatingProfile:"Creant perfil…", profileCreated:"Perfil creat. Aquest navegador desa ara el token d'edició; encara no hi ha recuperació.",
     addingProperty:"Afegint habitatge…", propertyAdded:"Habitatge afegit.", resetConfirm:"Oblidar el token d'edició de PARROT i la llista local d'habitatges d'aquest navegador?",
     sessionRemoved:"Sessió local eliminada.", savingListing:"Desant l'anunci extern…", listingSaved:"Enllaç d'Airbnb desat.",
@@ -64,7 +64,7 @@ const copy = {
     nameLabel:"Имя / название", contactLabel:"Контакт", contactPlaceholder:"Email или WhatsApp", createProfile:"Создать профиль →",
     forgetSession:"Забыть сессию в этом браузере", propertiesTitle:"Объекты",
     propertiesHelp:"Без фотографий, цен и скопированных описаний. Только минимум данных для поиска свободных дат.",
-    internalLabel:"Название для себя", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", accommodationTypeLabel:"Тип жилья", entirePlace:"Жильё целиком", privateRoom:"Отдельная комната", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", addProperty:"Добавить объект →",
+    internalLabel:"Название для себя", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", accommodationTypeLabel:"Тип жилья", entirePlace:"Жильё целиком", privateRoom:"Отдельная комната", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", propertySettings:"Настройки объекта", savePropertySettings:"Сохранить настройки", propertySettingsSaved:"Настройки объекта сохранены.", enableCalendar:"Включить", disableCalendar:"Выключить", calendarEnabled:"Календарь Airbnb включён.", calendarDisabled:"Календарь Airbnb выключен.", calendarDisabledStatus:"Выключен", addProperty:"Добавить объект →",
     creatingProfile:"Создаём профиль…", profileCreated:"Профиль создан. Токен редактирования теперь хранится в этом браузере; восстановления пока нет.",
     addingProperty:"Добавляем объект…", propertyAdded:"Объект добавлен.", resetConfirm:"Забыть токен PARROT и локальный список объектов в этом браузере?",
     sessionRemoved:"Локальная сессия удалена.", savingListing:"Сохраняем внешнее объявление…", listingSaved:"Ссылка Airbnb сохранена.",
@@ -262,8 +262,7 @@ propertyForm.addEventListener("submit", async event => {
         city:String(form.get("city") || "").trim(),
         accommodationType:String(form.get("accommodationType") || "entire_place"),
         bedrooms:Number(form.get("bedrooms")),
-        sleeps:Number(form.get("sleeps")),
-        minStayDays:Number(form.get("minStayDays"))
+        sleeps:Number(form.get("sleeps"))
       })
     });
 
@@ -275,6 +274,7 @@ propertyForm.addEventListener("submit", async event => {
       bedrooms:created.bedrooms,
       sleeps:created.sleeps,
       minStayDays:created.minStayDays,
+      cleaningFeeCents:created.cleaningFeeCents,
       listing:null,
       availability:[],
       calendars:[]
@@ -309,6 +309,27 @@ function centsToEuros(value){
   return (Number(value)/100).toFixed(2).replace(/\.00$/,"");
 }
 
+async function updatePropertySettings(property, form){
+  const data=new FormData(form);
+  setBusy(form,true);
+  message(tr("loading"));
+  try{
+    const updated=await api(`/properties/${property.id}`,{
+      method:"PUT",
+      body:JSON.stringify({
+        minStayDays:Number(data.get("minStayDays")),
+        cleaningFeeCents:eurosToCents(data.get("cleaningFee"))
+      })
+    });
+    property.minStayDays=updated.minStayDays;
+    property.cleaningFeeCents=updated.cleaningFeeCents;
+    saveState();
+    message(tr("propertySettingsSaved"),"success");
+    renderProperties();
+  }catch(error){message(error.message,"error")}
+  finally{setBusy(form,false)}
+}
+
 async function addListing(property, form){
   const data = new FormData(form);
   setBusy(form, true);
@@ -319,11 +340,10 @@ async function addListing(property, form){
       method:"POST",
       body:JSON.stringify({
         platform:"airbnb",
-        externalId:String(data.get("externalId") || "").trim(),
-        cleaningFeeCents:eurosToCents(data.get("cleaningFee"))
+        externalId:String(data.get("externalId") || "").trim()
       })
     });
-    property.listing = {id:created.id, platform:created.platform, externalId:created.externalId, url:created.url, cleaningFeeCents:created.cleaningFeeCents};
+    property.listing = {id:created.id, platform:created.platform, externalId:created.externalId, url:created.url};
     saveState();
     message(tr("listingSaved"), "success");
     renderProperties();
@@ -454,6 +474,15 @@ async function syncCalendar(calendar){
   }catch(error){message(error.message,"error")}
 }
 
+async function setCalendarEnabled(calendar, enabled){
+  message(tr("loading"));
+  try{
+    await api(`/calendars/${calendar.id}`,{method:"PUT",body:JSON.stringify({enabled})});
+    message(tr(enabled ? "calendarEnabled" : "calendarDisabled"),"success");
+    await syncDashboard();
+  }catch(error){message(error.message,"error")}
+}
+
 async function disconnectCalendar(calendar){
   if(!confirm(tr("disconnectCalendarConfirm"))) return;
   message(tr("loading"));
@@ -507,6 +536,30 @@ function renderProperties(){
     deletePropertyButton.addEventListener("click", () => deleteProperty(property));
     head.append(title, deletePropertyButton);
 
+    const settings=document.createElement("div");
+    settings.className="host-subpanel host-property-settings";
+    const settingsTitle=document.createElement("h3");
+    settingsTitle.textContent=tr("propertySettings");
+    const settingsForm=document.createElement("form");
+    settingsForm.className="host-settings-form";
+    const minStayLabel=document.createElement("label");
+    const minStayText=document.createElement("span");
+    minStayText.textContent=tr("minStayLabel");
+    const minStayInput=document.createElement("input");
+    minStayInput.type="number";minStayInput.name="minStayDays";minStayInput.min="1";minStayInput.max="365";minStayInput.required=true;minStayInput.value=String(property.minStayDays||1);
+    minStayLabel.append(minStayText,minStayInput);
+    const cleaningLabel=document.createElement("label");
+    const cleaningText=document.createElement("span");
+    cleaningText.textContent=tr("cleaningFee");
+    const propertyCleaningInput=document.createElement("input");
+    propertyCleaningInput.type="number";propertyCleaningInput.name="cleaningFee";propertyCleaningInput.min="0";propertyCleaningInput.step="0.01";propertyCleaningInput.value=centsToEuros(property.cleaningFeeCents);
+    cleaningLabel.append(cleaningText,propertyCleaningInput);
+    const saveSettings=document.createElement("button");
+    saveSettings.className="button button-small";saveSettings.type="submit";saveSettings.textContent=tr("savePropertySettings");
+    settingsForm.append(minStayLabel,cleaningLabel,saveSettings);
+    settingsForm.addEventListener("submit",event=>{event.preventDefault();updatePropertySettings(property,settingsForm)});
+    settings.append(settingsTitle,settingsForm);
+
     const listing = document.createElement("div");
     listing.className = "host-subpanel";
     const listingTitle = document.createElement("h3");
@@ -522,27 +575,12 @@ function renderProperties(){
       a.textContent = property.listing.url;
       const actions = document.createElement("div");
       actions.className = "host-listing-actions";
-      const cleaningWrap=document.createElement("div");
-      cleaningWrap.className="host-pricing-edit";
-      const cleaningInput=document.createElement("input");
-      cleaningInput.type="number";cleaningInput.min="0";cleaningInput.step="0.01";
-      cleaningInput.placeholder=tr("cleaningFee");cleaningInput.value=centsToEuros(property.listing.cleaningFeeCents);
-      const saveCleaning=document.createElement("button");
-      saveCleaning.type="button";saveCleaning.className="text-button";saveCleaning.textContent=tr("saveCleaning");
-      saveCleaning.addEventListener("click", async()=>{
-        try{
-          const updated=await api(`/listings/${property.listing.id}`,{method:"PUT",body:JSON.stringify({cleaningFeeCents:eurosToCents(cleaningInput.value)})});
-          property.listing.cleaningFeeCents=updated.cleaningFeeCents;
-          message(tr("listingSaved"),"success");
-        }catch(error){message(error.message,"error")}
-      });
-      cleaningWrap.append(cleaningInput,saveCleaning);
       const removeListing = document.createElement("button");
       removeListing.type = "button";
       removeListing.className = "text-button danger";
       removeListing.textContent = tr("deleteListing");
       removeListing.addEventListener("click", () => deleteListing(property));
-      actions.append(a, cleaningWrap, removeListing);
+      actions.append(a, removeListing);
       listing.append(actions);
     } else {
       const form = document.createElement("form");
@@ -559,13 +597,11 @@ function renderProperties(){
       input.name = "externalId";
       input.required = true;
       input.placeholder = tr("airbnbIdPlaceholder");
-      const cleaningInput=document.createElement("input");
-      cleaningInput.type="number";cleaningInput.min="0";cleaningInput.step="0.01";cleaningInput.name="cleaningFee";cleaningInput.placeholder=tr("cleaningFee");
       const button = document.createElement("button");
       button.className = "button button-small";
       button.type = "submit";
       button.textContent = tr("saveAirbnb");
-      form.append(input, cleaningInput, button);
+      form.append(input, button);
       form.addEventListener("submit", event => {
         event.preventDefault();
         addListing(property, form);
@@ -588,11 +624,13 @@ function renderProperties(){
       syncPanel.append(note);
     }else if(externalCalendar){
       const status=document.createElement("div");
-      status.className=`host-calendar-status ${externalCalendar.status||""}`;
+      status.className=`host-calendar-status ${externalCalendar.enabled===false ? "disabled" : (externalCalendar.status||"")}`;
 
       const statusTop=document.createElement("div");
       const statusLabel=document.createElement("strong");
-      statusLabel.textContent=externalCalendar.status==="connected" ? "Airbnb · Connected" : `Airbnb · ${tr("calendarError")}`;
+      statusLabel.textContent=externalCalendar.enabled===false
+        ? `Airbnb · ${tr("calendarDisabledStatus")}`
+        : (externalCalendar.status==="connected" ? "Airbnb · Connected" : `Airbnb · ${tr("calendarError")}`);
       const last=document.createElement("span");
       last.textContent=tr("lastSync",formatSyncTime(externalCalendar.lastSyncedAt));
       statusTop.append(statusLabel,last);
@@ -609,12 +647,15 @@ function renderProperties(){
       const actions=document.createElement("div");
       actions.className="host-calendar-actions";
       const syncButton=document.createElement("button");
-      syncButton.type="button";syncButton.className="button button-small";syncButton.textContent=tr("syncNow");
+      syncButton.type="button";syncButton.className="button button-small";syncButton.textContent=tr("syncNow");syncButton.disabled=externalCalendar.enabled===false;
       syncButton.addEventListener("click",()=>syncCalendar(externalCalendar));
+      const toggleButton=document.createElement("button");
+      toggleButton.type="button";toggleButton.className="text-button";toggleButton.textContent=tr(externalCalendar.enabled===false ? "enableCalendar" : "disableCalendar");
+      toggleButton.addEventListener("click",()=>setCalendarEnabled(externalCalendar,externalCalendar.enabled===false));
       const disconnectButton=document.createElement("button");
       disconnectButton.type="button";disconnectButton.className="text-button danger";disconnectButton.textContent=tr("disconnectCalendar");
       disconnectButton.addEventListener("click",()=>disconnectCalendar(externalCalendar));
-      actions.append(syncButton,disconnectButton);
+      actions.append(syncButton,toggleButton,disconnectButton);
 
       status.append(statusTop,stats);
       if(externalCalendar.lastError){
@@ -740,7 +781,7 @@ function renderProperties(){
     }
 
     calendar.append(periods);
-    card.append(head, listing, syncPanel, calendar);
+    card.append(head, settings, listing, syncPanel, calendar);
     propertiesNode.append(card);
   });
 }

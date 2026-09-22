@@ -29,14 +29,15 @@ Current MVP principle:
    - external Airbnb link when the host has attached one; otherwise the result explicitly says that no external link is available yet.
 4. Minimum stay is enforced by backend search.
 4a. Guest can choose all results or only results with complete nightly pricing. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only search.
-4b. Optional cleaning fee belongs to the external listing and is included in the displayed estimate when known.
+4b. Optional cleaning fee belongs to the PARROT property, not to the external listing, and is included in the displayed estimate when known.
 5. Property title shown to guests is the same title entered by the owner; Barcelona is not used as the result title.
 6. Date ranges use hotel-style [check-in, checkout) semantics: checkout day is not occupied and same-day check-in/check-out is invalid.
 
 ### Host
 1. Open `/host.html`.
 2. Create host profile.
-3. Create a Barcelona property and choose whether it is an entire place or a private room.
+3. Create a Barcelona property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
+3a. Minimum stay and optional cleaning fee are visible property settings and can be edited after creation, independently of any external listing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL.
 5. PARROT generates the canonical Airbnb URL.
 6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR.
@@ -46,7 +47,7 @@ Current MVP principle:
 8. Edit token is currently kept in browser localStorage; backend stores only token hash.
 9. On every host-page load, property/listing/availability/calendar-sync state is fetched from the backend owner dashboard. localStorage stores credentials only and is not the source of truth for listings or availability.
 10. After adding an Airbnb listing, the host can paste Airbnb's private iCal export URL. The listing id embedded in the iCal URL must match the Airbnb listing id already attached to the property.
-11. Calendar sync runs immediately on connect, manually via "Sync now", and automatically about once per hour. The raw iCal URL is never returned by the API or rendered back to the browser after connection.
+11. Calendar sync runs immediately on connect, manually via "Sync now", and automatically about once per hour while the calendar is enabled. A disabled calendar keeps its imported snapshot for later re-enable but does not block search and is skipped by automatic sync. Re-enabling triggers an immediate refresh. The raw iCal URL is never returned by the API or rendered back to the browser after connection.
 12. Calendar connection errors, including a listing-id mismatch, are shown directly under the calendar form as well as in the page status.
 
 ## Barcelona scope
@@ -95,11 +96,13 @@ Important migrations:
 - V6 optional nightly pricing + external-listing cleaning fee; search stitches adjacent availability periods and supports priced-only filtering
 - V7 external calendars + imported event snapshots; Airbnb Reserved events block search, Airbnb (Not available) events are retained but ignored for physical availability
 - V8 property accommodation type (`entire_place` or `private_room`); existing properties are migrated to `entire_place`
+- V9 moves cleaning fee to the property and adds enabled/disabled state for external calendars
 
 Current important endpoints:
 - `POST /api/profiles`
 - `GET /api/profiles/:profileId/dashboard` (owner-only, token required)
 - `POST /api/profiles/:profileId/properties`
+- `PUT /api/properties/:propertyId` updates minimum stay and optional property cleaning fee
 - `DELETE /api/properties/:propertyId`
 - `POST /api/properties/:propertyId/listings`
 - `DELETE /api/listings/:listingId`
@@ -108,7 +111,8 @@ Current important endpoints:
 - `PUT /api/listings/:listingId` updates optional cleaning fee
 - `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&accommodationType=any|entire_place|private_room&pricedOnly=true|false`
 - `POST /api/properties/:propertyId/calendars` connects/upserts an Airbnb iCal source and immediately syncs it
-- `POST /api/calendars/:calendarId/sync` manually refreshes the source
+- `POST /api/calendars/:calendarId/sync` manually refreshes an enabled source
+- `PUT /api/calendars/:calendarId` enables/disables the source
 - `DELETE /api/calendars/:calendarId` disconnects it
 
 CI runs compile + PostgreSQL end-to-end smoke test + Docker image build.
@@ -141,7 +145,7 @@ Observed Airbnb export distinguishes:
 PARROT intentionally discards DESCRIPTION and other reservation metadata; it stores only UID, date range, classified kind and observation time.
 
 Search logic is therefore:
-`host offer covers every requested night AND no imported reservation covers any requested night`.
+`host offer covers every requested night AND no imported reservation from an enabled calendar covers any requested night`.
 
 The iCal URL is a secret capability link. It is stored server-side because it must be fetched, but never returned in dashboard/public APIs. TODO before serious scale: encrypt calendar URLs at rest with an application-managed key.
 

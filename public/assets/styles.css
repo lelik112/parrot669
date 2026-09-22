@@ -1421,15 +1421,18 @@ footer{
 .text-button{padding:0;border:0;background:none;color:#cdd5d1;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .text-button:hover{color:var(--lime)}
 .text-button.danger:hover{color:#f2b5a8}
-.host-properties{display:grid;gap:16px;margin-top:24px}
-.host-property{padding:20px;border:1px solid rgba(255,255,255,.075);border-radius:18px;background:#071214}
+.host-properties{display:grid;gap:24px;margin-top:24px}
+.host-property{padding:20px;border:1px solid rgba(216,255,99,.14);border-radius:18px;background:#071214;box-shadow:inset 3px 0 0 rgba(216,255,99,.22)}
 .host-property-head{display:flex;justify-content:space-between;gap:16px;margin-bottom:18px}
 .host-property-head>div{display:grid;gap:5px}
-.host-property-head strong{font-family:"Space Grotesk",sans-serif;font-size:21px}
+.host-property-head strong{font-family:"Space Grotesk",sans-serif;font-size:21px;color:var(--lime)}
 .host-property-head span{color:#7f8f8a;font-size:12px}
 .host-subpanel{padding-top:17px;margin-top:17px;border-top:1px solid rgba(255,255,255,.065)}
 .host-subpanel h3{margin:0 0 12px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:#8b9b96}
 .host-inline-form{display:grid;grid-template-columns:1fr auto;gap:10px}
+.host-settings-form{display:grid;grid-template-columns:minmax(150px,.5fr) minmax(180px,.6fr) auto;gap:10px;align-items:end}
+.host-settings-form label{display:grid;gap:7px;color:#84938f;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.host-settings-form input{min-height:42px;box-sizing:border-box;padding:0 12px;border:1px solid rgba(255,255,255,.1);border-radius:11px;background:#061012;color:#eef2ee;color-scheme:dark}
 .host-dates{grid-template-columns:1fr 1fr auto}
 .host-saved-link{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--lime);font-size:13px}
 .host-periods{display:grid;gap:8px;margin-top:12px}
@@ -1448,7 +1451,7 @@ footer{
   .host-panel{padding:18px}
   .host-panel-heading{display:grid;gap:12px}
   .host-panel-heading p{text-align:left}
-  .host-form,.host-property-form,.host-inline-form,.host-dates{grid-template-columns:1fr}
+  .host-form,.host-property-form,.host-inline-form,.host-settings-form,.host-dates{grid-template-columns:1fr}
   .host-period{grid-template-columns:1fr 1fr}
   .host-session{align-items:flex-start;flex-direction:column}
 }
@@ -1483,7 +1486,7 @@ footer{
 @media(max-width:1280px){.search-form{grid-template-columns:repeat(3,minmax(0,1fr))}.search-form .availability-submit{grid-column:1/-1}}
 @media(max-width:700px){.search-form{grid-template-columns:1fr}}
 
-.host-property-form{grid-template-columns:1.35fr .8fr 1fr .55fr .65fr .7fr auto}
+.host-property-form{grid-template-columns:1.35fr .8fr 1fr .55fr .65fr auto}
 @media(max-width:1100px){.host-property-form{grid-template-columns:repeat(3,1fr)}.host-property-form .button{grid-column:1/-1}}
 @media(max-width:640px){.host-property-form{grid-template-columns:1fr}}
 
@@ -1564,6 +1567,8 @@ footer{
 .host-calendar-status>div:first-child{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
 .host-calendar-status strong{font-size:13px;color:#dce5e1}
 .host-calendar-status.connected strong{color:var(--lime)}
+.host-calendar-status.disabled{opacity:.72;border-style:dashed}
+.host-calendar-status.disabled strong{color:#aeb9b5}
 .host-calendar-status span{font-size:11px;color:#82918c}
 .host-calendar-stats{display:flex;flex-wrap:wrap;gap:8px 16px}
 .host-calendar-blocks{display:flex;flex-wrap:wrap;gap:7px}
