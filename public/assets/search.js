@@ -9,10 +9,10 @@ const copy = {
 };
 
 const housingCopy = {
-  en:{accommodationType:"Accommodation type",anyType:"Any type",entirePlace:"Entire place",privateRoom:"Private room",noExternalLink:"External listing link not added yet",lead:"Search host-reported physical availability. When an external listing is attached, continue there for rental terms."},
-  es:{accommodationType:"Tipo de alojamiento",anyType:"Cualquier tipo",entirePlace:"Alojamiento entero",privateRoom:"Habitación privada",noExternalLink:"Todavía no se ha añadido un enlace externo",lead:"Busca disponibilidad física declarada por propietarios. Si hay un anuncio externo, continúa allí para consultar las condiciones."},
-  ca:{accommodationType:"Tipus d'allotjament",anyType:"Qualsevol tipus",entirePlace:"Allotjament sencer",privateRoom:"Habitació privada",noExternalLink:"Encara no s'ha afegit cap enllaç extern",lead:"Cerca disponibilitat física declarada pels propietaris. Si hi ha un anunci extern, continua-hi per consultar les condicions."},
-  ru:{accommodationType:"Тип жилья",anyType:"Любой тип",entirePlace:"Жильё целиком",privateRoom:"Отдельная комната",noExternalLink:"Внешняя ссылка пока не добавлена",lead:"Ищите физически свободное жильё по данным владельцев. Если добавлена внешняя площадка, условия аренды смотрите там."}
+  en:{accommodationType:"Accommodation type",anyType:"Any type",entirePlace:"Entire place",privateRoom:"Private room",noExternalLink:"External listing link not added yet",availableLabel:"Available",lead:"Search host-reported physical availability. When an external listing is attached, continue there for rental terms."},
+  es:{accommodationType:"Tipo de alojamiento",anyType:"Cualquier tipo",entirePlace:"Alojamiento entero",privateRoom:"Habitación privada",noExternalLink:"Todavía no se ha añadido un enlace externo",availableLabel:"Disponible",lead:"Busca disponibilidad física declarada por propietarios. Si hay un anuncio externo, continúa allí para consultar las condiciones."},
+  ca:{accommodationType:"Tipus d'allotjament",anyType:"Qualsevol tipus",entirePlace:"Allotjament sencer",privateRoom:"Habitació privada",noExternalLink:"Encara no s'ha afegit cap enllaç extern",availableLabel:"Disponible",lead:"Cerca disponibilitat física declarada pels propietaris. Si hi ha un anunci extern, continua-hi per consultar les condicions."},
+  ru:{accommodationType:"Тип жилья",anyType:"Любой тип",entirePlace:"Жильё целиком",privateRoom:"Отдельная комната",noExternalLink:"Внешняя ссылка пока не добавлена",availableLabel:"Свободно",lead:"Ищите физически свободное жильё по данным владельцев. Если добавлена внешняя площадка, условия аренды смотрите там."}
 };
 
 let lang=(()=>{const saved=localStorage.getItem(LANG_KEY);if(saved&&copy[saved])return saved;const b=(navigator.language||"en").slice(0,2);return copy[b]?b:"en"})();
@@ -77,38 +77,111 @@ function restoreSearchState(){
     if(minCheckout) form.elements.to.min=minCheckout;
   }catch{}
 }
+function formatResultDate(iso){
+  if(!iso) return "";
+  const [year,month,day]=String(iso).split("-").map(Number);
+  if(!year||!month||!day) return String(iso);
+  const date=new Date(Date.UTC(year,month-1,day));
+  return new Intl.DateTimeFormat(document.documentElement.lang||"en",{
+    day:"numeric",month:"short",year:"numeric",timeZone:"UTC"
+  }).format(date);
+}
 function render(items){
   results.replaceChildren();
   if(!items.length){state(t("empty"),"empty");return}
   items.forEach(item=>{
-    const card=document.createElement("article");card.className="availability-card";
-    const head=document.createElement("div");head.className="availability-card-heading";
-    const city=document.createElement("strong");city.textContent=item.propertyTitle||"Property";
-    const meta=document.createElement("span");meta.textContent=`${t("bed",Number(item.bedrooms))} · ${t("sleep",Number(item.sleeps))}`;
-    head.append(city,meta);
-    const accommodationType=document.createElement("div");accommodationType.className="availability-type";accommodationType.textContent=item.accommodationType==="private_room"?t("privateRoom"):t("entirePlace");
-    const owner=document.createElement("div");owner.className="availability-owner";owner.textContent=t("owner", item.ownerDisplayName || "PARROT host");
-    const period=document.createElement("div");period.className="availability-period";period.textContent=t("period",item.availableFrom,item.availableTo);
-    const price=document.createElement("div");price.className="availability-price";
+    const card=document.createElement("article");
+    card.className="availability-card";
+
+    const head=document.createElement("div");
+    head.className="availability-card-heading";
+    const titleGroup=document.createElement("div");
+    titleGroup.className="availability-title-group";
+    const title=document.createElement("strong");
+    title.textContent=item.propertyTitle||"Property";
+    const city=document.createElement("span");
+    city.className="availability-card-city";
+    city.textContent=item.city||"Barcelona";
+    titleGroup.append(title,city);
+    head.append(titleGroup);
+
+    const facts=document.createElement("div");
+    facts.className="availability-facts";
+    [
+      item.accommodationType==="private_room"?t("privateRoom"):t("entirePlace"),
+      t("bed",Number(item.bedrooms)),
+      t("sleep",Number(item.sleeps))
+    ].forEach(value=>{
+      const fact=document.createElement("span");
+      fact.className="availability-fact";
+      fact.textContent=value;
+      facts.append(fact);
+    });
+
+    const availability=document.createElement("div");
+    availability.className="availability-window";
+    const availabilityLabel=document.createElement("span");
+    availabilityLabel.className="availability-window-label";
+    availabilityLabel.textContent=t("availableLabel");
+    const dates=document.createElement("strong");
+    dates.className="availability-window-dates";
+    dates.textContent=`${formatResultDate(item.availableFrom)} → ${formatResultDate(item.availableTo)}`;
+    availability.append(availabilityLabel,dates);
+
+    const priceBlock=document.createElement("div");
+    priceBlock.className="availability-price-block";
+    const price=document.createElement("div");
+    price.className="availability-price";
     let priceNote=null;
     if(item.price){
       const amount=(Number(item.price.estimatedAmountCents||0)/100).toLocaleString(document.documentElement.lang,{minimumFractionDigits:0,maximumFractionDigits:2});
       price.textContent=t("priceEstimate",amount,Number(item.price.nights||0));
       if(item.price.cleaningFeeCents != null){
         const cleaning=(Number(item.price.cleaningFeeCents)/100).toLocaleString(document.documentElement.lang,{minimumFractionDigits:0,maximumFractionDigits:2});
-        const small=document.createElement("small");small.textContent=t("cleaning",cleaning);price.append(" · ",small);
+        const small=document.createElement("small");
+        small.textContent=t("cleaning",cleaning);
+        price.append(" · ",small);
       }
-      priceNote=document.createElement("div");priceNote.className="availability-price-note";priceNote.textContent=t("priceNote");
+      priceNote=document.createElement("div");
+      priceNote.className="availability-price-note";
+      priceNote.textContent=t("priceNote");
     } else {
       price.classList.add("unknown");
       price.textContent=t("priceUnknown");
     }
-    const links=document.createElement("div");links.className="availability-links";
-    (item.links||[]).forEach(link=>{try{const u=new URL(link.url);if(u.protocol!=="https:")return;const a=document.createElement("a");a.className="availability-link";a.href=u.toString();a.target="_blank";a.rel="noopener noreferrer";a.textContent=t("view");links.append(a)}catch{}});
-    if(!links.childElementCount){const missing=document.createElement("span");missing.className="availability-link-missing";missing.textContent=t("noExternalLink");links.append(missing)}
-    card.append(head,accommodationType,owner,period,price);
-    if(priceNote) card.append(priceNote);
-    card.append(links);
+    priceBlock.append(price);
+    if(priceNote) priceBlock.append(priceNote);
+
+    const footer=document.createElement("div");
+    footer.className="availability-card-footer";
+    const owner=document.createElement("div");
+    owner.className="availability-owner";
+    owner.textContent=t("owner",item.ownerDisplayName||"PARROT host");
+
+    const links=document.createElement("div");
+    links.className="availability-links";
+    (item.links||[]).forEach(link=>{
+      try{
+        const u=new URL(link.url);
+        if(u.protocol!=="https:") return;
+        const a=document.createElement("a");
+        a.className="availability-link";
+        a.href=u.toString();
+        a.target="_blank";
+        a.rel="noopener noreferrer";
+        a.textContent=t("view");
+        links.append(a);
+      }catch{}
+    });
+    if(!links.childElementCount){
+      const missing=document.createElement("span");
+      missing.className="availability-link-missing";
+      missing.textContent=t("noExternalLink");
+      links.append(missing);
+    }
+
+    footer.append(owner,links);
+    card.append(head,facts,availability,priceBlock,footer);
     results.append(card);
   });
 }

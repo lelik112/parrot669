@@ -1,5 +1,13 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Product-style housing result cards
+
+- Reworked guest search results into a clearer product-card hierarchy instead of a flat stack of equally weighted metadata.
+- Cards now lead with property name and city, group accommodation type/bedrooms/sleeping places into compact facts, and give the available date window its own visual block.
+- Result dates are rendered in the current UI locale rather than raw ISO form.
+- Price is a stronger secondary focus, while host identity is intentionally quieter in the footer.
+- Published Airbnb links render as the card CTA; properties without a published external link show a subdued informational state instead of a button-like affordance.
+
 ## 2026-09-22 — Database-enforced availability integrity
 
 - Added Flyway V13 with a PostgreSQL GiST exclusion constraint preventing overlapping `[date_from, date_to)` availability periods for the same property.

@@ -19,13 +19,13 @@ Current MVP principle:
 ### Guest
 1. Open `/search.html`.
 2. Choose a city (currently only Barcelona), then search by dates, bedrooms and sleeping places. Accommodation type is a result filter alongside pricing filters and defaults to any. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Result filters are applied from their current UI values on every request, so changing any filter after a search immediately re-runs the same base search with the new filter.
-3. Results show:
-   - host nickname,
-   - bedrooms,
-   - sleeping places,
-   - host-reported PARROT availability,
+3. Results use a product-card hierarchy:
+   - property name and city,
+   - compact accommodation type / bedrooms / sleeping-place facts,
+   - a distinct host-reported availability window with locale-formatted dates,
    - optional indicative price when every requested night has a nightly price,
-   - external Airbnb link when the host has attached one; otherwise the result explicitly says that no external link is available yet.
+   - host nickname in a quieter footer,
+   - external Airbnb action when the host has attached and published one; otherwise a subdued note says that no external link is available yet.
 4. Minimum stay is enforced by backend search but is not displayed as a separate field in guest results.
 4a. Guest can choose all results or only results with complete nightly pricing, and may filter by minimum/maximum estimated total price for the requested stay. Results with a known price are sorted cheapest first; results without a complete price come last. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only and price-range search.
 4b. Optional cleaning fee belongs to the PARROT property, not to the external listing, and is included in the displayed estimate when known. An external listing has an independent `showInSearch` flag: it may remain connected for calendar sync while its outbound URL is hidden from guest search results.

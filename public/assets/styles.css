@@ -1651,3 +1651,69 @@ footer{
 @media(max-width:640px){
   .host-stay-settings{grid-template-columns:1fr;max-width:none}
 }
+
+/* 2026-09-22 product-style search result cards */
+.availability-card{
+  min-height:330px;
+  padding:24px;
+  gap:0;
+  border-color:rgba(255,255,255,.095);
+  background:
+    radial-gradient(circle at 100% 0,rgba(216,255,99,.045),transparent 34%),
+    linear-gradient(145deg,rgba(255,255,255,.038),rgba(255,255,255,.012)),
+    #0b181a;
+  transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.availability-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(216,255,99,.22);
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+}
+.availability-card-heading{align-items:flex-start}
+.availability-title-group{min-width:0;display:grid;gap:5px}
+.availability-card-heading strong{
+  display:block;overflow-wrap:anywhere;font-size:24px;line-height:1.08;
+  letter-spacing:-.025em;color:#f0f4f1;
+}
+.availability-card-heading .availability-card-city{
+  color:#73827d;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+}
+.availability-facts{display:flex;flex-wrap:wrap;gap:7px;margin-top:17px}
+.availability-fact{
+  display:inline-flex;align-items:center;min-height:28px;padding:0 10px;
+  border:1px solid rgba(255,255,255,.075);border-radius:999px;
+  background:rgba(255,255,255,.025);color:#aeb9b5;font-size:11px;line-height:1;
+}
+.availability-window{
+  display:grid;gap:6px;margin-top:20px;padding:15px 16px;
+  border:1px solid rgba(216,255,99,.12);border-radius:14px;background:rgba(216,255,99,.035);
+}
+.availability-window-label{
+  color:#8c9b96;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+}
+.availability-window-dates{
+  font-family:"Space Grotesk",sans-serif;color:#e6ece8;font-size:15px;font-weight:600;line-height:1.35;
+}
+.availability-price-block{display:grid;gap:7px;margin-top:19px}
+.availability-price{font-size:21px;line-height:1.25}
+.availability-price.unknown{font-size:13px}
+.availability-price-note{margin-top:0;max-width:360px}
+.availability-card-footer{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+  margin-top:auto;padding-top:21px;border-top:1px solid rgba(255,255,255,.065);
+}
+.availability-owner{margin-top:0;color:#73827d;font-size:11px;line-height:1.35}
+.availability-links{flex:0 0 auto;margin-top:0;justify-content:flex-end}
+.availability-link{
+  min-height:40px;padding:0 16px;border:1px solid rgba(216,255,99,.26);background:rgba(216,255,99,.09);
+}
+.availability-link-missing{
+  display:inline-block;max-width:180px;color:#65746f;font-size:10px;line-height:1.35;text-align:right;
+}
+@media(max-width:640px){
+  .availability-card{min-height:0;padding:20px}
+  .availability-card-footer{align-items:flex-start;flex-direction:column}
+  .availability-links{width:100%;justify-content:flex-start}
+  .availability-link{justify-content:center;width:100%;box-sizing:border-box}
+  .availability-link-missing{max-width:none;text-align:left}
+}
