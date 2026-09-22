@@ -88,7 +88,6 @@ function render(items){
     head.append(city,meta);
     const accommodationType=document.createElement("div");accommodationType.className="availability-type";accommodationType.textContent=item.accommodationType==="private_room"?t("privateRoom"):t("entirePlace");
     const owner=document.createElement("div");owner.className="availability-owner";owner.textContent=t("owner", item.ownerDisplayName || "PARROT host");
-    const stay=document.createElement("div");stay.className="availability-stay";stay.textContent=t("min",Number(item.minStayDays||1));
     const period=document.createElement("div");period.className="availability-period";period.textContent=t("period",item.availableFrom,item.availableTo);
     const price=document.createElement("div");price.className="availability-price";
     let priceNote=null;
@@ -107,7 +106,7 @@ function render(items){
     const links=document.createElement("div");links.className="availability-links";
     (item.links||[]).forEach(link=>{try{const u=new URL(link.url);if(u.protocol!=="https:")return;const a=document.createElement("a");a.className="availability-link";a.href=u.toString();a.target="_blank";a.rel="noopener noreferrer";a.textContent=t("view");links.append(a)}catch{}});
     if(!links.childElementCount){const missing=document.createElement("span");missing.className="availability-link-missing";missing.textContent=t("noExternalLink");links.append(missing)}
-    card.append(head,accommodationType,owner,stay,period,price);
+    card.append(head,accommodationType,owner,period,price);
     if(priceNote) card.append(priceNote);
     card.append(links);
     results.append(card);

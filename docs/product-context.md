@@ -23,21 +23,20 @@ Current MVP principle:
    - host nickname,
    - bedrooms,
    - sleeping places,
-   - host minimum stay,
    - host-reported PARROT availability,
    - optional indicative price when every requested night has a nightly price,
    - external Airbnb link when the host has attached one; otherwise the result explicitly says that no external link is available yet.
-4. Minimum stay is enforced by backend search.
+4. Minimum stay is enforced by backend search but is not displayed as a separate field in guest results.
 4a. Guest can choose all results or only results with complete nightly pricing, and may filter by minimum/maximum estimated total price for the requested stay. Results with a known price are sorted cheapest first; results without a complete price come last. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only and price-range search.
 4b. Optional cleaning fee belongs to the PARROT property, not to the external listing, and is included in the displayed estimate when known. An external listing has an independent `showInSearch` flag: it may remain connected for calendar sync while its outbound URL is hidden from guest search results.
-5. Property title shown to guests is the same title entered by the owner; Barcelona is not used as the result title.
+5. Property title shown to guests is the same property name entered by the owner; it is not an internal-only label. Barcelona is not used as the result title.
 6. Date ranges use hotel-style [check-in, checkout) semantics: checkout day is not occupied and same-day check-in/check-out is invalid.
 
 ### Host
 1. Open `/host.html`.
 2. Register or log in with email/password. Authentication uses a server-side session in an HttpOnly cookie; host credentials are not stored in frontend JavaScript/localStorage.
 3. Choose a city (currently only Barcelona), create a property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
-3a. Accommodation type, minimum stay and optional cleaning fee are visible property settings and can be edited after creation, independently of any external listing. Property cards are collapsed by default to a compact summary and can be expanded for editing.
+3a. Accommodation type, bedrooms and sleeping places are editable property characteristics. Minimum stay and optional cleaning fee are editable alongside PARROT availability/pricing controls. Property cards are collapsed by default to a compact summary and can be expanded for editing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
 5. PARROT generates the canonical Airbnb URL. The host may hide that URL from guest search without disconnecting the listing or calendar.
 6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR.
@@ -109,7 +108,7 @@ Current important endpoints:
 - `GET /api/dashboard` (owner-only, session required)
 - `POST /api/properties` (owner-only, session required)
 - `GET /api/profiles/:profileId/dashboard` and `POST /api/profiles/:profileId/properties` remain authenticated compatibility aliases; the profile id is checked against the session identity and is not a credential
-- `PUT /api/properties/:propertyId` updates minimum stay and optional property cleaning fee
+- `PUT /api/properties/:propertyId` updates accommodation type, bedrooms, sleeping places, minimum stay and optional property cleaning fee
 - `DELETE /api/properties/:propertyId`
 - `POST /api/properties/:propertyId/listings`
 - `DELETE /api/listings/:listingId`

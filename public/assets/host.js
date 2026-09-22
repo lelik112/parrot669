@@ -11,7 +11,7 @@ const copy = {
     loggingIn:"Logging in…", registering:"Creating account…", loggedIn:"Logged in.", registered:"Account created.", loggedOut:"Logged out.", legacyClaimHelp:"An older PARROT host profile was found in this browser. You can attach it to this account.", legacyClaimButton:"Attach existing profile", legacyClaiming:"Attaching existing profile…", legacyClaimed:"Existing host profile attached.",
     propertiesTitle:"Properties",
     propertiesHelp:"No photos or copied descriptions. Only enough data to search availability.",
-    internalLabel:"Internal label", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", accommodationTypeLabel:"Accommodation type", entirePlace:"Entire place", privateRoom:"Private room", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", propertySettings:"Property settings", savePropertySettings:"Save settings", propertySettingsSaved:"Property settings saved.", enableCalendar:"Enable", disableCalendar:"Disable", calendarEnabled:"Airbnb calendar enabled.", calendarDisabled:"Airbnb calendar disabled.", calendarDisabledStatus:"Disabled", calendarConnectedStatus:"Connected", expandProperty:"Expand", collapseProperty:"Collapse", addProperty:"Add property →",
+    internalLabel:"Property name", propertyPlaceholder:"Poblenou apartment", cityLabel:"City", accommodationTypeLabel:"Accommodation type", entirePlace:"Entire place", privateRoom:"Private room", bedroomsLabel:"Bedrooms", sleepsLabel:"Sleeping places", minStayLabel:"Minimum stay, days", propertySettings:"Property characteristics", savePropertySettings:"Save characteristics", saveStaySettings:"Save conditions", propertySettingsSaved:"Property settings saved.", enableCalendar:"Enable", disableCalendar:"Disable", calendarEnabled:"Airbnb calendar enabled.", calendarDisabled:"Airbnb calendar disabled.", calendarDisabledStatus:"Disabled", calendarConnectedStatus:"Connected", expandProperty:"Expand", collapseProperty:"Collapse", addProperty:"Add property →",
     addingProperty:"Adding property…", propertyAdded:"Property added.",
     savingListing:"Saving external listing…", listingSaved:"Airbnb link saved.",
     addingAvailability:"Adding availability…", availabilityAdded:"Availability added.", updatingAvailability:"Updating availability…",
@@ -29,7 +29,7 @@ const copy = {
     loggingIn:"Iniciando sesión…", registering:"Creando cuenta…", loggedIn:"Sesión iniciada.", registered:"Cuenta creada.", loggedOut:"Sesión cerrada.", legacyClaimHelp:"Se encontró un perfil antiguo de PARROT en este navegador. Puedes asociarlo a esta cuenta.", legacyClaimButton:"Asociar perfil existente", legacyClaiming:"Asociando perfil existente…", legacyClaimed:"Perfil existente asociado.",
     propertiesTitle:"Viviendas",
     propertiesHelp:"Sin fotos ni descripciones copiadas. Solo los datos mínimos para buscar disponibilidad.",
-    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", accommodationTypeLabel:"Tipo de alojamiento", entirePlace:"Alojamiento entero", privateRoom:"Habitación privada", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", propertySettings:"Ajustes de la vivienda", savePropertySettings:"Guardar ajustes", propertySettingsSaved:"Ajustes guardados.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendario de Airbnb activado.", calendarDisabled:"Calendario de Airbnb desactivado.", calendarDisabledStatus:"Desactivado", calendarConnectedStatus:"Conectado", expandProperty:"Expandir", collapseProperty:"Contraer", addProperty:"Añadir vivienda →",
+    internalLabel:"Nombre de la vivienda", propertyPlaceholder:"Apartamento Poblenou", cityLabel:"Ciudad", accommodationTypeLabel:"Tipo de alojamiento", entirePlace:"Alojamiento entero", privateRoom:"Habitación privada", bedroomsLabel:"Dormitorios", sleepsLabel:"Plazas para dormir", minStayLabel:"Estancia mínima, días", propertySettings:"Características de la vivienda", savePropertySettings:"Guardar características", saveStaySettings:"Guardar condiciones", propertySettingsSaved:"Ajustes guardados.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendario de Airbnb activado.", calendarDisabled:"Calendario de Airbnb desactivado.", calendarDisabledStatus:"Desactivado", calendarConnectedStatus:"Conectado", expandProperty:"Expandir", collapseProperty:"Contraer", addProperty:"Añadir vivienda →",
     addingProperty:"Añadiendo vivienda…", propertyAdded:"Vivienda añadida.",
     savingListing:"Guardando anuncio externo…", listingSaved:"Enlace de Airbnb guardado.",
     addingAvailability:"Añadiendo disponibilidad…", availabilityAdded:"Disponibilidad añadida.", updatingAvailability:"Actualizando disponibilidad…",
@@ -47,7 +47,7 @@ const copy = {
     loggingIn:"Iniciant sessió…", registering:"Creant compte…", loggedIn:"Sessió iniciada.", registered:"Compte creat.", loggedOut:"Sessió tancada.", legacyClaimHelp:"S'ha trobat un perfil antic de PARROT en aquest navegador. El pots associar a aquest compte.", legacyClaimButton:"Associar perfil existent", legacyClaiming:"Associant perfil existent…", legacyClaimed:"Perfil existent associat.",
     propertiesTitle:"Habitatges",
     propertiesHelp:"Sense fotos ni descripcions copiades. Només les dades mínimes per cercar disponibilitat.",
-    internalLabel:"Etiqueta interna", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", accommodationTypeLabel:"Tipus d'allotjament", entirePlace:"Allotjament sencer", privateRoom:"Habitació privada", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", propertySettings:"Configuració de l'habitatge", savePropertySettings:"Desar configuració", propertySettingsSaved:"Configuració desada.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendari d'Airbnb activat.", calendarDisabled:"Calendari d'Airbnb desactivat.", calendarDisabledStatus:"Desactivat", calendarConnectedStatus:"Connectat", expandProperty:"Desplegar", collapseProperty:"Plegar", addProperty:"Afegir habitatge →",
+    internalLabel:"Nom de l'habitatge", propertyPlaceholder:"Apartament Poblenou", cityLabel:"Ciutat", accommodationTypeLabel:"Tipus d'allotjament", entirePlace:"Allotjament sencer", privateRoom:"Habitació privada", bedroomsLabel:"Dormitoris", sleepsLabel:"Places per dormir", minStayLabel:"Estada mínima, dies", propertySettings:"Característiques de l'habitatge", savePropertySettings:"Desar característiques", saveStaySettings:"Desar condicions", propertySettingsSaved:"Configuració desada.", enableCalendar:"Activar", disableCalendar:"Desactivar", calendarEnabled:"Calendari d'Airbnb activat.", calendarDisabled:"Calendari d'Airbnb desactivat.", calendarDisabledStatus:"Desactivat", calendarConnectedStatus:"Connectat", expandProperty:"Desplegar", collapseProperty:"Plegar", addProperty:"Afegir habitatge →",
     addingProperty:"Afegint habitatge…", propertyAdded:"Habitatge afegit.",
     savingListing:"Desant l'anunci extern…", listingSaved:"Enllaç d'Airbnb desat.",
     addingAvailability:"Afegint disponibilitat…", availabilityAdded:"Disponibilitat afegida.", updatingAvailability:"Actualitzant disponibilitat…",
@@ -65,7 +65,7 @@ const copy = {
     loggingIn:"Входим…", registering:"Создаём аккаунт…", loggedIn:"Вы вошли.", registered:"Аккаунт создан.", loggedOut:"Вы вышли.", legacyClaimHelp:"В этом браузере найден старый профиль PARROT. Его можно привязать к этому аккаунту.", legacyClaimButton:"Привязать существующий профиль", legacyClaiming:"Привязываем существующий профиль…", legacyClaimed:"Существующий профиль привязан.",
     propertiesTitle:"Объекты",
     propertiesHelp:"Без фотографий и скопированных описаний. Только минимум данных для поиска свободных дат.",
-    internalLabel:"Название для себя", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", accommodationTypeLabel:"Тип жилья", entirePlace:"Жильё целиком", privateRoom:"Отдельная комната", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", propertySettings:"Настройки объекта", savePropertySettings:"Сохранить настройки", propertySettingsSaved:"Настройки объекта сохранены.", enableCalendar:"Включить", disableCalendar:"Выключить", calendarEnabled:"Календарь Airbnb включён.", calendarDisabled:"Календарь Airbnb выключен.", calendarDisabledStatus:"Выключен", calendarConnectedStatus:"Подключён", expandProperty:"Развернуть", collapseProperty:"Свернуть", addProperty:"Добавить объект →",
+    internalLabel:"Название объекта", propertyPlaceholder:"Квартира в Poblenou", cityLabel:"Город", accommodationTypeLabel:"Тип жилья", entirePlace:"Жильё целиком", privateRoom:"Отдельная комната", bedroomsLabel:"Спальни", sleepsLabel:"Спальных мест", minStayLabel:"Минимум дней", propertySettings:"Характеристики объекта", savePropertySettings:"Сохранить характеристики", saveStaySettings:"Сохранить условия", propertySettingsSaved:"Настройки объекта сохранены.", enableCalendar:"Включить", disableCalendar:"Выключить", calendarEnabled:"Календарь Airbnb включён.", calendarDisabled:"Календарь Airbnb выключен.", calendarDisabledStatus:"Выключен", calendarConnectedStatus:"Подключён", expandProperty:"Развернуть", collapseProperty:"Свернуть", addProperty:"Добавить объект →",
     addingProperty:"Добавляем объект…", propertyAdded:"Объект добавлен.",
     savingListing:"Сохраняем внешнее объявление…", listingSaved:"Ссылка Airbnb сохранена.",
     addingAvailability:"Добавляем свободные даты…", availabilityAdded:"Свободные даты добавлены.", updatingAvailability:"Обновляем даты…",
@@ -413,18 +413,23 @@ function centsToEuros(value){
 
 async function updatePropertySettings(property, form){
   const data=new FormData(form);
+  const payload={
+    accommodationType:data.has("accommodationType") ? String(data.get("accommodationType")||"entire_place") : property.accommodationType,
+    bedrooms:data.has("bedrooms") ? Number(data.get("bedrooms")) : Number(property.bedrooms),
+    sleeps:data.has("sleeps") ? Number(data.get("sleeps")) : Number(property.sleeps),
+    minStayDays:data.has("minStayDays") ? Number(data.get("minStayDays")) : Number(property.minStayDays||1),
+    cleaningFeeCents:data.has("cleaningFee") ? eurosToCents(data.get("cleaningFee")) : property.cleaningFeeCents
+  };
   setBusy(form,true);
   message(tr("loading"));
   try{
     const updated=await api(`/properties/${property.id}`,{
       method:"PUT",
-      body:JSON.stringify({
-        accommodationType:String(data.get("accommodationType")||"entire_place"),
-        minStayDays:Number(data.get("minStayDays")),
-        cleaningFeeCents:eurosToCents(data.get("cleaningFee"))
-      })
+      body:JSON.stringify(payload)
     });
     property.accommodationType=updated.accommodationType;
+    property.bedrooms=updated.bedrooms;
+    property.sleeps=updated.sleeps;
     property.minStayDays=updated.minStayDays;
     property.cleaningFeeCents=updated.cleaningFeeCents;
     saveState();
@@ -701,21 +706,21 @@ function renderProperties(){
     accommodationSelect.append(entireOption,roomOption);
     accommodationSelect.value=property.accommodationType==="private_room"?"private_room":"entire_place";
     accommodationLabel.append(accommodationText,accommodationSelect);
-    const minStayLabel=document.createElement("label");
-    const minStayText=document.createElement("span");
-    minStayText.textContent=tr("minStayLabel");
-    const minStayInput=document.createElement("input");
-    minStayInput.type="number";minStayInput.name="minStayDays";minStayInput.min="1";minStayInput.max="365";minStayInput.required=true;minStayInput.value=String(property.minStayDays||1);
-    minStayLabel.append(minStayText,minStayInput);
-    const cleaningLabel=document.createElement("label");
-    const cleaningText=document.createElement("span");
-    cleaningText.textContent=tr("cleaningFee");
-    const propertyCleaningInput=document.createElement("input");
-    propertyCleaningInput.type="number";propertyCleaningInput.name="cleaningFee";propertyCleaningInput.min="0";propertyCleaningInput.step="0.01";propertyCleaningInput.value=centsToEuros(property.cleaningFeeCents);
-    cleaningLabel.append(cleaningText,propertyCleaningInput);
+    const bedroomsLabel=document.createElement("label");
+    const bedroomsText=document.createElement("span");
+    bedroomsText.textContent=tr("bedroomsLabel");
+    const bedroomsInput=document.createElement("input");
+    bedroomsInput.type="number";bedroomsInput.name="bedrooms";bedroomsInput.min="1";bedroomsInput.max="20";bedroomsInput.required=true;bedroomsInput.value=String(property.bedrooms||1);
+    bedroomsLabel.append(bedroomsText,bedroomsInput);
+    const sleepsLabel=document.createElement("label");
+    const sleepsText=document.createElement("span");
+    sleepsText.textContent=tr("sleepsLabel");
+    const sleepsInput=document.createElement("input");
+    sleepsInput.type="number";sleepsInput.name="sleeps";sleepsInput.min="1";sleepsInput.max="40";sleepsInput.required=true;sleepsInput.value=String(property.sleeps||1);
+    sleepsLabel.append(sleepsText,sleepsInput);
     const saveSettings=document.createElement("button");
     saveSettings.className="button button-small";saveSettings.type="submit";saveSettings.textContent=tr("savePropertySettings");
-    settingsForm.append(accommodationLabel,minStayLabel,cleaningLabel,saveSettings);
+    settingsForm.append(accommodationLabel,bedroomsLabel,sleepsLabel,saveSettings);
     settingsForm.addEventListener("submit",event=>{event.preventDefault();updatePropertySettings(property,settingsForm)});
     settings.append(settingsTitle,settingsForm);
 
@@ -863,6 +868,26 @@ function renderProperties(){
     const calendarTitle = document.createElement("h3");
     calendarTitle.textContent = tr("availability");
     calendar.append(calendarTitle);
+
+    const staySettingsForm=document.createElement("form");
+    staySettingsForm.className="host-settings-form host-stay-settings";
+    const minStayLabel=document.createElement("label");
+    const minStayText=document.createElement("span");
+    minStayText.textContent=tr("minStayLabel");
+    const minStayInput=document.createElement("input");
+    minStayInput.type="number";minStayInput.name="minStayDays";minStayInput.min="1";minStayInput.max="365";minStayInput.required=true;minStayInput.value=String(property.minStayDays||1);
+    minStayLabel.append(minStayText,minStayInput);
+    const cleaningLabel=document.createElement("label");
+    const cleaningText=document.createElement("span");
+    cleaningText.textContent=tr("cleaningFee");
+    const propertyCleaningInput=document.createElement("input");
+    propertyCleaningInput.type="number";propertyCleaningInput.name="cleaningFee";propertyCleaningInput.min="0";propertyCleaningInput.step="0.01";propertyCleaningInput.value=centsToEuros(property.cleaningFeeCents);
+    cleaningLabel.append(cleaningText,propertyCleaningInput);
+    const saveStaySettings=document.createElement("button");
+    saveStaySettings.className="button button-small";saveStaySettings.type="submit";saveStaySettings.textContent=tr("saveStaySettings");
+    staySettingsForm.append(minStayLabel,cleaningLabel,saveStaySettings);
+    staySettingsForm.addEventListener("submit",event=>{event.preventDefault();updatePropertySettings(property,staySettingsForm)});
+    calendar.append(staySettingsForm);
 
     const addForm = document.createElement("form");
     addForm.className = "host-inline-form host-dates";

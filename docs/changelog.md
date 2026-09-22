@@ -1,5 +1,12 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Editable property characteristics and stay settings
+
+- Bedrooms and sleeping places can now be edited after property creation alongside accommodation type.
+- Property characteristics are grouped separately from stay conditions: minimum stay and cleaning fee now sit with availability and nightly pricing controls.
+- Renamed the property creation label from an internal/private label to a property name, matching the fact that it is shown in guest search.
+- Guest search no longer displays minimum stay as a separate result line; backend minimum-stay enforcement is unchanged.
+
 ## 2026-09-22 — Owner accounts and server-side sessions
 
 - Replaced frontend `profileId + editToken` authentication with email/password accounts and opaque server-side sessions.

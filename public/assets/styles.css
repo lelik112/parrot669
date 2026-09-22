@@ -1638,3 +1638,13 @@ footer{
 /* 2026-09-22 search filter alignment */
 .price-filter{align-self:flex-end}
 @media(max-width:700px){.price-filter{align-self:stretch}}
+
+/* 2026-09-22 property characteristics and stay conditions */
+.host-stay-settings{
+  grid-template-columns:minmax(150px,.5fr) minmax(180px,.6fr) auto;
+  max-width:760px;
+  margin-bottom:14px;
+}
+@media(max-width:640px){
+  .host-stay-settings{grid-template-columns:1fr;max-width:none}
+}
