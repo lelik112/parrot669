@@ -1,5 +1,14 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Email verification for new accounts
+
+- New registrations require email confirmation before an authenticated session is created.
+- Added V14 with account verification timestamps and one-time 24-hour verification tokens stored only as SHA-256 hashes; pre-existing accounts are grandfathered as verified.
+- Added verify and generic resend endpoints; correct-password login for an unverified account returns a verification-required state instead of creating a session.
+- Verification links use `host.html#verify=...`, keeping the raw token out of normal page-request URLs and access logs.
+- Host auth UI now shows a check-your-email/resend state and signs the user in after successful verification.
+- Transactional verification delivery supports Resend (preferred) and Cloudflare Email Service.
+
 ## 2026-09-22 — Product-style housing result cards
 
 - Reworked guest search results into a clearer product-card hierarchy instead of a flat stack of equally weighted metadata.
