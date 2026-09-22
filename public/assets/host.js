@@ -6,6 +6,7 @@ const copy = {
     title:"PARROT 669 — Host console", consoleLabel:"HOST CONSOLE", backToSite:"← Back to site", tabSearch:"Find availability", tabHost:"For hosts", deleteProperty:"Delete property", deleteListing:"Remove external listing", showListingInSearch:"Show external link in search results", listingVisibilitySaved:"External link visibility updated.",
     toolsEyebrow:"HOST TOOLS", heroTitle:"Publish availability.<br><span>Keep the deal elsewhere.</span>",
     heroLead:"Add a property, link the original Airbnb listing and maintain only the dates when the property is physically free.",
+    accountTitle:"Host account", accountHelp:"Sign in with email and password. Your session is kept in a secure HttpOnly cookie.", loginTitle:"Log in", signupTitle:"Create account", emailLabel:"Email", passwordLabel:"Password", loginButton:"Log in →", signupButton:"Create account →", logoutButton:"Log out", signedInAs:"Signed in as", recoveryNote:"Password recovery is not available yet.", loggingIn:"Logging in…", signingUp:"Creating account…", loggedOut:"Logged out.", legacyMigrated:"Your existing host profile was connected to this account.", legacyMigrationFailed:"Signed in, but the existing browser profile could not be connected. Its old credentials were kept for retry.",
     identityTitle:"Host identity", identityHelp:"The edit token stays in this browser. PARROT stores only its hash.",
     nameLabel:"Name / host label", contactLabel:"Contact", contactPlaceholder:"Email or WhatsApp", createProfile:"Create host profile →",
     forgetSession:"Forget this browser session", propertiesTitle:"Properties",
@@ -24,6 +25,7 @@ const copy = {
     title:"PARROT 669 — Panel de propietarios", consoleLabel:"PANEL DE PROPIETARIOS", backToSite:"← Volver al sitio", tabSearch:"Buscar disponibilidad", tabHost:"Para propietarios", deleteProperty:"Eliminar vivienda", deleteListing:"Eliminar anuncio externo", showListingInSearch:"Mostrar enlace externo en los resultados", listingVisibilitySaved:"Visibilidad del enlace actualizada.",
     toolsEyebrow:"HERRAMIENTAS PARA PROPIETARIOS", heroTitle:"Publica la disponibilidad.<br><span>La operación ocurre fuera.</span>",
     heroLead:"Añade una vivienda, enlaza el anuncio original de Airbnb y mantén únicamente las fechas en las que está físicamente libre.",
+    accountTitle:"Cuenta de propietario", accountHelp:"Inicia sesión con email y contraseña. La sesión se guarda en una cookie HttpOnly segura.", loginTitle:"Iniciar sesión", signupTitle:"Crear cuenta", emailLabel:"Email", passwordLabel:"Contraseña", loginButton:"Entrar →", signupButton:"Crear cuenta →", logoutButton:"Cerrar sesión", signedInAs:"Sesión iniciada como", recoveryNote:"La recuperación de contraseña todavía no está disponible.", loggingIn:"Iniciando sesión…", signingUp:"Creando cuenta…", loggedOut:"Sesión cerrada.", legacyMigrated:"Tu perfil de propietario existente se ha conectado a esta cuenta.", legacyMigrationFailed:"Has iniciado sesión, pero no se pudo conectar el perfil guardado en este navegador. Sus credenciales antiguas se conservaron para reintentar.",
     identityTitle:"Identidad del propietario", identityHelp:"El token de edición se queda en este navegador. PARROT solo guarda su hash.",
     nameLabel:"Nombre / etiqueta", contactLabel:"Contacto", contactPlaceholder:"Email o WhatsApp", createProfile:"Crear perfil →",
     forgetSession:"Olvidar esta sesión del navegador", propertiesTitle:"Viviendas",
@@ -42,6 +44,7 @@ const copy = {
     title:"PARROT 669 — Panell de propietaris", consoleLabel:"PANELL DE PROPIETARIS", backToSite:"← Tornar al web", tabSearch:"Cercar disponibilitat", tabHost:"Per a propietaris", deleteProperty:"Eliminar habitatge", deleteListing:"Eliminar anunci extern", showListingInSearch:"Mostrar l'enllaç extern als resultats", listingVisibilitySaved:"Visibilitat de l'enllaç actualitzada.",
     toolsEyebrow:"EINES PER A PROPIETARIS", heroTitle:"Publica la disponibilitat.<br><span>L'operació passa fora.</span>",
     heroLead:"Afegeix un habitatge, enllaça l'anunci original d'Airbnb i mantén només les dates en què està físicament lliure.",
+    accountTitle:"Compte de propietari", accountHelp:"Inicia sessió amb correu i contrasenya. La sessió es desa en una cookie HttpOnly segura.", loginTitle:"Inicia sessió", signupTitle:"Crea un compte", emailLabel:"Correu electrònic", passwordLabel:"Contrasenya", loginButton:"Entra →", signupButton:"Crea el compte →", logoutButton:"Tanca la sessió", signedInAs:"Sessió iniciada com", recoveryNote:"La recuperació de contrasenya encara no està disponible.", loggingIn:"Iniciant sessió…", signingUp:"Creant el compte…", loggedOut:"Sessió tancada.", legacyMigrated:"El teu perfil de propietari existent s'ha connectat a aquest compte.", legacyMigrationFailed:"Has iniciat sessió, però no s'ha pogut connectar el perfil guardat en aquest navegador. S'han conservat les credencials antigues per tornar-ho a provar.",
     identityTitle:"Identitat del propietari", identityHelp:"El token d'edició es queda en aquest navegador. PARROT només en desa el hash.",
     nameLabel:"Nom / etiqueta", contactLabel:"Contacte", contactPlaceholder:"Email o WhatsApp", createProfile:"Crear perfil →",
     forgetSession:"Oblidar aquesta sessió del navegador", propertiesTitle:"Habitatges",
@@ -60,6 +63,7 @@ const copy = {
     title:"PARROT 669 — Кабинет владельца", consoleLabel:"КАБИНЕТ ВЛАДЕЛЬЦА", backToSite:"← Назад на сайт", tabSearch:"Найти жильё", tabHost:"Владельцам", deleteProperty:"Удалить объект", deleteListing:"Удалить внешнее объявление", showListingInSearch:"Показывать внешнюю ссылку в поиске", listingVisibilitySaved:"Видимость внешней ссылки обновлена.",
     toolsEyebrow:"ИНСТРУМЕНТЫ ВЛАДЕЛЬЦА", heroTitle:"Публикуйте свободные даты.<br><span>Сделка остаётся снаружи.</span>",
     heroLead:"Добавьте объект, укажите исходное объявление Airbnb и поддерживайте только даты, когда жильё физически свободно.",
+    accountTitle:"Аккаунт владельца", accountHelp:"Войдите по email и паролю. Сессия хранится в защищённой HttpOnly cookie.", loginTitle:"Вход", signupTitle:"Регистрация", emailLabel:"Email", passwordLabel:"Пароль", loginButton:"Войти →", signupButton:"Создать аккаунт →", logoutButton:"Выйти", signedInAs:"Выполнен вход", recoveryNote:"Восстановление пароля пока недоступно.", loggingIn:"Входим…", signingUp:"Создаём аккаунт…", loggedOut:"Вы вышли из аккаунта.", legacyMigrated:"Старый профиль владельца привязан к этому аккаунту.", legacyMigrationFailed:"Вход выполнен, но старый профиль из этого браузера привязать не удалось. Старые данные сохранены для повторной попытки.",
     identityTitle:"Профиль владельца", identityHelp:"Токен редактирования остаётся в этом браузере. PARROT хранит только его hash.",
     nameLabel:"Имя / название", contactLabel:"Контакт", contactPlaceholder:"Email или WhatsApp", createProfile:"Создать профиль →",
     forgetSession:"Забыть сессию в этом браузере", propertiesTitle:"Объекты",
@@ -76,30 +80,41 @@ const copy = {
   }
 };
 
-const emptyState = () => ({profileId:"", parrotId:"", editToken:"", properties:[]});
-let state = loadState();
+const emptyState = () => ({user:null, properties:[]});
+let state = emptyState();
 let lang = loadLanguage();
+let legacyState = loadLegacyState();
 const expandedPropertyIds = new Set();
 
 const statusNode = document.getElementById("host-status");
-const profileForm = document.getElementById("profile-form");
+const loginForm = document.getElementById("login-form");
+const registerForm = document.getElementById("register-form");
+const authForms = document.getElementById("host-auth-forms");
+const recoveryNote = document.getElementById("recovery-note");
 const propertyPanel = document.getElementById("property-panel");
 const propertyForm = document.getElementById("property-form");
 const hostSession = document.getElementById("host-session");
+const hostAccountEmail = document.getElementById("host-account-email");
 const hostParrotId = document.getElementById("host-parrot-id");
 const propertiesNode = document.getElementById("host-properties");
-const resetButton = document.getElementById("reset-host");
+const logoutButton = document.getElementById("logout-host");
 const langButtons = document.querySelectorAll("[data-host-lang]");
 
-function loadState(){
+function loadLegacyState(){
   try {
     const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-    return parsed && typeof parsed === "object"
-      ? {...emptyState(), profileId:parsed.profileId || "", parrotId:parsed.parrotId || "", editToken:parsed.editToken || "", properties:[]}
-      : emptyState();
+    if (!parsed || typeof parsed !== "object") return null;
+    const profileId = String(parsed.profileId || "");
+    const editToken = String(parsed.editToken || "");
+    return profileId && editToken ? {profileId, editToken, parrotId:String(parsed.parrotId || "")} : null;
   } catch {
-    return emptyState();
+    return null;
   }
+}
+
+function clearLegacyState(){
+  localStorage.removeItem(STORAGE_KEY);
+  legacyState = null;
 }
 
 function loadLanguage(){
@@ -134,11 +149,7 @@ function applyLanguage(next){
 }
 
 function saveState(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({
-    profileId: state.profileId,
-    parrotId: state.parrotId,
-    editToken: state.editToken
-  }));
+  // Auth state is server-side. localStorage is intentionally not an auth source of truth.
 }
 
 function message(text, kind = ""){
@@ -150,16 +161,21 @@ async function api(path, options = {}){
   const headers = new Headers(options.headers || {});
   headers.set("Accept", "application/json");
   if (options.body) headers.set("Content-Type", "application/json");
-  if (state.editToken) headers.set("X-Parrot-Token", state.editToken);
 
-  // Browser host API is namespaced under /api/host; the Worker strips /api/host
-  // and forwards the same request to the backend under /api.
-  const response = await fetch(`/api/host${path}`, {...options, headers});
+  const response = await fetch(`/api/host${path}`, {
+    ...options,
+    headers,
+    credentials:"same-origin"
+  });
   if (response.status === 204) return null;
 
   let data = null;
   try { data = await response.json(); } catch {}
-  if (!response.ok) throw new Error(data?.error || `HTTP ${response.status}`);
+  if (!response.ok) {
+    const error = new Error(data?.error || `HTTP ${response.status}`);
+    error.status = response.status;
+    throw error;
+  }
   return data;
 }
 
@@ -181,72 +197,150 @@ function setFormError(form, text = ""){
   }
 }
 
+function renderAuthState(){
+  const ready = Boolean(state.user);
+  authForms.hidden = ready;
+  recoveryNote.hidden = ready;
+  hostSession.hidden = !ready;
+  propertyPanel.hidden = !ready;
+
+  if (ready) {
+    hostAccountEmail.textContent = state.user.email || "";
+    hostParrotId.textContent = state.user.profile?.parrotId || "";
+  } else {
+    state.properties = [];
+    renderProperties();
+  }
+}
+
+async function migrateLegacyIfNeeded(){
+  if (!state.user || !legacyState) return false;
+
+  if (state.user.profile?.id === legacyState.profileId) {
+    clearLegacyState();
+    return false;
+  }
+
+  try {
+    const user = await api("/auth/claim-legacy", {
+      method:"POST",
+      body:JSON.stringify({
+        profileId:legacyState.profileId,
+        editToken:legacyState.editToken
+      })
+    });
+    state.user = user;
+    clearLegacyState();
+    message(tr("legacyMigrated"), "success");
+    return true;
+  } catch (error) {
+    message(tr("legacyMigrationFailed"), "error");
+    return false;
+  }
+}
+
 async function syncDashboard(){
   message(tr("loading"));
   try {
-    const dashboard = await api(`/profiles/${state.profileId}/dashboard`);
-    state.parrotId = dashboard.profile.parrotId || state.parrotId;
+    const dashboard = await api("/dashboard");
     state.properties = (dashboard.properties || []).map(property => ({
       ...property,
       listing: Array.isArray(property.listings) ? (property.listings[0] || null) : null,
       availability: Array.isArray(property.availability) ? property.availability : [],
       calendars: Array.isArray(property.calendars) ? property.calendars : []
     }));
-    saveState();
-    hostParrotId.textContent = state.parrotId || state.profileId;
+    if (state.user?.profile) {
+      state.user.profile.parrotId = dashboard.profile.parrotId || state.user.profile.parrotId;
+      state.user.profile.displayName = dashboard.profile.displayName || state.user.profile.displayName;
+    }
+    hostParrotId.textContent = dashboard.profile.parrotId || state.user?.profile?.parrotId || "";
     renderProperties();
-    message("");
+    if (!statusNode.classList.contains("error") && !statusNode.classList.contains("success")) message("");
   } catch (error) {
+    if (error.status === 401) {
+      state = emptyState();
+      renderAuthState();
+      message("");
+      return;
+    }
     message(error.message, "error");
     state.properties = [];
     renderProperties();
   }
 }
 
-async function boot(){
-  const ready = Boolean(state.profileId && state.editToken);
-  profileForm.hidden = ready;
-  hostSession.hidden = !ready;
-  propertyPanel.hidden = !ready;
+async function finishAuthentication(user){
+  state.user = user;
+  renderAuthState();
+  const migrated = await migrateLegacyIfNeeded();
+  renderAuthState();
+  await syncDashboard();
+  return migrated;
+}
 
-  if (ready) {
-    hostParrotId.textContent = state.parrotId || state.profileId;
+async function boot(){
+  try {
+    const user = await api("/auth/me");
+    state.user = user;
+    renderAuthState();
+    await migrateLegacyIfNeeded();
+    renderAuthState();
     await syncDashboard();
-  } else {
-    renderProperties();
+  } catch (error) {
+    if (error.status !== 401) message(error.message, "error");
+    state = emptyState();
+    renderAuthState();
   }
 }
 
-profileForm.addEventListener("submit", async event => {
+loginForm.addEventListener("submit", async event => {
   event.preventDefault();
-
-  // Capture values before disabling controls. Disabled controls are omitted by FormData.
-  const form = new FormData(profileForm);
-  setBusy(profileForm, true);
-  message(tr("creatingProfile"));
+  const form = new FormData(loginForm);
+  setBusy(loginForm, true);
+  setFormError(loginForm);
+  message(tr("loggingIn"));
 
   try {
-    const created = await api("/profiles", {
+    const user = await api("/auth/login", {
+      method:"POST",
+      body:JSON.stringify({
+        email:String(form.get("email") || "").trim(),
+        password:String(form.get("password") || "")
+      })
+    });
+    await finishAuthentication(user);
+    loginForm.reset();
+  } catch (error) {
+    setFormError(loginForm, error.message);
+    message(error.message, "error");
+  } finally {
+    setBusy(loginForm, false);
+  }
+});
+
+registerForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  const form = new FormData(registerForm);
+  setBusy(registerForm, true);
+  setFormError(registerForm);
+  message(tr("signingUp"));
+
+  try {
+    const user = await api("/auth/register", {
       method:"POST",
       body:JSON.stringify({
         displayName:String(form.get("displayName") || "").trim(),
-        contact:String(form.get("contact") || "").trim()
+        email:String(form.get("email") || "").trim(),
+        password:String(form.get("password") || "")
       })
     });
-
-    state = {
-      ...emptyState(),
-      profileId:created.id,
-      parrotId:created.profile.parrotId,
-      editToken:created.editToken
-    };
-    saveState();
-    message(tr("profileCreated"), "success");
-    boot();
+    await finishAuthentication(user);
+    registerForm.reset();
   } catch (error) {
+    setFormError(registerForm, error.message);
     message(error.message, "error");
   } finally {
-    setBusy(profileForm, false);
+    setBusy(registerForm, false);
   }
 });
 
@@ -258,7 +352,7 @@ propertyForm.addEventListener("submit", async event => {
   message(tr("addingProperty"));
 
   try {
-    const created = await api(`/profiles/${state.profileId}/properties`, {
+    const created = await api("/properties", {
       method:"POST",
       body:JSON.stringify({
         title:String(form.get("title") || "").trim(),
@@ -283,7 +377,6 @@ propertyForm.addEventListener("submit", async event => {
       calendars:[]
     });
     expandedPropertyIds.add(created.id);
-    saveState();
     propertyForm.elements.title.value = "";
     message(tr("propertyAdded"), "success");
     renderProperties();
@@ -294,12 +387,14 @@ propertyForm.addEventListener("submit", async event => {
   }
 });
 
-resetButton.addEventListener("click", () => {
-  if (!confirm(tr("resetConfirm"))) return;
-  localStorage.removeItem(STORAGE_KEY);
+logoutButton.addEventListener("click", async () => {
+  try {
+    await api("/auth/logout", {method:"POST"});
+  } catch {}
   state = emptyState();
-  message(tr("sessionRemoved"));
-  boot();
+  expandedPropertyIds.clear();
+  renderAuthState();
+  message(tr("loggedOut"), "success");
 });
 
 function eurosToCents(value){
@@ -531,7 +626,7 @@ function renderProperties(){
   if (!propertiesNode) return;
   propertiesNode.replaceChildren();
 
-  if (!state.profileId) return;
+  if (!state.user) return;
 
   if (!state.properties.length) {
     const empty = document.createElement("div");
