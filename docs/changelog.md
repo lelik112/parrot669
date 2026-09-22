@@ -1,5 +1,17 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Owner accounts and server-side sessions
+
+- Replaced frontend `profileId + editToken` authentication with email/password accounts and opaque server-side sessions.
+- Passwords are hashed with Argon2id; raw passwords and raw session tokens are never stored in PostgreSQL.
+- Host sessions use HttpOnly, SameSite=Lax cookies; production cookies are Secure and expire after 30 days. Logout invalidates the server-side session.
+- Owner mutations authorize the authenticated profile and no longer accept `X-Parrot-Token` as a security credential.
+- Added register, login, logout, `/me` and authenticated dashboard flows plus login failure rate limiting.
+- Added a one-time legacy profile claim path for existing edit-token hosts. Successful claim clears the legacy token hash.
+- Host UI now shows login/sign-up states, persists authentication across reloads via the cookie, clears host state on logout, and offers legacy migration when old credentials are found in localStorage.
+- V11 adds accounts, sessions, profile/account ownership and a reserved hashed password-reset-token table. Password reset email is intentionally not exposed until backend email delivery is connected.
+- Guest availability search remains public.
+
 ## 2026-09-22 — Search copy and city selector cleanup
 
 - Removed the claim that host properties do not contain prices; PARROT can now store optional pricing.
