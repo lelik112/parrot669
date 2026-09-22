@@ -22,7 +22,6 @@ Current MVP principle:
 3. Results use a product-card hierarchy:
    - property name and city,
    - compact accommodation type / bedrooms / sleeping-place facts,
-   - a distinct host-reported availability window with locale-formatted dates,
    - optional indicative price when every requested night has a nightly price,
    - host nickname in a quieter footer,
    - external Airbnb action when the host has attached and published one; otherwise a subdued note says that no external link is available yet.

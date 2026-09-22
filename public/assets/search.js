@@ -9,10 +9,10 @@ const copy = {
 };
 
 const housingCopy = {
-  en:{accommodationType:"Accommodation type",anyType:"Any type",entirePlace:"Entire place",privateRoom:"Private room",noExternalLink:"External listing link not added yet",availableLabel:"Available",lead:"Search host-reported physical availability. When an external listing is attached, continue there for rental terms."},
-  es:{accommodationType:"Tipo de alojamiento",anyType:"Cualquier tipo",entirePlace:"Alojamiento entero",privateRoom:"Habitación privada",noExternalLink:"Todavía no se ha añadido un enlace externo",availableLabel:"Disponible",lead:"Busca disponibilidad física declarada por propietarios. Si hay un anuncio externo, continúa allí para consultar las condiciones."},
-  ca:{accommodationType:"Tipus d'allotjament",anyType:"Qualsevol tipus",entirePlace:"Allotjament sencer",privateRoom:"Habitació privada",noExternalLink:"Encara no s'ha afegit cap enllaç extern",availableLabel:"Disponible",lead:"Cerca disponibilitat física declarada pels propietaris. Si hi ha un anunci extern, continua-hi per consultar les condicions."},
-  ru:{accommodationType:"Тип жилья",anyType:"Любой тип",entirePlace:"Жильё целиком",privateRoom:"Отдельная комната",noExternalLink:"Внешняя ссылка пока не добавлена",availableLabel:"Свободно",lead:"Ищите физически свободное жильё по данным владельцев. Если добавлена внешняя площадка, условия аренды смотрите там."}
+  en:{accommodationType:"Accommodation type",anyType:"Any type",entirePlace:"Entire place",privateRoom:"Private room",noExternalLink:"External listing link not added yet",lead:"Search host-reported physical availability. When an external listing is attached, continue there for rental terms."},
+  es:{accommodationType:"Tipo de alojamiento",anyType:"Cualquier tipo",entirePlace:"Alojamiento entero",privateRoom:"Habitación privada",noExternalLink:"Todavía no se ha añadido un enlace externo",lead:"Busca disponibilidad física declarada por propietarios. Si hay un anuncio externo, continúa allí para consultar las condiciones."},
+  ca:{accommodationType:"Tipus d'allotjament",anyType:"Qualsevol tipus",entirePlace:"Allotjament sencer",privateRoom:"Habitació privada",noExternalLink:"Encara no s'ha afegit cap enllaç extern",lead:"Cerca disponibilitat física declarada pels propietaris. Si hi ha un anunci extern, continua-hi per consultar les condicions."},
+  ru:{accommodationType:"Тип жилья",anyType:"Любой тип",entirePlace:"Жильё целиком",privateRoom:"Отдельная комната",noExternalLink:"Внешняя ссылка пока не добавлена",lead:"Ищите физически свободное жильё по данным владельцев. Если добавлена внешняя площадка, условия аренды смотрите там."}
 };
 
 let lang=(()=>{const saved=localStorage.getItem(LANG_KEY);if(saved&&copy[saved])return saved;const b=(navigator.language||"en").slice(0,2);return copy[b]?b:"en"})();
@@ -77,15 +77,6 @@ function restoreSearchState(){
     if(minCheckout) form.elements.to.min=minCheckout;
   }catch{}
 }
-function formatResultDate(iso){
-  if(!iso) return "";
-  const [year,month,day]=String(iso).split("-").map(Number);
-  if(!year||!month||!day) return String(iso);
-  const date=new Date(Date.UTC(year,month-1,day));
-  return new Intl.DateTimeFormat(document.documentElement.lang||"en",{
-    day:"numeric",month:"short",year:"numeric",timeZone:"UTC"
-  }).format(date);
-}
 function render(items){
   results.replaceChildren();
   if(!items.length){state(t("empty"),"empty");return}
@@ -117,16 +108,6 @@ function render(items){
       fact.textContent=value;
       facts.append(fact);
     });
-
-    const availability=document.createElement("div");
-    availability.className="availability-window";
-    const availabilityLabel=document.createElement("span");
-    availabilityLabel.className="availability-window-label";
-    availabilityLabel.textContent=t("availableLabel");
-    const dates=document.createElement("strong");
-    dates.className="availability-window-dates";
-    dates.textContent=`${formatResultDate(item.availableFrom)} → ${formatResultDate(item.availableTo)}`;
-    availability.append(availabilityLabel,dates);
 
     const priceBlock=document.createElement("div");
     priceBlock.className="availability-price-block";
@@ -181,7 +162,7 @@ function render(items){
     }
 
     footer.append(owner,links);
-    card.append(head,facts,availability,priceBlock,footer);
+    card.append(head,facts,priceBlock,footer);
     results.append(card);
   });
 }

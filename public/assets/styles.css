@@ -1684,17 +1684,7 @@ footer{
   border:1px solid rgba(255,255,255,.075);border-radius:999px;
   background:rgba(255,255,255,.025);color:#aeb9b5;font-size:11px;line-height:1;
 }
-.availability-window{
-  display:grid;gap:6px;margin-top:20px;padding:15px 16px;
-  border:1px solid rgba(216,255,99,.12);border-radius:14px;background:rgba(216,255,99,.035);
-}
-.availability-window-label{
-  color:#8c9b96;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-}
-.availability-window-dates{
-  font-family:"Space Grotesk",sans-serif;color:#e6ece8;font-size:15px;font-weight:600;line-height:1.35;
-}
-.availability-price-block{display:grid;gap:7px;margin-top:19px}
+.availability-price-block{display:grid;gap:7px;margin-top:22px}
 .availability-price{font-size:21px;line-height:1.25}
 .availability-price.unknown{font-size:13px}
 .availability-price-note{margin-top:0;max-width:360px}

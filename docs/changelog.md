@@ -1,5 +1,10 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Remove duplicated dates from result cards
+
+- Removed the availability date window from every result card because the requested stay period is already visible in the search controls above the results.
+- Cards now focus on the information that actually differs between properties: identity, accommodation/capacity facts, price, host and outbound action.
+
 ## 2026-09-22 — Product-style housing result cards
 
 - Reworked guest search results into a clearer product-card hierarchy instead of a flat stack of equally weighted metadata.
