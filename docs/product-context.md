@@ -99,7 +99,7 @@ Important migrations:
 - V10 adds per-listing search-link visibility and removes orphan external calendars
 - V11 adds accounts, server-side sessions, profile ownership by account and the reserved password-reset-token model
 - V12 removes pre-account edit-token authentication, deletes any remaining unowned legacy profiles, makes `profiles.account_id` mandatory and drops `access_token_hash`
-- V13 adds `accounts.email_verified_at` plus hashed, expiring, one-time `email_verification_tokens`; accounts that predate V13 are grandfathered as verified
+- V14 adds `accounts.email_verified_at` plus hashed, expiring, one-time `email_verification_tokens`; accounts that predate V13 are grandfathered as verified
 
 Current important endpoints:
 - `POST /api/auth/register`
