@@ -34,7 +34,7 @@ Current MVP principle:
 
 ### Host
 1. Open `/host.html`.
-2. Register or log in with email/password. Authentication uses a server-side session in an HttpOnly cookie; host credentials are not stored in frontend JavaScript/localStorage.
+2. Register with email/password, confirm the email through the link sent by PARROT, then use the server-side session created by verification. Existing verified users can log in normally. Host credentials are not stored in frontend JavaScript/localStorage.
 3. Choose a city (currently only Barcelona), create a property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
 3a. Accommodation type, bedrooms and sleeping places are editable property characteristics. Minimum stay and optional cleaning fee are editable alongside PARROT availability/pricing controls. Property cards are collapsed by default to a compact summary and can be expanded for editing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
@@ -99,9 +99,12 @@ Important migrations:
 - V10 adds per-listing search-link visibility and removes orphan external calendars
 - V11 adds accounts, server-side sessions, profile ownership by account and the reserved password-reset-token model
 - V12 removes pre-account edit-token authentication, deletes any remaining unowned legacy profiles, makes `profiles.account_id` mandatory and drops `access_token_hash`
+- V13 adds `accounts.email_verified_at` plus hashed, expiring, one-time `email_verification_tokens`; accounts that predate V13 are grandfathered as verified
 
 Current important endpoints:
 - `POST /api/auth/register`
+- `POST /api/auth/verify-email`
+- `POST /api/auth/resend-verification`
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
@@ -161,13 +164,14 @@ Calendar connection validation is deliberately strict: the listing id must match
 
 Owner authentication is account/session based:
 
-- `accounts` is the login identity and stores normalized unique email plus an Argon2id password hash.
+- `accounts` is the login identity and stores normalized unique email, Argon2id password hash and email verification timestamp.
 - `profiles` remains the domain identity shown to guests and owns properties. For the MVP one account owns one host profile through `profiles.account_id`.
 - Host authorization is ownership-based, not role-based: an authenticated account can mutate only resources belonging to its profile. "Host" is not an RBAC role.
 - Sessions are opaque 256-bit random tokens. The browser receives the raw token only as a `HttpOnly; SameSite=Lax` cookie; production also sets `Secure`. The database stores only SHA-256 session-token hashes.
-- Sessions expire after 30 days, multiple active sessions are allowed, login creates a fresh session, and logout deletes the server-side session.
+- New registrations do not receive a session until email verification succeeds. Verification tokens are 256-bit random values, stored only as SHA-256 hashes, expire after 24 hours and are one-time use. Verification immediately creates the first authenticated session.
+- Sessions expire after 30 days, multiple active sessions are allowed, verified login creates a fresh session, and logout deletes the server-side session.
 - Login errors do not distinguish unknown email from wrong password. A simple per-instance limiter caps repeated failures per normalized email; a distributed limiter can replace it if traffic or horizontal scaling justifies it.
-- Password recovery is not exposed yet because the backend has no mail provider. V11 reserves a hashed, expiring `password_reset_tokens` model so request/confirm endpoints can be added together with real email delivery rather than a fake reset flow.
+- Verification email delivery is implemented through a backend transactional-email sender. Production currently expects Cloudflare Email Service credentials; tests use a logging sender. V11 already reserves a hashed, expiring `password_reset_tokens` model for the next auth step.
 - The pre-account `editToken`/`access_token_hash` mechanism and its compatibility routes have been removed.
 
 Before exposing owner contact or messaging broadly, add profile/privacy controls.
@@ -196,6 +200,6 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 - Before opening availability writes to meaningful concurrent traffic: clean up any legacy overlapping periods and add a PostgreSQL exclusion constraint on `daterange(date_from, date_to, '[)')` per property. API-level overlap checks remain useful for friendly errors, but are not sufficient against concurrent inserts/updates.
 - Improve visual design of housing/search/host UI.
-- Connect a backend email provider and add real password-reset request/confirm endpoints using the reserved reset-token model.
+- Add real password-reset request/confirm endpoints using the reserved reset-token model and the same transactional-email delivery layer.
 - Add owner messaging/privacy preferences.
 - Upgrade Flyway or align Postgres version (Railway currently warns PostgreSQL 18 is newer than tested Flyway support).
