@@ -1,5 +1,10 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Live housing filters and dirty period saves
+
+- Accommodation type now behaves as a true result filter: repeat searches always use its current selected value instead of the value captured in the previous base-search snapshot.
+- Existing host availability periods no longer show a redundant Save action while unchanged. Save appears only after dates or nightly price are edited.
+
 ## 2026-09-22 — Remove legacy auth and simplify host account UI
 
 - Removed the pre-account edit-token migration path, legacy claim endpoint and compatibility owner routes.

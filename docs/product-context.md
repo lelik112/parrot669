@@ -18,7 +18,7 @@ Current MVP principle:
 
 ### Guest
 1. Open `/search.html`.
-2. Choose a city (currently only Barcelona), then search by dates, bedrooms and sleeping places. Accommodation type is a result filter alongside pricing filters and defaults to any. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Changing any result filter after a search re-runs that search immediately.
+2. Choose a city (currently only Barcelona), then search by dates, bedrooms and sleeping places. Accommodation type is a result filter alongside pricing filters and defaults to any. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Result filters are applied from their current UI values on every request, so changing any filter after a search immediately re-runs the same base search with the new filter.
 3. Results show:
    - host nickname,
    - bedrooms,
@@ -39,7 +39,7 @@ Current MVP principle:
 3a. Accommodation type, bedrooms and sleeping places are editable property characteristics. Minimum stay and optional cleaning fee are editable alongside PARROT availability/pricing controls. Property cards are collapsed by default to a compact summary and can be expanded for editing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
 5. PARROT generates the canonical Airbnb URL. The host may hide that URL from guest search without disconnecting the listing or calendar.
-6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR.
+6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR. Existing periods show a Save action only after their dates or nightly price have actually changed.
 6a. New/updated availability periods may not overlap. Adjacent periods are allowed and can have different prices.
 6b. Search stitches adjacent periods together by requested night, so a stay may span multiple adjacent rows as long as every night is covered.
 7. Delete external listing or whole property.

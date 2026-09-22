@@ -131,8 +131,7 @@ function currentSearchParams(){
     from:String(fd.get("from")||""),
     to:String(fd.get("to")||""),
     bedrooms:String(fd.get("bedrooms")||"1"),
-    sleeps:String(fd.get("sleeps")||"1"),
-    accommodationType:String(accommodationTypeFilter?.value||"any")
+    sleeps:String(fd.get("sleeps")||"1")
   });
 }
 async function runSearch(baseParams,{disableSubmit=false}={}){
@@ -140,6 +139,7 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
   const params=new URLSearchParams(baseParams);
   const minPriceCents=eurosToCents(minPriceFilter?.value);
   const maxPriceCents=eurosToCents(maxPriceFilter?.value);
+  params.set("accommodationType",String(accommodationTypeFilter?.value||"any"));
   if(minPriceCents!=null&&maxPriceCents!=null&&minPriceCents>maxPriceCents){
     state(t("priceRangeError"),"error");
     return;

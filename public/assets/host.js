@@ -939,6 +939,18 @@ function renderProperties(){
         save.type = "button";
         save.className = "text-button";
         save.textContent = tr("save");
+        save.hidden = true;
+        const originalNightly = centsToEuros(period.nightlyPriceCents);
+        const syncSaveVisibility = () => {
+          save.hidden =
+            from.value === period.from &&
+            to.value === period.to &&
+            nightly.value === originalNightly;
+        };
+        [from,to,nightly].forEach(input => {
+          input.addEventListener("input", syncSaveVisibility);
+          input.addEventListener("change", syncSaveVisibility);
+        });
         save.addEventListener("click", () => updateAvailability(property, period, from.value, to.value, nightly.value));
 
         const remove = document.createElement("button");
