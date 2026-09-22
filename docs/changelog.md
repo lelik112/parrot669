@@ -1,5 +1,10 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Localized Airbnb calendar links and visible errors
+
+- Airbnb iCal export links on localized hosts such as `airbnb.ru`, `airbnb.es` and `airbnb.co.uk` are accepted and normalized to `www.airbnb.com` before fetch; redirects stay disabled and lookalike hosts remain rejected.
+- Calendar connection failures, including an iCal listing-id mismatch, are now rendered directly below the calendar form instead of only in the page-level status above the property list.
+
 ## 2026-09-22 — Harden Airbnb iCal connection
 
 - Added regression coverage confirming that a calendar listing ID must exactly match the attached Airbnb listing ID; mismatches are rejected before fetch.

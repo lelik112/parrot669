@@ -164,6 +164,20 @@ function setBusy(form, busy){
   form?.querySelectorAll("button,input,select").forEach(node => node.disabled = busy);
 }
 
+function setFormError(form, text = ""){
+  let node = form?.querySelector(".host-form-error");
+  if (!node && text) {
+    node = document.createElement("p");
+    node.className = "host-inline-error host-form-error";
+    node.setAttribute("role", "alert");
+    form.append(node);
+  }
+  if (node) {
+    node.textContent = text;
+    node.hidden = !text;
+  }
+}
+
 async function syncDashboard(){
   message(tr("loading"));
   try {
@@ -412,6 +426,7 @@ async function deleteListing(property){
 
 async function connectCalendar(property, form){
   const data=new FormData(form);
+  setFormError(form);
   setBusy(form,true);
   message(tr("loading"));
   try{
@@ -421,7 +436,10 @@ async function connectCalendar(property, form){
     });
     message(tr("calendarConnected"),"success");
     await syncDashboard();
-  }catch(error){message(error.message,"error")}
+  }catch(error){
+    setFormError(form,error.message);
+    message(error.message,"error");
+  }
   finally{setBusy(form,false)}
 }
 

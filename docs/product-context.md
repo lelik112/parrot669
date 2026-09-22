@@ -47,6 +47,7 @@ Current MVP principle:
 9. On every host-page load, property/listing/availability/calendar-sync state is fetched from the backend owner dashboard. localStorage stores credentials only and is not the source of truth for listings or availability.
 10. After adding an Airbnb listing, the host can paste Airbnb's private iCal export URL. The listing id embedded in the iCal URL must match the Airbnb listing id already attached to the property.
 11. Calendar sync runs immediately on connect, manually via "Sync now", and automatically about once per hour. The raw iCal URL is never returned by the API or rendered back to the browser after connection.
+12. Calendar connection errors, including a listing-id mismatch, are shown directly under the calendar form as well as in the page status.
 
 ## Barcelona scope
 
@@ -143,7 +144,7 @@ Search logic is therefore:
 
 The iCal URL is a secret capability link. It is stored server-side because it must be fetched, but never returned in dashboard/public APIs. TODO before serious scale: encrypt calendar URLs at rest with an application-managed key.
 
-Calendar connection validation is deliberately strict: the listing id must match the property's Airbnb listing id exactly, and production fetches accept only HTTPS URLs on `airbnb.com` or its subdomains with the exact `/calendar/ical/<listingId>.ics` path. Redirects remain disabled. If reconnecting or replacing a calendar URL fails, PARROT keeps the last successful event snapshot, so known reservations continue to block search until a later successful sync replaces them.
+Calendar connection validation is deliberately strict: the listing id must match the property's Airbnb listing id exactly and the path must be `/calendar/ical/<listingId>.ics`. HTTPS links on `airbnb.com` and localized Airbnb hosts such as `airbnb.ru`, `airbnb.es` or `airbnb.co.uk` are accepted; localized hosts are normalized to `www.airbnb.com` before the server fetch, so redirects stay disabled and no user-controlled host is fetched. Lookalike hosts remain rejected. If reconnecting or replacing a calendar URL fails, PARROT keeps the last successful event snapshot, so known reservations continue to block search until a later successful sync replaces them.
 
 ## Auth / contact direction
 

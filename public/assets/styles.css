@@ -1436,6 +1436,7 @@ footer{
 .host-period input{min-height:40px}
 .host-empty,.host-inline-muted,.host-inline-error{color:#74837e;font-size:13px}
 .host-inline-error{color:#f2b5a8}
+.host-form-error{grid-column:1/-1;margin:0}
 @media(max-width:900px){
   .host-form,.host-property-form{grid-template-columns:1fr 1fr}
   .host-form .button{grid-column:1/-1}
