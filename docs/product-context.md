@@ -35,7 +35,7 @@ Current MVP principle:
 
 ### Host
 1. Open `/host.html`.
-2. Create host profile.
+2. Register or log in with email/password. Authentication uses a server-side session in an HttpOnly cookie; host credentials are not stored in frontend JavaScript/localStorage.
 3. Choose a city (currently only Barcelona), create a property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
 3a. Accommodation type, minimum stay and optional cleaning fee are visible property settings and can be edited after creation, independently of any external listing. Property cards are collapsed by default to a compact summary and can be expanded for editing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
@@ -44,8 +44,8 @@ Current MVP principle:
 6a. New/updated availability periods may not overlap. Adjacent periods are allowed and can have different prices.
 6b. Search stitches adjacent periods together by requested night, so a stay may span multiple adjacent rows as long as every night is covered.
 7. Delete external listing or whole property.
-8. Edit token is currently kept in browser localStorage; backend stores only token hash.
-9. On every host-page load, property/listing/availability/calendar-sync state is fetched from the backend owner dashboard. localStorage stores credentials only and is not the source of truth for listings or availability.
+8. On every host-page load, the frontend calls `GET /api/auth/me` and then fetches the owner dashboard through the authenticated session.
+9. Legacy profiles created before account auth remain claimable with their old `profileId + editToken` exactly once. Successful claim attaches the legacy profile to the current account, deletes the newly-created empty profile, clears the legacy token hash, and frontend removes the old localStorage credentials. The edit token is not accepted by normal owner endpoints.
 10. After adding an Airbnb listing, the host can paste Airbnb's private iCal export URL. The listing id embedded in the iCal URL must match the Airbnb listing id already attached to the property.
 11. Calendar sync runs immediately on connect, manually via "Sync now", and automatically about once per hour while the calendar is enabled. A disabled calendar keeps its imported snapshot for later re-enable but does not block search and is skipped by automatic sync. Re-enabling triggers an immediate refresh. The raw iCal URL is never returned by the API or rendered back to the browser after connection.
 12. Calendar connection errors, including a listing-id mismatch, are shown directly under the calendar form as well as in the page status.
@@ -98,11 +98,17 @@ Important migrations:
 - V8 property accommodation type (`entire_place` or `private_room`); existing properties are migrated to `entire_place`
 - V9 moves cleaning fee to the property and adds enabled/disabled state for external calendars
 - V10 adds per-listing search-link visibility and removes orphan external calendars
+- V11 adds accounts, server-side sessions, optional profile ownership by account, nullable legacy edit-token hashes, and the reserved password-reset-token model
 
 Current important endpoints:
-- `POST /api/profiles`
-- `GET /api/profiles/:profileId/dashboard` (owner-only, token required)
-- `POST /api/profiles/:profileId/properties`
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/auth/logout`
+- `GET /api/auth/me`
+- `POST /api/auth/claim-legacy` is the temporary authenticated migration path for old edit-token profiles
+- `GET /api/dashboard` (owner-only, session required)
+- `POST /api/properties` (owner-only, session required)
+- `GET /api/profiles/:profileId/dashboard` and `POST /api/profiles/:profileId/properties` remain authenticated compatibility aliases; the profile id is checked against the session identity and is not a credential
 - `PUT /api/properties/:propertyId` updates minimum stay and optional property cleaning fee
 - `DELETE /api/properties/:propertyId`
 - `POST /api/properties/:propertyId/listings`
@@ -126,7 +132,8 @@ Hosted on Cloudflare Workers/static assets.
 
 Worker proxies:
 - public `/api/search` to Railway
-- restricted browser host CRUD routes under `/api/host/*`; the Worker strips the `/api/host` prefix and forwards them to Railway backend `/api/*`. Example: browser `PUT /api/host/calendars/:id` becomes backend `PUT /api/calendars/:id`.
+- restricted browser auth/host routes under `/api/host/*`; the Worker strips the `/api/host` prefix and forwards them to Railway backend `/api/*`. Example: browser `PUT /api/host/calendars/:id` becomes backend `PUT /api/calendars/:id`.
+- Host proxy forwards the session Cookie upstream and Set-Cookie back to the browser, does not forward the old `X-Parrot-Token`, and rejects cross-origin state-changing browser requests when an Origin header is present.
 
 Languages:
 - EN
@@ -154,9 +161,18 @@ Calendar connection validation is deliberately strict: the listing id must match
 
 ## Auth / contact direction
 
-Current edit-token-in-localStorage auth is MVP only.
+Owner authentication is account/session based:
 
-Before exposing owner contact or messaging broadly, implement real authentication and profile/privacy controls.
+- `accounts` is the login identity and stores normalized unique email plus an Argon2id password hash.
+- `profiles` remains the domain identity shown to guests and owns properties. For the MVP one account owns one host profile through `profiles.account_id`.
+- Host authorization is ownership-based, not role-based: an authenticated account can mutate only resources belonging to its profile. "Host" is not an RBAC role.
+- Sessions are opaque 256-bit random tokens. The browser receives the raw token only as a `HttpOnly; SameSite=Lax` cookie; production also sets `Secure`. The database stores only SHA-256 session-token hashes.
+- Sessions expire after 30 days, multiple active sessions are allowed, login creates a fresh session, and logout deletes the server-side session.
+- Login errors do not distinguish unknown email from wrong password. A simple per-instance limiter caps repeated failures per normalized email; a distributed limiter can replace it if traffic or horizontal scaling justifies it.
+- Password recovery is not exposed yet because the backend has no mail provider. V11 reserves a hashed, expiring `password_reset_tokens` model so request/confirm endpoints can be added together with real email delivery rather than a fake reset flow.
+- Legacy `access_token_hash` is migration-only. Normal owner routes ignore `X-Parrot-Token`; successful legacy claim nulls the old hash.
+
+Before exposing owner contact or messaging broadly, add profile/privacy controls.
 
 Desired future owner contact options:
 - PARROT message/contact relay;
@@ -182,6 +198,6 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 - Before opening availability writes to meaningful concurrent traffic: clean up any legacy overlapping periods and add a PostgreSQL exclusion constraint on `daterange(date_from, date_to, '[)')` per property. API-level overlap checks remain useful for friendly errors, but are not sufficient against concurrent inserts/updates.
 - Improve visual design of housing/search/host UI.
-- Replace localStorage edit-token auth with real auth/recovery.
+- Connect a backend email provider and add real password-reset request/confirm endpoints using the reserved reset-token model.
 - Add owner messaging/privacy preferences.
 - Upgrade Flyway or align Postgres version (Railway currently warns PostgreSQL 18 is newer than tested Flyway support).

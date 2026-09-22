@@ -42,9 +42,9 @@ const proxyBackend = async (request, targetPath) => {
 
   const headers = new Headers();
   const contentType = request.headers.get("Content-Type");
-  const token = request.headers.get("X-Parrot-Token");
+  const cookie = request.headers.get("Cookie");
   if (contentType) headers.set("Content-Type", contentType);
-  if (token) headers.set("X-Parrot-Token", token);
+  if (cookie) headers.set("Cookie", cookie);
   headers.set("Accept", "application/json");
 
   const init = {
@@ -57,12 +57,16 @@ const proxyBackend = async (request, targetPath) => {
   }
 
   const response = await fetch(upstream.toString(), init);
+  const responseHeaders = new Headers({
+    "Content-Type": response.headers.get("Content-Type") || "application/json; charset=utf-8",
+    "Cache-Control": "no-store",
+  });
+  const setCookie = response.headers.get("Set-Cookie");
+  if (setCookie) responseHeaders.set("Set-Cookie", setCookie);
+
   return new Response(response.body, {
     status: response.status,
-    headers: {
-      "Content-Type": response.headers.get("Content-Type") || "application/json; charset=utf-8",
-      "Cache-Control": "no-store",
-    },
+    headers: responseHeaders,
   });
 };
 
@@ -99,8 +103,24 @@ export default {
 
     if (url.pathname.startsWith("/api/host/")) {
       const path = url.pathname.slice("/api/host".length);
+
+      if (!["GET", "HEAD", "OPTIONS"].includes(request.method)) {
+        const origin = request.headers.get("Origin");
+        if (origin && origin !== url.origin) {
+          return json({ error: "Forbidden" }, 403);
+        }
+      }
+
       const allowed =
-        (path === "/profiles" && request.method === "POST") ||
+        (path === "/auth/register" && request.method === "POST") ||
+        (path === "/auth/login" && request.method === "POST") ||
+        (path === "/auth/logout" && request.method === "POST") ||
+        (path === "/auth/me" && request.method === "GET") ||
+        (path === "/auth/claim-legacy" && request.method === "POST") ||
+        (path === "/dashboard" && request.method === "GET") ||
+        (path === "/properties" && request.method === "POST") ||
+        (/^\/profiles\/[0-9a-f-]+\/dashboard$/i.test(path) && request.method === "GET") ||
+        (/^\/profiles\/[0-9a-f-]+\/properties$/i.test(path) && request.method === "POST") ||
         (/^\/profiles\/[0-9a-f-]+\/dashboard$/i.test(path) && request.method === "GET") ||
         (/^\/profiles\/[0-9a-f-]+\/properties$/i.test(path) && request.method === "POST") ||
         (/^\/properties\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
