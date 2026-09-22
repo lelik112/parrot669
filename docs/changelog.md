@@ -1,5 +1,14 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Email verification for new accounts
+
+- New registrations require email confirmation before the account can create an authenticated session.
+- Added one-time 24-hour verification tokens stored only as SHA-256 hashes and V13 account verification state.
+- Existing accounts are grandfathered as verified during V13 migration.
+- Added verify and generic resend endpoints; login with a correct password but unverified email returns a verification-required state.
+- Verification links use the `host.html#verify=...` fragment so raw tokens are not sent in normal page-request URLs or access logs.
+- Host auth dialog now shows a check-your-email/resend state and signs the user in automatically after a successful verification link.
+
 ## 2026-09-22 — Live housing filters and dirty period saves
 
 - Accommodation type now behaves as a true result filter: repeat searches always use its current selected value instead of the value captured in the previous base-search snapshot.
