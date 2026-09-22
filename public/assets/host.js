@@ -617,12 +617,7 @@ function renderProperties(){
 
     const externalCalendar=Array.isArray(property.calendars) ? property.calendars.find(item=>item.provider==="airbnb") : null;
 
-    if(!property.listing){
-      const note=document.createElement("p");
-      note.className="host-inline-muted";
-      note.textContent=tr("calendarHelp");
-      syncPanel.append(note);
-    }else if(externalCalendar){
+    if(externalCalendar){
       const status=document.createElement("div");
       status.className=`host-calendar-status ${externalCalendar.enabled===false ? "disabled" : (externalCalendar.status||"")}`;
 
@@ -674,6 +669,11 @@ function renderProperties(){
       }
 
       syncPanel.append(status,actions);
+    }else if(!property.listing){
+      const note=document.createElement("p");
+      note.className="host-inline-muted";
+      note.textContent=tr("calendarHelp");
+      syncPanel.append(note);
     }else{
       const help=document.createElement("p");
       help.className="host-inline-muted host-listing-help";

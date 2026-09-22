@@ -5,6 +5,7 @@
 - Minimum stay is no longer requested while creating a property; new properties default to one day and the value is editable from each property card.
 - Cleaning fee moved from the external Airbnb listing to the PARROT property, so it can be set, changed or cleared even when no external listing exists. Existing listing fees are migrated to their property.
 - External calendars can now be disabled and re-enabled without deleting the connection. Disabled calendars keep their snapshot but do not block search or run automatic sync; re-enabling refreshes immediately.
+- Calendar controls remain visible after the external Airbnb listing is removed, so an existing calendar can still be disabled, re-enabled or disconnected.
 - Host property cards are more strongly separated visually and highlight each property title.
 - Added backend smoke coverage for property settings plus calendar disable/re-enable search semantics.
 
