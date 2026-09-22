@@ -80,30 +80,42 @@ const copy = {
   }
 };
 
-const emptyState = () => ({profileId:"", parrotId:"", editToken:"", properties:[]});
-let state = loadState();
+const emptyState = () => ({authenticated:false, accountEmail:"", profileId:"", parrotId:"", properties:[]});
+let state = emptyState();
+let legacyCredentials = loadLegacyCredentials();
 let lang = loadLanguage();
 const expandedPropertyIds = new Set();
 
 const statusNode = document.getElementById("host-status");
-const profileForm = document.getElementById("profile-form");
+const authForms = document.getElementById("auth-forms");
+const loginForm = document.getElementById("login-form");
+const registerForm = document.getElementById("register-form");
 const propertyPanel = document.getElementById("property-panel");
 const propertyForm = document.getElementById("property-form");
 const hostSession = document.getElementById("host-session");
+const hostAccountEmail = document.getElementById("host-account-email");
 const hostParrotId = document.getElementById("host-parrot-id");
 const propertiesNode = document.getElementById("host-properties");
 const resetButton = document.getElementById("reset-host");
+const legacyClaimPanel = document.getElementById("legacy-claim");
+const legacyClaimButton = document.getElementById("claim-legacy");
 const langButtons = document.querySelectorAll("[data-host-lang]");
 
-function loadState(){
+function loadLegacyCredentials(){
   try {
     const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-    return parsed && typeof parsed === "object"
-      ? {...emptyState(), profileId:parsed.profileId || "", parrotId:parsed.parrotId || "", editToken:parsed.editToken || "", properties:[]}
-      : emptyState();
+    if (!parsed || typeof parsed !== "object") return null;
+    const profileId = String(parsed.profileId || "");
+    const editToken = String(parsed.editToken || "");
+    return profileId && editToken ? {profileId, editToken} : null;
   } catch {
-    return emptyState();
+    return null;
   }
+}
+
+function clearLegacyCredentials(){
+  localStorage.removeItem(STORAGE_KEY);
+  legacyCredentials = null;
 }
 
 function loadLanguage(){
@@ -138,11 +150,8 @@ function applyLanguage(next){
 }
 
 function saveState(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({
-    profileId: state.profileId,
-    parrotId: state.parrotId,
-    editToken: state.editToken
-  }));
+  // Auth credentials are server-side sessions in HttpOnly cookies.
+  // Keep this no-op because property mutations still call saveState after local rerenders.
 }
 
 function message(text, kind = ""){
@@ -154,16 +163,23 @@ async function api(path, options = {}){
   const headers = new Headers(options.headers || {});
   headers.set("Accept", "application/json");
   if (options.body) headers.set("Content-Type", "application/json");
-  if (state.editToken) headers.set("X-Parrot-Token", state.editToken);
 
   // Browser host API is namespaced under /api/host; the Worker strips /api/host
   // and forwards the same request to the backend under /api.
-  const response = await fetch(`/api/host${path}`, {...options, headers});
+  const response = await fetch(`/api/host${path}`, {
+    ...options,
+    headers,
+    credentials:"same-origin"
+  });
   if (response.status === 204) return null;
 
   let data = null;
   try { data = await response.json(); } catch {}
-  if (!response.ok) throw new Error(data?.error || `HTTP ${response.status}`);
+  if (!response.ok) {
+    const error = new Error(data?.error || `HTTP ${response.status}`);
+    error.status = response.status;
+    throw error;
+  }
   return data;
 }
 
@@ -185,10 +201,38 @@ function setFormError(form, text = ""){
   }
 }
 
+function setAuthenticated(user){
+  state = {
+    ...emptyState(),
+    authenticated:true,
+    accountEmail:String(user?.email || ""),
+    profileId:String(user?.profile?.id || ""),
+    parrotId:String(user?.profile?.parrotId || "")
+  };
+}
+
+function renderAuthState(){
+  const ready = Boolean(state.authenticated && state.profileId);
+  authForms.hidden = ready;
+  hostSession.hidden = !ready;
+  propertyPanel.hidden = !ready;
+
+  if (ready) {
+    hostAccountEmail.textContent = state.accountEmail;
+    hostParrotId.textContent = state.parrotId || state.profileId;
+  }
+
+  legacyClaimPanel.hidden = !(
+    ready &&
+    legacyCredentials &&
+    legacyCredentials.profileId !== state.profileId
+  );
+}
+
 async function syncDashboard(){
   message(tr("loading"));
   try {
-    const dashboard = await api(`/profiles/${state.profileId}/dashboard`);
+    const dashboard = await api("/dashboard");
     state.parrotId = dashboard.profile.parrotId || state.parrotId;
     state.properties = (dashboard.properties || []).map(property => ({
       ...property,
@@ -196,11 +240,15 @@ async function syncDashboard(){
       availability: Array.isArray(property.availability) ? property.availability : [],
       calendars: Array.isArray(property.calendars) ? property.calendars : []
     }));
-    saveState();
     hostParrotId.textContent = state.parrotId || state.profileId;
     renderProperties();
     message("");
   } catch (error) {
+    if (error.status === 401) {
+      state = emptyState();
+      state.properties = [];
+      renderAuthState();
+    }
     message(error.message, "error");
     state.properties = [];
     renderProperties();
@@ -208,49 +256,96 @@ async function syncDashboard(){
 }
 
 async function boot(){
-  const ready = Boolean(state.profileId && state.editToken);
-  profileForm.hidden = ready;
-  hostSession.hidden = !ready;
-  propertyPanel.hidden = !ready;
-
-  if (ready) {
-    hostParrotId.textContent = state.parrotId || state.profileId;
+  try {
+    const user = await api("/auth/me");
+    setAuthenticated(user);
+    renderAuthState();
     await syncDashboard();
-  } else {
+  } catch (error) {
+    state = emptyState();
+    renderAuthState();
     renderProperties();
+    if (error.status !== 401) message(error.message, "error");
+    else message("");
   }
 }
 
-profileForm.addEventListener("submit", async event => {
+loginForm.addEventListener("submit", async event => {
   event.preventDefault();
-
-  // Capture values before disabling controls. Disabled controls are omitted by FormData.
-  const form = new FormData(profileForm);
-  setBusy(profileForm, true);
-  message(tr("creatingProfile"));
+  const form = new FormData(loginForm);
+  setBusy(loginForm, true);
+  setFormError(loginForm);
+  message(tr("loggingIn"));
 
   try {
-    const created = await api("/profiles", {
+    const user = await api("/auth/login", {
+      method:"POST",
+      body:JSON.stringify({
+        email:String(form.get("email") || "").trim(),
+        password:String(form.get("password") || "")
+      })
+    });
+    setAuthenticated(user);
+    renderAuthState();
+    await syncDashboard();
+    loginForm.elements.password.value = "";
+    message(tr("loggedIn"), "success");
+  } catch (error) {
+    setFormError(loginForm, error.message);
+    message(error.message, "error");
+  } finally {
+    setBusy(loginForm, false);
+  }
+});
+
+registerForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  const form = new FormData(registerForm);
+  setBusy(registerForm, true);
+  setFormError(registerForm);
+  message(tr("registering"));
+
+  try {
+    const user = await api("/auth/register", {
       method:"POST",
       body:JSON.stringify({
         displayName:String(form.get("displayName") || "").trim(),
-        contact:String(form.get("contact") || "").trim()
+        email:String(form.get("email") || "").trim(),
+        password:String(form.get("password") || "")
       })
     });
+    setAuthenticated(user);
+    renderAuthState();
+    await syncDashboard();
+    registerForm.elements.password.value = "";
+    message(tr("registered"), "success");
+  } catch (error) {
+    setFormError(registerForm, error.message);
+    message(error.message, "error");
+  } finally {
+    setBusy(registerForm, false);
+  }
+});
 
-    state = {
-      ...emptyState(),
-      profileId:created.id,
-      parrotId:created.profile.parrotId,
-      editToken:created.editToken
-    };
-    saveState();
-    message(tr("profileCreated"), "success");
-    boot();
+legacyClaimButton.addEventListener("click", async () => {
+  if (!legacyCredentials) return;
+  legacyClaimButton.disabled = true;
+  message(tr("legacyClaiming"));
+
+  try {
+    const user = await api("/auth/claim-legacy", {
+      method:"POST",
+      body:JSON.stringify(legacyCredentials)
+    });
+    clearLegacyCredentials();
+    setAuthenticated(user);
+    renderAuthState();
+    await syncDashboard();
+    message(tr("legacyClaimed"), "success");
   } catch (error) {
     message(error.message, "error");
   } finally {
-    setBusy(profileForm, false);
+    legacyClaimButton.disabled = false;
   }
 });
 
@@ -262,7 +357,7 @@ propertyForm.addEventListener("submit", async event => {
   message(tr("addingProperty"));
 
   try {
-    const created = await api(`/profiles/${state.profileId}/properties`, {
+    const created = await api("/properties", {
       method:"POST",
       body:JSON.stringify({
         title:String(form.get("title") || "").trim(),
@@ -287,7 +382,6 @@ propertyForm.addEventListener("submit", async event => {
       calendars:[]
     });
     expandedPropertyIds.add(created.id);
-    saveState();
     propertyForm.elements.title.value = "";
     message(tr("propertyAdded"), "success");
     renderProperties();
@@ -298,12 +392,15 @@ propertyForm.addEventListener("submit", async event => {
   }
 });
 
-resetButton.addEventListener("click", () => {
-  if (!confirm(tr("resetConfirm"))) return;
-  localStorage.removeItem(STORAGE_KEY);
+resetButton.addEventListener("click", async () => {
+  try {
+    await api("/auth/logout", {method:"POST"});
+  } catch {}
   state = emptyState();
-  message(tr("sessionRemoved"));
-  boot();
+  expandedPropertyIds.clear();
+  renderAuthState();
+  renderProperties();
+  message(tr("loggedOut"), "success");
 });
 
 function eurosToCents(value){
