@@ -168,7 +168,7 @@ Owner authentication is account/session based:
 - Host authorization is ownership-based, not role-based: an authenticated account can mutate only resources belonging to its profile. "Host" is not an RBAC role.
 - Sessions are opaque 256-bit random tokens. The browser receives the raw token only as a `HttpOnly; SameSite=Lax` cookie; production also sets `Secure`. The database stores only SHA-256 session-token hashes.
 - Sessions expire after 30 days, multiple active sessions are allowed, login creates a fresh session, and logout deletes the server-side session.
-- Login errors do not distinguish unknown email from wrong password. A simple per-instance email+client rate limiter limits repeated failures; a distributed limiter can replace it if traffic justifies it.
+- Login errors do not distinguish unknown email from wrong password. A simple per-instance limiter caps repeated failures per normalized email; a distributed limiter can replace it if traffic or horizontal scaling justifies it.
 - Password recovery is not exposed yet because the backend has no mail provider. V11 reserves a hashed, expiring `password_reset_tokens` model so request/confirm endpoints can be added together with real email delivery rather than a fake reset flow.
 - Legacy `access_token_hash` is migration-only. Normal owner routes ignore `X-Parrot-Token`; successful legacy claim nulls the old hash.
 
