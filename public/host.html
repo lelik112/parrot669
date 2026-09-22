@@ -90,6 +90,16 @@
         <p class="host-inline-muted" data-host-i18n="passwordHelp">At least 10 characters.</p>
         <button class="button" type="submit" data-host-i18n="registerButton">Create account →</button>
       </form>
+
+      <div class="host-verification-panel" id="verification-panel" hidden>
+        <p data-host-i18n="verificationHelp">We sent a confirmation link to:</p>
+        <strong id="verification-email"></strong>
+        <p class="host-inline-muted" data-host-i18n="verificationExpiry">The link is valid for 24 hours.</p>
+        <div class="host-verification-actions">
+          <button class="button button-small" id="resend-verification" type="button" data-host-i18n="resendVerification">Send again</button>
+          <button class="host-auth-link" id="verification-login" type="button" data-host-i18n="backToLogin">Back to login</button>
+        </div>
+      </div>
     </dialog>
 
     <section class="host-panel" id="property-panel" hidden>
