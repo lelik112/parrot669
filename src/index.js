@@ -180,6 +180,10 @@ export default {
       console.error("NOTIFY_TO is not configured");
       return json({ ok: false, error: "Contact destination is not configured" }, 500);
     }
+    if (!env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      return json({ ok: false, error: "Email delivery is not configured" }, 500);
+    }
 
     const subject = `[PARROT 669] New request: ${service}`;
     const text = [
@@ -206,18 +210,31 @@ export default {
 
     try {
       const email = {
-        to: env.NOTIFY_TO,
-        from: { email: "hello@parrot669.com", name: "PARROT 669 website" },
+        from: env.RESEND_FROM || "PARROT 669 website <hello@parrot669.com>",
+        to: [env.NOTIFY_TO],
         subject,
         text,
         html,
       };
-      if (replyTo) email.replyTo = replyTo;
+      if (replyTo) email.reply_to = replyTo;
 
-      await env.EMAIL.send(email);
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(email),
+      });
+
+      if (!response.ok) {
+        console.error("Resend email failed", response.status);
+        return json({ ok: false, error: "Email delivery failed" }, 502);
+      }
+
       return json({ ok: true });
     } catch (error) {
-      console.error("Email send failed", error?.code, error?.message);
+      console.error("Email send failed", error?.message);
       return json({ ok: false, error: "Email delivery failed" }, 500);
     }
   },
