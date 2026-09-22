@@ -1,5 +1,13 @@
 # PARROT 669 changelog
 
+## 2026-09-22 — Remove legacy auth and simplify host account UI
+
+- Removed the pre-account edit-token migration path, legacy claim endpoint and compatibility owner routes.
+- V12 deletes any remaining unowned legacy profiles, makes `profiles.account_id` mandatory and drops `access_token_hash`.
+- Host authentication moved out of the large numbered content panel into compact top-bar Log in / Create account actions.
+- After authentication, only the account email and Log out action remain in the top bar; PARROT ID is no longer shown in the host console.
+- Cloudflare Worker now proxies only the `parrot_session` cookie for owner API calls.
+
 ## 2026-09-22 — Editable property characteristics and stay settings
 
 - Bedrooms and sleeping places can now be edited after property creation alongside accommodation type.
