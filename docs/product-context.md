@@ -108,7 +108,7 @@ Current important endpoints:
 - `DELETE /api/listings/:listingId`
 - `GET|POST /api/properties/:propertyId/availability`
 - `PUT|DELETE /api/availability/:availabilityId`
-- `PUT /api/listings/:listingId` updates optional cleaning fee
+- `PUT /api/listings/:listingId` remains for legacy listing-level fee compatibility; new host UI and search use the property cleaning fee from `PUT /api/properties/:propertyId`
 - `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&accommodationType=any|entire_place|private_room&pricedOnly=true|false`
 - `POST /api/properties/:propertyId/calendars` connects/upserts an Airbnb iCal source and immediately syncs it
 - `POST /api/calendars/:calendarId/sync` manually refreshes an enabled source
