@@ -1401,6 +1401,11 @@ footer{
 .host-auth-dialog-head h2{margin:0;font-family:"Space Grotesk",sans-serif;font-size:24px}
 .host-dialog-close{width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.06);color:#cdd5d1;font-size:25px;line-height:1;cursor:pointer}
 .host-dialog-close:hover{background:rgba(255,255,255,.1);color:var(--lime)}
+.host-verification-panel{display:grid;gap:12px}
+.host-verification-panel p{margin:0;line-height:1.55}
+.host-verification-panel>strong{font-family:"Space Grotesk",sans-serif;color:var(--lime);overflow-wrap:anywhere}
+.host-verification-actions{display:flex;align-items:center;gap:14px;margin-top:6px}
+@media(max-width:480px){.host-verification-actions{align-items:flex-start;flex-direction:column}}
 .host-property-form{grid-template-columns:1.4fr 1fr .55fr auto}
 .host-form label{display:grid;gap:8px;color:#84938f;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
 .host-form input,
