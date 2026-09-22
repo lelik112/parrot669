@@ -79,6 +79,8 @@ const emptyState = () => ({authenticated:false, accountEmail:"", properties:[]})
 let state = emptyState();
 let lang = loadLanguage();
 let authMode = "login";
+let sessionLoading = true;
+let authBusy = false;
 const expandedPropertyIds = new Set();
 
 const statusNode = document.getElementById("host-status");
@@ -97,6 +99,7 @@ const hostAccountEmail = document.getElementById("host-account-email");
 const propertiesNode = document.getElementById("host-properties");
 const resetButton = document.getElementById("reset-host");
 const langButtons = document.querySelectorAll("[data-host-lang]");
+const authModeButtons = document.querySelectorAll("[data-auth-mode]");
 
 function loadLanguage(){
   const saved = localStorage.getItem(LANG_KEY);
@@ -192,10 +195,11 @@ function setAuthenticated(user){
 
 function renderAuthState(){
   const ready = Boolean(state.authenticated);
-  hostAuthLinks.hidden = ready;
+  hostAuthLinks.hidden = sessionLoading || ready;
   hostAccountSession.hidden = !ready;
   propertyPanel.hidden = !ready;
   hostAccountEmail.textContent = ready ? state.accountEmail : "";
+  if (ready && authDialog.open) closeAuth();
 }
 
 function updateAuthDialog(){
@@ -203,20 +207,30 @@ function updateAuthDialog(){
   authDialogTitle.textContent = tr(login ? "loginTitle" : "registerTitle");
   loginForm.hidden = !login;
   registerForm.hidden = login;
+  authModeButtons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.authMode === authMode)));
 }
 
 function openAuth(mode){
+  if (sessionLoading || state.authenticated || authBusy) return;
   authMode = mode === "register" ? "register" : "login";
   setFormError(loginForm);
   setFormError(registerForm);
   updateAuthDialog();
-  if (typeof authDialog.showModal === "function") authDialog.showModal();
+  if (typeof authDialog.showModal === "function" && !authDialog.open) authDialog.showModal();
   else authDialog.setAttribute("open", "");
+  (authMode === "login" ? loginForm : registerForm).querySelector("input").focus();
 }
 
 function closeAuth(){
   if (typeof authDialog.close === "function") authDialog.close();
   else authDialog.removeAttribute("open");
+}
+
+function setAuthBusy(form, busy){
+  authBusy = busy;
+  setBusy(form, busy);
+  authModeButtons.forEach(button => button.disabled = busy);
+  authDialog.setAttribute("aria-busy", String(busy));
 }
 
 async function syncDashboard(){
@@ -244,6 +258,15 @@ async function syncDashboard(){
 }
 
 async function boot(){
+  try {
+    await restoreSession();
+  } finally {
+    sessionLoading = false;
+    renderAuthState();
+  }
+}
+
+async function restoreSession(){
   const params = new URLSearchParams(window.location.search);
   const verificationToken = params.get("verifyEmail");
 
@@ -291,14 +314,22 @@ async function boot(){
 openLoginButton.addEventListener("click", () => openAuth("login"));
 openRegisterButton.addEventListener("click", () => openAuth("register"));
 closeAuthDialogButton.addEventListener("click", closeAuth);
+authModeButtons.forEach(button => button.addEventListener("click", () => openAuth(button.dataset.authMode)));
+authDialog.addEventListener("close", () => {
+  loginForm.elements.password.value = "";
+  registerForm.elements.password.value = "";
+});
 authDialog.addEventListener("click", event => {
-  if (event.target === authDialog) closeAuth();
+  if (event.target !== authDialog) return;
+  const bounds = authDialog.getBoundingClientRect();
+  if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeAuth();
 });
 
 loginForm.addEventListener("submit", async event => {
   event.preventDefault();
+  if (sessionLoading || state.authenticated || authBusy) return;
   const form = new FormData(loginForm);
-  setBusy(loginForm, true);
+  setAuthBusy(loginForm, true);
   setFormError(loginForm);
   message(tr("loggingIn"));
 
@@ -320,14 +351,15 @@ loginForm.addEventListener("submit", async event => {
     setFormError(loginForm, error.message);
     message(error.message, "error");
   } finally {
-    setBusy(loginForm, false);
+    setAuthBusy(loginForm, false);
   }
 });
 
 registerForm.addEventListener("submit", async event => {
   event.preventDefault();
+  if (sessionLoading || state.authenticated || authBusy) return;
   const form = new FormData(registerForm);
-  setBusy(registerForm, true);
+  setAuthBusy(registerForm, true);
   setFormError(registerForm);
   message(tr("registering"));
 
@@ -350,7 +382,7 @@ registerForm.addEventListener("submit", async event => {
     setFormError(registerForm, error.message);
     message(error.message, "error");
   } finally {
-    setBusy(registerForm, false);
+    setAuthBusy(registerForm, false);
   }
 });
 
@@ -398,14 +430,23 @@ propertyForm.addEventListener("submit", async event => {
 });
 
 resetButton.addEventListener("click", async () => {
+  if (resetButton.disabled) return;
+  resetButton.disabled = true;
   try {
     await api("/auth/logout", {method:"POST"});
-  } catch {}
+  } catch (error) {
+    if (error.status !== 401) {
+      message(error.message, "error");
+      resetButton.disabled = false;
+      return;
+    }
+  }
   state = emptyState();
   expandedPropertyIds.clear();
   renderAuthState();
   renderProperties();
   message(tr("loggedOut"), "success");
+  resetButton.disabled = false;
 });
 
 function eurosToCents(value){
