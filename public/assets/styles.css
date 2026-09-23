@@ -1549,9 +1549,8 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-form input[readonly]{color:#8d9b97;cursor:not-allowed}
 @media(max-width:640px){
   .housing-tabs{justify-content:stretch;padding:12px 20px 0}
-  .housing-tabs a{flex:1;text-align:center}
-  .housing-tabs a.housing-host-link{order:-1;border-color:var(--lime);color:var(--lime);min-height:44px;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
-  .housing-tabs a.housing-host-link.active{background:var(--lime);color:#071214}
+  .housing-tabs a{flex:1;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+  .housing-tabs a.active{background:var(--lime);border-color:var(--lime);color:#071214}
   .host-listing-actions{align-items:flex-start;flex-direction:column}
 }
 
@@ -1569,7 +1568,7 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
   box-shadow:0 0 28px rgba(216,255,99,.04);
 }
 .housing-entry:hover{background:rgba(216,255,99,.14);border-color:var(--lime)}
-.mobile-product-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mobile-product-actions{display:grid;grid-template-columns:1fr;gap:10px}
 .search-filters{
   display:flex;align-items:center;gap:12px;margin:16px 0 4px;padding:12px 14px;
   border:1px solid rgba(255,255,255,.07);border-radius:14px;background:#071214;

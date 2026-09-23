@@ -182,13 +182,22 @@ test('collapse stays alone in the header; destructive action is only in the expa
   assert.equal(app.nodes.get('host-properties').children[0].querySelector('.host-property-head-actions').children.length, 1);
 });
 
-test('mobile housing navigation is first and highlighted; hosting tab keeps its active state', () => {
+test('mobile menu has one Housing entry opening search; search stays left of hosts', () => {
   const home = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
   const search = fs.readFileSync(path.join(root, 'public/search.html'), 'utf8');
   assert.match(home, /<nav aria-label="Mobile navigation">\s*<a class="mobile-housing-primary" href="\/search.html"/);
   assert.match(css, /\.mobile-menu nav a\.mobile-housing-primary\{[^}]*background:var\(--lime\)/);
-  assert.match(css, /\.housing-tabs a\.housing-host-link\{order:-1/);
+  const mobileMenu = home.split('id="mobile-menu"')[1].split('<main')[0];
+  assert.equal((mobileMenu.match(/data-i18n="navHousing"/g) || []).length, 1);
+  assert.equal((mobileMenu.match(/href="\/search.html"/g) || []).length, 1);
+  for (const page of [html, search]) {
+    const tabs = page.match(/<nav class="housing-tabs"[^>]*>([\s\S]*?)<\/nav>/)[1];
+    assert.deepEqual([...tabs.matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['/search.html', '/host.html']);
+  }
+  assert.doesNotMatch(css, /\.housing-tabs[^{}]*\{[^}]*\border\s*:/);
+  assert.match(css, /\.housing-tabs a\.active\{background:var\(--lime\)/);
   assert.match(html, /class="active housing-host-link" aria-current="page"/);
+  assert.match(search, /href="\/search.html" class="active" aria-current="page"/);
   assert.match(search, /class="housing-host-link"/);
   assert.match(css, /\.host-status\.error\{\s*position:fixed/);
 });
