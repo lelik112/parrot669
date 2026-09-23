@@ -1,0 +1,125 @@
+{
+  "checkedAt": "2026-09-23T12:14:43.901Z",
+  "url": "https://parrot669.com/search",
+  "scope": "Desktop browser; no mobile touch or screen-reader speech test",
+  "geo001": {
+    "baselineCity": "Barcelona",
+    "baselineProperties": [
+      "The therd",
+      "One more",
+      "The second"
+    ],
+    "changedCity": "Sant Cugat del Vallès",
+    "cardsCleared": true,
+    "prompt": "Параметры изменены. Нажмите «Найти свободное», чтобы увидеть подходящие варианты.",
+    "resubmittedProperties": [
+      "Four"
+    ],
+    "dateChange": {
+      "checkout": "2026-10-09",
+      "cards": 0,
+      "prompt": true
+    },
+    "afterNavigation": {
+      "url": "https://parrot669.com/search",
+      "city": "Sant Cugat del Vallès",
+      "checkout": "2026-10-09",
+      "cards": 0,
+      "prompt": true
+    }
+  },
+  "geo002": [
+    {
+      "language": "RU",
+      "accessibleComboboxes": [
+        "  - combobox \"Страна\":",
+        "  - combobox \"Город\":"
+      ],
+      "fields": [
+        {
+          "ariaLabel": null,
+          "labelTexts": [
+            "Страна\n          Выберите странуБеларусьИспания"
+          ],
+          "value": "ES"
+        },
+        {
+          "ariaLabel": null,
+          "labelTexts": [
+            "Город\n          Выберите городBarcelonaSant Cugat del Vallès"
+          ],
+          "value": "Sant Cugat del Vallès"
+        }
+      ]
+    },
+    {
+      "language": "ES",
+      "accessibleComboboxes": [
+        "  - combobox \"País\":",
+        "  - combobox \"Ciudad\":"
+      ],
+      "fields": [
+        {
+          "ariaLabel": null,
+          "labelTexts": [
+            "País\n          Elige un paísBielorrusiaEspaña"
+          ],
+          "value": "ES"
+        },
+        {
+          "ariaLabel": null,
+          "labelTexts": [
+            "Ciudad\n          Elige una ciudadBarcelonaSant Cugat del Vallès"
+          ],
+          "value": "Sant Cugat del Vallès"
+        }
+      ]
+    },
+    {
+      "language": "CA",
+      "accessibleComboboxes": [
+        "  - combobox \"País\":",
+        "  - combobox \"Ciutat\":"
+      ],
+      "fields": [
+        {
+          "ariaLabel": null,
+          "labelTexts": [
+            "País\n          Tria un paísBelarúsEspanya"
+          ],
+          "value": "ES"
+        },
+        {
+          "ariaLabel": null,
+          "labelTexts": [
+            "Ciutat\n          Tria una ciutatBarcelonaSant Cugat del Vallès"
+          ],
+          "value": "Sant Cugat del Vallès"
+        }
+      ]
+    },
+    {
+      "language": "EN",
+      "accessibleComboboxes": [
+        "  - combobox \"Country\":",
+        "  - combobox \"City\":"
+      ],
+      "fields": [
+        {
+          "ariaLabel": null,
+          "labelTexts": [
+            "Country\n          Choose countryBelarusSpain"
+          ],
+          "value": "ES"
+        },
+        {
+          "ariaLabel": null,
+          "labelTexts": [
+            "City\n          Choose cityBarcelonaSant Cugat del Vallès"
+          ],
+          "value": "Sant Cugat del Vallès"
+        }
+      ]
+    }
+  ]
+}
