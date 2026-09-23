@@ -1,5 +1,15 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Private guest/host messaging backend
+
+- Added isolated backend `messaging` routes, service and repository plus Flyway V21.
+- Reuse verified account sessions for property conversations, text messages with optional stay dates, paginated inbox/history, unread counts and explicit read acknowledgements.
+- Host opts into new conversations (off by default); existing conversations continue after opt-out. No external listing is required. Messaging never changes physical availability or creates bookings.
+- Participant-only access keeps emails, raw contacts and exact addresses private. Deleting a property retains read-only history.
+- Database locks and idempotency keys protect retries, message ordering and unread state; per-profile database-backed limits constrain spam.
+- PostgreSQL integration tests cover authorization, privacy, dates, concurrency, pagination, retries, limits and deletion. Backend API contract is in `parrot669-backend/docs/messaging.md`.
+- Backend only: frontend screens, Worker proxy, block/report UI and message email notifications remain to be connected. Existing frontend/geolocation flows are unchanged.
+
 ## 2026-09-23 — Host address autocomplete and persistence
 
 - Replace the Barcelona city selector with a labeled address field in create/edit forms.

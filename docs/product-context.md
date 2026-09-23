@@ -107,6 +107,7 @@ Important migrations:
 - V12 removes pre-account edit-token authentication, deletes any remaining unowned legacy profiles, makes `profiles.account_id` mandatory and drops `access_token_hash`
 - V13 enforces non-overlapping property availability in PostgreSQL with a GiST exclusion constraint over `[date_from, date_to)`
 - V17 adds normalized property `country_code` / `country`, backfills existing properties to `ES / Spain`, and indexes `(country_code, city)` for location discovery
+- V21 adds opt-in messaging settings, private property conversations and messages; no changes to property/address/availability tables
 
 Current important endpoints:
 - `POST /api/auth/register`
@@ -186,10 +187,10 @@ Owner authentication is account/session based:
 - Sessions are opaque 256-bit random tokens. The browser receives the raw token only as a `HttpOnly; SameSite=Lax` cookie; production also sets `Secure`. The database stores only SHA-256 session-token hashes.
 - Sessions expire after 30 days, multiple active sessions are allowed, login creates a fresh session, and logout deletes the server-side session.
 - Login errors do not distinguish unknown email from wrong password. A simple per-instance limiter caps repeated failures per normalized email; a distributed limiter can replace it if traffic or horizontal scaling justifies it.
-- Password recovery is not exposed yet because the backend has no mail provider. V11 reserves a hashed, expiring `password_reset_tokens` model so request/confirm endpoints can be added together with real email delivery rather than a fake reset flow.
+- Email verification uses the backend Resend provider. Password recovery is not exposed yet; V11 reserves a hashed, expiring `password_reset_tokens` model for a later request/confirm flow.
 - The pre-account `editToken`/`access_token_hash` mechanism and its compatibility routes have been removed.
 
-Before exposing owner contact or messaging broadly, add profile/privacy controls.
+Messaging backend privacy controls are implemented; UI and broader contact publishing are still pending.
 
 Desired future owner contact options:
 - PARROT message/contact relay;
@@ -198,6 +199,21 @@ Desired future owner contact options:
 - neither.
 
 Search may show host nickname now, but should not expose raw contact by default.
+
+### Internal messaging — backend implemented, UI pending
+
+- Backend package `com.parrot669.messaging` contains its own routes, service, repository and models. `Main` composes these routes with the existing API; the large legacy route file and geocoding are unchanged.
+- Reuses the verified account/session cookie. An account can initiate enquiries and own properties without separate roles.
+- A host explicitly enables `acceptingNewConversations` for their profile; default is false. It applies to all their properties. Disabling it prevents new threads while existing participants can continue replying.
+- One private conversation per property and enquiring profile, independent of external listings. The server resolves the owner; only the two participants can access the conversation. Other users get 404.
+- Messages contain plain text and optional `[check-in, checkout)` dates. They never book, block availability, set prices or expose account email/raw contact/exact address.
+- Client-generated `clientMessageId` makes retries idempotent. Transactional per-thread sequences and explicit read acknowledgements prevent concurrent sends from being lost or marked read accidentally.
+- Inbox/history pagination and unread counts are available. Limits: 4000 characters, 16 KiB JSON, 30 new messages/minute and 10 new conversations/hour per profile, enforced in PostgreSQL across instances.
+- Deleting a property preserves its private conversation history and saved title but disables new replies. Account/profile deletion cascades conversations.
+- API namespace: `/api/messaging`. Public `GET /contact-options/:propertyId`; authenticated `GET|PUT /settings`, `GET|POST /conversations`, `GET /conversations/:id`, `GET|POST /conversations/:id/messages`, `PUT /conversations/:id/read`, `GET /unread`. Paths here are relative to the namespace.
+- API/lifecycle details and examples: [backend messaging contract](https://github.com/lelik112/parrot669-backend/blob/main/docs/messaging.md).
+- **Backend only:** no message button, inbox screen or Worker proxy is connected in this release. Message email notifications are deferred until there is a working inbox destination; existing verification emails are unchanged. The future Worker routes must preserve session-cookie forwarding and Origin checks. Render messages as text, never HTML.
+- Add block/report controls with the UI before broad public exposure. Public contact opt-in, attachments and realtime sockets are separate future decisions.
 
 ## Verification direction
 
@@ -215,6 +231,6 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 - Address autocomplete and storage are connected; map UI and any guest address-visibility policy remain separate future work.
 - Improve visual design of housing/search/host UI.
-- Connect a backend email provider and add real password-reset request/confirm endpoints using the reserved reset-token model.
-- Add owner messaging/privacy preferences.
+- Add password-reset request/confirm endpoints using the reserved reset-token model and existing backend email provider.
+- Connect the messaging UI/Worker proxy and host opt-in control, then message email notifications and block/report controls. Backend messaging/privacy settings are implemented.
 - Upgrade Flyway or align Postgres version (Railway currently warns PostgreSQL 18 is newer than tested Flyway support).
