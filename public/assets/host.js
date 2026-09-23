@@ -80,6 +80,10 @@ const copy = {
 };
 
 const emptyState = () => ({authenticated:false, accountEmail:"", username:"", properties:[]});
+Object.assign(copy.en, {overlapError:"These dates overlap an existing availability period. Change the dates or edit that period.", dismissError:"Dismiss error"});
+Object.assign(copy.es, {overlapError:"Estas fechas se solapan con un período disponible existente. Cambia las fechas o edita ese período.", dismissError:"Cerrar error"});
+Object.assign(copy.ca, {overlapError:"Aquestes dates se solapen amb un període disponible existent. Canvia les dates o edita aquell període.", dismissError:"Tancar error"});
+Object.assign(copy.ru, {overlapError:"Эти даты пересекаются с уже добавленным свободным периодом. Измените даты или отредактируйте тот период.", dismissError:"Закрыть ошибку"});
 let state = emptyState();
 let lang = loadLanguage();
 let authMode = "login";
@@ -145,6 +149,17 @@ function saveState(){
 function message(text, kind = ""){
   statusNode.textContent = text || "";
   statusNode.className = `host-status ${kind}`.trim();
+  statusNode.setAttribute("role", kind === "error" ? "alert" : "status");
+  statusNode.setAttribute("aria-live", kind === "error" ? "assertive" : "polite");
+  if (kind === "error" && text) {
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "host-status-close";
+    close.textContent = "×";
+    close.setAttribute("aria-label", tr("dismissError"));
+    close.addEventListener("click", () => message(""));
+    statusNode.append(close);
+  }
 }
 
 async function api(path, options = {}){
@@ -164,7 +179,8 @@ async function api(path, options = {}){
   let data = null;
   try { data = await response.json(); } catch {}
   if (!response.ok) {
-    const error = new Error(data?.error || `HTTP ${response.status}`);
+    const detail = data?.error || data?.message || `HTTP ${response.status}`;
+    const error = new Error(detail === "availability period overlaps an existing period" ? tr("overlapError") : detail);
     error.status = response.status;
     throw error;
   }
@@ -397,6 +413,7 @@ propertyForm.addEventListener("submit", async event => {
   event.preventDefault();
 
   const form = new FormData(propertyForm);
+  setFormError(propertyForm);
   setBusy(propertyForm, true);
   message(tr("addingProperty"));
 
@@ -430,6 +447,7 @@ propertyForm.addEventListener("submit", async event => {
     message(tr("propertyAdded"), "success");
     renderProperties();
   } catch (error) {
+    setFormError(propertyForm, error.message);
     message(error.message, "error");
   } finally {
     setBusy(propertyForm, false);
@@ -468,6 +486,7 @@ function centsToEuros(value){
 }
 
 async function updatePropertySettings(property, form){
+  setFormError(form);
   const data=new FormData(form);
   const payload={
     accommodationType:data.has("accommodationType") ? String(data.get("accommodationType")||"entire_place") : property.accommodationType,
@@ -491,11 +510,12 @@ async function updatePropertySettings(property, form){
     saveState();
     message(tr("propertySettingsSaved"),"success");
     renderProperties();
-  }catch(error){message(error.message,"error")}
+  }catch(error){setFormError(form,error.message);message(error.message,"error")}
   finally{setBusy(form,false)}
 }
 
 async function addListing(property, form){
+  setFormError(form);
   const data = new FormData(form);
   setBusy(form, true);
   message(tr("savingListing"));
@@ -513,6 +533,7 @@ async function addListing(property, form){
     message(tr("listingSaved"), "success");
     renderProperties();
   } catch (error) {
+    setFormError(form, error.message);
     message(error.message, "error");
   } finally {
     setBusy(form, false);
@@ -528,7 +549,10 @@ function plusDays(iso, days){
 }
 
 async function addAvailability(property, form){
+  if (form.getAttribute("aria-busy") === "true") return;
   const data = new FormData(form);
+  setFormError(form);
+  form.setAttribute("aria-busy", "true");
   setBusy(form, true);
   message(tr("addingAvailability"));
 
@@ -540,8 +564,10 @@ async function addAvailability(property, form){
     message(tr("availabilityAdded"), "success");
     await refreshAvailability(property, true);
   } catch (error) {
+    setFormError(form, error.message);
     message(error.message, "error");
   } finally {
+    form.removeAttribute("aria-busy");
     setBusy(form, false);
   }
 }
@@ -557,17 +583,26 @@ async function refreshAvailability(property, rerender = false){
   }
 }
 
-async function updateAvailability(property, period, from, to, nightlyPrice){
+async function updateAvailability(property, period, form){
+  if (form.getAttribute("aria-busy") === "true") return;
+  const data = new FormData(form);
+  setFormError(form);
+  form.setAttribute("aria-busy", "true");
+  setBusy(form, true);
   message(tr("updatingAvailability"));
   try {
     await api(`/availability/${period.id}`, {
       method:"PUT",
-      body:JSON.stringify({from, to, nightlyPriceCents:eurosToCents(nightlyPrice)})
+      body:JSON.stringify({from:data.get("from"), to:data.get("to"), nightlyPriceCents:eurosToCents(data.get("nightlyPrice"))})
     });
     message(tr("availabilityUpdated"), "success");
     await refreshAvailability(property, true);
   } catch (error) {
+    setFormError(form, error.message);
     message(error.message, "error");
+  } finally {
+    form.removeAttribute("aria-busy");
+    setBusy(form, false);
   }
 }
 
@@ -723,20 +758,13 @@ function renderProperties(){
     togglePropertyButton.textContent=expanded?"▴":"▾";
     togglePropertyButton.title=tr(expanded?"collapseProperty":"expandProperty");
     togglePropertyButton.setAttribute("aria-label",tr(expanded?"collapseProperty":"expandProperty"));
+    togglePropertyButton.setAttribute("aria-expanded",String(expanded));
     togglePropertyButton.addEventListener("click",()=>{
       if(expanded) expandedPropertyIds.delete(property.id);
       else expandedPropertyIds.add(property.id);
       renderProperties();
     });
     headActions.append(togglePropertyButton);
-    if(expanded){
-      const deletePropertyButton = document.createElement("button");
-      deletePropertyButton.type = "button";
-      deletePropertyButton.className = "text-button danger";
-      deletePropertyButton.textContent = tr("deleteProperty");
-      deletePropertyButton.addEventListener("click", () => deleteProperty(property));
-      headActions.append(deletePropertyButton);
-    }
     head.append(title, headActions);
     card.append(head);
     if(!expanded){
@@ -969,7 +997,7 @@ function renderProperties(){
     addForm.append(fromInput, toInput, nightlyInput, addButton);
     addForm.addEventListener("submit", event => {
       event.preventDefault();
-      addAvailability(property, addForm);
+      return addAvailability(property, addForm);
     });
     calendar.append(addForm);
 
@@ -994,14 +1022,18 @@ function renderProperties(){
       periods.append(empty);
     } else {
       property.availability.forEach(period => {
-        const row = document.createElement("div");
+        const row = document.createElement("form");
         row.className = "host-period";
 
         const from = document.createElement("input");
         from.type = "date";
+        from.name = "from";
+        from.required = true;
         from.value = period.from;
         const to = document.createElement("input");
         to.type = "date";
+        to.name = "to";
+        to.required = true;
         to.value = period.to;
         to.min = plusDays(period.from, 1);
         from.addEventListener("change", () => {
@@ -1012,9 +1044,10 @@ function renderProperties(){
 
         const nightly=document.createElement("input");
         nightly.type="number";nightly.min="0.01";nightly.step="0.01";nightly.placeholder=tr("nightlyPrice");nightly.value=centsToEuros(period.nightlyPriceCents);
+        nightly.name="nightlyPrice";
 
         const save = document.createElement("button");
-        save.type = "button";
+        save.type = "submit";
         save.className = "text-button";
         save.textContent = tr("save");
         save.hidden = true;
@@ -1029,7 +1062,10 @@ function renderProperties(){
           input.addEventListener("input", syncSaveVisibility);
           input.addEventListener("change", syncSaveVisibility);
         });
-        save.addEventListener("click", () => updateAvailability(property, period, from.value, to.value, nightly.value));
+        row.addEventListener("submit", event => {
+          event.preventDefault();
+          return updateAvailability(property, period, row);
+        });
 
         const remove = document.createElement("button");
         remove.type = "button";
@@ -1046,6 +1082,15 @@ function renderProperties(){
     card.append(settings, listing);
     if(property.listing) card.append(syncPanel);
     card.append(calendar);
+    const footer = document.createElement("div");
+    footer.className = "host-property-footer";
+    const deletePropertyButton = document.createElement("button");
+    deletePropertyButton.type = "button";
+    deletePropertyButton.className = "text-button danger";
+    deletePropertyButton.textContent = tr("deleteProperty");
+    deletePropertyButton.addEventListener("click", () => deleteProperty(property));
+    footer.append(deletePropertyButton);
+    card.append(footer);
     propertiesNode.append(card);
   });
 }

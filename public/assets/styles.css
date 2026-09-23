@@ -1362,7 +1362,14 @@ footer{
   font-size:13px;
 }
 .host-status.success{color:var(--lime)}
-.host-status.error{color:#f2b5a8}
+.host-status.error{
+  position:fixed;z-index:1000;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);
+  width:min(580px,calc(100% - 32px));max-height:35dvh;overflow-y:auto;box-sizing:border-box;
+  margin:0;padding:16px 60px 16px 18px;border:1px solid #a96558;border-radius:14px;
+  background:#281a18;color:#ffd1c7;box-shadow:0 8px 30px #0008;line-height:1.5;overflow-wrap:anywhere;
+}
+.host-status-close{position:absolute;right:6px;top:6px;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:inherit;font-size:24px;cursor:pointer}
+.host-status-close:focus-visible{outline:2px solid var(--lime)}
 .host-panel{
   margin-top:18px;
   padding:26px;
@@ -1439,9 +1446,11 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .text-button.danger:hover{color:#f2b5a8}
 .host-properties{display:grid;gap:24px;margin-top:24px}
 .host-property{padding:20px;border:1px solid rgba(216,255,99,.14);border-radius:18px;background:#071214;box-shadow:inset 3px 0 0 rgba(216,255,99,.22)}
-.host-property-head{display:flex;justify-content:space-between;gap:16px;margin-bottom:18px}
+.host-property-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
 .host-property.collapsed .host-property-head{margin-bottom:0}
-.host-property-head>div:first-child{display:grid;gap:5px}
+.host-property-head>div:first-child{display:grid;gap:5px;min-width:0;overflow-wrap:anywhere}
+.host-property-footer{display:flex;justify-content:flex-end;margin-top:24px;padding-top:18px;border-top:1px solid rgba(242,181,168,.15)}
+.host-property-footer .danger{min-height:44px;padding:10px 14px;border:1px solid rgba(242,181,168,.3);border-radius:10px;color:#f2b5a8}
 .host-property-head-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .host-property-head strong{font-family:"Space Grotesk",sans-serif;font-size:21px;color:var(--lime)}
 .host-property-head span{color:#7f8f8a;font-size:12px}
@@ -1533,6 +1542,7 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 }
 .housing-tabs a:hover{color:#e9efeb;border-color:rgba(255,255,255,.16)}
 .housing-tabs a.active{background:rgba(216,255,99,.1);border-color:rgba(216,255,99,.28);color:var(--lime)}
+.mobile-menu nav a.mobile-housing-primary{padding:12px 16px;border:1px solid var(--lime);border-radius:12px;background:var(--lime);color:#071214;font-weight:700}
 .host-listing-actions{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .host-listing-actions .host-saved-link{min-width:0;flex:1}
 .availability-owner{color:#b8c3bf;font-size:13px;margin-top:-8px}
@@ -1540,6 +1550,8 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 @media(max-width:640px){
   .housing-tabs{justify-content:stretch;padding:12px 20px 0}
   .housing-tabs a{flex:1;text-align:center}
+  .housing-tabs a.housing-host-link{order:-1;border-color:var(--lime);color:var(--lime);min-height:44px;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+  .housing-tabs a.housing-host-link.active{background:var(--lime);color:#071214}
   .host-listing-actions{align-items:flex-start;flex-direction:column}
 }
 
@@ -1627,7 +1639,7 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 
 /* 2026-09-22 housing UI refinements */
 .host-property-toggle{
-  width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
   padding:0;border:1px solid rgba(255,255,255,.12);border-radius:50%;
   background:#061012;color:var(--lime);font-size:18px;line-height:1;cursor:pointer;
 }

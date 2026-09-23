@@ -11,12 +11,13 @@ const css = fs.readFileSync(path.join(root, 'public/assets/styles.css'), 'utf8')
 
 // Run the real controller against a small DOM/API test double. No live accounts
 // or network requests are used. Layout is checked separately in the browser.
-function element() {
+function element(tag = 'div') {
   const listeners = new Map();
   const attributes = new Map();
   const children = [];
   const controls = [];
   return {
+    tagName: tag.toUpperCase(), children,
     hidden: false, open: false, disabled: false, value: '', textContent: '',
     dataset: {}, elements: {}, controls, classList: {toggle() {}},
     addEventListener(type, fn) {
@@ -30,12 +31,17 @@ function element() {
     setAttribute(name, value) { attributes.set(name, value); },
     getAttribute(name) { return attributes.get(name); },
     removeAttribute(name) { attributes.delete(name); },
-    append(node) { children.push(node); },
+    append(...nodes) { children.push(...nodes); },
     replaceChildren() { children.length = 0; },
     querySelector(selector) {
-      return selector === 'input' ? controls[0] : children.find(n => n.className?.includes('host-form-error'));
+      return this.querySelectorAll(selector)[0];
     },
-    querySelectorAll() { return controls; },
+    querySelectorAll(selector) {
+      const descendants = [...controls, ...children.flatMap(n => [n, ...n.querySelectorAll('*')])];
+      return [...new Set(descendants)].filter(n => selector === '*' || selector.split(',').some(s =>
+        s.startsWith('.') ? n.className?.split(' ').includes(s.slice(1)) :
+        n.tagName === s.toUpperCase() || controls.includes(n) && ['input','button'].includes(s)));
+    },
     focus() { this.focused = true; },
     showModal() { this.open = true; },
     close() { this.open = false; void this.emit('close'); },
@@ -75,7 +81,8 @@ function setup(routes = {}, search = '') {
     Headers, URLSearchParams,
     FormData: class {
       constructor(form) {this.form = form;}
-      get(key) {return this.form.elements[key]?.value;}
+      get(key) {return (this.form.elements[key] || this.form.querySelectorAll('*').find(n => n.name === key))?.value;}
+      has(key) {return this.get(key) !== undefined;}
     },
     fetch: async (url, options) => {
       const route = url.replace('/api/host', '');
@@ -92,6 +99,99 @@ function setup(routes = {}, search = '') {
 }
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
+
+function propertyCard(app) {
+  app.run(`state = {...emptyState(), authenticated:true, properties:[{
+    id:'property-1', title:'Test home', city:'Barcelona', bedrooms:1, sleeps:2,
+    availability:[{id:'period-1', from:'2026-10-01', to:'2026-10-05', nightlyPriceCents:10000}]
+  }]}; expandedPropertyIds.add('property-1'); renderProperties();`);
+  return app.nodes.get('host-properties').children[0];
+}
+
+for (const status of [400, 409]) {
+  for (const action of ['add', 'edit']) {
+    test(`${action} range: HTTP ${status} is shown beside dates and keeps the draft`, async () => {
+      const route = action === 'add' ? '/properties/property-1/availability' : '/availability/period-1';
+      const app = setup({[route]:{status,body:{error:'availability period overlaps an existing period'}}});
+      await settle();
+      app.run('lang = "ru"');
+      const card = propertyCard(app);
+      const form = card.querySelector(action === 'add' ? '.host-dates' : '.host-period');
+      const inputs = form.querySelectorAll('input');
+      inputs[0].value = '2026-10-03';
+      inputs[1].value = '2026-10-09';
+      inputs[2].value = '125';
+      await inputs[0].emit('input');
+      await form.emit('submit');
+      assert.match(form.querySelector('.host-form-error').textContent, /пересекаются/);
+      assert.equal(form.querySelector('.host-form-error').getAttribute('role'), 'alert');
+      assert.equal(app.nodes.get('host-status').getAttribute('role'), 'alert');
+      assert.equal(inputs[0].value, '2026-10-03');
+      assert.equal(inputs[1].value, '2026-10-09');
+      assert.equal(inputs[2].value, '125');
+      assert.equal(inputs.every(input => !input.disabled), true);
+      assert.equal(app.nodes.get('host-properties').children[0], card);
+      assert.equal(app.requests.find(r => r.route === route).body.nightlyPriceCents, 12500);
+      const close = app.nodes.get('host-status').querySelector('.host-status-close');
+      await close.emit('click');
+      assert.equal(app.nodes.get('host-status').textContent, '');
+      assert.equal(form.querySelector('.host-form-error').hidden, false);
+    });
+  }
+}
+
+test('saving a range blocks duplicate submits; retry clears its old error and refreshes on success', async () => {
+  let resolve;
+  const routes = {'/availability/period-1':{status:400,body:{error:'Invalid range'}}};
+  const app = setup(routes);
+  await settle();
+  const form = propertyCard(app).querySelector('.host-period');
+  await form.emit('submit');
+  assert.equal(form.querySelector('.host-form-error').textContent, 'Invalid range');
+  routes['/availability/period-1'] = () => new Promise(r => resolve = r);
+  routes['/properties/property-1/availability'] = {body:[{id:'period-1',from:'2026-10-06',to:'2026-10-10'}]};
+  form.querySelectorAll('input')[0].value = '2026-10-06';
+  form.querySelectorAll('input')[1].value = '2026-10-10';
+  const pending = form.emit('submit');
+  assert.equal(form.querySelector('.host-form-error').hidden, true);
+  assert.equal(form.getAttribute('aria-busy'), 'true');
+  assert.equal(form.querySelectorAll('input').every(input => input.disabled), true);
+  await form.emit('submit');
+  assert.equal(app.calls.filter(route => route === '/availability/period-1').length, 2);
+  resolve({body:{}});
+  await pending;
+  const updated = app.nodes.get('host-properties').children[0].querySelector('.host-period');
+  assert.notEqual(updated, form);
+  assert.equal(updated.querySelectorAll('input')[0].value, '2026-10-06');
+  assert.equal(updated.querySelector('.host-form-error'), undefined);
+});
+
+test('collapse stays alone in the header; destructive action is only in the expanded footer', async () => {
+  const app = setup();
+  await settle();
+  let card = propertyCard(app);
+  assert.equal(card.querySelector('.host-property-head-actions').children.length, 1);
+  assert.equal(card.querySelector('.host-property-toggle').getAttribute('aria-expanded'), 'true');
+  assert.match(card.querySelector('.host-property-footer').children[0].textContent, /Delete/);
+  await card.querySelector('.host-property-toggle').emit('click');
+  card = app.nodes.get('host-properties').children[0];
+  assert.equal(card.querySelector('.host-property-head-actions').children.length, 1);
+  assert.equal(card.querySelector('.host-property-toggle').getAttribute('aria-expanded'), 'false');
+  assert.equal(card.querySelector('.host-property-footer'), undefined);
+  await card.querySelector('.host-property-toggle').emit('click');
+  assert.equal(app.nodes.get('host-properties').children[0].querySelector('.host-property-head-actions').children.length, 1);
+});
+
+test('mobile housing navigation is first and highlighted; hosting tab keeps its active state', () => {
+  const home = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+  const search = fs.readFileSync(path.join(root, 'public/search.html'), 'utf8');
+  assert.match(home, /<nav aria-label="Mobile navigation">\s*<a class="mobile-housing-primary" href="\/search.html"/);
+  assert.match(css, /\.mobile-menu nav a\.mobile-housing-primary\{[^}]*background:var\(--lime\)/);
+  assert.match(css, /\.housing-tabs a\.housing-host-link\{order:-1/);
+  assert.match(html, /class="active housing-host-link" aria-current="page"/);
+  assert.match(search, /class="housing-host-link"/);
+  assert.match(css, /\.host-status\.error\{\s*position:fixed/);
+});
 
 test('login sends either email or username in the login field', async () => {
   for (const value of ['  My Name  ', '  test@example.test  ']) {
