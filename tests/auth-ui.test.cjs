@@ -107,12 +107,14 @@ function setup(routes = {}, search = '') {
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
 
-const cityId='51f07665660fc4024059dc0a96dfac6c123';
-const cityFixture={address:'Barcelona, Spain',countryCode:'ES',country:'Spain',city:'Barcelona',latitude:41.39,longitude:2.16,placeId:cityId,resultType:'city',street:null,houseNumber:null};
-const streetFixture={...cityFixture,address:"Carrer d'Alfons el Magnànim, Barcelona, Spain",latitude:41.42,longitude:2.22,placeId:'street-alfons',street:"Carrer d'Alfons el Magnànim",resultType:'street'};
+const cityId='locationiq:323126006243';
+const cityBounds={west:2.0524977,south:41.3170353,east:2.2283555,north:41.4679135};
+const cityFixture={address:'Barcelona, Spain',countryCode:'ES',country:'Spain',city:'Barcelona',latitude:41.39,longitude:2.16,placeId:cityId,resultType:'city',street:null,houseNumber:null,bounds:cityBounds};
+const streetFixture={...cityFixture,address:"Carrer d'Alfons el Magnànim, Barcelona, Spain",latitude:41.42,longitude:2.22,placeId:'locationiq:321209898040',street:"Carrer d'Alfons el Magnànim",resultType:'street',bounds:null};
 const addressFixture={...streetFixture,address:"Carrer d'Alfons el Magnànim 40, Barcelona, Spain",houseNumber:'40'};
+delete addressFixture.bounds;
 const cityRoute='/geocode/autocomplete?type=city&country=ES&q=barcelona';
-const streetRoute='/geocode/autocomplete?type=street&country=ES&q=alfo&cityId='+cityId+'&city=Barcelona';
+const streetRoute='/geocode/autocomplete?type=street&country=ES&q=alfo&cityId='+encodeURIComponent(cityId)+'&city=Barcelona&bounds='+encodeURIComponent(Object.values(cityBounds).join(','));
 const lookupRoutes={[cityRoute]:{body:[cityFixture]},[streetRoute]:{body:[streetFixture]}};
 function addressTimers(app){
   app.run('var addressTimer = null; var addressDelay = null; setTimeout = (fn,ms) => { addressTimer = fn; addressDelay = ms; return 1; }; clearTimeout = () => { addressTimer = null; };');
@@ -252,6 +254,28 @@ test('create sends the combined address and resets dependent fields after succes
   assert.deepEqual(app.requests.find(r=>r.route==='/properties'&&r.method==='POST').body.address,addressFixture);
   assert.equal(editor.country.value,'');assert.equal(editor.city.input.value,'');
   assert.equal(editor.street.input.disabled,true);assert.equal(editor.house.disabled,true);
+});
+
+test('quota error keeps the typed street and retry works without reselecting the city',async()=>{
+  let limited=true;
+  const app=setup({...lookupRoutes,[streetRoute]:()=>limited?{status:429,body:{error:'rate limit'}}:{body:[streetFixture]}});
+  await settle();const editor=app.run('newPropertyAddress'),flush=await chooseCity(app);
+  editor.street.input.value='alfo';await editor.street.input.emit('input');await flush();
+  assert.equal(editor.street.input.value,'alfo');
+  assert.match(editor.street.node.querySelector('.host-address-status').textContent,/Too many address searches/);
+  limited=false;await editor.street.node.querySelector('.host-address-retry').emit('click');
+  assert.equal(editor.street.node.querySelectorAll('.host-address-option').length,1);
+  const attribution=editor.node.querySelector('.host-address-attribution');
+  assert.equal(attribution.href,'https://locationiq.com/');
+  assert.equal(attribution.textContent,'Search by LocationIQ.com');
+});
+
+test('city suggestions without valid bounds cannot enable street search',async()=>{
+  const app=setup({...lookupRoutes,[cityRoute]:{body:[{...cityFixture,bounds:null},{...cityFixture,bounds:{...cityBounds,east:-190}},cityFixture]}});
+  await settle();const editor=app.run('newPropertyAddress');
+  editor.country.value='ES';await editor.country.emit('change');const flush=addressTimers(app);
+  editor.city.input.value='Barcelona';await editor.city.input.emit('input');await flush();
+  assert.equal(editor.city.node.querySelectorAll('.host-address-option').length,1);
 });
 
 test('saved legacy location is preserved without lookups until Change address is chosen',async()=>{

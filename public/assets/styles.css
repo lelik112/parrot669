@@ -1862,7 +1862,7 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-address-option{display:grid;gap:4px;min-height:52px;padding:12px 14px;box-sizing:border-box;cursor:pointer;color:#eef2ee;font-size:15px;line-height:1.4;overflow-wrap:anywhere;border-bottom:1px solid rgba(255,255,255,.07)}
 .host-address-option:hover,.host-address-option[aria-selected="true"]{background:rgba(216,255,99,.12);color:var(--lime)}
 .host-address-option small{color:#a3b3ac;font-size:12px}
-.host-address-attribution{display:block;padding:10px 14px;color:#a3b3ac;font-size:11px;text-align:right}
+.host-address-attribution{grid-column:1/-1;justify-self:start;color:#a3b3ac;font-size:13px;text-transform:none;letter-spacing:normal}
 .host-address-location{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:12px 14px;background:rgba(216,255,99,.04);border:1px solid rgba(216,255,99,.14);border-radius:10px}
 .host-address-location>div{display:grid;gap:5px;min-width:0}
 .host-address-location span{color:#84938f;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}

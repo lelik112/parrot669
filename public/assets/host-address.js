@@ -42,6 +42,9 @@
     countryRetry.type="button";countryRetry.className="text-button";countryRetry.hidden=true;
     const help=document.createElement("p");
     help.className="host-address-help";
+    const attribution=document.createElement("a");
+    attribution.className="host-address-attribution";attribution.href="https://locationiq.com/";
+    attribution.target="_blank";attribution.rel="noopener noreferrer";attribution.textContent="Search by LocationIQ.com";
     const houseLabel=document.createElement("label"), houseTitle=document.createElement("span");
     const house=document.createElement("input");
     house.id=id+"-house";house.name="addressHouseNumber";house.type="text";house.maxLength=64;house.autocomplete="off";
@@ -53,6 +56,10 @@
       return v && v.countryCode===country.value && v.country && v.city && v.placeId &&
         Number.isFinite(v.latitude) && Math.abs(v.latitude)<=90 &&
         Number.isFinite(v.longitude) && Math.abs(v.longitude)<=180;
+    }
+    function validBounds(b){
+      return b && [b.west,b.south,b.east,b.north].every(Number.isFinite) &&
+        b.west>=-180 && b.east<=180 && b.south>=-90 && b.north<=90 && b.west<b.east && b.south<b.north;
     }
     function lookup(kind,onSelect,onEdit){
       const box=document.createElement("div");
@@ -67,10 +74,7 @@
       dropdown.className="host-address-dropdown";dropdown.hidden=true;
       const list=document.createElement("ul");
       list.id=input.id+"-options";list.className="host-address-options";list.setAttribute("role","listbox");
-      const attribution=document.createElement("a");
-      attribution.className="host-address-attribution";attribution.href="https://www.geoapify.com/";
-      attribution.target="_blank";attribution.rel="noopener noreferrer";attribution.textContent="Powered by Geoapify";
-      dropdown.append(list,attribution);
+      dropdown.append(list);
       const status=document.createElement("p");
       status.id=input.id+"-status";status.className="host-address-status";status.hidden=true;
       status.setAttribute("role","status");status.setAttribute("aria-live","polite");
@@ -93,13 +97,16 @@
         const q=normalize(input.value);
         if(q.length<3 || q.length>256) return null;
         const params=new URLSearchParams({type:kind,country:country.value,q});
-        if(kind==="street") {params.set("cityId",cityValue.placeId);params.set("city",cityValue.city);}
+        if(kind==="street") {
+          params.set("cityId",cityValue.placeId);params.set("city",cityValue.city);
+          const b=cityValue.bounds;params.set("bounds",[b.west,b.south,b.east,b.north].join(","));
+        }
         return "/geocode/autocomplete?"+params.toString();
       }
       function complete(v){
-        return validLocation(v) && (kind==="city" ? v.resultType==="city" :
+        return validLocation(v) && (kind==="city" ? v.resultType==="city" && validBounds(v.bounds) :
           normalize(v.city)===normalize(cityValue.city) && typeof v.street==="string" && v.street.trim() &&
-          ["street","building","amenity"].includes(v.resultType));
+          v.resultType==="street");
       }
       function choose(value){
         cancel();selected=value;input.value=kind==="city"?value.city:value.street;
@@ -134,7 +141,7 @@
           remember(path,results);render(results);
         }catch(error){
           if(version!==sequence || disposed || error.name==="AbortError") return;
-          statusMessage(error.status===401?"addressSignIn":"addressUnavailable",true);
+          statusMessage(error.status===401?"addressSignIn":error.status===429?"addressRateLimited":"addressUnavailable",true);
           retry.hidden=error.status===401;if(error.status===401)onUnauthorized();
         }finally{if(version===sequence)input.setAttribute("aria-busy","false");}
       }
@@ -187,7 +194,7 @@
     const street=lookup("street",value=>{
       streetValue=value;house.value=value.houseNumber || "";refreshDisabled();
     },()=>{streetValue=null;house.value="";refreshDisabled();});
-    fields.append(countryLabel,countryStatus,countryRetry,city.node,street.node,houseLabel,help);
+    fields.append(countryLabel,countryStatus,countryRetry,city.node,street.node,houseLabel,help,attribution);
     node.append(saved,change,fields);
     function refreshDisabled(){
       saved.hidden=active;fields.hidden=!active;
