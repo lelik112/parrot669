@@ -18,7 +18,7 @@ Current MVP principle:
 
 ### Guest
 1. Open `/search.html`.
-2. Choose a city (currently only Barcelona), then search by dates, bedrooms and sleeping places. Accommodation type is a result filter alongside pricing filters and defaults to any. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Result filters are applied from their current UI values on every request, so changing any filter after a search immediately re-runs the same base search with the new filter.
+2. Choose a required country and city, then search by dates, bedrooms and sleeping places. Search locations come only from PARROT's own database: countries are derived from stored properties, and cities are derived from stored properties for the selected country. Guest search never calls the external address provider. Accommodation type is a result filter alongside pricing filters and defaults to any. Search criteria and filter state are persisted in browser localStorage; returning from the host screen restores them and re-runs the last performed search. Result filters are applied from their current UI values on every request, so changing any filter after a search immediately re-runs the same base search with the new filter.
 3. Results use a product-card hierarchy:
    - property name and city,
    - compact accommodation type / bedrooms / sleeping-place facts,
@@ -49,15 +49,18 @@ Current MVP principle:
 11. Calendar sync runs immediately on connect, manually via "Sync now", and automatically about once per hour while the calendar is enabled. A disabled calendar keeps its imported snapshot for later re-enable but does not block search and is skipped by automatic sync. Re-enabling triggers an immediate refresh. The raw iCal URL is never returned by the API or rendered back to the browser after connection.
 12. Calendar connection errors, including a listing-id mismatch, are shown directly under the calendar form as well as in the page status.
 
-## Barcelona scope
+## Location model
 
-MVP is intentionally Barcelona-only.
+Guest search is no longer architecturally Barcelona-only.
 
-Backend persists an internal city code:
-- `city_code = barcelona`
-- display name: `Barcelona`
+Properties carry normalized `country_code`, `country` and `city`. Guest location selectors are derived from the properties already stored in PostgreSQL:
+- `GET /api/locations/countries` returns distinct countries present in properties.
+- `GET /api/locations/cities?country=ES` returns distinct cities for that required country.
+- Guest search requires both `country` and `city`.
+- There is no separate `cities` table and no internal city id at this stage.
+- Guest search does not call Geoapify or another external geocoder.
 
-Do not accept arbitrary city strings into the product yet. There is no universal standard city ID worth coupling to now. Later options include GeoNames IDs or another geocoding provider, while preserving PARROT's internal stable city code.
+Host property creation is still temporarily limited to Barcelona until owner-side address autocomplete is connected. The intended next step is to validate owner-entered addresses through an external provider and store normalized country/city/address/coordinates/provider place id on the property. The external provider is ingestion-only; PARROT's database remains the source for guest discovery.
 
 ## Navigation
 
@@ -100,6 +103,7 @@ Important migrations:
 - V11 adds accounts, server-side sessions, profile ownership by account and the reserved password-reset-token model
 - V12 removes pre-account edit-token authentication, deletes any remaining unowned legacy profiles, makes `profiles.account_id` mandatory and drops `access_token_hash`
 - V13 enforces non-overlapping property availability in PostgreSQL with a GiST exclusion constraint over `[date_from, date_to)`
+- V17 adds normalized property `country_code` / `country`, backfills existing properties to `ES / Spain`, and indexes `(country_code, city)` for location discovery
 
 Current important endpoints:
 - `POST /api/auth/register`
@@ -115,7 +119,9 @@ Current important endpoints:
 - `GET|POST /api/properties/:propertyId/availability`
 - `PUT|DELETE /api/availability/:availabilityId`
 - `PUT /api/listings/:listingId` updates whether the external link is shown in guest search; the listing can remain connected for calendar sync while hidden
-- `GET /api/search?city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&accommodationType=any|entire_place|private_room&pricedOnly=true|false&minPriceCents=...&maxPriceCents=...`; results are sorted by final estimated stay price ascending, with unknown prices last
+- `GET /api/locations/countries`
+- `GET /api/locations/cities?country=ES`; `country` is required
+- `GET /api/search?country=ES&city=Barcelona&from=...&to=...&bedrooms=...&sleeps=...&accommodationType=any|entire_place|private_room&pricedOnly=true|false&minPriceCents=...&maxPriceCents=...`; both `country` and `city` are required, and results are sorted by final estimated stay price ascending, with unknown prices last
 - `POST /api/properties/:propertyId/calendars` connects/upserts an Airbnb iCal source and immediately syncs it
 - `POST /api/calendars/:calendarId/sync` manually refreshes an enabled source
 - `PUT /api/calendars/:calendarId` enables/disables the source
@@ -139,6 +145,7 @@ Frontend release path:
 
 Worker proxies:
 - public `/api/search` to Railway
+- public `/api/locations/countries` and `/api/locations/cities` to Railway
 - restricted browser auth/host routes under `/api/host/*`; the Worker strips the `/api/host` prefix and forwards them to Railway backend `/api/*`. Example: browser `PUT /api/host/calendars/:id` becomes backend `PUT /api/calendars/:id`.
 - Host proxy forwards only the `parrot_session` Cookie upstream and Set-Cookie back to the browser, and rejects cross-origin state-changing browser requests when an Origin header is present.
 
@@ -203,6 +210,7 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 ## Immediate TODO
 
+- Connect owner-side address autocomplete/geocoding and remove the remaining Barcelona-only property-creation restriction.
 - Improve visual design of housing/search/host UI.
 - Connect a backend email provider and add real password-reset request/confirm endpoints using the reserved reset-token model.
 - Add owner messaging/privacy preferences.
