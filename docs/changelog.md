@@ -1,5 +1,13 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Airbnb calendar control verification
+
+- Add owner-only Start/Check verification and clear required/pending/verified/blocked states, retry deadlines and attempt counts in EN/ES/CA/RU. Status updates preserve unsaved property/date/price edits.
+- Backend V24 stores a fresh baseline, attempts and persistent jobs. Check immediately and at +5/+10/+20 minutes; three failed attempts block verification for 24 hours. Initial changes have a 30-minute deadline. Removing/reconnecting a calendar does not clear its property's cooldown.
+- Reuse the existing iCal fetcher/parser without changing calendar connection, listing-ID matching, synchronization, imports, enable/disable or deletion. Verification does not gate existing search or availability.
+- Only availability ranges count; UID/metadata noise and malformed feeds do not. A changed source invalidates verification. Any availability change can pass, including an unrelated reservation; iCal cannot prove who edited it. The badge concerns calendar control, not identity or legal property ownership.
+- Add PostgreSQL concurrency/cooldown/HTTP tests, snapshot tests and frontend/polling/proxy regressions. Full backend contract and limits: `parrot669-backend/docs/calendar-ownership-verification.md`.
+
 ## 2026-09-23 — General QA fixes and password recovery
 
 - Address BUG-001/002/006/007/008/010/011/012: reject invalid search budgets, rerender results on language changes, clarify whole-stay pricing and optional Airbnb use, make form values readable, fix Russian capacity plurals and explain email verification.
