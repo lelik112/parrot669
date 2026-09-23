@@ -88,7 +88,8 @@
       cancel();
       selected = {
         address:value.address, countryCode:value.countryCode, country:value.country,
-        city:value.city, latitude:value.latitude, longitude:value.longitude, placeId:value.placeId
+        city:value.city, latitude:value.latitude, longitude:value.longitude, placeId:value.placeId,
+        street:value.street, houseNumber:value.houseNumber, resultType:value.resultType
       };
       input.value = selected.address;
       input.removeAttribute("aria-invalid");
@@ -101,6 +102,9 @@
     function isComplete(value){
       return value && typeof value.address === "string" && value.address.trim() &&
         /^[a-z]{2}$/i.test(value.countryCode || "") && value.country && value.city &&
+        typeof value.street === "string" && value.street.trim() &&
+        typeof value.houseNumber === "string" && value.houseNumber.trim() &&
+        ["building", "amenity"].includes(value.resultType) &&
         Number.isFinite(value.latitude) && Math.abs(value.latitude) <= 90 &&
         Number.isFinite(value.longitude) && Math.abs(value.longitude) <= 180 && value.placeId;
     }
@@ -110,6 +114,7 @@
         const option = document.createElement("li");
         option.id = `${id}-option-${index}`;
         option.className = "host-address-option";
+        option.tabIndex = -1;
         option.setAttribute("role", "option");
         option.setAttribute("aria-selected", "false");
         const title = document.createElement("span");
@@ -117,7 +122,6 @@
         const detail = document.createElement("small");
         detail.textContent = `${value.city} · ${value.country}`;
         option.append(title, detail);
-        option.addEventListener("pointerdown", event => event.preventDefault());
         option.addEventListener("click", () => choose(value));
         list.append(option);
       });
@@ -183,9 +187,19 @@
         choose(suggestions[Math.max(active, 0)]);
       } else if (event.key === "Tab") { cancel(); close(); }
     });
+    function dismiss(){
+      cancel(); close();
+      if (statusKey === "addressLoading") showStatus("");
+    }
+    // Mobile Safari can blur the input with relatedTarget=null before dispatching
+    // the suggestion's click. Keep it mounted; outside taps dismiss independently.
     node.addEventListener("focusout", event => {
-      if (!node.contains(event.relatedTarget)) { cancel(); close(); if (statusKey === "addressLoading") showStatus(""); }
+      if (event.relatedTarget && !node.contains(event.relatedTarget)) dismiss();
     });
+    function outsidePointerDown(event){
+      if (!node.contains(event.target)) dismiss();
+    }
+    document.addEventListener("pointerdown", outsidePointerDown);
     retry.addEventListener("click", search);
     function updateLanguage(){
       heading.textContent = tr("addressLabel");
@@ -200,8 +214,11 @@
     showLocation(initial || location);
     updateLanguage();
     return {
-      node, input, updateLanguage, dispose:cancel,
+      node, input, updateLanguage,
+      dispose(){ cancel(); document.removeEventListener("pointerdown", outsidePointerDown); },
       getValue(){
+        // An unchanged historical address is preserved by omitting the update.
+        if (!required && initial && selected === initial && input.value.trim() === initial.address) return undefined;
         if (selected && input.value.trim() === selected.address && isComplete(selected)) return {...selected};
         if (!required && !initial && !input.value.trim()) return undefined;
         showStatus("addressChoose", true);

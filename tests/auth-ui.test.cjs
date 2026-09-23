@@ -23,6 +23,9 @@ function element(tag = 'div') {
     addEventListener(type, fn) {
       listeners.set(type, [...(listeners.get(type) || []), fn]);
     },
+    removeEventListener(type, fn) {
+      listeners.set(type, (listeners.get(type) || []).filter(listener => listener !== fn));
+    },
     async emit(type, extra = {}) {
       for (const fn of listeners.get(type) || []) {
         await fn({preventDefault() {}, target: this, ...extra});
@@ -70,6 +73,7 @@ function setup(routes = {}, search = '') {
   const requests = [];
   const sandbox = {
     document: {
+      ...element('document'),
       documentElement: {},
       getElementById: id => nodes.get(id),
       querySelectorAll: selector => selector === '[data-auth-mode]' ? modes : [],
@@ -102,7 +106,7 @@ function setup(routes = {}, search = '') {
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
 
-const addressFixture = {address:'Calle de Alcalá 42, Madrid', countryCode:'ES', country:'Spain', city:'Madrid', latitude:40.418, longitude:-3.697, placeId:'test-madrid'};
+const addressFixture = {address:'Calle de Alcalá 42, Madrid', countryCode:'ES', country:'Spain', city:'Madrid', latitude:40.418, longitude:-3.697, placeId:'test-madrid', street:'Calle de Alcalá', houseNumber:'42', resultType:'building'};
 function addressTimers(app){
   app.run('var addressTimer = null; setTimeout = fn => { addressTimer = fn; return 1; }; clearTimeout = () => { addressTimer = null; };');
   return () => app.run('addressTimer ? addressTimer() : undefined');
@@ -137,6 +141,28 @@ test('address autocomplete waits for three characters, fills location on keyboar
   editor.dispose();
 });
 
+test('mobile tap survives input blur before click; scrolling does not select; outside tap dismisses', async () => {
+  const app=setup({'/geocode/autocomplete?q=Madrid':{body:[addressFixture]}});
+  await settle();
+  const flush=addressTimers(app), editor=app.run('newPropertyAddress');
+  editor.input.value='Madrid'; await editor.input.emit('input'); await flush();
+  const option=editor.node.querySelector('.host-address-option');
+  const doc=app.run('document');
+  await doc.emit('pointerdown',{target:option.children[0],pointerType:'touch'});
+  await editor.node.emit('focusout',{relatedTarget:null});
+  assert.equal(editor.input.getAttribute('aria-expanded'),'true');
+  // Touch scrolling has no click: it must keep the query and leave it unselected.
+  await option.emit('pointercancel',{pointerType:'touch'});
+  assert.equal(editor.input.value,'Madrid');
+  await option.emit('click');
+  assert.deepEqual(JSON.parse(JSON.stringify(editor.getValue())),addressFixture);
+  assert.equal(editor.input.getAttribute('aria-expanded'),'false');
+  editor.input.value='Madrid'; await editor.input.emit('input'); await flush();
+  await doc.emit('pointerdown',{target:element('button'),pointerType:'touch'});
+  assert.equal(editor.input.getAttribute('aria-expanded'),'false');
+  editor.dispose();
+});
+
 test('a slower old autocomplete response cannot overwrite newer results, and Escape cancels a pending result', async () => {
   let resolveOld, resolvePending;
   const app=setup({
@@ -160,7 +186,8 @@ test('autocomplete failure preserves text and offers retry; broad places are not
   let failed=true;
   const app=setup({'/geocode/autocomplete?q=Madrid':()=>failed
     ? {status:503,body:{error:'Address autocomplete is not configured'}}
-    : {body:[{...addressFixture,city:null},addressFixture]}});
+    : {body:[{...addressFixture,city:null}, {...addressFixture,street:null,houseNumber:null,resultType:'city'},
+      {...addressFixture,houseNumber:null,resultType:'street'}, {...addressFixture,resultType:'city'}, addressFixture]}});
   await settle();
   const flush=addressTimers(app), editor=app.run('newPropertyAddress');
   editor.input.value='Madrid'; await editor.input.emit('input'); await flush();
@@ -195,16 +222,46 @@ test('creation sends the selected address and resets it only after successful sa
   assert.equal(app.run('state.properties[0].address.placeId'),addressFixture.placeId);
 });
 
-test('editing characteristics sends the saved address; a 400 preserves the address draft and error', async () => {
+test('a city-only result cannot be selected or submitted as a property address', async () => {
+  const city={...addressFixture,address:'Беларусь, Минск',city:'Minsk',country:'Belarus',countryCode:'BY',street:null,houseNumber:null,resultType:'city'};
+  const app=setup({'/geocode/autocomplete?q=Minsk':{body:[city]}});
+  await settle();
+  const flush=addressTimers(app), editor=app.run('newPropertyAddress');
+  editor.input.value='Minsk'; await editor.input.emit('input'); await flush();
+  assert.equal(editor.node.querySelectorAll('.host-address-option').length,0);
+  assert.match(editor.node.querySelector('.host-address-status').textContent,/house number/);
+  await app.nodes.get('property-form').emit('submit');
+  assert.equal(app.requests.some(r=>r.method==='POST'),false);
+});
+
+test('editing an address sends the complete replacement and keeps it when the API returns 400', async () => {
+  const app=setup({
+    '/geocode/autocomplete?q=Madrid':{body:[addressFixture]},
+    '/properties/property-1':{status:400,body:{error:'select a full address with a street and house number'}}
+  });
+  await settle(); propertyCard(app);
+  const flush=addressTimers(app);
+  const form=app.nodes.get('host-properties').children[0].querySelector('.host-settings-form');
+  const field=form.querySelector('.host-address-field'), input=field.querySelector('input');
+  input.value='Madrid'; await input.emit('input'); await flush();
+  await field.querySelector('.host-address-option').emit('click');
+  await form.emit('submit'); await settle();
+  assert.deepEqual(app.requests.find(r=>r.method==='PUT').body.address,addressFixture);
+  assert.equal(input.value,addressFixture.address);
+  assert.match(form.querySelector('.host-form-error').textContent,/house number/);
+});
+
+test('editing characteristics preserves an unchanged legacy address; a 400 keeps the input and error', async () => {
   const app=setup({'/properties/property-1':{status:400,body:{error:'Address validation failed'}}});
   await settle(); propertyCard(app);
-  app.run(`state.properties[0].address=${JSON.stringify(addressFixture)}; renderProperties();`);
+  const legacy = {...addressFixture, street:null, houseNumber:null, resultType:null};
+  app.run(`state.properties[0].address=${JSON.stringify(legacy)}; renderProperties();`);
   const form=app.nodes.get('host-properties').children[0].querySelector('.host-settings-form');
   const input=form.querySelector('.host-address-field').querySelector('input');
   assert.equal(input.value,addressFixture.address);
   await form.emit('submit');
   await settle();
-  assert.deepEqual(app.requests.find(r=>r.method==='PUT').body.address,addressFixture);
+  assert.equal(app.requests.find(r=>r.method==='PUT').body.address,undefined);
   assert.equal(input.value,addressFixture.address);
   assert.equal(form.querySelector('.host-form-error').textContent,'Address validation failed');
 });

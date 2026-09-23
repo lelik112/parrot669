@@ -2,6 +2,15 @@
 
 Static site + Cloudflare Worker API proxy/contact endpoint.
 
+## Address validation fix — 2026-09-23
+
+- Host suggestions require a street, house number and building/amenity result type.
+- Empty results explain which address components to enter in all four languages.
+- Unchanged historical addresses are omitted from settings updates, preserving old objects.
+- Regression tests cover broad suggestions, stale selections and legacy address editing.
+- Mobile taps keep suggestions mounted through Safari's input blur; outside taps and
+  keyboard navigation dismiss the list, while scrolling never selects an address.
+
 ## What changed
 - The public form now POSTs to `/api/contact`.
 - The Worker sends contact requests through Resend.
