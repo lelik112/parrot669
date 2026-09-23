@@ -1,11 +1,17 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Compact responsive period layout
+
+- Desktop period controls share one row: dates, labeled nightly price and actions.
+- Mobile keeps both dates side by side, with labeled price and actions below.
+- Keep card grouping and date hints; reduce nested mobile padding to leave room for date values.
+
 ## 2026-09-23 — Clear owner period cards on mobile
 
 - Saved availability and manual blocks are separate cards with labeled fields and a dedicated action row.
 - Price per night keeps its visible label and EUR unit even when filled.
 - Empty owner date controls show a localized hint and calendar icon without relying on native date placeholders.
-- Mobile fields use a single column so dates fit comfortably; native date pickers and inclusive-night semantics are preserved.
+- Native date pickers and inclusive-night semantics are preserved.
 
 ## 2026-09-23 — Inclusive owner date ranges
 

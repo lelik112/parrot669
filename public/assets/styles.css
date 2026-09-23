@@ -1791,13 +1791,13 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 @media(max-width:640px){
   .host-availability-panel,.host-unavailability-panel{padding:12px}
   .host-unavailability-add,.host-unavailability-period{grid-template-columns:repeat(2,minmax(0,1fr))}
-.host-unavailability-add .button{grid-column:1/-1}
+  .host-unavailability-add .button{grid-column:1/-1}
 }
 
 /* Period cards keep their labels and actions grouped at every width. */
 .host-availability-panel .host-dates,
 .host-availability-panel .host-period{
-  grid-template-columns:repeat(2,minmax(0,1fr)) minmax(130px,.8fr);
+  grid-template-columns:repeat(2,minmax(0,1fr)) minmax(110px,.7fr) auto;
 }
 .host-availability-panel .host-dates{margin-top:22px;padding-top:20px;border-top:1px solid rgba(216,255,99,.15)}
 .host-availability-panel .host-period,
@@ -1806,12 +1806,11 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 }
 .host-unavailability-panel .host-period{border-color:rgba(242,181,168,.28)}
 .host-unavailability-panel .host-unavailability-add,
-.host-unavailability-panel .host-period{grid-template-columns:repeat(2,minmax(0,1fr))}
+.host-unavailability-panel .host-period{grid-template-columns:repeat(2,minmax(0,1fr)) auto}
 .host-availability-panel .host-periods,.host-unavailability-panel .host-periods{gap:16px;margin-top:24px}
 .host-period-heading{grid-column:1/-1;margin:0;font-size:13px;font-weight:600;color:var(--lime)}
 .host-unavailability-panel .host-period-heading{color:#f2b5a8}
-.host-period-actions{grid-column:1/-1;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:12px}
-.host-period .host-period-actions{padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+.host-period-actions{display:flex;align-items:center;align-self:end;justify-content:flex-end;flex-wrap:nowrap;gap:8px}
 .host-period-actions .text-button{min-height:44px;padding:10px 14px;border:1px solid rgba(242,181,168,.3);border-radius:10px;color:#f2b5a8;text-decoration:none}
 .host-period-actions .button{min-height:44px}
 .host-date-label{font-size:12px;line-height:1.4;color:#b3c0bb}
@@ -1828,7 +1827,13 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-date-control:focus-within .host-date-hint{display:none}
 @media(max-width:640px){
   .host-availability-panel .host-dates,.host-availability-panel .host-period,
-  .host-unavailability-panel .host-unavailability-add,.host-unavailability-panel .host-period{grid-template-columns:minmax(0,1fr)}
-  .host-availability-panel .host-period,.host-unavailability-panel .host-period{padding:12px}
+  .host-unavailability-panel .host-unavailability-add,.host-unavailability-panel .host-period{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:10px}
+  .host-availability-panel,.host-unavailability-panel{padding:12px 0;border-left:0;border-right:0;border-radius:0}
+  .host-availability-panel .host-period,.host-unavailability-panel .host-period{padding:10px}
+  .host-period-actions{min-width:0;flex-wrap:wrap}
+  .host-unavailability-panel .host-period-actions{grid-column:1/-1}
+  .host-date-control input[type="date"][data-empty="false"]{padding-left:8px;padding-right:6px;background-image:none}
+  .host-date-control input[type="date"][data-empty="false"]::-webkit-calendar-picker-indicator{width:100%;right:0}
   .host-dates .host-period-actions .button,.host-unavailability-add .host-period-actions .button{width:100%}
+  .host-dates .host-period-actions .button{min-width:0;padding-left:10px;padding-right:10px;white-space:normal}
 }
