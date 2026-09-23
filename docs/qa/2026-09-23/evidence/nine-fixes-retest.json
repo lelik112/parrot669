@@ -1,0 +1,320 @@
+{
+  "negativeBudget": {
+    "message": "Цена не может быть отрицательной.",
+    "cards": 0
+  },
+  "searchFonts": [
+    {
+      "fontSize": "16px",
+      "height": 48,
+      "label": "ЗА ВЕСЬ ПЕРИОД ОТ, €"
+    },
+    {
+      "fontSize": "16px",
+      "height": 48,
+      "label": "ЗА ВЕСЬ ПЕРИОД ДО, €"
+    }
+  ],
+  "hostFonts": [
+    {
+      "fontSize": "16px",
+      "height": 46
+    },
+    {
+      "fontSize": "16px",
+      "height": 42
+    }
+  ],
+  "zeroBudget": {
+    "cards": 0,
+    "text": [
+      "  - generic: Подключено к живому индексу доступности PARROT",
+      "  - generic: Здесь показывается физическая доступность жилья. Условия аренды и допустимый срок определяет владелец.",
+      "  - generic: Подходящих вариантов пока нет."
+    ]
+  },
+  "budget100RU": [
+    "The therdBarcelonaОтдельная комната3 спальни6 спальных мест≈ €63 за 7 ноч.Цена ориентировочная. Финальные условия и дополнительные платежи уточняйте у владельца.Владелец: lelik112Внешняя ссылка пока не добавленаНаписать владельцу"
+  ],
+  "budget100ES": [
+    "The therdBarcelonaHabitación privada3 dormitorios6 plazas≈ €63 por 7 nochesPrecio orientativo. Confirma las condiciones finales y otros cargos con el propietario.Propietario: lelik112Todavía no se ha añadido un enlace externoEscribir al propietario"
+  ],
+  "originalName": "QA 2026-09-23 — НЕ ДЛЯ АРЕНДЫ 🔥🏠 & <test>",
+  "propertyBefore": [
+    {
+      "name": "title",
+      "value": "QA 2026-09-23 — НЕ ДЛЯ АРЕНДЫ 🔥🏠 & <test>"
+    },
+    {
+      "name": "addressCountry",
+      "value": "ES"
+    },
+    {
+      "name": "addresscity",
+      "value": ""
+    },
+    {
+      "name": "addressstreet",
+      "value": ""
+    },
+    {
+      "name": "addressHouseNumber",
+      "value": ""
+    },
+    {
+      "name": "accommodationType",
+      "value": "private_room"
+    },
+    {
+      "name": "bedrooms",
+      "value": "2"
+    },
+    {
+      "name": "sleeps",
+      "value": "4"
+    },
+    {
+      "name": "externalId",
+      "value": ""
+    },
+    {
+      "name": "minStayDays",
+      "value": "3"
+    },
+    {
+      "name": "cleaningFee",
+      "value": "42.50"
+    },
+    {
+      "name": "from",
+      "value": ""
+    },
+    {
+      "name": "to",
+      "value": ""
+    },
+    {
+      "name": "nightlyPrice",
+      "value": ""
+    },
+    {
+      "name": "from",
+      "value": "2020-01-01"
+    },
+    {
+      "name": "to",
+      "value": "2020-01-07"
+    },
+    {
+      "name": "nightlyPrice",
+      "value": "12.34"
+    },
+    {
+      "name": "from",
+      "value": "2026-12-01"
+    },
+    {
+      "name": "to",
+      "value": "2026-12-07"
+    },
+    {
+      "name": "nightlyPrice",
+      "value": "91.50"
+    },
+    {
+      "name": "from",
+      "value": ""
+    },
+    {
+      "name": "to",
+      "value": ""
+    },
+    {
+      "name": "from",
+      "value": "2020-01-01"
+    },
+    {
+      "name": "to",
+      "value": "2020-01-07"
+    },
+    {
+      "name": "from",
+      "value": "2026-12-01"
+    },
+    {
+      "name": "to",
+      "value": "2026-12-07"
+    }
+  ],
+  "budget100RUBack": [
+    "The therdBarcelonaОтдельная комната3 спальни6 спальных мест≈ €63 за 7 ноч.Цена ориентировочная. Финальные условия и дополнительные платежи уточняйте у владельца.Владелец: lelik112Внешняя ссылка пока не добавленаНаписать владельцу"
+  ],
+  "preservedBudget": "100",
+  "hostNumericFonts": [
+    {
+      "fontSize": "16px",
+      "label": "Спальни"
+    },
+    {
+      "fontSize": "16px",
+      "label": "Спальных мест"
+    },
+    {
+      "fontSize": "16px",
+      "label": "Спальни"
+    },
+    {
+      "fontSize": "16px",
+      "label": "Спальных мест"
+    },
+    {
+      "fontSize": "16px",
+      "label": "Минимум дней"
+    },
+    {
+      "fontSize": "16px",
+      "label": "Уборка, € (необязательно)"
+    },
+    {
+      "fontSize": "16px",
+      "label": "Цена за ночь, €"
+    },
+    {
+      "fontSize": "16px",
+      "label": "Цена за ночь, €"
+    },
+    {
+      "fontSize": "16px",
+      "label": "Цена за ночь, €"
+    }
+  ],
+  "renamedAfterReload": "QA 2026-09-23 — НЕ ДЛЯ АРЕНДЫ 🔥🏠 & <test> — ретест",
+  "propertyAfter": [
+    {
+      "name": "title",
+      "value": "QA 2026-09-23 — НЕ ДЛЯ АРЕНДЫ 🔥🏠 & <test>"
+    },
+    {
+      "name": "addressCountry",
+      "value": "ES"
+    },
+    {
+      "name": "addresscity",
+      "value": ""
+    },
+    {
+      "name": "addressstreet",
+      "value": ""
+    },
+    {
+      "name": "addressHouseNumber",
+      "value": ""
+    },
+    {
+      "name": "accommodationType",
+      "value": "private_room"
+    },
+    {
+      "name": "bedrooms",
+      "value": "2"
+    },
+    {
+      "name": "sleeps",
+      "value": "4"
+    },
+    {
+      "name": "externalId",
+      "value": ""
+    },
+    {
+      "name": "minStayDays",
+      "value": "3"
+    },
+    {
+      "name": "cleaningFee",
+      "value": "42.50"
+    },
+    {
+      "name": "from",
+      "value": ""
+    },
+    {
+      "name": "to",
+      "value": ""
+    },
+    {
+      "name": "nightlyPrice",
+      "value": ""
+    },
+    {
+      "name": "from",
+      "value": "2020-01-01"
+    },
+    {
+      "name": "to",
+      "value": "2020-01-07"
+    },
+    {
+      "name": "nightlyPrice",
+      "value": "12.34"
+    },
+    {
+      "name": "from",
+      "value": "2026-12-01"
+    },
+    {
+      "name": "to",
+      "value": "2026-12-07"
+    },
+    {
+      "name": "nightlyPrice",
+      "value": "91.50"
+    },
+    {
+      "name": "from",
+      "value": ""
+    },
+    {
+      "name": "to",
+      "value": ""
+    },
+    {
+      "name": "from",
+      "value": "2020-01-01"
+    },
+    {
+      "name": "to",
+      "value": "2020-01-07"
+    },
+    {
+      "name": "from",
+      "value": "2026-12-01"
+    },
+    {
+      "name": "to",
+      "value": "2026-12-07"
+    }
+  ],
+  "propertyRestoredExactly": true,
+  "recoveryLink": "/recover.html",
+  "recoveryPageRU": "- banner:\n  - link \"PARROT 669 home\":\n    - /url: /\n    - strong: PARROT 669\n  - generic \"Language\":\n    - button \"EN\"\n    - button \"ES\"\n    - button \"CA\"\n    - button \"RU\"\n- main:\n  - heading \"Восстановление доступа\" [level=1]\n  - paragraph: Укажите почту, на которую зарегистрирован аккаунт PARROT 669.\n  - generic: Email аккаунта\n  - textbox \"Email аккаунта\"\n  - button \"Отправить ссылку\"\n  - status\n  - navigation:\n    - link \"Вернуться ко входу\":\n      - /url: /host.html?login=1\n    - link \"Сообщения\":\n      - /url: /messages.html",
+  "recoveryReturnToLogin": true,
+  "messagesRecoveryLink": "/recover.html",
+  "messagesRecoveryReached": true,
+  "unboundedCardsRU": [
+    "The therdBarcelonaОтдельная комната3 спальни6 спальных мест≈ €63 за 7 ноч.Цена ориентировочная. Финальные условия и дополнительные платежи уточняйте у владельца.Владелец: lelik112Внешняя ссылка пока не добавленаНаписать владельцу",
+    "One moreBarcelonaЖильё целиком3 спальни3 спальных места≈ €616 за 7 ноч. · включая €70 уборкиЦена ориентировочная. Финальные условия и дополнительные платежи уточняйте у владельца.Владелец: lelik112Открыть на AirbnbНаписать владельцу",
+    "The secondBarcelonaЖильё целиком3 спальни5 спальных местЦену уточняйте у владельцаВладелец: lelik112Внешняя ссылка пока не добавленаНаписать владельцу"
+  ],
+  "retestedAt": "2026-09-23T13:12:31.242Z",
+  "clearedBudgetRetest": {
+    "oneSearchClick": true,
+    "cards": 3
+  },
+  "bug011": {
+    "status": "needs_verification",
+    "reason": "The supplied test account is already email-verified; no unverified-account login was submitted in this retest."
+  },
+  "recoveryScope": "Visible route from Host and Messages reaches recovery form; return to Host reopens login. No recovery email submitted or password changed.",
+  "mobileScope": "Desktop Chrome only; no mobile viewport or touch capability available."
+}
