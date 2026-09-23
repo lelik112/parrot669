@@ -93,12 +93,13 @@
         const q=normalize(input.value);
         if(q.length<3 || q.length>256) return null;
         const params=new URLSearchParams({type:kind,country:country.value,q});
-        if(kind==="street") params.set("cityId",cityValue.placeId);
+        if(kind==="street") {params.set("cityId",cityValue.placeId);params.set("city",cityValue.city);}
         return "/geocode/autocomplete?"+params.toString();
       }
       function complete(v){
         return validLocation(v) && (kind==="city" ? v.resultType==="city" :
-          typeof v.street==="string" && v.street.trim() && ["street","building","amenity"].includes(v.resultType));
+          normalize(v.city)===normalize(cityValue.city) && typeof v.street==="string" && v.street.trim() &&
+          ["street","building","amenity"].includes(v.resultType));
       }
       function choose(value){
         cancel();selected=value;input.value=kind==="city"?value.city:value.street;

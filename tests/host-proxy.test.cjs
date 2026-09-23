@@ -14,7 +14,7 @@ test('address autocomplete proxy preserves encoded query, session and provider e
     return new Response(JSON.stringify({error:'Address autocomplete is temporarily unavailable'}),{status:503});
   }};
   vm.createContext(sandbox); vm.runInContext(source,sandbox);
-  const query='?type=street&country=ES&cityId=51f07665660fc4024059dc0a96dfac6c123&q=alfo';
+  const query='?type=street&country=ES&cityId=51f07665660fc4024059dc0a96dfac6c123&city=Barcelona&q=alfo';
   const response=await sandbox.worker.fetch(new Request('https://parrot669.com/api/host/geocode/autocomplete'+query,{
     headers:{Cookie:'other=secret; parrot_session=test-session'}
   }),{});

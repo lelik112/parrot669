@@ -112,7 +112,7 @@ const cityFixture={address:'Barcelona, Spain',countryCode:'ES',country:'Spain',c
 const streetFixture={...cityFixture,address:"Carrer d'Alfons el Magnànim, Barcelona, Spain",latitude:41.42,longitude:2.22,placeId:'street-alfons',street:"Carrer d'Alfons el Magnànim",resultType:'street'};
 const addressFixture={...streetFixture,address:"Carrer d'Alfons el Magnànim 40, Barcelona, Spain",houseNumber:'40'};
 const cityRoute='/geocode/autocomplete?type=city&country=ES&q=barcelona';
-const streetRoute='/geocode/autocomplete?type=street&country=ES&q=alfo&cityId='+cityId;
+const streetRoute='/geocode/autocomplete?type=street&country=ES&q=alfo&cityId='+cityId+'&city=Barcelona';
 const lookupRoutes={[cityRoute]:{body:[cityFixture]},[streetRoute]:{body:[streetFixture]}};
 function addressTimers(app){
   app.run('var addressTimer = null; var addressDelay = null; setTimeout = (fn,ms) => { addressTimer = fn; addressDelay = ms; return 1; }; clearTimeout = () => { addressTimer = null; };');
@@ -228,9 +228,9 @@ test('late street response after a country change cannot re-open old suggestions
   assert.equal(editor.street.input.disabled,true);
 });
 
-test('failed lookup preserves input and offers retry; city results cannot stand in for a street',async()=>{
+test('failed lookup preserves input and offers retry; streets must belong to the selected city',async()=>{
   let failed=true;
-  const app=setup({...lookupRoutes,[streetRoute]:()=>failed?{status:503,body:{error:'unavailable'}}:{body:[cityFixture,streetFixture]}});
+  const app=setup({...lookupRoutes,[streetRoute]:()=>failed?{status:503,body:{error:'unavailable'}}:{body:[cityFixture,{...streetFixture,city:'Badalona'},streetFixture]}});
   await settle();
   const editor=app.run('newPropertyAddress'),flush=await chooseCity(app);
   editor.street.input.value='alfo';await editor.street.input.emit('input');await flush();
