@@ -157,6 +157,7 @@ export default {
       const allowed =
         (path === "/auth/register" && request.method === "POST") ||
         (path === "/auth/verify-email" && request.method === "POST") ||
+        (["/auth/password-reset/request", "/auth/password-reset/confirm"].includes(path) && request.method === "POST") ||
         (path === "/auth/login" && request.method === "POST") ||
         (path === "/auth/logout" && request.method === "POST") ||
         (path === "/auth/me" && request.method === "GET") ||

@@ -1,5 +1,14 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — General QA fixes and password recovery
+
+- Address BUG-001/002/006/007/008/010/011/012: reject invalid search budgets, rerender results on language changes, clarify whole-stay pricing and optional Airbnb use, make form values readable, fix Russian capacity plurals and explain email verification.
+- Let owners rename existing properties through their characteristics; keep ownership checks and preserve addresses, availability and integrations. Older PUT payloads continue to preserve the name.
+- BUG-005: add a localized recovery page linked from both login screens and real Resend reset emails using the existing token table. Single-use 30-minute links, database issuance limits and atomic session/token revocation protect recovery. No automatic login or account enumeration response.
+- Serialize login/verification session creation with reset, so a concurrent old credential cannot survive revocation. Tokens stay out of URL queries, browser storage and logs. No migration or new credentials required.
+- Add PostgreSQL/HTTP, rename smoke and browser-controller regression checks. Preserve the parallel geolocation fixes and their search tests.
+- Recovery delivery uses a bounded in-memory queue; users can retry if delivery fails or a restart interrupts it. Message notification delivery remains durable.
+
 ## 2026-09-23 — Geolocation QA: guest search state and accessible labels
 
 - GEO-001: changing country, city, dates or capacity clears the previous results and asks the guest to search again. Late responses and filter changes cannot bring back results for the old parameters.

@@ -28,15 +28,16 @@ Current MVP principle:
    - **Write to host** when the owner accepts PARROT messages, independent of external listings. It opens `/messages.html` with the property and requested checkout dates; login/registration is available there.
 4. Minimum stay is enforced by backend search but is not displayed as a separate field in guest results.
 4a. Guest can choose all results or only results with complete nightly pricing, and may filter by minimum/maximum estimated total price for the requested stay. Results with a known price are sorted cheapest first; results without a complete price come last. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only and price-range search.
+4c. Price controls explicitly describe the total for the requested stay, including known cleaning fees. Negative, invalid-precision and reversed budgets produce visible errors instead of silently dropping a filter. Switching language rerenders already loaded cards/statuses without another search request; Russian capacity counts use proper plural forms. Housing input values use 16 px text.
 4b. Optional cleaning fee belongs to the PARROT property, not to the external listing, and is included in the displayed estimate when known. An external listing has an independent `showInSearch` flag: it may remain connected for calendar sync while its outbound URL is hidden from guest search results.
 5. Property title shown to guests is the same property name entered by the owner; it is not an internal-only label. Barcelona is not used as the result title.
 6. Guest search uses hotel-style [check-in, checkout) semantics: checkout day is not occupied and same-day check-in/check-out is invalid. Owner forms instead select an inclusive range of nights (see below).
 
 ### Host
 1. Open `/host.html`.
-2. Register or log in with email/password. Authentication uses a server-side session in an HttpOnly cookie; host credentials are not stored in frontend JavaScript/localStorage.
+2. Register or log in with email/password. Both host and Messages login screens link to `/recover.html` for password recovery; an unverified-login error explains email confirmation in the current language. Authentication uses a server-side session in an HttpOnly cookie; host credentials are not stored in frontend JavaScript/localStorage.
 3. Choose a country, select a city and street from LocationIQ suggestions, then enter the house number. Create the property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay. Owners can edit the address in property characteristics; the exact address and coordinates are private to the owner.
-3a. Accommodation type, bedrooms and sleeping places are editable property characteristics. Minimum stay and optional cleaning fee are editable alongside PARROT availability/pricing controls. Property cards are collapsed by default to a compact summary and can be expanded for editing.
+3a. Property name, accommodation type, bedrooms and sleeping places are editable property characteristics. Names are trimmed and limited to 160 characters; renaming preserves address, periods and integrations. Minimum stay and optional cleaning fee are editable alongside PARROT availability/pricing controls. Property cards are collapsed by default to a compact summary and can be expanded for editing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
 5. PARROT generates the canonical Airbnb URL. The host may hide that URL from guest search without disconnecting the listing or calendar.
 6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR. Existing periods show a Save action only after their dates or nightly price have actually changed.
@@ -124,11 +125,13 @@ Important migrations:
 Current important endpoints:
 - `POST /api/auth/register`
 - `POST /api/auth/login`
+- `POST /api/auth/password-reset/request` accepts `{email, language?}` and gives the same generic 202 response for known/unknown accounts
+- `POST /api/auth/password-reset/confirm` accepts `{token, password, language?}` and revokes old sessions on success
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
 - `GET /api/dashboard` (owner-only, session required)
 - `POST /api/properties` (owner-only, session required)
-- `PUT /api/properties/:propertyId` updates accommodation type, bedrooms, sleeping places, minimum stay and optional property cleaning fee
+- `PUT /api/properties/:propertyId` updates optional property title, accommodation type, bedrooms, sleeping places, minimum stay and optional property cleaning fee
 - `DELETE /api/properties/:propertyId`
 - `POST /api/properties/:propertyId/listings`
 - `DELETE /api/listings/:listingId`
@@ -199,7 +202,10 @@ Owner authentication is account/session based:
 - Sessions are opaque 256-bit random tokens. The browser receives the raw token only as a `HttpOnly; SameSite=Lax` cookie; production also sets `Secure`. The database stores only SHA-256 session-token hashes.
 - Sessions expire after 30 days, multiple active sessions are allowed, login creates a fresh session, and logout deletes the server-side session.
 - Login errors do not distinguish unknown email from wrong password. A simple per-instance limiter caps repeated failures per normalized email; a distributed limiter can replace it if traffic or horizontal scaling justifies it.
-- Email verification uses the backend Resend provider. Password recovery is not exposed yet; V11 reserves a hashed, expiring `password_reset_tokens` model for a later request/confirm flow.
+- Email verification and password recovery use the existing backend Resend configuration. Recovery supports EN/ES/CA/RU, 32-byte random tokens, SHA-256 token hashes and a 30-minute single-use expiry in the existing V11 table. Database limits allow one link per account per 90 seconds and at most three per hour; requesting again does not invalidate a previous valid link.
+- Reset atomically replaces the Argon2id password, confirms email possession, revokes all sessions and invalidates other recovery/verification tokens. Account/profile/property identity is retained. Login and email verification serialize session creation with reset; an old credential in flight cannot recreate a valid session afterwards. Reset does not auto-login.
+- Recovery request acceptance is asynchronous and does not disclose whether an email exists. Its process-local queue is bounded to 64 jobs; restart/provider failure may require another request. This queue is intentionally separate from the durable messaging outbox. The page tells users to check spam and retry; password-change notices are best effort.
+- Recovery links carry secrets in a fragment, removed from the visible URL on load. The page uses no-referrer and stores neither reset tokens nor passwords in browser storage. Recovery APIs cap JSON at 16 KiB and return no-store responses.
 - The pre-account `editToken`/`access_token_hash` mechanism and its compatibility routes have been removed.
 
 Private messaging and its UI are implemented; broader contact publishing remains a future decision.
@@ -257,6 +263,5 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 - Address autocomplete and storage are connected; map UI and any guest address-visibility policy remain separate future work.
 - Improve visual design of housing/search/host UI.
-- Add password-reset request/confirm endpoints using the reserved reset-token model and existing backend email provider.
 - Add abuse reporting/moderation and email bounce/delivery webhooks. Inbox, notifications, Worker proxy, host opt-in and participant blocking are connected.
 - Upgrade Flyway or align Postgres version (Railway currently warns PostgreSQL 18 is newer than tested Flyway support).
