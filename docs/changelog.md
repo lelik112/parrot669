@@ -1,5 +1,24 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Extract the backend search module
+
+- Move availability search and database-backed country/city discovery from the large legacy routes/service/repository into the independent `com.parrot669.search` package.
+- Move search-only models; keep the country DTO shared with geocoding. Reuse the unchanged HTTP response/error mapping through `HttpResponses`.
+- Preserve API paths and JSON, SQL/query count, half-open coverage, validation order, property cleaning fees, total-price filtering/sorting and searchable properties without external links. No migration or product behavior change.
+- Add seven focused route/service contract tests alongside the existing full-application PostgreSQL smoke and Docker build. Keep messaging and the new calendar-control verification implementation structurally unchanged.
+
+## 2026-09-23 — Extract shared backend errors
+
+- Move the unchanged `ServiceError` ADT out of `ParrotService.scala` into its own file, preserving its package and all API/error behavior.
+- Keep this mechanical refactor separate from the preceding calendar integrity fix; validate it through the complete backend CI and production deployment checks.
+
+## 2026-09-23 — Preserve reservations when iCal content is incomplete
+
+- Reject incomplete calendar envelopes and unbalanced/nested event boundaries before replacing imported events, including malformed responses delivered with HTTP 200.
+- Preserve the previous reservation snapshot and last-success timestamp on parse failure. A complete empty calendar still clears old events normally.
+- Add parser regression tests and end-to-end PostgreSQL/API smoke checks for malformed feeds, snapshot preservation, search blocking, valid empty feeds and recovery.
+- Keep Airbnb URL validation, event classification and the separate calendar-control verification workflow unchanged. No database migration.
+
 ## 2026-09-23 — Airbnb calendar control verification
 
 - Add owner-only Start/Check verification and clear required/pending/verified/blocked states, retry deadlines and attempt counts in EN/ES/CA/RU. Status updates preserve unsaved property/date/price edits.
