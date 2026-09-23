@@ -7,6 +7,24 @@ const source = fs.readFileSync(path.join(__dirname,'../src/index.js'),'utf8')
   .replace('export default {','globalThis.worker = {');
 const id='11111111-1111-4111-8111-111111111111';
 
+test('address autocomplete proxy preserves encoded query, session and provider error status', async () => {
+  let forwarded;
+  const sandbox={URL,Headers,Response,console,fetch:async(url,init)=>{
+    forwarded={url,...init};
+    return new Response(JSON.stringify({error:'Address autocomplete is temporarily unavailable'}),{status:503});
+  }};
+  vm.createContext(sandbox); vm.runInContext(source,sandbox);
+  const query='?q=Carrer%20%26%20city%3DMadrid';
+  const response=await sandbox.worker.fetch(new Request('https://parrot669.com/api/host/geocode/autocomplete'+query,{
+    headers:{Cookie:'other=secret; parrot_session=test-session'}
+  }),{});
+  assert.equal(response.status,503);
+  assert.equal(forwarded.url,'https://api.parrot669.com/api/geocode/autocomplete'+query);
+  assert.equal(forwarded.headers.get('Cookie'),'parrot_session=test-session');
+  assert.equal(response.headers.get('Cache-Control'),'no-store');
+  assert.match((await response.json()).error,/unavailable/);
+});
+
 for (const [method,route,status] of [
   ['GET',`/properties/${id}/unavailability`,200],
   ['POST',`/properties/${id}/unavailability`,409],

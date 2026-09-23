@@ -137,6 +137,7 @@ export default {
         (path === "/auth/logout" && request.method === "POST") ||
         (path === "/auth/me" && request.method === "GET") ||
         (path === "/dashboard" && request.method === "GET") ||
+        (path === "/geocode/autocomplete" && request.method === "GET") ||
         (path === "/properties" && request.method === "POST") ||
         (/^\/properties\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
         (/^\/properties\/[0-9a-f-]+\/listings$/i.test(path) && request.method === "POST") ||

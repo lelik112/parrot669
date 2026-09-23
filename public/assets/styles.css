@@ -1837,3 +1837,39 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
   .host-dates .host-period-actions .button,.host-unavailability-add .host-period-actions .button{width:100%}
   .host-dates .host-period-actions .button{min-width:0;padding-left:10px;padding-right:10px;white-space:normal}
 }
+
+/* Owner address input and suggestions share the full form width. */
+.host-property-form{grid-template-columns:repeat(3,minmax(0,1fr));align-items:end}
+.host-property-form>label:first-child,.host-property-form>.button,
+.host-address-slot,.host-address-field{grid-column:1/-1;min-width:0}
+.host-address-field{display:grid;gap:10px;position:relative}
+.host-address-field input{height:48px;font-size:16px}
+.host-address-field input[aria-invalid="true"]{border-color:#f2b5a8}
+.host-address-help,.host-address-status{margin:0;color:#9aaba5;font-size:13px;line-height:1.5;letter-spacing:normal;text-transform:none}
+.host-address-status.host-inline-error{color:#f2b5a8}
+.host-address-dropdown{border:1px solid rgba(216,255,99,.35);border-radius:12px;overflow:hidden;background:#071416;box-shadow:0 12px 30px rgba(0,0,0,.2)}
+.host-address-options{list-style:none;padding:0;margin:0;max-height:300px;overflow-y:auto;overscroll-behavior:contain}
+.host-address-option{display:grid;gap:4px;min-height:52px;padding:12px 14px;box-sizing:border-box;cursor:pointer;color:#eef2ee;font-size:15px;line-height:1.4;overflow-wrap:anywhere;border-bottom:1px solid rgba(255,255,255,.07)}
+.host-address-option:hover,.host-address-option[aria-selected="true"]{background:rgba(216,255,99,.12);color:var(--lime)}
+.host-address-option small{color:#a3b3ac;font-size:12px}
+.host-address-attribution{display:block;padding:10px 14px;color:#a3b3ac;font-size:11px;text-align:right}
+.host-address-location{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:12px 14px;background:rgba(216,255,99,.04);border:1px solid rgba(216,255,99,.14);border-radius:10px}
+.host-address-location>div{display:grid;gap:5px;min-width:0}
+.host-address-location span{color:#84938f;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.host-address-location strong{color:#dce5df;font-size:14px;font-weight:500;overflow-wrap:anywhere}
+.host-address-retry{justify-self:start;min-height:44px}
+.host-address-field [hidden]{display:none!important}
+.host-property-settings .host-address-field{margin-bottom:6px}
+.host-property-settings .host-settings-form{grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,.6fr)) auto}
+@media(max-width:900px){
+  .host-property-settings .host-settings-form{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .host-property-settings .host-settings-form>.button{grid-column:1/-1}
+}
+@media(max-width:640px){
+  .host-property-form{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .host-property-form>label:nth-of-type(2){grid-column:1/-1}
+  .host-property-settings .host-settings-form{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .host-property-settings .host-settings-form>label:first-of-type{grid-column:1/-1}
+  .host-address-option{min-height:56px;padding:12px;font-size:16px}
+  .host-address-options{max-height:280px}
+}

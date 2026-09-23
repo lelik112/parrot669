@@ -115,6 +115,14 @@ const periodUiCopy = {
 };
 Object.entries(periodUiCopy).forEach(([language, values]) => Object.assign(copy[language], values));
 
+const addressCopy = {
+  en:{addressLabel:"Property address",addressPlaceholder:"Street, house number, city",addressHelp:"Start typing and select a suggestion. Country and city fill automatically. Only you can see the exact address.",countryLabel:"Country",addressSuggestions:"Address suggestions",addressLoading:"Looking for addresses…",addressChoose:"Select an address from the suggestions.",addressMore:"Enter at least 3 characters.",addressNoResults:"No complete address found. Add the street, city or country.",addressUnavailable:"Address suggestions are unavailable. Your input is saved — try again.",addressSignIn:"Sign in again to look up addresses.",addressSelected:"Address selected. Country and city filled automatically.",addressRetry:"Try again",addressTooLong:"Use a shorter search, up to 256 characters."},
+  es:{addressLabel:"Dirección de la vivienda",addressPlaceholder:"Calle, número, ciudad",addressHelp:"Empieza a escribir y selecciona una sugerencia. País y ciudad se rellenan automáticamente. Solo tú puedes ver la dirección exacta.",countryLabel:"País",addressSuggestions:"Sugerencias de direcciones",addressLoading:"Buscando direcciones…",addressChoose:"Selecciona una dirección de las sugerencias.",addressMore:"Introduce al menos 3 caracteres.",addressNoResults:"No se encontró una dirección completa. Añade la calle, ciudad o país.",addressUnavailable:"Las sugerencias no están disponibles. Conservamos el texto; vuelve a intentarlo.",addressSignIn:"Vuelve a iniciar sesión para buscar direcciones.",addressSelected:"Dirección seleccionada. País y ciudad completados automáticamente.",addressRetry:"Reintentar",addressTooLong:"Acorta la búsqueda a un máximo de 256 caracteres."},
+  ca:{addressLabel:"Adreça de l’habitatge",addressPlaceholder:"Carrer, número, ciutat",addressHelp:"Comença a escriure i selecciona un suggeriment. El país i la ciutat s’emplenen automàticament. Només tu pots veure l’adreça exacta.",countryLabel:"País",addressSuggestions:"Suggeriments d’adreces",addressLoading:"Cercant adreces…",addressChoose:"Selecciona una adreça dels suggeriments.",addressMore:"Introdueix almenys 3 caràcters.",addressNoResults:"No s’ha trobat cap adreça completa. Afegeix el carrer, la ciutat o el país.",addressUnavailable:"Els suggeriments no estan disponibles. Conservem el text; torna-ho a provar.",addressSignIn:"Torna a iniciar sessió per cercar adreces.",addressSelected:"Adreça seleccionada. País i ciutat emplenats automàticament.",addressRetry:"Torna-ho a provar",addressTooLong:"Escurça la cerca a un màxim de 256 caràcters."},
+  ru:{addressLabel:"Адрес объекта",addressPlaceholder:"Улица, номер дома, город",addressHelp:"Начните вводить адрес и выберите подсказку. Страна и город заполнятся автоматически. Точный адрес видите только вы.",countryLabel:"Страна",addressSuggestions:"Подсказки адресов",addressLoading:"Ищем адреса…",addressChoose:"Выберите адрес из списка подсказок.",addressMore:"Введите хотя бы 3 символа.",addressNoResults:"Полный адрес не найден. Добавьте улицу, город или страну.",addressUnavailable:"Подсказки адресов сейчас недоступны. Введённый текст сохранён — попробуйте ещё раз.",addressSignIn:"Войдите снова, чтобы найти адрес.",addressSelected:"Адрес выбран. Страна и город заполнены автоматически.",addressRetry:"Повторить поиск",addressTooLong:"Сократите поисковый запрос до 256 символов."}
+};
+Object.entries(addressCopy).forEach(([language, values]) => Object.assign(copy[language], values));
+
 const statusNode = document.getElementById("host-status");
 const authDialog = document.getElementById("auth-dialog");
 const authDialogTitle = document.getElementById("auth-dialog-title");
@@ -132,6 +140,17 @@ const propertiesNode = document.getElementById("host-properties");
 const resetButton = document.getElementById("reset-host");
 const langButtons = document.querySelectorAll("[data-host-lang]");
 const authModeButtons = document.querySelectorAll("[data-auth-mode]");
+const propertyAddressEditors = new Map();
+const newPropertyAddress = window.ParrotAddress.create({
+  id:"new-property-address", tr, request:api, required:true, onUnauthorized:addressSessionExpired
+});
+document.getElementById("property-address").append(newPropertyAddress.node);
+
+function addressSessionExpired(){
+  state = {...state, authenticated:false};
+  renderAuthState();
+  openAuth("login");
+}
 
 function loadLanguage(){
   const saved = localStorage.getItem(LANG_KEY);
@@ -162,6 +181,7 @@ function applyLanguage(next){
   });
   langButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.hostLang === lang));
   updateAuthDialog();
+  newPropertyAddress.updateLanguage();
   renderProperties();
 }
 
@@ -205,6 +225,7 @@ async function api(path, options = {}){
   if (!response.ok) {
     const detail = data?.error || data?.message || `HTTP ${response.status}`;
     const knownErrors = {
+      "select an address with a country and city":"addressChoose",
       "availability period overlaps an existing period":"overlapError",
       "unavailability period overlaps an existing block":"blockOverlap",
       "to must be after from; checkout date is exclusive":"blockDateError",
@@ -445,15 +466,17 @@ propertyForm.addEventListener("submit", async event => {
 
   const form = new FormData(propertyForm);
   setFormError(propertyForm);
-  setBusy(propertyForm, true);
-  message(tr("addingProperty"));
 
   try {
+    const address = newPropertyAddress.getValue();
+    setBusy(propertyForm, true);
+    message(tr("addingProperty"));
     const created = await api("/properties", {
       method:"POST",
       body:JSON.stringify({
         title:String(form.get("title") || "").trim(),
-        city:String(form.get("city") || "").trim(),
+        city:address.city,
+        address,
         accommodationType:String(form.get("accommodationType") || "entire_place"),
         bedrooms:Number(form.get("bedrooms")),
         sleeps:Number(form.get("sleeps"))
@@ -464,6 +487,9 @@ propertyForm.addEventListener("submit", async event => {
       id:created.id,
       title:created.title,
       city:created.city,
+      countryCode:created.countryCode,
+      country:created.country,
+      address:created.address,
       accommodationType:created.accommodationType,
       bedrooms:created.bedrooms,
       sleeps:created.sleeps,
@@ -476,6 +502,7 @@ propertyForm.addEventListener("submit", async event => {
     });
     expandedPropertyIds.add(created.id);
     propertyForm.elements.title.value = "";
+    newPropertyAddress.reset();
     message(tr("propertyAdded"), "success");
     renderProperties();
   } catch (error) {
@@ -499,6 +526,7 @@ resetButton.addEventListener("click", async () => {
     }
   }
   state = emptyState();
+  newPropertyAddress.reset();
   expandedPropertyIds.clear();
   renderAuthState();
   renderProperties();
@@ -527,9 +555,11 @@ async function updatePropertySettings(property, form){
     minStayDays:data.has("minStayDays") ? Number(data.get("minStayDays")) : Number(property.minStayDays||1),
     cleaningFeeCents:data.has("cleaningFee") ? eurosToCents(data.get("cleaningFee")) : property.cleaningFeeCents
   };
-  setBusy(form,true);
-  message(tr("loading"));
   try{
+    const addressEditor = propertyAddressEditors.get(form);
+    if (addressEditor) payload.address = addressEditor.getValue();
+    setBusy(form,true);
+    message(tr("loading"));
     const updated=await api(`/properties/${property.id}`,{
       method:"PUT",
       body:JSON.stringify(payload)
@@ -539,6 +569,10 @@ async function updatePropertySettings(property, form){
     property.sleeps=updated.sleeps;
     property.minStayDays=updated.minStayDays;
     property.cleaningFeeCents=updated.cleaningFeeCents;
+    property.city=updated.city;
+    property.countryCode=updated.countryCode;
+    property.country=updated.country;
+    property.address=updated.address;
     saveState();
     message(tr("propertySettingsSaved"),"success");
     renderProperties();
@@ -915,6 +949,8 @@ function renderUnavailability(property){
 
 function renderProperties(){
   if (!propertiesNode) return;
+  propertyAddressEditors.forEach(editor => editor.dispose());
+  propertyAddressEditors.clear();
   propertiesNode.replaceChildren();
 
   if (!state.authenticated) return;
@@ -940,7 +976,7 @@ function renderProperties(){
     const meta = document.createElement("span");
     const sleeps = Number(property.sleeps || property.bedrooms || 1);
     const accommodationType = property.accommodationType === "private_room" ? tr("privateRoom") : tr("entirePlace");
-    meta.textContent = `${property.city} · ${accommodationType} · ${tr("bedroom", Number(property.bedrooms))} · ${tr("sleepSummary", sleeps)}`;
+    meta.textContent = `${[property.city, property.country].filter(Boolean).join(", ")} · ${accommodationType} · ${tr("bedroom", Number(property.bedrooms))} · ${tr("sleepSummary", sleeps)}`;
     title.append(strong, meta);
     const headActions=document.createElement("div");
     headActions.className="host-property-head-actions";
@@ -970,6 +1006,11 @@ function renderProperties(){
     settingsTitle.textContent=tr("propertySettings");
     const settingsForm=document.createElement("form");
     settingsForm.className="host-settings-form";
+    const addressEditor = window.ParrotAddress.create({
+      id:`property-address-${property.id}`, tr, request:api,
+      initial:property.address || null, location:property, onUnauthorized:addressSessionExpired
+    });
+    propertyAddressEditors.set(settingsForm, addressEditor);
     const accommodationLabel=document.createElement("label");
     const accommodationText=document.createElement("span");
     accommodationText.textContent=tr("accommodationTypeLabel");
@@ -996,7 +1037,7 @@ function renderProperties(){
     sleepsLabel.append(sleepsText,sleepsInput);
     const saveSettings=document.createElement("button");
     saveSettings.className="button button-small";saveSettings.type="submit";saveSettings.textContent=tr("savePropertySettings");
-    settingsForm.append(accommodationLabel,bedroomsLabel,sleepsLabel,saveSettings);
+    settingsForm.append(addressEditor.node,accommodationLabel,bedroomsLabel,sleepsLabel,saveSettings);
     settingsForm.addEventListener("submit",event=>{event.preventDefault();updatePropertySettings(property,settingsForm)});
     settings.append(settingsTitle,settingsForm);
 

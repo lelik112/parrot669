@@ -113,12 +113,7 @@
           <span data-host-i18n="internalLabel">Internal label</span>
           <input name="title" required maxlength="160" data-host-placeholder="propertyPlaceholder" placeholder="Poblenou apartment" />
         </label>
-        <label>
-          <span data-host-i18n="cityLabel">City</span>
-          <select name="city" required>
-            <option value="Barcelona">Barcelona</option>
-          </select>
-        </label>
+        <div id="property-address" class="host-address-slot"></div>
         <label>
           <span data-host-i18n="accommodationTypeLabel">Accommodation type</span>
           <select name="accommodationType" required>
@@ -141,6 +136,7 @@
     </section>
   </main>
 
+  <script src="/assets/host-address.js"></script>
   <script src="/assets/host.js"></script>
 </body>
 </html>

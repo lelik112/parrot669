@@ -34,7 +34,7 @@ Current MVP principle:
 ### Host
 1. Open `/host.html`.
 2. Register or log in with email/password. Authentication uses a server-side session in an HttpOnly cookie; host credentials are not stored in frontend JavaScript/localStorage.
-3. Choose a city (currently only Barcelona), create a property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay.
+3. Enter a property address and select a Geoapify suggestion; country and city fill automatically. Create the property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay. Owners can edit the address in property characteristics; the exact address and coordinates are private to the owner.
 3a. Accommodation type, bedrooms and sleeping places are editable property characteristics. Minimum stay and optional cleaning fee are editable alongside PARROT availability/pricing controls. Property cards are collapsed by default to a compact summary and can be expanded for editing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
 5. PARROT generates the canonical Airbnb URL. The host may hide that URL from guest search without disconnecting the listing or calendar.
@@ -63,7 +63,7 @@ Properties carry normalized `country_code`, `country` and `city`. Guest location
 - There is no separate `cities` table and no internal city id at this stage.
 - Guest search does not call Geoapify or another external geocoder.
 
-Host property creation is still temporarily limited to Barcelona until owner-side address autocomplete is connected. The intended next step is to validate owner-entered addresses through an external provider and store normalized country/city/address/coordinates/provider place id on the property. The external provider is ingestion-only; PARROT's database remains the source for guest discovery.
+Host address autocomplete is connected through the authenticated backend/Worker proxy. The selected normalized country/city/address/coordinates/provider place ID are validated and saved on the property. New UI creates require an address selection; existing properties retain their previous location until edited. The external provider is used only for owner input; PARROT's database remains the source for guest discovery. No map is included.
 
 ## Navigation
 
@@ -213,7 +213,7 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 ## Immediate TODO
 
-- Connect owner-side address autocomplete/geocoding and remove the remaining Barcelona-only property-creation restriction.
+- Address autocomplete and storage are connected; map UI and any guest address-visibility policy remain separate future work.
 - Improve visual design of housing/search/host UI.
 - Connect a backend email provider and add real password-reset request/confirm endpoints using the reserved reset-token model.
 - Add owner messaging/privacy preferences.

@@ -1,5 +1,15 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Host address autocomplete and persistence
+
+- Replace the Barcelona city selector with a labeled address field in create/edit forms.
+- Fetch suggestions through the authenticated Worker proxy; debounce, cancel stale queries,
+  support keyboard/touch selection and show retry/error states without losing the text.
+- Fill country/city from selection and save the complete address with the property.
+- Clear stale coordinates when text changes; keep exact addresses private to the owner.
+- Backend V19 preserves existing records and lets normalized properties use other locations;
+  guest discovery continues to read our own database.
+
 ## 2026-09-23 — Compact responsive period layout
 
 - Desktop period controls share one row: dates, labeled nightly price and actions.
