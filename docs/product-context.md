@@ -268,6 +268,9 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 ## Immediate TODO
 
+- Continue backend extraction in small CI-verified steps: housing/availability, dashboard/profile assembly, auth, then calendar sync and legacy challenges after coordinating parallel calendar work. Keep behavior fixes separate from mechanical moves.
+- Separate backend fixes identified in the source review: align accepted 254-character emails with `profiles.contact VARCHAR(200)`; bound verification-email transport waits; bound/expire login limiter state and make concurrent admission explicit.
+- Batch search enrichment separately and handle a property deleted between candidate selection and fee lookup; the current per-result `.unique` fee read can fail the entire search. Make legacy challenge creation and verification-token replacement atomic; map duplicate listing constraints to a deliberate API response.
 - Address autocomplete and storage are connected; map UI and any guest address-visibility policy remain separate future work.
 - Improve visual design of housing/search/host UI.
 - Add abuse reporting/moderation and email bounce/delivery webhooks. Inbox, notifications, Worker proxy, host opt-in and participant blocking are connected.
