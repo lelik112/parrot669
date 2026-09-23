@@ -1,7 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../src/index.js'),'utf8').replace('export default {','globalThis.worker = {');
 const id='11111111-1111-4111-8111-111111111111';
-for(const [method,route] of [['GET',`/contact-options/${id}`],['GET','/settings'],['PUT','/settings'],['GET','/unread'],
+for(const [method,route] of [['GET',`/contact-options/${id}`],['GET','/settings'],['PUT','/settings'],['GET','/notification-settings'],['PUT','/notification-settings'],['GET','/unread'],
   ['GET','/conversations?limit=20&cursor=opaque%2Bcursor'],['POST','/conversations'],['GET',`/conversations/for-property/${id}`],
   ['GET',`/conversations/${id}`],['GET',`/conversations/${id}/messages?afterSequence=20`],['POST',`/conversations/${id}/messages`],
   ['PUT',`/conversations/${id}/read`],['PUT',`/conversations/${id}/block`]]) {

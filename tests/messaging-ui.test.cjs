@@ -31,6 +31,7 @@ async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=tr
     if(custom!==undefined) return custom instanceof Response?custom:response(custom);
     if(request.path==='/api/host/auth/me') return loggedIn?response(user):response({error:'unauthorized'},401);
     if(request.path==='/api/messaging/unread') return response({conversations:1,messages:1});
+    if(request.path==='/api/messaging/notification-settings') return response({enabled:true,language:'en'});
     if(request.path==='/api/messaging/conversations') return response({items:[],nextCursor:null});
     if(request.path===`/api/messaging/conversations/for-property/${property}`) return response(null);
     if(request.path===`/api/messaging/contact-options/${property}`) return response({propertyId:property,propertyTitle:'Apartment',hostDisplayName:'Host',hostProfileId:'host',acceptingNewConversations:true});
@@ -38,7 +39,7 @@ async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=tr
     throw Error(`Unexpected request: ${request.method} ${raw}`);
   };
   w.eval(file('assets/messaging-common.js'));
-  if(page==='messages.html') w.eval(file('assets/messages.js'));
+  if(page==='messages.html') { w.eval(file('assets/messaging-email-settings.js')); w.eval(file('assets/messages.js')); }
   await flush();
   return {w,calls,intervals,$:id=>w.document.getElementById(id),submit:form=>form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})),
     input:(element,value)=>{element.value=value;element.dispatchEvent(new w.Event('input',{bubbles:true}));}};
@@ -165,4 +166,31 @@ test('search contact actions respect opt-in and pass the result dates without ex
   await flush();const link=container.querySelector('a');assert.equal(link.hidden,false);
   assert.equal(new URL(link.href).searchParams.get('to'),'2027-05-04');
   h.w.ParrotMessaging.setLanguage('ru');assert.equal(link.textContent,'Написать владельцу');
+});
+
+test('email settings persist both preference and language; failed changes restore server state',async t=>{
+  let saved={enabled:true,language:'ru'},fail=false;
+  const h=await harness(t,{handler:r=>{
+    if(r.path==='/api/messaging/notification-settings') {
+      if(r.method==='PUT') {if(fail)return response({error:'unavailable'},503);saved=r.body;}
+      return saved;
+    }
+  }});
+  const toggle=h.$('msg-email-enabled'),language=h.$('msg-email-language');
+  assert.equal(toggle.checked,true);assert.equal(language.value,'ru');
+  toggle.checked=false;toggle.dispatchEvent(new h.w.Event('change'));await flush();
+  assert.deepEqual(saved,{enabled:false,language:'ru'});
+  fail=true;toggle.checked=true;toggle.dispatchEvent(new h.w.Event('change'));await flush();
+  assert.equal(toggle.checked,false);assert.match(h.$('msg-email-status').textContent,/connect/i);
+  h.w.ParrotMessaging.setUser(null);assert.equal(h.$('msg-email-settings').hidden,true);
+});
+
+test('late email preference response is discarded after switching accounts',async t=>{
+  const late=deferred();let reads=0;
+  const h=await harness(t,{handler:r=>{
+    if(r.path==='/api/messaging/notification-settings') return ++reads===1?late.promise:{enabled:false,language:'ca'};
+  }});
+  h.w.ParrotMessaging.setUser({...user,accountId:'different-account'});await flush();
+  late.resolve({enabled:true,language:'ru'});await flush();
+  assert.equal(h.$('msg-email-enabled').checked,false);assert.equal(h.$('msg-email-language').value,'ca');
 });
