@@ -20,6 +20,7 @@ const form=document.getElementById("availability-form");
 const results=document.getElementById("availability-results");
 const countrySelect=form.elements.country;
 const citySelect=form.elements.city;
+const submitButton=form.querySelector('button[type="submit"]');
 const accommodationTypeFilter=document.getElementById("filter-accommodation-type");
 const pricedOnlyFilter=document.getElementById("filter-priced-only");
 const minPriceFilter=document.getElementById("filter-price-from");
@@ -83,6 +84,9 @@ function restoreSearchState(){
     return null;
   }
 }
+function updateSearchSubmitState(){
+  submitButton.disabled=!(countrySelect.value&&citySelect.value);
+}
 function countryDisplayName(code,fallback){
   try{
     return new Intl.DisplayNames([lang],{type:"region"}).of(code)||fallback;
@@ -110,6 +114,7 @@ function refreshLocationLabels(){
 async function loadCities(countryCode,preferredCity=""){
   resetLocationSelect(citySelect,"chooseCity");
   citySelect.disabled=true;
+  updateSearchSubmitState();
   if(!countryCode) return;
 
   const response=await fetch("/api/locations/cities?country="+encodeURIComponent(countryCode),{headers:{Accept:"application/json"}});
@@ -129,6 +134,7 @@ async function loadCities(countryCode,preferredCity=""){
   else if(cities.length===1) citySelect.value=String(cities[0].name||"");
 
   citySelect.disabled=cities.length===0;
+  updateSearchSubmitState();
 }
 async function loadLocations(saved){
   countrySelect.disabled=true;
@@ -157,6 +163,7 @@ async function loadLocations(saved){
     else if(countries.length===1) countrySelect.value=String(countries[0].code||"");
 
     await loadCities(countrySelect.value,String(saved&&saved.city||""));
+    updateSearchSubmitState();
     saveSearchState();
   }catch(error){
     console.error(error);
@@ -288,8 +295,7 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
   params.set("pricedOnly",pricedOnlyFilter?.checked?"true":"false");
   if(minPriceCents!=null) params.set("minPriceCents",String(minPriceCents));
   if(maxPriceCents!=null) params.set("maxPriceCents",String(maxPriceCents));
-  const submit=form.querySelector('button[type="submit"]');
-  if(disableSubmit) submit.disabled=true;
+  if(disableSubmit) submitButton.disabled=true;
   if(pricedOnlyFilter) pricedOnlyFilter.disabled=true;
   state(t("loading"),"loading");
   try{
@@ -301,7 +307,7 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
     console.error(error);
     if(requestId===searchSequence) state(t("error"),"error");
   }finally{
-    if(disableSubmit) submit.disabled=false;
+    if(disableSubmit) updateSearchSubmitState();
     if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
   }
 }
@@ -320,6 +326,10 @@ form.addEventListener("input",saveSearchState);
     saveSearchState();
     if(lastSearchParams) runSearch(lastSearchParams);
   });
+});
+citySelect.addEventListener("change",()=>{
+  updateSearchSubmitState();
+  saveSearchState();
 });
 countrySelect.addEventListener("change",async()=>{
   try{
