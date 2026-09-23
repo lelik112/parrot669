@@ -2,12 +2,15 @@
 
 Static site + Cloudflare Worker API proxy/contact endpoint.
 
-## Cascading address input — 2026-09-23
+## LocationIQ address input — 2026-09-23
 
 - Country list is local to our backend; city searches are scoped to country, street
-  searches to the chosen city. House number is entered separately without a lookup.
+  searches to the chosen city's bounds. LocationIQ receives the selected city and
+  typed street fragment with a roads-only filter. House number is entered separately.
 - Autocomplete waits 700ms and uses 15-minute browser/server caches. Focus alone never
-  calls Geoapify; up to 10 geographically scoped suggestions are displayed.
+  calls the provider; up to 10 geographically scoped suggestions are displayed.
+- Backend pacing and localized 429 errors preserve input when the provider limit is
+  reached. The form displays Search by LocationIQ.com attribution. No Catalan-prefix fallback.
 - Parent field changes clear dependent selections. Existing locations remain editable
   without re-geocoding unless the owner chooses Change address.
 - Regression coverage includes mobile taps, city/street filtering, credit-saving

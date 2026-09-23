@@ -1,5 +1,12 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — LocationIQ owner address lookup
+
+- Replace Geoapify with LocationIQ for country → city → street entry. Keep the selected city's geographic bounds and search only road records, with the city included in each query.
+- Remove the Catalan-prefix fallback. Deduplicate road segments and reject neighboring-city/POI results; each uncached street lookup uses one provider request.
+- Preserve caches, mobile selection, manual house numbers, existing saved addresses and PostgreSQL-only guest search.
+- Add backend request pacing, clear quota errors and visible LocationIQ attribution. No database migration.
+
 ## 2026-09-23 — Guest/host inbox and participant blocking
 
 - Connect search's **Write to host**, a Messages tab with unread counts and the owner's account-level opt-in control. No external listing is required to communicate.
