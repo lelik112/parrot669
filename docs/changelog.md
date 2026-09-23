@@ -8,6 +8,7 @@
 - Serialize login/verification session creation with reset, so a concurrent old credential cannot survive revocation. Tokens stay out of URL queries, browser storage and logs. No migration or new credentials required.
 - Add PostgreSQL/HTTP, rename smoke and browser-controller regression checks. Preserve the parallel geolocation fixes and their search tests.
 - Recovery delivery uses a bounded in-memory queue; users can retry if delivery fails or a restart interrupts it. Message notification delivery remains durable.
+- Released backend `39f3f92` and frontend `be9db76`: main CI passes (51 backend tests plus PostgreSQL smoke/Docker; 90 frontend tests), Railway and Cloudflare deployments succeed. Live desktop checks confirm budget validation, translated results, readable fields, editable-title controls and the recovery page. Evidence and remaining mailbox/mobile limitations are recorded in the QA report.
 
 ## 2026-09-23 — Geolocation QA: guest search state and accessible labels
 

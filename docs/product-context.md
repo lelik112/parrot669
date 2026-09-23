@@ -206,6 +206,7 @@ Owner authentication is account/session based:
 - Reset atomically replaces the Argon2id password, confirms email possession, revokes all sessions and invalidates other recovery/verification tokens. Account/profile/property identity is retained. Login and email verification serialize session creation with reset; an old credential in flight cannot recreate a valid session afterwards. Reset does not auto-login.
 - Recovery request acceptance is asynchronous and does not disclose whether an email exists. Its process-local queue is bounded to 64 jobs; restart/provider failure may require another request. This queue is intentionally separate from the durable messaging outbox. The page tells users to check spam and retry; password-change notices are best effort.
 - Recovery links carry secrets in a fragment, removed from the visible URL on load. The page uses no-referrer and stores neither reset tokens nor passwords in browser storage. Recovery APIs cap JSON at 16 KiB and return no-store responses.
+- The nine confirmed general findings in `docs/qa/2026-09-23/PARROT669-QA-2026-09-23.md` were fixed and released on 2026-09-23 (backend `39f3f92`, frontend `be9db76`). CI, production deployment and focused desktop checks passed; real-mailbox recovery and mobile/touch coverage remain explicitly unverified in that report.
 - The pre-account `editToken`/`access_token_hash` mechanism and its compatibility routes have been removed.
 
 Private messaging and its UI are implemented; broader contact publishing remains a future decision.
