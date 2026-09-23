@@ -100,6 +100,35 @@ function setup(routes = {}, search = '') {
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
 
+test('date hints follow selection, automatic end date and clearing; saved prices keep a visible label', async () => {
+  const app=setup();
+  await settle();
+  const card=propertyCard(app);
+  for(const selector of ['.host-dates','.host-unavailability-add']){
+    const form=card.querySelector(selector);
+    const inputs=form.querySelectorAll('input');
+    const hints=form.querySelectorAll('.host-date-hint');
+    assert.equal(hints.length,2);
+    assert.equal(hints.every(h=>!h.hidden && h.textContent==='Select date'),true);
+    inputs[0].value='2026-10-10';
+    await inputs[0].emit('change');
+    assert.equal(inputs[1].value,'2026-10-10');
+    assert.equal(hints.every(h=>h.hidden),true);
+    inputs[1].value='';
+    await inputs[1].emit('input');
+    assert.equal(hints[1].hidden,false);
+    assert.equal(inputs[1].dataset.empty,'true');
+  }
+  const row=card.querySelector('.host-availability-panel').querySelector('.host-period');
+  const price=row.querySelector('.host-price-label');
+  assert.equal(price.children[0].textContent,'Price per night, €');
+  assert.equal(price.querySelector('input').value,'100');
+  assert.equal(row.querySelectorAll('.host-date-hint').every(h=>h.hidden),true);
+  const actions=row.querySelector('.host-period-actions');
+  assert.equal(actions.querySelectorAll('button').length,2);
+  assert.equal(actions.querySelectorAll('input').length,0);
+});
+
 test('manual blocks have a separate panel, send no price and preserve availability through CRUD', async () => {
   const block = {id:'block-1', from:'2026-10-02', to:'2026-10-04'};
   const app = setup({

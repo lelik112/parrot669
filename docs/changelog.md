@@ -1,5 +1,12 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Clear owner period cards on mobile
+
+- Saved availability and manual blocks are separate cards with labeled fields and a dedicated action row.
+- Price per night keeps its visible label and EUR unit even when filled.
+- Empty owner date controls show a localized hint and calendar icon without relying on native date placeholders.
+- Mobile fields use a single column so dates fit comfortably; native date pickers and inclusive-night semantics are preserved.
+
 ## 2026-09-23 — Inclusive owner date ranges
 
 - Owner availability and manual blocks now include the selected last night, with explicit labels and guidance in all four languages.

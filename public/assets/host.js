@@ -107,6 +107,14 @@ const hostDateCopy = {
 };
 Object.entries(hostDateCopy).forEach(([language, values]) => Object.assign(copy[language], values));
 
+const periodUiCopy = {
+  en:{chooseDate:"Select date",priceLabel:"Price per night, €",priceOptional:"Optional",newPeriod:"Add available dates",savedPeriod:"Available period",savedBlock:"Blocked period"},
+  es:{chooseDate:"Elegir fecha",priceLabel:"Precio por noche, €",priceOptional:"Opcional",newPeriod:"Añadir fechas disponibles",savedPeriod:"Período disponible",savedBlock:"Período bloqueado"},
+  ca:{chooseDate:"Tria una data",priceLabel:"Preu per nit, €",priceOptional:"Opcional",newPeriod:"Afegir dates disponibles",savedPeriod:"Període disponible",savedBlock:"Període bloquejat"},
+  ru:{chooseDate:"Выберите дату",priceLabel:"Цена за ночь, €",priceOptional:"Необязательно",newPeriod:"Добавить свободные даты",savedPeriod:"Доступный период",savedBlock:"Период недоступности"}
+};
+Object.entries(periodUiCopy).forEach(([language, values]) => Object.assign(copy[language], values));
+
 const statusNode = document.getElementById("host-status");
 const authDialog = document.getElementById("auth-dialog");
 const authDialogTitle = document.getElementById("auth-dialog-title");
@@ -583,8 +591,40 @@ function hostDateLabel(input, key){
   label.className = "host-date-label";
   const caption = document.createElement("span");
   caption.textContent = tr(key);
+  const control = document.createElement("span");
+  control.className = "host-date-control";
+  const hint = document.createElement("span");
+  hint.className = "host-date-hint";
+  hint.textContent = tr("chooseDate");
+  hint.setAttribute("aria-hidden", "true");
+  input.refreshDateHint = () => {
+    hint.hidden = Boolean(input.value);
+    input.dataset.empty = String(!input.value);
+  };
+  input.addEventListener("input", input.refreshDateHint);
+  input.addEventListener("change", input.refreshDateHint);
+  input.refreshDateHint();
+  control.append(input, hint);
+  label.append(caption, control);
+  return label;
+}
+
+function hostPriceLabel(input){
+  const label = document.createElement("label");
+  label.className = "host-date-label host-price-label";
+  const caption = document.createElement("span");
+  caption.textContent = tr("priceLabel");
+  input.placeholder = tr("priceOptional");
+  input.inputMode = "decimal";
   label.append(caption, input);
   return label;
+}
+
+function periodHeading(form, key){
+  const heading = document.createElement("h4");
+  heading.className = "host-period-heading";
+  heading.textContent = tr(key);
+  form.append(heading);
 }
 
 async function addAvailability(property, form){
@@ -818,14 +858,11 @@ function renderUnavailability(property){
   function dateForm(period = null){
     const form = document.createElement("form");
     form.className = period ? "host-period host-unavailability-period" : "host-inline-form host-unavailability-add";
+    if (period) periodHeading(form, "savedBlock");
     function dateField(name, text, value){
-      const label = document.createElement("label");
-      const span = document.createElement("span");
-      span.textContent = tr(text);
       const input = document.createElement("input");
       input.name = name; input.type = "date"; input.required = true; input.value = value || "";
-      label.append(span, input);
-      form.append(label);
+      form.append(hostDateLabel(input, text));
       return input;
     }
     const from = dateField("from", "blockFrom", period?.from);
@@ -835,6 +872,7 @@ function renderUnavailability(property){
     from.addEventListener("change", () => {
       to.min = from.value;
       if (from.value && (!to.value || to.value < from.value)) to.value = to.min;
+      to.refreshDateHint();
     });
     const save = document.createElement("button");
     save.type = "submit";
@@ -848,13 +886,16 @@ function renderUnavailability(property){
         input.addEventListener("change", changed);
       });
     }
-    form.append(save);
+    const actions = document.createElement("div");
+    actions.className = "host-period-actions";
+    actions.append(save);
+    form.append(actions);
     form.addEventListener("submit", event => { event.preventDefault(); return saveUnavailability(property, form, period); });
     if (period) {
       const remove = document.createElement("button");
       remove.type = "button"; remove.className = "text-button danger"; remove.textContent = tr("remove");
       remove.addEventListener("click", () => deleteUnavailability(property, period, form));
-      form.append(remove);
+      actions.append(remove);
     }
     return form;
   }
@@ -1130,6 +1171,7 @@ function renderProperties(){
 
     const addForm = document.createElement("form");
     addForm.className = "host-inline-form host-dates";
+    periodHeading(addForm, "newPeriod");
     const fromInput = document.createElement("input");
     fromInput.type = "date";
     fromInput.name = "from";
@@ -1141,6 +1183,7 @@ function renderProperties(){
     fromInput.addEventListener("change", () => {
       toInput.min = fromInput.value;
       if (!toInput.value || toInput.value < fromInput.value) toInput.value = fromInput.value;
+      toInput.refreshDateHint();
     });
     const nightlyInput=document.createElement("input");
     nightlyInput.type="number";nightlyInput.min="0.01";nightlyInput.step="0.01";nightlyInput.name="nightlyPrice";nightlyInput.placeholder=tr("nightlyPrice");
@@ -1148,7 +1191,10 @@ function renderProperties(){
     addButton.className = "button button-small";
     addButton.type = "submit";
     addButton.textContent = tr("addDates");
-    addForm.append(hostDateLabel(fromInput, "firstNight"), hostDateLabel(toInput, "lastNight"), nightlyInput, addButton);
+    const addActions = document.createElement("div");
+    addActions.className = "host-period-actions";
+    addActions.append(addButton);
+    addForm.append(hostDateLabel(fromInput, "firstNight"), hostDateLabel(toInput, "lastNight"), hostPriceLabel(nightlyInput), addActions);
     addForm.addEventListener("submit", event => {
       event.preventDefault();
       return addAvailability(property, addForm);
@@ -1178,6 +1224,7 @@ function renderProperties(){
       property.availability.forEach(period => {
         const row = document.createElement("form");
         row.className = "host-period";
+        periodHeading(row, "savedPeriod");
 
         const from = document.createElement("input");
         from.type = "date";
@@ -1194,6 +1241,7 @@ function renderProperties(){
         from.addEventListener("change", () => {
           to.min = from.value;
           if (!to.value || to.value < from.value) to.value = from.value;
+          to.refreshDateHint();
         });
 
         const nightly=document.createElement("input");
@@ -1202,7 +1250,7 @@ function renderProperties(){
 
         const save = document.createElement("button");
         save.type = "submit";
-        save.className = "text-button";
+        save.className = "button button-small host-period-save";
         save.textContent = tr("save");
         save.hidden = true;
         const originalNightly = centsToEuros(period.nightlyPriceCents);
@@ -1227,7 +1275,10 @@ function renderProperties(){
         remove.textContent = tr("remove");
         remove.addEventListener("click", () => deleteAvailability(property, period));
 
-        row.append(hostDateLabel(from, "firstNight"), hostDateLabel(to, "lastNight"), nightly, save, remove);
+        const actions = document.createElement("div");
+        actions.className = "host-period-actions";
+        actions.append(save, remove);
+        row.append(hostDateLabel(from, "firstNight"), hostDateLabel(to, "lastNight"), hostPriceLabel(nightly), actions);
         periods.append(row);
       });
     }
