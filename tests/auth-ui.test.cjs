@@ -78,7 +78,7 @@ function setup(routes = {}, search = '') {
     localStorage: {getItem() {return null;}, setItem() {}},
     window: {location: {search, pathname:'/host', hash:''}},
     history: {replaceState() {}},
-    Headers, URLSearchParams,
+    Headers, URLSearchParams, confirm: () => true,
     FormData: class {
       constructor(form) {this.form = form;}
       get(key) {return (this.form.elements[key] || this.form.querySelectorAll('*').find(n => n.name === key))?.value;}
@@ -87,8 +87,8 @@ function setup(routes = {}, search = '') {
     fetch: async (url, options) => {
       const route = url.replace('/api/host', '');
       calls.push(route);
-      requests.push({route, body: options.body ? JSON.parse(options.body) : null});
-      const result = typeof routes[route] === 'function' ? await routes[route]() : routes[route];
+      requests.push({route, method: options.method || 'GET', body: options.body ? JSON.parse(options.body) : null});
+      const result = typeof routes[route] === 'function' ? await routes[route](options) : routes[route];
       const status = result?.status ?? (!result && route === '/auth/me' ? 401 : 200);
       return {status, ok:status < 400, json:async () => result?.body ?? {error:'Test error'}};
     }
@@ -99,6 +99,82 @@ function setup(routes = {}, search = '') {
 }
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
+
+test('manual blocks have a separate panel, send no price and preserve availability through CRUD', async () => {
+  const block = {id:'block-1', from:'2026-10-02', to:'2026-10-04'};
+  const app = setup({
+    '/properties/property-1/unavailability':{status:201,body:block},
+    '/unavailability/block-1':options => options.method === 'DELETE'
+      ? {status:204} : {body:{...block,...JSON.parse(options.body)}}
+  });
+  await settle();
+  let card = propertyCard(app);
+  const original = app.run('JSON.stringify(state.properties[0].availability)');
+  const panel = card.querySelector('.host-unavailability-panel');
+  assert.ok(card.querySelector('.host-availability-panel'));
+  assert.equal(panel.querySelectorAll('input').length, 2);
+  let form = panel.querySelector('.host-unavailability-add');
+  form.querySelectorAll('input')[0].value = block.from;
+  form.querySelectorAll('input')[1].value = block.to;
+  await form.emit('submit');
+  assert.deepEqual(app.requests.find(r => r.method === 'POST').body, {from:block.from,to:block.to});
+  card = app.nodes.get('host-properties').children[0];
+  form = card.querySelector('.host-unavailability-period');
+  form.querySelectorAll('input')[1].value = '2026-10-05';
+  await form.querySelectorAll('input')[1].emit('input');
+  assert.equal(form.querySelector('.host-block-button').hidden, false);
+  await form.emit('submit');
+  assert.deepEqual(app.requests.find(r => r.method === 'PUT').body, {from:block.from,to:'2026-10-05'});
+  assert.equal(app.run('state.properties[0].unavailability[0].to'), '2026-10-05');
+  form = app.nodes.get('host-properties').children[0].querySelector('.host-unavailability-period');
+  app.run('confirm = () => false');
+  await form.querySelector('.danger').emit('click');
+  assert.equal(app.requests.some(r => r.method === 'DELETE'), false);
+  app.run('confirm = () => true');
+  await form.querySelector('.danger').emit('click');
+  assert.equal(app.run('state.properties[0].unavailability.length'), 0);
+  assert.equal(app.run('JSON.stringify(state.properties[0].availability)'), original);
+});
+
+for (const action of ['add','edit']) {
+  for (const status of [400,409]) {
+    test(`manual block ${action}: HTTP ${status} keeps the draft and shows the error`, async () => {
+      const route = action === 'add' ? '/properties/property-1/unavailability' : '/unavailability/block-1';
+      const app = setup({[route]:{status,body:{error:status===409
+        ? 'unavailability period overlaps an existing block'
+        : 'to must be after from; end date is exclusive'}}});
+      await settle();
+      propertyCard(app);
+      app.run('lang="ru"; state.properties[0].unavailability=[{id:"block-1",from:"2026-10-02",to:"2026-10-04"}]; renderProperties()');
+      const form = app.nodes.get('host-properties').children[0].querySelector(
+        action === 'add' ? '.host-unavailability-add' : '.host-unavailability-period');
+      const inputs = form.querySelectorAll('input');
+      inputs[0].value = '2026-10-03'; inputs[1].value = '2026-10-06';
+      await form.emit('submit');
+      assert.match(form.querySelector('.host-form-error').textContent, /[А-Яа-я]/);
+      assert.equal(inputs[0].value,'2026-10-03');
+      assert.equal(inputs[1].value,'2026-10-06');
+      assert.equal(inputs.every(n => !n.disabled), true);
+      assert.equal(app.run('state.properties[0].unavailability[0].from'),'2026-10-02');
+    });
+  }
+}
+
+test('manual block duplicate submission sends a single request', async () => {
+  let resolve;
+  const route='/properties/property-1/unavailability';
+  const app=setup({[route]:()=>new Promise(r=>resolve=r)});
+  await settle();
+  const form=propertyCard(app).querySelector('.host-unavailability-add');
+  const inputs=form.querySelectorAll('input');
+  inputs[0].value='2026-10-02'; inputs[1].value='2026-10-04';
+  const pending=form.emit('submit');
+  await form.emit('submit');
+  assert.equal(app.calls.filter(p=>p===route).length,1);
+  resolve({status:201,body:{id:'block-1',from:inputs[0].value,to:inputs[1].value}});
+  await pending;
+  assert.equal(app.run('state.properties[0].unavailability.length'),1);
+});
 
 function propertyCard(app) {
   app.run(`state = {...emptyState(), authenticated:true, properties:[{

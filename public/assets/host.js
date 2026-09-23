@@ -91,6 +91,14 @@ let sessionLoading = true;
 let authBusy = false;
 const expandedPropertyIds = new Set();
 
+const blockCopy = {
+  en: {availability:"Available", availabilityHelp:"Dates offered in search. Manual blocks and imported reservations take priority.", unavailable:"Unavailable · manual blocks", unavailableHelp:"Block dates for your own use or other bookings. No price. Existing availability and prices are kept; blocked nights are excluded from search.", blockFrom:"Unavailable from", blockTo:"Available again on", addBlock:"Block dates", noBlocks:"No manual blocks yet.", blockSaved:"Unavailable dates saved.", blockDeleted:"Block removed. Availability rules apply again.", blockOverlap:"These dates overlap an existing manual block. Edit that block instead.", deleteBlockConfirm:(from,to)=>`Remove the block ${from} → ${to}? These dates may appear in search again.`, blockDateError:"The end date must be after the start date. The end date is not blocked."},
+  es: {availability:"Disponible", availabilityHelp:"Fechas ofrecidas en la búsqueda. Los bloqueos manuales y las reservas importadas tienen prioridad.", unavailable:"No disponible · bloqueos manuales", unavailableHelp:"Bloquea fechas para uso propio u otras reservas. Sin precio. Se conservan la disponibilidad y los precios; las noches bloqueadas se excluyen de la búsqueda.", blockFrom:"No disponible desde", blockTo:"Disponible de nuevo el", addBlock:"Bloquear fechas", noBlocks:"No hay bloqueos manuales.", blockSaved:"Fechas no disponibles guardadas.", blockDeleted:"Bloqueo eliminado. Vuelven a aplicarse las reglas de disponibilidad.", blockOverlap:"Estas fechas se solapan con un bloqueo manual. Edita ese bloqueo.", deleteBlockConfirm:(from,to)=>`¿Eliminar el bloqueo ${from} → ${to}? Estas fechas podrían volver a aparecer en la búsqueda.`, blockDateError:"La fecha final debe ser posterior a la inicial. La fecha final no está bloqueada."},
+  ca: {availability:"Disponible", availabilityHelp:"Dates ofertes a la cerca. Els bloquejos manuals i les reserves importades tenen prioritat.", unavailable:"No disponible · bloquejos manuals", unavailableHelp:"Bloqueja dates per a ús propi o altres reserves. Sense preu. Es conserven la disponibilitat i els preus; les nits bloquejades s'exclouen de la cerca.", blockFrom:"No disponible des de", blockTo:"Disponible de nou el", addBlock:"Bloquejar dates", noBlocks:"Encara no hi ha bloquejos manuals.", blockSaved:"Dates no disponibles desades.", blockDeleted:"Bloqueig eliminat. Es tornen a aplicar les regles de disponibilitat.", blockOverlap:"Aquestes dates se solapen amb un bloqueig manual. Edita aquell bloqueig.", deleteBlockConfirm:(from,to)=>`Eliminar el bloqueig ${from} → ${to}? Aquestes dates podrien tornar a aparèixer a la cerca.`, blockDateError:"La data final ha de ser posterior a la inicial. La data final no està bloquejada."},
+  ru: {availability:"Доступно", availabilityHelp:"Даты для поиска. Ручные блокировки и брони из календаря имеют приоритет.", unavailable:"Недоступно · ручные блокировки", unavailableHelp:"Закройте даты для себя или других бронирований. Без цены. Свободные периоды и их цены сохраняются, но заблокированные ночи исключаются из поиска.", blockFrom:"Недоступно с", blockTo:"Снова доступно с", addBlock:"Заблокировать даты", noBlocks:"Ручных блокировок пока нет.", blockSaved:"Период недоступности сохранён.", blockDeleted:"Блокировка удалена. Снова действуют свободные периоды.", blockOverlap:"Эти даты пересекаются с уже добавленной ручной блокировкой. Отредактируйте её.", deleteBlockConfirm:(from,to)=>`Удалить блокировку ${from} → ${to}? Эти даты снова смогут появиться в поиске.`, blockDateError:"Дата окончания должна быть позже начала. Дата окончания не блокируется."}
+};
+Object.entries(blockCopy).forEach(([language, values]) => Object.assign(copy[language], values));
+
 const statusNode = document.getElementById("host-status");
 const authDialog = document.getElementById("auth-dialog");
 const authDialogTitle = document.getElementById("auth-dialog-title");
@@ -180,7 +188,12 @@ async function api(path, options = {}){
   try { data = await response.json(); } catch {}
   if (!response.ok) {
     const detail = data?.error || data?.message || `HTTP ${response.status}`;
-    const error = new Error(detail === "availability period overlaps an existing period" ? tr("overlapError") : detail);
+    const knownErrors = {
+      "availability period overlaps an existing period":"overlapError",
+      "unavailability period overlaps an existing block":"blockOverlap",
+      "to must be after from; end date is exclusive":"blockDateError"
+    };
+    const error = new Error(knownErrors[detail] ? tr(knownErrors[detail]) : detail);
     error.status = response.status;
     throw error;
   }
@@ -263,6 +276,7 @@ async function syncDashboard(){
       ...property,
       listing: Array.isArray(property.listings) ? (property.listings[0] || null) : null,
       availability: Array.isArray(property.availability) ? property.availability : [],
+      unavailability: Array.isArray(property.unavailability) ? property.unavailability : [],
       calendars: Array.isArray(property.calendars) ? property.calendars : []
     }));
     renderProperties();
@@ -440,6 +454,7 @@ propertyForm.addEventListener("submit", async event => {
       cleaningFeeCents:created.cleaningFeeCents,
       listing:null,
       availability:[],
+      unavailability:[],
       calendars:[]
     });
     expandedPropertyIds.add(created.id);
@@ -721,6 +736,117 @@ function formatSyncTime(value){
   return date.toLocaleString(document.documentElement.lang);
 }
 
+async function saveUnavailability(property, form, period = null){
+  if (form.getAttribute("aria-busy") === "true") return;
+  const data = new FormData(form);
+  setFormError(form);
+  form.setAttribute("aria-busy", "true");
+  setBusy(form, true);
+  message(tr("loading"));
+  try {
+    const saved = await api(period ? `/unavailability/${period.id}` : `/properties/${property.id}/unavailability`, {
+      method:period ? "PUT" : "POST",
+      body:JSON.stringify({from:data.get("from"), to:data.get("to")})
+    });
+    property.unavailability = [...(property.unavailability || []).filter(item => item.id !== saved.id), saved]
+      .sort((a,b) => a.from.localeCompare(b.from) || a.to.localeCompare(b.to));
+    renderProperties();
+    message(tr("blockSaved"), "success");
+  } catch (error) {
+    setFormError(form, error.message);
+    message(error.message, "error");
+  } finally {
+    form.removeAttribute("aria-busy");
+    setBusy(form, false);
+  }
+}
+
+async function deleteUnavailability(property, period, form){
+  if (form.getAttribute("aria-busy") === "true" || !confirm(tr("deleteBlockConfirm", period.from, period.to))) return;
+  setFormError(form);
+  form.setAttribute("aria-busy", "true");
+  setBusy(form, true);
+  message(tr("loading"));
+  try {
+    await api(`/unavailability/${period.id}`, {method:"DELETE"});
+    property.unavailability = (property.unavailability || []).filter(item => item.id !== period.id);
+    renderProperties();
+    message(tr("blockDeleted"), "success");
+  } catch (error) {
+    setFormError(form, error.message);
+    message(error.message, "error");
+  } finally {
+    form.removeAttribute("aria-busy");
+    setBusy(form, false);
+  }
+}
+
+function renderUnavailability(property){
+  const panel = document.createElement("section");
+  panel.className = "host-subpanel host-unavailability-panel";
+  const title = document.createElement("h3");
+  title.textContent = tr("unavailable");
+  const help = document.createElement("p");
+  help.className = "host-inline-muted";
+  help.textContent = tr("unavailableHelp");
+  panel.append(title, help);
+
+  function dateForm(period = null){
+    const form = document.createElement("form");
+    form.className = period ? "host-period host-unavailability-period" : "host-inline-form host-unavailability-add";
+    function dateField(name, text, value){
+      const label = document.createElement("label");
+      const span = document.createElement("span");
+      span.textContent = tr(text);
+      const input = document.createElement("input");
+      input.name = name; input.type = "date"; input.required = true; input.value = value || "";
+      label.append(span, input);
+      form.append(label);
+      return input;
+    }
+    const from = dateField("from", "blockFrom", period?.from);
+    const to = dateField("to", "blockTo", period?.to);
+    to.min = plusDays(from.value, 1);
+    from.addEventListener("change", () => {
+      to.min = plusDays(from.value, 1);
+      if (from.value && (!to.value || to.value <= from.value)) to.value = to.min;
+    });
+    const save = document.createElement("button");
+    save.type = "submit";
+    save.className = "button button-small host-block-button";
+    save.textContent = tr(period ? "save" : "addBlock");
+    save.hidden = Boolean(period);
+    if (period) {
+      const changed = () => { save.hidden = from.value === period.from && to.value === period.to; };
+      [from, to].forEach(input => {
+        input.addEventListener("input", changed);
+        input.addEventListener("change", changed);
+      });
+    }
+    form.append(save);
+    form.addEventListener("submit", event => { event.preventDefault(); return saveUnavailability(property, form, period); });
+    if (period) {
+      const remove = document.createElement("button");
+      remove.type = "button"; remove.className = "text-button danger"; remove.textContent = tr("remove");
+      remove.addEventListener("click", () => deleteUnavailability(property, period, form));
+      form.append(remove);
+    }
+    return form;
+  }
+  panel.append(dateForm());
+  const periods = document.createElement("div");
+  periods.className = "host-periods";
+  const blocks = property.unavailability || [];
+  if (!blocks.length) {
+    const empty = document.createElement("p");
+    empty.className = "host-inline-muted";
+    empty.textContent = tr("noBlocks");
+    periods.append(empty);
+  } else blocks.forEach(period => periods.append(dateForm(period)));
+  panel.append(periods);
+  return panel;
+}
+
 function renderProperties(){
   if (!propertiesNode) return;
   propertiesNode.replaceChildren();
@@ -948,10 +1074,14 @@ function renderProperties(){
     }
 
     const calendar = document.createElement("div");
-    calendar.className = "host-subpanel";
+    calendar.className = "host-subpanel host-availability-panel";
     const calendarTitle = document.createElement("h3");
     calendarTitle.textContent = tr("availability");
     calendar.append(calendarTitle);
+    const availabilityHelp = document.createElement("p");
+    availabilityHelp.className = "host-inline-muted";
+    availabilityHelp.textContent = tr("availabilityHelp");
+    calendar.append(availabilityHelp);
 
     const staySettingsForm=document.createElement("form");
     staySettingsForm.className="host-settings-form host-stay-settings";
@@ -1082,6 +1212,7 @@ function renderProperties(){
     card.append(settings, listing);
     if(property.listing) card.append(syncPanel);
     card.append(calendar);
+    card.append(renderUnavailability(property));
     const footer = document.createElement("div");
     footer.className = "host-property-footer";
     const deletePropertyButton = document.createElement("button");

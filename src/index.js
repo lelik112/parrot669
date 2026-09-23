@@ -143,6 +143,8 @@ export default {
         (/^\/listings\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
         (/^\/properties\/[0-9a-f-]+\/availability$/i.test(path) && ["GET", "POST"].includes(request.method)) ||
         (/^\/availability\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
+        (/^\/properties\/[0-9a-f-]+\/unavailability$/i.test(path) && ["GET", "POST"].includes(request.method)) ||
+        (/^\/unavailability\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
         (/^\/properties\/[0-9a-f-]+\/calendars$/i.test(path) && request.method === "POST") ||
         (/^\/calendars\/[0-9a-f-]+\/sync$/i.test(path) && request.method === "POST") ||
         (/^\/calendars\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method));

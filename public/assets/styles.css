@@ -1468,6 +1468,14 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-empty,.host-inline-muted,.host-inline-error{color:#74837e;font-size:13px}
 .host-inline-error{color:#f2b5a8}
 .host-form-error{grid-column:1/-1;margin:0}
+.host-availability-panel,.host-unavailability-panel{padding:18px;border-radius:14px;margin-top:22px}
+.host-availability-panel{border:1px solid rgba(216,255,99,.2);background:rgba(216,255,99,.025)}
+.host-availability-panel h3{color:var(--lime)}
+.host-unavailability-panel{border:1px solid rgba(242,181,168,.32);background:rgba(242,181,168,.045)}
+.host-unavailability-panel h3{color:#f2b5a8}
+.host-unavailability-panel .host-inline-muted{line-height:1.6;margin:0 0 16px;color:#a8b2ae}
+.host-unavailability-panel label{display:grid;gap:7px;min-width:0;font-size:11px;color:#bd9f96}
+.host-unavailability-panel .host-block-button{background:#3a2924;color:#ffd1c7;border:1px solid #846051;box-shadow:none;min-height:44px}
 @media(max-width:900px){
   .host-form,.host-property-form{grid-template-columns:1fr 1fr}
   .host-auth-card{grid-template-columns:1fr}
@@ -1772,4 +1780,13 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 @media(max-width:640px){
   .host-form,.host-property-form,.host-inline-form,.host-settings-form,.host-dates{grid-template-columns:minmax(0,1fr)}
   .host-period{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+.host-unavailability-add{grid-template-columns:repeat(2,minmax(0,1fr)) auto;align-items:end}
+.host-unavailability-period{grid-template-columns:repeat(2,minmax(0,1fr)) auto auto;align-items:end;padding-top:12px;border-top:1px solid rgba(242,181,168,.12)}
+.host-unavailability-period .text-button{min-height:44px}
+@media(max-width:640px){
+  .host-availability-panel,.host-unavailability-panel{padding:12px}
+  .host-unavailability-add,.host-unavailability-period{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .host-unavailability-add .button{grid-column:1/-1}
 }
