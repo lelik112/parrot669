@@ -18,6 +18,8 @@ const housingCopy = {
 let lang=(()=>{const saved=localStorage.getItem(LANG_KEY);if(saved&&copy[saved])return saved;const b=(navigator.language||"en").slice(0,2);return copy[b]?b:"en"})();
 const form=document.getElementById("availability-form");
 const results=document.getElementById("availability-results");
+const countrySelect=form.elements.country;
+const citySelect=form.elements.city;
 const accommodationTypeFilter=document.getElementById("filter-accommodation-type");
 const pricedOnlyFilter=document.getElementById("filter-priced-only");
 const minPriceFilter=document.getElementById("filter-price-from");
@@ -36,6 +38,7 @@ function applyLanguage(next){
   document.querySelectorAll("[data-search-i18n]").forEach(n=>n.textContent=t(n.dataset.searchI18n));
   document.querySelectorAll("[data-search-i18n-html]").forEach(n=>n.innerHTML=t(n.dataset.searchI18nHtml));
   buttons.forEach(b=>b.classList.toggle("active",b.dataset.searchLang===lang));
+  refreshLocationLabels();
 }
 function state(text,kind=""){results.replaceChildren();const n=document.createElement("div");n.className=`availability-state ${kind}`.trim();n.textContent=text;results.append(n)}
 function eurosToCents(value){
@@ -47,7 +50,8 @@ function eurosToCents(value){
 function saveSearchState(){
   const fd=new FormData(form);
   localStorage.setItem(SEARCH_STATE_KEY,JSON.stringify({
-    city:String(fd.get("city")||"Barcelona"),
+    country:String(fd.get("country")||""),
+    city:String(fd.get("city")||""),
     accommodationType:String(accommodationTypeFilter?.value||"any"),
     from:String(fd.get("from")||""),
     to:String(fd.get("to")||""),
@@ -92,7 +96,7 @@ function render(items){
     title.textContent=item.propertyTitle||"Property";
     const city=document.createElement("span");
     city.className="availability-card-city";
-    city.textContent=item.city||"Barcelona";
+    city.textContent=item.city||"—";
     titleGroup.append(title,city);
     head.append(titleGroup);
 
@@ -181,7 +185,8 @@ form.elements.from.addEventListener("change",()=>{
 function currentSearchParams(){
   const fd=new FormData(form);
   return new URLSearchParams({
-    city:String(fd.get("city")||"Barcelona"),
+    country:String(fd.get("country")||""),
+    city:String(fd.get("city")||""),
     from:String(fd.get("from")||""),
     to:String(fd.get("to")||""),
     bedrooms:String(fd.get("bedrooms")||"1"),
