@@ -123,6 +123,17 @@ const addressCopy = {
 };
 Object.entries(addressCopy).forEach(([language, values]) => Object.assign(copy[language], values));
 
+const qaCopy={
+  en:{heroLead:"Add a property and keep its physically available dates up to date. An Airbnb listing and calendar are optional.",verifyFirst:"Confirm your email using the link in the message, then log in. Check your spam folder too.",forgotPassword:"Forgot password?",titleRequired:"Enter a property name.",titleTooLong:"Use up to 160 characters for the property name."},
+  es:{heroLead:"Añade una vivienda y mantén actualizadas las fechas en las que está físicamente libre. El anuncio y el calendario de Airbnb son opcionales.",verifyFirst:"Confirma tu email con el enlace del mensaje y vuelve a iniciar sesión. Revisa también la carpeta de spam.",forgotPassword:"¿Has olvidado la contraseña?",titleRequired:"Introduce el nombre de la vivienda.",titleTooLong:"Usa un máximo de 160 caracteres para el nombre."},
+  ca:{heroLead:"Afegeix un habitatge i mantén al dia les dates en què està físicament lliure. L’anunci i el calendari d’Airbnb són opcionals.",verifyFirst:"Confirma el correu amb l’enllaç del missatge i torna a iniciar sessió. Revisa també la carpeta de correu brossa.",forgotPassword:"Has oblidat la contrasenya?",titleRequired:"Introdueix el nom de l’habitatge.",titleTooLong:"Fes servir un màxim de 160 caràcters per al nom."},
+  ru:{heroLead:"Добавьте объект и укажите даты, когда он физически свободен. Объявление Airbnb и подключение календаря необязательны.",verifyFirst:"Подтвердите email по ссылке в письме, затем войдите. Проверьте также папку «Спам».",forgotPassword:"Забыли пароль?",titleRequired:"Укажите название объекта.",titleTooLong:"Название объекта — не более 160 символов."}
+};
+Object.entries(qaCopy).forEach(([language,values])=>Object.assign(copy[language],values));
+function ruPlural(n,one,few,many){return `${n} ${n%100>=11&&n%100<=14?many:n%10===1?one:n%10>=2&&n%10<=4?few:many}`}
+copy.ru.bedroom=n=>ruPlural(n,"спальня","спальни","спален");
+copy.ru.sleepSummary=n=>ruPlural(n,"спальное место","спальных места","спальных мест");
+
 const statusNode = document.getElementById("host-status");
 const authDialog = document.getElementById("auth-dialog");
 const authDialogTitle = document.getElementById("auth-dialog-title");
@@ -226,6 +237,9 @@ async function api(path, options = {}){
   if (!response.ok) {
     const detail = data?.error || data?.message || `HTTP ${response.status}`;
     const knownErrors = {
+      "email verification required":"verifyFirst",
+      "title is required":"titleRequired",
+      "title is too long":"titleTooLong",
       "select an address with a country and city":"addressChoose",
       "select a full address with a street and house number":"addressChoose",
       "availability period overlaps an existing period":"overlapError",
@@ -345,6 +359,7 @@ async function boot(){
   } finally {
     sessionLoading = false;
     renderAuthState();
+    if (new URLSearchParams(window.location.search).get("login") === "1") openAuth("login");
   }
 }
 
@@ -564,6 +579,7 @@ async function updatePropertySettings(property, form){
     minStayDays:data.has("minStayDays") ? Number(data.get("minStayDays")) : Number(property.minStayDays||1),
     cleaningFeeCents:data.has("cleaningFee") ? eurosToCents(data.get("cleaningFee")) : property.cleaningFeeCents
   };
+  if(data.has("title")) payload.title=String(data.get("title")||"").trim();
   try{
     const addressEditor = propertyAddressEditors.get(form);
     if (addressEditor) payload.address = addressEditor.getValue();
@@ -573,6 +589,7 @@ async function updatePropertySettings(property, form){
       method:"PUT",
       body:JSON.stringify(payload)
     });
+    property.title=updated.title;
     property.accommodationType=updated.accommodationType;
     property.bedrooms=updated.bedrooms;
     property.sleeps=updated.sleeps;
@@ -1015,6 +1032,13 @@ function renderProperties(){
     settingsTitle.textContent=tr("propertySettings");
     const settingsForm=document.createElement("form");
     settingsForm.className="host-settings-form";
+    const titleLabel=document.createElement("label");
+    titleLabel.className="host-property-title-field";
+    const titleText=document.createElement("span");
+    titleText.textContent=tr("internalLabel");
+    const titleInput=document.createElement("input");
+    titleInput.type="text";titleInput.name="title";titleInput.required=true;titleInput.maxLength=160;titleInput.value=property.title;
+    titleLabel.append(titleText,titleInput);
     const addressEditor = window.ParrotAddress.create({
       id:`property-address-${property.id}`, tr, request:api,
       initial:property.address || null, location:property, onUnauthorized:addressSessionExpired
@@ -1046,7 +1070,7 @@ function renderProperties(){
     sleepsLabel.append(sleepsText,sleepsInput);
     const saveSettings=document.createElement("button");
     saveSettings.className="button button-small";saveSettings.type="submit";saveSettings.textContent=tr("savePropertySettings");
-    settingsForm.append(addressEditor.node,accommodationLabel,bedroomsLabel,sleepsLabel,saveSettings);
+    settingsForm.append(titleLabel,addressEditor.node,accommodationLabel,bedroomsLabel,sleepsLabel,saveSettings);
     settingsForm.addEventListener("submit",event=>{event.preventDefault();updatePropertySettings(property,settingsForm)});
     settings.append(settingsTitle,settingsForm);
 

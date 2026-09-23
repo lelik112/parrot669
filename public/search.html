@@ -84,14 +84,16 @@
           <span data-search-i18n="pricedOnly">Only with a price</span>
         </label>
         <label class="price-range-filter">
-          <span data-search-i18n="priceFrom">Price from, €</span>
-          <input type="number" id="filter-price-from" min="0" step="1" inputmode="decimal" />
+          <span data-search-i18n="priceFrom">Stay total from, €</span>
+          <input type="number" id="filter-price-from" min="0" step="0.01" inputmode="decimal" aria-describedby="search-budget-help" />
         </label>
         <label class="price-range-filter">
-          <span data-search-i18n="priceTo">Price to, €</span>
-          <input type="number" id="filter-price-to" min="0" step="1" inputmode="decimal" />
+          <span data-search-i18n="priceTo">Stay total to, €</span>
+          <input type="number" id="filter-price-to" min="0" step="0.01" inputmode="decimal" aria-describedby="search-budget-help" />
         </label>
       </div>
+
+      <p class="search-budget-help" id="search-budget-help" data-search-i18n="budgetHelp">Budget for the whole selected stay, including cleaning when provided. Other charges must be confirmed with the host.</p>
 
       <div class="availability-meta">
         <span class="availability-live"><span class="status-dot"></span><span data-search-i18n="live">Connected to the live PARROT availability index</span></span>

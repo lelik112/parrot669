@@ -21,6 +21,7 @@
     ru:{emailSettings:"Email-уведомления",emailEnabled:"Получать письма о непрочитанных сообщениях",emailLanguage:"Язык писем",emailHelp:"Короткое уведомление и ссылка на диалог. Текст переписки остаётся на сайте."}
   };
   Object.entries(emailCopy).forEach(([key,value]) => Object.assign(texts[key],value));
+  Object.entries({en:"Forgot password?",es:"¿Has olvidado la contraseña?",ca:"Has oblidat la contrasenya?",ru:"Забыли пароль?"}).forEach(([key,value])=>texts[key].forgotPassword=value);
   let lang = "en", user, revision = 0, unreadBusy = false;
   const subscribers = new Set(), languageSubscribers = new Set();
   const contactCache = new Map();

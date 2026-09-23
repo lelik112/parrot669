@@ -53,3 +53,14 @@ for (const [method,route,status] of [
     if (status!==204) assert.deepEqual(await response.json(),{error:'range error'});
   });
 }
+
+for(const action of ['request','confirm'])test(`password recovery ${action} keeps Origin protection and forwards no-store responses`,async()=>{
+  const calls=[];const sandbox={URL,Headers,Response,console,fetch:async(url,init)=>{calls.push({url,...init});return new Response(null,{status:204,headers:{'Set-Cookie':'parrot_session=; Path=/; HttpOnly; Secure; Max-Age=0'}})}};
+  vm.createContext(sandbox);vm.runInContext(source,sandbox);
+  const path='/api/host/auth/password-reset/'+action;
+  const bad=await sandbox.worker.fetch(new Request('https://parrot669.com'+path,{method:'POST',headers:{Origin:'https://other.example'},body:'{}'}),{});
+  assert.equal(bad.status,403);assert.equal(calls.length,0);
+  const good=await sandbox.worker.fetch(new Request('https://parrot669.com'+path,{method:'POST',headers:{Origin:'https://parrot669.com','Content-Type':'application/json'},body:'{}'}),{});
+  assert.equal(good.status,204);assert.equal(calls[0].url,'https://api.parrot669.com/api/auth/password-reset/'+action);assert.equal(good.headers.get('Cache-Control'),'no-store');assert.match(good.headers.get('Set-Cookie'),/Max-Age=0/);
+  const get=await sandbox.worker.fetch(new Request('https://parrot669.com'+path),{});assert.equal(get.status,404);
+});

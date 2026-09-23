@@ -29,6 +29,20 @@ const buttons=document.querySelectorAll("[data-search-lang]");
 let lastSearchParams=null;
 let searchSequence=0;
 let hasSearched=false;
+let renderedItems=null;
+let resultState=null;
+
+function ruPlural(n,one,few,many){return `${n} ${n%100>=11&&n%100<=14?many:n%10===1?one:n%10>=2&&n%10<=4?few:many}`}
+
+const budgetCopy={
+  en:{priceFrom:"Stay total from, €",priceTo:"Stay total to, €",budgetHelp:"Budget for the whole selected stay, including cleaning when provided. Other charges must be confirmed with the host.",priceNegative:"Price cannot be negative.",priceInvalid:"Enter a valid price with up to two decimal places."},
+  es:{priceFrom:"Total de la estancia desde, €",priceTo:"Total de la estancia hasta, €",budgetHelp:"Presupuesto para toda la estancia, incluida la limpieza si está indicada. Confirma otros cargos con el propietario.",priceNegative:"El precio no puede ser negativo.",priceInvalid:"Introduce un precio válido con un máximo de dos decimales."},
+  ca:{priceFrom:"Total de l’estada des de, €",priceTo:"Total de l’estada fins a, €",budgetHelp:"Pressupost per a tota l’estada, inclosa la neteja si està indicada. Confirma altres càrrecs amb el propietari.",priceNegative:"El preu no pot ser negatiu.",priceInvalid:"Introdueix un preu vàlid amb un màxim de dos decimals."},
+  ru:{priceFrom:"За весь период от, €",priceTo:"За весь период до, €",budgetHelp:"Бюджет за весь выбранный период, включая уборку, если её стоимость указана. Другие платежи уточняйте у владельца.",priceNegative:"Цена не может быть отрицательной.",priceInvalid:"Введите корректную цену: не более двух знаков после запятой."}
+};
+Object.entries(budgetCopy).forEach(([language,values])=>Object.assign(housingCopy[language],values));
+copy.ru.bed=n=>ruPlural(n,"спальня","спальни","спален");
+copy.ru.sleep=n=>ruPlural(n,"спальное место","спальных места","спальных мест");
 
 function t(key,...args){const v=(housingCopy[lang]||housingCopy.en)[key]??(copy[lang]||copy.en)[key];return typeof v==="function"?v(...args):v}
 function applyLanguage(next){
@@ -41,8 +55,27 @@ function applyLanguage(next){
   buttons.forEach(b=>b.classList.toggle("active",b.dataset.searchLang===lang));
   refreshLocationLabels();
   window.ParrotMessaging?.setLanguage(lang);
+  if(renderedItems) render(renderedItems);
+  else if(resultState) state(resultState.key,resultState.kind);
 }
-function state(text,kind="",translationKey=""){results.replaceChildren();const n=document.createElement("div");n.className=`availability-state ${kind}`.trim();n.textContent=text;if(translationKey)n.dataset.searchI18n=translationKey;results.append(n)}
+function state(key,kind=""){
+  renderedItems=null;resultState={key,kind};results.replaceChildren();
+  const n=document.createElement("div");n.className=`availability-state ${kind}`.trim();n.textContent=t(key);results.append(n);
+}
+function validatePriceFilters(){
+  let invalid=null;
+  for(const field of [minPriceFilter,maxPriceFilter]){
+    if(!field) continue;
+    const value=field.value.trim();
+    const amount=Number(value);
+    const key=value&&amount<0?"priceNegative":
+      !field.validity.valid||(value&&(!Number.isFinite(amount)||!Number.isSafeInteger(Math.round(amount*100))))?"priceInvalid":null;
+    field.setAttribute("aria-invalid",String(Boolean(key)));
+    if(key&&!invalid) invalid={field,key};
+  }
+  if(invalid){state(invalid.key,"error");return false}
+  return true;
+}
 function eurosToCents(value){
   const raw=String(value??"").trim().replace(",",".");
   if(!raw) return null;
@@ -168,12 +201,13 @@ async function loadLocations(saved){
     saveSearchState();
   }catch(error){
     console.error(error);
-    state(t("locationError"),"error");
+    state("locationError","error");
   }
 }
 function render(items){
+  renderedItems=items;resultState=null;
   results.replaceChildren();
-  if(!items.length){state(t("empty"),"empty");return}
+  if(!items.length){state("empty","empty");return}
   items.forEach(item=>{
     const card=document.createElement("article");
     card.className="availability-card";
@@ -286,12 +320,17 @@ function currentSearchParams(){
 }
 async function runSearch(baseParams,{disableSubmit=false}={}){
   const requestId=++searchSequence;
+  if(!validatePriceFilters()){
+    updateSearchSubmitState();
+    if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
+    return;
+  }
   const params=new URLSearchParams(baseParams);
   const minPriceCents=eurosToCents(minPriceFilter?.value);
   const maxPriceCents=eurosToCents(maxPriceFilter?.value);
   params.set("accommodationType",String(accommodationTypeFilter?.value||"any"));
   if(minPriceCents!=null&&maxPriceCents!=null&&minPriceCents>maxPriceCents){
-    state(t("priceRangeError"),"error");
+    state("priceRangeError","error");
     updateSearchSubmitState();
     if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
     return;
@@ -301,7 +340,7 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
   if(maxPriceCents!=null) params.set("maxPriceCents",String(maxPriceCents));
   if(disableSubmit) submitButton.disabled=true;
   if(pricedOnlyFilter) pricedOnlyFilter.disabled=true;
-  state(t("loading"),"loading");
+  state("loading","loading");
   try{
     const response=await fetch(`/api/search?${params}`,{headers:{Accept:"application/json"}});
     if(!response.ok)throw new Error(`HTTP ${response.status}`);
@@ -309,7 +348,7 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
     if(requestId===searchSequence) render(Array.isArray(items)?items:[]);
   }catch(error){
     console.error(error);
-    if(requestId===searchSequence) state(t("error"),"error");
+    if(requestId===searchSequence) state("error","error");
   }finally{
     if(requestId===searchSequence){
       updateSearchSubmitState();
@@ -333,7 +372,7 @@ function searchDetailsChanged(){
     hasSearched=false;
     updateSearchSubmitState();
     if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
-    state(t("searchChanged"),"empty","searchChanged");
+    state("searchChanged","empty");
   }
   saveSearchState();
 }
@@ -355,7 +394,7 @@ countrySelect.addEventListener("change",async()=>{
     saveSearchState();
   }catch(error){
     console.error(error);
-    state(t("locationError"),"error");
+    state("locationError","error");
   }
 });
 buttons.forEach(b=>b.addEventListener("click",()=>applyLanguage(b.dataset.searchLang)));

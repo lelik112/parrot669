@@ -736,3 +736,25 @@ test('verification restores session without showing auth modal', async () => {
   assert.equal(app.nodes.get('auth-dialog').open, false);
   assert.equal(app.run('sessionLoading'), false);
 });
+
+test('unverified email login explains the next step in the selected language',async()=>{
+  const app=setup({'/auth/login':{status:401,body:{error:'email verification required'}}});await settle();
+  app.run('applyLanguage("ru");openAuth("login")');await app.nodes.get('login-form').emit('submit');
+  assert.match(app.nodes.get('login-form').querySelector('.host-form-error').textContent,/Подтвердите email по ссылке/);
+  assert.match(html,/href="\/recover.html"/);
+});
+
+test('property name can be edited, errors preserve it, successful save refreshes the heading without replacing periods',async()=>{
+  let fail=true;
+  const app=setup({'/properties/property-1':options=>fail?{status:400,body:{error:'title is required'}}:{body:{id:'property-1',city:'Barcelona',...JSON.parse(options.body)}}});await settle();
+  let card=propertyCard(app);let form=card.querySelector('.host-settings-form');const input=form.querySelectorAll('input').find(n=>n.name==='title');
+  assert.equal(input.value,'Test home');input.value='  Новый дом 🏠 <test>  ';
+  await app.run('updatePropertySettings(state.properties[0],propertiesNode.children[0].querySelector(".host-settings-form"))');
+  assert.equal(input.value,'  Новый дом 🏠 <test>  ');assert.equal(input.disabled,false);
+  assert.match(form.querySelector('.host-form-error').textContent,/Enter a property name/);
+  fail=false;await app.run('updatePropertySettings(state.properties[0],propertiesNode.children[0].querySelector(".host-settings-form"))');
+  assert.equal(app.requests.filter(r=>r.method==='PUT').at(-1).body.title,'Новый дом 🏠 <test>');
+  assert.equal(app.run('state.properties[0].title'),'Новый дом 🏠 <test>');
+  assert.equal(app.nodes.get('host-properties').children[0].querySelector('strong').textContent,'Новый дом 🏠 <test>');
+  assert.equal(app.run('state.properties[0].availability[0].id'),'period-1');
+});
