@@ -66,8 +66,7 @@ function saveSearchState(){
 function restoreSearchState(){
   try{
     const saved=JSON.parse(localStorage.getItem(SEARCH_STATE_KEY)||"null");
-    if(!saved||typeof saved!=="object") return;
-    if(saved.city&&form.elements.city) form.elements.city.value=saved.city;
+    if(!saved||typeof saved!=="object") return null;
     if(saved.accommodationType&&accommodationTypeFilter) accommodationTypeFilter.value=saved.accommodationType;
     if(saved.from) form.elements.from.value=saved.from;
     if(saved.to) form.elements.to.value=saved.to;
@@ -79,7 +78,90 @@ function restoreSearchState(){
     hasSearched=Boolean(saved.searched);
     const minCheckout=plusDays(form.elements.from.value,1);
     if(minCheckout) form.elements.to.min=minCheckout;
-  }catch{}
+    return saved;
+  }catch{
+    return null;
+  }
+}
+function countryDisplayName(code,fallback){
+  try{
+    return new Intl.DisplayNames([lang],{type:"region"}).of(code)||fallback;
+  }catch{
+    return fallback;
+  }
+}
+function resetLocationSelect(select,placeholderKey){
+  select.replaceChildren();
+  const option=document.createElement("option");
+  option.value="";
+  option.textContent=t(placeholderKey);
+  select.append(option);
+}
+function refreshLocationLabels(){
+  if(!countrySelect||!citySelect) return;
+  const countryPlaceholder=countrySelect.querySelector('option[value=""]');
+  const cityPlaceholder=citySelect.querySelector('option[value=""]');
+  if(countryPlaceholder) countryPlaceholder.textContent=t("chooseCountry");
+  if(cityPlaceholder) cityPlaceholder.textContent=t("chooseCity");
+  countrySelect.querySelectorAll("option[data-country-name]").forEach(option=>{
+    option.textContent=countryDisplayName(option.value,option.dataset.countryName);
+  });
+}
+async function loadCities(countryCode,preferredCity=""){
+  resetLocationSelect(citySelect,"chooseCity");
+  citySelect.disabled=true;
+  if(!countryCode) return;
+
+  const response=await fetch("/api/locations/cities?country="+encodeURIComponent(countryCode),{headers:{Accept:"application/json"}});
+  if(!response.ok) throw new Error("HTTP "+response.status);
+  const cities=await response.json();
+  if(!Array.isArray(cities)) throw new Error("Invalid cities response");
+
+  cities.forEach(item=>{
+    const option=document.createElement("option");
+    option.value=String(item.name||"");
+    option.textContent=String(item.name||"");
+    citySelect.append(option);
+  });
+
+  const preferred=[...citySelect.options].find(option=>option.value&&option.value.toLowerCase()===String(preferredCity||"").toLowerCase());
+  if(preferred) citySelect.value=preferred.value;
+  else if(cities.length===1) citySelect.value=String(cities[0].name||"");
+
+  citySelect.disabled=cities.length===0;
+}
+async function loadLocations(saved){
+  countrySelect.disabled=true;
+  citySelect.disabled=true;
+  resetLocationSelect(countrySelect,"chooseCountry");
+  resetLocationSelect(citySelect,"chooseCity");
+
+  try{
+    const response=await fetch("/api/locations/countries",{headers:{Accept:"application/json"}});
+    if(!response.ok) throw new Error("HTTP "+response.status);
+    const countries=await response.json();
+    if(!Array.isArray(countries)) throw new Error("Invalid countries response");
+
+    countries.forEach(item=>{
+      const option=document.createElement("option");
+      option.value=String(item.code||"");
+      option.dataset.countryName=String(item.name||item.code||"");
+      option.textContent=countryDisplayName(option.value,option.dataset.countryName);
+      countrySelect.append(option);
+    });
+    countrySelect.disabled=countries.length===0;
+
+    const requestedCountry=String(saved&&saved.country||"").toUpperCase();
+    const preferred=[...countrySelect.options].find(option=>option.value===requestedCountry);
+    if(preferred) countrySelect.value=preferred.value;
+    else if(countries.length===1) countrySelect.value=String(countries[0].code||"");
+
+    await loadCities(countrySelect.value,String(saved&&saved.city||""));
+    saveSearchState();
+  }catch(error){
+    console.error(error);
+    state(t("locationError"),"error");
+  }
 }
 function render(items){
   results.replaceChildren();
