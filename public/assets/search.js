@@ -40,6 +40,7 @@ function applyLanguage(next){
   document.querySelectorAll("[data-search-i18n-html]").forEach(n=>n.innerHTML=t(n.dataset.searchI18nHtml));
   buttons.forEach(b=>b.classList.toggle("active",b.dataset.searchLang===lang));
   refreshLocationLabels();
+  window.ParrotMessaging?.setLanguage(lang);
 }
 function state(text,kind=""){results.replaceChildren();const n=document.createElement("div");n.className=`availability-state ${kind}`.trim();n.textContent=text;results.append(n)}
 function eurosToCents(value){
@@ -254,6 +255,7 @@ function render(items){
       links.append(missing);
     }
 
+    window.ParrotMessaging?.attachContact(links,item);
     footer.append(owner,links);
     card.append(head,facts,priceBlock,footer);
     results.append(card);

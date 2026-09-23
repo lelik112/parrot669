@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/messaging.css" />
 </head>
 <body class="host-page">
   <header class="host-topbar">
@@ -45,6 +46,7 @@
   <nav class="housing-tabs" aria-label="Housing">
     <a href="/search.html" data-host-i18n="tabSearch">Find availability</a>
     <a href="/host.html" class="active housing-host-link" aria-current="page" data-host-i18n="tabHost">For hosts</a>
+    <a href="/messages.html" class="messaging-nav-link"><span data-msg-i18n="messages">Messages</span><span class="messaging-badge" data-msg-unread hidden></span></a>
   </nav>
 
   <main class="host-shell">
@@ -102,6 +104,14 @@
       </form>
     </dialog>
 
+    <section class="messaging-settings" id="messaging-host-settings" hidden>
+      <h2 data-msg-i18n="settingsTitle">Guest messages</h2>
+      <label class="messaging-toggle"><input type="checkbox" id="messaging-host-enabled" disabled /><span data-msg-i18n="hostSetting">Accept messages about my properties</span></label>
+      <p class="host-inline-muted" data-msg-i18n="hostSettingHelp">Guests can start a private conversation. Turning this off stops new enquiries; existing conversations stay open.</p>
+      <p id="messaging-host-status" role="status" aria-live="polite"></p>
+      <button type="button" class="button button-ghost button-small" id="messaging-host-retry" data-msg-i18n="retry" hidden>Retry</button>
+    </section>
+
     <section class="host-panel" id="property-panel" hidden>
       <div class="host-panel-heading">
         <div><span class="host-step">01</span><h2 data-host-i18n="propertiesTitle">Properties</h2></div>
@@ -136,6 +146,7 @@
     </section>
   </main>
 
+  <script src="/assets/messaging-common.js"></script>
   <script src="/assets/host-address.js"></script>
   <script src="/assets/host.js"></script>
 </body>

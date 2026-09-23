@@ -80,6 +80,30 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname.startsWith("/api/messaging/")) {
+      const path = url.pathname.slice("/api/messaging".length);
+      const id = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
+      const allowed =
+        (new RegExp(`^/contact-options/${id}$`, "i").test(path) && request.method === "GET") ||
+        (path === "/settings" && ["GET", "PUT"].includes(request.method)) ||
+        (path === "/unread" && request.method === "GET") ||
+        (path === "/conversations" && ["GET", "POST"].includes(request.method)) ||
+        (new RegExp(`^/conversations/for-property/${id}$`, "i").test(path) && request.method === "GET") ||
+        (new RegExp(`^/conversations/${id}$`, "i").test(path) && request.method === "GET") ||
+        (new RegExp(`^/conversations/${id}/messages$`, "i").test(path) && ["GET", "POST"].includes(request.method)) ||
+        (new RegExp(`^/conversations/${id}/(read|block)$`, "i").test(path) && request.method === "PUT");
+      if (!allowed) return json({ error: "Not found" }, 404);
+      if (request.method !== "GET") {
+        const origin = request.headers.get("Origin");
+        if (origin && origin !== url.origin) return json({ error: "Forbidden" }, 403);
+      }
+      try {
+        return await proxyBackend(request, url.pathname);
+      } catch {
+        return json({ error: "Messaging service unavailable" }, 502);
+      }
+    }
+
     if (url.pathname === "/api/locations/countries" || url.pathname === "/api/locations/cities") {
       if (request.method !== "GET") {
         return json({ error: "Method not allowed" }, 405);

@@ -25,6 +25,7 @@ Current MVP principle:
    - optional indicative price when every requested night has a nightly price,
    - host nickname in a quieter footer,
    - external Airbnb action when the host has attached and published one; otherwise a subdued note says that no external link is available yet.
+   - **Write to host** when the owner accepts PARROT messages, independent of external listings. It opens `/messages.html` with the property and requested checkout dates; login/registration is available there.
 4. Minimum stay is enforced by backend search but is not displayed as a separate field in guest results.
 4a. Guest can choose all results or only results with complete nightly pricing, and may filter by minimum/maximum estimated total price for the requested stay. Results with a known price are sorted cheapest first; results without a complete price come last. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only and price-range search.
 4b. Optional cleaning fee belongs to the PARROT property, not to the external listing, and is included in the displayed estimate when known. An external listing has an independent `showInSearch` flag: it may remain connected for calendar sync while its outbound URL is hidden from guest search results.
@@ -51,6 +52,7 @@ Current MVP principle:
 10. After adding an Airbnb listing, the host can paste Airbnb's private iCal export URL. The listing id embedded in the iCal URL must match the Airbnb listing id already attached to the property.
 11. Calendar sync runs immediately on connect, manually via "Sync now", and automatically about once per hour while the calendar is enabled. A disabled calendar keeps its imported snapshot for later re-enable but does not block search and is skipped by automatic sync. Re-enabling triggers an immediate refresh. The raw iCal URL is never returned by the API or rendered back to the browser after connection.
 12. Calendar connection errors, including a listing-id mismatch, are shown directly under the calendar form as well as in the page status.
+13. A separate account-level **Guest messages** control enables new enquiries across all owned properties (off by default). The Messages tab opens the same inbox used by guests, with an unread badge.
 
 ## Location model
 
@@ -108,6 +110,7 @@ Important migrations:
 - V13 enforces non-overlapping property availability in PostgreSQL with a GiST exclusion constraint over `[date_from, date_to)`
 - V17 adds normalized property `country_code` / `country`, backfills existing properties to `ES / Spain`, and indexes `(country_code, city)` for location discovery
 - V21 adds opt-in messaging settings, private property conversations and messages; no changes to property/address/availability tables
+- V22 adds directional participant blocks, enforced across all property conversations between the pair
 
 Current important endpoints:
 - `POST /api/auth/register`
@@ -200,7 +203,7 @@ Desired future owner contact options:
 
 Search may show host nickname now, but should not expose raw contact by default.
 
-### Internal messaging — backend implemented, UI pending
+### Internal messaging — connected guest/host flow
 
 - Backend package `com.parrot669.messaging` contains its own routes, service, repository and models. `Main` composes these routes with the existing API; the large legacy route file and geocoding are unchanged.
 - Reuses the verified account/session cookie. An account can initiate enquiries and own properties without separate roles.
@@ -210,10 +213,14 @@ Search may show host nickname now, but should not expose raw contact by default.
 - Client-generated `clientMessageId` makes retries idempotent. Transactional per-thread sequences and explicit read acknowledgements prevent concurrent sends from being lost or marked read accidentally.
 - Inbox/history pagination and unread counts are available. Limits: 4000 characters, 16 KiB JSON, 30 new messages/minute and 10 new conversations/hour per profile, enforced in PostgreSQL across instances.
 - Deleting a property preserves its private conversation history and saved title but disables new replies. Account/profile deletion cascades conversations.
-- API namespace: `/api/messaging`. Public `GET /contact-options/:propertyId`; authenticated `GET|PUT /settings`, `GET|POST /conversations`, `GET /conversations/:id`, `GET|POST /conversations/:id/messages`, `PUT /conversations/:id/read`, `GET /unread`. Paths here are relative to the namespace.
+- Either participant can block the other. Blocks prevent sends in both directions and new enquiries across **all properties** between the pair. Existing history remains readable; each participant removes only their own block. Sends and block changes share a PostgreSQL advisory transaction lock per pair.
+- API namespace: `/api/messaging`. Public `GET /contact-options/:propertyId` includes public property/host labels; authenticated `GET|PUT /settings`, `GET|POST /conversations`, `GET /conversations/for-property/:propertyId`, `GET /conversations/:id`, `GET|POST /conversations/:id/messages`, `PUT /conversations/:id/read`, `PUT /conversations/:id/block`, `GET /unread`. Paths here are relative to the namespace.
 - API/lifecycle details and examples: [backend messaging contract](https://github.com/lelik112/parrot669-backend/blob/main/docs/messaging.md).
-- **Backend only:** no message button, inbox screen or Worker proxy is connected in this release. Message email notifications are deferred until there is a working inbox destination; existing verification emails are unchanged. The future Worker routes must preserve session-cookie forwarding and Origin checks. Render messages as text, never HTML.
-- Add block/report controls with the UI before broad public exposure. Public contact opt-in, attachments and realtime sockets are separate future decisions.
+- `/messages.html` provides login/registration, inbox/history pagination, sending with optional stay dates, explicit read acknowledgements and block/unblock. Desktop shows list and thread together; mobile shows one panel at a time. UI is translated into EN/ES/CA/RU and renders message/preview text safely with `textContent`.
+- The Worker proxies only the allowed messaging paths/methods, forwards only the existing session cookie, checks Origin on mutations and preserves API errors with `no-store`. No auth token is exposed to JavaScript.
+- Visible inbox/history refresh every 15 seconds; unread badges every 30 seconds. Read acknowledgement requires the history to be visible, focused and scrolled to the latest fetched message. Sending never advances the polling cursor past an unseen concurrent reply.
+- Drafts and uncertain-send idempotency keys live only in per-account sessionStorage with 24-hour expiry. They are restored for the same account, never treated as the message source of truth. Explicit logout from Messages clears its drafts. LocalStorage holds only language and a short-lived return URL after email verification, not message content or credentials.
+- Email verification from a Messages registration returns to the enquiry in the same browser. Message email notifications and abuse reporting/moderation remain follow-up work. Public contact opt-in, attachments and realtime sockets are separate future decisions.
 
 ## Verification direction
 
@@ -232,5 +239,5 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 - Address autocomplete and storage are connected; map UI and any guest address-visibility policy remain separate future work.
 - Improve visual design of housing/search/host UI.
 - Add password-reset request/confirm endpoints using the reserved reset-token model and existing backend email provider.
-- Connect the messaging UI/Worker proxy and host opt-in control, then message email notifications and block/report controls. Backend messaging/privacy settings are implemented.
+- Add message email notifications and abuse reporting/moderation. Inbox, Worker proxy, host opt-in and participant blocking are connected.
 - Upgrade Flyway or align Postgres version (Railway currently warns PostgreSQL 18 is newer than tested Flyway support).

@@ -556,7 +556,7 @@ test('mobile menu has one Housing entry opening search; search stays left of hos
   assert.equal((mobileMenu.match(/href="\/search.html"/g) || []).length, 1);
   for (const page of [html, search]) {
     const tabs = page.match(/<nav class="housing-tabs"[^>]*>([\s\S]*?)<\/nav>/)[1];
-    assert.deepEqual([...tabs.matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['/search.html', '/host.html']);
+    assert.deepEqual([...tabs.matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['/search.html', '/host.html', '/messages.html']);
   }
   assert.doesNotMatch(css, /\.housing-tabs[^{}]*\{[^}]*\border\s*:/);
   assert.match(css, /\.housing-tabs a\.active\{background:var\(--lime\)/);

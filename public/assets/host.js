@@ -183,6 +183,7 @@ function applyLanguage(next){
   updateAuthDialog();
   newPropertyAddress.updateLanguage();
   renderProperties();
+  window.ParrotMessaging?.setLanguage(lang);
 }
 
 function saveState(){
@@ -262,6 +263,7 @@ function setFormError(form, text = ""){
 }
 
 function setAuthenticated(user){
+  window.ParrotMessaging?.setUser(user);
   state = {
     ...emptyState(),
     authenticated:true,
@@ -272,6 +274,7 @@ function setAuthenticated(user){
 
 function renderAuthState(){
   const ready = Boolean(state.authenticated);
+  if (!ready && !sessionLoading) window.ParrotMessaging?.setUser(null);
   hostAuthLinks.hidden = sessionLoading || ready;
   hostAccountSession.hidden = !ready;
   propertyPanel.hidden = !ready;
@@ -363,6 +366,7 @@ async function restoreSession(){
       const query = params.toString();
       history.replaceState(null, "", window.location.pathname + (query ? `?${query}` : "") + window.location.hash);
       message(tr("emailVerified"), "success");
+      window.ParrotMessaging?.resumeAfterVerification();
       return;
     } catch (error) {
       params.delete("verifyEmail");
