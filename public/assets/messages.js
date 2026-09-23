@@ -164,8 +164,10 @@
     saveDraft(); threadVersion++; messages = new Map(); fetchedThrough = 0; readThrough = 0; readBusy = false;
     sending = false; pending = null; active = null; threadError = null;
     form.reset(); form.hidden = true; $("msg-thread").hidden = false; $("msg-empty").hidden = true;
+    $("msg-block").disabled = false; $("msg-earlier").disabled = false;
     $("msg-earlier").hidden = true; $("msg-jump").hidden = true;
     historyNode.replaceChildren(); app.classList.add("has-thread");
+    renderContext();
     status(t("loading"), false, $("msg-thread-notice"));
     return threadVersion;
   }
@@ -218,6 +220,7 @@
     inboxBusy = false; pollBusy = false; readBusy = false; sending = false;
     active = null; inbox = []; nextCursor = null; messages = new Map(); pending = null; threadError = null;
     historyNode.replaceChildren(); $("msg-list").replaceChildren(); form.reset();
+    $("msg-property").textContent = ""; $("msg-other").textContent = "";
     $("msg-auth").hidden = Boolean(user); app.hidden = !user; $("msg-account").hidden = !user;
     $("msg-account-name").textContent = user?.username || "";
     $("msg-thread").hidden = true; $("msg-empty").hidden = false; app.classList.remove("has-thread");
@@ -318,14 +321,14 @@
       active = detail; threadError = null;
       renderContext(); await loadInbox();
     } catch (error) { if (version === threadVersion) failed(error,$("msg-thread-notice")); }
-    finally { $("msg-block").disabled = false; }
+    finally { if (version === threadVersion) $("msg-block").disabled = false; }
   });
   $("msg-earlier").addEventListener("click", async () => {
     if (!active?.id || !messages.size) return;
     const version = threadVersion; $("msg-earlier").disabled = true;
     try { await fetchMessages(version,{older:true}); }
     catch (error) { if (version === threadVersion) failed(error,$("msg-thread-notice")); }
-    finally { $("msg-earlier").disabled = false; }
+    finally { if (version === threadVersion) $("msg-earlier").disabled = false; }
   });
   $("msg-back").addEventListener("click", () => {
     saveDraft(); threadVersion++; active = null; pending = null; sending = false; messages.clear();

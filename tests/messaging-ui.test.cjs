@@ -114,6 +114,7 @@ test('late block metadata cannot overwrite another selected conversation; accoun
   h.input(h.$('msg-compose').elements.body,'Private draft');
   h.w.ParrotMessaging.setUser(null);await flush();
   assert.equal(h.$('msg-history').textContent,'');assert.equal(h.$('msg-compose').elements.body.value,'');
+  assert.equal(h.$('msg-property').textContent,'');assert.equal(h.$('msg-other').textContent,'');
   h.w.history.replaceState(null,'','/messages.html');
   h.w.ParrotMessaging.setUser({...user,accountId:'another-account',profile:{id:'another-profile'}});await flush();
   assert.equal(h.$('msg-compose').elements.body.value,'');
