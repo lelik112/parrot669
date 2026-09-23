@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/messaging.css" />
 </head>
 <body class="search-page">
   <header class="host-topbar">
@@ -31,6 +32,7 @@
   <nav class="housing-tabs" aria-label="Housing">
     <a href="/search.html" class="active" aria-current="page" data-search-i18n="tabSearch">Find availability</a>
     <a href="/host.html" class="housing-host-link" data-search-i18n="tabHost">For hosts</a>
+    <a href="/messages.html" class="messaging-nav-link"><span data-msg-i18n="messages">Messages</span><span class="messaging-badge" data-msg-unread hidden></span></a>
   </nav>
 
   <main class="search-shell">
@@ -100,6 +102,7 @@
     </section>
   </main>
 
+  <script src="/assets/messaging-common.js"></script>
   <script src="/assets/search.js"></script>
 </body>
 </html>

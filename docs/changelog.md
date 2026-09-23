@@ -1,5 +1,16 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Guest/host inbox and participant blocking
+
+- Connect search's **Write to host**, a Messages tab with unread counts and the owner's account-level opt-in control. No external listing is required to communicate.
+- Add `/messages.html`: login/registration, paginated conversations/history, optional stay dates, plain-text messages and block/unblock, in EN/ES/CA/RU. Mobile uses separate list and thread panels.
+- Preserve enquiry context through login and same-browser email verification. Keep drafts and uncertain-send keys scoped to the account; retries do not duplicate messages and polling does not skip concurrent replies.
+- Acknowledge read only for visible, focused history at its latest messages. API errors remain visible next to the relevant controls.
+- Add a strict Worker messaging proxy with session-cookie forwarding, Origin protection and no-store responses.
+- Backend V22 adds profile-pair blocks across all properties, public contact labels and an authenticated existing-enquiry lookup; PostgreSQL tests cover blocking races and bypass attempts.
+- Add frontend CI and regression coverage for auth/context, failed sends, account isolation, read acknowledgements, opt-in and proxy protections. Geolocation implementation is unchanged.
+- Message email notifications and abuse reporting remain follow-up work.
+
 ## 2026-09-23 — Private guest/host messaging backend
 
 - Added isolated backend `messaging` routes, service and repository plus Flyway V21.
