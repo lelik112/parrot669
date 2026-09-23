@@ -148,6 +148,12 @@ Current important endpoints:
 
 CI runs compile + PostgreSQL end-to-end smoke test + Docker image build.
 
+Backend refactoring proceeds in separately tested steps. The shared `ServiceError` ADT now lives in its own `service/ServiceError.scala` file with the same package and definitions; auth, messaging and calendar verification keep their existing error contracts.
+
+Guest availability search and PostgreSQL location discovery now live in `com.parrot669.search` (`SearchRoutes`, `SearchService`, `SearchRepository` / `DoobieSearchRepository`, and search models). `Main` wires this module independently of `ParrotService` and the iCal fetcher. `LocationCountry` remains shared with geocoding; the existing and search routes share the unchanged `http.HttpResponses` mapping. Public endpoints, JSON fields, SQL, validation order, pricing, sorting and listing visibility are preserved. The existing per-result listing/cleaning-fee queries are intentionally unchanged; batching is a separate follow-up. Messaging, calendar-control verification, provider geocoding and database migrations were not reorganized in this step.
+
+These initial steps were released independently on 2026-09-23: calendar integrity `bcebaa4`, shared errors `d370575`, search extraction `1e00ef5`. Each passed PR/main CI, Railway deployment and live API smoke. Final [main CI 35873996970](https://github.com/lelik112/parrot669-backend/actions/runs/35873996970) passed 75 tests plus PostgreSQL HTTP smoke and Docker build. Railway deployment `6d68b808-d625-461c-ba74-c26afa862873` succeeded on `1e00ef59804216b417d264bd1f7ee1be9b7cb348`, with Flyway still at V24. Ten read-only production checks passed across the direct backend and Cloudflare Worker (health, location/search routing, invalid-budget errors and unauthorized dashboard access). Calendar failure/recovery and nonempty search scenarios were exercised in isolated CI, not against real host calendar data.
+
 ## Frontend
 
 Repository: `lelik112/parrot669`
@@ -191,6 +197,8 @@ Search logic is therefore:
 The iCal URL is a secret capability link. It is stored server-side because it must be fetched, but never returned in dashboard/public APIs. TODO before serious scale: encrypt calendar URLs at rest with an application-managed key.
 
 Calendar connection validation is deliberately strict: the listing id must match the property's Airbnb listing id exactly and the path must be `/calendar/ical/<listingId>.ics`. HTTPS links on `airbnb.com` and localized Airbnb hosts such as `airbnb.ru`, `airbnb.es` or `airbnb.co.uk` are accepted; localized hosts are normalized to `www.airbnb.com` before the server fetch, so redirects stay disabled and no user-controlled host is fetched. Lookalike hosts remain rejected. If reconnecting or replacing a calendar URL fails, PARROT keeps the last successful event snapshot, so known reservations continue to block search until a later successful sync replaces them.
+
+Calendar imports require a complete iCalendar document with balanced event boundaries. A truncated or malformed response is a sync error even when HTTP returned 200: the last successful snapshot and `lastSuccessAt` remain unchanged, so known reservations keep blocking search. A complete calendar with no events is valid and intentionally clears the previous snapshot. This validation does not change event classification or calendar-control verification policy.
 
 ## Auth / contact direction
 
@@ -262,6 +270,9 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 ## Immediate TODO
 
+- Continue backend extraction in small CI-verified steps: housing/availability, dashboard/profile assembly, auth, then calendar sync and legacy challenges after coordinating parallel calendar work. Keep behavior fixes separate from mechanical moves.
+- Separate backend fixes identified in the source review: align accepted 254-character emails with `profiles.contact VARCHAR(200)`; bound verification-email transport waits; bound/expire login limiter state and make concurrent admission explicit.
+- Batch search enrichment separately and handle a property deleted between candidate selection and fee lookup; the current per-result `.unique` fee read can fail the entire search. Make legacy challenge creation and verification-token replacement atomic; map duplicate listing constraints to a deliberate API response.
 - Address autocomplete and storage are connected; map UI and any guest address-visibility policy remain separate future work.
 - Improve visual design of housing/search/host UI.
 - Add abuse reporting/moderation and email bounce/delivery webhooks. Inbox, notifications, Worker proxy, host opt-in and participant blocking are connected.
