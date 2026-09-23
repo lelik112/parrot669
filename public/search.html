@@ -43,9 +43,15 @@
 
       <form class="availability-form search-form" id="availability-form">
         <label>
+          <span data-search-i18n="country">Country</span>
+          <select name="country" required aria-label="Country">
+            <option value="" data-search-i18n="chooseCountry">Choose country</option>
+          </select>
+        </label>
+        <label>
           <span data-search-i18n="city">City</span>
-          <select name="city" required>
-            <option value="Barcelona">Barcelona</option>
+          <select name="city" required aria-label="City" disabled>
+            <option value="" data-search-i18n="chooseCity">Choose city</option>
           </select>
         </label>
         <label><span data-search-i18n="from">From</span><input type="date" name="from" required /></label>
