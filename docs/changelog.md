@@ -1,5 +1,12 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Geolocation QA: guest search state and accessible labels
+
+- GEO-001: changing country, city, dates or capacity clears the previous results and asks the guest to search again. Late responses and filter changes cannot bring back results for the old parameters.
+- Keep unsubmitted search drafts across navigation without automatically running them; confirmed searches still restore normally. Pending requests cannot unlock controls belonging to a newer request.
+- GEO-002: country and city controls inherit their translated native labels, removing the fixed English accessible names in RU/ES/CA.
+- Add seven guest-search regression tests covering changed parameters, delayed responses, filters, state restoration and all four interface languages. Backend, LocationIQ and owner data are unchanged.
+
 ## 2026-09-23 — Unread-message email notifications
 
 - Notify verified hosts and guests about new unread messages through the existing backend Resend configuration. Wait two minutes, combine pending messages and cap frequency at one email per recipient/conversation per 15 minutes.

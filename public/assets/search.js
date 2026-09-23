@@ -9,10 +9,10 @@ const copy = {
 };
 
 const housingCopy = {
-  en:{accommodationType:"Accommodation type",anyType:"Any type",entirePlace:"Entire place",privateRoom:"Private room",noExternalLink:"External listing link not added yet",lead:"Search host-reported physical availability. When an external listing is attached, continue there for rental terms."},
-  es:{accommodationType:"Tipo de alojamiento",anyType:"Cualquier tipo",entirePlace:"Alojamiento entero",privateRoom:"Habitación privada",noExternalLink:"Todavía no se ha añadido un enlace externo",lead:"Busca disponibilidad física declarada por propietarios. Si hay un anuncio externo, continúa allí para consultar las condiciones."},
-  ca:{accommodationType:"Tipus d'allotjament",anyType:"Qualsevol tipus",entirePlace:"Allotjament sencer",privateRoom:"Habitació privada",noExternalLink:"Encara no s'ha afegit cap enllaç extern",lead:"Cerca disponibilitat física declarada pels propietaris. Si hi ha un anunci extern, continua-hi per consultar les condicions."},
-  ru:{accommodationType:"Тип жилья",anyType:"Любой тип",entirePlace:"Жильё целиком",privateRoom:"Отдельная комната",noExternalLink:"Внешняя ссылка пока не добавлена",lead:"Ищите физически свободное жильё по данным владельцев. Если добавлена внешняя площадка, условия аренды смотрите там."}
+  en:{accommodationType:"Accommodation type",anyType:"Any type",entirePlace:"Entire place",privateRoom:"Private room",noExternalLink:"External listing link not added yet",lead:"Search host-reported physical availability. When an external listing is attached, continue there for rental terms.",searchChanged:"Search details changed. Search again to see matching properties."},
+  es:{accommodationType:"Tipo de alojamiento",anyType:"Cualquier tipo",entirePlace:"Alojamiento entero",privateRoom:"Habitación privada",noExternalLink:"Todavía no se ha añadido un enlace externo",lead:"Busca disponibilidad física declarada por propietarios. Si hay un anuncio externo, continúa allí para consultar las condiciones.",searchChanged:"Has cambiado los datos de búsqueda. Vuelve a buscar para ver los alojamientos disponibles."},
+  ca:{accommodationType:"Tipus d'allotjament",anyType:"Qualsevol tipus",entirePlace:"Allotjament sencer",privateRoom:"Habitació privada",noExternalLink:"Encara no s'ha afegit cap enllaç extern",lead:"Cerca disponibilitat física declarada pels propietaris. Si hi ha un anunci extern, continua-hi per consultar les condicions.",searchChanged:"Has canviat les dades de cerca. Torna a cercar per veure els allotjaments disponibles."},
+  ru:{accommodationType:"Тип жилья",anyType:"Любой тип",entirePlace:"Жильё целиком",privateRoom:"Отдельная комната",noExternalLink:"Внешняя ссылка пока не добавлена",lead:"Ищите физически свободное жильё по данным владельцев. Если добавлена внешняя площадка, условия аренды смотрите там.",searchChanged:"Параметры изменены. Нажмите «Найти свободное», чтобы увидеть подходящие варианты."}
 };
 
 let lang=(()=>{const saved=localStorage.getItem(LANG_KEY);if(saved&&copy[saved])return saved;const b=(navigator.language||"en").slice(0,2);return copy[b]?b:"en"})();
@@ -42,7 +42,7 @@ function applyLanguage(next){
   refreshLocationLabels();
   window.ParrotMessaging?.setLanguage(lang);
 }
-function state(text,kind=""){results.replaceChildren();const n=document.createElement("div");n.className=`availability-state ${kind}`.trim();n.textContent=text;results.append(n)}
+function state(text,kind="",translationKey=""){results.replaceChildren();const n=document.createElement("div");n.className=`availability-state ${kind}`.trim();n.textContent=text;if(translationKey)n.dataset.searchI18n=translationKey;results.append(n)}
 function eurosToCents(value){
   const raw=String(value??"").trim().replace(",",".");
   if(!raw) return null;
@@ -292,6 +292,8 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
   params.set("accommodationType",String(accommodationTypeFilter?.value||"any"));
   if(minPriceCents!=null&&maxPriceCents!=null&&minPriceCents>maxPriceCents){
     state(t("priceRangeError"),"error");
+    updateSearchSubmitState();
+    if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
     return;
   }
   params.set("pricedOnly",pricedOnlyFilter?.checked?"true":"false");
@@ -309,8 +311,10 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
     console.error(error);
     if(requestId===searchSequence) state(t("error"),"error");
   }finally{
-    if(disableSubmit) updateSearchSubmitState();
-    if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
+    if(requestId===searchSequence){
+      updateSearchSubmitState();
+      if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
+    }
   }
 }
 form.addEventListener("submit",async e=>{
@@ -321,8 +325,20 @@ form.addEventListener("submit",async e=>{
   saveSearchState();
   await runSearch(lastSearchParams,{disableSubmit:true});
 });
-form.addEventListener("change",saveSearchState);
-form.addEventListener("input",saveSearchState);
+function searchDetailsChanged(){
+  if(lastSearchParams && lastSearchParams.toString()!==currentSearchParams().toString()){
+    // Ignore responses for the old city/dates, including requests still in flight.
+    searchSequence++;
+    lastSearchParams=null;
+    hasSearched=false;
+    updateSearchSubmitState();
+    if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
+    state(t("searchChanged"),"empty","searchChanged");
+  }
+  saveSearchState();
+}
+form.addEventListener("change",searchDetailsChanged);
+form.addEventListener("input",searchDetailsChanged);
 [accommodationTypeFilter,pricedOnlyFilter,minPriceFilter,maxPriceFilter].forEach(filter=>{
   filter?.addEventListener("change",()=>{
     saveSearchState();
