@@ -1,5 +1,13 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Inclusive owner date ranges
+
+- Owner availability and manual blocks now include the selected last night, with explicit labels and guidance in all four languages.
+- A single-night period can use the same date in both fields.
+- Convert dates only at the host UI boundary; API/database ranges and guest checkout remain exclusive.
+- Existing periods retain their covered nights and prices. Display, edit, save and deletion confirmation use consistent inclusive dates.
+- Regression tests cover single nights, repeated saves, month/year/leap-day boundaries and date changes around daylight saving time.
+
 ## 2026-09-23 — Country and city search
 
 - Guest search now requires both country and city.

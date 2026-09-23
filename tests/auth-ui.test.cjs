@@ -103,7 +103,7 @@ const user = {email:'test@example.test'};
 test('manual blocks have a separate panel, send no price and preserve availability through CRUD', async () => {
   const block = {id:'block-1', from:'2026-10-02', to:'2026-10-04'};
   const app = setup({
-    '/properties/property-1/unavailability':{status:201,body:block},
+    '/properties/property-1/unavailability':options => ({status:201,body:{...block,...JSON.parse(options.body)}}),
     '/unavailability/block-1':options => options.method === 'DELETE'
       ? {status:204} : {body:{...block,...JSON.parse(options.body)}}
   });
@@ -117,15 +117,15 @@ test('manual blocks have a separate panel, send no price and preserve availabili
   form.querySelectorAll('input')[0].value = block.from;
   form.querySelectorAll('input')[1].value = block.to;
   await form.emit('submit');
-  assert.deepEqual(app.requests.find(r => r.method === 'POST').body, {from:block.from,to:block.to});
+  assert.deepEqual(app.requests.find(r => r.method === 'POST').body, {from:block.from,to:'2026-10-05'});
   card = app.nodes.get('host-properties').children[0];
   form = card.querySelector('.host-unavailability-period');
   form.querySelectorAll('input')[1].value = '2026-10-05';
   await form.querySelectorAll('input')[1].emit('input');
   assert.equal(form.querySelector('.host-block-button').hidden, false);
   await form.emit('submit');
-  assert.deepEqual(app.requests.find(r => r.method === 'PUT').body, {from:block.from,to:'2026-10-05'});
-  assert.equal(app.run('state.properties[0].unavailability[0].to'), '2026-10-05');
+  assert.deepEqual(app.requests.find(r => r.method === 'PUT').body, {from:block.from,to:'2026-10-06'});
+  assert.equal(app.run('state.properties[0].unavailability[0].to'), '2026-10-06');
   form = app.nodes.get('host-properties').children[0].querySelector('.host-unavailability-period');
   app.run('confirm = () => false');
   await form.querySelector('.danger').emit('click');
@@ -171,7 +171,7 @@ test('manual block duplicate submission sends a single request', async () => {
   const pending=form.emit('submit');
   await form.emit('submit');
   assert.equal(app.calls.filter(p=>p===route).length,1);
-  resolve({status:201,body:{id:'block-1',from:inputs[0].value,to:inputs[1].value}});
+  resolve({status:201,body:{id:'block-1',...app.requests.find(r=>r.route===route).body}});
   await pending;
   assert.equal(app.run('state.properties[0].unavailability.length'),1);
 });
@@ -183,6 +183,81 @@ function propertyCard(app) {
   }]}; expandedPropertyIds.add('property-1'); renderProperties();`);
   return app.nodes.get('host-properties').children[0];
 }
+
+test('existing ranges render the last covered night and round-trip without shifting dates or price', async () => {
+  const stored={id:'period-1',from:'2026-10-01',to:'2026-10-05',nightlyPriceCents:10000};
+  const app=setup({
+    '/availability/period-1':{body:stored},
+    '/properties/property-1/availability':{body:[stored]},
+    '/unavailability/block-1':{body:{id:'block-1',from:'2026-10-10',to:'2026-10-11'}}
+  });
+  await settle();
+  propertyCard(app);
+  app.run('state.properties[0].unavailability=[{id:"block-1",from:"2026-10-10",to:"2026-10-11"}]; renderProperties()');
+  for(let i=0;i<2;i++){
+    const card=app.nodes.get('host-properties').children[0];
+    const available=card.querySelector('.host-availability-panel').querySelector('.host-period');
+    const blocked=card.querySelector('.host-unavailability-period');
+    assert.equal(available.querySelectorAll('input')[1].value,'2026-10-04');
+    assert.equal(blocked.querySelectorAll('input')[1].value,'2026-10-10');
+    assert.equal(blocked.querySelectorAll('input')[1].min,'2026-10-10');
+    await available.querySelectorAll('input')[1].emit('input');
+    assert.equal(available.querySelector('button').hidden,true);
+    await available.emit('submit');
+    await blocked.emit('submit');
+  }
+  for(const req of app.requests.filter(r=>r.method==='PUT')){
+    assert.deepEqual(req.body,req.route.includes('/unavailability/')
+      ? {from:'2026-10-10',to:'2026-10-11'}
+      : {from:stored.from,to:stored.to,nightlyPriceCents:stored.nightlyPriceCents});
+  }
+});
+
+test('owner ranges include the final night, allow one night and handle month/year/leap boundaries', async () => {
+  for(const [first,last,end,nights] of [
+    ['2026-09-10','2026-09-15','2026-09-16',6],
+    ['2026-09-15','2026-09-15','2026-09-16',1],
+    ['2026-12-31','2026-12-31','2027-01-01',1],
+    ['2028-02-28','2028-02-29','2028-03-01',2],
+    ['2026-03-28','2026-03-30','2026-03-31',3]
+  ]){
+    const app=setup({
+      '/properties/property-1/availability':options=> options.method==='POST'
+        ? {status:201,body:{id:'new',...JSON.parse(options.body)}} : {body:[]},
+      '/properties/property-1/unavailability':options=>({status:201,body:{id:'block-1',...JSON.parse(options.body)}})
+    });
+    await settle();
+    const card=propertyCard(app);
+    for(const selector of ['.host-dates','.host-unavailability-add']){
+      const form=card.querySelector(selector),inputs=form.querySelectorAll('input');
+      inputs[0].value=first;
+      await inputs[0].emit('change');
+      assert.equal(inputs[1].min,first);
+      assert.equal(inputs[1].value,first);
+      inputs[1].value=last;
+      if(inputs[2]) inputs[2].value='100';
+      await form.emit('submit');
+    }
+    for(const req of app.requests.filter(r=>r.method==='POST')){
+      assert.equal(req.body.from,first); assert.equal(req.body.to,end);
+      assert.equal((Date.parse(req.body.to)-Date.parse(req.body.from))/86400000,nights);
+      assert.equal(req.body.nightlyPriceCents,req.route.endsWith('/availability')?10000:undefined);
+    }
+  }
+});
+
+test('deletion confirmations use the same inclusive dates as the owner forms', async () => {
+  const app=setup();
+  await settle(); propertyCard(app);
+  app.run('var confirmed=[]; confirm=text=>{confirmed.push(text);return false}; state.properties[0].unavailability=[{id:"block-1",from:"2026-10-10",to:"2026-10-11"}]; renderProperties()');
+  const card=app.nodes.get('host-properties').children[0];
+  await card.querySelector('.host-availability-panel').querySelector('.host-period').querySelector('.danger').emit('click');
+  await card.querySelector('.host-unavailability-period').querySelector('.danger').emit('click');
+  const messages=JSON.parse(app.run('JSON.stringify(confirmed)'));
+  assert.match(messages[0],/2026-10-01.*2026-10-04/);
+  assert.match(messages[1],/2026-10-10.*2026-10-10/);
+  assert.equal(app.requests.some(r=>r.method==='DELETE'),false);
+});
 
 for (const status of [400, 409]) {
   for (const action of ['add', 'edit']) {

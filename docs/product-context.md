@@ -29,7 +29,7 @@ Current MVP principle:
 4a. Guest can choose all results or only results with complete nightly pricing, and may filter by minimum/maximum estimated total price for the requested stay. Results with a known price are sorted cheapest first; results without a complete price come last. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only and price-range search.
 4b. Optional cleaning fee belongs to the PARROT property, not to the external listing, and is included in the displayed estimate when known. An external listing has an independent `showInSearch` flag: it may remain connected for calendar sync while its outbound URL is hidden from guest search results.
 5. Property title shown to guests is the same property name entered by the owner; it is not an internal-only label. Barcelona is not used as the result title.
-6. Date ranges use hotel-style [check-in, checkout) semantics: checkout day is not occupied and same-day check-in/check-out is invalid.
+6. Guest search uses hotel-style [check-in, checkout) semantics: checkout day is not occupied and same-day check-in/check-out is invalid. Owner forms instead select an inclusive range of nights (see below).
 
 ### Host
 1. Open `/host.html`.
@@ -40,6 +40,9 @@ Current MVP principle:
 5. PARROT generates the canonical Airbnb URL. The host may hide that URL from guest search without disconnecting the listing or calendar.
 6. Add/update/delete PARROT availability periods; each period may optionally carry a nightly price in EUR. Existing periods show a Save action only after their dates or nightly price have actually changed.
 6a. New/updated availability periods may not overlap. Adjacent periods are allowed and can have different prices.
+6b. Owner availability and manual unavailability forms include both selected dates. The last date is the last covered night, not checkout. Selecting the same date twice covers one night. For example, September 10–15 at €100/night covers six nights and allows checkout September 16.
+6c. API, persisted state and database ranges remain [from, to). Only the host form boundary converts: display API end minus one calendar day; submit selected last night plus one calendar day. Existing coverage and prices are preserved, including repeated edits. Imported iCal ranges and guest search dates are unchanged.
+6d. Manual unavailability is a separate section with no price. These blocks override availability in search without deleting or splitting the priced periods; removing a block restores the original coverage. Both endpoints use the same inclusive owner-form convention.
 6b. Search stitches adjacent periods together by requested night, so a stay may span multiple adjacent rows as long as every night is covered.
 6c. Overlapping availability periods for the same property are rejected twice: application-level checks provide friendly 409 responses, while PostgreSQL V13 enforces the invariant so concurrent writes cannot race past the check.
 7. Delete external listing or whole property.

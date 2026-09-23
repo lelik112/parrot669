@@ -1471,6 +1471,9 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-availability-panel,.host-unavailability-panel{padding:18px;border-radius:14px;margin-top:22px}
 .host-availability-panel{border:1px solid rgba(216,255,99,.2);background:rgba(216,255,99,.025)}
 .host-availability-panel h3{color:var(--lime)}
+.host-availability-panel .host-inline-muted{line-height:1.6;color:#a8b2ae}
+.host-date-label{display:grid;gap:7px;min-width:0;font-size:11px;color:#a8b2ae}
+.host-availability-panel .host-dates,.host-availability-panel .host-period{align-items:end}
 .host-unavailability-panel{border:1px solid rgba(242,181,168,.32);background:rgba(242,181,168,.045)}
 .host-unavailability-panel h3{color:#f2b5a8}
 .host-unavailability-panel .host-inline-muted{line-height:1.6;margin:0 0 16px;color:#a8b2ae}

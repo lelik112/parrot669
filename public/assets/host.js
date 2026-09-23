@@ -99,6 +99,14 @@ const blockCopy = {
 };
 Object.entries(blockCopy).forEach(([language, values]) => Object.assign(copy[language], values));
 
+const hostDateCopy = {
+  en: {firstNight:"First night", lastNight:"Last night (included)", availabilityHelp:"Both dates are included. The price applies to every selected night, including the last one. Manual blocks and imported reservations take priority.", unavailableHelp:"Both dates are blocked, including the last night. No price. Existing availability and prices are kept; these nights are excluded from search.", blockTo:"Unavailable through (included)", blockDateError:"The last date cannot be before the first date."},
+  es: {firstNight:"Primera noche", lastNight:"Última noche (incluida)", availabilityHelp:"Ambas fechas están incluidas. El precio se aplica a cada noche seleccionada, incluida la última. Los bloqueos manuales y las reservas importadas tienen prioridad.", unavailableHelp:"Ambas fechas están bloqueadas, incluida la última noche. Sin precio. Se conservan la disponibilidad y los precios; estas noches se excluyen de la búsqueda.", blockTo:"No disponible hasta (incluido)", blockDateError:"La fecha final no puede ser anterior a la inicial."},
+  ca: {firstNight:"Primera nit", lastNight:"Última nit (inclosa)", availabilityHelp:"Ambdues dates estan incloses. El preu s'aplica a cada nit seleccionada, inclosa l'última. Els bloquejos manuals i les reserves importades tenen prioritat.", unavailableHelp:"Ambdues dates estan bloquejades, inclosa l'última nit. Sense preu. Es conserven la disponibilitat i els preus; aquestes nits s'exclouen de la cerca.", blockTo:"No disponible fins al (inclòs)", blockDateError:"La data final no pot ser anterior a la inicial."},
+  ru: {firstNight:"Первая ночь", lastNight:"Последняя ночь (включительно)", availabilityHelp:"Обе даты включены. Цена действует на каждую выбранную ночь, включая последнюю. Ручные блокировки и брони из календаря имеют приоритет.", unavailableHelp:"Обе даты заблокированы, включая последнюю ночь. Без цены. Свободные периоды и цены сохраняются, но эти ночи исключаются из поиска.", blockTo:"Недоступно по (включительно)", blockDateError:"Последняя дата не может быть раньше первой."}
+};
+Object.entries(hostDateCopy).forEach(([language, values]) => Object.assign(copy[language], values));
+
 const statusNode = document.getElementById("host-status");
 const authDialog = document.getElementById("auth-dialog");
 const authDialogTitle = document.getElementById("auth-dialog-title");
@@ -191,6 +199,7 @@ async function api(path, options = {}){
     const knownErrors = {
       "availability period overlaps an existing period":"overlapError",
       "unavailability period overlaps an existing block":"blockOverlap",
+      "to must be after from; checkout date is exclusive":"blockDateError",
       "to must be after from; end date is exclusive":"blockDateError"
     };
     const error = new Error(knownErrors[detail] ? tr(knownErrors[detail]) : detail);
@@ -563,6 +572,21 @@ function plusDays(iso, days){
   return date.toISOString().slice(0, 10);
 }
 
+// The owner selects nights inclusively; state and API keep [from, to).
+// Convert only at the form boundary so existing periods never gain a night.
+function hostPeriodDates(data){
+  return {from:data.get("from"), to:plusDays(data.get("to"), 1)};
+}
+
+function hostDateLabel(input, key){
+  const label = document.createElement("label");
+  label.className = "host-date-label";
+  const caption = document.createElement("span");
+  caption.textContent = tr(key);
+  label.append(caption, input);
+  return label;
+}
+
 async function addAvailability(property, form){
   if (form.getAttribute("aria-busy") === "true") return;
   const data = new FormData(form);
@@ -574,7 +598,7 @@ async function addAvailability(property, form){
   try {
     await api(`/properties/${property.id}/availability`, {
       method:"POST",
-      body:JSON.stringify({from:data.get("from"), to:data.get("to"), nightlyPriceCents:eurosToCents(data.get("nightlyPrice"))})
+      body:JSON.stringify({...hostPeriodDates(data), nightlyPriceCents:eurosToCents(data.get("nightlyPrice"))})
     });
     message(tr("availabilityAdded"), "success");
     await refreshAvailability(property, true);
@@ -608,7 +632,7 @@ async function updateAvailability(property, period, form){
   try {
     await api(`/availability/${period.id}`, {
       method:"PUT",
-      body:JSON.stringify({from:data.get("from"), to:data.get("to"), nightlyPriceCents:eurosToCents(data.get("nightlyPrice"))})
+      body:JSON.stringify({...hostPeriodDates(data), nightlyPriceCents:eurosToCents(data.get("nightlyPrice"))})
     });
     message(tr("availabilityUpdated"), "success");
     await refreshAvailability(property, true);
@@ -622,7 +646,7 @@ async function updateAvailability(property, period, form){
 }
 
 async function deleteAvailability(property, period){
-  if (!confirm(tr("deleteConfirm", period.from, period.to))) return;
+  if (!confirm(tr("deleteConfirm", period.from, plusDays(period.to, -1)))) return;
   message(tr("deletingAvailability"));
   try {
     await api(`/availability/${period.id}`, {method:"DELETE"});
@@ -746,7 +770,7 @@ async function saveUnavailability(property, form, period = null){
   try {
     const saved = await api(period ? `/unavailability/${period.id}` : `/properties/${property.id}/unavailability`, {
       method:period ? "PUT" : "POST",
-      body:JSON.stringify({from:data.get("from"), to:data.get("to")})
+      body:JSON.stringify(hostPeriodDates(data))
     });
     property.unavailability = [...(property.unavailability || []).filter(item => item.id !== saved.id), saved]
       .sort((a,b) => a.from.localeCompare(b.from) || a.to.localeCompare(b.to));
@@ -762,7 +786,7 @@ async function saveUnavailability(property, form, period = null){
 }
 
 async function deleteUnavailability(property, period, form){
-  if (form.getAttribute("aria-busy") === "true" || !confirm(tr("deleteBlockConfirm", period.from, period.to))) return;
+  if (form.getAttribute("aria-busy") === "true" || !confirm(tr("deleteBlockConfirm", period.from, plusDays(period.to, -1)))) return;
   setFormError(form);
   form.setAttribute("aria-busy", "true");
   setBusy(form, true);
@@ -805,11 +829,12 @@ function renderUnavailability(property){
       return input;
     }
     const from = dateField("from", "blockFrom", period?.from);
-    const to = dateField("to", "blockTo", period?.to);
-    to.min = plusDays(from.value, 1);
+    const lastNight = plusDays(period?.to, -1);
+    const to = dateField("to", "blockTo", lastNight);
+    to.min = from.value;
     from.addEventListener("change", () => {
-      to.min = plusDays(from.value, 1);
-      if (from.value && (!to.value || to.value <= from.value)) to.value = to.min;
+      to.min = from.value;
+      if (from.value && (!to.value || to.value < from.value)) to.value = to.min;
     });
     const save = document.createElement("button");
     save.type = "submit";
@@ -817,7 +842,7 @@ function renderUnavailability(property){
     save.textContent = tr(period ? "save" : "addBlock");
     save.hidden = Boolean(period);
     if (period) {
-      const changed = () => { save.hidden = from.value === period.from && to.value === period.to; };
+      const changed = () => { save.hidden = from.value === period.from && to.value === lastNight; };
       [from, to].forEach(input => {
         input.addEventListener("input", changed);
         input.addEventListener("change", changed);
@@ -1114,9 +1139,8 @@ function renderProperties(){
     toInput.name = "to";
     toInput.required = true;
     fromInput.addEventListener("change", () => {
-      const minCheckout = plusDays(fromInput.value, 1);
-      toInput.min = minCheckout;
-      if (!toInput.value || toInput.value <= fromInput.value) toInput.value = minCheckout;
+      toInput.min = fromInput.value;
+      if (!toInput.value || toInput.value < fromInput.value) toInput.value = fromInput.value;
     });
     const nightlyInput=document.createElement("input");
     nightlyInput.type="number";nightlyInput.min="0.01";nightlyInput.step="0.01";nightlyInput.name="nightlyPrice";nightlyInput.placeholder=tr("nightlyPrice");
@@ -1124,7 +1148,7 @@ function renderProperties(){
     addButton.className = "button button-small";
     addButton.type = "submit";
     addButton.textContent = tr("addDates");
-    addForm.append(fromInput, toInput, nightlyInput, addButton);
+    addForm.append(hostDateLabel(fromInput, "firstNight"), hostDateLabel(toInput, "lastNight"), nightlyInput, addButton);
     addForm.addEventListener("submit", event => {
       event.preventDefault();
       return addAvailability(property, addForm);
@@ -1164,12 +1188,12 @@ function renderProperties(){
         to.type = "date";
         to.name = "to";
         to.required = true;
-        to.value = period.to;
-        to.min = plusDays(period.from, 1);
+        const lastNight = plusDays(period.to, -1);
+        to.value = lastNight;
+        to.min = period.from;
         from.addEventListener("change", () => {
-          const minCheckout = plusDays(from.value, 1);
-          to.min = minCheckout;
-          if (!to.value || to.value <= from.value) to.value = minCheckout;
+          to.min = from.value;
+          if (!to.value || to.value < from.value) to.value = from.value;
         });
 
         const nightly=document.createElement("input");
@@ -1185,7 +1209,7 @@ function renderProperties(){
         const syncSaveVisibility = () => {
           save.hidden =
             from.value === period.from &&
-            to.value === period.to &&
+            to.value === lastNight &&
             nightly.value === originalNightly;
         };
         [from,to,nightly].forEach(input => {
@@ -1203,7 +1227,7 @@ function renderProperties(){
         remove.textContent = tr("remove");
         remove.addEventListener("click", () => deleteAvailability(property, period));
 
-        row.append(from, to, nightly, save, remove);
+        row.append(hostDateLabel(from, "firstNight"), hostDateLabel(to, "lastNight"), nightly, save, remove);
         periods.append(row);
       });
     }
