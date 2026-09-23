@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-23T13:26:37.771Z",
+  "page": "https://parrot669.com/host",
+  "locale": "ru",
+  "dialogText": "Войти\n×\nВойти\nСоздать аккаунт\nEMAIL ИЛИ ЛОГИН\nПАРОЛЬ\nВойти →\nЗабыли пароль?\n\nПодтвердите email по ссылке в письме, затем войдите. Проверьте также папку «Спам».",
+  "statusText": [],
+  "loginBlocked": true,
+  "mainAfterES": "HERRAMIENTAS PARA PROPIETARIOS\n\nPublica la disponibilidad.\nLa operación ocurre fuera.\n\nAñade una vivienda y mantén actualizadas las fechas en las que está físicamente libre. El anuncio y el calendario de Airbnb son opcionales.\n\nПодтвердите email по ссылке в письме, затем войдите. Проверьте также папку «Спам».\n×",
+  "actualMessage": "Подтвердите email по ссылке в письме, затем войдите. Проверьте также папку «Спам».",
+  "status": "fixed_original_ru_scenario",
+  "rawEnglishErrorAbsent": true,
+  "localeScope": "Fresh sign-in submitted on RU. After closing the dialog and switching to ES, the previously shown notification retains Russian. No fresh ES sign-in was submitted.",
+  "credentialsRecorded": false,
+  "accountEmailVerifiedDuringRetest": false
+}
