@@ -321,10 +321,21 @@ form.addEventListener("input",saveSearchState);
     if(lastSearchParams) runSearch(lastSearchParams);
   });
 });
+countrySelect.addEventListener("change",async()=>{
+  try{
+    await loadCities(countrySelect.value,"");
+    saveSearchState();
+  }catch(error){
+    console.error(error);
+    state(t("locationError"),"error");
+  }
+});
 buttons.forEach(b=>b.addEventListener("click",()=>applyLanguage(b.dataset.searchLang)));
 applyLanguage(lang);
-restoreSearchState();
-if(hasSearched&&form.reportValidity()){
-  lastSearchParams=currentSearchParams();
-  runSearch(lastSearchParams);
-}
+const savedSearchState=restoreSearchState();
+loadLocations(savedSearchState).then(()=>{
+  if(hasSearched&&form.reportValidity()){
+    lastSearchParams=currentSearchParams();
+    runSearch(lastSearchParams);
+  }
+});
