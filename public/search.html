@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#050c0e" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <meta name="description" content="Search host-reported property availability in Barcelona with PARROT 669." />
+  <meta name="description" content="Search host-reported property availability by country and city with PARROT 669." />
   <title>PARROT 669 — Availability search</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,9 +43,15 @@
 
       <form class="availability-form search-form" id="availability-form">
         <label>
+          <span data-search-i18n="country">Country</span>
+          <select name="country" required aria-label="Country">
+            <option value="" data-search-i18n="chooseCountry">Choose country</option>
+          </select>
+        </label>
+        <label>
           <span data-search-i18n="city">City</span>
-          <select name="city" required>
-            <option value="Barcelona">Barcelona</option>
+          <select name="city" required aria-label="City" disabled>
+            <option value="" data-search-i18n="chooseCity">Choose city</option>
           </select>
         </label>
         <label><span data-search-i18n="from">From</span><input type="date" name="from" required /></label>
@@ -58,7 +64,7 @@
           <span data-search-i18n="sleeps">Sleeping places</span>
           <select name="sleeps"><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option><option value="6">6+</option></select>
         </label>
-        <button class="button availability-submit" type="submit"><span data-search-i18n="search">Search availability</span><span>→</span></button>
+        <button class="button availability-submit" type="submit" disabled><span data-search-i18n="search">Search availability</span><span>→</span></button>
       </form>
 
       <div class="search-filters" aria-label="Search filters">

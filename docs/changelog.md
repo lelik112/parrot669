@@ -1,5 +1,15 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Country and city search
+
+- Guest search now requires both country and city.
+- Country options come from distinct property countries in PostgreSQL; city options come from distinct property cities for the selected country.
+- Guest search no longer depends on an external geocoder and cannot select locations that PARROT does not currently have in its database.
+- Removed the remaining Barcelona-only filter from backend availability search; backend now filters by normalized country code plus city.
+- Cloudflare Worker proxies the public location endpoints used by the search UI.
+- Existing saved Barcelona searches are migrated client-side when Spain is the only available country.
+- Search stays disabled until both required location fields are loaded and selected.
+
 ## 2026-09-22 — Remove duplicated dates from result cards
 
 - Removed the availability date window from every result card because the requested stay period is already visible in the search controls above the results.

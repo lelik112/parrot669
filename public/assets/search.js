@@ -2,10 +2,10 @@ const LANG_KEY = "parrot669-language";
 const SEARCH_STATE_KEY = "parrot669-search-state";
 
 const copy = {
-  en:{page:"PARROT 669 — Availability search",label:"AVAILABILITY",back:"← Back to site",tabSearch:"Find availability",tabHost:"For hosts",owner:n=>`Host: ${n}`,eyebrow:"LIVE AVAILABILITY",title:"Find a property that is<br><span>actually free.</span>",lead:"Search host-reported availability and continue to the original Airbnb listing for rental terms.",city:"City",from:"Check-in",to:"Check-out",bedrooms:"Bedrooms",sleeps:"Sleeping places",search:"Search availability",filters:"Filters",pricedOnly:"Only with a price",priceFrom:"Price from, €",priceTo:"Price to, €",priceRangeError:"Price from must not be greater than price to",priceUnknown:"Price: ask the host",priceNote:"Indicative price. Confirm final terms and any other charges with the host.",priceEstimate:(amount,nights)=>`≈ €${amount} for ${nights} night${nights===1?"":"s"}`,cleaning:n=>`including €${n} cleaning`,live:"Connected to the live PARROT availability index",disclaimer:"Availability is physical availability. Rental terms and permitted stay duration are defined by the host.",loading:"Searching live availability…",empty:"No matching availability yet.",error:"Availability search is temporarily unavailable.",bed:n=>n===1?"1 bedroom":`${n} bedrooms`,sleep:n=>n===1?"1 sleeping place":`${n} sleeping places`,min:n=>`minimum stay ${n} day${n===1?"":"s"}`,period:(a,b)=>`Available ${a} → ${b}`,view:"View on Airbnb"},
-  es:{page:"PARROT 669 — Buscar disponibilidad",label:"DISPONIBILIDAD",back:"← Volver al sitio",tabSearch:"Buscar disponibilidad",tabHost:"Para propietarios",owner:n=>`Propietario: ${n}`,eyebrow:"DISPONIBILIDAD EN DIRECTO",title:"Encuentra una vivienda que esté<br><span>realmente libre.</span>",lead:"Busca disponibilidad declarada por propietarios y continúa al anuncio original de Airbnb para consultar las condiciones.",city:"Ciudad",from:"Entrada",to:"Salida",bedrooms:"Dormitorios",sleeps:"Plazas para dormir",search:"Buscar disponibilidad",filters:"Filtros",pricedOnly:"Solo con precio",priceFrom:"Precio desde, €",priceTo:"Precio hasta, €",priceRangeError:"El precio mínimo no puede superar el máximo",priceUnknown:"Precio: consulta al propietario",priceNote:"Precio orientativo. Confirma las condiciones finales y otros cargos con el propietario.",priceEstimate:(amount,nights)=>`≈ €${amount} por ${nights} noche${nights===1?"":"s"}`,cleaning:n=>`incluye €${n} de limpieza`,live:"Conectado al índice de disponibilidad de PARROT",disclaimer:"La disponibilidad indica que la vivienda está físicamente libre. Las condiciones y la duración permitida las define el propietario.",loading:"Buscando disponibilidad…",empty:"Todavía no hay resultados.",error:"La búsqueda no está disponible temporalmente.",bed:n=>n===1?"1 dormitorio":`${n} dormitorios`,sleep:n=>n===1?"1 plaza":`${n} plazas`,min:n=>`estancia mínima ${n} día${n===1?"":"s"}`,period:(a,b)=>`Disponible ${a} → ${b}`,view:"Ver en Airbnb"},
-  ca:{page:"PARROT 669 — Cercar disponibilitat",label:"DISPONIBILITAT",back:"← Tornar al web",tabSearch:"Cercar disponibilitat",tabHost:"Per a propietaris",owner:n=>`Propietari: ${n}`,eyebrow:"DISPONIBILITAT EN DIRECTE",title:"Troba un habitatge que estigui<br><span>realment lliure.</span>",lead:"Cerca disponibilitat declarada pels propietaris i continua a l'anunci original d'Airbnb per consultar les condicions.",city:"Ciutat",from:"Entrada",to:"Sortida",bedrooms:"Dormitoris",sleeps:"Places per dormir",search:"Cercar disponibilitat",filters:"Filtres",pricedOnly:"Només amb preu",priceFrom:"Preu des de, €",priceTo:"Preu fins a, €",priceRangeError:"El preu mínim no pot superar el màxim",priceUnknown:"Preu: consulta el propietari",priceNote:"Preu orientatiu. Confirma les condicions finals i altres càrrecs amb el propietari.",priceEstimate:(amount,nights)=>`≈ €${amount} per ${nights} nit${nights===1?"":"s"}`,cleaning:n=>`inclou €${n} de neteja`,live:"Connectat a l'índex de disponibilitat de PARROT",disclaimer:"La disponibilitat indica que l'habitatge està físicament lliure. Les condicions i la durada permesa les defineix el propietari.",loading:"Cercant disponibilitat…",empty:"Encara no hi ha resultats.",error:"La cerca no està disponible temporalment.",bed:n=>n===1?"1 dormitori":`${n} dormitoris`,sleep:n=>n===1?"1 plaça":`${n} places`,min:n=>`estada mínima ${n} dia${n===1?"":"s"}`,period:(a,b)=>`Disponible ${a} → ${b}`,view:"Veure a Airbnb"},
-  ru:{page:"PARROT 669 — Поиск свободного жилья",label:"СВОБОДНЫЕ ДАТЫ",back:"← Назад на сайт",tabSearch:"Найти жильё",tabHost:"Владельцам",owner:n=>`Владелец: ${n}`,eyebrow:"АКТУАЛЬНАЯ ДОСТУПНОСТЬ",title:"Найдите жильё, которое<br><span>реально свободно.</span>",lead:"Ищите свободные даты, указанные владельцами, а условия аренды смотрите в исходном объявлении Airbnb.",city:"Город",from:"Заезд",to:"Выезд",bedrooms:"Спальни",sleeps:"Спальных мест",search:"Найти свободное",filters:"Фильтры",pricedOnly:"Только с ценой",priceFrom:"Цена от, €",priceTo:"Цена до, €",priceRangeError:"Цена «от» не может быть больше цены «до»",priceUnknown:"Цену уточняйте у владельца",priceNote:"Цена ориентировочная. Финальные условия и дополнительные платежи уточняйте у владельца.",priceEstimate:(amount,nights)=>`≈ €${amount} за ${nights} ноч.`,cleaning:n=>`включая €${n} уборки`,live:"Подключено к живому индексу доступности PARROT",disclaimer:"Здесь показывается физическая доступность жилья. Условия аренды и допустимый срок определяет владелец.",loading:"Ищем свободные даты…",empty:"Подходящих вариантов пока нет.",error:"Поиск временно недоступен.",bed:n=>n===1?"1 спальня":n<5?`${n} спальни`:`${n} спален`,sleep:n=>`${n} спальных мест`,min:n=>`минимум ${n} дн.`,period:(a,b)=>`Свободно ${a} → ${b}`,view:"Открыть на Airbnb"}
+  en:{page:"PARROT 669 — Availability search",label:"AVAILABILITY",back:"← Back to site",tabSearch:"Find availability",tabHost:"For hosts",owner:n=>`Host: ${n}`,eyebrow:"LIVE AVAILABILITY",title:"Find a property that is<br><span>actually free.</span>",lead:"Search host-reported availability and continue to the original Airbnb listing for rental terms.",country:"Country",chooseCountry:"Choose country",city:"City",chooseCity:"Choose city",locationError:"Locations are temporarily unavailable.",from:"Check-in",to:"Check-out",bedrooms:"Bedrooms",sleeps:"Sleeping places",search:"Search availability",filters:"Filters",pricedOnly:"Only with a price",priceFrom:"Price from, €",priceTo:"Price to, €",priceRangeError:"Price from must not be greater than price to",priceUnknown:"Price: ask the host",priceNote:"Indicative price. Confirm final terms and any other charges with the host.",priceEstimate:(amount,nights)=>`≈ €${amount} for ${nights} night${nights===1?"":"s"}`,cleaning:n=>`including €${n} cleaning`,live:"Connected to the live PARROT availability index",disclaimer:"Availability is physical availability. Rental terms and permitted stay duration are defined by the host.",loading:"Searching live availability…",empty:"No matching availability yet.",error:"Availability search is temporarily unavailable.",bed:n=>n===1?"1 bedroom":`${n} bedrooms`,sleep:n=>n===1?"1 sleeping place":`${n} sleeping places`,min:n=>`minimum stay ${n} day${n===1?"":"s"}`,period:(a,b)=>`Available ${a} → ${b}`,view:"View on Airbnb"},
+  es:{page:"PARROT 669 — Buscar disponibilidad",label:"DISPONIBILIDAD",back:"← Volver al sitio",tabSearch:"Buscar disponibilidad",tabHost:"Para propietarios",owner:n=>`Propietario: ${n}`,eyebrow:"DISPONIBILIDAD EN DIRECTO",title:"Encuentra una vivienda que esté<br><span>realmente libre.</span>",lead:"Busca disponibilidad declarada por propietarios y continúa al anuncio original de Airbnb para consultar las condiciones.",country:"País",chooseCountry:"Elige un país",city:"Ciudad",chooseCity:"Elige una ciudad",locationError:"Las ubicaciones no están disponibles temporalmente.",from:"Entrada",to:"Salida",bedrooms:"Dormitorios",sleeps:"Plazas para dormir",search:"Buscar disponibilidad",filters:"Filtros",pricedOnly:"Solo con precio",priceFrom:"Precio desde, €",priceTo:"Precio hasta, €",priceRangeError:"El precio mínimo no puede superar el máximo",priceUnknown:"Precio: consulta al propietario",priceNote:"Precio orientativo. Confirma las condiciones finales y otros cargos con el propietario.",priceEstimate:(amount,nights)=>`≈ €${amount} por ${nights} noche${nights===1?"":"s"}`,cleaning:n=>`incluye €${n} de limpieza`,live:"Conectado al índice de disponibilidad de PARROT",disclaimer:"La disponibilidad indica que la vivienda está físicamente libre. Las condiciones y la duración permitida las define el propietario.",loading:"Buscando disponibilidad…",empty:"Todavía no hay resultados.",error:"La búsqueda no está disponible temporalmente.",bed:n=>n===1?"1 dormitorio":`${n} dormitorios`,sleep:n=>n===1?"1 plaza":`${n} plazas`,min:n=>`estancia mínima ${n} día${n===1?"":"s"}`,period:(a,b)=>`Disponible ${a} → ${b}`,view:"Ver en Airbnb"},
+  ca:{page:"PARROT 669 — Cercar disponibilitat",label:"DISPONIBILITAT",back:"← Tornar al web",tabSearch:"Cercar disponibilitat",tabHost:"Per a propietaris",owner:n=>`Propietari: ${n}`,eyebrow:"DISPONIBILITAT EN DIRECTE",title:"Troba un habitatge que estigui<br><span>realment lliure.</span>",lead:"Cerca disponibilitat declarada pels propietaris i continua a l'anunci original d'Airbnb per consultar les condicions.",country:"País",chooseCountry:"Tria un país",city:"Ciutat",chooseCity:"Tria una ciutat",locationError:"Les ubicacions no estan disponibles temporalment.",from:"Entrada",to:"Sortida",bedrooms:"Dormitoris",sleeps:"Places per dormir",search:"Cercar disponibilitat",filters:"Filtres",pricedOnly:"Només amb preu",priceFrom:"Preu des de, €",priceTo:"Preu fins a, €",priceRangeError:"El preu mínim no pot superar el màxim",priceUnknown:"Preu: consulta el propietari",priceNote:"Preu orientatiu. Confirma les condicions finals i altres càrrecs amb el propietari.",priceEstimate:(amount,nights)=>`≈ €${amount} per ${nights} nit${nights===1?"":"s"}`,cleaning:n=>`inclou €${n} de neteja`,live:"Connectat a l'índex de disponibilitat de PARROT",disclaimer:"La disponibilitat indica que l'habitatge està físicament lliure. Les condicions i la durada permesa les defineix el propietari.",loading:"Cercant disponibilitat…",empty:"Encara no hi ha resultats.",error:"La cerca no està disponible temporalment.",bed:n=>n===1?"1 dormitori":`${n} dormitoris`,sleep:n=>n===1?"1 plaça":`${n} places`,min:n=>`estada mínima ${n} dia${n===1?"":"s"}`,period:(a,b)=>`Disponible ${a} → ${b}`,view:"Veure a Airbnb"},
+  ru:{page:"PARROT 669 — Поиск свободного жилья",label:"СВОБОДНЫЕ ДАТЫ",back:"← Назад на сайт",tabSearch:"Найти жильё",tabHost:"Владельцам",owner:n=>`Владелец: ${n}`,eyebrow:"АКТУАЛЬНАЯ ДОСТУПНОСТЬ",title:"Найдите жильё, которое<br><span>реально свободно.</span>",lead:"Ищите свободные даты, указанные владельцами, а условия аренды смотрите в исходном объявлении Airbnb.",country:"Страна",chooseCountry:"Выберите страну",city:"Город",chooseCity:"Выберите город",locationError:"Список стран и городов временно недоступен.",from:"Заезд",to:"Выезд",bedrooms:"Спальни",sleeps:"Спальных мест",search:"Найти свободное",filters:"Фильтры",pricedOnly:"Только с ценой",priceFrom:"Цена от, €",priceTo:"Цена до, €",priceRangeError:"Цена «от» не может быть больше цены «до»",priceUnknown:"Цену уточняйте у владельца",priceNote:"Цена ориентировочная. Финальные условия и дополнительные платежи уточняйте у владельца.",priceEstimate:(amount,nights)=>`≈ €${amount} за ${nights} ноч.`,cleaning:n=>`включая €${n} уборки`,live:"Подключено к живому индексу доступности PARROT",disclaimer:"Здесь показывается физическая доступность жилья. Условия аренды и допустимый срок определяет владелец.",loading:"Ищем свободные даты…",empty:"Подходящих вариантов пока нет.",error:"Поиск временно недоступен.",bed:n=>n===1?"1 спальня":n<5?`${n} спальни`:`${n} спален`,sleep:n=>`${n} спальных мест`,min:n=>`минимум ${n} дн.`,period:(a,b)=>`Свободно ${a} → ${b}`,view:"Открыть на Airbnb"}
 };
 
 const housingCopy = {
@@ -18,6 +18,9 @@ const housingCopy = {
 let lang=(()=>{const saved=localStorage.getItem(LANG_KEY);if(saved&&copy[saved])return saved;const b=(navigator.language||"en").slice(0,2);return copy[b]?b:"en"})();
 const form=document.getElementById("availability-form");
 const results=document.getElementById("availability-results");
+const countrySelect=form.elements.country;
+const citySelect=form.elements.city;
+const submitButton=form.querySelector('button[type="submit"]');
 const accommodationTypeFilter=document.getElementById("filter-accommodation-type");
 const pricedOnlyFilter=document.getElementById("filter-priced-only");
 const minPriceFilter=document.getElementById("filter-price-from");
@@ -36,6 +39,7 @@ function applyLanguage(next){
   document.querySelectorAll("[data-search-i18n]").forEach(n=>n.textContent=t(n.dataset.searchI18n));
   document.querySelectorAll("[data-search-i18n-html]").forEach(n=>n.innerHTML=t(n.dataset.searchI18nHtml));
   buttons.forEach(b=>b.classList.toggle("active",b.dataset.searchLang===lang));
+  refreshLocationLabels();
 }
 function state(text,kind=""){results.replaceChildren();const n=document.createElement("div");n.className=`availability-state ${kind}`.trim();n.textContent=text;results.append(n)}
 function eurosToCents(value){
@@ -47,7 +51,8 @@ function eurosToCents(value){
 function saveSearchState(){
   const fd=new FormData(form);
   localStorage.setItem(SEARCH_STATE_KEY,JSON.stringify({
-    city:String(fd.get("city")||"Barcelona"),
+    country:String(fd.get("country")||""),
+    city:String(fd.get("city")||""),
     accommodationType:String(accommodationTypeFilter?.value||"any"),
     from:String(fd.get("from")||""),
     to:String(fd.get("to")||""),
@@ -62,8 +67,7 @@ function saveSearchState(){
 function restoreSearchState(){
   try{
     const saved=JSON.parse(localStorage.getItem(SEARCH_STATE_KEY)||"null");
-    if(!saved||typeof saved!=="object") return;
-    if(saved.city&&form.elements.city) form.elements.city.value=saved.city;
+    if(!saved||typeof saved!=="object") return null;
     if(saved.accommodationType&&accommodationTypeFilter) accommodationTypeFilter.value=saved.accommodationType;
     if(saved.from) form.elements.from.value=saved.from;
     if(saved.to) form.elements.to.value=saved.to;
@@ -75,7 +79,96 @@ function restoreSearchState(){
     hasSearched=Boolean(saved.searched);
     const minCheckout=plusDays(form.elements.from.value,1);
     if(minCheckout) form.elements.to.min=minCheckout;
-  }catch{}
+    return saved;
+  }catch{
+    return null;
+  }
+}
+function updateSearchSubmitState(){
+  submitButton.disabled=!(countrySelect.value&&citySelect.value);
+}
+function countryDisplayName(code,fallback){
+  try{
+    return new Intl.DisplayNames([lang],{type:"region"}).of(code)||fallback;
+  }catch{
+    return fallback;
+  }
+}
+function resetLocationSelect(select,placeholderKey){
+  select.replaceChildren();
+  const option=document.createElement("option");
+  option.value="";
+  option.textContent=t(placeholderKey);
+  select.append(option);
+}
+function refreshLocationLabels(){
+  if(!countrySelect||!citySelect) return;
+  const countryPlaceholder=countrySelect.querySelector('option[value=""]');
+  const cityPlaceholder=citySelect.querySelector('option[value=""]');
+  if(countryPlaceholder) countryPlaceholder.textContent=t("chooseCountry");
+  if(cityPlaceholder) cityPlaceholder.textContent=t("chooseCity");
+  countrySelect.querySelectorAll("option[data-country-name]").forEach(option=>{
+    option.textContent=countryDisplayName(option.value,option.dataset.countryName);
+  });
+}
+async function loadCities(countryCode,preferredCity=""){
+  resetLocationSelect(citySelect,"chooseCity");
+  citySelect.disabled=true;
+  updateSearchSubmitState();
+  if(!countryCode) return;
+
+  const response=await fetch("/api/locations/cities?country="+encodeURIComponent(countryCode),{headers:{Accept:"application/json"}});
+  if(!response.ok) throw new Error("HTTP "+response.status);
+  const cities=await response.json();
+  if(!Array.isArray(cities)) throw new Error("Invalid cities response");
+
+  cities.forEach(item=>{
+    const option=document.createElement("option");
+    option.value=String(item.name||"");
+    option.textContent=String(item.name||"");
+    citySelect.append(option);
+  });
+
+  const preferred=[...citySelect.options].find(option=>option.value&&option.value.toLowerCase()===String(preferredCity||"").toLowerCase());
+  if(preferred) citySelect.value=preferred.value;
+  else if(cities.length===1) citySelect.value=String(cities[0].name||"");
+
+  citySelect.disabled=cities.length===0;
+  updateSearchSubmitState();
+}
+async function loadLocations(saved){
+  countrySelect.disabled=true;
+  citySelect.disabled=true;
+  resetLocationSelect(countrySelect,"chooseCountry");
+  resetLocationSelect(citySelect,"chooseCity");
+
+  try{
+    const response=await fetch("/api/locations/countries",{headers:{Accept:"application/json"}});
+    if(!response.ok) throw new Error("HTTP "+response.status);
+    const countries=await response.json();
+    if(!Array.isArray(countries)) throw new Error("Invalid countries response");
+
+    countries.forEach(item=>{
+      const option=document.createElement("option");
+      option.value=String(item.code||"");
+      option.dataset.countryName=String(item.name||item.code||"");
+      option.textContent=countryDisplayName(option.value,option.dataset.countryName);
+      countrySelect.append(option);
+    });
+    countrySelect.disabled=countries.length===0;
+
+    const requestedCountry=String(saved&&saved.country||"").toUpperCase();
+    const preferred=[...countrySelect.options].find(option=>option.value===requestedCountry);
+    if(preferred) countrySelect.value=preferred.value;
+    else if(countries.length===1) countrySelect.value=String(countries[0].code||"");
+
+    await loadCities(countrySelect.value,String(saved&&saved.city||""));
+    updateSearchSubmitState();
+    saveSearchState();
+  }catch(error){
+    console.error(error);
+    state(t("locationError"),"error");
+  }
 }
 function render(items){
   results.replaceChildren();
@@ -92,7 +185,7 @@ function render(items){
     title.textContent=item.propertyTitle||"Property";
     const city=document.createElement("span");
     city.className="availability-card-city";
-    city.textContent=item.city||"Barcelona";
+    city.textContent=item.city||"—";
     titleGroup.append(title,city);
     head.append(titleGroup);
 
@@ -181,7 +274,8 @@ form.elements.from.addEventListener("change",()=>{
 function currentSearchParams(){
   const fd=new FormData(form);
   return new URLSearchParams({
-    city:String(fd.get("city")||"Barcelona"),
+    country:String(fd.get("country")||""),
+    city:String(fd.get("city")||""),
     from:String(fd.get("from")||""),
     to:String(fd.get("to")||""),
     bedrooms:String(fd.get("bedrooms")||"1"),
@@ -201,8 +295,7 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
   params.set("pricedOnly",pricedOnlyFilter?.checked?"true":"false");
   if(minPriceCents!=null) params.set("minPriceCents",String(minPriceCents));
   if(maxPriceCents!=null) params.set("maxPriceCents",String(maxPriceCents));
-  const submit=form.querySelector('button[type="submit"]');
-  if(disableSubmit) submit.disabled=true;
+  if(disableSubmit) submitButton.disabled=true;
   if(pricedOnlyFilter) pricedOnlyFilter.disabled=true;
   state(t("loading"),"loading");
   try{
@@ -214,7 +307,7 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
     console.error(error);
     if(requestId===searchSequence) state(t("error"),"error");
   }finally{
-    if(disableSubmit) submit.disabled=false;
+    if(disableSubmit) updateSearchSubmitState();
     if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
   }
 }
@@ -234,10 +327,25 @@ form.addEventListener("input",saveSearchState);
     if(lastSearchParams) runSearch(lastSearchParams);
   });
 });
+citySelect.addEventListener("change",()=>{
+  updateSearchSubmitState();
+  saveSearchState();
+});
+countrySelect.addEventListener("change",async()=>{
+  try{
+    await loadCities(countrySelect.value,"");
+    saveSearchState();
+  }catch(error){
+    console.error(error);
+    state(t("locationError"),"error");
+  }
+});
 buttons.forEach(b=>b.addEventListener("click",()=>applyLanguage(b.dataset.searchLang)));
 applyLanguage(lang);
-restoreSearchState();
-if(hasSearched&&form.reportValidity()){
-  lastSearchParams=currentSearchParams();
-  runSearch(lastSearchParams);
-}
+const savedSearchState=restoreSearchState();
+loadLocations(savedSearchState).then(()=>{
+  if(hasSearched&&form.reportValidity()){
+    lastSearchParams=currentSearchParams();
+    runSearch(lastSearchParams);
+  }
+});

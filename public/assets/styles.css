@@ -1173,7 +1173,7 @@ footer{
 }
 .availability-form{
   display:grid;
-  grid-template-columns:minmax(180px,1.2fr) repeat(3,minmax(145px,.8fr)) auto;
+  grid-template-columns:minmax(135px,.8fr) minmax(170px,1fr) repeat(4,minmax(115px,.72fr)) auto;
   gap:12px;
   align-items:end;
   padding:18px;

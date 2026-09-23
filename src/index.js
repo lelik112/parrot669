@@ -80,6 +80,19 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === "/api/locations/countries" || url.pathname === "/api/locations/cities") {
+      if (request.method !== "GET") {
+        return json({ error: "Method not allowed" }, 405);
+      }
+
+      try {
+        return await proxyBackend(request, url.pathname);
+      } catch (error) {
+        console.error("Location API proxy failed", error?.message);
+        return json({ error: "Location service unavailable" }, 502);
+      }
+    }
+
     if (url.pathname === "/api/search") {
       if (request.method !== "GET") {
         return json({ error: "Method not allowed" }, 405);
