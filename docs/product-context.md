@@ -152,6 +152,8 @@ Backend refactoring proceeds in separately tested steps. The shared `ServiceErro
 
 Guest availability search and PostgreSQL location discovery now live in `com.parrot669.search` (`SearchRoutes`, `SearchService`, `SearchRepository` / `DoobieSearchRepository`, and search models). `Main` wires this module independently of `ParrotService` and the iCal fetcher. `LocationCountry` remains shared with geocoding; the existing and search routes share the unchanged `http.HttpResponses` mapping. Public endpoints, JSON fields, SQL, validation order, pricing, sorting and listing visibility are preserved. The existing per-result listing/cleaning-fee queries are intentionally unchanged; batching is a separate follow-up. Messaging, calendar-control verification, provider geocoding and database migrations were not reorganized in this step.
 
+These initial steps were released independently on 2026-09-23: calendar integrity `bcebaa4`, shared errors `d370575`, search extraction `1e00ef5`. Each passed PR/main CI, Railway deployment and live API smoke. Final [main CI 35873996970](https://github.com/lelik112/parrot669-backend/actions/runs/35873996970) passed 75 tests plus PostgreSQL HTTP smoke and Docker build. Railway deployment `6d68b808-d625-461c-ba74-c26afa862873` succeeded on `1e00ef59804216b417d264bd1f7ee1be9b7cb348`, with Flyway still at V24. Ten read-only production checks passed across the direct backend and Cloudflare Worker (health, location/search routing, invalid-budget errors and unauthorized dashboard access). Calendar failure/recovery and nonempty search scenarios were exercised in isolated CI, not against real host calendar data.
+
 ## Frontend
 
 Repository: `lelik112/parrot669`

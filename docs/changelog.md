@@ -6,11 +6,13 @@
 - Move search-only models; keep the country DTO shared with geocoding. Reuse the unchanged HTTP response/error mapping through `HttpResponses`.
 - Preserve API paths and JSON, SQL/query count, half-open coverage, validation order, property cleaning fees, total-price filtering/sorting and searchable properties without external links. No migration or product behavior change.
 - Add seven focused route/service contract tests alongside the existing full-application PostgreSQL smoke and Docker build. Keep messaging and the new calendar-control verification implementation structurally unchanged.
+- Released as backend `1e00ef5`: PR/main CI green with 75 tests, PostgreSQL smoke and Docker; Railway deployment `6d68b808-d625-461c-ba74-c26afa862873` SUCCESS, schema V24, ten direct/proxied read-only production checks passed.
 
 ## 2026-09-23 — Extract shared backend errors
 
 - Move the unchanged `ServiceError` ADT out of `ParrotService.scala` into its own file, preserving its package and all API/error behavior.
 - Keep this mechanical refactor separate from the preceding calendar integrity fix; validate it through the complete backend CI and production deployment checks.
+- Released as backend `d370575`: PR/main CI green with 68 tests, PostgreSQL smoke and Docker; matching Railway deployment SUCCESS and six live API checks passed.
 
 ## 2026-09-23 — Preserve reservations when iCal content is incomplete
 
@@ -18,6 +20,7 @@
 - Preserve the previous reservation snapshot and last-success timestamp on parse failure. A complete empty calendar still clears old events normally.
 - Add parser regression tests and end-to-end PostgreSQL/API smoke checks for malformed feeds, snapshot preservation, search blocking, valid empty feeds and recovery.
 - Keep Airbnb URL validation, event classification and the separate calendar-control verification workflow unchanged. No database migration.
+- Released as backend `bcebaa4`: PR/main CI green with 68 tests, PostgreSQL smoke and Docker; matching Railway deployment SUCCESS and six live API checks passed.
 
 ## 2026-09-23 — Airbnb calendar control verification
 
