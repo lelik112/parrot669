@@ -35,7 +35,7 @@ Current MVP principle:
 ### Host
 1. Open `/host.html`.
 2. Register or log in with email/password. Authentication uses a server-side session in an HttpOnly cookie; host credentials are not stored in frontend JavaScript/localStorage.
-3. Enter a property address and select a Geoapify suggestion; country and city fill automatically. Create the property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay. Owners can edit the address in property characteristics; the exact address and coordinates are private to the owner.
+3. Choose a country, select a city and street from LocationIQ suggestions, then enter the house number. Create the property and choose whether it is an entire place or a private room. New properties start with a 1-day minimum stay. Owners can edit the address in property characteristics; the exact address and coordinates are private to the owner.
 3a. Accommodation type, bedrooms and sleeping places are editable property characteristics. Minimum stay and optional cleaning fee are editable alongside PARROT availability/pricing controls. Property cards are collapsed by default to a compact summary and can be expanded for editing.
 4. Supply Airbnb listing ID (the number after `/rooms/`), not a full URL. Calendar sync is available only while this external listing exists. Removing the listing also removes its connected Airbnb calendar.
 5. PARROT generates the canonical Airbnb URL. The host may hide that URL from guest search without disconnecting the listing or calendar.
@@ -63,9 +63,16 @@ Properties carry normalized `country_code`, `country` and `city`. Guest location
 - `GET /api/locations/cities?country=ES` returns distinct cities for that required country.
 - Guest search requires both `country` and `city`.
 - There is no separate `cities` table and no internal city id at this stage.
-- Guest search does not call Geoapify or another external geocoder.
+- Guest search does not call LocationIQ or another external geocoder.
 
 Host address autocomplete is connected through the authenticated backend/Worker proxy. The selected normalized country/city/address/coordinates/provider place ID are validated and saved on the property. New UI creates require an address selection; existing properties retain their previous location until edited. The external provider is used only for owner input; PARROT's database remains the source for guest discovery. No map is included.
+
+The provider is LocationIQ (`LOCATIONIQ_API_KEY` on the backend). City suggestions
+include geographic bounds; street requests pass those bounds, country, city ID and
+city name. The backend searches `<city>, <fragment>` with `layers=road`, rejects
+neighbors and deduplicates segments. One uncached street lookup uses one provider
+call; 15-minute caches and backend pacing protect the quota. Manual house numbers
+do not imply provider-verified building coordinates. Existing addresses need no migration.
 
 ## Navigation
 
