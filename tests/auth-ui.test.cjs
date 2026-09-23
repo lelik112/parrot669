@@ -54,6 +54,7 @@ function element(tag = 'div') {
 }
 
 function setup(routes = {}, search = '') {
+  routes['/geocode/countries']??={body:[{code:'ES',name:'Spain'},{code:'FR',name:'France'},{code:'BY',name:'Belarus'}]};
   const nodes = new Map([...html.matchAll(/id="([^"]+)"/g)].map(match => [match[1], element()]));
   for (const id of ['login-form', 'register-form']) {
     const form = nodes.get(id);
@@ -106,164 +107,181 @@ function setup(routes = {}, search = '') {
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
 
-const addressFixture = {address:'Calle de Alcalá 42, Madrid', countryCode:'ES', country:'Spain', city:'Madrid', latitude:40.418, longitude:-3.697, placeId:'test-madrid', street:'Calle de Alcalá', houseNumber:'42', resultType:'building'};
+const cityId='51f07665660fc4024059dc0a96dfac6c123';
+const cityFixture={address:'Barcelona, Spain',countryCode:'ES',country:'Spain',city:'Barcelona',latitude:41.39,longitude:2.16,placeId:cityId,resultType:'city',street:null,houseNumber:null};
+const streetFixture={...cityFixture,address:"Carrer d'Alfons el Magnànim, Barcelona, Spain",latitude:41.42,longitude:2.22,placeId:'street-alfons',street:"Carrer d'Alfons el Magnànim",resultType:'street'};
+const addressFixture={...streetFixture,address:"Carrer d'Alfons el Magnànim 40, Barcelona, Spain",houseNumber:'40'};
+const cityRoute='/geocode/autocomplete?type=city&country=ES&q=barcelona';
+const streetRoute='/geocode/autocomplete?type=street&country=ES&q=alfo&cityId='+cityId;
+const lookupRoutes={[cityRoute]:{body:[cityFixture]},[streetRoute]:{body:[streetFixture]}};
 function addressTimers(app){
-  app.run('var addressTimer = null; setTimeout = fn => { addressTimer = fn; return 1; }; clearTimeout = () => { addressTimer = null; };');
+  app.run('var addressTimer = null; var addressDelay = null; setTimeout = (fn,ms) => { addressTimer = fn; addressDelay = ms; return 1; }; clearTimeout = () => { addressTimer = null; };');
   return () => app.run('addressTimer ? addressTimer() : undefined');
 }
-
-test('address autocomplete waits for three characters, fills location on keyboard selection and blocks stale selection on submit', async () => {
-  const app = setup({'/geocode/autocomplete?q=Madrid':{body:[addressFixture]}});
-  await settle();
-  const flush = addressTimers(app);
-  const editor = app.run('newPropertyAddress');
-  editor.input.value = 'Ma';
-  await editor.input.emit('input');
-  await flush();
-  assert.equal(app.calls.some(c=>c.startsWith('/geocode')),false);
-  editor.input.value = 'Madrid';
-  await editor.input.emit('input');
-  assert.equal(app.calls.some(c=>c.startsWith('/geocode')),false);
-  await flush();
-  assert.equal(editor.input.getAttribute('aria-expanded'),'true');
-  await editor.input.emit('keydown',{key:'ArrowDown'});
-  assert.equal(editor.input.getAttribute('aria-activedescendant'),'new-property-address-option-0');
-  await editor.input.emit('keydown',{key:'Enter'});
-  assert.deepEqual(JSON.parse(JSON.stringify(editor.getValue())),addressFixture);
-  assert.equal(editor.input.value,addressFixture.address);
-  assert.equal(editor.node.querySelector('.host-address-location').hidden,false);
-  editor.input.value = 'Paris';
-  await editor.input.emit('input');
-  assert.equal(editor.node.querySelector('.host-address-location').hidden,true);
-  await app.nodes.get('property-form').emit('submit');
-  assert.equal(app.requests.some(r=>r.method==='POST'),false);
-  assert.match(app.nodes.get('property-form').querySelector('.host-form-error').textContent,/Select an address/);
-  editor.dispose();
-});
-
-test('mobile tap survives input blur before click; scrolling does not select; outside tap dismisses', async () => {
-  const app=setup({'/geocode/autocomplete?q=Madrid':{body:[addressFixture]}});
-  await settle();
-  const flush=addressTimers(app), editor=app.run('newPropertyAddress');
-  editor.input.value='Madrid'; await editor.input.emit('input'); await flush();
-  const option=editor.node.querySelector('.host-address-option');
-  const doc=app.run('document');
-  await doc.emit('pointerdown',{target:option.children[0],pointerType:'touch'});
-  await editor.node.emit('focusout',{relatedTarget:null});
-  assert.equal(editor.input.getAttribute('aria-expanded'),'true');
-  // Touch scrolling has no click: it must keep the query and leave it unselected.
-  await option.emit('pointercancel',{pointerType:'touch'});
-  assert.equal(editor.input.value,'Madrid');
-  await option.emit('click');
-  assert.deepEqual(JSON.parse(JSON.stringify(editor.getValue())),addressFixture);
-  assert.equal(editor.input.getAttribute('aria-expanded'),'false');
-  editor.input.value='Madrid'; await editor.input.emit('input'); await flush();
-  await doc.emit('pointerdown',{target:element('button'),pointerType:'touch'});
-  assert.equal(editor.input.getAttribute('aria-expanded'),'false');
-  editor.dispose();
-});
-
-test('a slower old autocomplete response cannot overwrite newer results, and Escape cancels a pending result', async () => {
-  let resolveOld, resolvePending;
-  const app=setup({
-    '/geocode/autocomplete?q=old':()=>new Promise(resolve=>{resolveOld=resolve}),
-    '/geocode/autocomplete?q=new':{body:[addressFixture]},
-    '/geocode/autocomplete?q=escape':()=>new Promise(resolve=>{resolvePending=resolve})
-  });
-  await settle();
-  const flush=addressTimers(app), editor=app.run('newPropertyAddress');
-  editor.input.value='old'; await editor.input.emit('input'); const old=flush();
-  editor.input.value='new'; await editor.input.emit('input'); await flush();
-  resolveOld({body:[{...addressFixture,address:'Old address'}]}); await old;
-  assert.equal(editor.node.querySelector('.host-address-option').children[0].textContent,addressFixture.address);
-  editor.input.value='escape'; await editor.input.emit('input'); const pending=flush();
-  await editor.input.emit('keydown',{key:'Escape'});
-  resolvePending({body:[addressFixture]}); await pending;
-  assert.equal(editor.input.getAttribute('aria-expanded'),'false');
-});
-
-test('autocomplete failure preserves text and offers retry; broad places are not offered as complete addresses', async () => {
-  let failed=true;
-  const app=setup({'/geocode/autocomplete?q=Madrid':()=>failed
-    ? {status:503,body:{error:'Address autocomplete is not configured'}}
-    : {body:[{...addressFixture,city:null}, {...addressFixture,street:null,houseNumber:null,resultType:'city'},
-      {...addressFixture,houseNumber:null,resultType:'street'}, {...addressFixture,resultType:'city'}, addressFixture]}});
-  await settle();
-  const flush=addressTimers(app), editor=app.run('newPropertyAddress');
-  editor.input.value='Madrid'; await editor.input.emit('input'); await flush();
-  assert.equal(editor.input.value,'Madrid');
-  const retry=editor.node.querySelector('.host-address-retry');
-  assert.equal(retry.hidden,false);
-  assert.match(editor.node.querySelector('.host-address-status').textContent,/unavailable/);
-  failed=false; await retry.emit('click');
-  assert.equal(editor.node.querySelectorAll('.host-address-option').length,1);
-  await editor.node.querySelector('.host-address-option').emit('click');
-  assert.equal(editor.getValue().city,'Madrid');
-});
-
-test('creation sends the selected address and resets it only after successful saving', async () => {
-  const app=setup({
-    '/geocode/autocomplete?q=Madrid':{body:[addressFixture]},
-    '/properties':options=>({status:201,body:{id:'created-address',...JSON.parse(options.body),country:'Spain',countryCode:'ES'}})
-  });
-  await settle();
-  const flush=addressTimers(app), editor=app.run('newPropertyAddress');
-  const form=app.nodes.get('property-form');
-  for(const [key,value] of Object.entries({title:'Madrid home',bedrooms:'1',sleeps:'2',accommodationType:'entire_place'})){
-    form.elements[key]=element('input'); form.elements[key].value=value;
-  }
-  editor.input.value='Madrid'; await editor.input.emit('input'); await flush();
-  await editor.node.querySelector('.host-address-option').emit('click');
-  await form.emit('submit');
-  const created=app.requests.find(r=>r.route==='/properties'&&r.method==='POST');
-  assert.deepEqual(created.body.address,addressFixture);
-  assert.equal(created.body.city,'Madrid');
-  assert.equal(editor.input.value,'');
-  assert.equal(app.run('state.properties[0].address.placeId'),addressFixture.placeId);
-});
-
-test('a city-only result cannot be selected or submitted as a property address', async () => {
-  const city={...addressFixture,address:'Беларусь, Минск',city:'Minsk',country:'Belarus',countryCode:'BY',street:null,houseNumber:null,resultType:'city'};
-  const app=setup({'/geocode/autocomplete?q=Minsk':{body:[city]}});
-  await settle();
-  const flush=addressTimers(app), editor=app.run('newPropertyAddress');
-  editor.input.value='Minsk'; await editor.input.emit('input'); await flush();
-  assert.equal(editor.node.querySelectorAll('.host-address-option').length,0);
-  assert.match(editor.node.querySelector('.host-address-status').textContent,/house number/);
-  await app.nodes.get('property-form').emit('submit');
-  assert.equal(app.requests.some(r=>r.method==='POST'),false);
-});
-
-test('editing an address sends the complete replacement and keeps it when the API returns 400', async () => {
-  const app=setup({
-    '/geocode/autocomplete?q=Madrid':{body:[addressFixture]},
-    '/properties/property-1':{status:400,body:{error:'select a full address with a street and house number'}}
-  });
-  await settle(); propertyCard(app);
+async function chooseCity(app,editor=app.run('newPropertyAddress')){
+  editor.country.value='ES';await editor.country.emit('change');
   const flush=addressTimers(app);
-  const form=app.nodes.get('host-properties').children[0].querySelector('.host-settings-form');
-  const field=form.querySelector('.host-address-field'), input=field.querySelector('input');
-  input.value='Madrid'; await input.emit('input'); await flush();
-  await field.querySelector('.host-address-option').emit('click');
-  await form.emit('submit'); await settle();
-  assert.deepEqual(app.requests.find(r=>r.method==='PUT').body.address,addressFixture);
-  assert.equal(input.value,addressFixture.address);
-  assert.match(form.querySelector('.host-form-error').textContent,/house number/);
+  editor.city.input.value='Barcelona';await editor.city.input.emit('input');await flush();
+  await editor.city.node.querySelector('.host-address-option').emit('click');
+  return flush;
+}
+async function chooseStreet(app,editor=app.run('newPropertyAddress')){
+  const flush=await chooseCity(app,editor);
+  editor.street.input.value='alfo';await editor.street.input.emit('input');await flush();
+  await editor.street.node.querySelector('.host-address-option').emit('click');
+  editor.house.value='40';await editor.house.emit('input');
+  return editor;
+}
+
+test('countries are loaded once; lookup waits for country, three characters and a 700ms pause', async()=>{
+  const app=setup(lookupRoutes);await settle();
+  const editor=app.run('newPropertyAddress'),flush=addressTimers(app);
+  assert.equal(editor.city.input.disabled,true);
+  assert.equal(editor.street.input.disabled,true);
+  assert.equal(app.calls.filter(x=>x.includes('/autocomplete')).length,0);
+  editor.country.value='ES';await editor.country.emit('change');
+  editor.city.input.value='Ba';await editor.city.input.emit('input');await flush();
+  assert.equal(app.calls.filter(x=>x.includes('/autocomplete')).length,0);
+  editor.city.input.value='Barcelona';await editor.city.input.emit('input');
+  assert.equal(app.run('addressDelay'),700);
+  assert.equal(app.calls.filter(x=>x.includes('/autocomplete')).length,0);
+  await flush();
+  await editor.city.input.emit('keydown',{key:'ArrowDown'});
+  await editor.city.input.emit('keydown',{key:'Enter'});
+  assert.equal(editor.street.input.disabled,false);
+  propertyCard(app);await settle();
+  assert.equal(app.calls.filter(x=>x==='/geocode/countries').length,1);
 });
 
-test('editing characteristics preserves an unchanged legacy address; a 400 keeps the input and error', async () => {
-  const app=setup({'/properties/property-1':{status:400,body:{error:'Address validation failed'}}});
-  await settle(); propertyCard(app);
-  const legacy = {...addressFixture, street:null, houseNumber:null, resultType:null};
-  app.run(`state.properties[0].address=${JSON.stringify(legacy)}; renderProperties();`);
-  const form=app.nodes.get('host-properties').children[0].querySelector('.host-settings-form');
-  const input=form.querySelector('.host-address-field').querySelector('input');
-  assert.equal(input.value,addressFixture.address);
-  await form.emit('submit');
+test('city then street without a house number can be chosen; house entry uses no provider request',async()=>{
+  const app=setup(lookupRoutes);await settle();
+  const editor=await chooseStreet(app);
+  assert.deepEqual(JSON.parse(JSON.stringify(editor.getValue())),addressFixture);
+  const count=app.calls.filter(x=>x.includes('/autocomplete')).length;
+  editor.house.value='40 bis';await editor.house.emit('input');
+  assert.equal(editor.getValue().houseNumber,'40 bis');
+  assert.equal(editor.getValue().resultType,'street');
+  assert.equal(app.calls.filter(x=>x.includes('/autocomplete')).length,count);
+  editor.house.value='';
+  assert.throws(()=>editor.getValue(),/house number/);
+});
+
+test('changing country or city clears downstream selections and prevents mixed-address submission',async()=>{
+  const app=setup(lookupRoutes);await settle();
+  const editor=await chooseStreet(app);
+  editor.city.input.value='Madrid';await editor.city.input.emit('input');
+  assert.equal(editor.street.input.value,'');
+  assert.equal(editor.street.input.disabled,true);
+  assert.equal(editor.house.value,'');
+  assert.throws(()=>editor.getValue(),/Select a city/);
+  editor.country.value='FR';await editor.country.emit('change');
+  assert.equal(editor.city.input.value,'');
+  await app.nodes.get('property-form').emit('submit');
+  assert.equal(app.requests.some(r=>r.method==='POST'),false);
+  editor.dispose();
+});
+
+test('mobile tap survives input blur before click; scrolling never selects and outside taps dismiss',async()=>{
+  const app=setup(lookupRoutes);await settle();
+  const editor=app.run('newPropertyAddress'),flush=await chooseCity(app);
+  editor.street.input.value='alfo';await editor.street.input.emit('input');await flush();
+  const option=editor.street.node.querySelector('.host-address-option'),doc=app.run('document');
+  await doc.emit('pointerdown',{target:option.children[0],pointerType:'touch'});
+  await editor.street.node.emit('focusout',{relatedTarget:null});
+  assert.equal(editor.street.input.getAttribute('aria-expanded'),'true');
+  await option.emit('pointercancel',{pointerType:'touch'});
+  assert.equal(editor.street.input.value,'alfo');
+  await option.emit('click');
+  assert.equal(editor.street.input.value,streetFixture.street);
+  editor.house.value='40';
+  assert.deepEqual(JSON.parse(JSON.stringify(editor.getValue())),addressFixture);
+  editor.street.input.value='alfo';await editor.street.input.emit('input');await flush();
+  await doc.emit('pointerdown',{target:element('button'),pointerType:'touch'});
+  assert.equal(editor.street.input.getAttribute('aria-expanded'),'false');
+});
+
+test('retyping the same scoped query uses cache; focusing fields does not create lookups',async()=>{
+  const app=setup(lookupRoutes);await settle();
+  const editor=await chooseStreet(app),flush=addressTimers(app);
+  const count=app.calls.length;
+  editor.street.input.value=' ALFO ';await editor.street.input.emit('input');await flush();
+  assert.equal(app.calls.length,count);
+  await editor.street.input.emit('keydown',{key:'Escape'});
+  await editor.street.input.emit('focus');
+  assert.equal(app.calls.length,count);
+  assert.equal(editor.street.input.getAttribute('aria-expanded'),'true');
+  editor.street.input.value='new';await editor.street.input.emit('input');
+  await editor.street.input.emit('keydown',{key:'Escape'});
+  await editor.street.input.emit('focus');
+  assert.equal(app.calls.length,count);
+});
+
+test('late street response after a country change cannot re-open old suggestions',async()=>{
+  let resolve;
+  const app=setup({...lookupRoutes,[streetRoute]:()=>new Promise(r=>resolve=r)});await settle();
+  const editor=app.run('newPropertyAddress'),flush=await chooseCity(app);
+  editor.street.input.value='alfo';await editor.street.input.emit('input');const pending=flush();
+  editor.country.value='FR';await editor.country.emit('change');
+  resolve({body:[streetFixture]});await pending;
+  assert.equal(editor.street.input.getAttribute('aria-expanded'),'false');
+  assert.equal(editor.street.input.value,'');
+  assert.equal(editor.street.input.disabled,true);
+});
+
+test('failed lookup preserves input and offers retry; city results cannot stand in for a street',async()=>{
+  let failed=true;
+  const app=setup({...lookupRoutes,[streetRoute]:()=>failed?{status:503,body:{error:'unavailable'}}:{body:[cityFixture,streetFixture]}});
   await settle();
+  const editor=app.run('newPropertyAddress'),flush=await chooseCity(app);
+  editor.street.input.value='alfo';await editor.street.input.emit('input');await flush();
+  assert.equal(editor.street.input.value,'alfo');
+  const retry=editor.street.node.querySelector('.host-address-retry');assert.equal(retry.hidden,false);
+  failed=false;await retry.emit('click');
+  assert.equal(editor.street.node.querySelectorAll('.host-address-option').length,1);
+  await editor.street.node.querySelector('.host-address-option').emit('click');
+  assert.throws(()=>editor.getValue(),/house number/);
+});
+
+test('create sends the combined address and resets dependent fields after successful saving',async()=>{
+  const app=setup({...lookupRoutes,'/properties':options=>({status:201,body:{id:'created-address',...JSON.parse(options.body),country:'Spain',countryCode:'ES'}})});
+  await settle();const editor=await chooseStreet(app),form=app.nodes.get('property-form');
+  for(const [key,value] of Object.entries({title:'Barcelona home',bedrooms:'1',sleeps:'2',accommodationType:'entire_place'})){
+    form.elements[key]=element('input');form.elements[key].value=value;
+  }
+  await form.emit('submit');
+  assert.deepEqual(app.requests.find(r=>r.route==='/properties'&&r.method==='POST').body.address,addressFixture);
+  assert.equal(editor.country.value,'');assert.equal(editor.city.input.value,'');
+  assert.equal(editor.street.input.disabled,true);assert.equal(editor.house.disabled,true);
+});
+
+test('saved legacy location is preserved without lookups until Change address is chosen',async()=>{
+  const app=setup({'/properties/property-1':{status:400,body:{error:'Address validation failed'}}});await settle();propertyCard(app);
+  const legacy={...addressFixture,street:null,houseNumber:null,resultType:null};
+  app.run('state.properties[0].address='+JSON.stringify(legacy)+'; renderProperties();');
+  const editor=app.run('Array.from(propertyAddressEditors.values())[0]');
+  const form=app.nodes.get('host-properties').children[0].querySelector('.host-settings-form');
+  assert.equal(editor.getValue(),undefined);
+  assert.equal(editor.city.input.disabled,true);
+  await form.emit('submit');await settle();
   assert.equal(app.requests.find(r=>r.method==='PUT').body.address,undefined);
-  assert.equal(input.value,addressFixture.address);
+  assert.equal(editor.city.input.disabled,true);
+  assert.equal(app.calls.filter(x=>x.includes('/autocomplete')).length,0);
   assert.equal(form.querySelector('.host-form-error').textContent,'Address validation failed');
+});
+
+test('address replacement keeps draft on 400 and can be canceled to preserve the saved location',async()=>{
+  const app=setup({...lookupRoutes,'/properties/property-1':{status:400,body:{error:'select a full address with a street and house number'}}});
+  await settle();propertyCard(app);await settle();
+  const editor=app.run('Array.from(propertyAddressEditors.values())[0]');
+  const form=app.nodes.get('host-properties').children[0].querySelector('.host-settings-form');
+  await editor.change.emit('click');await chooseStreet(app,editor);
+  await form.emit('submit');await settle();
+  assert.deepEqual(app.requests.find(r=>r.method==='PUT').body.address,addressFixture);
+  assert.equal(editor.house.value,'40');
+  assert.equal(editor.house.disabled,false);
+  await editor.change.emit('click');
+  assert.equal(editor.getValue(),undefined);
+  assert.equal(editor.house.disabled,true);
 });
 
 test('date hints follow selection, automatic end date and clearing; saved prices keep a visible label', async () => {

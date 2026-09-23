@@ -2,7 +2,18 @@
 
 Static site + Cloudflare Worker API proxy/contact endpoint.
 
-## Address validation fix — 2026-09-23
+## Cascading address input — 2026-09-23
+
+- Country list is local to our backend; city searches are scoped to country, street
+  searches to the chosen city. House number is entered separately without a lookup.
+- Autocomplete waits 700ms and uses 15-minute browser/server caches. Focus alone never
+  calls Geoapify; up to 10 geographically scoped suggestions are displayed.
+- Parent field changes clear dependent selections. Existing locations remain editable
+  without re-geocoding unless the owner chooses Change address.
+- Regression coverage includes mobile taps, city/street filtering, credit-saving
+  behavior, late responses, saved drafts, disabled dependent fields and persistence.
+
+## Address validation fix — 2026-09-23 (superseded for suggestions)
 
 - Host suggestions require a street, house number and building/amenity result type.
 - Empty results explain which address components to enter in all four languages.

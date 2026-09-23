@@ -1,233 +1,260 @@
 (function(root){
-  function create({id, tr, request, initial = null, required = false, location = null, onUnauthorized = () => {}}){
-    const node = document.createElement("div");
-    node.className = "host-address-field";
-    const label = document.createElement("label");
-    const heading = document.createElement("span");
-    const input = document.createElement("input");
-    input.id = id;
-    input.name = "addressQuery";
-    input.type = "text";
-    input.maxLength = 256;
-    input.required = required;
-    input.autocomplete = "off";
-    input.setAttribute("role", "combobox");
-    input.setAttribute("aria-autocomplete", "list");
-    input.setAttribute("aria-expanded", "false");
-    input.setAttribute("aria-controls", `${id}-options`);
-    input.setAttribute("aria-describedby", `${id}-help ${id}-status`);
-    label.append(heading, input);
-    const help = document.createElement("p");
-    help.id = `${id}-help`;
-    help.className = "host-address-help";
-    const dropdown = document.createElement("div");
-    dropdown.className = "host-address-dropdown";
-    dropdown.hidden = true;
-    const list = document.createElement("ul");
-    list.id = `${id}-options`;
-    list.className = "host-address-options";
-    list.setAttribute("role", "listbox");
-    const attribution = document.createElement("a");
-    attribution.className = "host-address-attribution";
-    attribution.href = "https://www.geoapify.com/";
-    attribution.target = "_blank";
-    attribution.rel = "noopener noreferrer";
-    attribution.textContent = "Powered by Geoapify";
-    dropdown.append(list, attribution);
-    const status = document.createElement("p");
-    status.id = `${id}-status`;
-    status.className = "host-address-status";
-    status.setAttribute("role", "status");
-    status.setAttribute("aria-live", "polite");
-    status.hidden = true;
-    const retry = document.createElement("button");
-    retry.type = "button";
-    retry.className = "text-button host-address-retry";
-    retry.hidden = true;
-    const summary = document.createElement("div");
-    summary.className = "host-address-location";
-    const country = document.createElement("div");
-    const countryLabel = document.createElement("span");
-    const countryValue = document.createElement("strong");
-    country.append(countryLabel, countryValue);
-    const city = document.createElement("div");
-    const cityLabel = document.createElement("span");
-    const cityValue = document.createElement("strong");
-    city.append(cityLabel, cityValue);
-    summary.append(country, city);
-    node.append(label, dropdown, help, status, retry, summary);
+  const cache = new Map();
+  let countriesPromise;
+  const TTL = 15 * 60 * 1000;
+  function normalize(text){ return text.trim().replace(/\s+/g," ").toLowerCase(); }
+  function remember(key, values){
+    if (cache.size >= 100) cache.delete(cache.keys().next().value);
+    cache.set(key,{values,until:Date.now()+TTL});
+  }
+  function cached(key){
+    const entry=cache.get(key);
+    if (entry && entry.until>Date.now()) return entry.values;
+    cache.delete(key);
+    return null;
+  }
+  function countries(request){
+    if (!countriesPromise) countriesPromise=request("/geocode/countries").then(values=>{
+      if (!Array.isArray(values) || !values.length) throw new Error("countries unavailable");
+      return values;
+    }).catch(error=>{countriesPromise=null;throw error;});
+    return countriesPromise;
+  }
+  function create({id,tr,request,initial=null,required=false,location=null,onUnauthorized=()=>{}}){
+    const node=document.createElement("div");
+    node.className="host-address-field";
+    const saved=document.createElement("div");
+    saved.className="host-address-saved";
+    const savedText=document.createElement("p");
+    savedText.textContent=initial?.address || [location?.city,location?.country].filter(Boolean).join(", ");
+    const change=document.createElement("button");
+    change.type="button";change.className="text-button";
+    saved.append(savedText);
+    const fields=document.createElement("div");
+    fields.className="host-address-fields";
+    const countryLabel=document.createElement("label"), countryTitle=document.createElement("span");
+    const country=document.createElement("select");
+    country.id=id+"-country";country.name="addressCountry";
+    countryLabel.append(countryTitle,country);
+    const countryStatus=document.createElement("p");
+    countryStatus.className="host-address-status";countryStatus.setAttribute("role","status");
+    const countryRetry=document.createElement("button");
+    countryRetry.type="button";countryRetry.className="text-button";countryRetry.hidden=true;
+    const help=document.createElement("p");
+    help.className="host-address-help";
+    const houseLabel=document.createElement("label"), houseTitle=document.createElement("span");
+    const house=document.createElement("input");
+    house.id=id+"-house";house.name="addressHouseNumber";house.type="text";house.maxLength=64;house.autocomplete="off";
+    houseLabel.append(houseTitle,house);
+    let active=required, disposed=false, countryValues=[], countriesReady=false;
+    let cityValue=null, streetValue=null;
 
-    let selected = initial, suggestions = [], active = -1, timer, controller, sequence = 0;
-    let statusKey = "", statusError = false;
-    input.value = initial?.address || "";
-    function showLocation(value){
-      summary.hidden = !value;
-      countryValue.textContent = value?.country || "";
-      cityValue.textContent = value?.city || "";
+    function validLocation(v){
+      return v && v.countryCode===country.value && v.country && v.city && v.placeId &&
+        Number.isFinite(v.latitude) && Math.abs(v.latitude)<=90 &&
+        Number.isFinite(v.longitude) && Math.abs(v.longitude)<=180;
     }
-    function showStatus(key, error = false){
-      statusKey = key;
-      statusError = error;
-      status.textContent = key ? tr(key) : "";
-      status.hidden = !key;
-      status.className = `host-address-status${error ? " host-inline-error" : ""}`;
-    }
-    function cancel(){
-      clearTimeout(timer);
-      controller?.abort();
-      sequence += 1;
-      input.setAttribute("aria-busy", "false");
-    }
-    function close(){
-      dropdown.hidden = true;
-      input.setAttribute("aria-expanded", "false");
-      input.removeAttribute("aria-activedescendant");
-      active = -1;
-    }
-    function choose(value){
-      cancel();
-      selected = {
-        address:value.address, countryCode:value.countryCode, country:value.country,
-        city:value.city, latitude:value.latitude, longitude:value.longitude, placeId:value.placeId,
-        street:value.street, houseNumber:value.houseNumber, resultType:value.resultType
-      };
-      input.value = selected.address;
-      input.removeAttribute("aria-invalid");
-      retry.hidden = true;
-      showLocation(selected);
-      showStatus("addressSelected");
-      close();
-      input.focus();
-    }
-    function isComplete(value){
-      return value && typeof value.address === "string" && value.address.trim() &&
-        /^[a-z]{2}$/i.test(value.countryCode || "") && value.country && value.city &&
-        typeof value.street === "string" && value.street.trim() &&
-        typeof value.houseNumber === "string" && value.houseNumber.trim() &&
-        ["building", "amenity"].includes(value.resultType) &&
-        Number.isFinite(value.latitude) && Math.abs(value.latitude) <= 90 &&
-        Number.isFinite(value.longitude) && Math.abs(value.longitude) <= 180 && value.placeId;
-    }
-    function renderOptions(){
-      list.replaceChildren();
-      suggestions.forEach((value, index) => {
-        const option = document.createElement("li");
-        option.id = `${id}-option-${index}`;
-        option.className = "host-address-option";
-        option.tabIndex = -1;
-        option.setAttribute("role", "option");
-        option.setAttribute("aria-selected", "false");
-        const title = document.createElement("span");
-        title.textContent = value.address;
-        const detail = document.createElement("small");
-        detail.textContent = `${value.city} · ${value.country}`;
-        option.append(title, detail);
-        option.addEventListener("click", () => choose(value));
-        list.append(option);
+    function lookup(kind,onSelect,onEdit){
+      const box=document.createElement("div");
+      box.className="host-address-lookup host-address-"+kind;
+      const label=document.createElement("label"), title=document.createElement("span"), input=document.createElement("input");
+      input.id=id+"-"+kind;input.name="address"+kind;input.type="text";input.maxLength=256;input.autocomplete="off";
+      input.setAttribute("role","combobox");input.setAttribute("aria-autocomplete","list");
+      input.setAttribute("aria-controls",input.id+"-options");input.setAttribute("aria-expanded","false");
+      input.setAttribute("aria-describedby",input.id+"-status");
+      label.append(title,input);
+      const dropdown=document.createElement("div");
+      dropdown.className="host-address-dropdown";dropdown.hidden=true;
+      const list=document.createElement("ul");
+      list.id=input.id+"-options";list.className="host-address-options";list.setAttribute("role","listbox");
+      const attribution=document.createElement("a");
+      attribution.className="host-address-attribution";attribution.href="https://www.geoapify.com/";
+      attribution.target="_blank";attribution.rel="noopener noreferrer";attribution.textContent="Powered by Geoapify";
+      dropdown.append(list,attribution);
+      const status=document.createElement("p");
+      status.id=input.id+"-status";status.className="host-address-status";status.hidden=true;
+      status.setAttribute("role","status");status.setAttribute("aria-live","polite");
+      const retry=document.createElement("button");
+      retry.type="button";retry.className="text-button host-address-retry";retry.hidden=true;
+      box.append(label,dropdown,status,retry);
+      let timer,controller,sequence=0,suggestions=[],current=-1,selected=null,statusKey="",errorState=false;
+      function statusMessage(key,error=false){
+        statusKey=key;errorState=error;status.textContent=key?tr(key):"";status.hidden=!key;
+        status.className="host-address-status"+(error?" host-inline-error":"");
+      }
+      function cancel(){clearTimeout(timer);controller?.abort();sequence++;input.setAttribute("aria-busy","false");}
+      function close(){dropdown.hidden=true;input.setAttribute("aria-expanded","false");input.removeAttribute("aria-activedescendant");current=-1;}
+      function reset(){
+        cancel();close();input.value="";selected=null;suggestions=[];retry.hidden=true;
+        input.removeAttribute("aria-invalid");statusMessage("");
+      }
+      function scope(){
+        if (!active || !country.value || (kind==="street" && !cityValue)) return null;
+        const q=normalize(input.value);
+        if(q.length<3 || q.length>256) return null;
+        const params=new URLSearchParams({type:kind,country:country.value,q});
+        if(kind==="street") params.set("cityId",cityValue.placeId);
+        return "/geocode/autocomplete?"+params.toString();
+      }
+      function complete(v){
+        return validLocation(v) && (kind==="city" ? v.resultType==="city" :
+          typeof v.street==="string" && v.street.trim() && ["street","building","amenity"].includes(v.resultType));
+      }
+      function choose(value){
+        cancel();selected=value;input.value=kind==="city"?value.city:value.street;
+        input.removeAttribute("aria-invalid");retry.hidden=true;statusMessage("");close();
+        onSelect(value);input.focus();
+      }
+      function render(values){
+        suggestions=values.filter(complete).slice(0,10);list.replaceChildren();
+        suggestions.forEach((value,index)=>{
+          const option=document.createElement("li");
+          option.id=input.id+"-option-"+index;option.className="host-address-option";option.tabIndex=-1;
+          option.setAttribute("role","option");option.setAttribute("aria-selected","false");
+          const text=document.createElement("span"), detail=document.createElement("small");
+          text.textContent=kind==="city"?value.city:value.street;detail.textContent=value.address;
+          option.append(text,detail);option.addEventListener("click",()=>choose(value));list.append(option);
+        });
+        current=-1;dropdown.hidden=!suggestions.length;input.setAttribute("aria-expanded",String(suggestions.length>0));
+        statusMessage(suggestions.length?"addressChoose"+(kind==="city"?"City":"Street"):"addressNo"+(kind==="city"?"Cities":"Streets"));
+      }
+      async function search(){
+        cancel();close();retry.hidden=true;
+        const path=scope();
+        if(!path){statusMessage(input.value.trim()?"addressMore":"");return;}
+        const existing=cached(path);
+        if(existing){render(existing);return;}
+        const version=sequence;controller=new AbortController();
+        input.setAttribute("aria-busy","true");statusMessage("addressLoading");
+        try{
+          const values=await request(path,{signal:controller.signal});
+          if(version!==sequence || disposed) return;
+          const results=Array.isArray(values)?values:[];
+          remember(path,results);render(results);
+        }catch(error){
+          if(version!==sequence || disposed || error.name==="AbortError") return;
+          statusMessage(error.status===401?"addressSignIn":"addressUnavailable",true);
+          retry.hidden=error.status===401;if(error.status===401)onUnauthorized();
+        }finally{if(version===sequence)input.setAttribute("aria-busy","false");}
+      }
+      input.addEventListener("input",()=>{
+        cancel();close();selected=null;suggestions=[];retry.hidden=true;input.removeAttribute("aria-invalid");onEdit();
+        statusMessage(input.value.trim().length<3 && input.value.trim()?"addressMore":"");
+        if(scope())timer=setTimeout(search,700);
       });
-      active = -1;
-      dropdown.hidden = !suggestions.length;
-      input.setAttribute("aria-expanded", String(suggestions.length > 0));
+      input.addEventListener("focus",()=>{
+        if(selected)return;
+        const path=scope(),values=path?cached(path):null;
+        if(values)render(values); // Focusing alone must not spend another provider request.
+      });
+      input.addEventListener("keydown",event=>{
+        if(event.key==="Escape" || event.key==="Tab"){cancel();close();statusMessage("");return;}
+        if(event.key==="Enter"){
+          event.preventDefault();
+          if(!dropdown.hidden && suggestions.length)choose(suggestions[Math.max(current,0)]);
+          else if(!selected)void search();
+          return;
+        }
+        if(dropdown.hidden || !suggestions.length)return;
+        if(event.key==="ArrowDown" || event.key==="ArrowUp"){
+          event.preventDefault();current=(current+(event.key==="ArrowDown"?1:-1)+suggestions.length)%suggestions.length;
+          Array.from(list.children).forEach((option,index)=>option.setAttribute("aria-selected",String(index===current)));
+          input.setAttribute("aria-activedescendant",list.children[current].id);
+          list.children[current].scrollIntoView?.({block:"nearest"});
+        }
+      });
+      function dismiss(){cancel();close();if(statusKey==="addressLoading")statusMessage("");}
+      // Safari may blur with a null relatedTarget before the option receives its click.
+      box.addEventListener("focusout",event=>{if(event.relatedTarget && !box.contains(event.relatedTarget))dismiss();});
+      function outside(event){if(!box.contains(event.target))dismiss();}
+      document.addEventListener("pointerdown",outside);
+      retry.addEventListener("click",search);
+      function updateLanguage(){
+        title.textContent=tr(kind==="city"?"cityLabel":"addressStreetLabel");
+        input.placeholder=tr(kind==="city"?"addressCityPlaceholder":"addressStreetPlaceholder");
+        list.setAttribute("aria-label",tr(kind==="city"?"addressChooseCity":"addressChooseStreet"));
+        retry.textContent=tr("addressRetry");statusMessage(statusKey,errorState);
+      }
+      return {node:box,input,reset,search,updateLanguage,
+        dispose(){cancel();document.removeEventListener("pointerdown",outside);},
+        invalid(){input.setAttribute("aria-invalid","true");statusMessage(kind==="city"?"addressChooseCity":"addressChooseStreet",true);input.focus();}
+      };
     }
-    async function search(){
-      cancel();
-      const query = input.value.trim();
-      retry.hidden = true;
-      if (query.length < 3) { close(); showStatus(query ? "addressMore" : ""); return; }
-      if (query.length > 256) { close(); showStatus("addressTooLong", true); return; }
-      const current = sequence;
-      controller = new AbortController();
-      input.setAttribute("aria-busy", "true");
-      showStatus("addressLoading");
-      try {
-        const results = await request(`/geocode/autocomplete?q=${encodeURIComponent(query)}`, {signal:controller.signal});
-        if (current !== sequence) return;
-        suggestions = (Array.isArray(results) ? results : []).filter(isComplete).slice(0,5);
-        renderOptions();
-        showStatus(suggestions.length ? "addressChoose" : "addressNoResults");
-      } catch(error) {
-        if (current !== sequence || error.name === "AbortError") return;
-        close();
-        showStatus(error.status === 401 ? "addressSignIn" : "addressUnavailable", true);
-        retry.hidden = error.status === 401;
-        if (error.status === 401) onUnauthorized();
-      } finally {
-        if (current === sequence) input.setAttribute("aria-busy", "false");
+    const city=lookup("city",value=>{
+      cityValue=value;streetValue=null;street.reset();house.value="";refreshDisabled();
+    },()=>{cityValue=null;streetValue=null;street.reset();house.value="";refreshDisabled();});
+    const street=lookup("street",value=>{
+      streetValue=value;house.value=value.houseNumber || "";refreshDisabled();
+    },()=>{streetValue=null;house.value="";refreshDisabled();});
+    fields.append(countryLabel,countryStatus,countryRetry,city.node,street.node,houseLabel,help);
+    node.append(saved,change,fields);
+    function refreshDisabled(){
+      saved.hidden=active;fields.hidden=!active;
+      change.hidden=required;change.textContent=tr(active?"addressCancelChange":"addressChange");
+      country.disabled=!active || !countriesReady;country.required=active;
+      city.input.disabled=!active || !country.value;city.input.required=active;
+      street.input.disabled=!active || !cityValue;street.input.required=active;
+      house.disabled=!active || !streetValue;house.required=active;
+    }
+    function renderCountries(){
+      const value=country.value || (!required ? (initial?.countryCode || location?.countryCode || "") : "");
+      let names;
+      try{names=new Intl.DisplayNames([document.documentElement.lang || "en"],{type:"region"});}catch{}
+      const options=countryValues.map(v=>({...v,label:names?.of(v.code)||v.name})).sort((a,b)=>a.label.localeCompare(b.label));
+      country.replaceChildren();
+      const placeholder=document.createElement("option");placeholder.value="";placeholder.textContent=tr("addressChooseCountry");country.append(placeholder);
+      options.forEach(v=>{const option=document.createElement("option");option.value=v.code;option.textContent=v.label;country.append(option);});
+      country.value=value;
+    }
+    async function loadCountries(){
+      countryRetry.hidden=true;countryStatus.hidden=false;countryStatus.textContent=tr("addressLoadingCountries");
+      try{
+        countryValues=await countries(request);if(disposed)return;
+        countriesReady=true;renderCountries();countryStatus.hidden=true;refreshDisabled();
+      }catch{
+        if(disposed)return;countryStatus.textContent=tr("addressCountriesUnavailable");countryRetry.hidden=false;
       }
     }
-    input.addEventListener("input", () => {
-      cancel();
-      selected = null;
-      suggestions = [];
-      input.removeAttribute("aria-invalid");
-      retry.hidden = true;
-      showLocation(null);
-      close();
-      const length = input.value.trim().length;
-      showStatus(length && length < 3 ? "addressMore" : "");
-      if (length >= 3) timer = setTimeout(search, 300);
+    country.addEventListener("change",()=>{
+      country.removeAttribute("aria-invalid");cityValue=null;streetValue=null;city.reset();street.reset();house.value="";refreshDisabled();
     });
-    input.addEventListener("focus", () => {
-      if (!selected && input.value.trim().length >= 3) {
-        if (suggestions.length) renderOptions();
-        else { cancel(); timer = setTimeout(search, 300); }
-      }
+    countryRetry.addEventListener("click",loadCountries);
+    change.addEventListener("click",()=>{
+      active=!active;cityValue=null;streetValue=null;city.reset();street.reset();house.value="";refreshDisabled();
+      if(active)country.focus();
     });
-    input.addEventListener("keydown", event => {
-      if (event.key === "Escape") { event.preventDefault(); cancel(); close(); showStatus(""); return; }
-      if (dropdown.hidden || !suggestions.length) return;
-      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-        event.preventDefault();
-        active = (active + (event.key === "ArrowDown" ? 1 : -1) + suggestions.length) % suggestions.length;
-        Array.from(list.children).forEach((option, index) => option.setAttribute("aria-selected", String(index === active)));
-        input.setAttribute("aria-activedescendant", `${id}-option-${active}`);
-        list.children[active].scrollIntoView?.({block:"nearest"});
-      } else if (event.key === "Enter") {
-        event.preventDefault();
-        choose(suggestions[Math.max(active, 0)]);
-      } else if (event.key === "Tab") { cancel(); close(); }
-    });
-    function dismiss(){
-      cancel(); close();
-      if (statusKey === "addressLoading") showStatus("");
-    }
-    // Mobile Safari can blur the input with relatedTarget=null before dispatching
-    // the suggestion's click. Keep it mounted; outside taps dismiss independently.
-    node.addEventListener("focusout", event => {
-      if (event.relatedTarget && !node.contains(event.relatedTarget)) dismiss();
-    });
-    function outsidePointerDown(event){
-      if (!node.contains(event.target)) dismiss();
-    }
-    document.addEventListener("pointerdown", outsidePointerDown);
-    retry.addEventListener("click", search);
+    house.addEventListener("input",()=>house.removeAttribute("aria-invalid"));
     function updateLanguage(){
-      heading.textContent = tr("addressLabel");
-      input.placeholder = tr("addressPlaceholder");
-      list.setAttribute("aria-label", tr("addressSuggestions"));
-      help.textContent = tr("addressHelp");
-      countryLabel.textContent = tr("countryLabel");
-      cityLabel.textContent = tr("cityLabel");
-      retry.textContent = tr("addressRetry");
-      showStatus(statusKey, statusError);
+      countryTitle.textContent=tr("countryLabel");houseTitle.textContent=tr("addressHouseLabel");
+      house.placeholder=tr("addressHousePlaceholder");help.textContent=tr("addressStepsHelp");
+      change.textContent=tr(active?"addressCancelChange":"addressChange");countryRetry.textContent=tr("addressRetry");
+      renderCountries();city.updateLanguage();street.updateLanguage();
     }
-    showLocation(initial || location);
-    updateLanguage();
+    updateLanguage();refreshDisabled();void loadCountries();
     return {
-      node, input, updateLanguage,
-      dispose(){ cancel(); document.removeEventListener("pointerdown", outsidePointerDown); },
+      node,country,city,street,house,change,refreshDisabled,updateLanguage,
+      dispose(){disposed=true;city.dispose();street.dispose();},
       getValue(){
-        // An unchanged historical address is preserved by omitting the update.
-        if (!required && initial && selected === initial && input.value.trim() === initial.address) return undefined;
-        if (selected && input.value.trim() === selected.address && isComplete(selected)) return {...selected};
-        if (!required && !initial && !input.value.trim()) return undefined;
-        showStatus("addressChoose", true);
-        input.setAttribute("aria-invalid", "true");
-        input.focus();
-        throw new Error(tr("addressChoose"));
+        if(!active)return undefined;
+        if(!country.value){country.setAttribute("aria-invalid","true");country.focus();throw new Error(tr("addressChooseCountry"));}
+        if(!cityValue){city.invalid();throw new Error(tr("addressChooseCity"));}
+        if(!streetValue){street.invalid();throw new Error(tr("addressChooseStreet"));}
+        const number=house.value.trim();
+        if(!number || number.length>64){house.setAttribute("aria-invalid","true");house.focus();throw new Error(tr("addressHouseRequired"));}
+        const sameBuilding=number===streetValue.houseNumber;
+        return {
+          address:[streetValue.street+" "+number,cityValue.city,cityValue.country].join(", "),
+          countryCode:country.value,country:cityValue.country,city:cityValue.city,
+          street:streetValue.street,houseNumber:number,
+          latitude:streetValue.latitude,longitude:streetValue.longitude,placeId:streetValue.placeId,
+          resultType:sameBuilding?streetValue.resultType:"street"
+        };
       },
-      reset(){ cancel(); selected = null; input.value = ""; suggestions = []; close(); showStatus(""); showLocation(null); retry.hidden = true; input.removeAttribute("aria-invalid"); }
+      reset(){
+        cityValue=null;streetValue=null;country.value="";city.reset();street.reset();house.value="";
+        country.removeAttribute("aria-invalid");house.removeAttribute("aria-invalid");refreshDisabled();
+      }
     };
   }
-  root.ParrotAddress = {create};
+  root.ParrotAddress={create};
 })(window);
