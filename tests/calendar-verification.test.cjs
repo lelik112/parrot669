@@ -1,0 +1,113 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const {JSDOM}=require('jsdom');
+const source=fs.readFileSync(path.join(__dirname,'../public/assets/calendar-verification.js'),'utf8');
+const id='11111111-1111-4111-8111-111111111111';
+const required={status:'required',attemptsCount:0,maxAttempts:3,canStart:true,canCheck:false};
+const ready={...required,status:'pending',attemptId:'attempt-1',attemptsCount:1,baselineReady:true,canStart:false,canCheck:true,expiresAt:'2030-09-23T12:30:00Z'};
+const waiting={...ready,canCheck:false,checksCount:1,nextCheckAt:'2030-09-23T12:05:00Z'};
+const verified={...waiting,status:'verified',verifiedAt:'2030-09-23T12:05:00Z',nextCheckAt:null};
+const flush=async()=>{for(let i=0;i<5;i++)await new Promise(resolve=>setImmediate(resolve));};
+const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return {promise,resolve};};
+
+async function harness(t,{handler=()=>required,language='ru',enabled=true}={}){
+  const dom=new JSDOM('<main><input id="draft" value="unsaved price"></main>',{runScripts:'outside-only',url:'https://parrot669.com/host'});
+  const w=dom.window,calls=[],timers=new Map(),statuses=[];let sequence=0,unauthorized=0,visibility='visible';
+  Object.defineProperty(w.document,'visibilityState',{get:()=>visibility});
+  w.setTimeout=(fn,ms)=>{timers.set(++sequence,{fn,ms});return sequence;};w.clearTimeout=id=>timers.delete(id);
+  w.eval(source);
+  const panel=w.ParrotCalendarVerification.create({calendar:{id,enabled},language,
+    onUnauthorized:()=>unauthorized++,onStatus:value=>statuses.push(value),request:async(path,options={})=>{
+      const call={path,...options};calls.push(call);return handler(call);
+    }});
+  w.document.querySelector('main').append(panel.node);t.after(()=>{panel.dispose();dom.window.close();});await flush();
+  return {w,panel,calls,timers,statuses,button:()=>panel.node.querySelector('button'),unauthorized:()=>unauthorized,
+    text:()=>panel.node.textContent,click:async()=>{panel.node.querySelector('button').click();await flush();},
+    tick:async()=>{const [key,value]=timers.entries().next().value;timers.delete(key);value.fn();await flush();},
+    visible:value=>{visibility=value;w.document.dispatchEvent(new w.Event('visibilitychange'));}};
+}
+
+test('start captures the baseline before Check; double click sends once and verification preserves unrelated drafts',async t=>{
+  const pending=deferred();let state=required;
+  const h=await harness(t,{handler:call=>{
+    if(call.path.endsWith('/start'))return pending.promise;
+    if(call.path.endsWith('/check'))return state=verified;
+    return state;
+  }});
+  assert.match(h.text(),/Требуется проверка/);
+  await h.click();await h.click();
+  assert.equal(h.calls.filter(c=>c.method==='POST').length,1);
+  assert.equal(h.button().disabled,true);
+  state=ready;pending.resolve(ready);await flush();
+  assert.equal(h.button().textContent,'Проверить');
+  assert.match(h.text(),/Можно как закрыть, так и открыть даты/);
+  await h.click();
+  assert.match(h.text(),/✓ Управление календарём подтверждено/);
+  assert.equal(h.button().hidden,true);
+  assert.equal(h.w.document.getElementById('draft').value,'unsaved price');
+  assert.equal(h.timers.size,0);
+  assert.deepEqual(h.calls.filter(c=>c.method==='POST').map(c=>c.path),[
+    `/calendars/${id}/verification/start`,`/calendars/${id}/verification/check`]);
+});
+
+test('pending status polls only GET; hidden pages pause polling and never schedule provider checks in the browser',async t=>{
+  let state=waiting;const h=await harness(t,{handler:()=>state});
+  assert.equal(h.button().hidden,true);
+  assert.match(h.text(),/через 5, 10 и 20 минут/);
+  assert.equal([...h.timers.values()][0].ms,15000);
+  await h.tick();assert(h.calls.every(c=>!c.method||c.method==='GET'));
+  h.visible('hidden');assert.equal(h.timers.size,0);
+  state=verified;h.visible('visible');await flush();
+  assert.match(h.text(),/подтверждено/);assert.equal(h.timers.size,0);
+});
+
+test('429 reloads the blocked state; cooldown displays the deadline and refreshes once when it ends',async t=>{
+  let state=required;
+  const h=await harness(t,{handler:call=>{
+    if(call.method==='POST'){
+      state={...required,status:'blocked',attemptsCount:3,canStart:false,blockedUntil:new Date(Date.now()+86400000).toISOString()};
+      throw Object.assign(Error('blocked'),{status:429});
+    }return state;
+  }});
+  await h.click();
+  assert.match(h.text(),/временно заблокирована/);assert.match(h.text(),/Попытка 3 из 3/);
+  assert.match(h.text(),/Новая попытка будет доступна после/);
+  assert.equal(h.button().hidden,true);
+  assert([...h.timers.values()][0].ms>86000000);
+  state=required;await h.tick();assert.equal(h.button().textContent,'Начать проверку');
+  assert.equal(h.button().hidden,false);
+});
+
+test('load/network failures offer status retry without replaying an uncertain start request',async t=>{
+  let offline=true;
+  const h=await harness(t,{handler:call=>{
+    if(offline || call.method==='POST')throw Error('offline');return ready;
+  }});
+  assert.match(h.text(),/Не удалось загрузить статус/);
+  assert.equal(h.button().textContent,'Обновить статус');
+  offline=false;await h.click();assert.equal(h.button().textContent,'Проверить');
+  await h.click();assert.equal(h.button().textContent,'Обновить статус');
+  await h.click();assert.equal(h.calls.filter(c=>c.method==='POST').length,1);
+});
+
+test('disposal aborts in-flight requests and late responses cannot update a removed panel',async t=>{
+  const pending=deferred();const h=await harness(t,{handler:()=>pending.promise});
+  h.panel.dispose();assert.equal(h.calls[0].signal.aborted,true);
+  pending.resolve(verified);await flush();
+  assert.equal(h.statuses.length,0);assert.equal(h.timers.size,0);
+});
+
+test('disabled calendars show no verification actions; expired sessions stop polling',async t=>{
+  const disabled=await harness(t,{enabled:false,handler:()=>({...ready,canCheck:false})});
+  assert.match(disabled.text(),/Календарь выключен/);assert.equal(disabled.button().hidden,true);
+  const expired=await harness(t,{handler:()=>{throw Object.assign(Error('expired'),{status:401});}});
+  assert.equal(expired.unauthorized(),1);assert.equal(expired.timers.size,0);
+});
+
+test('verification states are translated in EN, ES, CA and RU',async t=>{
+  for(const [language,label] of [['en','Ownership verified'],['es','Control del calendario verificado'],['ca','Control del calendari verificat'],['ru','Управление календарём подтверждено']]){
+    const h=await harness(t,{language,handler:()=>verified});assert(h.text().includes(label));
+  }
+});

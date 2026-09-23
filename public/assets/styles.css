@@ -1640,6 +1640,14 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-calendar-actions{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:12px}
 .host-calendar-control-group{display:flex;align-items:center;gap:12px}
 .host-calendar-delete{padding-left:18px;border-left:1px solid rgba(255,255,255,.1)}
+.calendar-verification{display:grid;gap:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:16px}
+.calendar-verification p{margin:0;font-size:13px;line-height:1.5;color:#aeb9b5;overflow-wrap:anywhere}
+.calendar-verification .calendar-verification-scope{font-size:12px;color:#82918c}
+.calendar-verification .calendar-verification-error{color:#f2b5a8}
+.host-calendar-status .calendar-verification strong{font-size:15px;color:#e2e9e5}
+.host-calendar-status .calendar-verification[data-status="verified"] strong{color:var(--lime)}
+.calendar-verification .button{justify-self:start;min-height:44px;white-space:normal}
+@media(max-width:640px){.calendar-verification .button{width:100%}}
 @media(max-width:640px){
   .host-calendar-form{grid-template-columns:1fr}
   .host-calendar-status>div:first-child{align-items:flex-start;flex-direction:column;gap:5px}

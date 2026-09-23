@@ -152,6 +152,7 @@ const resetButton = document.getElementById("reset-host");
 const langButtons = document.querySelectorAll("[data-host-lang]");
 const authModeButtons = document.querySelectorAll("[data-auth-mode]");
 const propertyAddressEditors = new Map();
+const calendarVerificationPanels = [];
 const newPropertyAddress = window.ParrotAddress.create({
   id:"new-property-address", tr, request:api, required:true, onUnauthorized:addressSessionExpired
 });
@@ -975,6 +976,7 @@ function renderUnavailability(property){
 
 function renderProperties(){
   if (!propertiesNode) return;
+  calendarVerificationPanels.splice(0).forEach(panel=>panel.dispose());
   propertyAddressEditors.forEach(editor => editor.dispose());
   propertyAddressEditors.clear();
   propertiesNode.replaceChildren();
@@ -1181,7 +1183,15 @@ function renderProperties(){
       controlGroup.append(syncButton,toggleButton);
       actions.append(controlGroup,disconnectButton);
 
-      status.append(statusTop,stats);
+      status.append(statusTop);
+      if(window.ParrotCalendarVerification){
+        const verification=window.ParrotCalendarVerification.create({calendar:externalCalendar,request:api,language:lang,onUnauthorized:addressSessionExpired,
+          onStatus:value=>{statusLabel.hidden=value.status==="verified" && externalCalendar.enabled!==false && externalCalendar.status==="connected";}});
+        calendarVerificationPanels.push(verification);
+        syncTitle.textContent=verification.name;
+        status.append(verification.node);
+      }
+      status.append(stats);
       if(externalCalendar.lastError){
         const err=document.createElement("p");err.className="host-inline-error";err.textContent=externalCalendar.lastError;status.append(err);
       }

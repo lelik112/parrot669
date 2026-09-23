@@ -173,6 +173,8 @@ export default {
         (/^\/unavailability\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
         (/^\/properties\/[0-9a-f-]+\/calendars$/i.test(path) && request.method === "POST") ||
         (/^\/calendars\/[0-9a-f-]+\/sync$/i.test(path) && request.method === "POST") ||
+        (/^\/calendars\/[0-9a-f-]+\/verification$/i.test(path) && request.method === "GET") ||
+        (/^\/calendars\/[0-9a-f-]+\/verification\/(start|check)$/i.test(path) && request.method === "POST") ||
         (/^\/calendars\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method));
 
       if (!allowed) {

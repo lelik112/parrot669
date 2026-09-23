@@ -27,6 +27,9 @@ test('address autocomplete proxy preserves encoded query, session and provider e
 
 for (const [method,route,status] of [
   ['GET','/geocode/countries',200],
+  ['GET',`/calendars/${id}/verification`,200],
+  ['POST',`/calendars/${id}/verification/start`,429],
+  ['POST',`/calendars/${id}/verification/check`,409],
   ['GET',`/properties/${id}/unavailability`,200],
   ['POST',`/properties/${id}/unavailability`,409],
   ['PUT',`/unavailability/${id}`,400],
