@@ -85,7 +85,7 @@ export default {
       const id = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
       const allowed =
         (new RegExp(`^/contact-options/${id}$`, "i").test(path) && request.method === "GET") ||
-        (path === "/settings" && ["GET", "PUT"].includes(request.method)) ||
+        (["/settings", "/notification-settings"].includes(path) && ["GET", "PUT"].includes(request.method)) ||
         (path === "/unread" && request.method === "GET") ||
         (path === "/conversations" && ["GET", "POST"].includes(request.method)) ||
         (new RegExp(`^/conversations/for-property/${id}$`, "i").test(path) && request.method === "GET") ||

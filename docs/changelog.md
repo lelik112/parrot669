@@ -1,5 +1,14 @@
 # PARROT 669 changelog
 
+## 2026-09-23 — Unread-message email notifications
+
+- Notify verified hosts and guests about new unread messages through the existing backend Resend configuration. Wait two minutes, combine pending messages and cap frequency at one email per recipient/conversation per 15 minutes.
+- Add a Messages-page notification toggle and EN/ES/CA/RU email-language selector, backed by authenticated settings endpoints. Host contact opt-in stays independent.
+- Keep message content and participant contact details out of emails; link directly to the authenticated conversation. Suppress pending mail for read messages, opt-outs, blocks, unverified accounts and deleted properties.
+- Flyway V23 adds preferences and a transactional PostgreSQL outbox. Leases, frozen payloads, stable provider idempotency keys and bounded retries survive restarts without tying chat writes to email availability.
+- Add PostgreSQL/HTTP and UI regression tests for coalescing, cooldown, suppression, retry/restart races, settings isolation and failure recovery. No geocoding configuration or implementation changes.
+- Bounce/delivery webhooks and abuse reporting remain follow-up work.
+
 ## 2026-09-23 — LocationIQ owner address lookup
 
 - Replace Geoapify with LocationIQ for country → city → street entry. Keep the selected city's geographic bounds and search only road records, with the city included in each query.

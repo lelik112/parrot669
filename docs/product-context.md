@@ -78,9 +78,10 @@ do not imply provider-verified building coordinates. Existing addresses need no 
 
 Main site exposes one product entry: Housing / Жильё.
 
-Search and host pages have two shared tabs:
+Search, host and messaging pages share three tabs:
 - Find availability
 - For hosts
+- Messages
 
 ## Backend
 
@@ -118,6 +119,7 @@ Important migrations:
 - V17 adds normalized property `country_code` / `country`, backfills existing properties to `ES / Spain`, and indexes `(country_code, city)` for location discovery
 - V21 adds opt-in messaging settings, private property conversations and messages; no changes to property/address/availability tables
 - V22 adds directional participant blocks, enforced across all property conversations between the pair
+- V23 adds email notification preferences and a durable, coalescing messaging outbox
 
 Current important endpoints:
 - `POST /api/auth/register`
@@ -200,7 +202,7 @@ Owner authentication is account/session based:
 - Email verification uses the backend Resend provider. Password recovery is not exposed yet; V11 reserves a hashed, expiring `password_reset_tokens` model for a later request/confirm flow.
 - The pre-account `editToken`/`access_token_hash` mechanism and its compatibility routes have been removed.
 
-Messaging backend privacy controls are implemented; UI and broader contact publishing are still pending.
+Private messaging and its UI are implemented; broader contact publishing remains a future decision.
 
 Desired future owner contact options:
 - PARROT message/contact relay;
@@ -227,7 +229,17 @@ Search may show host nickname now, but should not expose raw contact by default.
 - The Worker proxies only the allowed messaging paths/methods, forwards only the existing session cookie, checks Origin on mutations and preserves API errors with `no-store`. No auth token is exposed to JavaScript.
 - Visible inbox/history refresh every 15 seconds; unread badges every 30 seconds. Read acknowledgement requires the history to be visible, focused and scrolled to the latest fetched message. Sending never advances the polling cursor past an unseen concurrent reply.
 - Drafts and uncertain-send idempotency keys live only in per-account sessionStorage with 24-hour expiry. They are restored for the same account, never treated as the message source of truth. Explicit logout from Messages clears its drafts. LocalStorage holds only language and a short-lived return URL after email verification, not message content or credentials.
-- Email verification from a Messages registration returns to the enquiry in the same browser. Message email notifications and abuse reporting/moderation remain follow-up work. Public contact opt-in, attachments and realtime sockets are separate future decisions.
+- Email verification from a Messages registration returns to the enquiry in the same browser. Public contact opt-in, abuse reporting/moderation, attachments and realtime sockets are separate future decisions.
+
+### Message email notifications
+
+- Verified participants receive emails about new unread messages by default. `/messages.html` has a separate **Email notifications** setting and email language selector (EN/ES/CA/RU, default EN). This setting is independent of host acceptance of new conversations.
+- Authenticated `GET|PUT /api/messaging/notification-settings` reads/sets `{enabled, language}` for the current profile only. The Worker proxies it with the existing cookie and Origin protections.
+- The first email waits roughly two minutes so an actively read conversation does not generate unnecessary mail. Pending messages are grouped, with at least 15 minutes between accepted emails for the same recipient/conversation. Replies notify guests as well as hosts.
+- Notifications use the existing backend Resend configuration and contain only a short notice plus a link to the authenticated conversation. Message content, names, dates, addresses and the other participant's email are not copied into mail.
+- Queue work is committed atomically with each new message, without backfilling older messages. PostgreSQL coordinates multiple workers, persists frozen payloads/idempotency keys and retries temporary provider failures across restarts. Chat writes do not wait for the email provider.
+- Unread status, notification preference, verification, blocks and property existence are checked before sending. Already in-flight mail may arrive after a read/block/opt-out. Retries are capped at eight attempts and 23 hours; terminal delivery errors are retained as sanitized codes for diagnosis.
+- Delivery acceptance is logged without sensitive data; bounce/delivery webhooks are not connected yet. Frozen email/payload data is cleared when a delivery ends.
 
 ## Verification direction
 
@@ -246,5 +258,5 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 - Address autocomplete and storage are connected; map UI and any guest address-visibility policy remain separate future work.
 - Improve visual design of housing/search/host UI.
 - Add password-reset request/confirm endpoints using the reserved reset-token model and existing backend email provider.
-- Add message email notifications and abuse reporting/moderation. Inbox, Worker proxy, host opt-in and participant blocking are connected.
+- Add abuse reporting/moderation and email bounce/delivery webhooks. Inbox, notifications, Worker proxy, host opt-in and participant blocking are connected.
 - Upgrade Flyway or align Postgres version (Railway currently warns PostgreSQL 18 is newer than tested Flyway support).

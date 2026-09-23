@@ -34,6 +34,19 @@
     <p id="msg-status" class="messaging-status" role="status" aria-live="polite"></p>
     <button id="msg-session-retry" type="button" class="button button-small button-ghost" data-msg-i18n="retry" hidden>Try again</button>
 
+    <details id="msg-email-settings" class="messaging-email-settings" hidden>
+      <summary data-msg-i18n="emailSettings">Email notifications</summary>
+      <div class="messaging-email-controls">
+        <label class="messaging-toggle"><input id="msg-email-enabled" type="checkbox" disabled /><span data-msg-i18n="emailEnabled">Email me about unread messages</span></label>
+        <label class="messaging-email-language"><span data-msg-i18n="emailLanguage">Email language</span><select id="msg-email-language" disabled>
+          <option value="en">English</option><option value="es">Español</option><option value="ca">Català</option><option value="ru">Русский</option>
+        </select></label>
+      </div>
+      <p class="messaging-hint" data-msg-i18n="emailHelp">A short notification and a link to the conversation. Message text stays on the website.</p>
+      <p id="msg-email-status" class="messaging-status" role="status" aria-live="polite"></p>
+      <button id="msg-email-retry" type="button" class="text-button" data-msg-i18n="retry" hidden>Try again</button>
+    </details>
+
     <section id="msg-auth" class="messaging-auth" hidden>
       <p data-msg-i18n="authLead">Log in to message hosts and see your conversations.</p>
       <div class="host-auth-tabs">
@@ -88,6 +101,7 @@
     </div>
   </main>
   <script src="/assets/messaging-common.js"></script>
+  <script src="/assets/messaging-email-settings.js"></script>
   <script src="/assets/messages.js"></script>
 </body>
 </html>
