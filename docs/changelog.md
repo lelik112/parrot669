@@ -1,5 +1,13 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — Product coordination and saved-date verification requirement
+
+- Establish a shared repository workflow for both frontend and backend work: roadmap/feature registry, task ownership and discussion, decision log and a status report. PM: Mark / Марк. Strategist: Alex / Алекс, currently without repository access. Other agent names and claims remain open until confirmed.
+- Record the owner's accepted clarification: select control dates in PARROT, save the dates/action and initial state, change them in Airbnb, then verify that exact challenge. This is a product requirement and backlog entry (`PM-001` / `BUG-015`), **not a release of the corrected implementation**. The historical v1 entry below remains intact.
+- Track link publication after verification as a proposal with unresolved details (`PM-002` / `PRODUCT-001`), rather than describing a new gate as current behavior.
+- Prioritize the unfinished two-account contact scenario, current host UI findings and bounded email/mobile acceptance. Separate implementation, deployment and independent QA evidence.
+- Correct the product-context summary of search coverage to include existing manual PARROT blocks. No runtime behavior, application code, configuration or infrastructure changes are part of this documentation update.
+
 ## 2026-09-24 — Extract housing operations and profile views
 
 - Move availability/manual-block routes, service and repository into `com.parrot669.housing` (`AvailabilityRoutes`, `AvailabilityService`, `AvailabilityRepository` / `DoobieAvailabilityRepository`). Preserve half-open API dates, nightly-price handling, validation/ownership order and overlap-conflict behavior.

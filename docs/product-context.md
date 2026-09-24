@@ -2,6 +2,24 @@
 
 This file is the handoff/source-of-truth for continuing product work if chat context is lost.
 
+## Product direction and team coordination
+
+PARROT helps guests find housing that is available for their dates and reach its owner. The MVP must establish that owners add useful availability, guests find suitable housing, and contact takes place. Feature count is not evidence of those outcomes.
+
+Use existing external data and reputation where helpful. Trust labels must describe a specific observed fact; calendar verification does not verify identity, legal ownership or the right to rent. PARROT remains an availability/search/contact product, without booking or payment processing.
+
+The shared product workspace for **both repositories** is `lelik112/parrot669/docs`:
+
+- [Roadmap and feature registry](roadmap.md): priorities and scope.
+- [Tasks and team workflow](tasks/README.md): claim ownership, ask questions, record handoffs and acceptance evidence.
+- [Status](status.md): current delivery/QA state and blockers.
+- [Decision log](decisions/README.md): accepted decisions and clearly marked proposals.
+- [Changelog](changelog.md): dated history; decisions, implementation and verification are separate events.
+
+Before starting or resuming work, read the status and the relevant task. Record a claim in the task before implementation; do not start a duplicate task already claimed by another agent. Repository updates are asynchronous records, not a mechanism that automatically starts another agent. The detailed agreement and known team identities are in [tasks/README.md](tasks/README.md).
+
+Mark / Марк is PM and edits product documentation only. Alex / Алекс is the strategist; he currently has no repository access. Developers own technical changes and QA owns independent verification. Names not yet supplied by the owner remain unassigned; an old branch or shared GitHub login does not identify the current worker.
+
 ## Current product
 
 PARROT 669 is evolving from a Barcelona property verification/local-service site into a neutral housing availability + trust layer.
@@ -220,7 +238,9 @@ Observed Airbnb export distinguishes:
 PARROT intentionally discards DESCRIPTION and other reservation metadata; it stores only UID, date range, classified kind and observation time.
 
 Search logic is therefore:
-`host offer covers every requested night AND no imported reservation from an enabled calendar covers any requested night`.
+`host offer covers every requested night AND no manual PARROT block covers any requested night AND no imported reservation from an enabled calendar covers any requested night`.
+
+This expression summarizes date coverage; the other search filters and minimum-stay rules still apply. Mentioning manual blocks here corrects an omission in this summary, not the implemented behavior.
 
 The iCal URL is a secret capability link. It is stored server-side because it must be fetched, but never returned in dashboard/public APIs. TODO before serious scale: encrypt calendar URLs at rest with an application-managed key.
 
@@ -284,6 +304,22 @@ Search may show host nickname now, but should not expose raw contact by default.
 - Unread status, notification preference, verification, blocks and property existence are checked before sending. Already in-flight mail may arrive after a read/block/opt-out. Retries are capped at eight attempts and 23 hours; terminal delivery errors are retained as sanitized codes for diagnosis.
 - Delivery acceptance is logged without sensitive data; bounce/delivery webhooks are not connected yet. Frozen email/payload data is cleared when a delivery ends.
 
+## Calendar control verification — current implementation and accepted change
+
+As documented on 2026-09-24, v1 starts from a fresh iCal baseline and accepts any observed change in future unavailable ranges. PARROT does not store a user-selected challenge range in v1. A new or cancelled reservation on unrelated dates can therefore pass the check. Its current status must not be treated as evidence that a specific user completed a specific date challenge.
+
+The owner's clarification on **2026-09-24** supersedes that behavior as the target requirement:
+
+1. The owner selects control nights **in PARROT** before changing Airbnb.
+2. PARROT saves the selected dates and expected action, and obtains the initial calendar state before telling the owner to act.
+3. The owner changes those dates in Airbnb and returns to check.
+4. Success requires the saved action on the saved dates. A change only on other dates, an already-existing target state, incomplete action or a fetch error must not pass.
+5. Dates, action and instructions survive waiting, navigation and reload.
+
+This change is **accepted but not recorded as implemented or accepted by QA**. See [decision D002](decisions/D002-calendar-control-dates.md) and [task PM-001 / BUG-015](tasks/PM-001-calendar-control-dates.md). The existing synchronization, event classification and calendar lifecycle remain separate. A date challenge is a limited signal of calendar control, not proof of identity or legal ownership.
+
+External-link visibility currently remains independent of calendar verification. The owner has requested a link-publication restriction; the final contract is still a [proposal D003](decisions/D003-link-publication-proposal.md), tracked in [PM-002](tasks/PM-002-link-publication.md). Do not silently apply it as an already-shipped rule or remove otherwise eligible properties from search. Publication after success, treatment of v1 verified records and the public-profile surface need explicit resolution.
+
 ## Verification direction
 
 Longer-term trust claims should stay explicit, e.g.:
@@ -298,6 +334,9 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 ## Immediate TODO
 
+- Implement the accepted saved-date calendar challenge ([PM-001](tasks/PM-001-calendar-control-dates.md)); resolve the separate publication policy before implementing [PM-002](tasks/PM-002-link-publication.md).
+- Complete independent search → enquiry → reply verification ([PM-003](tasks/PM-003-contact-acceptance.md)). Prioritize evidence for the core MVP path over adding unrelated features.
+- Fix the two current host UI findings and complete focused email/mobile acceptance. The ordered backlog and pilot proposal live in [roadmap.md](roadmap.md); do not infer an active assignment from this TODO list.
 - Continue backend extraction later with auth, then calendar sync and legacy challenges after coordinating parallel calendar work. Keep behavior fixes separate from mechanical moves.
 - Separate backend fixes identified in the source review: align accepted 254-character emails with `profiles.contact VARCHAR(200)`; bound verification-email transport waits; bound/expire login limiter state and make concurrent admission explicit.
 - Batch search enrichment separately and handle a property deleted between candidate selection and fee lookup; the current per-result `.unique` fee read can fail the entire search. Make legacy challenge creation and verification-token replacement atomic; map duplicate listing constraints to a deliberate API response.
