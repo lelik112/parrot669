@@ -286,7 +286,7 @@ Owner authentication is account/session based:
 - The nine confirmed general findings in `docs/qa/2026-09-23/PARROT669-QA-2026-09-23.md` were fixed and released on 2026-09-23 (backend `39f3f92`, frontend `be9db76`). CI, production deployment and focused desktop checks passed; real-mailbox recovery and mobile/touch coverage remain explicitly unverified in that report.
 - The pre-account `editToken`/`access_token_hash` mechanism and its compatibility routes have been removed.
 
-Private messaging and its UI are implemented; broader contact publishing remains a future decision.
+PARROT private messaging is implemented. Under D011, every property kept in search must offer this private message path; PM-024 removes the legacy host-wide opt-in gate. Publishing direct phone/email remains a separate future decision.
 
 Desired future owner contact options:
 - PARROT message/contact relay;
