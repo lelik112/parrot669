@@ -154,6 +154,34 @@ Guest availability search and PostgreSQL location discovery now live in `com.par
 
 These initial steps were released independently on 2026-09-23: calendar integrity `bcebaa4`, shared errors `d370575`, search extraction `1e00ef5`. Each passed PR/main CI, Railway deployment and live API smoke. Final [main CI 35873996970](https://github.com/lelik112/parrot669-backend/actions/runs/35873996970) passed 75 tests plus PostgreSQL HTTP smoke and Docker build. Railway deployment `6d68b808-d625-461c-ba74-c26afa862873` succeeded on `1e00ef59804216b417d264bd1f7ee1be9b7cb348`, with Flyway still at V24. Ten read-only production checks passed across the direct backend and Cloudflare Worker (health, location/search routing, invalid-budget errors and unauthorized dashboard access). Calendar failure/recovery and nonempty search scenarios were exercised in isolated CI, not against real host calendar data.
 
+### 2026-09-24 housing and profile extraction
+
+Three further extractions are merged and released. Each stage passed PR and main CI with PostgreSQL tests, full HTTP smoke and Docker build; production now runs the final combined commit below.
+
+| Responsibility | Backend module | Preserved contract |
+| --- | --- | --- |
+| Availability and manual unavailability | `com.parrot669.housing`: `AvailabilityRoutes`, `AvailabilityService`, `AvailabilityRepository` / `DoobieAvailabilityRepository` | Existing owner endpoints, half-open API dates, optional nightly prices, ownership/validation order and named PostgreSQL overlap constraints |
+| Properties and external listings | `com.parrot669.housing`: `PropertyRoutes`, `PropertyService`, `PropertyRepository` | Property/address/title updates, canonical Airbnb links and visibility; listing/calendar deletion remains atomic, and property deletion retains private messaging history |
+| Owner dashboard and public profiles | `com.parrot669.profiles`: `ProfileRoutes`, `ProfileService`, `ProfileRepository` / `DoobieProfileRepository` | Session-derived dashboard identity, owner-only addresses and calendar details, anonymous public-profile JSON and legacy verification expiry semantics |
+
+`Main` composes the extracted routes with search and the remaining API. Shared DTOs remain in `domain`; each module owns its repository queries without depending on another feature's service. SQL statements and transaction boundaries are retained. `http.OwnerRequests` shares the existing session-cookie extraction, authentication delegation, UUID parsing and JSON decoding between the remaining legacy routes and these modules. `HttpResponses` continues to supply the existing response/error mapping. This moves request plumbing without moving or changing authentication policy.
+
+The legacy `ParrotService` is reduced from 890 to 294 lines, `Routes` from 363 to 173, and `ParrotRepository` from 545 to 299. All 52 route handlers retain their existing bodies and each is composed once.
+
+Frontend API paths, Worker forwarding, JSON fields, status codes and date conversion stay the same; no frontend migration is required. Public profiles still omit exact addresses, raw contact, periods and calendars, while the authenticated dashboard retains owner data. Public-profile listing visibility keeps its existing behavior and is separate from the guest-search `showInSearch` filter. The messaging/outbox and `calendarverification` packages, calendar synchronization, provider geocoding and database migrations are unchanged by this batch.
+
+Twenty-one focused backend tests were added: nine availability route/service tests, six property/listing tests (four route tests and two PostgreSQL repository/service tests), and six profile tests. They cover authentication/validation order, exact errors and response shapes, overlap-constraint handling, omitted updates, atomic deletion rollback, retained messaging history, public privacy and verification expiry. The existing full-application PostgreSQL smoke and Docker build passed for each stage. Test HTTP helpers explicitly send raw JSON bytes to avoid encoding the request object as a JSON string.
+
+Release evidence (2026-09-24):
+
+| Stage | Main commit | Main CI | Railway deployment |
+| --- | --- | --- | --- |
+| Availability / manual blocks, [PR #18](https://github.com/lelik112/parrot669-backend/pull/18) | `50ef837bfc5aec408debf1b1cf5f72d6a1d8afc5` | [35963891979](https://github.com/lelik112/parrot669-backend/actions/runs/35963891979): success, 84 tests + full smoke + Docker | `a7bee003-5c57-4456-a40f-17c4298b6396`, superseded |
+| Properties / listings, [PR #19](https://github.com/lelik112/parrot669-backend/pull/19) | `b5ac2a2a266fa81bb840086928b6234d9d575f33` | [35964196912](https://github.com/lelik112/parrot669-backend/actions/runs/35964196912): success, 90 tests + full smoke + Docker | `14a6eaea-96e1-4ea9-972c-90aaa203a7bf`, superseded |
+| Dashboard / public profile, [PR #20](https://github.com/lelik112/parrot669-backend/pull/20) | `f9d8ae7ab0b2d16a260a2ac64eeea3b9582f6696` | [35964554278](https://github.com/lelik112/parrot669-backend/actions/runs/35964554278): success, 96 tests + full smoke + Docker | `73c5cb1a-2657-49c5-bfd3-b2e9b172bdcd`: SUCCESS |
+
+The final production commit's tree matches the CI-tested implementation. Railway startup validated all 24 migrations and remained at V24 without a schema change. Eight read-only checks passed against the final direct backend: health, country/city discovery, search, invalid-budget error, unauthenticated dashboard/availability and missing public-profile 404. Private dashboard, calendar and mutation scenarios ran in isolated CI; no real host data was changed for live verification. Cloudflare returned HTTP 403 / code 1010 to this environment when checking the frontend proxy, so this batch does not claim a fresh successful live Worker check. Worker code was unchanged.
+
 ## Frontend
 
 Repository: `lelik112/parrot669`
@@ -270,7 +298,7 @@ Each claim should have method, verifiedAt, expiresAt. Avoid one vague green "ver
 
 ## Immediate TODO
 
-- Continue backend extraction in small CI-verified steps: housing/availability, dashboard/profile assembly, auth, then calendar sync and legacy challenges after coordinating parallel calendar work. Keep behavior fixes separate from mechanical moves.
+- Continue backend extraction later with auth, then calendar sync and legacy challenges after coordinating parallel calendar work. Keep behavior fixes separate from mechanical moves.
 - Separate backend fixes identified in the source review: align accepted 254-character emails with `profiles.contact VARCHAR(200)`; bound verification-email transport waits; bound/expire login limiter state and make concurrent admission explicit.
 - Batch search enrichment separately and handle a property deleted between candidate selection and fee lookup; the current per-result `.unique` fee read can fail the entire search. Make legacy challenge creation and verification-token replacement atomic; map duplicate listing constraints to a deliberate API response.
 - Address autocomplete and storage are connected; map UI and any guest address-visibility policy remain separate future work.

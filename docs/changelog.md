@@ -1,5 +1,15 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — Extract housing operations and profile views
+
+- Move availability/manual-block routes, service and repository into `com.parrot669.housing` (`AvailabilityRoutes`, `AvailabilityService`, `AvailabilityRepository` / `DoobieAvailabilityRepository`). Preserve half-open API dates, nightly-price handling, validation/ownership order and overlap-conflict behavior.
+- Move property and external-listing operations into the same package's `PropertyRoutes`, `PropertyService` and `PropertyRepository`. Preserve omitted title/address updates, canonical Airbnb URLs and link visibility; keep listing/calendar deletion atomic and retain messaging history when a property is deleted.
+- Move owner-dashboard and public-profile assembly into `com.parrot669.profiles` (`ProfileRoutes`, `ProfileService`, `ProfileRepository` / `DoobieProfileRepository`). Preserve owner-only address/calendar data, anonymous public JSON, listing scoping and legacy verification expiry semantics.
+- Share the existing cookie/authentication, UUID and JSON request handling through `http.OwnerRequests`; keep response/error mapping in `HttpResponses` and shared models in `domain`. `Main` composes the extracted modules. API paths, Worker forwarding, SQL and transaction boundaries are unchanged; no frontend or database migration is required. Messaging, calendar-control verification and calendar synchronization retain their existing implementation.
+- Add 21 focused tests: nine availability route/service tests, six property/listing tests (four route and two PostgreSQL tests), and six profile tests. Cover auth/validation order, exact errors/JSON, overlap constraints, patch semantics, atomic deletion rollback, messaging-history retention and public privacy.
+- Released in three PR/main-CI-verified steps: availability `50ef837` (84 tests), properties/listings `b5ac2a2` (90 tests), profiles `f9d8ae7` (96 tests). Every stage passed full PostgreSQL HTTP smoke and Docker build. Final [main CI 35964554278](https://github.com/lelik112/parrot669-backend/actions/runs/35964554278) is green; Railway deployment `73c5cb1a-2657-49c5-bfd3-b2e9b172bdcd` is SUCCESS on `f9d8ae7ab0b2d16a260a2ac64eeea3b9582f6696`, with Flyway unchanged at V24.
+- Eight read-only live backend checks passed. Private/mutation coverage ran in isolated CI. The frontend proxy check was blocked by Cloudflare 403/1010 from this environment; Worker runtime was not changed. See product-context for the complete release evidence.
+
 ## 2026-09-23 — Extract the backend search module
 
 - Move availability search and database-backed country/city discovery from the large legacy routes/service/repository into the independent `com.parrot669.search` package.
