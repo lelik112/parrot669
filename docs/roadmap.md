@@ -13,6 +13,7 @@
 | [PM-001 — Проверка сохранённых дат](tasks/PM-001-calendar-control-dates.md) | P1 | Проверяется конкретное задание пользователя | in review: Борис подтвердил часть desktop A/B и `close`; правка P2 инструкции опубликована, waiting `open`/reload/языки проверены Борисом; `close`/mobile/источник ещё открыты |
 | [PM-003 — Поиск → обращение → ответ](tasks/PM-003-contact-acceptance.md) | P1 | Независимо подтверждён основной путь контакта | CHECK-H11 начат, приостановлен; нужен статус QA |
 | [PM-002 — Внешняя ссылка и verification status](tasks/PM-002-link-publication.md) | P1 | Публикация Airbnb-ссылки и честный verification status + nudge | in review: backend в production; frontend и QA ещё требуют завершения
+| [PM-024 — Контакт с хозяином из каждого результата](tasks/PM-024-contact-from-every-search-result.md) | P1 | D011 accepted; implementation planned, old opt-in gate remains in production |
 | [PM-004 — Выбор улицы](tasks/PM-004-street-autofill.md) | P2 | Первый вариант не скрывается браузерной подсказкой | in review; выпущено Денисом, Борису нужен независимый нативный ретест |
 | [PM-005 — Закрытые даты](tasks/PM-005-closed-dates-copy.md) | P2 | Обычная форма не выглядит недоступной функцией | in review; выпущено Денисом, Борису нужен независимый визуальный ретест |
 | [PM-010 — Выделение AuthRoutes](tasks/PM-010-auth-routes-extraction.md) | P2 | Упростить поддержку auth routes без изменения поведения | in review: Игорь выпустил backend `e41d322`, CI/Railway SUCCESS; Борису назначен auth QA |
@@ -34,6 +35,10 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | [PM-020 — Навигация кабинета](tasks/PM-020-host-cabinet-navigation.md) | P2 | in review: desktop/keyboard partial PASS; BUG-016 открыт, touch ждёт PM-015
 | [PM-021 — Личный профиль владельца](tasks/PM-021-private-host-profile.md) | P2 | in progress у Дениса: только существующее имя, новые поля отложены
 | [PM-023 — Путь гостя к первому сообщению](tasks/PM-023-guest-message-onboarding.md) | P1 | planned after current PM-020/021 work; auth at send, preserve draft |
+| [PM-025 — Расположение кнопки контакта](tasks/PM-025-search-contact-button-layout.md) | P1 | planned after PM-024; owner-reported mobile layout bug |
+| [PM-026 — Убрать дублирующий Messages](tasks/PM-026-remove-duplicate-messages-link.md) | P2 | keep global nav, remove Host shortcut duplicate |
+| [PM-027 — Открыть объект из диалога](tasks/PM-027-open-property-from-messages.md) | P2 | planned after current PM-020/021 work |
+| [PM-028 — Профиль хозяина из Messages](tasks/PM-028-open-host-profile-from-messages.md) | P2 | planned after PM-021 |
 | [PM-022 — Публичный профиль владельца](tasks/PM-022-public-host-profile.md) | P2 | после PM-021; отдельный privacy/public contract |
 
 Пилот можно готовить параллельно; не нужно ждать карты или полного редизайна. Отсутствие внешней ссылки не убирает объект из поиска. Нужно измерить, сколько найденных объектов вообще имеют доступный путь связи: сообщения выключены по умолчанию.
@@ -72,7 +77,7 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | F06 | Сравнение стоимости | Полная цена срока с известной уборкой; без неполной оценки | done | P1 | QA 23.09; [PM-007](tasks/PM-007-mobile-acceptance.md) |
 | F07 | Airbnb iCal | Импорт, синхронизация и жизненный цикл календаря | done | P1 | Защищаемые сценарии [PM-001](tasks/PM-001-calendar-control-dates.md) |
 | F08 | Поиск без Airbnb | Внешнее объявление необязательно | done | P1 | [PM-002](tasks/PM-002-link-publication.md), [PM-008](tasks/PM-008-pilot.md) |
-| F09 | Сообщения и блокировка | Частное обращение по согласию владельца | done | P1 | Независимый полный QA — [PM-003](tasks/PM-003-contact-acceptance.md) |
+| F09 | Сообщения и блокировка | Контакт доступен для каждого объекта в поиске; auth перед отправкой, per-participant block/rate limit | in progress | P1 | [D011](decisions/D011-contact-always-available.md), [PM-024](tasks/PM-024-contact-from-every-search-result.md), QA [PM-003](tasks/PM-003-contact-acceptance.md)
 | F10 | Email-уведомления | Уведомление о непрочитанных сообщениях | done | P1 | [PM-006](tasks/PM-006-email-acceptance.md); доставка ещё не принята |
 | F11 | Изменение календаря v1 | Историческая проверка любого изменения без сохранённого задания | done | P1 | Ранее выданный v1-статус не доказывает выбранные даты; [D002](decisions/D002-calendar-control-dates.md) |
 | F12 | Проверка выбранных дат | Выбор в PARROT, сохранение, внешнее действие, сравнение | done | P1 | [PM-001](tasks/PM-001-calendar-control-dates.md); частичная desktop QA подтверждена, полная приёмка и [PM-013](tasks/PM-013-calendar-waiting-instruction.md) открыты |
@@ -94,6 +99,7 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | F28 | Личный профиль | Управлять данными хозяина отдельно от учётной записи | planned | P2 | [PM-021](tasks/PM-021-private-host-profile.md), NEXT после PM-020 |
 | F29 | Публичный профиль | Показывать только разрешённые сведения и проверяемые сигналы | planned | P2 | [PM-022](tasks/PM-022-public-host-profile.md), после PM-021 |
 | F30 | Путь гостя к первому сообщению | Довести намерение написать до отправленного обращения: auth по месту, без потери черновика | planned | P1 | [PM-023](tasks/PM-023-guest-message-onboarding.md) |
+| F31 | Контекст диалога | Открыть связанный объект и собственный профиль из Messages | planned | P2 | [PM-027](tasks/PM-027-open-property-from-messages.md), [PM-028](tasks/PM-028-open-host-profile-from-messages.md) |
 
 ## Приоритизация и измерения
 
