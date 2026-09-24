@@ -170,6 +170,13 @@ const qaCopy={
   ca:{heroLead:"Afegeix un habitatge i mantén al dia les dates en què està físicament lliure. L’anunci i el calendari d’Airbnb són opcionals.",verifyFirst:"Confirma el correu amb l’enllaç del missatge i torna a iniciar sessió. Revisa també la carpeta de correu brossa.",forgotPassword:"Has oblidat la contrasenya?",titleRequired:"Introdueix el nom de l’habitatge.",titleTooLong:"Fes servir un màxim de 160 caràcters per al nom."},
   ru:{heroLead:"Добавьте объект и укажите даты, когда он физически свободен. Объявление Airbnb и подключение календаря необязательны.",verifyFirst:"Подтвердите email по ссылке в письме, затем войдите. Проверьте также папку «Спам».",forgotPassword:"Забыли пароль?",titleRequired:"Укажите название объекта.",titleTooLong:"Название объекта — не более 160 символов."}
 };
+const profileCopy={
+  en:{navProfile:"Host profile",profileTitle:"Host profile",profileHelp:"Your host name is visible to guests. Your email and login stay private.",profileName:"Public host name",profileSave:"Save name",profileAccount:"Account",profileSaved:"Host name saved."},
+  es:{navProfile:"Perfil de anfitrión",profileTitle:"Perfil de anfitrión",profileHelp:"Los huéspedes pueden ver tu nombre de anfitrión. El email y el usuario de acceso son privados.",profileName:"Nombre público del anfitrión",profileSave:"Guardar nombre",profileAccount:"Cuenta",profileSaved:"Nombre guardado."},
+  ca:{navProfile:"Perfil d'amfitrió",profileTitle:"Perfil d'amfitrió",profileHelp:"Els hostes poden veure el nom d'amfitrió. El correu i l'usuari d'accés són privats.",profileName:"Nom públic de l'amfitrió",profileSave:"Desar el nom",profileAccount:"Compte",profileSaved:"Nom desat."},
+  ru:{navProfile:"Профиль хозяина",profileTitle:"Профиль хозяина",profileHelp:"Имя хозяина видно гостям. Email и логин остаются личными.",profileName:"Публичное имя хозяина",profileSave:"Сохранить имя",profileAccount:"Учётная запись",profileSaved:"Имя хозяина сохранено."}
+};
+Object.entries(profileCopy).forEach(([language,values])=>Object.assign(copy[language],values));
 Object.entries(qaCopy).forEach(([language,values])=>Object.assign(copy[language],values));
 function ruPlural(n,one,few,many){return `${n} ${n%100>=11&&n%100<=14?many:n%10===1?one:n%10>=2&&n%10<=4?few:many}`}
 copy.ru.bedroom=n=>ruPlural(n,"спальня","спальни","спален");
@@ -186,6 +193,8 @@ const closeAuthDialogButton = document.getElementById("close-auth-dialog");
 const hostAuthLinks = document.getElementById("host-auth-links");
 const hostAccountSession = document.getElementById("host-account-session");
 const propertyPanel = document.getElementById("property-panel");
+const hostProfilePanel = document.getElementById("host-profile");
+const hostProfileForm = document.getElementById("host-profile-form");
 const propertyForm = document.getElementById("property-form");
 const hostAccountEmail = document.getElementById("host-account-email");
 const propertiesNode = document.getElementById("host-properties");
@@ -326,7 +335,8 @@ function setAuthenticated(user){
     ...emptyState(),
     authenticated:true,
     accountEmail:String(user?.email || ""),
-    username:String(user?.username || "")
+    username:String(user?.username || ""),
+    profile:user?.profile || null
   };
 }
 
@@ -336,9 +346,14 @@ function renderAuthState(){
   hostAuthLinks.hidden = sessionLoading || ready;
   hostAccountSession.hidden = !ready;
   propertyPanel.hidden = !ready;
+  hostProfilePanel.hidden = !ready;
   hostShortcuts.hidden = !ready;
   hostAccountEmail.textContent = ready ? (state.username || state.accountEmail) : "";
   hostAccountEmail.title = ready ? state.accountEmail : "";
+  document.getElementById("host-profile-email").textContent = ready ? state.accountEmail : "";
+  document.getElementById("host-profile-username").textContent = ready ? state.username : "";
+  if (ready && state.profile) hostProfileForm.elements.displayName.value = state.profile.displayName || "";
+  else hostProfileForm.elements.displayName.value = "";
   if (ready && authDialog.open) closeAuth();
 }
 
@@ -377,6 +392,10 @@ async function syncDashboard(){
   message(tr("loading"));
   try {
     const dashboard = await api("/dashboard");
+    if (dashboard.profile) {
+      state.profile = dashboard.profile;
+      hostProfileForm.elements.displayName.value = dashboard.profile.displayName || "";
+    }
     state.properties = (dashboard.properties || []).map(property => ({
       ...property,
       listing: Array.isArray(property.listings) ? (property.listings[0] || null) : null,
@@ -457,6 +476,29 @@ async function restoreSession(){
 }
 
 openLoginButton.addEventListener("click", () => openAuth("login"));
+hostProfileForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!state.authenticated) return;
+  setFormError(hostProfileForm);
+  setBusy(hostProfileForm, true);
+  try {
+    const profile = await api("/host/profile", {
+      method:"PATCH",
+      body:JSON.stringify({displayName:hostProfileForm.elements.displayName.value.trim()})
+    });
+    state.profile = profile;
+    hostProfileForm.elements.displayName.value = profile.displayName;
+    message(tr("profileSaved"), "success");
+  } catch (error) {
+    setFormError(hostProfileForm, error.message);
+    if (error.status === 401) {
+      state = emptyState();
+      renderAuthState();
+    }
+  } finally {
+    setBusy(hostProfileForm, false);
+  }
+});
 openRegisterButton.addEventListener("click", () => openAuth("register"));
 closeAuthDialogButton.addEventListener("click", closeAuth);
 authModeButtons.forEach(button => button.addEventListener("click", () => openAuth(button.dataset.authMode)));

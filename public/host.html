@@ -60,6 +60,7 @@
 
     <nav class="host-shortcuts" id="host-shortcuts" aria-label="Host tools" hidden>
       <a href="#property-panel" data-host-i18n="navProperties">My properties</a>
+      <a href="#host-profile" data-host-i18n="navProfile">Host profile</a>
       <a href="/messages.html" class="host-messages-link"><span data-msg-i18n="messages">Messages</span><span class="messaging-badge" data-msg-unread hidden></span></a>
     </nav>
 
@@ -116,6 +117,22 @@
       <p class="host-inline-muted" data-msg-i18n="hostSettingHelp">Guests can start a private conversation. Turning this off stops new enquiries; existing conversations stay open.</p>
       <p id="messaging-host-status" role="status" aria-live="polite"></p>
       <button type="button" class="button button-ghost button-small" id="messaging-host-retry" data-msg-i18n="retry" hidden>Retry</button>
+    </section>
+
+    <section class="host-panel host-profile-panel" id="host-profile" hidden>
+      <div class="host-panel-heading">
+        <div><h2 data-host-i18n="profileTitle">Host profile</h2></div>
+        <p data-host-i18n="profileHelp">Your host name is visible to guests. Your email and login stay private.</p>
+      </div>
+      <form class="host-form host-profile-form" id="host-profile-form">
+        <label><span data-host-i18n="profileName">Public host name</span><input name="displayName" required maxlength="120" autocomplete="name" /></label>
+        <button class="button button-small" type="submit" data-host-i18n="profileSave">Save name</button>
+      </form>
+      <div class="host-profile-account">
+        <h3 data-host-i18n="profileAccount">Account</h3>
+        <p><span data-host-i18n="usernameLabel">Username</span>: <span id="host-profile-username"></span></p>
+        <p><span data-host-i18n="emailLabel">Email</span>: <span id="host-profile-email"></span></p>
+      </div>
     </section>
 
     <section class="host-panel" id="property-panel" hidden>
