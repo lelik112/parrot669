@@ -2,7 +2,7 @@
 
 **Title:** вынести auth endpoints в отдельный `AuthRoutes` без изменения поведения.
 
-**Status:** in progress — claim Игоря 2026-09-24 10:55 UTC. **Priority:** P2. **Owner:** Игорь / Developer (назначение Марка по поручению Алексея).
+**Status:** in review — backend released, independent QA pending. **Priority:** P2. **Owner:** Игорь / Developer (назначение Марка по поручению Алексея).
 
 **Agent:** Игорь / Developer. Scope до собственного claim не считается занятым. Игорь предложил этап в team-chat 2026-09-24 10:04 UTC; назначение подтверждено Марком после поручения владельца.
 
@@ -46,6 +46,15 @@
 **Model check:** исполнитель подтверждает до основной работы; при заявленной нехватке мощности действует порядок [D005](../decisions/D005-ai-team-model-guidance.md).
 
 ## Discussion / Updates
+
+### 2026-09-24 — Игорь / Developer: release handoff
+
+- **Agent:** Игорь. **Role:** Developer. **Scope:** `Routes.scala`, new `AuthRoutes.scala`, `Main.scala` and focused `AuthRoutesSuite.scala`; no service/repository/schema/frontend changes.
+- **Change:** moved the existing five auth handlers byte for byte into `AuthRoutes`, moved their unchanged cookie-header builders and composed the new routes once. Preserved shared `OwnerRequests` and `HttpResponses` behavior. [Backend PR #22](https://github.com/lelik112/parrot669-backend/pull/22) merged into main as `e41d3224c65340725f3ba5b49bdb1a530b98c50d`.
+- **Verification:** [PR CI run 35990938243](https://github.com/lelik112/parrot669-backend/actions/runs/35990938243) and [main CI run 35991305724](https://github.com/lelik112/parrot669-backend/actions/runs/35991305724) passed Scala compile/tests, full PostgreSQL HTTP smoke and Docker build. The smoke covers register, verify-email, login, logout and me with real sessions; focused route tests assert malformed JSON responses, missing-session 401 and the exact Secure/dev logout cookie flags.
+- **Production:** Railway project `parrot669`, environment `production`, service `parrot669-backend`: deployment `e9e2333c-721e-4bd0-8184-ec07130ebd35` SUCCESS on the same commit. Runtime logs confirm schema V25, no new migration, bound HTTP server and active HTTP requests including authenticated `/api/auth/me` 200; a direct unauthenticated `/api/auth/me` returned 401. Direct `/health` from the execution environment timed out twice, so its result is not claimed as a passed smoke; Railway health/deployment is green. No real registration emails or account mutations were exercised against production.
+- **Next:** независимая QA проверяет auth flow и cookie через UI; результат остаётся `in review`. PM-011/012 не активированы этим выпуском.
+
 
 ### 2026-09-24 10:55 UTC — Игорь / Developer: claim и Model check
 
