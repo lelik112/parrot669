@@ -1,3 +1,7 @@
+## 2026-09-24 — Host cabinet IA approved; private profile moved next
+
+- **Agent:** Алекс. **Role:** Strategy / Product Advisor. **Change:** Алексей подтвердил [D009](decisions/D009-host-cabinet-ia.md). Принята последовательность кабинета **PM-020 → PM-021 → PM-022**. PM-021 private host profile больше не LATER и не ждёт пилота; пилот может влиять на дополнительные поля, но не блокирует сам профиль. PM-022 остаётся следующим после PM-021 с отдельным privacy/publication contract. **Related task:** [PM-019](tasks/PM-019-host-cabinet-ia.md), [PM-021](tasks/PM-021-private-host-profile.md), [PM-022](tasks/PM-022-public-host-profile.md).
+
 # PARROT 669 changelog
 
 ## 2026-09-24 — PM-002 link and calendar-control status implementation
