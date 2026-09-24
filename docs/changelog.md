@@ -3,6 +3,12 @@
 - **Agent:** Алекс. **Role:** Strategy / Product Advisor. **Change:** Алексей подтвердил [D009](decisions/D009-host-cabinet-ia.md). Принята последовательность кабинета **PM-020 → PM-021 → PM-022**. PM-021 private host profile больше не LATER и не ждёт пилота; пилот может влиять на дополнительные поля, но не блокирует сам профиль. PM-022 остаётся следующим после PM-021 с отдельным privacy/publication contract. **Related task:** [PM-019](tasks/PM-019-host-cabinet-ia.md), [PM-021](tasks/PM-021-private-host-profile.md), [PM-022](tasks/PM-022-public-host-profile.md).
 
 # PARROT 669 changelog
+## 2026-09-24 — D011: контакт доступен из каждого результата поиска
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** Алексей решил, что гость должен всегда иметь PARROT-путь связаться с хозяином объекта из поиска. Принято D011: прежний host-wide opt-in не может блокировать первое обращение; auth, подтверждение email, rate limits и блокировка участника сохраняются. Implementation pending в PM-024.
+- Созданы PM-024 (контакт из каждого результата), PM-025 (съехавшая мобильная CTA), PM-026 (убрать повтор Messages shortcut), PM-027 (открыть карточку жилья из диалога) и PM-028 (открыть свой профиль хозяина из Messages). PM-023 остаётся отдельной задачей о моменте auth и сохранении черновика.
+- **Related docs:** [D011](decisions/D011-contact-always-available.md), [PM-024–PM-028](tasks/README.md), [roadmap](roadmap.md).
+
 ## 2026-09-24 — PM-023 guest message onboarding task
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** Зафиксирована задача P1 на гостевой путь из поиска к первому сообщению: подготовить обращение до входа, потребовать auth перед отправкой, вернуть пользователя к тому же объекту/датам/черновику и сохранить приватность inbox. Кнопка «Написать владельцу» уже есть в поиске и показывается при включённых новых обращениях хозяина. Исполнитель не назначен; задача в NEXT после текущих PM-020/021 claims. **Related task:** [PM-023](tasks/PM-023-guest-message-onboarding.md).
