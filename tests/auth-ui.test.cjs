@@ -65,6 +65,10 @@ function setup(routes = {}, search = '') {
     }
     form.controls.push(element());
   }
+  const profileForm = nodes.get('host-profile-form');
+  profileForm.elements.displayName = element('input');
+  profileForm.controls.push(profileForm.elements.displayName);
+  profileForm.controls.push(element('button'));
   const modes = ['login', 'register'].map(mode => {
     const node = element();
     node.dataset.authMode = mode;
@@ -108,6 +112,30 @@ function setup(routes = {}, search = '') {
 }
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
+
+test('host profile saves public name, keeps account identity private and retains input on a 400', async()=>{
+  let fail = true;
+  const app = setup({
+    '/auth/me':{body:{accountId:'owner-1',email:'private@example.test',username:'my-login',profile:{displayName:'Old host'}}},
+    '/dashboard':{body:{profile:{displayName:'Old host'},properties:[]}},
+    '/host/profile':()=>fail ? {status:400,body:{error:'Invalid name'}} : {body:{parrotId:'PAR-TEST',displayName:'New host',createdAt:'2030-01-01'}}
+  });
+  await settle();
+  assert.equal(app.nodes.get('host-profile').hidden,false);
+  assert.equal(app.nodes.get('host-profile-email').textContent,'private@example.test');
+  assert.equal(app.nodes.get('host-profile-username').textContent,'my-login');
+  const form=app.nodes.get('host-profile-form');
+  assert.equal(form.elements.displayName.value,'Old host');
+  form.elements.displayName.value='New host';
+  await form.emit('submit');
+  assert.equal(form.elements.displayName.value,'New host');
+  assert.equal(app.requests.at(-1).method,'PATCH');
+  assert.deepEqual(app.requests.at(-1).body,{displayName:'New host'});
+  fail=false;
+  await form.emit('submit');
+  assert.equal(form.elements.displayName.value,'New host');
+  assert.equal(app.nodes.get('host-status').textContent,'Host name saved.');
+});
 
 const cityId='locationiq:323126006243';
 const cityBounds={west:2.0524977,south:41.3170353,east:2.2283555,north:41.4679135};
