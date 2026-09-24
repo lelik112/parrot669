@@ -1,1 +1,353 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éí×mxÙ:-jZ.¶›­–)Þ³R2%$õBcc’6†ævVÆöp ¢22##bÓ’Ó#B(	B’×FVÒv÷&¶fÆ÷ræBÒÓ†æFöf` ¢Ò66WFVB´CUÒ†FV6—6–öç2ôCRÖ’×FVÒÖÖöFVÂÖwV–Fæ6RæÖB“¢æWr÷"&V7F—fFVBF6·26''’Ö–æ–×VÒ×7Vff–6–VçBÖöFVÂ÷&V6öæ–ær&V6öÖÖVæFF–öâæB&V6öã²W†V7WF÷'26†V6²—B&Vf÷&RÖ–âv÷&²æBv—Bf÷"F†R&öGV7B÷væW"v†VâF†W’–FVçF–g’æVVBFò–æ7&V6R66—G’âæò&WG&ö7F—fR&V6öÖÖVæFF–öâ—2&WV—&VBf÷"6ö×ÆWFVBv÷&²à¢ÒFFVB´’×FVÒv÷&¶fÆ÷uÒ†’×FVÒæÖB’Â–æ6ÇVF–ærFVÒ&öÆW2Â6÷W&6R&VF–ærÂ6Æ–×2ÂF6²f–VÆG2æB†æFöfg2à¢ÒFFVB7V6–f–2&V6öÖÖVæFF–öç2f÷"7F—fR÷ÆææVBæB–×ÆVÖVçFF–öâF6·3²f÷"–â×&Wf–Wr—FV×2F†W’Ç’FòF†RæW‡B7FWÂæ÷BF†R&–÷"–×ÆVÖVçFF–öâà¢Ò–v÷"6öæf—&ÖVB†—2æÖR–âFVÒÖ6†Bâ†—2†æFöfb7FFW2F†R7W'&VçB&Vf7F÷"—26ö×ÆWFRæBÒÓw2&VÆWfçB&6¶VæB&V—2&VÆV6VC²FVæ—2w26Æ–Ò÷7F'B—27F–ÆÂVæF–ærà¢Ò&V6÷&FVB–v÷"w2&VÖ–æ–ærW‡G&7F–öâ7VvvW7F–öç22ÒÓóó"–âÄDU"Âv—F‚FWVæFVæ6–W2æB&V†f–÷"×&W6W'f–ær66WFæ6R7&—FW&–²æòFWfVÆ÷W"6Æ–Ò÷"76–væÖVçB—2–×Æ–VBâCb&V6÷&G2F†R6WVVæ6–ærFV6—6–öâà¢Ò¢¤vVçC¢¢¢	Í¢â¢¥&öÆS¢¢¢&öGV7BÖævW"â¢¤6†ævS¢¢¢&V6÷&FVBCRÂWFFVBFVÒ÷&öGV7B÷F6²v÷&¶fÆ÷ræB7W'&VçBÒÓ†æFöfbâ¢¥&VÆFVBF6³¢¢¢Fö72÷F6·2õÒÓÖ6ÆVæF"Ö6öçG&öÂÖFFW2æÖC²Fö72öFV6—6–öç2ôCRÖ’×FVÒÖÖöFVÂÖwV–Fæ6RæÖBà ¢22##bÓ’Ó#B(	B76–vâ6fVBÖFFRfW&–f–6F–öâæB÷VâFVÒ6†@ ¢Ò¢¤vVçC¢¢¢	Í ¢Ò¢¥&öÆS¢¢¢&öGV7BÖævW ¢Ò¢¤6†ævS¢¢¢76–vâÒÓFòFVæ—2föÆÆ÷v–ærF†R÷væW"w2–ç7G'V7F–öã²&V6÷&B6öæ7&WFR6öçG&7Bög&öçFVæB7F'F–ær66÷RæB&WV—&RF—&V7B&6¶VæB÷fW&Æ6ö÷&F–æF–öâv—F‚F†RFWfVÆ÷W"7F–ÆÂ&Vf7F÷&–ærâ76–væÖVçB—2&V6÷&FVC²FVæ—2w26Æ–ÒæBF†R÷F†W"FWfVÆ÷W"w26¶æ÷vÆVFvVÖVçB&RVæF–ærà¢Ò¢¥&VÆFVBF6³¢¢¢µÒÓÒ‡F6·2õÒÓÖ6ÆVæF"Ö6öçG&öÂÖFFW2æÖB’à¢ÒFB·FVÒÖ6†BæÖEÒ‡FVÒÖ6†BæÖB’f÷"–æf÷&ÖÂvVçB×FòÖvVçBF—67W76–öâÂ–æ6ÇVF–ær7&—F–6—6Òöb&ö6W76W2æBÆVFW'6†—â&VBFG&W76VBÖW76vW2öâ7F'B÷&W7VÖRæB†æFöfc²&V6÷&B7F–öæ&ÆRw&VVÖVçG2–âF6·2öFV6—6–öç2âF†Rf–ÆRFöW2æ÷BWFöÖF–6ÆÇ’v¶RvVçG2à¢ÒW‡FVæB´CÒ†FV6—6–öç2ôC×&W÷6—F÷'’Ö6ö÷&F–æF–öâæÖB’ÂWFFRFVÒö6öçFW‡BæB&V6öæ6–ÆR&öFÖ÷7FGW2v—F‚FVæ—2w2Ç&VG’×V&Æ—6†VBÒÓBóRWf–FVæ6RâF†÷6Rf—†W2&VÖ–â–â&Wf–Ws²æòæWr&W7VÇB—276W'FVBà¢ÒFö7VÖVçFF–öâöæÇ“¢æò–×ÆVÖVçFF–öâÂ–æg&7G'V7GW&R÷"&öGV7BÖ6öçG&7B6†ævR–âF†—2WFFRà ¢22##bÓ’Ó#B(	B†÷7BFG&W72Æöö·WæB6Æ÷6VBÖFFRT ¢Ò¢¤vVçC¢¢¢	M]Ý¢Ò¢¥&öÆS¢¢¢FWfVÆ÷W ¢Ò¢¤6†ævS¢¢¢&W6VçB6—G’÷7G&VWB6öÖ&ö&÷†W22Æ6R6V&6†W2†G—S×6V&6†Â6V&6‚æÖW2ô”G2æBG&ç6ÆFVB6V&6‚Æ&VÇ2’Fò&VGV6R6ö×WF—F–öâv—F‚6öçF7BÖFG&W72WFöf–ÆÂâ¶VWWFö6ö×ÆWFSÖöffÂæF—fR¶W–&ö&B÷F÷V6‚&V†f–÷"æBF†Ræ÷&ÖÆ—¦VB&÷f–FW"6VÆV7F–öââFWFV7B6†ævRÖöæÇ’WFöf–ÆÂæB&V¦V7Bf—6–&ÆRfÇVW2F†BæòÆöævW"ÖF6‚F†R6VÆV7FVB6÷VçG'’ö6—G’÷7G&VWB&Vf÷&R6f–ærâFòæ÷B&WVBÆöö·W2öâæ÷&ÖÂ6†ævRföÆÆ÷v–ær–çWBà¢Ò¢¥&VÆFVBF6³¢¢¢µÒÓBò%TrÓ5Ò‡F6·2õÒÓB×7G&VWBÖWFöf–ÆÂæÖB’ÂµÒÓRò%TrÓEÒ‡F6·2õÒÓRÖ6Æ÷6VBÖFFW2Ö6÷’æÖB’à¢Ò&VæÖRÖçVÂ6Æ÷7W&W2FòæWWG&Â(	Ä6Æ÷6VBFFW>(	Òò*½	}­½-½RM-¼+²–âTâôU2ô4õ%S²&VÖ÷fRW'&÷"ÖÆ–¶R7G–Æ–ærÂW‡Æ–âF†R7F–öâ&Vf÷&R6f–ærÂÆ&VÂf—'7BöÆ7B–æ6ÇVFVBæ–v‡G2ÂF—7F–æwV—6‚6fVB6Æ÷7W&W2ÂæB6†÷r6fRöFVÆWFR6öæf—&ÖF–öâæW‡BFòF†Rf÷&Òâ¶VWW†—7F–ær’FFW2Â&–6W2æBf–Æ&–Æ—G’&V†f–÷"à¢Òbg&öçFVæBFW7G272Â–æ6ÇVF–ær6—‚FFVB66W26÷fW&–ær6–ÆVçBWFöf–ÆÂ–â7&VFRöVF—BÂ¶W–&ö&B6VÆV7F–öâæBÆÂf÷W"6Æ÷6VBÖFFR7FFRG&ç6—F–öç2âW†—7F–ær÷fW&ÆÂ–æ6ÇW6—fRÖFFRÂ&–6RÂF÷V6‚æB&÷‡’FW7G272à¢Ò'&÷w6W"ÖæF—fRWFöf–ÆÂv—F‚6fVBFG&W72æB&VÂÖö&–ÆR6f&’&VÖ–âVçfW&–f–VC²F†Rf–Æ&ÆR6Æ÷VB†÷7BvR&WV—&W26–vâÖ–ââ6V&6‚6VÖçF–72&RF&vWFVBÖ—F–vF–öâÂæ÷B&ööbF†BWfW'’'&÷w6W"7W&W76W2—G2æF—fR÷Wâ&÷F‚F6·2&VÖ–â–â&Wf–Wrf÷"–æFWVæFVçBâ6‡&öÖ—VÒw2·6V&6‚f–VÆB'6W%Ò†‡GG3¢òö6‡&öÖ—VÒævöövÆW6÷W&6Ræ6öÒö6‡&öÖ—VÒ÷7&2ò²÷&Vg2ö†VG2öÖ–âö6ö×öæVçG2öWFöf–ÆÂö6÷&Rö'&÷w6W"öf÷&Õ÷'6–ær÷6V&6…öf–VÆE÷'6W"æ62’–æf÷&×2F†—26†ö–6S²—B—2æ÷B7&÷72Ö'&÷w6W"wV&çFVRà¢Òg&öçFVæBÖöæÇ’6†ævRâ&6¶VæBÂÖ–w&F–öç2Â7–æ6‡&öæ—¦F–öâÂ6VÆV7FVBÖFFRfW&–f–6F–öâ…ÒÓ’æBW‡FW&æÂÖÆ–æ²V&Æ–6F–öâ…ÒÓ"’&RVçF÷V6†VBGW&–ær&ÆÆVÂ&6¶VæB&Vf7F÷&–ærâ&VÆV6VBf–µ"35Ò†‡GG3¢òöv—F‡V"æ6öÒöÆVÆ–³"÷'&÷Ccc’÷VÆÂó2’ÂÖ–âVƒƒ“3vCVvF&cs6cvc&#3F3c6““Ssƒâ"öÖ–â4’æB6Æ÷VFfÆ&R&öGV7F–öâ'V–ÆBsSC3“3c76VBâg&W6‚Æ—fR†÷7BDôÒW‡÷6W2F†RæWr6V&6‚–çWBG—W2öæÖW2æB%RÆ&VÇ3²WF†VçF–6FVB–çFW&7F–öç2&VÖ–âVçfW&–f–VBâF—&V7B76WB…EE6†V6·2&V6V—fVBC2g&öÒF†—2Vçf—&öæÖVçBæB&Ræ÷B6÷VçFVB27V66W76gVÂ6Öö¶Rà ¢22##bÓ’Ó#B(	BæÖVBFVÒæBÖæFF÷'’6†ævR–FVçF–f–6F–öà ¢Ò¢¤vVçC¢¢¢	Í ¢Ò¢¥&öÆS¢¢¢&öGV7BÖævW ¢Ò¢¤6†ævS¢¢¢FBF†R6æöæ–6ÂFVÒ&÷7FW"æB&÷VæF&–W2–âFö72÷FVÒæÖF¢	½]­ò7G&FVw’Â	Í¢òÒÂ	M]ÝòFWfVÆ÷W"Â	íòæB6V6öæBFWfVÆ÷W"v†÷6RæÖR—2VæF–ærâ&WV—&RvVçBõ&öÆRõ66÷R&Vf÷&Rv÷&²æBvVçBõ&öÆRô6†ævRõ&VÆFVBF6²–â6öÖÖ—BÖW76vW2Â"FW67&—F–öç2ÂF6²×7FGW2WFFW2æB6†ævVÆörVçG&–W2â&V6÷&BÒw2&W7öç6–&–Æ—G’Fò&W6W'fRWF†÷'6†—Â&V6öç2æBFV6—6–öç2gFW"6–væ–f–6çB6†ævW2à¢Ò¢¥&VÆFVBF6³¢¢¢µÒÓ•Ò‡F6·2õÒÓ’×FVÒÖ–FVçF—G’æÖB¢Ò¢¤FV6—6–öã¢¢¢´CEÒ†FV6—6–öç2ôCB×FVÒÖ–FVçF—G’æÖB’Â66WFVBg&öÒF†R÷væW"w2–ç7G'V7F–öââ	½]­&W&VBF†R&÷÷6Ã²	Í¢&V6÷&G2æBV&Æ—6†W2F†RFö7VÖVçFF–öâà¢Ò6Æ&–g’&÷&—2w2–FVçF—G’–âF†RW†—7F–ærW6VBF6²v—F†÷WB6Æ–Ö–ær&W7F'B÷"7V66W76gVÂ6†V6·2âVæ¶æ÷vâFWfVÆ÷W"æÖW2Â6Æ–×2æB†—7F÷&–6ÂWF†÷'2&Ræ÷B–çfVçFVBâÆ–6F–öâ&V†f–÷"—2Væ6†ævVBà¢Ò&W6W'fRFVæ—2w26öæ7W'&VçB6Æ–ÒöbÒÓBóR†C†F3fF&’æB&VfÆV7BF†V—"g&öçFVæBÖöæÇ’–â&öw&W767FFR–âF†R&öFÖ÷7FGW2âF†—2&V6÷&G27F'Böbv÷&²Âæ÷B6ö×ÆWFVBf—†W2÷"&VÆV6Rà ¢22##bÓ’Ó#B(	B&öGV7B6ö÷&F–æF–öâæB6fVBÖFFRfW&–f–6F–öâ&WV—&VÖVç@ ¢ÒW7F&Æ—6‚6†&VB&W÷6—F÷'’v÷&¶fÆ÷rf÷"&÷F‚g&öçFVæBæB&6¶VæBv÷&³¢&öFÖöfVGW&R&Vv—7G'’ÂF6²÷væW'6†—æBF—67W76–öâÂFV6—6–öâÆöræB7FGW2&W÷'BâÓ¢Ö&²ò	Í¢â7G&FVv—7C¢ÆW‚ò	½]­Â7W'&VçFÇ’v—F†÷WB&W÷6—F÷'’66W72â÷F†W"vVçBæÖW2æB6Æ–×2&VÖ–â÷VâVçF–Â6öæf—&ÖVBà¢Ò&V6÷&BF†R÷væW"w266WFVB6Æ&–f–6F–öã¢6VÆV7B6öçG&öÂFFW2–â%$õBÂ6fRF†RFFW2ö7F–öâæB–æ—F–Â7FFRÂ6†ævRF†VÒ–â—&&æ"ÂF†VâfW&–g’F†BW†7B6†ÆÆVævRâF†—2—2&öGV7B&WV—&VÖVçBæB&6¶ÆörVçG'’†ÒÓò%TrÓV’Â¢¦æ÷B&VÆV6RöbF†R6÷'&V7FVB–×ÆVÖVçFF–öâ¢¢âF†R†—7F÷&–6ÂcVçG'’&VÆ÷r&VÖ–ç2–çF7Bà¢ÒG&6²Æ–æ²V&Æ–6F–öâgFW"fW&–f–6F–öâ2&÷÷6Âv—F‚Vç&W6öÇfVBFWF–Ç2†ÒÓ&ò$ôET5BÓ’Â&F†W"F†âFW67&–&–æræWrvFR27W'&VçB&V†f–÷"à¢Ò&–÷&—F—¦RF†RVæf–æ—6†VBGvòÖ66÷VçB6öçF7B66Væ&–òÂ7W'&VçB†÷7BT’f–æF–æw2æB&÷VæFVBVÖ–ÂöÖö&–ÆR66WFæ6Râ6W&FR–×ÆVÖVçFF–öâÂFWÆ÷–ÖVçBæB–æFWVæFVçBWf–FVæ6Rà¢Ò6÷'&V7BF†R&öGV7BÖ6öçFW‡B7VÖÖ'’öb6V&6‚6÷fW&vRFò–æ6ÇVFRW†—7F–ærÖçVÂ%$õB&Æö6·2âæò'VçF–ÖR&V†f–÷"ÂÆ–6F–öâ6öFRÂ6öæf–wW&F–öâ÷"–æg&7G'V7GW&R6†ævW2&R'BöbF†—2Fö7VÖVçFF–öâWFFRà ¢22##bÓ’Ó#B(	BW‡G&7B†÷W6–ær÷W&F–öç2æB&öf–ÆRf–Ww0 ¢ÒÖ÷fRf–Æ&–Æ—G’öÖçVÂÖ&Æö6²&÷WFW2Â6W'f–6RæB&W÷6—F÷'’–çFò6öÒç'&÷Ccc’æ†÷W6–æv†f–Æ&–Æ—G•&÷WFW6Âf–Æ&–Æ—G•6W'f–6VÂf–Æ&–Æ—G•&W÷6—F÷'–òFöö&–Tf–Æ&–Æ—G•&W÷6—F÷'–’â&W6W'fR†ÆbÖ÷Vâ’FFW2Âæ–v‡FÇ’×&–6R†æFÆ–ærÂfÆ–FF–öâö÷væW'6†—÷&FW"æB÷fW&ÆÖ6öæfÆ–7B&V†f–÷"à¢ÒÖ÷fR&÷W'G’æBW‡FW&æÂÖÆ—7F–ær÷W&F–öç2–çFòF†R6ÖR6¶vRw2&÷W'G•&÷WFW6Â&÷W'G•6W'f–6VæB&÷W'G•&W÷6—F÷'–â&W6W'fRöÖ—GFVBF—FÆRöFG&W72WFFW2Â6æöæ–6Â—&&æ"U$Ç2æBÆ–æ²f—6–&–Æ—G“²¶VWÆ—7F–ærö6ÆVæF"FVÆWF–öâFöÖ–2æB&WF–âÖW76v–ær†—7F÷'’v†Vâ&÷W'G’—2FVÆWFVBà¢ÒÖ÷fR÷væW"ÖF6†&ö&BæBV&Æ–2×&öf–ÆR76VÖ&Ç’–çFò6öÒç'&÷Ccc’ç&öf–ÆW6†&öf–ÆU&÷WFW6Â&öf–ÆU6W'f–6VÂ&öf–ÆU&W÷6—F÷'–òFöö&–U&öf–ÆU&W÷6—F÷'–’â&W6W'fR÷væW"ÖöæÇ’FG&W72ö6ÆVæF"FFÂæöç–Ö÷W2V&Æ–2¥4ôâÂÆ—7F–ær66÷–æræBÆVv7’fW&–f–6F–öâW‡—'’6VÖçF–72à¢Ò6†&RF†RW†—7F–ær6öö¶–RöWF†VçF–6F–öâÂUT”BæB¥4ôâ&WVW7B†æFÆ–ærF‡&÷Vv‚‡GGä÷væW%&WVW7G6²¶VW&W7öç6RöW'&÷"Ö–ær–â‡GG&W7öç6W6æB6†&VBÖöFVÇ2–âFöÖ–æâÖ–æ6ö×÷6W2F†RW‡G&7FVBÖöGVÆW2â’F‡2Âv÷&¶W"f÷'v&F–ærÂ5ÂæBG&ç67F–öâ&÷VæF&–W2&RVæ6†ævVC²æòg&öçFVæB÷"FF&6RÖ–w&F–öâ—2&WV—&VBâÖW76v–ærÂ6ÆVæF"Ö6öçG&öÂfW&–f–6F–öâæB6ÆVæF"7–æ6‡&öæ—¦F–öâ&WF–âF†V—"W†—7F–ær–×ÆVÖVçFF–öâà¢ÒFB#fö7W6VBFW7G3¢æ–æRf–Æ&–Æ—G’&÷WFR÷6W'f–6RFW7G2Â6—‚&÷W'G’öÆ—7F–ærFW7G2†f÷W"&÷WFRæBGvò÷7Fw&U5ÂFW7G2’ÂæB6—‚&öf–ÆRFW7G2â6÷fW"WF‚÷fÆ–FF–öâ÷&FW"ÂW†7BW'&÷'2ô¥4ôâÂ÷fW&Æ6öç7G&–çG2ÂF6‚6VÖçF–72ÂFöÖ–2FVÆWF–öâ&öÆÆ&6²ÂÖW76v–ærÖ†—7F÷'’&WFVçF–öâæBV&Æ–2&—f7’à¢Ò&VÆV6VB–âF‡&VR"öÖ–âÔ4’×fW&–f–VB7FW3¢f–Æ&–Æ—G’SVcƒ3vƒƒBFW7G2’Â&÷W'F–W2öÆ—7F–æw2#V3&&ƒ“FW7G2’Â&öf–ÆW2c–C†Svƒ“bFW7G2’âWfW'’7FvR76VBgVÆÂ÷7Fw&U5Â…EE6Öö¶RæBFö6¶W"'V–ÆBâf–æÂ¶Ö–â4’3S“cCSSC#s…Ò†‡GG3¢òöv—F‡V"æ6öÒöÆVÆ–³"÷'&÷Ccc’Ö&6¶VæBö7F–öç2÷'Vç2ó3S“cCSSC#s‚’—2w&VVã²&–Çv’FWÆ÷–ÖVçBs63V6#Ó#cSrÓC–3RÖ&fC2Ö#&S–#s&&F6F—25T44U52öâc–C†Sv##&Cf#c&3cFVVV6#“Sƒ&ccc“fÂv—F‚fÇ—v’Væ6†ævVBBc#Bà¢ÒV–v‡B&VBÖöæÇ’Æ—fR&6¶VæB6†V6·276VBâ&—fFRö×WFF–öâ6÷fW&vR&â–â—6öÆFVB4’âF†Rg&öçFVæB&÷‡’6†V6²v2&Æö6¶VB'’6Æ÷VFfÆ&RC2óg&öÒF†—2Vçf—&öæÖVçC²v÷&¶W"'VçF–ÖRv2æ÷B6†ævVBâ6VR&öGV7BÖ6öçFW‡Bf÷"F†R6ö×ÆWFR&VÆV6RWf–FVæ6Rà ¢22##bÓ’Ó#2(	BW‡G&7BF†R&6¶VæB6V&6‚ÖöGVÆP ¢ÒÖ÷fRf–Æ&–Æ—G’6V&6‚æBFF&6RÖ&6¶VB6÷VçG'’ö6—G’F—66÷fW'’g&öÒF†RÆ&vRÆVv7’&÷WFW2÷6W'f–6R÷&W÷6—F÷'’–çFòF†R–æFWVæFVçB6öÒç'&÷Ccc’ç6V&6†6¶vRà¢ÒÖ÷fR6V&6‚ÖöæÇ’ÖöFVÇ3²¶VWF†R6÷VçG'’EDò6†&VBv—F‚vVö6öF–ærâ&WW6RF†RVæ6†ævVB…EE&W7öç6RöW'&÷"Ö–ærF‡&÷Vv‚‡GG&W7öç6W6à¢Ò&W6W'fR’F‡2æB¥4ôâÂ5Â÷VW'’6÷VçBÂ†ÆbÖ÷Vâ6÷fW&vRÂfÆ–FF–öâ÷&FW"Â&÷W'G’6ÆVæ–ærfVW2ÂF÷FÂ×&–6Rf–ÇFW&–ær÷6÷'F–æræB6V&6†&ÆR&÷W'F–W2v—F†÷WBW‡FW&æÂÆ–æ·2âæòÖ–w&F–öâ÷"&öGV7B&V†f–÷"6†ævRà¢ÒFB6WfVâfö7W6VB&÷WFR÷6W'f–6R6öçG&7BFW7G2Æöæw6–FRF†RW†—7F–ærgVÆÂÖÆ–6F–öâ÷7Fw&U5Â6Öö¶RæBFö6¶W"'V–ÆBâ¶VWÖW76v–æræBF†RæWr6ÆVæF"Ö6öçG&öÂfW&–f–6F–öâ–×ÆVÖVçFF–öâ7G'V7GW&ÆÇ’Væ6†ævVBà¢Ò&VÆV6VB2&6¶VæBSVcV¢"öÖ–â4’w&VVâv—F‚sRFW7G2Â÷7Fw&U5Â6Öö¶RæBFö6¶W#²&–Çv’FWÆ÷–ÖVçBfCc†#ƒ‚ÖCc#RÓCc2Ö&sBÖ3#ffƒc#ƒs65T44U52Â66†VÖc#BÂFVâF—&V7B÷&÷†–VB&VBÖöæÇ’&öGV7F–öâ6†V6·276VBà ¢22##bÓ’Ó#2(	BW‡G&7B6†&VB&6¶VæBW'&÷'0 ¢ÒÖ÷fRF†RVæ6†ævVB6W'f–6TW'&÷&EB÷WBöb'&÷E6W'f–6Rç66Æ–çFò—G2÷vâf–ÆRÂ&W6W'f–ær—G26¶vRæBÆÂ’öW'&÷"&V†f–÷"à¢Ò¶VWF†—2ÖV6†æ–6Â&Vf7F÷"6W&FRg&öÒF†R&V6VF–ær6ÆVæF"–çFVw&—G’f—ƒ²fÆ–FFR—BF‡&÷Vv‚F†R6ö×ÆWFR&6¶VæB4’æB&öGV7F–öâFWÆ÷–ÖVçB6†V6·2à¢Ò&VÆV6VB2&6¶VæBC3sSsV¢"öÖ–â4’w&VVâv—F‚c‚FW7G2Â÷7Fw&U5Â6Öö¶RæBFö6¶W#²ÖF6†–ær&–Çv’FWÆ÷–ÖVçB5T44U52æB6—‚Æ—fR’6†V6·276VBà ¢22##bÓ’Ó#2(	B&W6W'fR&W6W'fF–öç2v†Vâ”6Â6öçFVçB—2–æ6ö×ÆWFP ¢Ò&V¦V7B–æ6ö×ÆWFR6ÆVæF"VçfVÆ÷W2æBVæ&Ææ6VBöæW7FVBWfVçB&÷VæF&–W2&Vf÷&R&WÆ6–ær–×÷'FVBWfVçG2Â–æ6ÇVF–ærÖÆf÷&ÖVB&W7öç6W2FVÆ—fW&VBv—F‚…EE#à¢Ò&W6W'fRF†R&Wf–÷W2&W6W'fF–öâ6æ6†÷BæBÆ7B×7V66W72F–ÖW7F×öâ'6Rf–ÇW&Râ6ö×ÆWFRV×G’6ÆVæF"7F–ÆÂ6ÆV'2öÆBWfVçG2æ÷&ÖÆÇ’à¢ÒFB'6W"&Vw&W76–öâFW7G2æBVæB×FòÖVæB÷7Fw&U5Âô’6Öö¶R6†V6·2f÷"ÖÆf÷&ÖVBfVVG2Â6æ6†÷B&W6W'fF–öâÂ6V&6‚&Æö6¶–ærÂfÆ–BV×G’fVVG2æB&V6÷fW'’à¢Ò¶VW—&&æ"U$ÂfÆ–FF–öâÂWfVçB6Æ76–f–6F–öâæBF†R6W&FR6ÆVæF"Ö6öçG&öÂfW&–f–6F–öâv÷&¶fÆ÷rVæ6†ævVBâæòFF&6RÖ–w&F–öâà¢Ò&VÆV6VB2&6¶VæB&6V&F¢"öÖ–â4’w&VVâv—F‚c‚FW7G2Â÷7Fw&U5Â6Öö¶RæBFö6¶W#²ÖF6†–ær&–Çv’FWÆ÷–ÖVçB5T44U52æB6—‚Æ—fR’6†V6·276VBà ¢22##bÓ’Ó#2(	B—&&æ"6ÆVæF"6öçG&öÂfW&–f–6F–öà ¢ÒFB÷væW"ÖöæÇ’7F'Bô6†V6²fW&–f–6F–öâæB6ÆV"&WV—&VB÷VæF–ær÷fW&–f–VBö&Æö6¶VB7FFW2Â&WG'’FVFÆ–æW2æBGFV×B6÷VçG2–âTâôU2ô4õ%Râ7FGW2WFFW2&W6W'fRVç6fVB&÷W'G’öFFR÷&–6RVF—G2à¢Ò&6¶VæBc#B7F÷&W2g&W6‚&6VÆ–æRÂGFV×G2æBW'6—7FVçB¦ö'2â6†V6²–ÖÖVF–FVÇ’æBB³Rò³ò³#Ö–çWFW3²F‡&VRf–ÆVBGFV×G2&Æö6²fW&–f–6F–öâf÷"#B†÷W'2â–æ—F–Â6†ævW2†fR3ÖÖ–çWFRFVFÆ–æRâ&VÖ÷f–ær÷&V6öææV7F–ær6ÆVæF"FöW2æ÷B6ÆV"—G2&÷W'G’w26ööÆF÷vâà¢Ò&WW6RF†RW†—7F–ær”6ÂfWF6†W"÷'6W"v—F†÷WB6†æv–ær6ÆVæF"6öææV7F–öâÂÆ—7F–ærÔ”BÖF6†–ærÂ7–æ6‡&öæ—¦F–öâÂ–×÷'G2ÂVæ&ÆRöF—6&ÆR÷"FVÆWF–öââfW&–f–6F–öâFöW2æ÷BvFRW†—7F–ær6V&6‚÷"f–Æ&–Æ—G’à¢ÒöæÇ’f–Æ&–Æ—G’&ævW26÷VçC²T”BöÖWFFFæö—6RæBÖÆf÷&ÖVBfVVG2Fòæ÷Bâ6†ævVB6÷W&6R–çfÆ–FFW2fW&–f–6F–öââç’f–Æ&–Æ—G’6†ævR6â72Â–æ6ÇVF–ærâVç&VÆFVB&W6W'fF–öã²”6Â6ææ÷B&÷fRv†òVF—FVB—BâF†R&FvR6öæ6W&ç26ÆVæF"6öçG&öÂÂæ÷B–FVçF—G’÷"ÆVvÂ&÷W'G’÷væW'6†—à¢ÒFB÷7Fw&U5Â6öæ7W'&Væ7’ö6ööÆF÷vâô…EEFW7G2Â6æ6†÷BFW7G2æBg&öçFVæB÷öÆÆ–ær÷&÷‡’&Vw&W76–öç2âgVÆÂ&6¶VæB6öçG&7BæBÆ–Ö—G3¢'&÷Ccc’Ö&6¶VæBöFö72ö6ÆVæF"Ö÷væW'6†—×fW&–f–6F–öâæÖFà ¢22##bÓ’Ó#2(	BvVæW&Âf—†W2æB77v÷&B&V6÷fW' ¢ÒFG&W72%TrÓó"óbóró‚óóó#¢&V¦V7B–çfÆ–B6V&6‚'VFvWG2Â&W&VæFW"&W7VÇG2öâÆæwVvR6†ævW2Â6Æ&–g’v†öÆR×7F’&–6–æræB÷F–öæÂ—&&æ"W6RÂÖ¶Rf÷&ÒfÇVW2&VF&ÆRÂf—‚'W76–â66—G’ÇW&Ç2æBW‡Æ–âVÖ–ÂfW&–f–6F–öâà¢ÒÆWB÷væW'2&VæÖRW†—7F–ær&÷W'F–W2F‡&÷Vv‚F†V—"6†&7FW&—7F–73²¶VW÷væW'6†—6†V6·2æB&W6W'fRFG&W76W2Âf–Æ&–Æ—G’æB–çFVw&F–öç2âöÆFW"UB–ÆöG26öçF–çVRFò&W6W'fRF†RæÖRà¢Ò%TrÓS¢FBÆö6Æ—¦VB&V6÷fW'’vRÆ–æ¶VBg&öÒ&÷F‚Æöv–â67&VVç2æB&VÂ&W6VæB&W6WBVÖ–Ç2W6–ærF†RW†—7F–ærFö¶VâF&ÆRâ6–ævÆR×W6R3ÖÖ–çWFRÆ–æ·2ÂFF&6R—77Væ6RÆ–Ö—G2æBFöÖ–26W76–öâ÷Fö¶Vâ&Wfö6F–öâ&÷FV7B&V6÷fW'’âæòWFöÖF–2Æöv–â÷"66÷VçBVçVÖW&F–öâ&W7öç6Rà¢Ò6W&–Æ—¦RÆöv–â÷fW&–f–6F–öâ6W76–öâ7&VF–öâv—F‚&W6WBÂ6ò6öæ7W'&VçBöÆB7&VFVçF–Â6ææ÷B7W'f—fR&Wfö6F–öââFö¶Vç27F’÷WBöbU$ÂVW&–W2Â'&÷w6W"7F÷&vRæBÆöw2âæòÖ–w&F–öâ÷"æWr7&VFVçF–Ç2&WV—&VBà¢ÒFB÷7Fw&U5Âô…EEÂ&VæÖR6Öö¶RæB'&÷w6W"Ö6öçG&öÆÆW"&Vw&W76–öâ6†V6·2â&W6W'fRF†R&ÆÆVÂvVöÆö6F–öâf—†W2æBF†V—"6V&6‚FW7G2à¢Ò&V6÷fW'’FVÆ—fW'’W6W2&÷VæFVB–âÖÖVÖ÷'’VWVS²W6W'26â&WG'’–bFVÆ—fW'’f–Ç2÷"&W7F'B–çFW''WG2—BâÖW76vRæ÷F–f–6F–öâFVÆ—fW'’&VÖ–ç2GW&&ÆRà¢Ò&VÆV6VB&6¶VæB3–c6c“&æBg&öçFVæB&S–F#sf¢Ö–â4’76W2ƒS&6¶VæBFW7G2ÇW2÷7Fw&U5Â6Öö¶RôFö6¶W#²“g&öçFVæBFW7G2’Â&–Çv’æB6Æ÷VFfÆ&RFWÆ÷–ÖVçG27V66VVBâÆ—fRF]µãkh‘éì¶»§q«^u•ÁÌ¥ÑÌÙ¥Í¥‰±”±…‰•°…¹UHÕ¹¥Ð•Ù•¸Ý¡•¸™¥±±•¸(´µÁÑä½Ý¹•È‘…Ñ”½¹ÑÉ½±ÌÍ¡½Ü„±½…±¥é•¡¥¹Ð…¹…±•¹‘…È¥½¸Ý¥Ñ¡½ÕÐÉ•±å¥¹œ½¸¹…Ñ¥Ù”‘…Ñ”Á±…•¡½±‘•ÉÌ¸(´9…Ñ¥Ù”‘…Ñ”Á¥­•ÉÌ…¹¥¹±ÕÍ¥Ù”µ¹¥¡ÐÍ•µ…¹Ñ¥Ì…É”ÁÉ•Í•ÉÙ•¸((ŒŒ€ÈÀÈØ´Àä´ÈÌƒŠP%¹±ÕÍ¥Ù”½Ý¹•È‘…Ñ”É…¹•Ì((´=Ý¹•È…Ù…¥±…‰¥±¥Ñä…¹µ…¹Õ…°‰±½­Ì¹½Ü¥¹±Õ‘”Ñ¡”Í•±•Ñ•±…ÍÐ¹¥¡Ð°Ý¥Ñ •áÁ±¥¥Ð±…‰•±Ì…¹Õ¥‘…¹”¥¸…±°™½ÕÈ±…¹Õ…•Ì¸(´Í¥¹±”µ¹¥¡ÐÁ•É¥½…¸ÕÍ”Ñ¡”Í…µ”‘…Ñ”¥¸‰½Ñ ™¥•±‘Ì¸(´½¹Ù•ÉÐ‘…Ñ•Ì½¹±ä…ÐÑ¡”¡½ÍÐU$‰½Õ¹‘…ÉäìA$½‘…Ñ…‰…Í”É…¹•Ì…¹Õ•ÍÐ¡•­½ÕÐÉ•µ…¥¸•á±ÕÍ¥Ù”¸(´á¥ÍÑ¥¹œÁ•É¥½‘ÌÉ•Ñ…¥¸Ñ¡•¥È½Ù•É•¹¥¡ÑÌ…¹ÁÉ¥•Ì¸¥ÍÁ±…ä°•‘¥Ð°Í…Ù”…¹‘•±•Ñ¥½¸½¹™¥Éµ…Ñ¥½¸ÕÍ”½¹Í¥ÍÑ•¹Ð¥¹±ÕÍ¥Ù”‘…Ñ•Ì¸(´I•É•ÍÍ¥½¸Ñ•ÍÑÌ½Ù•ÈÍ¥¹±”¹¥¡ÑÌ°É•Á•…Ñ•Í…Ù•Ì°µ½¹Ñ ½å•…È½±•…Àµ‘…ä‰½Õ¹‘…É¥•Ì…¹‘…Ñ”¡…¹•Ì…É½Õ¹‘…å±¥¡ÐÍ…Ù¥¹œÑ¥µ”¸((ŒŒ€ÈÀÈØ´Àä´ÈÌƒŠP½Õ¹ÑÉä…¹¥ÑäÍ•…É ((´Õ•ÍÐÍ•…É ¹½ÜÉ•ÅÕ¥É•Ì‰½Ñ ½Õ¹ÑÉä…¹¥Ñä¸(´½Õ¹ÑÉä½ÁÑ¥½¹Ì½µ”™É½´‘¥ÍÑ¥¹ÐÁÉ½Á•ÉÑä½Õ¹ÑÉ¥•Ì¥¸A½ÍÑÉ•ME0ì¥Ñä½ÁÑ¥½¹Ì½µ”™É½´‘¥ÍÑ¥¹ÐÁÉ½Á•ÉÑä¥Ñ¥•Ì™½ÈÑ¡”Í•±•Ñ•½Õ¹ÑÉä¸(´Õ•ÍÐÍ•…É ¹¼±½¹•È‘•Á•¹‘Ì½¸…¸•áÑ•É¹…°•½½‘•È…¹…¹¹½ÐÍ•±•Ð±½…Ñ¥½¹ÌÑ¡…ÐAII=P‘½•Ì¹½ÐÕÉÉ•¹Ñ±ä¡…Ù”¥¸¥ÑÌ‘…Ñ…‰…Í”¸(´I•µ½Ù•Ñ¡”É•µ…¥¹¥¹œ	…É•±½¹„µ½¹±ä™¥±Ñ•È™É½´‰…­•¹…Ù…¥±…‰¥±¥ÑäÍ•…É ì‰…­•¹¹½Ü™¥±Ñ•ÉÌ‰ä¹½Éµ…±¥é•½Õ¹ÑÉä½‘”Á±ÕÌ¥Ñä¸(´±½Õ‘™±…É”]½É­•ÈÁÉ½á¥•ÌÑ¡”ÁÕ‰±¥Œ±½…Ñ¥½¸•¹‘Á½¥¹ÑÌÕÍ•‰äÑ¡”Í•…É U$¸(´á¥ÍÑ¥¹œÍ…Ù•	…É•±½¹„Í•…É¡•Ì…É”µ¥É…Ñ•±¥•¹ÐµÍ¥‘”Ý¡•¸MÁ…¥¸¥ÌÑ¡”½¹±ä…Ù…¥±…‰±”½Õ¹ÑÉä¸(´M•…É ÍÑ…åÌ‘¥Í…‰±•Õ¹Ñ¥°‰½Ñ É•ÅÕ¥É•±½…Ñ¥½¸™¥•±‘Ì…É”±½…‘•…¹Í•±•Ñ•¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠPI•µ½Ù”‘ÕÁ±¥…Ñ•‘…Ñ•Ì™É½´É•ÍÕ±Ð…É‘Ì((´I•µ½Ù•Ñ¡”…Ù…¥±…‰¥±¥Ñä‘…Ñ”Ý¥¹‘½Ü™É½´•Ù•ÉäÉ•ÍÕ±Ð…É‰•…ÕÍ”Ñ¡”É•ÅÕ•ÍÑ•ÍÑ…äÁ•É¥½¥Ì…±É•…‘äÙ¥Í¥‰±”¥¸Ñ¡”Í•…É ½¹ÑÉ½±Ì…‰½Ù”Ñ¡”É•ÍÕ±ÑÌ¸(´…É‘Ì¹½Ü™½ÕÌ½¸Ñ¡”¥¹™½Éµ…Ñ¥½¸Ñ¡…Ð…ÑÕ…±±ä‘¥™™•ÉÌ‰•ÑÝ••¸ÁÉ½Á•ÉÑ¥•Ìè¥‘•¹Ñ¥Ñä°…½µµ½‘…Ñ¥½¸½…Á…¥Ñä™…ÑÌ°ÁÉ¥”°¡½ÍÐ…¹½ÕÑ‰½Õ¹…Ñ¥½¸¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠPAÉ½‘ÕÐµÍÑå±”¡½ÕÍ¥¹œÉ•ÍÕ±Ð…É‘Ì((´I•Ý½É­•Õ•ÍÐÍ•…É É•ÍÕ±ÑÌ¥¹Ñ¼„±•…É•ÈÁÉ½‘ÕÐµ…É¡¥•É…É¡ä¥¹ÍÑ•…½˜„™±…ÐÍÑ…¬½˜•ÅÕ…±±äÝ•¥¡Ñ•µ•Ñ…‘…Ñ„¸(´…É‘Ì¹½Ü±•…Ý¥Ñ ÁÉ½Á•ÉÑä¹…µ”…¹¥Ñä°É½ÕÀ…½µµ½‘…Ñ¥½¸ÑåÁ”½‰•‘É½½µÌ½Í±••Á¥¹œÁ±…•Ì¥¹Ñ¼½µÁ…Ð™…ÑÌ°…¹¥Ù”Ñ¡”…Ù…¥±…‰±”‘…Ñ”Ý¥¹‘½Ü¥ÑÌ½Ý¸Ù¥ÍÕ…°‰±½¬¸(´I•ÍÕ±Ð‘…Ñ•Ì…É”É•¹‘•É•¥¸Ñ¡”ÕÉÉ•¹ÐU$±½…±”É…Ñ¡•ÈÑ¡…¸É…Ü%M<™½É´¸(´AÉ¥”¥Ì„ÍÑÉ½¹•ÈÍ•½¹‘…Éä™½ÕÌ°Ý¡¥±”¡½ÍÐ¥‘•¹Ñ¥Ñä¥Ì¥¹Ñ•¹Ñ¥½¹…±±äÅÕ¥•Ñ•È¥¸Ñ¡”™½½Ñ•È¸(´AÕ‰±¥Í¡•¥É‰¹ˆ±¥¹­ÌÉ•¹‘•È…ÌÑ¡”…ÉQìÁÉ½Á•ÉÑ¥•ÌÝ¥Ñ¡½ÕÐ„ÁÕ‰±¥Í¡••áÑ•É¹…°±¥¹¬Í¡½Ü„ÍÕ‰‘Õ•¥¹™½Éµ…Ñ¥½¹…°ÍÑ…Ñ”¥¹ÍÑ•…½˜„‰ÕÑÑ½¸µ±¥­”…™™½É‘…¹”¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠP…Ñ…‰…Í”µ•¹™½É•…Ù…¥±…‰¥±¥Ñä¥¹Ñ•É¥Ñä((´‘‘•±åÝ…äXÄÌÝ¥Ñ „A½ÍÑÉ•ME0¥MP•á±ÕÍ¥½¸½¹ÍÑÉ…¥¹ÐÁÉ•Ù•¹Ñ¥¹œ½Ù•É±…ÁÁ¥¹œm‘…Ñ•}™É½´°‘…Ñ•}Ñ¼¥€…Ù…¥±…‰¥±¥ÑäÁ•É¥½‘Ì™½ÈÑ¡”Í…µ”ÁÉ½Á•ÉÑä¸(´5¥É…Ñ¥½¸…‰½ÉÑÌÝ¥Ñ „±•…È•ÉÉ½È¥˜±•…ä½Ù•É±…ÁÁ¥¹œÉ½ÝÌ…±É•…‘ä•á¥ÍÐ¥¹ÍÑ•…½˜Í¥±•¹Ñ±ä‘•±•Ñ¥¹œÕÍ•È‘…Ñ„¸(´á¥ÍÑ¥¹œ…ÁÁ±¥…Ñ¥½¸½Ù•É±…À¡•­ÌÉ•µ…¥¸™½È™É¥•¹‘±äÙ…±¥‘…Ñ¥½¸°Ý¡¥±”A½ÍÑÉ•ME0¹½Ü±½Í•ÌÑ¡”½¹ÕÉÉ•¹Ð¡•¬µÑ¡•¸µ¥¹Í•ÉÐ½ÕÁ‘…Ñ”É…”¸(´A½ÍÑÉ•ME0•á±ÕÍ¥½¸Ù¥½±…Ñ¥½¹Ì…É”µ…ÁÁ•‰…¬Ñ¼!QQ@€ÐÀä½¹™±¥Ð¥¹ÍÑ•…½˜ÍÕÉ™…¥¹œ…Ì€ÔÀÀ•ÉÉ½ÉÌ¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠP1¥Ù”¡½ÕÍ¥¹œ™¥±Ñ•ÉÌ…¹‘¥ÉÑäÁ•É¥½Í…Ù•Ì((´½µµ½‘…Ñ¥½¸ÑåÁ”¹½Ü‰•¡…Ù•Ì…Ì„ÑÉÕ”É•ÍÕ±Ð™¥±Ñ•ÈèÉ•Á•…ÐÍ•…É¡•Ì…±Ý…åÌÕÍ”¥ÑÌÕÉÉ•¹ÐÍ•±•Ñ•Ù…±Õ”¥¹ÍÑ•…½˜Ñ¡”Ù…±Õ”…ÁÑÕÉ•¥¸Ñ¡”ÁÉ•Ù¥½ÕÌ‰…Í”µÍ•…É Í¹…ÁÍ¡½Ð¸(´á¥ÍÑ¥¹œ¡½ÍÐ…Ù…¥±…‰¥±¥ÑäÁ•É¥½‘Ì¹¼±½¹•ÈÍ¡½Ü„É•‘Õ¹‘…¹ÐM…Ù”…Ñ¥½¸Ý¡¥±”Õ¹¡…¹•¸M…Ù”…ÁÁ•…ÉÌ½¹±ä…™Ñ•È‘…Ñ•Ì½È¹¥¡Ñ±äÁÉ¥”…É”•‘¥Ñ•¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠPI•µ½Ù”±•…ä…ÕÑ …¹Í¥µÁ±¥™ä¡½ÍÐ…½Õ¹ÐU$((´I•µ½Ù•Ñ¡”ÁÉ”µ…½Õ¹Ð•‘¥ÐµÑ½­•¸µ¥É…Ñ¥½¸Á…Ñ °±•…ä±…¥´•¹‘Á½¥¹Ð…¹½µÁ…Ñ¥‰¥±¥Ñä½Ý¹•ÈÉ½ÕÑ•Ì¸(´XÄÈ‘•±•Ñ•Ì…¹äÉ•µ…¥¹¥¹œÕ¹½Ý¹•±•…äÁÉ½™¥±•Ì°µ…­•ÌÁÉ½™¥±•Ì¹…½Õ¹Ñ}¥‘€µ…¹‘…Ñ½Éä…¹‘É½ÁÌ…•ÍÍ}Ñ½­•¹}¡…Í¡€¸(´!½ÍÐ…ÕÑ¡•¹Ñ¥…Ñ¥½¸µ½Ù•½ÕÐ½˜Ñ¡”±…É”¹Õµ‰•É•½¹Ñ•¹ÐÁ…¹•°¥¹Ñ¼½µÁ…ÐÑ½Àµ‰…È1½œ¥¸€¼É•…Ñ”…½Õ¹Ð…Ñ¥½¹Ì¸(´™Ñ•È…ÕÑ¡•¹Ñ¥…Ñ¥½¸°½¹±äÑ¡”…½Õ¹Ð•µ…¥°…¹1½œ½ÕÐ…Ñ¥½¸É•µ…¥¸¥¸Ñ¡”Ñ½À‰…ÈìAII=P%¥Ì¹¼±½¹•ÈÍ¡½Ý¸¥¸Ñ¡”¡½ÍÐ½¹Í½±”¸(´±½Õ‘™±…É”]½É­•È¹½ÜÁÉ½á¥•Ì½¹±äÑ¡”Á…ÉÉ½Ñ}Í•ÍÍ¥½¹€½½­¥”™½È½Ý¹•ÈA$…±±Ì¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠP‘¥Ñ…‰±”ÁÉ½Á•ÉÑä¡…É…Ñ•É¥ÍÑ¥Ì…¹ÍÑ…äÍ•ÑÑ¥¹Ì((´	•‘É½½µÌ…¹Í±••Á¥¹œÁ±…•Ì…¸¹½Ü‰”•‘¥Ñ•…™Ñ•ÈÁÉ½Á•ÉÑäÉ•…Ñ¥½¸…±½¹Í¥‘”…½µµ½‘…Ñ¥½¸ÑåÁ”¸(´AÉ½Á•ÉÑä¡…É…Ñ•É¥ÍÑ¥Ì…É”É½ÕÁ•Í•Á…É…Ñ•±ä™É½´ÍÑ…ä½¹‘¥Ñ¥½¹Ìèµ¥¹¥µÕ´ÍÑ…ä…¹±•…¹¥¹œ™•”¹½ÜÍ¥ÐÝ¥Ñ …Ù…¥±…‰¥±¥Ñä…¹¹¥¡Ñ±äÁÉ¥¥¹œ½¹ÑÉ½±Ì¸(´I•¹…µ•Ñ¡”ÁÉ½Á•ÉÑäÉ•…Ñ¥½¸±…‰•°™É½´…¸¥¹Ñ•É¹…°½ÁÉ¥Ù…Ñ”±…‰•°Ñ¼„ÁÉ½Á•ÉÑä¹…µ”°µ…Ñ¡¥¹œÑ¡”™…ÐÑ¡…Ð¥Ð¥ÌÍ¡½Ý¸¥¸Õ•ÍÐÍ•…É ¸(´Õ•ÍÐÍ•…É ¹¼±½¹•È‘¥ÍÁ±…åÌµ¥¹¥µÕ´ÍÑ…ä…Ì„Í•Á…É…Ñ”É•ÍÕ±Ð±¥¹”ì‰…­•¹µ¥¹¥µÕ´µÍÑ…ä•¹™½É•µ•¹Ð¥ÌÕ¹¡…¹•¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠP=Ý¹•È…½Õ¹ÑÌ…¹Í•ÉÙ•ÈµÍ¥‘”Í•ÍÍ¥½¹Ì((´I•Á±…•™É½¹Ñ•¹ÁÉ½™¥±•%€¬•‘¥ÑQ½­•¹€…ÕÑ¡•¹Ñ¥…Ñ¥½¸Ý¥Ñ •µ…¥°½Á…ÍÍÝ½É…½Õ¹ÑÌ…¹½Á…ÅÕ”Í•ÉÙ•ÈµÍ¥‘”Í•ÍÍ¥½¹Ì¸(´A…ÍÍÝ½É‘Ì…É”¡…Í¡•Ý¥Ñ É½¸É¥ìÉ…ÜÁ…ÍÍÝ½É‘Ì…¹É…ÜÍ•ÍÍ¥½¸Ñ½­•¹Ì…É”¹•Ù•ÈÍÑ½É•¥¸A½ÍÑÉ•ME0¸(´!½ÍÐÍ•ÍÍ¥½¹ÌÕÍ”!ÑÑÁ=¹±ä°M…µ•M¥Ñ”õ1…à½½­¥•ÌìÁÉ½‘ÕÑ¥½¸½½­¥•Ì…É”M•ÕÉ”…¹•áÁ¥É”…™Ñ•È€ÌÀ‘…åÌ¸1½½ÕÐ¥¹Ù…±¥‘…Ñ•ÌÑ¡”Í•ÉÙ•ÈµÍ¥‘”Í•ÍÍ¥½¸¸(´=Ý¹•ÈµÕÑ…Ñ¥½¹Ì…ÕÑ¡½É¥é”Ñ¡”…ÕÑ¡•¹Ñ¥…Ñ•ÁÉ½™¥±”…¹¹¼±½¹•È…•ÁÐ`µA…ÉÉ½ÐµQ½­•¹€…Ì„Í•ÕÉ¥ÑäÉ•‘•¹Ñ¥…°¸(´‘‘•É•¥ÍÑ•È°±½¥¸°±½½ÕÐ°€½µ•€…¹…ÕÑ¡•¹Ñ¥…Ñ•‘…Í¡‰½…É™±½ÝÌÁ±ÕÌ±½¥¸™…¥±ÕÉ”É…Ñ”±¥µ¥Ñ¥¹œ¸(´‘‘•„½¹”µÑ¥µ”±•…äÁÉ½™¥±”±…¥´Á…Ñ ™½È•á¥ÍÑ¥¹œ•‘¥ÐµÑ½­•¸¡½ÍÑÌ¸MÕ•ÍÍ™Õ°±…¥´±•…ÉÌÑ¡”±•…äÑ½­•¸¡…Í ¸(´!½ÍÐU$¹½ÜÍ¡½ÝÌ±½¥¸½Í¥¸µÕÀÍÑ…Ñ•Ì°Á•ÉÍ¥ÍÑÌ…ÕÑ¡•¹Ñ¥…Ñ¥½¸…É½ÍÌÉ•±½…‘ÌÙ¥„Ñ¡”½½­¥”°±•…ÉÌ¡½ÍÐÍÑ…Ñ”½¸±½½ÕÐ°…¹½™™•ÉÌ±•…äµ¥É…Ñ¥½¸Ý¡•¸½±É•‘•¹Ñ¥…±Ì…É”™½Õ¹¥¸±½…±MÑ½É…”¸(´XÄÄ…‘‘Ì…½Õ¹ÑÌ°Í•ÍÍ¥½¹Ì°ÁÉ½™¥±”½…½Õ¹Ð½Ý¹•ÉÍ¡¥À…¹„É•Í•ÉÙ•¡…Í¡•Á…ÍÍÝ½ÉµÉ•Í•ÐµÑ½­•¸Ñ…‰±”¸A…ÍÍÝ½ÉÉ•Í•Ð•µ…¥°¥Ì¥¹Ñ•¹Ñ¥½¹…±±ä¹½Ð•áÁ½Í•Õ¹Ñ¥°‰…­•¹•µ…¥°‘•±¥Ù•Éä¥Ì½¹¹•Ñ•¸(´Õ•ÍÐ…Ù…¥±…‰¥±¥ÑäÍ•…É É•µ…¥¹ÌÁÕ‰±¥Œ¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠPM•…É ½Áä…¹¥ÑäÍ•±•Ñ½È±•…¹ÕÀ((´I•µ½Ù•Ñ¡”±…¥´Ñ¡…Ð¡½ÍÐÁÉ½Á•ÉÑ¥•Ì‘¼¹½Ð½¹Ñ…¥¸ÁÉ¥•ÌìAII=P…¸¹½ÜÍÑ½É”½ÁÑ¥½¹…°ÁÉ¥¥¹œ¸(´I•ÍÕ±ÑÌÝ¥Ñ¡½ÕÐ„ÁÉ¥”¹½ÜÍ…äÑ¼…Í¬Ñ¡”¡½ÍÐ…¹¹¼±½¹•ÈÍ¡½ÜÑ¡”¥¹‘¥…Ñ¥Ù”µÁÉ¥”‘¥Í±…¥µ•È¸(´I•µ½Ù•Õ¹½¹‘¥Ñ¥½¹…°Ý½É‘¥¹œÑ¡…Ð…ÍÍÕµ•…¸•áÑ•É¹…°±¥ÍÑ¥¹œ•á¥ÍÑÌì•¹•É…°É•¹Ñ…°Ñ•ÉµÌ…É”…ÑÑÉ¥‰ÕÑ•Ñ¼Ñ¡”¡½ÍÐ°Ý¡¥±”•áÑ•É¹…°±¥¹­Ì…É”Í¡½Ý¸½¹±äÝ¡•¸…ÑÕ…±±ä…ÑÑ…¡•…¹ÁÕ‰±¥Í¡•¸(´I•µ½Ù•µ¥¹¥µÕ´µÍÑ…äÑ•áÐ™É½´Ñ¡”½µÁ…Ð¡½ÍÐÁÉ½Á•ÉÑäÍÕµµ…Éä‰•…ÕÍ”Ñ¡”Ù…±Õ”¥Ì…±É•…‘äÙ¥Í¥‰±”¥¸ÁÉ½Á•ÉÑäÍ•ÑÑ¥¹Ì¸(´±¥¹•Ñ¡”=¹±äÝ¥Ñ „ÁÉ¥•€¡•­‰½àÝ¥Ñ Ñ¡”½Ñ¡•ÈÉ•ÍÕ±Ðµ™¥±Ñ•È½¹ÑÉ½±Ì¸(´‘‘•„É•…°¥ÑäÍ•±•Ñ½ÈÑ¼Õ•ÍÐÍ•…É …¹ÁÉ½Á•ÉÑäÉ•…Ñ¥½¸¸	…É•±½¹„¥ÌÕÉÉ•¹Ñ±äÑ¡”½¹±ä…Ù…¥±…‰±”¥Ñä¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠPáÑ•É¹…°±¥ÍÑ¥¹œ±¥™•å±”…¹™¥±Ñ•È±•…¹ÕÀ((´…±•¹‘…ÈÍå¹Œ¥Ì¹½ÜÍ¡½Ý¸½¹±äÝ¡•¸…¸•áÑ•É¹…°¥É‰¹ˆ±¥ÍÑ¥¹œ•á¥ÍÑÌ¸(´•±•Ñ¥¹œÑ¡”•áÑ•É¹…°±¥ÍÑ¥¹œ…±Í¼‘•±•Ñ•Ì¥ÑÌ¥É‰¹ˆ…±•¹‘…È…Ñ½µ¥…±±äìµ¥É…Ñ¥½¸XÄÀÉ•µ½Ù•Ì…¹ä…±É•…‘ä½ÉÁ¡…¹•…±•¹‘…ÉÌ¸(´‘‘•„¡½ÍÐ¡•­‰½àÑ¼­••À…¸¥É‰¹ˆ±¥ÍÑ¥¹œ½¹¹•Ñ•™½ÈÍå¹ŒÝ¡¥±”¡¥‘¥¹œ¥ÑÌ½ÕÑ‰½Õ¹±¥¹¬™É½´Õ•ÍÐÍ•…É É•ÍÕ±ÑÌ¸(´I•Á±…•Ñ¡”ÁÉ½Á•ÉÑäáÁ…¹½½±±…ÁÍ”Ñ•áÐ‰ÕÑÑ½¸Ý¥Ñ „½µÁ…ÐÕÀ½‘½Ý¸¡•ÙÉ½¸½¹ÑÉ½°¸(´5½Ù•…½µµ½‘…Ñ¥½¸ÑåÁ”™É½´Ñ¡”ÁÉ¥µ…ÉäÍ•…É ™½É´¥¹Ñ¼Ñ¡”É•ÍÕ±Ðµ™¥±Ñ•ÈÉ½ÕÀ¸™Ñ•È…¸¥¹¥Ñ¥…°Í•…É °¡…¹¥¹œ¥Ð¥µµ•‘¥…Ñ•±äÉ”µÉÕ¹ÌÑ¡”Í•…É ±¥­”Ñ¡”½Ñ¡•È™¥±Ñ•ÉÌ¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠPA•ÉÍ¥ÍÑ•¹ÐÍ•…É °ÁÉ¥”½É‘•É¥¹œ…¹½µÁ…Ð¡½ÍÐ…É‘Ì((´Ù…¥±…‰¥±¥ÑäÍ•…É ¹½ÜÁ•ÉÍ¥ÍÑÌÉ¥Ñ•É¥„…¹É•ÍÕ±Ð™¥±Ñ•ÉÌ¥¸±½…±MÑ½É…”¸I•ÑÕÉ¹¥¹œ™É½´Ñ¡”¡½ÍÐÍÉ••¸É•ÍÑ½É•ÌÑ¡”ÁÉ•Ù¥½ÕÌÍ•…É ÍÑ…Ñ”…¹…ÕÑ½µ…Ñ¥…±±äÉ”µÉÕ¹ÌÑ¡”±…ÍÐÁ•É™½Éµ•Í•…É ¸(´M•…É É•ÍÕ±ÑÌ…É”Í½ÉÑ•‰ä™¥¹…°•ÍÑ¥µ…Ñ•ÍÑ…äÁÉ¥”…Í•¹‘¥¹œìÁÉ½Á•ÉÑ¥•ÌÝ¥Ñ¡½ÕÐ„½µÁ±•Ñ”ÁÉ¥”…É”Á±…•±…ÍÐ¸(´‘‘••ÍÑ¥µ…Ñ•Ñ½Ñ…°ÁÉ¥”™¥±Ñ•ÉÌ™É½´½Ñ¼¥¸UH¸¡…¹¥¹œ„É•ÍÕ±Ð™¥±Ñ•È…™Ñ•È„Í•…É ¥µµ•‘¥…Ñ•±äÉ”µÉÕ¹Ì¥Ð¸(´…±•¹‘…È½¹¹•Ñ•ÍÑ…ÑÕÌ¥Ì±½…±¥é•ìIÕÍÍ¥…¸¹½ÜÍ¡½ÝÌƒBBûBÓBëBïF;FFGBõ€¥¹ÍÑ•…½˜½¹¹•Ñ•‘€¸(´…±•¹‘…È‘•ÍÑÉÕÑ¥Ù”…Ñ¥½¸¥Ì±…‰•±±••±•Ñ”¿BBÓBÃBïBãFF0É…Ñ¡•ÈÑ¡…¸¥Í½¹¹•Ð¿B{FBëBïF;FBãFF0¸(´¹…‰±”½‘¥Í…‰±”½¹ÑÉ½±Ì…É”Ù¥ÍÕ…±±äÉ½ÕÁ•Í•Á…É…Ñ•±ä™É½´…±•¹‘…È‘•±•Ñ¥½¸¸(´!½ÍÐÁÉ½Á•ÉÑä…É‘Ì…É”½±±…ÁÍ•‰ä‘•™…Õ±ÐÑ¼Ñ¡•¥Èµ…¥¸ÍÕµµ…Éä…¹•áÁ½Í”áÁ…¹½½±±…ÁÍ”½¹ÑÉ½±Ìì•áÁ…¹‘•ÍÑ…Ñ”ÍÕÉÙ¥Ù•Ì¥¹Ñ•É¹…°É•É•¹‘•ÉÌ¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠP‘¥Ñ…‰±”…½µµ½‘…Ñ¥½¸ÑåÁ”…¹É•ÍÕ±Ð™¥±Ñ•ÉÌ((´½µµ½‘…Ñ¥½¸ÑåÁ”…¸¹½Ü‰”¡…¹•™É½´•… ÁÉ½Á•ÉÑäÌÍ•ÑÑ¥¹ÌÑ½•Ñ¡•ÈÝ¥Ñ µ¥¹¥µÕ´ÍÑ…ä…¹±•…¹¥¹œ™•”¸(´5½Ù•=¹±äÝ¥Ñ „ÁÉ¥•€½ÕÐ½˜Ñ¡”ÁÉ¥µ…ÉäÍ•…É ™½É´¥¹Ñ¼„Í•Á…É…Ñ”É•ÍÕ±Ðµ™¥±Ñ•È…É•„°±•…Ù¥¹œÉ½½´™½È™ÕÑÕÉ”™¥±Ñ•ÉÌ¸(´™Ñ•È…¸¥¹¥Ñ¥…°Í•…É °¡…¹¥¹œ=¹±äÝ¥Ñ „ÁÉ¥•€¥µµ•‘¥…Ñ•±äÉ”µÉÕ¹ÌÑ¡”Í…µ”Í•…É Ý¥Ñ Ñ¡”¹•Ü™¥±Ñ•ÈÍÑ…Ñ”¸(´½Õµ•¹Ñ•Ñ¡”¡½ÍÐA$ÁÉ½áä½¹ÑÉ…Ðè‰É½ÝÍ•È€½…Á¤½¡½ÍÐ¼©€É•ÅÕ•ÍÑÌ…É”¥¹Ñ•¹Ñ¥½¹…±±ä™½ÉÝ…É‘•Ñ¼‰…­•¹€½…Á¤¼©€ìÑ¡”‘¥™™•É•¹ÐÙ¥Í¥‰±”Á…Ñ¡Ì…É”¹½ÐÍ•Á…É…Ñ”A%Ì¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠP‘¥Ñ…‰±”ÁÉ½Á•ÉÑäÍ•ÑÑ¥¹Ì…¹…±•¹‘…ÈÑ½±•Ì((´5¥¹¥µÕ´ÍÑ…ä¥Ì¹¼±½¹•ÈÉ•ÅÕ•ÍÑ•Ý¡¥±”É•…Ñ¥¹œ„ÁÉ½Á•ÉÑäì¹•ÜÁÉ½Á•ÉÑ¥•Ì‘•™…Õ±ÐÑ¼½¹”‘…ä…¹Ñ¡”Ù…±Õ”¥Ì•‘¥Ñ…‰±”™É½´•… ÁÉ½Á•ÉÑä…É¸(´±•…¹¥¹œ™•”µ½Ù•™É½´Ñ¡”•áÑ•É¹…°¥É‰¹ˆ±¥ÍÑ¥¹œÑ¼Ñ¡”AII=PÁÉ½Á•ÉÑä°Í¼¥Ð…¸‰”Í•Ð°¡…¹•½È±•…É••Ù•¸Ý¡•¸¹¼•áÑ•É¹…°±¥ÍÑ¥¹œ•á¥ÍÑÌ¸á¥ÍÑ¥¹œ±¥ÍÑ¥¹œ™••Ì…É”µ¥É…Ñ•Ñ¼Ñ¡•¥ÈÁÉ½Á•ÉÑä¸(´áÑ•É¹…°…±•¹‘…ÉÌ…¸¹½Ü‰”‘¥Í…‰±•…¹É”µ•¹…‰±•Ý¥Ñ¡½ÕÐ‘•±•Ñ¥¹œÑ¡”½¹¹•Ñ¥½¸¸¥Í…‰±•…±•¹‘…ÉÌ­••ÀÑ¡•¥ÈÍ¹…ÁÍ¡½Ð‰ÕÐ‘¼¹½Ð‰±½¬Í•…É ½ÈÉÕ¸…ÕÑ½µ…Ñ¥ŒÍå¹ŒìÉ”µ•¹…‰±¥¹œÉ•™É•Í¡•Ì¥µµ•‘¥…Ñ•±ä¸(´…±•¹‘…È½¹ÑÉ½±ÌÉ•µ…¥¸Ù¥Í¥‰±”…™Ñ•ÈÑ¡”•áÑ•É¹…°¥É‰¹ˆ±¥ÍÑ¥¹œ¥ÌÉ•µ½Ù•°Í¼…¸•á¥ÍÑ¥¹œ…±•¹‘…È…¸ÍÑ¥±°‰”‘¥Í…‰±•°É”µ•¹…‰±•½È‘¥Í½¹¹•Ñ•¸(´!½ÍÐÁÉ½Á•ÉÑä…É‘Ì…É”µ½É”ÍÑÉ½¹±äÍ•Á…É…Ñ•Ù¥ÍÕ…±±ä…¹¡¥¡±¥¡Ð•… ÁÉ½Á•ÉÑäÑ¥Ñ±”¸(´‘‘•‰…­•¹Íµ½­”½Ù•É…”™½ÈÁÉ½Á•ÉÑäÍ•ÑÑ¥¹ÌÁ±ÕÌ…±•¹‘…È‘¥Í…‰±”½É”µ•¹…‰±”Í•…É Í•µ…¹Ñ¥Ì¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠPM•…É Ý¥Ñ¡½ÕÐ•áÑ•É¹…°±¥¹­Ì…¹…½µµ½‘…Ñ¥½¸ÑåÁ”((´AÉ½Á•ÉÑ¥•ÌÉ•µ…¥¸¥¸…Ù…¥±…‰¥±¥ÑäÍ•…É …™Ñ•ÈÑ¡•¥È•áÑ•É¹…°¥É‰¹ˆ±¥ÍÑ¥¹œ¥ÌÉ•µ½Ù•ìÍ•…É É•ÍÕ±ÑÌÉ•ÑÕÉ¸±¥¹­Ìèmu€…¹Ñ¡”Õ•ÍÐU$•áÁ±…¥¹ÌÑ¡…Ð¹¼•áÑ•É¹…°±¥¹¬¡…Ì‰••¸…‘‘•å•Ð¸(´‘‘•…½µµ½‘…Ñ¥½¹QåÁ•€Ý¥Ñ Ñ¡”Ù…±Õ•Ì•¹Ñ¥É•}Á±…•€…¹ÁÉ¥Ù…Ñ•}É½½µ€…É½ÍÌÁÉ½Á•ÉÑäÉ•…Ñ¥½¸°½Ý¹•È‘…Í¡‰½…É°ÁÕ‰±¥ŒÁÉ½™¥±”…¹Í•…É É•ÍÕ±ÑÌ¸(´á¥ÍÑ¥¹œÁÉ½Á•ÉÑ¥•Ìµ¥É…Ñ”Ñ¼•¹Ñ¥É•}Á±…•€¸(´!½ÍÐÉ•…Ñ¥½¸ÕÍ•Ì„½µÁ…ÐÑÝ¼µ½ÁÑ¥½¸Í•±•ÐìÕ•ÍÐÍ•…É ÕÍ•Ì¹äÑåÁ”€¼¹Ñ¥É”Á±…”€¼AÉ¥Ù…Ñ”É½½µ€°…¹É•ÍÕ±Ð…É‘ÌÍ¡½ÜÑ¡”Í•±•Ñ•ÑåÁ”¸(´‘‘•‰…­•¹Íµ½­”½Ù•É…”™½ÈÑåÁ”™¥±Ñ•É¥¹œ°¥¹Ù…±¥ÑåÁ”É•©•Ñ¥½¸…¹Í•…É …™Ñ•È‘•±•Ñ¥¹œ…¸•áÑ•É¹…°±¥ÍÑ¥¹œ¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠP1½…±¥é•¥É‰¹ˆ…±•¹‘…È±¥¹­Ì…¹Ù¥Í¥‰±”•ÉÉ½ÉÌ((´¥É‰¹ˆ¥…°•áÁ½ÉÐ±¥¹­Ì½¸±½…±¥é•¡½ÍÑÌÍÕ …Ì…¥É‰¹ˆ¹ÉÕ€°…¥É‰¹ˆ¹•Í€…¹…¥É‰¹ˆ¹¼¹Õ­€…É”…•ÁÑ•…¹¹½Éµ…±¥é•Ñ¼ÝÝÜ¹…¥É‰¹ˆ¹½µ€‰•™½É”™•Ñ ìÉ•‘¥É•ÑÌÍÑ…ä‘¥Í…‰±•…¹±½½­…±¥­”¡½ÍÑÌÉ•µ…¥¸É•©•Ñ•¸(´…±•¹‘…È½¹¹•Ñ¥½¸™…¥±ÕÉ•Ì°¥¹±Õ‘¥¹œ…¸¥…°±¥ÍÑ¥¹œµ¥µ¥Íµ…Ñ °…É”¹½ÜÉ•¹‘•É•‘¥É•Ñ±ä‰•±½ÜÑ¡”…±•¹‘…È™½É´¥¹ÍÑ•…½˜½¹±ä¥¸Ñ¡”Á…”µ±•Ù•°ÍÑ…ÑÕÌ…‰½Ù”Ñ¡”ÁÉ½Á•ÉÑä±¥ÍÐ¸((ŒŒ€ÈÀÈØ´Àä´ÈÈƒŠP!…É‘•¸¥É‰¹ˆ¥…°½¹¹•Ñ¥½¸((´‘‘•É•É•ÍÍ¥½¸½Ù•É…”½¹™¥Éµ¥¹œÑ¡…Ð„…±•¹‘…È±¥ÍÑ¥¹œ%µÕÍÐ•á…Ñ±äµ…Ñ Ñ¡”…ÑÑ…¡•¥É‰¹ˆ±¥ÍÑ¥¹œ%ìµ¥Íµ…Ñ¡•Ì…É”É•©•Ñ•‰•™½É”™•Ñ ¸(´…±•¹‘…È™•Ñ¡•Ì…•ÁÐ½¹±ä…¥É‰¹ˆ¹½µ€…¹¥ÑÌÍÕ‰‘½µ…¥¹ÌÝ¥Ñ Ñ¡”•á…Ð€½…±•¹‘…È½¥…°¼ñ±¥ÍÑ¥¹%ø¹¥Í€Á…Ñ °±½Í¥¹œ±½½­…±¥­”µ¡½ÍÐMMI‰åÁ…ÍÍ•Ì¸(´™…¥±•…±•¹‘…ÈÉ•½¹¹•Ð­••ÁÌÑ¡”±…ÍÐÍÕ•ÍÍ™Õ°•Ù•¹ÐÍ¹…ÁÍ¡½Ð…¹±…ÍÐµÍÕ•ÍÌÑ¥µ•ÍÑ…µÀ°Í¼­¹½Ý¸É•Í•ÉÙ…Ñ¥½¹ÌÉ•µ…¥¸‰±½­•¸(´¹µÑ¼µ•¹Íµ½­”½Ù•É…”¹½ÜÁÉ½Ñ•ÑÌUI0Ù…±¥‘…Ñ¥½¸°•á…Ð±¥ÍÑ¥¹œµ…Ñ¡¥¹œ…¹™…¥±•µÉ•½¹¹•Ð‰•¡…Ù¥½È¸((ŒŒ€ÈÀÈØ´Àä´ÈÄƒŠP¥É‰¹ˆ¥…°Íå¹¡É½¹¥é…Ñ¥½¸((´!½ÍÑÌ…¸½¹¹•Ð…¸¥É‰¹ˆ¥…°•áÁ½ÉÐUI0…™Ñ•È…ÑÑ…¡¥¹œÑ¡”µ…Ñ¡¥¹œ¥É‰¹ˆ±¥ÍÑ¥¹œ¸(´Q¡”‰…­•¹Ù…±¥‘…Ñ•ÌÑ¡…ÐÑ¡”±¥ÍÑ¥¹œ¥¥¹Í¥‘”Ñ¡”¥…°UI0µ…Ñ¡•ÌÑ¡”ÁÉ½Á•ÉÑäÌ¥É‰¹ˆ±¥ÍÑ¥¹œ¥¸(´Må¹Œ¡…ÁÁ•¹Ì¥µµ•‘¥…Ñ•±ä½¸½¹¹•Ð°µ…¹Õ…±±ä½¸‘•µ…¹°…¹…ÕÑ½µ…Ñ¥…±±ä…‰½ÕÐ½¹”Á•È¡½ÕÈ¸(´%µÁ½ÉÑ•¥…°‘…Ñ„¥Ì¹½Éµ…±¥é•Ñ¼•Ù•¹Ð­¥¹€¬‘…Ñ”É…¹”€¬U%ìÉ•Í•ÉÙ…Ñ¥½¸‘•ÍÉ¥ÁÑ¥½¹Ì½Á¡½¹”™É…µ•¹ÑÌ…É”¹½ÐÍÑ½É•¸(´I•Í•ÉÙ•‘€•Ù•¹ÑÌ‰±½¬AII=PÍ•…É ™½È½Ù•É±…ÁÁ¥¹œ¹¥¡ÑÌ¸(´¥É‰¹ˆ€¡9½Ð…Ù…¥±…‰±”¥€•Ù•¹ÑÌ…É”É•Ñ…¥¹•™½È¡½ÍÐÙ¥Í¥‰¥±¥Ñä‰ÕÐ‘¼¹½Ð‰±½¬AII=PÁ¡åÍ¥…°…Ù…¥±…‰¥±¥Ñä¸(´U¹­¹½Ý¸ÍÕµµ…É¥•Ì…É”É•Ñ…¥¹•…ÌÕ¹­¹½Ý¸…¹‘¼¹½ÐÍ¥±•¹Ñ±ä‰±½¬…Ù…¥±…‰¥±¥Ñä¸(´…±•¹‘…ÈUI1ÌÉ•µ…¥¸Í•ÉÙ•ÈµÍ¥‘”…¹…É”¹•Ù•ÈÉ•ÑÕÉ¹•‰ä‘…Í¡‰½…É½ÁÕ‰±¥ŒA%Ì¸((ŒŒ€ÈÀÈØ´Àä´ÈÄƒŠP½ÁÑ¥½¹…°ÁÉ¥¥¹œ…¹¥¹Ñ•ÉÙ…°ÍÑ¥Ñ¡¥¹œ((´Ù…¥±…‰¥±¥ÑäÁ•É¥½‘Ì…¸…ÉÉä…¸½ÁÑ¥½¹…°¹¥¡Ñ±äÁÉ¥”¥¸UH•¹ÑÌ¸(´áÑ•É¹…°±¥ÍÑ¥¹Ì…¸…ÉÉä…¸½ÁÑ¥½¹…°±•…¹¥¹œ™•”¸(´Õ•ÍÐÍ•…É …¸Í¡½Ü…±°É•ÍÕ±ÑÌ½È½¹±äÉ•ÍÕ±ÑÌÝ¥Ñ ½µÁ±•Ñ”ÁÉ¥¥¹œ¸(´%˜…¹äÉ•ÅÕ•ÍÑ•¹¥¡Ð¡…Ì¹¼ÁÉ¥”°Ñ¡”É•ÍÕ±Ð¡…Ì¹¼ÁÉ¥”•ÍÑ¥µ…Ñ”ìÁÉ¥•µ½¹±äµ½‘”•á±Õ‘•Ì¥Ð¸(´AÉ¥”¥Ì•áÁ±¥¥Ñ±ä¥¹‘¥…Ñ¥Ù”ì™¥¹…°Ñ•ÉµÌ…¹½Ñ¡•È¡…É•ÌÉ•µ…¥¸Ý¥Ñ Ñ¡”¡½ÍÐ½•áÑ•É¹…°±¥ÍÑ¥¹œ¸(´9•Ü…¹•‘¥Ñ•…Ù…¥±…‰¥±¥ÑäÁ•É¥½‘Ì…¹¹½Ð½Ù•É±…À¸(´‘©…•¹Ð¡…±˜µ½Á•¸Á•É¥½‘Ì…É”…±±½Ý•…¹Í•…É ¹½ÜÍÑ¥Ñ¡•ÌÑ¡•´…É½ÍÌ‰½Õ¹‘…É¥•Ì‰ä¹¥¡Ð¸(´-•ÁÐ¥¹Ñ•ÉÙ…°É½ÝÌÉ…Ñ¡•ÈÑ¡…¸½¹”‘…Ñ…‰…Í”É½ÜÁ•È‘…äìÉ•ÅÕ•ÍÑ•¹¥¡ÑÌ…É”•áÁ…¹‘•½¹±ä¥¹Í¥‘”Ñ¡”Í•…É ÅÕ•Éä¸(´5…¥¸µÍ¥Ñ”!½ÕÍ¥¹œ•¹ÑÉä¥ÌÙ¥ÍÕ…±±äÍ•Á…É…Ñ•™É½´½É‘¥¹…ÉäÍ•ÉÙ¥”½¹…Ù¥…Ñ¥½¸±¥¹­Ì¸((ŒŒ€ÈÀÈØ´Àä´ÈÄƒŠP½Ý¹•ÈÍÑ…Ñ”…¹‘…Ñ”Í•µ…¹Ñ¥Ì((´!½ÍÐÁ…”¹½ÜÉ•±½…‘ÌÁÉ½Á•ÉÑ¥•Ì°•áÑ•É¹…°±¥ÍÑ¥¹œ…¹AII=P…Ù…¥±…‰¥±¥Ñä™É½´…¸…ÕÑ¡•¹Ñ¥…Ñ•‰…­•¹‘…Í¡‰½…É•¹‘Á½¥¹Ð½¸•Ù•ÉäÁ…”±½…¸(´±½…±MÑ½É…”¥ÌÉ•‘•¹Ñ¥…±Ìµ½¹±äì¥Ð¥Ì¹¼±½¹•È…ÕÑ¡½É¥Ñ…Ñ¥Ù”™½ÈÁÉ½Á•ÉÑä½±¥ÍÑ¥¹œ½…±•¹‘…ÈÍÑ…Ñ”¸(´M•…É É•ÍÕ±ÑÌÕÍ”Ñ¡”½Ý¹•Èµ•¹Ñ•É•ÁÉ½Á•ÉÑäÑ¥Ñ±”¥¹ÍÑ•…½˜Ñ¡”¥Ñä¹…µ”¸(´…Ñ”É…¹•Ì¹½ÜÕÍ”¡½Ñ•°Í•µ…¹Ñ¥Ìèm¡•¬µ¥¸°¡•­½ÕÐ¥€¸(´M…µ”µ‘…ä¡•¬µ¥¸½¡•¬µ½ÕÐ¥ÌÉ•©•Ñ•…Ì„é•É¼µ¹¥¡ÐÍÑ…ä¸(´!½ÍÐ…Ù…¥±…‰¥±¥ÑäÁ•É¥½‘Ì…±Í¼É•ÅÕ¥É”Ñ¼€ø™É½µ€¸(´á¥ÍÑ¥¹œÁÉ½‘ÕÑ¥½¸…Ù…¥±…‰¥±¥ÑäÉ½ÝÌ…É”µ¥É…Ñ•‰ä…‘‘¥¹œ½¹”‘…äÑ¼Ñ¡”½±¥¹±ÕÍ¥Ù”•¹‘…Ñ”°ÁÉ•Í•ÉÙ¥¹œÑ¡•¥ÈÁÉ•Ù¥½ÕÌµ•…¹¥¹œ¸(´]½É­•ÈÁÉ½áä…±±½ÝÌÑ¡”¹•Ü½Ý¹•È‘…Í¡‰½…ÉÉ½ÕÑ”¸((ŒŒ€ÈÀÈØ´Àä´ÈÄƒŠP	…É•±½¹„Í½Á”…¹‘•±•Ñ¥½¸((´‘‘•ÁÉ½Á•ÉÑä‘•±•Ñ¥½¸…¹•áÑ•É¹…°µ±¥ÍÑ¥¹œ‘•±•Ñ¥½¸Ý¥Ñ ½Ý¹•ÈµÑ½­•¸…ÕÑ¡½É¥é…Ñ¥½¸¸(´5Y@É•ÍÑÉ¥Ñ•Ñ¼	…É•±½¹„Ý¥Ñ ¥¹Ñ•É¹…°¥Ñå}½‘”€ô‰…É•±½¹…€¸(´M•…É ¥¹±Õ‘•Ì½Ý¹•È¹¥­¹…µ”‰ÕÐ‘½•Ì¹½Ð•áÁ½Í”É…Ü½¹Ñ…Ð‘•Ñ…¥±Ì¸(´5…¥¸¹…Ù¥…Ñ¥½¸É½ÕÁÌÕ•ÍÐÍ•…É …¹¡½ÍÐÑ½½±ÌÕ¹‘•ÈÑ¡”!½ÕÍ¥¹œÁÉ½‘ÕÐ…É•„¸((ŒŒ€ÈÀÈØ´Àä´ÈÄƒŠP…Á…¥Ñä°µ¥¹¥µÕ´ÍÑ…ä…¹¥É‰¹ˆ%Ì((´‘‘•Í±••Á¥¹œµÁ±…”…Á…¥Ñä…¹µ¥¹¥µÕ´ÍÑ…ä¸(´M•…É •¹™½É•Ì‰½Ñ ¸(´!½ÍÑÌ•¹Ñ•È…¸¥É‰¹ˆ±¥ÍÑ¥¹œ%ìAII=P•¹•É…Ñ•ÌÑ¡”•áÑ•É¹…°UI0¸(´M•…É µ½Ù•™É½´Ñ¡”¡½µ•Á…”Ñ¼€½Í•…É ¹¡Ñµ±€¸
+# PARROT 669 changelog
+
+## 2026-09-24 â€” Saved-date calendar challenge released, independent QA pending
+
+- **Agent:** Ð”ÐµÐ½Ð¸Ñ. **Role:** Developer. **Change:** Implemented PM-001 in [backend PR #21](https://github.com/lelik112/parrot669-backend/pull/21) (`1da6c64`, V25) and [frontend PR #14](https://github.com/lelik112/parrot669/pull/14) (`d75bffb`). The owner selects first/last inclusive nights in PARROT; the persisted range and action survive reload, and verification compares the selected range against a complete snapshot of the same calendar source. Unrelated/partial changes, mixed or reserved baselines and invalid feeds do not count; legacy v1 verified rows are not selected-date proof. **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md). See [Denis's release note](changes/PM-001-calendar-control-dates.md) and backend contract linked from the task.
+- **Release evidence:** Backend PostgreSQL CI and frontend CI (108 tests) passed according to Denis's task update. Railway deployment `56125884-7043-46f0-bc08-de7aaef272d9` for `1da6c64` succeeded with V25 and `/health` `ok`; Denis checked published frontend assets against release hashes. These are implementation/deployment checks; Boris's independent QA on a controlled calendar, mobile input and Airbnb export timing remain open. PM-001 is `in review`.
+- **Agent:** ÐœÐ°Ñ€Ðº. **Role:** Product Manager. **Change:** Recorded Denis's implementation, release evidence and QA boundary in changelog, product context, roadmap and status without claiming independent product acceptance. **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md). **Recorded by:** ÐœÐ°Ñ€Ðº / Product Manager.
+
+## 2026-09-24 â€” AI-team workflow and PM-001 handoff
+
+- Accepted [D005](decisions/D005-ai-team-model-guidance.md): new or reactivated tasks carry a minimum-sufficient model/reasoning recommendation and reason; executors check it before main work and wait for the product owner when they identify a need to increase capacity. No retroactive recommendation is required for completed work.
+- Added [AI-team workflow](ai-team.md), including team roles, source reading, claims, task fields and handoffs.
+- Added specific recommendations for active/planned QA and implementation tasks; for in-review items they apply to the next QA step, not the prior implementation.
+- Igor confirmed his name in team-chat. His handoff states the current refactor is complete and PM-001's relevant backend area is released; Denis's claim/start was still pending at the time of this handoff entry.
+- Recorded Igor's remaining extraction suggestions as PM-010/011/012 in LATER, with dependencies and behavior-preserving acceptance criteria; no developer claim or assignment is implied. D006 records the sequencing decision.
+- **Agent:** ÐœÐ°Ñ€Ðº. **Role:** Product Manager. **Change:** recorded D005, updated team/product/task workflow and current PM-001 handoff. **Related task:** docs/tasks/PM-001-calendar-control-dates.md; docs/decisions/D005-ai-team-model-guidance.md.
+
+## 2026-09-24 â€” Assign saved-date verification and open team chat
+
+- **Agent:** ÐœÐ°Ñ€Ðº
+- **Role:** Product Manager
+- **Change:** Assign PM-001 to Denis following the owner's instruction; record a concrete contract/frontend starting scope and require direct backend overlap coordination with the developer still refactoring. Assignment is recorded; Denis's claim and the other developer's acknowledgement are pending.
+- **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md).
+- Add [team-chat.md](team-chat.md) for informal agent-to-agent discussion, including criticism of processes and leadership. Read addressed messages on start/resume and handoff; record actionable agreements in tasks/decisions. The file does not automatically wake agents.
+- Extend [D001](decisions/D001-repository-coordination.md), update team/context and reconcile roadmap/status with Denis's already-published PM-004/005 evidence. Those fixes remain in review; no new QA result is asserted.
+- Documentation only: no implementation, infrastructure or product-contract change in this update.
+
+## 2026-09-24 â€” Host address lookup and closed-date UI
+
+- **Agent:** Ð”ÐµÐ½Ð¸Ñ
+- **Role:** Developer
+- **Change:** Present city/street comboboxes as place searches (`type=search`, search names/IDs and translated search labels) to reduce competition with contact-address autofill. Keep `autocomplete=off`, native keyboard/touch behavior and the normalized provider selection. Detect change-only autofill and reject visible values that no longer match the selected country/city/street before saving. Do not repeat lookups on a normal change following input.
+- **Related task:** [PM-004 / BUG-013](tasks/PM-004-street-autofill.md), [PM-005 / BUG-014](tasks/PM-005-closed-dates-copy.md).
+- Rename manual closures to neutral â€œClosed datesâ€ / Â«Ð—Ð°ÐºÑ€Ñ‹Ñ‚Ñ‹Ðµ Ð´Ð°Ñ‚Ñ‹Â» in EN/ES/CA/RU; remove error-like styling, explain the action before saving, label first/last included nights, distinguish saved closures, and show save/delete confirmation next to the form. Keep existing API dates, prices and availability behavior.
+- 106 frontend tests pass, including six added cases covering silent autofill in create/edit, keyboard selection and all four closed-date state transitions. Existing overlap, inclusive-date, price, touch and proxy tests pass.
+- Browser-native autofill with a saved address and real mobile Safari remain unverified; the available cloud host page requires sign-in. Search semantics are a targeted mitigation, not proof that every browser suppresses its native popup. Both tasks remain in review for independent QA. Chromium's [search field parser](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/autofill/core/browser/form_parsing/search_field_parser.cc) informs this choice; it is not a cross-browser guarantee.
+- Frontend-only change. Backend, migrations, synchronization, selected-date verification (PM-001) and external-link publication (PM-002) are untouched during parallel backend refactoring. Released via [PR #13](https://github.com/lelik112/parrot669/pull/13), main `05a81890c7d5a7dbf73f07f0bb3104c63a995781`. PR/main CI and Cloudflare production build `107543913610` passed. A fresh live host DOM exposes the new search input types/names and RU labels; authenticated interactions remain unverified. Direct asset HTTP checks received 403 from this environment and are not counted as successful smoke.
+
+## 2026-09-24 â€” Named team and mandatory change identification
+
+- **Agent:** ÐœÐ°Ñ€Ðº
+- **Role:** Product Manager
+- **Change:** Add the canonical team roster and boundaries in `docs/team.md`: ÐÐ»ÐµÐºÑ / Strategy, ÐœÐ°Ñ€Ðº / PM, Ð”ÐµÐ½Ð¸Ñ / Developer, Ð‘Ð¾Ñ€Ð¸Ñ / QA and a second developer whose name is pending. Require Agent/Role/Scope before work and Agent/Role/Change/Related task in commit messages, PR descriptions, task-status updates and changelog entries. Record PM's responsibility to preserve authorship, reasons and decisions after significant changes.
+- **Related task:** [PM-009](tasks/PM-009-team-identity.md)
+- **Decision:** [D004](decisions/D004-team-identity.md), accepted from the owner's instruction. ÐÐ»ÐµÐºÑ prepared the proposal; ÐœÐ°Ñ€Ðº records and publishes the documentation.
+- Clarify Boris's identity in the existing paused QA task without claiming a restart or successful checks. Unknown developer names, claims and historical authors are not invented. Application behavior is unchanged.
+- Preserve Denis's concurrent claim of PM-004/005 (`d8dc6db`) and reflect their frontend-only `in progress` state in the roadmap/status. This records a start of work, not completed fixes or a release.
+
+## 2026-09-24 â€” Product coordination and saved-date verification requirement
+
+- Establish a shared repository workflow for both frontend and backend work: roadmap/feature registry, task ownership and discussion, decision log and a status report. PM: Mark / ÐœÐ°Ñ€Ðº. Strategist: Alex / ÐÐ»ÐµÐºÑ, currently without repository access. Other agent names and claims remain open until confirmed.
+- Record the owner's accepted clarification: select control dates in PARROT, save the dates/action and initial state, change them in Airbnb, then verify that exact challenge. This is a product requirement and backlog entry (`PM-001` / `BUG-015`), **not a release of the corrected implementation**. The historical v1 entry below remains intact.
+- Track link publication after verification as a proposal with unresolved details (`PM-002` / `PRODUCT-001`), rather than describing a new gate as current behavior.
+- Prioritize the unfinished two-account contact scenario, current host UI findings and bounded email/mobile acceptance. Separate implementation, deployment and independent QA evidence.
+- Correct the product-context summary of search coverage to include existing manual PARROT blocks. No runtime behavior, application code, configuration or infrastructure changes are part of this documentation update.
+
+## 2026-09-24 â€” Extract housing operations and profile views
+
+- Move availability/manual-block routes, service and repository into `com.parrot669.housing` (`AvailabilityRoutes`, `AvailabilityService`, `AvailabilityRepository` / `DoobieAvailabilityRepository`). Preserve half-open API dates, nightly-price handling, validation/ownership order and overlap-conflict behavior.
+- Move property and external-listing operations into the same package's `PropertyRoutes`, `PropertyService` and `PropertyRepository`. Preserve omitted title/address updates, canonical Airbnb URLs and link visibility; keep listing/calendar deletion atomic and retain messaging history when a property is deleted.
+- Move owner-dashboard and public-profile assembly into `com.parrot669.profiles` (`ProfileRoutes`, `ProfileService`, `ProfileRepository` / `DoobieProfileRepository`). Preserve owner-only address/calendar data, anonymous public JSON, listing scoping and legacy verification expiry semantics.
+- Share the existing cookie/authentication, UUID and JSON request handling through `http.OwnerRequests`; keep response/error mapping in `HttpResponses` and shared models in `domain`. `Main` composes the extracted modules. API paths, Worker forwarding, SQL and transaction boundaries are unchanged; no frontend or database migration is required. Messaging, calendar-control verification and calendar synchronization retain their existing implementation.
+- Add 21 focused tests: nine availability route/service tests, six property/listing tests (four route and two PostgreSQL tests), and six profile tests. Cover auth/validation order, exact errors/JSON, overlap constraints, patch semantics, atomic deletion rollback, messaging-history retention and public privacy.
+- Released in three PR/main-CI-verified steps: availability `50ef837` (84 tests), properties/listings `b5ac2a2` (90 tests), profiles `f9d8ae7` (96 tests). Every stage passed full PostgreSQL HTTP smoke and Docker build. Final [main CI 35964554278](https://github.com/lelik112/parrot669-backend/actions/runs/35964554278) is green; Railway deployment `73c5cb1a-2657-49c5-bfd3-b2e9b172bdcd` is SUCCESS on `f9d8ae7ab0b2d16a260a2ac64eeea3b9582f6696`, with Flyway unchanged at V24.
+- Eight read-only live backend checks passed. Private/mutation coverage ran in isolated CI. The frontend proxy check was blocked by Cloudflare 403/1010 from this environment; Worker runtime was not changed. See product-context for the complete release evidence.
+
+## 2026-09-23 â€” Extract the backend search module
+
+- Move availability search and database-backed country/city discovery from the large legacy routes/service/repository into the independent `com.parrot669.search` package.
+- Move search-only models; keep the country DTO shared with geocoding. Reuse the unchanged HTTP response/error mapping through `HttpResponses`.
+- Preserve API paths and JSON, SQL/query count, half-open coverage, validation order, property cleaning fees, total-price filtering/sorting and searchable properties without external links. No migration or product behavior change.
+- Add seven focused route/service contract tests alongside the existing full-application PostgreSQL smoke and Docker build. Keep messaging and the new calendar-control verification implementation structurally unchanged.
+- Released as backend `1e00ef5`: PR/main CI green with 75 tests, PostgreSQL smoke and Docker; Railway deployment `6d68b808-d625-461c-ba74-c26afa862873` SUCCESS, schema V24, ten direct/proxied read-only production checks passed.
+
+## 2026-09-23 â€” Extract shared backend errors
+
+- Move the unchanged `ServiceError` ADT out of `ParrotService.scala` into its own file, preserving its package and all API/error behavior.
+- Keep this mechanical refactor separate from the preceding calendar integrity fix; validate it through the complete backend CI and production deployment checks.
+- Released as backend `d370575`: PR/main CI green with 68 tests, PostgreSQL smoke and Docker; matching Railway deployment SUCCESS and six live API checks passed.
+
+## 2026-09-23 â€” Preserve reservations when iCal content is incomplete
+
+- Reject incomplete calendar envelopes and unbalanced/nested event boundaries before replacing imported events, including malformed responses delivered with HTTP 200.
+- Preserve the previous reservation snapshot and last-success timestamp on parse failure. A complete empty calendar still clears old events normally.
+- Add parser regression tests and end-to-end PostgreSQL/API smoke checks for malformed feeds, snapshot preservation, search blocking, valid empty feeds and recovery.
+- Keep Airbnb URL validation, event classification and the separate calendar-control verification workflow unchanged. No database migration.
+- Released as backend `bcebaa4`: PR/main CI green with 68 tests, PostgreSQL smoke and Docker; matching Railway deployment SUCCESS and six live API checks passed.
+
+## 2026-09-23 â€” Airbnb calendar control verification
+
+- Add owner-only Start/Check verification and clear required/pending/verified/blocked states, retry deadlines and attempt counts in EN/ES/CA/RU. Status updates preserve unsaved property/date/price edits.
+- Backend V24 stores a fresh baseline, attempts and persistent jobs. Check immediately and at +5/+10/+20 minutes; three failed attempts block verification for 24 hours. Initial changes have a 30-minute deadline. Removing/reconnecting a calendar does not clear its property's cooldown.
+- Reuse the existing iCal fetcher/parser without changing calendar connection, listing-ID matching, synchronization, imports, enable/disable or deletion. Verification does not gate existing search or availability.
+- Only availability ranges count; UID/metadata noise and malformed feeds do not. A changed source invalidates verification. Any availability change can pass, including an unrelated reservation; iCal cannot prove who edited it. The badge concerns calendar control, not identity or legal property ownership.
+- Add PostgreSQL concurrency/cooldown/HTTP tests, snapshot tests and frontend/polling/proxy regressions. Full backend contract and limits: `parrot669-backend/docs/calendar-ownership-verification.md`.
+
+## 2026-09-23 â€” General QA fixes and password recovery
+
+- Address BUG-001/002/006/007/008/010/011/012: reject invalid search budgets, rerender results on language changes, clarify whole-stay pricing and optional Airbnb use, make form values readable, fix Russian capacity plurals and explain email verification.
+- Let owners rename existing properties through their characteristics; keep ownership checks and preserve addresses, availability and integrations. Older PUT payloads continue to preserve the name.
+- BUG-005: add a localized recovery page linked from both login screens and real Resend reset emails using the existing token table. Single-use 30-minute links, database issuance limits and atomic session/token revocation protect recovery. No automatic login or account enumeration response.
+- Serialize login/verification session creation with reset, so a concurrent old credential cannot survive revocation. Tokens stay out of URL queries, browser storage and logs. No migration or new credentials required.
+- Add PostgreSQL/HTTP, rename smoke and browser-controller regression checks. Preserve the parallel geolocation fixes and their search tests.
+- Recovery delivery uses a bounded in-memory queue; users can retry if delivery fails or a restart interrupts it. Message notification delivery remains durable.
+- Released backend `39f3f92` and frontend `be9db76`: main CI passes (51 backend tests plus PostgreSQL smoke/Docker; 90 frontend tests), Railway and Cloudflare deployments succeed. Live desktop checks confirm budget validation, translated results, readable fields, editable-title controls and the recovery page. Evidence and remaining mailbox/mobile limitations are recorded in the QA report.
+
+## 2026-09-23 â€” Geolocation QA: guest search state and accessible labels
+
+- GEO-001: changing country, city, dates or capacity clears the previous results and asks the guest to search again. Late responses and filter changes cannot bring back results for the old parameters.
+- Keep unsubmitted search drafts across navigation without automatically running them; confirmed searches still restore normally. Pending requests cannot unlock controls belonging to a newer request.
+- GEO-002: country and city controls inherit their translated native labels, removing the fixed English accessible names in RU/ES/CA.
+- Add seven guest-search regression tests covering changed parameters, delayed responses, filters, state restoration and all four interface languages. Backend, LocationIQ and owner data are unchanged.
+
+## 2026-09-23 â€” Unread-message email notifications
+
+- Notify verified hosts and guests about new unread messages through the existing backend Resend configuration. Wait two minutes, combine pending messages and cap frequency at one email per recipient/conversation per 15 minutes.
+- Add a Messages-page notification toggle and EN/ES/CA/RU email-language selector, backed by authenticated settings endpoints. Host contact opt-in stays independent.
+- Keep message content and participant contact details out of emails; link directly to the authenticated conversation. Suppress pending mail for read messages, opt-outs, blocks, unverified accounts and deleted properties.
+- Flyway V23 adds preferences and a transactional PostgreSQL outbox. Leases, frozen payloads, stable provider idempotency keys and bounded retries survive restarts without tying chat writes to email availability.
+- Add PostgreSQL/HTTP and UI regression tests for coalescing, cooldown, suppression, retry/restart races, settings isolation and failure recovery. No geocoding configuration or implementation changes.
+- Bounce/delivery webhooks and abuse reporting remain follow-up work.
+
+## 2026-09-23 â€” LocationIQ owner address lookup
+
+- Replace Geoapify with LocationIQ for country â†’ city â†’ street entry. Keep the selected city's geographic bounds and search only road records, with the city included in each query.
+- Remove the Catalan-prefix fallback. Deduplicate road segments and reject neighboring-city/POI results; each uncached street lookup uses one provider request.
+- Preserve caches, mobile selection, manual house numbers, existing saved addresses and PostgreSQL-only guest search.
+- Add backend request pacing, clear quota errors and visible LocationIQ attribution. No database migration.
+
+## 2026-09-23 â€” Guest/host inbox and participant blocking
+
+- Connect search's **Write to host**, a Messages tab with unread counts and the owner's account-level opt-in control. No external listing is required to communicate.
+- Add `/messages.html`: login/registration, paginated conversations/history, optional stay dates, plain-text messages and block/unblock, in EN/ES/CA/RU. Mobile uses separate list and thread panels.
+- Preserve enquiry context through login and same-browser email verification. Keep drafts and uncertain-send keys scoped to the account; retries do not duplicate messages and polling does not skip concurrent replies.
+- Acknowledge read only for visible, focused history at its latest messages. API errors remain visible next to the relevant controls.
+- Add a strict Worker messaging proxy with session-cookie forwarding, Origin protection and no-store responses.
+- Backend V22 adds profile-pair blocks across all properties, public contact labels and an authenticated existing-enquiry lookup; PostgreSQL tests cover blocking races and bypass attempts.
+- Add frontend CI and regression coverage for auth/context, failed sends, account isolation, read acknowledgements, opt-in and proxy protections. Geolocation implementation is unchanged.
+- Message email notifications and abuse reporting remain follow-up work.
+
+## 2026-09-23 â€” Private guest/host messaging backend
+
+- Added isolated backend `messaging` routes, service and repository plus Flyway V21.
+- Reuse verified account sessions for property conversations, text messages with optional stay dates, paginated inbox/history, unread counts and explicit read acknowledgements.
+- Host opts into new conversations (off by default); existing conversations continue after opt-out. No external listing is required. Messaging never changes physical availability or creates bookings.
+- Participant-only access keeps emails, raw contacts and exact addresses private. Deleting a property retains read-only history.
+- Database locks and idempotency keys protect retries, message ordering and unread state; per-profile database-backed limits constrain spam.
+- PostgreSQL integration tests cover authorization, privacy, dates, concurrency, pagination, retries, limits and deletion. Backend API contract is in `parrot669-backend/docs/messaging.md`.
+- Backend only: frontend screens, Worker proxy, block/report UI and message email notifications remain to be connected. Existing frontend/geolocation flows are unchanged.
+
+## 2026-09-23 â€” Host address autocomplete and persistence
+
+- Replace the Barcelona city selector with a labeled address field in create/edit forms.
+- Fetch suggestions through the authenticated Worker proxy; debounce, cancel stale queries,
+  support keyboard/touch selection and show retry/error states without losing the text.
+- Fill country/city from selection and save the complete address with the property.
+- Clear stale coordinates when text changes; keep exact addresses private to the owner.
+- Backend V19 preserves existing records and lets normalized properties use other locations;
+  guest discovery continues to read our own database.
+
+## 2026-09-23 â€” Compact responsive period layout
+
+- Desktop period controls share one row: dates, labeled nightly price and actions.
+- Mobile keeps both dates side by side, with labeled price and actions below.
+- Keep card grouping and date hints; reduce nested mobile padding to leave room for date values.
+
+## 2026-09-23 â€” Clear owner period cards on mobile
+
+- Saved availability and manual blocks are separate cards with labeled fields and a dedicated action row.
+- Price per night keeps its visible label and EUR unit even when filled.
+- Empty owner date controls show a localized hint and calendar icon without relying on native date placeholders.
+- Native date pickers and inclusive-night semantics are preserved.
+
+## 2026-09-23 â€” Inclusive owner date ranges
+
+- Owner availability and manual blocks now include the selected last night, with explicit labels and guidance in all four languages.
+- A single-night period can use the same date in both fields.
+- Convert dates only at the host UI boundary; API/database ranges and guest checkout remain exclusive.
+- Existing periods retain their covered nights and prices. Display, edit, save and deletion confirmation use consistent inclusive dates.
+- Regression tests cover single nights, repeated saves, month/year/leap-day boundaries and date changes around daylight saving time.
+
+## 2026-09-23 â€” Country and city search
+
+- Guest search now requires both country and city.
+- Country options come from distinct property countries in PostgreSQL; city options come from distinct property cities for the selected country.
+- Guest search no longer depends on an external geocoder and cannot select locations that PARROT does not currently have in its database.
+- Removed the remaining Barcelona-only filter from backend availability search; backend now filters by normalized country code plus city.
+- Cloudflare Worker proxies the public location endpoints used by the search UI.
+- Existing saved Barcelona searches are migrated client-side when Spain is the only available country.
+- Search stays disabled until both required location fields are loaded and selected.
+
+## 2026-09-22 â€” Remove duplicated dates from result cards
+
+- Removed the availability date window from every result card because the requested stay period is already visible in the search controls above the results.
+- Cards now focus on the information that actually differs between properties: identity, accommodation/capacity facts, price, host and outbound action.
+
+## 2026-09-22 â€” Product-style housing result cards
+
+- Reworked guest search results into a clearer product-card hierarchy instead of a flat stack of equally weighted metadata.
+- Cards now lead with property name and city, group accommodation type/bedrooms/sleeping places into compact facts, and give the available date window its own visual block.
+- Result dates are rendered in the current UI locale rather than raw ISO form.
+- Price is a stronger secondary focus, while host identity is intentionally quieter in the footer.
+- Published Airbnb links render as the card CTA; properties without a published external link show a subdued informational state instead of a button-like affordance.
+
+## 2026-09-22 â€” Database-enforced availability integrity
+
+- Added Flyway V13 with a PostgreSQL GiST exclusion constraint preventing overlapping `[date_from, date_to)` availability periods for the same property.
+- Migration aborts with a clear error if legacy overlapping rows already exist instead of silently deleting user data.
+- Existing application overlap checks remain for friendly validation, while PostgreSQL now closes the concurrent check-then-insert/update race.
+- PostgreSQL exclusion violations are mapped back to HTTP 409 Conflict instead of surfacing as 500 errors.
+
+## 2026-09-22 â€” Live housing filters and dirty period saves
+
+- Accommodation type now behaves as a true result filter: repeat searches always use its current selected value instead of the value captured in the previous base-search snapshot.
+- Existing host availability periods no longer show a redundant Save action while unchanged. Save appears only after dates or nightly price are edited.
+
+## 2026-09-22 â€” Remove legacy auth and simplify host account UI
+
+- Removed the pre-account edit-token migration path, legacy claim endpoint and compatibility owner routes.
+- V12 deletes any remaining unowned legacy profiles, makes `profiles.account_id` mandatory and drops `access_token_hash`.
+- Host authentication moved out of the large numbered content panel into compact top-bar Log in / Create account actions.
+- After authentication, only the account email and Log out action remain in the top bar; PARROT ID is no longer shown in the host console.
+- Cloudflare Worker now proxies only the `parrot_session` cookie for owner API calls.
+
+## 2026-09-22 â€” Editable property characteristics and stay settings
+
+- Bedrooms and sleeping places can now be edited after property creation alongside accommodation type.
+- Property characteristics are grouped separately from stay conditions: minimum stay and cleaning fee now sit with availability and nightly pricing controls.
+- Renamed the property creation label from an internal/private label to a property name, matching the fact that it is shown in guest search.
+- Guest search no longer displays minimum stay as a separate result line; backend minimum-stay enforcement is unchanged.
+
+## 2026-09-22 â€” Owner accounts and server-side sessions
+
+- Replaced frontend `profileId + editToken` authentication with email/password accounts and opaque server-side sessions.
+- Passwords are hashed with Argon2id; raw passwords and raw session tokens are never stored in PostgreSQL.
+- Host sessions use HttpOnly, SameSite=Lax cookies; production cookies are Secure and expire after 30 days. Logout invalidates the server-side session.
+- Owner mutations authorize the authenticated profile and no longer accept `X-Parrot-Token` as a security credential.
+- Added register, login, logout, `/me` and authenticated dashboard flows plus login failure rate limiting.
+- Added a one-time legacy profile claim path for existing edit-token hosts. Successful claim clears the legacy token hash.
+- Host UI now shows login/sign-up states, persists authentication across reloads via the cookie, clears host state on logout, and offers legacy migration when old credentials are found in localStorage.
+- V11 adds accounts, sessions, profile/account ownership and a reserved hashed password-reset-token table. Password reset email is intentionally not exposed until backend email delivery is connected.
+- Guest availability search remains public.
+
+## 2026-09-22 â€” Search copy and city selector cleanup
+
+- Removed the claim that host properties do not contain prices; PARROT can now store optional pricing.
+- Results without a price now say to ask the host and no longer show the indicative-price disclaimer.
+- Removed unconditional wording that assumed an external listing exists; general rental terms are attributed to the host, while external links are shown only when actually attached and published.
+- Removed minimum-stay text from the compact host property summary because the value is already visible in property settings.
+- Aligned the `Only with a price` checkbox with the other result-filter controls.
+- Added a real city selector to guest search and property creation. Barcelona is currently the only available city.
+
+## 2026-09-22 â€” External listing lifecycle and filter cleanup
+
+- Calendar sync is now shown only when an external Airbnb listing exists.
+- Deleting the external listing also deletes its Airbnb calendar atomically; migration V10 removes any already orphaned calendars.
+- Added a host checkbox to keep an Airbnb listing connected for sync while hiding its outbound link from guest search results.
+- Replaced the property Expand/Collapse text button with a compact up/down chevron control.
+- Moved accommodation type from the primary search form into the result-filter group. After an initial search, changing it immediately re-runs the search like the other filters.
+
+## 2026-09-22 â€” Persistent search, price ordering and compact host cards
+
+- Availability search now persists criteria and result filters in localStorage. Returning from the host screen restores the previous search state and automatically re-runs the last performed search.
+- Search results are sorted by final estimated stay price ascending; properties without a complete price are placed last.
+- Added estimated total price filters from/to in EUR. Changing a result filter after a search immediately re-runs it.
+- Calendar connected status is localized; Russian now shows `ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ñ‘Ð½` instead of `Connected`.
+- Calendar destructive action is labelled Delete/Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ rather than Disconnect/ÐžÑ‚ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ.
+- Enable/disable controls are visually grouped separately from calendar deletion.
+- Host property cards are collapsed by default to their main summary and expose Expand/Collapse controls; expanded state survives internal rerenders.
+
+## 2026-09-22 â€” Editable accommodation type and result filters
+
+- Accommodation type can now be changed from each property's settings together with minimum stay and cleaning fee.
+- Moved `Only with a price` out of the primary search form into a separate result-filter area, leaving room for future filters.
+- After an initial search, changing `Only with a price` immediately re-runs the same search with the new filter state.
+- Documented the host API proxy contract: browser `/api/host/*` requests are intentionally forwarded to backend `/api/*`; the different visible paths are not separate APIs.
+
+## 2026-09-22 â€” Editable property settings and calendar toggles
+
+- Minimum stay is no longer requested while creating a property; new properties default to one day and the value is editable from each property card.
+- Cleaning fee moved from the external Airbnb listing to the PARROT property, so it can be set, changed or cleared even when no external listing exists. Existing listing fees are migrated to their property.
+- External calendars can now be disabled and re-enabled without deleting the connection. Disabled calendars keep their snapshot but do not block search or run automatic sync; re-enabling refreshes immediately.
+- Calendar controls remain visible after the external Airbnb listing is removed, so an existing calendar can still be disabled, re-enabled or disconnected.
+- Host property cards are more strongly separated visually and highlight each property title.
+- Added backend smoke coverage for property settings plus calendar disable/re-enable search semantics.
+
+## 2026-09-22 â€” Search without external links and accommodation type
+
+- Properties remain in availability search after their external Airbnb listing is removed; search results return `links: []` and the guest UI explains that no external link has been added yet.
+- Added `accommodationType` with the values `entire_place` and `private_room` across property creation, owner dashboard, public profile and search results.
+- Existing properties migrate to `entire_place`.
+- Host creation uses a compact two-option select; guest search uses `Any type / Entire place / Private room`, and result cards show the selected type.
+- Added backend smoke coverage for type filtering, invalid type rejection and search after deleting an external listing.
+
+## 2026-09-22 â€” Localized Airbnb calendar links and visible errors
+
+- Airbnb iCal export links on localized hosts such as `airbnb.ru`, `airbnb.es` and `airbnb.co.uk` are accepted and normalized to `www.airbnb.com` before fetch; redirects stay disabled and lookalike hosts remain rejected.
+- Calendar connection failures, including an iCal listing-id mismatch, are now rendered directly below the calendar form instead of only in the page-level status above the property list.
+
+## 2026-09-22 â€” Harden Airbnb iCal connection
+
+- Added regression coverage confirming that a calendar listing ID must exactly match the attached Airbnb listing ID; mismatches are rejected before fetch.
+- Calendar fetches accept only `airbnb.com` and its subdomains with the exact `/calendar/ical/<listingId>.ics` path, closing lookalike-host SSRF bypasses.
+- A failed calendar reconnect keeps the last successful event snapshot and last-success timestamp, so known reservations remain blocked.
+- End-to-end smoke coverage now protects URL validation, exact listing matching and failed-reconnect behavior.
+
+## 2026-09-21 â€” Airbnb iCal synchronization
+
+- Hosts can connect an Airbnb iCal export URL after attaching the matching Airbnb listing.
+- The backend validates that the listing id inside the iCal URL matches the property's Airbnb listing id.
+- Sync happens immediately on connect, manually on demand, and automatically about once per hour.
+- Imported iCal data is normalized to event kind + date range + UID; reservation descriptions/phone fragments are not stored.
+- `Reserved` events block PARROT search for overlapping nights.
+- `Airbnb (Not available)` events are retained for host visibility but do not block PARROT physical availability.
+- Unknown summaries are retained as unknown and do not silently block availability.
+- Calendar URLs remain server-side and are never returned by dashboard/public APIs.
+
+## 2026-09-21 â€” optional pricing and interval stitching
+
+- Availability periods can carry an optional nightly price in EUR cents.
+- External listings can carry an optional cleaning fee.
+- Guest search can show all results or only results with complete pricing.
+- If any requested night has no price, the result has no price estimate; priced-only mode excludes it.
+- Price is explicitly indicative; final terms and other charges remain with the host/external listing.
+- New and edited availability periods cannot overlap.
+- Adjacent half-open periods are allowed and search now stitches them across boundaries by night.
+- Kept interval rows rather than one database row per day; requested nights are expanded only inside the search query.
+- Main-site Housing entry is visually separated from ordinary service/navigation links.
+
+## 2026-09-21 â€” owner state and date semantics
+
+- Host page now reloads properties, external listing and PARROT availability from an authenticated backend dashboard endpoint on every page load.
+- localStorage is credentials-only; it is no longer authoritative for property/listing/calendar state.
+- Search results use the owner-entered property title instead of the city name.
+- Date ranges now use hotel semantics: `[check-in, checkout)`.
+- Same-day check-in/check-out is rejected as a zero-night stay.
+- Host availability periods also require `to > from`.
+- Existing production availability rows are migrated by adding one day to the old inclusive end date, preserving their previous meaning.
+- Worker proxy allows the new owner dashboard route.
+
+## 2026-09-21 â€” Barcelona scope and deletion
+
+- Added property deletion and external-listing deletion with owner-token authorization.
+- MVP restricted to Barcelona with internal `city_code = barcelona`.
+- Search includes owner nickname but does not expose raw contact details.
+- Main navigation groups guest search and host tools under the Housing product area.
+
+## 2026-09-21 â€” capacity, minimum stay and Airbnb IDs
+
+- Added sleeping-place capacity and minimum stay.
+- Search enforces both.
+- Hosts enter an Airbnb listing ID; PARROT generates the external URL.
+- Search moved from the homepage to `/search.html`.
