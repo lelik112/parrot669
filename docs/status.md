@@ -72,7 +72,7 @@ D009 кабинета подтверждён владельцем. Послед�
 
 1. Реализовать D011 в PM-024: контакт из каждого объекта в поиске, независимо от legacy host opt-in; auth, rate limits и блокировки остаются.
 
-1. Сохранить частичный PASS PM-013 (`open` waiting и четыре языка); `close`/PM-001 positive open и смена источника ждут контролируемого Airbnb-состояния [PM-018](tasks/PM-018-qa-controlled-calendar.md), mobile — PM-015.
+2. Сохранить частичный PASS PM-013 (`open` waiting и четыре языка); `close`/PM-001 positive open и смена источника ждут контролируемого Airbnb-состояния [PM-018](tasks/PM-018-qa-controlled-calendar.md), mobile — PM-015.
 2. Борис продолжает PM-003 и подтверждает реальный путь поиска и контакта; отдельно берёт следующий QA этап PM-004/005, если доступ и claim подтверждены.
 3. PM-002 разблокирована D010: назначить реализацию внешней ссылки + честного verification status + messaging nudge; Airbnb остаётся необязательным для поиска.
 4. Борис независимо проверяет [PM-010](tasks/PM-010-auth-routes-extraction.md) по auth UI/сессиям; Игорь выпустил [PM-011](tasks/PM-011-calendar-sync-extraction.md); Борис взял независимый календарный QA в очередь. PM-012 остаётся LATER.
