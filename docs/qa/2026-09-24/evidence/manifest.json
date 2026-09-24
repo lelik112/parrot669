@@ -1,0 +1,41 @@
+{
+  "review_date": "2026-09-24",
+  "evidence_origin": "user supplied screenshots, unchanged bytes",
+  "frontend_review_ref": "be7fc39c260627822c00292523c502c7b93bb879",
+  "backend_review_ref": "b5ac2a2a266fa81bb840086928b6234d9d575f33",
+  "independent_authenticated_live_retest": "not performed; current host page requires login",
+  "files": [
+    {
+      "original_name": "Screenshot 2026-09-24 at 09.05.49.png",
+      "path": "evidence/01-street-autofill.png",
+      "bytes": 40818,
+      "width": 530,
+      "height": 341,
+      "sha256": "0a324de438fbcfa40b376427edcd3679fbe1aef618aca6997b7002712292e6b1"
+    },
+    {
+      "original_name": "Screenshot 2026-09-24 at 09.07.57.png",
+      "path": "evidence/02-manual-blocks-copy.png",
+      "bytes": 34832,
+      "width": 1000,
+      "height": 252,
+      "sha256": "e0316aab4ad45b243dbcb5385c81d80c1a8983a1c817c1dfd90299308e7b6147"
+    },
+    {
+      "original_name": "Screenshot 2026-09-24 at 09.10.22.png",
+      "path": "evidence/03-link-before-verification.png",
+      "bytes": 85564,
+      "width": 1085,
+      "height": 494,
+      "sha256": "3bc5dee134972ae788ab1e3b8bbd085b5fc27b47749d787f39a433947c565595"
+    },
+    {
+      "original_name": "Screenshot 2026-09-24 at 09.11.36.png",
+      "path": "evidence/04-verification-waiting.png",
+      "bytes": 59211,
+      "width": 1126,
+      "height": 364,
+      "sha256": "ce388c2b134bd35be2eafe9a5572645230147d98febb5ea45354ae2a37af1506"
+    }
+  ]
+}
