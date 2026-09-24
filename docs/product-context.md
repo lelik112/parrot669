@@ -289,8 +289,8 @@ Owner authentication is account/session based:
 PARROT private messaging is implemented. Under D011, every property kept in search must offer this private message path; PM-024 removes the legacy host-wide opt-in gate. Publishing direct phone/email remains a separate future decision.
 
 Desired future owner contact options:
-- PARROT message/contact relay;
-- public contact if host explicitly opts in;
+- PARROT private messaging, available from every searchable property under D011;
+- direct public phone/email only if the host explicitly opts in, subject to a separate decision;
 - both;
 - neither.
 
