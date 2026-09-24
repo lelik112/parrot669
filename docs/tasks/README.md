@@ -21,14 +21,14 @@
 | [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | in review — desktop QA частично подтверждён, P2 дефект PM-013, остальная приёмка открыта | Денис / Developer; QA Борис |
 | [PM-002](PM-002-link-publication.md) | Публикация внешней ссылки; PRODUCT-001 | P1 | blocked — decision | Не заявлен; решение ведёт Марк |
 | [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — QA access | Борис / QA; возобновление не подтверждено |
-| [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — нужен нативный ретест | Денис / Developer |
-| [PM-005](PM-005-closed-dates-copy.md) | Понятная форма закрытых дат; BUG-014 | P2 | in review | Денис / Developer |
+| [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — Chrome QA частично PASS, Safari ждёт PM-014 | Денис / Developer; QA Борис |
+| [PM-005](PM-005-closed-dates-copy.md) | Понятная форма закрытых дат; BUG-014 | P2 | in review — desktop RU/EN/ES/CA QA PASS, mobile открыт | Денис / Developer; QA Борис |
 | [PM-006](PM-006-email-acceptance.md) | Письма и полный цикл восстановления | P1 | planned | Не заявлен |
 | [PM-007](PM-007-mobile-acceptance.md) | Приёмка основных путей на мобильных | P1 | planned | Не заявлен |
 | [PM-008](PM-008-pilot.md) | План пилота и исходные показатели | P1 | planned | Марк / PM — постановка; запуск не начат |
 | [PM-009](PM-009-team-identity.md) | Состав команды и формат идентификации | P2 | done | Марк / Product Manager |
-| [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | P2 | in review — backend released, QA Борису назначена | Игорь / Developer; QA Борис |
-| [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | P2 | in review — backend released, QA Борис взял в очередь | Игорь / Developer; QA Борис |
+| [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | P2 | in review — текущий сеанс сохраняется, полный auth ждёт PM-016/017 | Игорь / Developer; QA Борис |
+| [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | P2 | in review — sync/toggle QA PASS, delete/connect/search открыты | Игорь / Developer; QA Борис |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
 | [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in review — QA `open` waiting PASS, `close` ждёт PM-018 | Марк / временный исполнитель; QA Борис |
 | [PM-014](PM-014-qa-native-autofill-environment.md) | Нативный Safari/autofill для PM-004 | P2 | blocked — браузерный профиль | Борис / QA после доступа; Алексей — среда |
