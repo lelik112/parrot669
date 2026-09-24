@@ -48,7 +48,7 @@
 Новый backend, новый trust badge, публичные данные, фото, Instagram, обещание удаления аккаунта как готовой функции или редизайн гостевого поиска.
 
 ## Dependencies
-Источники: [product-context](../product-context.md), [PM-003](PM-003-contact-acceptance.md), [PM-001](PM-001-calendar-control-dates.md). Первая реализация — PM-020; PM-021/021 не обязательны для неё.
+Источники: [product-context](../product-context.md), [PM-003](PM-003-contact-acceptance.md), [PM-001](PM-001-calendar-control-dates.md). Первая реализация — PM-020; PM-021/022 не обязательны для неё.
 
 ## Evidence
 Предложение Алекса в [team-chat](../team-chat.md); текущие /host.html, /messages.html и существующий backend public profile. Наблюдения пользователей о проблеме навигации пока не собраны.
