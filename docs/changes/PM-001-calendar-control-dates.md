@@ -1,0 +1,7 @@
+# PM-001 — saved Airbnb calendar control dates
+
+- **Agent:** Денис / Developer
+- **Related task:** [PM-001](../tasks/PM-001-calendar-control-dates.md); backend contract in `lelik112/parrot669-backend/docs/calendar-ownership-verification.md`.
+- **Change:** In the host calendar panel select a first and last night (both included), start a persisted challenge, then follow the server's specific instruction to close all free selected nights or reopen all owner-blocked selected nights. Display selected dates, action, retries and result after reload in EN, ES, CA and RU. Show an explanation for reserved and mixed baseline ranges. A successful check suggests restoring the temporary Airbnb edit.
+- **Backend:** Migration V25 stores selected dates and action on the existing verification attempt. The initial complete iCal snapshot determines the action. Only a complete change of the same saved range with the same source can verify; changes elsewhere, partial changes, a reservation or an invalid feed cannot. Old v1 verified rows do not count as selected-date proof. Existing calendar connection, sync/import, enable/disable and removal remain in their original implementation.
+- **Validation:** 108 frontend tests pass, including required dates, saved request body, reload, actions and rejected baselines. Backend PostgreSQL tests run in PR CI. Independent QA with a controlled iCal source remains necessary; no real owner's Airbnb dates are modified by the app.

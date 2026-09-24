@@ -6,7 +6,8 @@ const {JSDOM}=require('jsdom');
 const source=fs.readFileSync(path.join(__dirname,'../public/assets/calendar-verification.js'),'utf8');
 const id='11111111-1111-4111-8111-111111111111';
 const required={status:'required',attemptsCount:0,maxAttempts:3,canStart:true,canCheck:false};
-const ready={...required,status:'pending',attemptId:'attempt-1',attemptsCount:1,baselineReady:true,canStart:false,canCheck:true,expiresAt:'2030-09-23T12:30:00Z'};
+const ready={...required,status:'pending',attemptId:'attempt-1',attemptsCount:1,baselineReady:true,canStart:false,canCheck:true,
+  selectedFrom:'2030-11-01',selectedTo:'2030-11-02',expectedAction:'close',expiresAt:'2030-09-23T12:30:00Z'};
 const waiting={...ready,canCheck:false,checksCount:1,nextCheckAt:'2030-09-23T12:05:00Z'};
 const verified={...waiting,status:'verified',verifiedAt:'2030-09-23T12:05:00Z',nextCheckAt:null};
 const flush=async()=>{for(let i=0;i<5;i++)await new Promise(resolve=>setImmediate(resolve));};
@@ -25,6 +26,7 @@ async function harness(t,{handler=()=>required,language='ru',enabled=true}={}){
   w.document.querySelector('main').append(panel.node);t.after(()=>{panel.dispose();dom.window.close();});await flush();
   return {w,panel,calls,timers,statuses,button:()=>panel.node.querySelector('button'),unauthorized:()=>unauthorized,
     text:()=>panel.node.textContent,click:async()=>{panel.node.querySelector('button').click();await flush();},
+    choose:(first='2030-11-01',last='2030-11-02')=>{const [from,to]=panel.node.querySelectorAll('input');from.value=first;to.value=last;},
     tick:async()=>{const [key,value]=timers.entries().next().value;timers.delete(key);value.fn();await flush();},
     visible:value=>{visibility=value;w.document.dispatchEvent(new w.Event('visibilitychange'));}};
 }
@@ -37,12 +39,14 @@ test('start captures the baseline before Check; double click sends once and veri
     return state;
   }});
   assert.match(h.text(),/Требуется проверка/);
+  h.choose();
   await h.click();await h.click();
   assert.equal(h.calls.filter(c=>c.method==='POST').length,1);
   assert.equal(h.button().disabled,true);
   state=ready;pending.resolve(ready);await flush();
   assert.equal(h.button().textContent,'Проверить');
-  assert.match(h.text(),/Можно как закрыть, так и открыть даты/);
+  assert.match(h.text(),/Закройте в Airbnb все выбранные ночи/);
+  assert.match(h.text(),/2030-11-01 – 2030-11-02/);
   await h.click();
   assert.match(h.text(),/✓ Управление календарём подтверждено/);
   assert.equal(h.button().hidden,true);
@@ -50,6 +54,7 @@ test('start captures the baseline before Check; double click sends once and veri
   assert.equal(h.timers.size,0);
   assert.deepEqual(h.calls.filter(c=>c.method==='POST').map(c=>c.path),[
     `/calendars/${id}/verification/start`,`/calendars/${id}/verification/check`]);
+  assert.deepEqual(JSON.parse(h.calls.find(c=>c.path.endsWith('/start')).body),{from:'2030-11-01',to:'2030-11-02'});
 });
 
 test('pending status polls only GET; hidden pages pause polling and never schedule provider checks in the browser',async t=>{
@@ -71,6 +76,7 @@ test('429 reloads the blocked state; cooldown displays the deadline and refreshe
       throw Object.assign(Error('blocked'),{status:429});
     }return state;
   }});
+  h.choose();
   await h.click();
   assert.match(h.text(),/временно заблокирована/);assert.match(h.text(),/Попытка 3 из 3/);
   assert.match(h.text(),/Новая попытка будет доступна после/);
@@ -107,7 +113,28 @@ test('disabled calendars show no verification actions; expired sessions stop pol
 });
 
 test('verification states are translated in EN, ES, CA and RU',async t=>{
-  for(const [language,label] of [['en','Ownership verified'],['es','Control del calendario verificado'],['ca','Control del calendari verificat'],['ru','Управление календарём подтверждено']]){
+  for(const [language,label] of [['en','Calendar control verified'],['es','Control del calendario verificado'],['ca','Control del calendari verificat'],['ru','Управление календарём подтверждено']]){
     const h=await harness(t,{language,handler:()=>verified});assert(h.text().includes(label));
   }
+});
+
+test('start requires inclusive dates and rejected booked nights can be selected again',async t=>{
+  let state=required;
+  const h=await harness(t,{handler:call=>call.path.endsWith('/start')?(state={...ready,status:'rejected',baselineReady:false,canCheck:false,
+    canStart:true,expectedAction:null,lastError:'choose_unreserved_dates'}):state});
+  await h.click();assert.match(h.text(),/Выберите будущие даты/);
+  assert.equal(h.calls.filter(c=>c.method==='POST').length,0);
+  h.choose('2030-11-02','2030-11-01');await h.click();
+  assert.equal(h.calls.filter(c=>c.method==='POST').length,0);
+  h.choose();await h.click();
+  assert.match(h.text(),/есть бронь/);
+  assert.equal(h.panel.node.querySelector('.calendar-verification-dates').hidden,false);
+  assert.match(h.text(),/2030-11-01 – 2030-11-02/);
+});
+
+test('reloaded pending action remains precise and does not allow editing challenge dates',async t=>{
+  const h=await harness(t,{handler:()=>({...ready,expectedAction:'open'})});
+  assert.match(h.text(),/Откройте все выбранные ночи/);
+  assert.equal(h.panel.node.querySelector('.calendar-verification-dates').hidden,true);
+  assert.equal(h.button().textContent,'Проверить');
 });

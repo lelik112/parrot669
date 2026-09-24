@@ -1649,6 +1649,11 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-calendar-status .calendar-verification strong{font-size:15px;color:#e2e9e5}
 .host-calendar-status .calendar-verification[data-status="verified"] strong{color:var(--lime)}
 .calendar-verification .button{justify-self:start;min-height:44px;white-space:normal}
+.calendar-verification-dates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.calendar-verification-dates[hidden]{display:none}
+.calendar-verification-dates label{display:grid;gap:6px;color:#aeb9b5;font-size:12px}
+.calendar-verification-dates input{min-width:0;width:100%;min-height:44px;padding:10px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:#0c1719;color:#e2e9e5;color-scheme:dark;font:inherit}
+.calendar-verification .calendar-verification-selected{color:var(--lime)}
 @media(max-width:640px){.calendar-verification .button{width:100%}}
 @media(max-width:640px){
   .host-calendar-form{grid-template-columns:1fr}
