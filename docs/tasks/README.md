@@ -19,8 +19,8 @@
 | [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | planned | Не заявлен |
 | [PM-002](PM-002-link-publication.md) | Публикация внешней ссылки; PRODUCT-001 | P1 | blocked — decision | Не заявлен; решение ведёт Марк |
 | [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — QA access | Борис / QA; возобновление не подтверждено |
-| [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in progress | Денис / Developer |
-| [PM-005](PM-005-closed-dates-copy.md) | Понятная форма закрытых дат; BUG-014 | P2 | in progress | Денис / Developer |
+| [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — нужен нативный ретест | Денис / Developer |
+| [PM-005](PM-005-closed-dates-copy.md) | Понятная форма закрытых дат; BUG-014 | P2 | in review | Денис / Developer |
 | [PM-006](PM-006-email-acceptance.md) | Письма и полный цикл восстановления | P1 | planned | Не заявлен |
 | [PM-007](PM-007-mobile-acceptance.md) | Приёмка основных путей на мобильных | P1 | planned | Не заявлен |
 | [PM-008](PM-008-pilot.md) | План пилота и исходные показатели | P1 | planned | Марк / PM — постановка; запуск не начат |

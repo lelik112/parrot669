@@ -1,5 +1,16 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — Host address lookup and closed-date UI
+
+- **Agent:** Денис
+- **Role:** Developer
+- **Change:** Present city/street comboboxes as place searches (`type=search`, search names/IDs and translated search labels) to reduce competition with contact-address autofill. Keep `autocomplete=off`, native keyboard/touch behavior and the normalized provider selection. Detect change-only autofill and reject visible values that no longer match the selected country/city/street before saving. Do not repeat lookups on a normal change following input.
+- **Related task:** [PM-004 / BUG-013](tasks/PM-004-street-autofill.md), [PM-005 / BUG-014](tasks/PM-005-closed-dates-copy.md).
+- Rename manual closures to neutral “Closed dates” / «Закрытые даты» in EN/ES/CA/RU; remove error-like styling, explain the action before saving, label first/last included nights, distinguish saved closures, and show save/delete confirmation next to the form. Keep existing API dates, prices and availability behavior.
+- 106 frontend tests pass, including six added cases covering silent autofill in create/edit, keyboard selection and all four closed-date state transitions. Existing overlap, inclusive-date, price, touch and proxy tests pass.
+- Browser-native autofill with a saved address and real mobile Safari remain unverified; the available cloud host page requires sign-in. Search semantics are a targeted mitigation, not proof that every browser suppresses its native popup. Both tasks remain in review for independent QA. Chromium's [search field parser](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/autofill/core/browser/form_parsing/search_field_parser.cc) informs this choice; it is not a cross-browser guarantee.
+- Frontend-only change. Backend, migrations, synchronization, selected-date verification (PM-001) and external-link publication (PM-002) are untouched during parallel backend refactoring. Publication evidence follows after CI/deployment.
+
 ## 2026-09-24 — Named team and mandatory change identification
 
 - **Agent:** Марк

@@ -65,7 +65,10 @@
       const box=document.createElement("div");
       box.className="host-address-lookup host-address-"+kind;
       const label=document.createElement("label"), title=document.createElement("span"), input=document.createElement("input");
-      input.id=id+"-"+kind;input.name="address"+kind;input.type="text";input.maxLength=256;input.autocomplete="off";
+      // This is a place search, not a contact-address field for browser autofill.
+      // Keep native search semantics and explicit search names alongside the combobox.
+      input.id=id+"-search-"+kind;input.name="search-"+kind;input.type="search";input.maxLength=256;input.autocomplete="off";
+      input.spellcheck=false;input.setAttribute("enterkeyhint","search");
       input.setAttribute("role","combobox");input.setAttribute("aria-autocomplete","list");
       input.setAttribute("aria-controls",input.id+"-options");input.setAttribute("aria-expanded","false");
       input.setAttribute("aria-describedby",input.id+"-status");
@@ -81,7 +84,7 @@
       const retry=document.createElement("button");
       retry.type="button";retry.className="text-button host-address-retry";retry.hidden=true;
       box.append(label,dropdown,status,retry);
-      let timer,controller,sequence=0,suggestions=[],current=-1,selected=null,statusKey="",errorState=false;
+      let timer,controller,sequence=0,suggestions=[],current=-1,selected=null,statusKey="",errorState=false,observedValue="";
       function statusMessage(key,error=false){
         statusKey=key;errorState=error;status.textContent=key?tr(key):"";status.hidden=!key;
         status.className="host-address-status"+(error?" host-inline-error":"");
@@ -89,7 +92,7 @@
       function cancel(){clearTimeout(timer);controller?.abort();sequence++;input.setAttribute("aria-busy","false");}
       function close(){dropdown.hidden=true;input.setAttribute("aria-expanded","false");input.removeAttribute("aria-activedescendant");current=-1;}
       function reset(){
-        cancel();close();input.value="";selected=null;suggestions=[];retry.hidden=true;
+        cancel();close();input.value="";observedValue="";selected=null;suggestions=[];retry.hidden=true;
         input.removeAttribute("aria-invalid");statusMessage("");
       }
       function scope(){
@@ -110,6 +113,7 @@
       }
       function choose(value){
         cancel();selected=value;input.value=kind==="city"?value.city:value.street;
+        observedValue=input.value;
         input.removeAttribute("aria-invalid");retry.hidden=true;statusMessage("");close();
         onSelect(value);input.focus();
       }
@@ -145,11 +149,15 @@
           retry.hidden=error.status===401;if(error.status===401)onUnauthorized();
         }finally{if(version===sequence)input.setAttribute("aria-busy","false");}
       }
-      input.addEventListener("input",()=>{
+      function edited(){
+        if(input.value===observedValue)return;
+        observedValue=input.value;
         cancel();close();selected=null;suggestions=[];retry.hidden=true;input.removeAttribute("aria-invalid");onEdit();
         statusMessage(input.value.trim().length<3 && input.value.trim()?"addressMore":"");
         if(scope())timer=setTimeout(search,700);
-      });
+      }
+      input.addEventListener("input",edited);
+      input.addEventListener("change",edited);
       input.addEventListener("focus",()=>{
         if(selected)return;
         const path=scope(),values=path?cached(path):null;
@@ -178,7 +186,7 @@
       document.addEventListener("pointerdown",outside);
       retry.addEventListener("click",search);
       function updateLanguage(){
-        title.textContent=tr(kind==="city"?"cityLabel":"addressStreetLabel");
+        title.textContent=tr(kind==="city"?"addressCitySearch":"addressStreetSearch");
         input.placeholder=tr(kind==="city"?"addressCityPlaceholder":"addressStreetPlaceholder");
         list.setAttribute("aria-label",tr(kind==="city"?"addressChooseCity":"addressChooseStreet"));
         retry.textContent=tr("addressRetry");statusMessage(statusKey,errorState);
@@ -245,8 +253,10 @@
       getValue(){
         if(!active)return undefined;
         if(!country.value){country.setAttribute("aria-invalid","true");country.focus();throw new Error(tr("addressChooseCountry"));}
-        if(!cityValue){city.invalid();throw new Error(tr("addressChooseCity"));}
-        if(!streetValue){street.invalid();throw new Error(tr("addressChooseStreet"));}
+        // Autofill can change a visible value without a normal input event.
+        // Never submit an old normalized selection behind different field text.
+        if(!cityValue || !validLocation(cityValue) || city.input.value!==cityValue.city){city.invalid();throw new Error(tr("addressChooseCity"));}
+        if(!streetValue || !validLocation(streetValue) || street.input.value!==streetValue.street){street.invalid();throw new Error(tr("addressChooseStreet"));}
         const number=house.value.trim();
         if(!number || number.length>64){house.setAttribute("aria-invalid","true");house.focus();throw new Error(tr("addressHouseRequired"));}
         const sameBuilding=number===streetValue.houseNumber;
