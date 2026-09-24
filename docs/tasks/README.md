@@ -36,10 +36,11 @@
 | [PM-016](PM-016-qa-second-session-access.md) | Второй изолированный сеанс для PM-003/010 | P1 | blocked — второй сеанс | Борис / QA после доступа; Алексей — участник |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | Тестовые ящики для PM-006 | P1 | blocked — почтовый доступ | Борис / QA после доступа; Алексей — ящик |
 | [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | blocked — внешнее изменение/источник | Борис / QA после доступа; Алексей — Airbnb |
-| [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | in review — IA подготовлена, ждёт подтверждения владельца | Марк / Product Manager |
-| [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | in review — desktop/keyboard partial PASS; BUG-016 scroll restore, touch PM-015 | Денис / Developer; QA Борис |
-| [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | P2 | in progress — существующее имя хозяина | Денис |
+| [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | done — D009 принят владельцем | Марк / Product Manager |
+| [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | in review — desktop/keyboard partial PASS; BUG-016 по возврату позиции, touch ждёт PM-015 | Денис / Developer; QA Борис |
+| [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | P2 | in progress — MVP на существующем имени хозяина | Денис / Developer |
 | [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | later | planned — LATER, зависит от PM-002/021 | Не назначен |
+| [PM-023](PM-023-guest-message-onboarding.md) | Путь гостя к первому сообщению | P1 | planned — NEXT после активной работы PM-020/021 | Не назначен |
 
 Статусы задач: `planned`, `in progress`, `blocked`, `in review`, `done`, `rejected`. У `blocked` обязательно указаны причина и следующее действие. Статусы фич в roadmap используют отдельный короткий перечень из поручения владельца.
 
