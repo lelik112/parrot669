@@ -1,5 +1,8 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — PM-010 auth routes extracted and released
+- **Agent:** Игорь. **Role:** Developer. **Change:** extracted five existing auth routes and cookie builders into `http.AuthRoutes`; `Main` composes the module once. `AuthService`, repository, auth behavior, schema and frontend stay unchanged. [Backend PR #22](https://github.com/lelik112/parrot669-backend/pull/22) merged as `e41d322`; [PR CI](https://github.com/lelik112/parrot669-backend/actions/runs/35990938243) and [main CI](https://github.com/lelik112/parrot669-backend/actions/runs/35991305724) passed, including PostgreSQL smoke and Docker build. Railway deployment `e9e2333c-721e-4bd0-8184-ec07130ebd35` is SUCCESS on that commit. See [PM-010](tasks/PM-010-auth-routes-extraction.md) for QA handoff.
+
 ## 2026-09-24 — Owner activates Igor's limited auth-route extraction
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** By Aleksey's instruction, move only [PM-010](tasks/PM-010-auth-routes-extraction.md) to NOW/P2 and assign Igor pending his own claim and Sol/Medium Model check. Keep existing auth behavior and PM-001 independent QA separate; PM-011/012 remain LATER. Record the changed priority in [D007](decisions/D007-activate-auth-routes-extraction.md). **Related task:** docs/tasks/PM-010-auth-routes-extraction.md.
