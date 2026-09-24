@@ -1,5 +1,10 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — PM-019 cabinet IA proposal prepared
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** Prepared [D009](decisions/D009-host-cabinet-ia.md): keep current Search / Host / Messages navigation; keep availability/calendar controls with each property, owner messaging opt-in in Host, and Inbox in Messages. No empty Dashboard/Profile tabs; Account remains technical. PM-019 is in review pending Aleksey's confirmation; PM-020 stays planned and unassigned until then. PM-002/link visibility is explicitly outside this scope. **Related task:** [PM-019](tasks/PM-019-host-cabinet-ia.md).
+
+
 ## 2026-09-24 — Host cabinet backlog staged, no implementation claim
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** By Aleksey's request, split Alex's cabinet proposal into [PM-019](tasks/PM-019-host-cabinet-ia.md) IA contract and [PM-020](tasks/PM-020-host-cabinet-navigation.md) navigation of current flows (NEXT/P2), plus [PM-021](tasks/PM-021-private-host-profile.md) personal data and [PM-022](tasks/PM-022-public-host-profile.md) public view (LATER). [D008](decisions/D008-cabinet-sequencing.md) records sequencing; no developer is assigned and no field/publication scope is approved. **Related task:** PM-019–PM-022.
