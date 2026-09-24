@@ -15,7 +15,7 @@
 | [D006](D006-backend-refactor-backlog.md) | Исходный порядок оставшихся backend extraction этапов после PM-001 | accepted; PM-010 updated by D007 | PM priority от 2026-09-24 по handoff Игоря |
 | [D007](D007-activate-auth-routes-extraction.md) | Только PM-010 активирована для Игоря; календарные этапы остаются LATER | accepted | Прямое поручение владельца 2026-09-24 |
 | [D008](D008-cabinet-sequencing.md) | Этапность кабинета: сначала действующий путь, профили отдельно | accepted — только порядок backlog | Просьба владельца нарезать задачи 2026-09-24 |
-| [D009](D009-external-link-independent-verification.md) | Внешняя ссылка независима от calendar verification | accepted | Решение владельца 2026-09-24; supersedes D003 |
+| [D010](D010-external-link-independent-verification.md) | Внешняя ссылка независима от calendar verification | accepted | Решение владельца 2026-09-24; supersedes D003 |
 | [D009](D009-host-cabinet-ia.md) | Минимальная IA: Search / Host / Messages; профиль и Dashboard отдельно | proposed — ждёт подтверждения владельца | PM-019, 2026-09-24 |
 
 У каждой записи: Decision, Problem, Reason, Alternatives, Rejected, Date, источник и связь с задачей. Незаписанные исторические альтернативы обозначаются как неизвестные, а не восстанавливаются из предположений.
