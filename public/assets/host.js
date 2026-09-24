@@ -90,6 +90,47 @@ let authMode = "login";
 let sessionLoading = true;
 let authBusy = false;
 const expandedPropertyIds = new Set();
+const hostShortcuts = document.getElementById("host-shortcuts");
+let accountId = null;
+let unsavedHostChanges = false;
+let confirmedExit = false;
+const returnKey = id => `parrot669-host-return:${id}`;
+const navCopy = {
+  en:{navProperties:"My properties",navTools:"Host tools",discardChanges:"Discard unsaved changes and leave this page?"},
+  es:{navProperties:"Mis viviendas",navTools:"Herramientas del propietario",discardChanges:"¿Descartar los cambios sin guardar y salir de esta página?"},
+  ca:{navProperties:"Els meus habitatges",navTools:"Eines del propietari",discardChanges:"Vols descartar els canvis sense desar i sortir d'aquesta pàgina?"},
+  ru:{navProperties:"Мои объекты",navTools:"Инструменты владельца",discardChanges:"Сбросить несохранённые изменения и уйти с этой страницы?"}
+};
+Object.entries(navCopy).forEach(([language,values])=>Object.assign(copy[language],values));
+document.getElementById("property-panel").addEventListener("input", event=>{
+  if(event.target.closest("form"))unsavedHostChanges=true;
+});
+document.getElementById("property-panel").addEventListener("change", event=>{
+  if(event.target.closest("form"))unsavedHostChanges=true;
+});
+document.addEventListener("click",event=>{
+  const link=event.target.closest("a[href]");
+  if(!link || !link.isConnected || link.origin!==window.location.origin || link.pathname===window.location.pathname)return;
+  if(unsavedHostChanges && !confirm(tr("discardChanges"))){event.preventDefault();return;}
+  confirmedExit=true;
+  if(link.pathname==="/messages.html" && state.authenticated && accountId){
+    try{sessionStorage.setItem(returnKey(accountId),JSON.stringify({ids:[...expandedPropertyIds],scrollY:window.scrollY}));}catch{}
+  }
+});
+window.addEventListener("beforeunload",event=>{
+  if(unsavedHostChanges && !confirmedExit){event.preventDefault();event.returnValue="";}
+});
+function restoreHostContext(){
+  if(!accountId)return;
+  try{
+    const key=returnKey(accountId),saved=JSON.parse(sessionStorage.getItem(key)||"null");
+    sessionStorage.removeItem(key);
+    if(!saved || !Array.isArray(saved.ids))return;
+    const owned=new Set(state.properties.map(property=>property.id));
+    saved.ids.filter(id=>typeof id==="string" && owned.has(id)).forEach(id=>expandedPropertyIds.add(id));
+    return Number.isFinite(saved.scrollY) && saved.scrollY>=0 ? saved.scrollY : null;
+  }catch{}
+}
 
 const blockCopy = {
   en: {availability:"Available", availabilityHelp:"Dates offered in search. Manual blocks and imported reservations take priority.", unavailable:"Closed dates", unavailableHelp:"Block dates for your own use or other bookings. No price. Existing availability and prices are kept; blocked nights are excluded from search.", blockFrom:"Unavailable from", blockTo:"Available again on", addBlock:"Close dates", noBlocks:"No closed dates yet.", blockSaved:"Dates closed for search.", blockDeleted:"Dates reopened. Existing availability and reservation rules apply.", blockOverlap:"These dates overlap an existing manual block. Edit that block instead.", deleteBlockConfirm:(from,to)=>`Remove the block ${from} → ${to}? These dates may appear in search again.`, blockDateError:"The end date must be after the start date. The end date is not blocked."},
@@ -192,6 +233,7 @@ function applyLanguage(next){
     node.placeholder = tr(node.dataset.hostPlaceholder);
   });
   langButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.hostLang === lang));
+  hostShortcuts.setAttribute("aria-label",tr("navTools"));
   updateAuthDialog();
   newPropertyAddress.updateLanguage();
   renderProperties();
@@ -278,6 +320,7 @@ function setFormError(form, text = ""){
 }
 
 function setAuthenticated(user){
+  accountId=user?.accountId || null;
   window.ParrotMessaging?.setUser(user);
   state = {
     ...emptyState(),
@@ -293,6 +336,7 @@ function renderAuthState(){
   hostAuthLinks.hidden = sessionLoading || ready;
   hostAccountSession.hidden = !ready;
   propertyPanel.hidden = !ready;
+  hostShortcuts.hidden = !ready;
   hostAccountEmail.textContent = ready ? (state.username || state.accountEmail) : "";
   hostAccountEmail.title = ready ? state.accountEmail : "";
   if (ready && authDialog.open) closeAuth();
@@ -340,7 +384,9 @@ async function syncDashboard(){
       unavailability: Array.isArray(property.unavailability) ? property.unavailability : [],
       calendars: Array.isArray(property.calendars) ? property.calendars : []
     }));
+    const previousScroll=restoreHostContext();
     renderProperties();
+    if(previousScroll!==null && previousScroll!==undefined)requestAnimationFrame(()=>window.scrollTo(0,previousScroll));
     message("");
   } catch (error) {
     if (error.status === 401) {
@@ -540,6 +586,7 @@ propertyForm.addEventListener("submit", async event => {
 
 resetButton.addEventListener("click", async () => {
   if (resetButton.disabled) return;
+  if (unsavedHostChanges && !confirm(tr("discardChanges"))) return;
   resetButton.disabled = true;
   try {
     await api("/auth/logout", {method:"POST"});
@@ -551,7 +598,10 @@ resetButton.addEventListener("click", async () => {
     }
   }
   state = emptyState();
-  newPropertyAddress.reset();
+  if(accountId){try{sessionStorage.removeItem(returnKey(accountId));}catch{}}
+  accountId=null;
+    newPropertyAddress.reset();
+    unsavedHostChanges=false;
   expandedPropertyIds.clear();
   renderAuthState();
   renderProperties();
@@ -981,6 +1031,7 @@ function renderUnavailability(property, feedbackKey = null){
 }
 
 function renderProperties(blockFeedback = null){
+  unsavedHostChanges=false;
   if (!propertiesNode) return;
   calendarVerificationPanels.splice(0).forEach(panel=>panel.dispose());
   propertyAddressEditors.forEach(editor => editor.dispose());
@@ -1022,6 +1073,7 @@ function renderProperties(blockFeedback = null){
     togglePropertyButton.setAttribute("aria-label",tr(expanded?"collapseProperty":"expandProperty"));
     togglePropertyButton.setAttribute("aria-expanded",String(expanded));
     togglePropertyButton.addEventListener("click",()=>{
+      if(unsavedHostChanges && !confirm(tr("discardChanges")))return;
       if(expanded) expandedPropertyIds.delete(property.id);
       else expandedPropertyIds.add(property.id);
       renderProperties();
@@ -1391,7 +1443,11 @@ function renderProperties(blockFeedback = null){
   });
 }
 
-langButtons.forEach(btn => btn.addEventListener("click", () => applyLanguage(btn.dataset.hostLang)));
+langButtons.forEach(btn => btn.addEventListener("click", () => {
+  if(btn.dataset.hostLang===lang)return;
+  if(unsavedHostChanges && !confirm(tr("discardChanges")))return;
+  applyLanguage(btn.dataset.hostLang);
+}));
 
 applyLanguage(lang);
 boot();

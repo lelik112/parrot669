@@ -82,7 +82,9 @@ function setup(routes = {}, search = '') {
     },
     navigator: {language:'en'},
     localStorage: {getItem() {return null;}, setItem() {}},
-    window: {location: {search, pathname:'/host', hash:''}},
+    window: {location: {search, pathname:'/host', hash:'', origin:'https://parrot669.com'},addEventListener() {},scrollY:380,scrollTo(x,y){this.restoredScroll=y;}},
+    sessionStorage: {values:new Map(),setItem(key,value){this.values.set(key,value);},getItem(key){return this.values.get(key)||null;},removeItem(key){this.values.delete(key);}},
+    requestAnimationFrame: fn=>fn(),
     history: {replaceState() {}},
     Headers, URLSearchParams, AbortController, setTimeout, clearTimeout, confirm: () => true,
     FormData: class {
@@ -836,4 +838,23 @@ test('property name can be edited, errors preserve it, successful save refreshes
   assert.equal(app.run('state.properties[0].title'),'Новый дом 🏠 <test>');
   assert.equal(app.nodes.get('host-properties').children[0].querySelector('strong').textContent,'Новый дом 🏠 <test>');
   assert.equal(app.run('state.properties[0].availability[0].id'),'period-1');
+});
+
+test('host navigation asks before dropping a draft and restores only this account’s object context',async()=>{
+  const app=setup();await settle();
+  assert.equal(app.nodes.get('host-shortcuts').hidden,true);
+  app.run('setAuthenticated({accountId:"host-a",email:"host@example.test"});renderAuthState();state.properties=[{id:"property-1"}];expandedPropertyIds.add("property-1");unsavedHostChanges=true');
+  assert.equal(app.nodes.get('host-shortcuts').hidden,false);
+  app.run('confirm=()=>false');
+  const click=()=>app.run('document.emit("click",{target:{closest:()=>({isConnected:true,origin:"https://parrot669.com",pathname:"/messages.html"})},preventDefault(){this.cancelled=true}})');
+  const rejected=await click();assert.equal(rejected,undefined);
+  assert.equal(app.run('sessionStorage.values.size'),0);
+  app.run('confirm=()=>true');await click();
+  assert.equal(app.run('JSON.parse(sessionStorage.getItem("parrot669-host-return:host-a")).scrollY'),380);
+  const scroll=app.run('expandedPropertyIds.clear();state.properties=[{id:"property-1"}];restoreHostContext()');
+  assert.equal(app.run('expandedPropertyIds.has("property-1")'),true);
+  assert.equal(scroll,380);
+  assert.equal(app.run('sessionStorage.values.size'),0);
+  app.run('sessionStorage.setItem("parrot669-host-return:host-a",JSON.stringify({ids:["property-1"],scrollY:300}));setAuthenticated({accountId:"host-b",email:"b@example.test"});expandedPropertyIds.clear();restoreHostContext()');
+  assert.equal(app.run('expandedPropertyIds.size'),0);
 });
