@@ -36,6 +36,10 @@
 | [PM-016](PM-016-qa-second-session-access.md) | Второй изолированный сеанс для PM-003/010 | P1 | blocked — второй сеанс | Борис / QA после доступа; Алексей — участник |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | Тестовые ящики для PM-006 | P1 | blocked — почтовый доступ | Борис / QA после доступа; Алексей — ящик |
 | [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | blocked — внешнее изменение/источник | Борис / QA после доступа; Алексей — Airbnb |
+| [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | planned — NEXT, только продуктовая карта | Марк / Product Manager |
+| [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | planned — NEXT, после PM-019 | Не назначен |
+| [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | later | planned — LATER, scope не принят | Не назначен |
+| [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | later | planned — LATER, зависит от PM-002/021 | Не назначен |
 
 Статусы задач: `planned`, `in progress`, `blocked`, `in review`, `done`, `rejected`. У `blocked` обязательно указаны причина и следующее действие. Статусы фич в roadmap используют отдельный короткий перечень из поручения владельца.
 

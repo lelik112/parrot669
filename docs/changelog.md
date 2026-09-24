@@ -1,5 +1,15 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — Host cabinet backlog staged, no implementation claim
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** By Aleksey's request, split Alex's cabinet proposal into [PM-019](tasks/PM-019-host-cabinet-ia.md) IA contract and [PM-020](tasks/PM-020-host-cabinet-navigation.md) navigation of current flows (NEXT/P2), plus [PM-021](tasks/PM-021-private-host-profile.md) personal data and [PM-022](tasks/PM-022-public-host-profile.md) public view (LATER). [D008](decisions/D008-cabinet-sequencing.md) records sequencing; no developer is assigned and no field/publication scope is approved. **Related task:** PM-019–PM-022.
+- Existing /host.html, /messages.html and restricted backend public-profile JSON remain current behavior; external-link rule D003/PM-002 and consent for new personal fields remain undecided. PM-001/003 QA and PM-008 pilot retain priority.
+
+
+## 2026-09-24 — QA handoff update (partial)
+
+- **Agent:** Борис. **Role:** QA. **Change:** Confirmed PM-013 waiting for `open` after early Check, reload and EN/ES/CA/RU in production; the `close` state still needs a controlled Airbnb starting condition ([PM-018](tasks/PM-018-qa-controlled-calendar.md)). Claimed independent PM-011 calendar QA after PM-005/010. **Related task:** [PM-013](tasks/PM-013-calendar-waiting-instruction.md), [PM-011](tasks/PM-011-calendar-sync-extraction.md). **Recorded by:** Марк / PM; see Boris's signed task entries for details.
+
 ## 2026-09-24 — PM-011 external calendar lifecycle extracted and released
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** moved external calendar routes, sync service, SQL operations and hourly loop into `externalcalendar`, preserving the existing API, SQL transactions, iCal URL security and reservation semantics. [Backend PR #23](https://github.com/lelik112/parrot669-backend/pull/23) merged as `59c046f`; [PR CI](https://github.com/lelik112/parrot669-backend/actions/runs/36004130654) and [main CI](https://github.com/lelik112/parrot669-backend/actions/runs/36004571053) passed with PostgreSQL smoke (including calendar delete/search recovery) and Docker. Railway deployment `b302e2f4-2021-469b-a773-87bcddc1b50b` is SUCCESS at V25; direct health 200. Independent calendar QA remains open. **Related task:** [PM-011](tasks/PM-011-calendar-sync-extraction.md).
