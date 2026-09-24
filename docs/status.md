@@ -51,7 +51,7 @@
 
 - [D001](decisions/D001-repository-coordination.md): работа и обсуждения команды ведутся в репозитории; добавлен свободный team-chat, вопросы передаются напрямую. PM-001 назначена Денису с отдельным согласованием backend-этапа.
 - [D002](decisions/D002-calendar-control-dates.md): контрольные даты выбираются и сохраняются в PARROT до изменения Airbnb; проверяется сохранённое задание. Принято владельцем 24.09; реализация слита в оба main, независимая QA-приёмка не завершена.
-- [D003](decisions/D003-link-publication-proposal.md) superseded before acceptance. [D009](decisions/D009-external-link-independent-verification.md): валидная опубликованная Airbnb-ссылка доступна независимо от calendar verification; verification показывается отдельным trust signal, unverified host можно попросить пройти проверку через messaging.
+- [D003](decisions/D003-link-publication-proposal.md) superseded before acceptance. [D009](decisions/D010-external-link-independent-verification.md): валидная опубликованная Airbnb-ссылка доступна независимо от calendar verification; verification показывается отдельным trust signal, unverified host можно попросить пройти проверку через messaging.
 - [D004](decisions/D004-team-identity.md): перед работой Agent/Role/Scope; в коммите, PR, статусе задачи и changelog Agent/Role/Change/Related task. После значимого изменения PM сохраняет авторство, причины и решения в документации.
 - [D005](decisions/D005-ai-team-model-guidance.md): новые/возобновляемые задачи содержат рекомендацию модели и reasoning; исполнитель проверяет её до основной работы и при нехватке мощности ждёт решения владельца продукта.
 - [D008](decisions/D008-cabinet-sequencing.md): принят только порядок подготовки. Предложение IA [D009](decisions/D009-host-cabinet-ia.md) в PM-019 ждёт подтверждения Алексея; PM-020 не разблокирована, PM-021/022 — LATER.
@@ -70,7 +70,7 @@
 
 1. Сохранить частичный PASS PM-013 (`open` waiting и четыре языка); `close`/PM-001 positive open и смена источника ждут контролируемого Airbnb-состояния [PM-018](tasks/PM-018-qa-controlled-calendar.md), mobile — PM-015.
 2. Борис продолжает PM-003 и подтверждает реальный путь поиска и контакта; отдельно берёт следующий QA этап PM-004/005, если доступ и claim подтверждены.
-3. PM-002 разблокирована D009: назначить реализацию внешней ссылки + честного verification status + messaging nudge; Airbnb остаётся необязательным для поиска.
+3. PM-002 разблокирована D010: назначить реализацию внешней ссылки + честного verification status + messaging nudge; Airbnb остаётся необязательным для поиска.
 4. Борис независимо проверяет [PM-010](tasks/PM-010-auth-routes-extraction.md) по auth UI/сессиям; Игорь выпустил [PM-011](tasks/PM-011-calendar-sync-extraction.md); Борис взял независимый календарный QA в очередь. PM-012 остаётся LATER.
 5. Подготовить discovery пилота и ограниченную приёмку email/mobile; оформить с владельцем минимальный контракт кабинета PM-019, затем рассмотреть PM-020. PM-021/022 не назначать без privacy/PM-002 и данных пилота.
 
