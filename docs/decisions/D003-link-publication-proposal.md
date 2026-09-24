@@ -1,4 +1,4 @@
-> **SUPERSEDED BEFORE ACCEPTANCE:** заменено принятым [D009](D009-external-link-independent-verification.md) 2026-09-24.
+> **SUPERSEDED BEFORE ACCEPTANCE:** заменено принятым [D009](D010-external-link-independent-verification.md) 2026-09-24.
 
 # D003 — Публикация ссылки после проверки источника
 
