@@ -6,6 +6,9 @@
   const loginForm = $("msg-login-form"), registerForm = $("msg-register-form");
   const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   let actor = null, accountVersion = 0, threadVersion = 0, inboxVersion = 0;
+  const initialQuery = new URLSearchParams(window.location.search);
+  const calendarNudgeProperty = initialQuery.get("verifyCalendar") === "1" ? initialQuery.get("property") : null;
+  let calendarNudgeApplied = false;
   let active = null, inbox = [], nextCursor = null, inboxBusy = false, pollBusy = false;
   let messages = new Map(), fetchedThrough = 0, readThrough = 0, readBusy = false;
   let sending = false, pending = null, authBusy = false, threadError = null;
@@ -51,13 +54,15 @@
       if (draft?.savedAt < Date.now() - 86400000 || typeof draft?.body !== "string") draft = null;
     } catch {}
     form.reset();
-    form.elements.body.value = draft?.body || "";
+    const prefill = !calendarNudgeApplied && calendarNudgeProperty === active?.propertyId && !draft;
+    form.elements.body.value = draft?.body || (prefill ? t("verifyCalendarDraft") : "");
     form.elements.from.value = draft?.from || dates.from || "";
     form.elements.to.value = draft?.to || dates.to || "";
     pending = draft?.pending || null;
     if (pending && !(uuid.test(pending.payload?.clientMessageId) &&
       (pending.endpoint === "/conversations" && pending.payload.propertyId === active.propertyId ||
        pending.endpoint === `/conversations/${active.id}/messages`))) pending = null;
+    if (prefill) { calendarNudgeApplied = true; saveDraft(); }
     $("msg-dates").open = Boolean(form.elements.from.value || form.elements.to.value);
     updateComposer();
   }

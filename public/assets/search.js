@@ -15,6 +15,11 @@ const housingCopy = {
   ru:{accommodationType:"Тип жилья",anyType:"Любой тип",entirePlace:"Жильё целиком",privateRoom:"Отдельная комната",noExternalLink:"Внешняя ссылка пока не добавлена",lead:"Ищите физически свободное жильё по данным владельцев. Если добавлена внешняя площадка, условия аренды смотрите там.",searchChanged:"Параметры изменены. Нажмите «Найти свободное», чтобы увидеть подходящие варианты."}
 };
 
+Object.assign(housingCopy.en,{calendarUnverified:"Calendar control not confirmed",calendarPending:"The host has not finished calendar verification",calendarVerified:"Calendar control confirmed ✓",calendarRecheck:"Calendar verification needs to be repeated"});
+Object.assign(housingCopy.es,{calendarUnverified:"Control del calendario sin confirmar",calendarPending:"El propietario aún no ha completado la verificación",calendarVerified:"Control del calendario confirmado ✓",calendarRecheck:"Hay que repetir la verificación del calendario"});
+Object.assign(housingCopy.ca,{calendarUnverified:"Control del calendari sense confirmar",calendarPending:"El propietari encara no ha acabat la verificació",calendarVerified:"Control del calendari confirmat ✓",calendarRecheck:"Cal repetir la verificació del calendari"});
+Object.assign(housingCopy.ru,{calendarUnverified:"Контроль календаря не подтверждён",calendarPending:"Владелец ещё не завершил проверку",calendarVerified:"Контроль календаря подтверждён ✓",calendarRecheck:"Требуется повторная проверка"});
+
 let lang=(()=>{const saved=localStorage.getItem(LANG_KEY);if(saved&&copy[saved])return saved;const b=(navigator.language||"en").slice(0,2);return copy[b]?b:"en"})();
 const form=document.getElementById("availability-form");
 const results=document.getElementById("availability-results");
@@ -272,14 +277,22 @@ function render(items){
     (item.links||[]).forEach(link=>{
       try{
         const u=new URL(link.url);
-        if(u.protocol!=="https:") return;
+        if(u.protocol!=="https:" || u.hostname!=="www.airbnb.com" ||
+          u.pathname!==`/rooms/${link.externalId}` || !/^[0-9]{1,32}$/.test(link.externalId||"")) return;
+        const group=document.createElement("div");
+        group.className="availability-link-group";
         const a=document.createElement("a");
         a.className="availability-link";
         a.href=u.toString();
         a.target="_blank";
         a.rel="noopener noreferrer";
         a.textContent=t("view");
-        links.append(a);
+        group.append(a);
+        const status=document.createElement("small");
+        status.className="availability-verification-status";
+        status.textContent=t({verified:"calendarVerified",pending:"calendarPending",recheck_required:"calendarRecheck"}[link.calendarControlStatus]||"calendarUnverified");
+        group.append(status);
+        links.append(group);
       }catch{}
     });
     if(!links.childElementCount){

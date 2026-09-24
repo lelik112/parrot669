@@ -2,7 +2,9 @@
 
 **Title:** унифицировать Airbnb-переход, calendar verification status и запрос владельцу пройти проверку.
 
-**Status:** planned — product decision accepted, implementation unclaimed. **Priority:** P1. **Owner:** не назначен.
+**Status:** implementation in progress — backend/frontend CI and release pending, independent QA open. **Priority:** P1. **Owner:** Денис / Developer.
+
+**Implementation branches:** `feat/pm002-link-contract` in backend, `feat/pm002-guest` in frontend. Baselines: backend `59c046f`, frontend `2af2816`. Model: Sol, High. Scope: shared public link projection, search card and messaging draft; no calendar sync or future profile UI.
 
 **Recommended model:** Sol. **Recommended reasoning:** High.
 
@@ -46,7 +48,7 @@
 
 ## Acceptance criteria
 
-- [ ] D009 используется как действующий контракт.
+- [x] D010 используется как действующий контракт.
 - [ ] Search/result card не блокирует валидный опубликованный Airbnb URL из-за verification.
 - [ ] Trust status соответствует таблице.
 - [ ] Legacy v1 не выдаётся за новый verified.
@@ -67,7 +69,7 @@ D010 accepted. Смысл verified берётся из D002. Незавершё�
 
 ## Evidence
 
-Implementation по новому контракту ещё не начата.
+Implementation started 2026-09-24. Backend `PublicLinks` reads latest D002 attempt and current calendar metadata without returning its secret, verifies URL/listing/source match and supplies one `calendarControlStatus` for search and public-profile JSON. UI labels four states and opens a messaging draft only when host accepts new conversations; send remains explicit. Local frontend tests: 111/111. Backend CI / independent QA / production rollout pending.
 
 ## Discussion / Updates
 
