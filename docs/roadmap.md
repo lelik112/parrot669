@@ -12,7 +12,7 @@
 | --- | --- | --- | --- |
 | [PM-001 — Проверка сохранённых дат](tasks/PM-001-calendar-control-dates.md) | P1 | Проверяется конкретное задание пользователя | in review: Борис подтвердил часть desktop A/B и `close`; правка P2 инструкции опубликована, waiting `open`/reload/языки проверены Борисом; `close`/mobile/источник ещё открыты |
 | [PM-003 — Поиск → обращение → ответ](tasks/PM-003-contact-acceptance.md) | P1 | Независимо подтверждён основной путь контакта | CHECK-H11 начат, приостановлен; нужен статус QA |
-| [PM-002 — Внешняя ссылка и verification status](tasks/PM-002-link-publication.md) | P1 | Ссылка доступна независимо от verification; честный status + nudge | D010 accepted; planned, исполнитель не заявлен |
+| [PM-002 — Внешняя ссылка и verification status](tasks/PM-002-link-publication.md) | P1 | Публикация Airbnb-ссылки и честный verification status + nudge | in review: backend в production; frontend и QA ещё требуют завершения
 | [PM-004 — Выбор улицы](tasks/PM-004-street-autofill.md) | P2 | Первый вариант не скрывается браузерной подсказкой | in review; выпущено Денисом, Борису нужен независимый нативный ретест |
 | [PM-005 — Закрытые даты](tasks/PM-005-closed-dates-copy.md) | P2 | Обычная форма не выглядит недоступной функцией | in review; выпущено Денисом, Борису нужен независимый визуальный ретест |
 | [PM-010 — Выделение AuthRoutes](tasks/PM-010-auth-routes-extraction.md) | P2 | Упростить поддержку auth routes без изменения поведения | in review: Игорь выпустил backend `e41d322`, CI/Railway SUCCESS; Борису назначен auth QA |
@@ -30,9 +30,10 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | [PM-006 — Email и восстановление](tasks/PM-006-email-acceptance.md) | P1 | Проверены реальные письма и завершение целевых сценариев |
 | [PM-007 — Мобильный основной путь](tasks/PM-007-mobile-acceptance.md) | P1 | Проверены touch, ввод дат, адрес и контакт |
 | [PM-008 — Пилот и измерения](tasks/PM-008-pilot.md) | P1 | Есть группа пилота, исходные показатели и наблюдения ценности |
-| [PM-019 — Контракт кабинета](tasks/PM-019-host-cabinet-ia.md) | P2 | done: D009 accepted |
-| [PM-020 — Навигация кабинета](tasks/PM-020-host-cabinet-navigation.md) | P2 | in review: реализовано Денисом, QA pending |
-| [PM-021 — Личный профиль владельца](tasks/PM-021-private-host-profile.md) | P2 | NEXT после PM-020; пилот не блокирует |
+| [PM-019 — Контракт кабинета](tasks/PM-019-host-cabinet-ia.md) | P2 | done: D009 принят владельцем
+| [PM-020 — Навигация кабинета](tasks/PM-020-host-cabinet-navigation.md) | P2 | in review: desktop/keyboard partial PASS; BUG-016 открыт, touch ждёт PM-015
+| [PM-021 — Личный профиль владельца](tasks/PM-021-private-host-profile.md) | P2 | in progress у Дениса: только существующее имя, новые поля отложены
+| [PM-023 — Путь гостя к первому сообщению](tasks/PM-023-guest-message-onboarding.md) | P1 | planned after current PM-020/021 work; auth at send, preserve draft |
 | [PM-022 — Публичный профиль владельца](tasks/PM-022-public-host-profile.md) | P2 | после PM-021; отдельный privacy/public contract |
 
 Пилот можно готовить параллельно; не нужно ждать карты или полного редизайна. Отсутствие внешней ссылки не убирает объект из поиска. Нужно измерить, сколько найденных объектов вообще имеют доступный путь связи: сообщения выключены по умолчанию.
@@ -75,7 +76,7 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | F10 | Email-уведомления | Уведомление о непрочитанных сообщениях | done | P1 | [PM-006](tasks/PM-006-email-acceptance.md); доставка ещё не принята |
 | F11 | Изменение календаря v1 | Историческая проверка любого изменения без сохранённого задания | done | P1 | Ранее выданный v1-статус не доказывает выбранные даты; [D002](decisions/D002-calendar-control-dates.md) |
 | F12 | Проверка выбранных дат | Выбор в PARROT, сохранение, внешнее действие, сравнение | done | P1 | [PM-001](tasks/PM-001-calendar-control-dates.md); частичная desktop QA подтверждена, полная приёмка и [PM-013](tasks/PM-013-calendar-waiting-instruction.md) открыты |
-| F13 | Внешняя ссылка + verification status | Не блокировать валидный URL из-за verification; показывать status и nudge | planned | P1 | [PM-002](tasks/PM-002-link-publication.md); [D009](decisions/D010-external-link-independent-verification.md) accepted |
+| F13 | Внешняя ссылка + verification status | Не блокировать валидный URL из-за verification; показывать status и nudge | in progress | P1 | [PM-002](tasks/PM-002-link-publication.md); [D010](decisions/D010-external-link-independent-verification.md) accepted
 | F14 | Понятные закрытые даты | Ясный заголовок и обычное оформление формы | in progress | P2 | [PM-005](tasks/PM-005-closed-dates-copy.md), Денис; выпущено, независимая приёмка ожидается |
 | F15 | Подсказки улиц | Устранить перекрытие браузерным autofill | in progress | P2 | [PM-004](tasks/PM-004-street-autofill.md), Денис; выпущена правка, нативный ретест ожидается |
 | F16 | Пилот и воронка | Проверить активацию владельца, поиск и контакт | idea | P1 | [PM-008](tasks/PM-008-pilot.md) |
@@ -92,6 +93,7 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | F27 | Навигация кабинета | Найти действующие действия и вернуться без потери контекста | idea | P2 | [PM-019](tasks/PM-019-host-cabinet-ia.md) → [PM-020](tasks/PM-020-host-cabinet-navigation.md), NEXT |
 | F28 | Личный профиль | Управлять данными хозяина отдельно от учётной записи | planned | P2 | [PM-021](tasks/PM-021-private-host-profile.md), NEXT после PM-020 |
 | F29 | Публичный профиль | Показывать только разрешённые сведения и проверяемые сигналы | planned | P2 | [PM-022](tasks/PM-022-public-host-profile.md), после PM-021 |
+| F30 | Путь гостя к первому сообщению | Подготовить и отправить первое обращение после auth без потери контекста | planned | P1 | [PM-023](tasks/PM-023-guest-message-onboarding.md) |
 
 ## Приоритизация и измерения
 
