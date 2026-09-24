@@ -28,7 +28,7 @@
 ## In Progress
 
 - **[PM-001](tasks/PM-001-calendar-control-dates.md) — in review:** Борис проверил часть сценариев с подключённым Airbnb iCal на production; `close` подтвердился, постороннее/частичное изменение не засчиталось. `open` в первой попытке не засчитан как положительный тест из-за завершения окна повторов; mobile, ошибка iCal, смена источника и другие границы ещё нужны. UX-дефект — [PM-013](tasks/PM-013-calendar-waiting-instruction.md).
-- **[PM-010](tasks/PM-010-auth-routes-extraction.md) — in review:** Igor released backend auth extraction; отдельная независимая проверка регистрации/сессии через UI ещё ожидается.
+- **[PM-010](tasks/PM-010-auth-routes-extraction.md) — in review:** Игорь выпустил auth routes; независимая проверка регистрации/сессии через UI назначена Борису, результатов ещё нет.
 - **[PM-013](tasks/PM-013-calendar-waiting-instruction.md) — planned NOW:** Денису назначена P2 правка текста waiting, его claim ещё не подтверждён.
 - **CHECK-H11 / [PM-003](tasks/PM-003-contact-acceptance.md):** независимая проверка сообщений начата, затем приостановлена. Обмена двумя аккаунтами ещё нет в подтверждённых результатах.
 - **PM-004/005 — in review:** Денис выпустил frontend `05a8189` через [PR #13](https://github.com/lelik112/parrot669/pull/13); в задачах зафиксированы 106 тестов и успешный Cloudflare build. Следующее действие — независимые QA-проверки; claim Бориса ожидается. Нативный autofill и авторизованный визуальный desktop/mobile-ретест ещё не подтверждены.
@@ -51,7 +51,7 @@
 - [D003](decisions/D003-link-publication-proposal.md): публикация ссылки после проверки — предложение с открытыми деталями. В качестве действующего правила ещё не применять.
 - [D004](decisions/D004-team-identity.md): перед работой Agent/Role/Scope; в коммите, PR, статусе задачи и changelog Agent/Role/Change/Related task. После значимого изменения PM сохраняет авторство, причины и решения в документации.
 - [D005](decisions/D005-ai-team-model-guidance.md): новые/возобновляемые задачи содержат рекомендацию модели и reasoning; исполнитель проверяет её до основной работы и при нехватке мощности ждёт решения владельца продукта.
-- [D006](decisions/D006-backend-refactor-backlog.md) и [D007](decisions/D007-activate-auth-routes-extraction.md): по поручению владельца только PM-010 активирована для Игоря после релиза PM-001; PM-011/012 остаются LATER, календарная QA не блокируется.
+- [D006](decisions/D006-backend-refactor-backlog.md) и [D007](decisions/D007-activate-auth-routes-extraction.md): PM-010 опубликована, auth QA назначена Борису. По новому поручению владельца PM-011 отдельно назначена Игорю (claim ожидается); PM-012 остаётся LATER. Календарная QA PM-001 и frontend PM-013 не считаются закрытыми.
 
 ## Risks
 
@@ -67,7 +67,7 @@
 1. Денис устраняет [PM-013](tasks/PM-013-calendar-waiting-instruction.md) после claim; Борис ретестирует ожидание и закрывает непроверенные сценарии PM-001, включая `open`, смену источника и mobile.
 2. Борис продолжает PM-003 и подтверждает реальный путь поиска и контакта; отдельно берёт следующий QA этап PM-004/005, если доступ и claim подтверждены.
 3. Зафиксировать контракт PM-002 без превращения Airbnb в обязательное условие поиска объекта.
-4. Принять [PM-010](tasks/PM-010-auth-routes-extraction.md) независимо по auth UI/сессиям; Игорь уже завершил и выпустил перенос. PM-011/012 не начинать без отдельного решения.
+4. Борис независимо проверяет [PM-010](tasks/PM-010-auth-routes-extraction.md) по auth UI/сессиям; Игорь начинает [PM-011](tasks/PM-011-calendar-sync-extraction.md) только после собственного claim/Model check и сверки границ с Денисом. PM-012 остаётся LATER.
 5. Подготовить discovery пилота и ограниченную приёмку email/mobile; отдельно разобрать предложение Алекса о кабинете/FAQ без преждевременного назначения фич.
 
 ## Evidence
