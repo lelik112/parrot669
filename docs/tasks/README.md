@@ -18,7 +18,7 @@
 
 | ID | Задача | Приоритет | Статус | Ответственный |
 | --- | --- | --- | --- | --- |
-| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | in review — backend/frontend опубликованы; независимая QA ожидается | Денис / Developer; QA Борис |
+| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | in review — desktop QA частично подтверждён, P2 дефект PM-013, остальная приёмка открыта | Денис / Developer; QA Борис |
 | [PM-002](PM-002-link-publication.md) | Публикация внешней ссылки; PRODUCT-001 | P1 | blocked — decision | Не заявлен; решение ведёт Марк |
 | [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — QA access | Борис / QA; возобновление не подтверждено |
 | [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — нужен нативный ретест | Денис / Developer |
@@ -30,6 +30,7 @@
 | [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | P2 | in review — backend released, independent QA pending | Игорь / Developer |
 | [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | later | planned — LATER; после PM-001 | Не назначен |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
+| [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | planned — NOW, claim ожидается | Денис / Developer; QA Борис |
 
 Статусы задач: `planned`, `in progress`, `blocked`, `in review`, `done`, `rejected`. У `blocked` обязательно указаны причина и следующее действие. Статусы фич в roadmap используют отдельный короткий перечень из поручения владельца.
 

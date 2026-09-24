@@ -1,5 +1,11 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — Boris's PM-001 desktop QA and waiting-instruction defect
+
+- **Agent:** Борис. **Role:** QA. **Change:** In a production Chrome run with a connected Airbnb iCal, confirmed that selected nights survive reload, unrelated date B and partial change of A do not verify, full closing of A verifies, and the status survives calendar disable/enable. The first full `open` attempt was inconclusive after the retry window ended; mobile/touch and other boundary cases remain open. The test calendar's unrelated date was restored. **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md). Source: Борис's report `PARROT669-QA-PM001-2026-09-24.md`; the actionable summary is copied into PM-001.
+- **Bug QA-PM001-01 / P2:** after an early Check the waiting state hides «Проверить», but its instruction still tells the owner to press it. Ordinary «Обновить сейчас» is a different sync action. **Agent:** Марк. **Role:** Product Manager. **Change:** Triaged Boris's finding and assigned a bounded frontend correction to Denis, pending his claim and Luna/Medium model check. **Related task:** [PM-013](tasks/PM-013-calendar-waiting-instruction.md). **Recorded by:** Марк / Product Manager.
+- **PM-010 status:** Igor already released auth-route extraction ([PR #22](https://github.com/lelik112/parrot669-backend/pull/22), CI/Railway SUCCESS); independent auth UI QA remains open. No additional backend implementation is attributed to this PM update.
+
 ## 2026-09-24 — PM-010 auth routes extracted and released
 - **Agent:** Игорь. **Role:** Developer. **Change:** extracted five existing auth routes and cookie builders into `http.AuthRoutes`; `Main` composes the module once. `AuthService`, repository, auth behavior, schema and frontend stay unchanged. [Backend PR #22](https://github.com/lelik112/parrot669-backend/pull/22) merged as `e41d322`; [PR CI](https://github.com/lelik112/parrot669-backend/actions/runs/35990938243) and [main CI](https://github.com/lelik112/parrot669-backend/actions/runs/35991305724) passed, including PostgreSQL smoke and Docker build. Railway deployment `e9e2333c-721e-4bd0-8184-ec07130ebd35` is SUCCESS on that commit. See [PM-010](tasks/PM-010-auth-routes-extraction.md) for QA handoff.
 

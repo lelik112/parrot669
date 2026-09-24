@@ -10,16 +10,17 @@
 
 | Задача | Приоритет | Результат | Готовность |
 | --- | --- | --- | --- |
-| [PM-001 — Проверка сохранённых дат](tasks/PM-001-calendar-control-dates.md) | P1 | Проверяется конкретное задание пользователя | in review: frontend/backend опубликованы, backend Railway SUCCESS; независимая QA-приёмка ожидается |
+| [PM-001 — Проверка сохранённых дат](tasks/PM-001-calendar-control-dates.md) | P1 | Проверяется конкретное задание пользователя | in review: Борис подтвердил часть desktop A/B и `close`, P2 ошибка инструкции ожидания; `open`/mobile/источник ещё не приняты |
 | [PM-003 — Поиск → обращение → ответ](tasks/PM-003-contact-acceptance.md) | P1 | Независимо подтверждён основной путь контакта | CHECK-H11 начат, приостановлен; нужен статус QA |
 | [PM-002 — Публикация ссылки](tasks/PM-002-link-publication.md) | P1 | Согласован единый продуктовый контракт | Сначала закрыть открытые решения; реализация заблокирована |
 | [PM-004 — Выбор улицы](tasks/PM-004-street-autofill.md) | P2 | Первый вариант не скрывается браузерной подсказкой | in review; выпущено Денисом, Борису нужен независимый нативный ретест |
 | [PM-005 — Закрытые даты](tasks/PM-005-closed-dates-copy.md) | P2 | Обычная форма не выглядит недоступной функцией | in review; выпущено Денисом, Борису нужен независимый визуальный ретест |
-| [PM-010 — Выделение AuthRoutes](tasks/PM-010-auth-routes-extraction.md) | P2 | Упростить поддержку auth routes без изменения поведения | Назначено Игорю по поручению владельца; его claim и Model check Sol/Medium ожидаются |
+| [PM-010 — Выделение AuthRoutes](tasks/PM-010-auth-routes-extraction.md) | P2 | Упростить поддержку auth routes без изменения поведения | in review: Игорь выпустил backend `e41d322`, CI/Railway SUCCESS; независимый QA auth UI ожидается |
+| [PM-013 — Инструкция ожидания проверки](tasks/PM-013-calendar-waiting-instruction.md) | P2 | После раннего Check указан доступный следующий шаг | Назначено Денису по отчёту Бориса; claim ожидается |
 
 PM-001 и PM-003 независимы. PM-002 зависит от смысла проверки PM-001. Одно лицо отвечает за координацию задачи; соисполнители и разделение работы записываются в ней до начала.
 
-PM-004/005 опубликованы Денисом через [PR #13](https://github.com/lelik112/parrot669/pull/13), main `05a8189`; в задачах записаны 106 тестов, CI и Cloudflare release. Нативный autofill и авторизованный desktop/mobile-ретест остаются открытыми. Денис выпустил PM-001 после handoff Игоря: [backend PR #21](https://github.com/lelik112/parrot669-backend/pull/21) с V25 и [frontend PR #14](https://github.com/lelik112/parrot669/pull/14) слиты; backend Railway deployment успешен, опубликованные frontend файлы сверены по хэшам в [задаче](tasks/PM-001-calendar-control-dates.md). Дальше нужна независимая проверка по [записи релиза](changes/PM-001-calendar-control-dates.md).
+PM-004/005 опубликованы Денисом через [PR #13](https://github.com/lelik112/parrot669/pull/13), main `05a8189`; в задачах записаны 106 тестов, CI и Cloudflare release. Нативный autofill и авторизованный desktop/mobile-ретест остаются открытыми. Денис выпустил PM-001 после handoff Игоря: [backend PR #21](https://github.com/lelik112/parrot669-backend/pull/21) с V25 и [frontend PR #14](https://github.com/lelik112/parrot669/pull/14) слиты; backend Railway deployment успешен, опубликованные frontend файлы сверены по хэшам в [задаче](tasks/PM-001-calendar-control-dates.md). Борис провёл часть независимой проверки: A/B и полный `close` подтвердились, но найден [UX-баг PM-013](tasks/PM-013-calendar-waiting-instruction.md), `open` и mobile остаются открыты. Игорь отдельно выпустил [PM-010](tasks/PM-010-auth-routes-extraction.md), auth QA ещё ожидается.
 
 ## NEXT
 
@@ -67,7 +68,7 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | F09 | Сообщения и блокировка | Частное обращение по согласию владельца | done | P1 | Независимый полный QA — [PM-003](tasks/PM-003-contact-acceptance.md) |
 | F10 | Email-уведомления | Уведомление о непрочитанных сообщениях | done | P1 | [PM-006](tasks/PM-006-email-acceptance.md); доставка ещё не принята |
 | F11 | Изменение календаря v1 | Историческая проверка любого изменения без сохранённого задания | done | P1 | Ранее выданный v1-статус не доказывает выбранные даты; [D002](decisions/D002-calendar-control-dates.md) |
-| F12 | Проверка выбранных дат | Выбор в PARROT, сохранение, внешнее действие, сравнение | done | P1 | [PM-001](tasks/PM-001-calendar-control-dates.md); опубликовано, независимая QA ожидается |
+| F12 | Проверка выбранных дат | Выбор в PARROT, сохранение, внешнее действие, сравнение | done | P1 | [PM-001](tasks/PM-001-calendar-control-dates.md); частичная desktop QA подтверждена, полная приёмка и [PM-013](tasks/PM-013-calendar-waiting-instruction.md) открыты |
 | F13 | Проверка перед публикацией ссылки | Связать публичную ссылку с проверкой текущего источника | idea | P1 | [PM-002](tasks/PM-002-link-publication.md); детали не приняты |
 | F14 | Понятные закрытые даты | Ясный заголовок и обычное оформление формы | in progress | P2 | [PM-005](tasks/PM-005-closed-dates-copy.md), Денис; выпущено, независимая приёмка ожидается |
 | F15 | Подсказки улиц | Устранить перекрытие браузерным autofill | in progress | P2 | [PM-004](tasks/PM-004-street-autofill.md), Денис; выпущена правка, нативный ретест ожидается |
