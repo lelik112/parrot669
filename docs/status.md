@@ -6,9 +6,9 @@
 
 - **Agent:** Марк
 - **Role:** Product Manager
-- **Scope:** Выпуск исправления PM-013 и передача Борису на независимый ретест.
-- **Change:** по прямому поручению владельца Марк временно реализовал UI-правку; CI и Cloudflare build успешны, QA ещё открыт. Учтён claim Игоря по PM-011.
-- **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md), [PM-010](tasks/PM-010-auth-routes-extraction.md), [PM-013](tasks/PM-013-calendar-waiting-instruction.md)
+- **Scope:** Сверка релиза PM-011 и обновление очереди независимой QA после PM-013.
+- **Change:** отражён выпущенный Игорем PM-011 (backend CI и Railway успешны); независимая календарная QA пока не назначена. PM-013 по-прежнему ждёт ретеста Бориса.
+- **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md), [PM-010](tasks/PM-010-auth-routes-extraction.md), [PM-011](tasks/PM-011-calendar-sync-extraction.md), [PM-013](tasks/PM-013-calendar-waiting-instruction.md)
 
 Источники среза: product-context/changelog, задачи/QA, handoff Игоря и claim/релиз Дениса в PM-001, [frontend PR #14](https://github.com/lelik112/parrot669/pull/14), [backend PR #21](https://github.com/lelik112/parrot669-backend/pull/21) и [запись Дениса](changes/PM-001-calendar-control-dates.md). Игорь завершил свой рефакторинг. PM-001 уже находится в обоих main; backend Railway deployment имеет SUCCESS. Денис подтвердил frontend production совпадением хэшей опубликованных файлов с релизными. Борис провёл независимый desktop-прогон с подключённым Airbnb iCal: ключевые A/B-сценарии подтвердились, один UX-баг P2 найден; полная приёмка остаётся открытой.
 
@@ -25,13 +25,14 @@
 - Игорь выпустил [PM-010](tasks/PM-010-auth-routes-extraction.md): пять auth routes выделены в [backend PR #22](https://github.com/lelik112/parrot669-backend/pull/22), commit `e41d322`; CI и Railway deployment SUCCESS. Независимый QA auth flow пока не записан.
 - Борис подтвердил desktop A/B-проверку PM-001: сохранение A после reload, отсутствие успеха без изменения и при изменении B/части A, успех при полном закрытии A и сохранение результата после disable/enable. Полная приёмка остаётся открытой.
 - Марк выпустил [PM-013](tasks/PM-013-calendar-waiting-instruction.md) в frontend `a749c72` по отдельному поручению владельца: в waiting больше нет просьбы нажать скрытую кнопку. 109 тестов, main CI и Cloudflare Workers Build успешны; Борису передан независимый ретест.
+- Игорь выпустил [PM-011](tasks/PM-011-calendar-sync-extraction.md): lifecycle внешнего календаря перенесён в отдельный backend-модуль в [PR #23](https://github.com/lelik112/parrot669-backend/pull/23), merge `59c046f`; PR/main CI и Railway deployment `b302e2f4-2021-469b-a773-87bcddc1b50b` успешны. Пользовательское поведение ещё не проверено независимо.
 
 ## In Progress
 
 - **[PM-001](tasks/PM-001-calendar-control-dates.md) — in review:** Борис проверил часть сценариев с подключённым Airbnb iCal на production; `close` подтвердился, постороннее/частичное изменение не засчиталось. `open` в первой попытке не засчитан как положительный тест из-за завершения окна повторов; mobile, ошибка iCal, смена источника и другие границы ещё нужны. UX-дефект — [PM-013](tasks/PM-013-calendar-waiting-instruction.md).
 - **[PM-010](tasks/PM-010-auth-routes-extraction.md) — in review:** Игорь выпустил auth routes; независимая проверка регистрации/сессии через UI назначена Борису, результатов ещё нет.
 - **[PM-013](tasks/PM-013-calendar-waiting-instruction.md) — in review:** frontend-правка опубликована Марком по прямому поручению владельца; Борису нужен независимый ретест waiting/reload на опубликованной версии.
-- **[PM-011](tasks/PM-011-calendar-sync-extraction.md) — in progress:** Игорь оставил собственный claim и Model check для отдельного переноса lifecycle календаря. Это не является QA-приёмкой PM-001.
+- **[PM-011](tasks/PM-011-calendar-sync-extraction.md) — in review:** backend-релиз Игоря подтверждён CI и Railway; независимая QA подключения, синхронизации, выключения/включения и удаления календаря ещё не назначена. Это не является QA-приёмкой PM-001.
 - **CHECK-H11 / [PM-003](tasks/PM-003-contact-acceptance.md):** независимая проверка сообщений начата, затем приостановлена. Обмена двумя аккаунтами ещё нет в подтверждённых результатах.
 - **PM-004/005 — in review:** Денис выпустил frontend `05a8189` через [PR #13](https://github.com/lelik112/parrot669/pull/13); в задачах зафиксированы 106 тестов и успешный Cloudflare build. Следующее действие — независимые QA-проверки; claim Бориса ожидается. Нативный autofill и авторизованный визуальный desktop/mobile-ретест ещё не подтверждены.
 
@@ -43,6 +44,7 @@
 | [PM-002](tasks/PM-002-link-publication.md) | Не закреплены публикация после успеха, обработка старых verified и область публичного профиля | Ответ владельца на UX-выбор; PM фиксирует остальные согласованные правила в D003 |
 | PM-001, приёмка | Desktop проверен частично; открыты `open`, ошибки/смена источника и mobile; PM-013 ожидает независимого ретеста | Борис продолжает сценарии и ретестирует инструкцию waiting после опубликованной правки |
 | PM-004/005 | Для следующих независимых QA-проверок пока нет подтверждённого claim Бориса | Борис подтверждает доступ/среду и claim по задаче |
+| PM-011 | Релиз есть; независимая календарная регрессия не назначена | PM назначает QA после сверки текущей загрузки Бориса; QA записывает claim и результаты |
 
 Алекс оставил подписанное предложение о кабинете, профиле и объясняющих страницах в [курилке](team-chat.md). Оно получено, но не назначено разработчикам и не стало принятым продуктовым решением. Факт доступа к курилке не меняет роль Алекса.
 
@@ -53,7 +55,7 @@
 - [D003](decisions/D003-link-publication-proposal.md): публикация ссылки после проверки — предложение с открытыми деталями. В качестве действующего правила ещё не применять.
 - [D004](decisions/D004-team-identity.md): перед работой Agent/Role/Scope; в коммите, PR, статусе задачи и changelog Agent/Role/Change/Related task. После значимого изменения PM сохраняет авторство, причины и решения в документации.
 - [D005](decisions/D005-ai-team-model-guidance.md): новые/возобновляемые задачи содержат рекомендацию модели и reasoning; исполнитель проверяет её до основной работы и при нехватке мощности ждёт решения владельца продукта.
-- [D006](decisions/D006-backend-refactor-backlog.md) и [D007](decisions/D007-activate-auth-routes-extraction.md): PM-010 опубликована, auth QA назначена Борису. PM-011 отдельно назначена Игорю, его claim получен; PM-012 остаётся LATER. Календарная QA PM-001 и ретест frontend PM-013 ещё открыты.
+- [D006](decisions/D006-backend-refactor-backlog.md) и [D007](decisions/D007-activate-auth-routes-extraction.md): PM-010 опубликована, auth QA назначена Борису. PM-011 выпущена Игорем, независимая QA ещё открыта; PM-012 остаётся LATER. Календарная QA PM-001 и ретест frontend PM-013 ещё открыты.
 
 ## Risks
 
@@ -69,7 +71,7 @@
 1. Борис ретестирует [PM-013](tasks/PM-013-calendar-waiting-instruction.md) на опубликованной версии и закрывает непроверенные сценарии PM-001, включая `open`, смену источника и mobile.
 2. Борис продолжает PM-003 и подтверждает реальный путь поиска и контакта; отдельно берёт следующий QA этап PM-004/005, если доступ и claim подтверждены.
 3. Зафиксировать контракт PM-002 без превращения Airbnb в обязательное условие поиска объекта.
-4. Борис независимо проверяет [PM-010](tasks/PM-010-auth-routes-extraction.md) по auth UI/сессиям; Игорь уже заявил [PM-011](tasks/PM-011-calendar-sync-extraction.md) с отдельным scope. PM-012 остаётся LATER.
+4. Борис независимо проверяет [PM-010](tasks/PM-010-auth-routes-extraction.md) по auth UI/сессиям; Игорь выпустил [PM-011](tasks/PM-011-calendar-sync-extraction.md); для неё ещё нужен независимый календарный QA. PM-012 остаётся LATER.
 5. Подготовить discovery пилота и ограниченную приёмку email/mobile; отдельно разобрать предложение Алекса о кабинете/FAQ без преждевременного назначения фич.
 
 ## Evidence
