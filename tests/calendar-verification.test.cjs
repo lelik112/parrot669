@@ -113,7 +113,7 @@ test('disabled calendars show no verification actions; expired sessions stop pol
 });
 
 test('verification states are translated in EN, ES, CA and RU',async t=>{
-  for(const [language,label] of [['en','Ownership verified'],['es','Control del calendario verificado'],['ca','Control del calendari verificat'],['ru','Управление календарём подтверждено']]){
+  for(const [language,label] of [['en','Calendar control verified'],['es','Control del calendario verificado'],['ca','Control del calendari verificat'],['ru','Управление календарём подтверждено']]){
     const h=await harness(t,{language,handler:()=>verified});assert(h.text().includes(label));
   }
 });
