@@ -2,7 +2,7 @@
 
 **Title:** перенести lifecycle внешнего календаря в отдельный модуль без смены поведения.
 
-**Status:** in review — backend released, independent QA pending. **Priority:** P2. **Owner:** Игорь / Developer.
+**Status:** in review — backend released, independent QA Бориса pending. **Priority:** P2. **Owner:** Игорь / Developer. **QA:** Борис.
 
 **Agent:** Игорь / Developer. Назначение по поручению Алексея от 24.09 12:02 UTC; эта запись не означает, что Игорь начал работу.
 
@@ -74,3 +74,11 @@ Handoff Игоря прямо связывает этот этап с завер
 - **Related task:** docs/tasks/PM-011-calendar-sync-extraction.md
 - **Recommended model:** Sol. **Recommended reasoning:** High; при переносе важно сохранить iCal импорт, SSRF-ограничения, транзакции удаления и маршруты. Игорь делает собственный Model check и claim до правок.
 - **Next:** Игорь сверяет backend main и claims, записывает точные файлы и границы; добавляет characterization tests для calendar lifecycle, проходит CI/PostgreSQL smoke, публикует PR и отдельно подтверждает production SHA. QA Бориса по PM-001 остаётся независимой; при выявленном пересечении — остановиться и согласовать.
+
+### 2026-09-24 14:05 UTC — Борис / QA: claim независимой проверки
+
+- **Agent:** Борис. **Role:** QA. **Scope:** пользовательский connect/sync/disable/enable/delete, отображение в кабинете и доступности, регрессия PM-001; без изменения backend/infra. **Status:** in review, QA в очереди после PM-005/PM-010.
+- **Change:** по прямому указанию Алексея единственный QA забирает выпущенную PM-011; отсутствие отдельного назначения не блокирует разработку. Наблюдённое переподключение тестового календаря в другом прогоне само по себе ещё не полная PM-011 приёмка.
+- **Related task:** PM-011, PM-001.
+- **Model check:** Sol / Medium достаточно для сравнения наблюдаемого lifecycle и изоляции от verification; недоступные внешние изменения в Airbnb отдельно в PM-018.
+- **Next:** после PM-005/PM-010 проверить доступные lifecycle действия с фиксацией исходного состояния; удалить календарь только при готовом способе восстановления секретной iCal-ссылки. Независимый результат записать здесь.
