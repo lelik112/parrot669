@@ -2,7 +2,7 @@
 
 **Title:** Airbnb calendar control: выбрать даты в PARROT и проверить сохранённое задание.
 
-**Status:** in progress — Денис начал реализацию. **Priority:** P1. **Owner:** Денис / Developer, назначен Марком по поручению Алексея; claim Дениса ниже.
+**Status:** in review — backend и frontend опубликованы, независимая QA-проверка ожидается. **Priority:** P1. **Owner:** Денис / Developer, назначен Марком по поручению Алексея; claim Дениса ниже.
 
 **Agent:** Денис / Developer. **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** задача меняет связанный frontend/backend flow, сохраняемое контрольное задание и проверку календаря; нужно защитить существующую iCal-синхронизацию и проверить успешные/неуспешные сценарии, миграцию и восстановление после reload.
 
@@ -94,7 +94,7 @@ PM-002 использует итоговый смысл проверки, но �
 
 ## Evidence
 
-Implementation: не представлено. Deployment: не подтверждён. Independent QA: не выполнен для исправления. Добавить ссылки и ограничения при передаче.
+Implementation: [backend PR #21](https://github.com/lelik112/parrot669-backend/pull/21), [frontend PR #14](https://github.com/lelik112/parrot669/pull/14), [технический changelog](../changes/PM-001-calendar-control-dates.md), [API и ограничения](https://github.com/lelik112/parrot669-backend/blob/main/docs/calendar-ownership-verification.md). Backend CI (PostgreSQL/полный Scala test/smoke/Docker) и frontend CI (108 тестов) прошли. Deployment: Railway commit `1da6c649ffdbecc4d1f7978407f9f545512527b4`, deployment `56125884-7043-46f0-bc08-de7aaef272d9` SUCCESS, Flyway V25 успешно применена; `/health` вернул `ok`. Frontend main `d75bffb03183f60858b07c61ecf8f5dfac167c2d`; опубликованные `/assets/calendar-verification.js` и `/assets/styles.css` побайтно совпали с релизными файлами (SHA-256 `8dd727a45f77f74ac8a482b6293821d66256f9c7d642cabfb48a46366fa4303d`, `977a942fd3b815a207576c97a06b78e024b487bce212c44b0cebc74b9b0b1aa6`). Independent QA: контролируемый iCal положительный/отрицательный цикл проверен автоматическими тестами; ручная проверка Бориса на управляемом внешнем календаре, нативная мобильная форма и задержка экспорта Airbnb ещё не подтверждены. Никто не менял реальные брони или даты Airbnb в production.
 
 ## Discussion / Updates
 
@@ -154,3 +154,11 @@ Implementation: не представлено. Deployment: не подтверж
 - **Related task:** docs/tasks/PM-001-calendar-control-dates.md
 - **Контракт:** `POST /verification/start` с JSON `{from:"YYYY-MM-DD",to:"YYYY-MM-DD"}` (обе ночи включены). Сервер сохраняет эти даты, baseline и ожидаемое действие; `GET` возвращает те же даты и действие, пустые для старых v1 попыток. Полностью свободные ночи → действие `close`; полностью закрытые `Airbnb (Not available)` ночи без Reserved/unknown → `open`; смешанные/занятые/прошедшие ночи не дают готового задания. `POST /check` и фоновые повторы сравнивают **только сохранённый диапазон** с полной целевой доступностью. V1 verified без сохранённого задания не приравнивается к выполненной проверке.
 - **Следующий шаг:** реализовать backend с тестами A/B, fetch failure, частичного изменения, reload, повторов, cooldown и смены источника; затем UI с неизменяемой инструкцией и четырьмя языками. Не менять обычный iCal импорт, поиск, PM-002 и реальные брони. Backend→frontend публикация после CI; QA принимает независимо.
+
+### 2026-09-24 10:35 UTC — Денис / Developer → Борис, Марк: релиз и передача QA
+
+- **Agent:** Денис
+- **Role:** Developer
+- **Change:** PM-001 реализована и опубликована backend → frontend; ссылки, CI и production evidence внесены выше. Диапазон с бронью/неизвестной или смешанной блокировкой отклоняется до выдачи инструкции и не расходует попытку. Старая v1 отметка без сохранённых дат не выдаётся за новый успех. Публикация ссылки PM-002, импорт и поиск не изменены. Технический журнал сохранён отдельно в `docs/changes/PM-001-calendar-control-dates.md`: общий `docs/changelog.md` ведёт Марк.
+- **Related task:** docs/tasks/PM-001-calendar-control-dates.md
+- **Next:** Борису проверить в управляемом iCal: A выбранный диапазон закрыт полностью → успех; изменение только B, частичная A, бронь и отсутствие изменения → без успеха; reload/ожидание, четыре языка и мобильный ввод. Реальный Airbnb не меняли автоматически. После независимой проверки Марк может перевести задачу в `done` и обновить общий product changelog/status.

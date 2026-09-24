@@ -18,7 +18,7 @@
 
 | ID | Задача | Приоритет | Статус | Ответственный |
 | --- | --- | --- | --- | --- |
-| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | planned — назначена; claim ожидается | Денис / Developer; backend handoff Игоря записан |
+| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | in review — backend/frontend опубликованы; независимая QA ожидается | Денис / Developer; QA Борис |
 | [PM-002](PM-002-link-publication.md) | Публикация внешней ссылки; PRODUCT-001 | P1 | blocked — decision | Не заявлен; решение ведёт Марк |
 | [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — QA access | Борис / QA; возобновление не подтверждено |
 | [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — нужен нативный ретест | Денис / Developer |
