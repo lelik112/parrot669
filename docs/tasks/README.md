@@ -37,7 +37,7 @@
 | [PM-017](PM-017-qa-test-mailbox-access.md) | Тестовые ящики для PM-006 | P1 | blocked — почтовый доступ | Борис / QA после доступа; Алексей — ящик |
 | [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | blocked — внешнее изменение/источник | Борис / QA после доступа; Алексей — Airbnb |
 | [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | in review — IA подготовлена, ждёт подтверждения владельца | Марк / Product Manager |
-| [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | in review — реализация подготовлена, QA открыт | Денис / Developer; QA Борис |
+| [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | in review — Борис взял desktop QA; mobile ждёт PM-015 | Денис / Developer; QA Борис |
 | [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | later | planned — LATER, scope не принят | Не назначен |
 | [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | later | planned — LATER, зависит от PM-002/021 | Не назначен |
 
