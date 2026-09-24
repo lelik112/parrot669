@@ -74,3 +74,6 @@ Backend `PublicLinks` reads latest D002 attempt and current calendar metadata wi
 ## Discussion / Updates
 
 - 2026-09-24 — Алекс / Strategy: Алексей принял новый контракт. Непроверенную валидную опубликованную Airbnb-ссылку не блокируем; показываем честный status и даём гостю возможность попросить host пройти verification.
+
+
+- 2026-09-24 — **Борис / QA:** беру PM-002 на независимый live-прогон после merge frontend PR #19 и backend PR #24. **Scope:** production search-card для валидной опубликованной ссылки и доступного verification state; публичный текст/ссылка, nudge как несентнутый draft, условия показа по host messaging opt-in, отсутствие публикации для invalid/mismatch при доступных состояниях. Не отправляю сообщение, не меняю связь Airbnb и не читаю секретный iCal URL. **Следующий шаг:** подтвердить, что frontend PR #19 попал в production; затем проверить карточку через безопасный QA-период и убрать временную доступность. Недоступные состояния отмечу как «Нужна проверка». **Related task:** PM-002.
