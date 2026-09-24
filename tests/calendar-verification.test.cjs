@@ -60,12 +60,40 @@ test('start captures the baseline before Check; double click sends once and veri
 test('pending status polls only GET; hidden pages pause polling and never schedule provider checks in the browser',async t=>{
   let state=waiting;const h=await harness(t,{handler:()=>state});
   assert.equal(h.button().hidden,true);
-  assert.match(h.text(),/через 5, 10 и 20 минут/);
+  assert.match(h.text(),/проверит календарь автоматически/);
   assert.equal([...h.timers.values()][0].ms,15000);
   await h.tick();assert(h.calls.every(c=>!c.method||c.method==='GET'));
   h.visible('hidden');assert.equal(h.timers.size,0);
   state=verified;h.visible('visible');await flush();
   assert.match(h.text(),/подтверждено/);assert.equal(h.timers.size,0);
+});
+
+test('waiting instructions do not point to a hidden Check in any language after Check or reload',async t=>{
+  const languages=[
+    ['en',/then check here/,/PARROT will check automatically/,/Next automatic check:/],
+    ['es',/comprueba aquí/,/PARROT comprobará el calendario automáticamente/,/Próxima comprobación automática:/],
+    ['ca',/comprova-ho aquí/,/PARROT comprovarà el calendari automàticament/,/Propera comprovació automàtica:/],
+    ['ru',/нажмите «Проверить»/,/PARROT проверит календарь автоматически/,/Следующая автоматическая проверка:/]
+  ];
+  for(const [language,manual,automatic,next] of languages){
+    for(const expectedAction of ['close','open']){
+      const readyState={...ready,expectedAction};
+      const waitingState={...waiting,expectedAction};
+      const h=await harness(t,{language,handler:call=>call.path.endsWith('/check')?waitingState:readyState});
+      assert.equal(h.button().hidden,false);
+      assert.match(h.panel.node.querySelector('p').textContent,manual);
+      await h.click();
+      assert.equal(h.button().hidden,true);
+      assert.doesNotMatch(h.panel.node.querySelector('p').textContent,manual);
+      assert.match(h.text(),automatic);
+      assert.match(h.text(),next);
+      assert.match(h.text(),/2030-11-01 – 2030-11-02/);
+      const reloaded=await harness(t,{language,handler:()=>waitingState});
+      assert.equal(reloaded.button().hidden,true);
+      assert.doesNotMatch(reloaded.panel.node.querySelector('p').textContent,manual);
+      assert.match(reloaded.text(),automatic);
+    }
+  }
 });
 
 test('429 reloads the blocked state; cooldown displays the deadline and refreshes once when it ends',async t=>{
