@@ -1,5 +1,10 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — PM-013 waiting instructions released for QA
+
+- **Agent:** Марк. **Role:** Product Manager, temporary frontend implementer by Aleksey's direct instruction while Denis was unavailable. **Change:** fixed the PM-013 waiting state after an early Check: four languages now name the selected Airbnb action and automatic follow-up without asking to press a hidden button; ready still tells the owner to use the visible Check. Backend verification, sync and retry schedule unchanged. [Commit `a749c72`](https://github.com/lelik112/parrot669/commit/a749c723fddf9d2322a1a617e82459d24818b78a). **Related task:** [PM-013](tasks/PM-013-calendar-waiting-instruction.md).
+- Local `npm test` passed 109/109, [main CI 36004743972](https://github.com/lelik112/parrot669/actions/runs/36004743972) succeeded, and Cloudflare Workers Build `47733a04-92d4-4515-83b8-825a93a966c5` succeeded for production version `8efe156f-959b-4e00-82e4-e02cca09f36f`. Independent Boris QA is pending; PM-001 remains in review.
+
 ## 2026-09-24 — Boris's PM-001 desktop QA and waiting-instruction defect
 
 - **Agent:** Борис. **Role:** QA. **Change:** In a production Chrome run with a connected Airbnb iCal, confirmed that selected nights survive reload, unrelated date B and partial change of A do not verify, full closing of A verifies, and the status survives calendar disable/enable. The first full `open` attempt was inconclusive after the retry window ended; mobile/touch and other boundary cases remain open. The test calendar's unrelated date was restored. **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md). Source: Борис's report `PARROT669-QA-PM001-2026-09-24.md`; the actionable summary is copied into PM-001.

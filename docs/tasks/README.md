@@ -30,7 +30,7 @@
 | [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | P2 | in review — backend released, QA Борису назначена | Игорь / Developer; QA Борис |
 | [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | P2 | in progress — claim Игоря, backend ветка `refactor/pm011-calendar-lifecycle` | Игорь / Developer |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
-| [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in progress — claim Марка по прямому поручению владельца | Марк / временный исполнитель; QA Борис |
+| [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in review — опубликовано, QA-ретест ожидается | Марк / временный исполнитель; QA Борис |
 
 Статусы задач: `planned`, `in progress`, `blocked`, `in review`, `done`, `rejected`. У `blocked` обязательно указаны причина и следующее действие. Статусы фич в roadmap используют отдельный короткий перечень из поручения владельца.
 

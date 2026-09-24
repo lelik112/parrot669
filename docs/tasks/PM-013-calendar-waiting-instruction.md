@@ -2,7 +2,7 @@
 
 **Title:** убрать указание нажать отсутствующую кнопку «Проверить» после перехода задания в ожидание.
 
-**Status:** in progress — Марк взял исправление по прямому поручению Алексея после недоступности Дениса. **Priority:** P2. **Owner:** Марк / временный исполнитель PM-013. **QA:** Борис.
+**Status:** in review — frontend опубликован, независимый QA-ретест ожидается. **Priority:** P2. **Owner:** Марк / временный исполнитель PM-013 по поручению Алексея. **QA:** Борис.
 
 **Agent:** Марк / Product Manager, временно выполняющий эту frontend-задачу по прямому поручению владельца. **Recommended model:** Luna. **Recommended reasoning:** Medium. **Reason:** локальный UI-state и тексты EN/ES/CA/RU с целевой проверкой перехода и reload; серверный контракт менять не предполагается.
 
@@ -45,6 +45,15 @@
 [PM-001](PM-001-calendar-control-dates.md) опубликована и частично проверена QA; этот баг не требует ждать PM-010 auth QA. Перед claim сверить актуальный frontend main и другие активные области.
 
 ## Discussion / Updates
+
+### 2026-09-24 13:19 UTC — Марк / временный исполнитель → Борис: выпуск и QA handoff
+
+- **Agent:** Марк
+- **Role:** Product Manager, временно выполняющий frontend-задачу по прямому поручению владельца.
+- **Change:** в [commit `a749c72`](https://github.com/lelik112/parrot669/commit/a749c723fddf9d2322a1a617e82459d24818b78a) разделил тексты ready/waiting для `close` и `open` во всех EN/ES/CA/RU. В waiting теперь описаны нужное действие в Airbnb и автоматическая проверка; сохранённые даты и время следующей проверки отображаются как раньше. Backend, iCal sync и расписание не изменены.
+- **Related task:** docs/tasks/PM-013-calendar-waiting-instruction.md
+- **Verification:** локально `npm test` — 109/109; [main CI 36004743972](https://github.com/lelik112/parrot669/actions/runs/36004743972) — success. Cloudflare Workers Build `47733a04-92d4-4515-83b8-825a93a966c5` — success для этого коммита, production version `8efe156f-959b-4e00-82e4-e02cca09f36f`. Это проверка публикации, не независимый UI-ретест.
+- **Next:** Борис повторяет ранний Check и reload в состоянии ожидания, проверяет `close` и `open` в четырёх языках и видимое время следующей проверки; записывает наблюдения. PM-001 остаётся `in review` до завершения остальных сценариев.
 
 ### 2026-09-24 13:12 UTC — Марк / Product Manager → команде: claim и исключение по роли
 
