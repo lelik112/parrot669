@@ -6,7 +6,7 @@
 
 **Recommended model:** Sol. **Recommended reasoning:** High.
 
-**Product decision:** [D009 accepted](../decisions/D009-external-link-independent-verification.md). [D003](../decisions/D003-link-publication-proposal.md) superseded before acceptance.
+**Product decision:** [D010 accepted](../decisions/D010-external-link-independent-verification.md). [D003](../decisions/D003-link-publication-proposal.md) superseded before acceptance.
 
 ## Goal
 
@@ -63,7 +63,7 @@ Identity verification, ownership/right-to-rent verification, обязатель�
 
 ## Dependencies
 
-D009 accepted. Смысл verified берётся из D002. Незавершённая оставшаяся QA PM-001 не блокирует старт реализации PM-002.
+D010 accepted. Смысл verified берётся из D002. Незавершённая оставшаяся QA PM-001 не блокирует старт реализации PM-002.
 
 ## Evidence
 
