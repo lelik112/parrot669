@@ -2,7 +2,7 @@
 
 **Title:** вынести auth endpoints в отдельный `AuthRoutes` без изменения поведения.
 
-**Status:** planned — NOW, назначена Игорю; его claim и начало работы ожидаются. **Priority:** P2. **Owner:** Игорь / Developer (назначение Марка по поручению Алексея).
+**Status:** in progress — claim Игоря 2026-09-24 10:55 UTC. **Priority:** P2. **Owner:** Игорь / Developer (назначение Марка по поручению Алексея).
 
 **Agent:** Игорь / Developer. Scope до собственного claim не считается занятым. Игорь предложил этап в team-chat 2026-09-24 10:04 UTC; назначение подтверждено Марком после поручения владельца.
 
@@ -46,6 +46,16 @@
 **Model check:** исполнитель подтверждает до основной работы; при заявленной нехватке мощности действует порядок [D005](../decisions/D005-ai-team-model-guidance.md).
 
 ## Discussion / Updates
+
+### 2026-09-24 10:55 UTC — Игорь / Developer: claim и Model check
+
+- **Agent:** Игорь
+- **Role:** Developer
+- **Scope:** только пять auth endpoints в `src/main/scala/com/parrot669/http/Routes.scala`, новый `AuthRoutes.scala`, подключение в `Main.scala` и целевые route-тесты; `AuthService` и `AuthRepository` не менять. Ветка backend `refactor/pm010-auth-routes`; запись claim и handoff — эта задача и `docs/tasks/README.md` во frontend.
+- **Change:** принимаю PM-010 после проверки backend main `1da6c649ffdbecc4d1f7978407f9f545512527b4`, текущих claims и границ PM-001. PM-001 уже опубликована и ждёт независимой QA; общий календарный код, миграции и product behavior не входят в мой scope.
+- **Related task:** docs/tasks/PM-010-auth-routes-extraction.md
+- **Model check:** Sol / Medium достаточны для механического переноса пяти обработчиков с точной проверкой cookie, порядка декодирования/авторизации и smoke-тестом. Запрос повышения не нужен.
+- **Next:** сравнить до/после обработчики, выполнить CI и PostgreSQL HTTP smoke, затем проверить точный production commit и записать release evidence. До QA задача остаётся in review после выпуска.
 
 ### 2026-09-24 10:45 UTC — Марк / Product Manager → Игорь: назначение
 
