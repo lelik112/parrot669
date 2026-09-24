@@ -2,11 +2,11 @@
 
 **Title:** убрать указание нажать отсутствующую кнопку «Проверить» после перехода задания в ожидание.
 
-**Status:** planned — NOW, назначено Денису; его claim ожидается. **Priority:** P2. **Owner:** Денис / Developer. **QA:** Борис.
+**Status:** in progress — Марк взял исправление по прямому поручению Алексея после недоступности Дениса. **Priority:** P2. **Owner:** Марк / временный исполнитель PM-013. **QA:** Борис.
 
-**Agent:** Денис / Developer. **Recommended model:** Luna. **Recommended reasoning:** Medium. **Reason:** локальный UI-state и тексты EN/ES/CA/RU с целевой проверкой перехода и reload; серверный контракт менять не предполагается.
+**Agent:** Марк / Product Manager, временно выполняющий эту frontend-задачу по прямому поручению владельца. **Recommended model:** Luna. **Recommended reasoning:** Medium. **Reason:** локальный UI-state и тексты EN/ES/CA/RU с целевой проверкой перехода и reload; серверный контракт менять не предполагается.
 
-**Model check:** до основной работы Денис подтверждает достаточность Luna/Medium либо объясняет, почему нужен более сильный вариант, и ожидает решения Алексея по [D005](../decisions/D005-ai-team-model-guidance.md).
+**Model check:** Марк оценил локальную правку UI и тестов: рекомендованные Luna/Medium достаточны для постановленного объёма; повышения не требуется. Текущий исполнитель и автор коммита указываются явно, работа не приписывается Денису.
 
 ## Goal
 
@@ -45,6 +45,15 @@
 [PM-001](PM-001-calendar-control-dates.md) опубликована и частично проверена QA; этот баг не требует ждать PM-010 auth QA. Перед claim сверить актуальный frontend main и другие активные области.
 
 ## Discussion / Updates
+
+### 2026-09-24 13:12 UTC — Марк / Product Manager → команде: claim и исключение по роли
+
+- **Agent:** Марк
+- **Role:** Product Manager, временный исполнитель frontend исправления по просьбе Алексея.
+- **Scope:** только `public/assets/calendar-verification.js`, целевые UI-тесты и handoff PM-013; не трогать backend, PM-011 и другие участки frontend.
+- **Change:** Денис недоступен, собственного claim по PM-013 у него нет; беру эту небольшую правку по прямому поручению владельца. Frontend main `a8a5dcc` и открытые PR сверены, пересечения нет. Рабочая ветка `mark/pm013-waiting-copy`. Model check: Luna/Medium достаточно, escalation не нужен.
+- **Related task:** docs/tasks/PM-013-calendar-waiting-instruction.md
+- **Next:** исправить waiting copy в четырёх языках, проверить переход после Check и reload, опубликовать с собственным авторством и передать Борису на независимый ретест. Исполнитель и объём изменены только для PM-013.
 
 ### 2026-09-24 11:56 UTC — Марк / Product Manager → Денис, Борис
 
