@@ -33,6 +33,10 @@
     if (text != null) element.textContent = text;
     return element;
   };
+  Object.assign(texts.en,{askCalendarVerification:"Ask the host to verify the calendar",verifyCalendarDraft:"Could you please confirm control of the calendar for this property on PARROT?"});
+  Object.assign(texts.es,{askCalendarVerification:"Pedir al propietario que verifique el calendario",verifyCalendarDraft:"¿Podrías confirmar el control del calendario de esta vivienda en PARROT?"});
+  Object.assign(texts.ca,{askCalendarVerification:"Demanar al propietari que verifiqui el calendari",verifyCalendarDraft:"Podries confirmar el control del calendari d'aquest habitatge a PARROT?"});
+  Object.assign(texts.ru,{askCalendarVerification:"Попросить владельца подтвердить календарь",verifyCalendarDraft:"Можете, пожалуйста, подтвердить контроль календаря этого жилья в PARROT?"});
   function t(key) { return texts[lang][key] || texts.en[key] || key; }
   function setLanguage(value) {
     lang = texts[value] ? value : "en";
@@ -129,8 +133,20 @@
     }
     link.href = `/messages.html?${params}`;
     container.append(link);
+    const canNudge = (property.links || []).some(item => item.calendarControlStatus && item.calendarControlStatus !== "verified");
+    const nudge = canNudge ? node("a", "availability-verify-nudge", t("askCalendarVerification")) : null;
+    if (nudge) {
+      nudge.dataset.msgI18n = "askCalendarVerification";
+      const request = new URLSearchParams(params);
+      request.set("verifyCalendar", "1");
+      nudge.href = `/messages.html?${request}`;
+      nudge.hidden = true;
+      container.append(nudge);
+    }
     contactOptions(property.propertyId).then(options => {
-      link.hidden = !options.acceptingNewConversations || options.hostProfileId === user?.profile?.id;
+      const allowed = options.acceptingNewConversations && options.hostProfileId !== user?.profile?.id;
+      link.hidden = !allowed;
+      if (nudge) nudge.hidden = !allowed;
     }).catch(() => {});
   }
   function resumeAfterVerification() {

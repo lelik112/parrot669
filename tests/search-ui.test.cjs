@@ -152,3 +152,16 @@ test('GEO-002: country and city use their translated native labels in all four l
     }
   }
 });
+
+test('PM-002: Airbnb stays clickable while calendar status is honest; invalid links are ignored',async t=>{
+  const id='910841261983250037';
+  const h=await harness(t,{handler:url=>url.pathname==='/api/search' ? [{
+    ...property('Barcelona'),propertyId:'11111111-1111-4111-8111-111111111111',
+    links:[{platform:'airbnb',externalId:id,url:`https://www.airbnb.com/rooms/${id}`,calendarControlStatus:'pending'},
+      {platform:'airbnb',externalId:'123',url:'https://evil.example/rooms/123',calendarControlStatus:'verified'}]
+  }] : undefined});
+  await h.barcelona();
+  assert.equal(h.results.querySelectorAll('.availability-link-group').length,1);
+  assert.match(h.results.textContent,/Владелец ещё не завершил проверку/);
+  assert.equal(h.results.querySelector('.availability-link').href,`https://www.airbnb.com/rooms/${id}`);
+});

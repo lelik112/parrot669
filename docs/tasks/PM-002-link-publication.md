@@ -2,7 +2,9 @@
 
 **Title:** унифицировать Airbnb-переход, calendar verification status и запрос владельцу пройти проверку.
 
-**Status:** planned — product decision accepted, implementation unclaimed. **Priority:** P1. **Owner:** не назначен.
+**Status:** implementation in progress — backend deployed, frontend production rollout and independent QA open. **Priority:** P1. **Owner:** Игорь / Developer.
+
+**Implementation branches:** `feat/pm002-link-contract` in backend, `feat/pm002-guest` in frontend. Baselines: backend `59c046f`, frontend `2af2816`. Model: Sol, High. Scope: shared public link projection, search card and messaging draft; no calendar sync or future profile UI.
 
 **Recommended model:** Sol. **Recommended reasoning:** High.
 
@@ -46,15 +48,15 @@
 
 ## Acceptance criteria
 
-- [ ] D009 используется как действующий контракт.
-- [ ] Search/result card не блокирует валидный опубликованный Airbnb URL из-за verification.
-- [ ] Trust status соответствует таблице.
-- [ ] Legacy v1 не выдаётся за новый verified.
-- [ ] Nudge доступен там, где можно начать messaging conversation.
-- [ ] Nudge не отправляет скрытое сообщение.
-- [ ] Invalid/mismatched URL не публикуется.
-- [ ] Отсутствие ссылки не скрывает объект из поиска.
-- [ ] Будущий public host profile использует тот же контракт.
+- [x] D010 используется как действующий контракт.
+- [x] Search/result card не блокирует валидный опубликованный Airbnb URL из-за verification.
+- [x] Trust status соответствует таблице (unit/API contract; независимая QA открыта).
+- [x] Legacy v1 не выдаётся за новый verified.
+- [x] Nudge доступен там, где можно начать messaging conversation.
+- [x] Nudge не отправляет скрытое сообщение.
+- [x] Invalid/mismatched URL не публикуется.
+- [x] Отсутствие ссылки не скрывает объект из поиска.
+- [x] Будущий public host profile использует тот же контракт (существующий JSON; новая страница вне scope).
 - [ ] QA проверяет основные состояния и messaging/no-messaging варианты.
 
 ## Not doing
@@ -67,7 +69,7 @@ D010 accepted. Смысл verified берётся из D002. Незавершё�
 
 ## Evidence
 
-Implementation по новому контракту ещё не начата.
+Backend `PublicLinks` reads latest D002 attempt and current calendar metadata without returning its secret, verifies URL/listing/source match and supplies one `calendarControlStatus` for search and public-profile JSON. UI labels four states and opens a messaging draft only when host accepts new conversations; send remains explicit. Backend [PR #24](https://github.com/lelik112/parrot669-backend/pull/24) merged `5db88ce`, [PR CI](https://github.com/lelik112/parrot669-backend/actions/runs/36015061454) and [main CI](https://github.com/lelik112/parrot669-backend/actions/runs/36015679982) passed, production Railway `e496a322-6390-4127-be99-aa53121b2a6f` SUCCESS and health 200. Frontend local tests: 111/111; [PR #19](https://github.com/lelik112/parrot669/pull/19) CI green. Independent QA and frontend release pending.
 
 ## Discussion / Updates
 

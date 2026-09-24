@@ -194,3 +194,16 @@ test('late email preference response is discarded after switching accounts',asyn
   late.resolve({enabled:true,language:'ru'});await flush();
   assert.equal(h.$('msg-email-enabled').checked,false);assert.equal(h.$('msg-email-language').value,'ca');
 });
+
+test('PM-002: verification nudge prepares an unsent draft only for an accepting host',async t=>{
+  const h=await harness(t,{url:`/messages.html?property=${property}&verifyCalendar=1`});
+  const compose=h.$('msg-compose');
+  assert.equal(compose.hidden,false);
+  assert.match(compose.elements.body.value,/calendar/);
+  assert.equal(h.calls.filter(call=>call.method==='POST').length,0);
+  const links=h.w.document.createElement('div');
+  h.w.ParrotMessaging.attachContact(links,{propertyId:property,links:[{calendarControlStatus:'unverified'}]});
+  await flush();
+  assert.equal(links.querySelector('.availability-verify-nudge').hidden,false);
+  assert.match(links.querySelector('.availability-verify-nudge').href,/verifyCalendar=1/);
+});

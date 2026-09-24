@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — PM-002 link and calendar-control status implementation
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** Implemented D010 in backend shared public-link projection for search and existing public-profile JSON: publish only canonical Airbnb links with matching listing/calendar ID, and derive `unverified`, `pending`, `verified` or `recheck_required` from the current D002 calendar source. Search shows a localized status beside the clickable link; when messaging opt-in allows, the guest can open an unsent calendar-verification request. Removed unpublished links from public-profile JSON. The search result itself remains independent of external links. [Backend PR #24](https://github.com/lelik112/parrot669-backend/pull/24) merged as `5db88ce`; [PR CI](https://github.com/lelik112/parrot669-backend/actions/runs/36015061454) and [main CI](https://github.com/lelik112/parrot669-backend/actions/runs/36015679982) passed (unit, PostgreSQL smoke, Docker). Railway deployment `e496a322-6390-4127-be99-aa53121b2a6f` is SUCCESS on the exact SHA, live `/health` returned 200. [Frontend PR #19](https://github.com/lelik112/parrot669/pull/19) has green CI; local tests 111/111 passed. Frontend production rollout and independent QA pending. **Related task:** [PM-002](tasks/PM-002-link-publication.md).
+
 ## 2026-09-24 — PM-019 cabinet IA proposal prepared
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** Prepared [D009](decisions/D009-host-cabinet-ia.md): keep current Search / Host / Messages navigation; keep availability/calendar controls with each property, owner messaging opt-in in Host, and Inbox in Messages. No empty Dashboard/Profile tabs; Account remains technical. PM-019 is in review pending Aleksey's confirmation; PM-020 stays planned and unassigned until then. PM-002/link visibility is explicitly outside this scope. **Related task:** [PM-019](tasks/PM-019-host-cabinet-ia.md).
