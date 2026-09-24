@@ -2,7 +2,7 @@
 
 **Title:** перенести lifecycle внешнего календаря в отдельный модуль без смены поведения.
 
-**Status:** in progress — claim Игоря 2026-09-24 13:08 UTC. **Priority:** P2. **Owner:** Игорь / Developer.
+**Status:** in review — backend released, independent QA pending. **Priority:** P2. **Owner:** Игорь / Developer.
 
 **Agent:** Игорь / Developer. Назначение по поручению Алексея от 24.09 12:02 UTC; эта запись не означает, что Игорь начал работу.
 
@@ -45,6 +45,15 @@ Handoff Игоря прямо связывает этот этап с завер
 **Model check:** исполнитель подтверждает до основной работы; при заявленной нехватке мощности действует порядок [D005](../decisions/D005-ai-team-model-guidance.md).
 
 ## Discussion / Updates
+
+### 2026-09-24 — Игорь / Developer: release handoff
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** вынес connect/sync/enable/disable/delete, error/success snapshots и hourly sync в `externalcalendar/{CalendarRoutes,CalendarService,CalendarRepository}.scala`; общий `Main` подключает календарные маршруты один раз, `Routes`/`ParrotService`/`ParrotRepository` сохраняют legacy challenges. Проверил посимвольное совпадение перенесённых обработчиков, веток сервиса и SQL. `calendarverification`, PM-001, V25, fetcher/parser и UI не менял. **Related task:** PM-011.
+- **Source:** [backend PR #23](https://github.com/lelik112/parrot669-backend/pull/23), merged `59c046ff61989f6f9ac2903cdf448a93dbcb45dd`. Added route authorization-order test and PostgreSQL HTTP smoke for `DELETE /api/calendars/:id`, empty dashboard calendar list and restored guest search.
+- **CI:** [PR 36004130654](https://github.com/lelik112/parrot669-backend/actions/runs/36004130654) and [main 36004571053](https://github.com/lelik112/parrot669-backend/actions/runs/36004571053) SUCCESS, with compile/tests, full PostgreSQL HTTP smoke and Docker build. The smoke also exercises connect/listing-ID mismatch, localized Airbnb URL, disable/enable, malformed/empty iCal, successful and failed sync, and reservation-based search blocking.
+- **Production:** Railway `parrot669` / `production` / `parrot669-backend` deployment `b302e2f4-2021-469b-a773-87bcddc1b50b` SUCCESS on the same SHA. Startup logs: schema V25 validated, no migration, server bound to port 8080. Direct live `/health` 200 and `/api/auth/me` without cookie 401. No real host calendar was mutated in production for this release check.
+- **Next:** независимая QA проверяет подключение, выключение/включение, синхронизацию, удаление и отражение в dashboard/search; исполнитель QA ещё не назначен. До приёмки оставить `in review`. PM-012 остаётся LATER, PM-001 QA и PM-013 идут отдельно.
+
 
 ### 2026-09-24 13:08 UTC — Игорь / Developer: claim и Model check
 

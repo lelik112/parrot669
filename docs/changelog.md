@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — PM-011 external calendar lifecycle extracted and released
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** moved external calendar routes, sync service, SQL operations and hourly loop into `externalcalendar`, preserving the existing API, SQL transactions, iCal URL security and reservation semantics. [Backend PR #23](https://github.com/lelik112/parrot669-backend/pull/23) merged as `59c046f`; [PR CI](https://github.com/lelik112/parrot669-backend/actions/runs/36004130654) and [main CI](https://github.com/lelik112/parrot669-backend/actions/runs/36004571053) passed with PostgreSQL smoke (including calendar delete/search recovery) and Docker. Railway deployment `b302e2f4-2021-469b-a773-87bcddc1b50b` is SUCCESS at V25; direct health 200. Independent calendar QA remains open. **Related task:** [PM-011](tasks/PM-011-calendar-sync-extraction.md).
+
 ## 2026-09-24 — PM-013 waiting instructions released for QA
 
 - **Agent:** Марк. **Role:** Product Manager, temporary frontend implementer by Aleksey's direct instruction while Denis was unavailable. **Change:** fixed the PM-013 waiting state after an early Check: four languages now name the selected Airbnb action and automatic follow-up without asking to press a hidden button; ready still tells the owner to use the visible Check. Backend verification, sync and retry schedule unchanged. [Commit `a749c72`](https://github.com/lelik112/parrot669/commit/a749c723fddf9d2322a1a617e82459d24818b78a). **Related task:** [PM-013](tasks/PM-013-calendar-waiting-instruction.md).
