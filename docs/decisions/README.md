@@ -11,5 +11,7 @@
 | [D002](D002-calendar-control-dates.md) | Проверка конкретных дат, выбранных в PARROT | accepted; implementation pending | Уточнение владельца 2026-09-24, QA BUG-015 |
 | [D003](D003-link-publication-proposal.md) | Внешняя ссылка после проверки источника | proposed | PRODUCT-001; детали ещё открыты |
 | [D004](D004-team-identity.md) | Имена, роли и обязательная идентификация изменений | accepted | Поручение владельца 2026-09-24; дополняет D001 |
+| [D005](D005-ai-team-model-guidance.md) | Рекомендация модели/reasoning и предварительная проверка достаточности | accepted | Поручение владельца 2026-09-24 |
+| [D006](D006-backend-refactor-backlog.md) | Оставшиеся backend extraction этапы помещены в LATER и разделены от PM-001 | accepted | PM priority от 2026-09-24 по handoff Игоря |
 
 У каждой записи: Decision, Problem, Reason, Alternatives, Rejected, Date, источник и связь с задачей. Незаписанные исторические альтернативы обозначаются как неизвестные, а не восстанавливаются из предположений.

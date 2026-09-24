@@ -4,6 +4,10 @@
 
 **Status:** in review. **Priority:** P2. **Owner:** Денис / Developer.
 
+**Agent (следующий шаг):** Борис / QA; claim ожидается. **Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** ближайшая проверка ограничена нативным browser autofill и зафиксированными desktop/mobile criteria; если нельзя воспроизвести сохранённый адрес/Safari, результат помечается непроверенным, а не выводится из тестовых событий.
+
+**Model check:** Борис подтверждает перед QA прогоном. Рекомендация относится только к следующему этапу проверки, не к уже выполненной Денисом реализации.
+
 **Area:** frontend адресной формы. **Source:** BUG-013. **Updated:** 2026-09-24, Денис / Developer.
 
 ## Goal

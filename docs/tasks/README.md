@@ -2,13 +2,13 @@
 
 Общая точка входа для `lelik112/parrot669` и `lelik112/parrot669-backend`. Координатор: **Марк / PM**. Обновлено: **2026-09-24**.
 
-Перед началом: [product-context](../product-context.md) → [команда и идентификация](../team.md) → [status](../status.md) → выбранная задача. Приоритеты и фичи — в [roadmap](../roadmap.md), продуктовые решения — в [decisions](../decisions/README.md).
+Перед началом: [product-context](../product-context.md) → [правила AI-команды и моделей](../ai-team.md) → [changelog](../changelog.md) → [команда и идентификация](../team.md) → [status](../status.md) → выбранная задача. Приоритеты и фичи — в [roadmap](../roadmap.md), продуктовые решения — в [decisions](../decisions/README.md).
 
 Свободное общение и вопросы команде — [курилка / team-chat](../team-chat.md). При старте/возобновлении и перед передачей результата прочитать новые адресованные сообщения. Договорённость о задаче фиксируется в самой задаче.
 
 ## Кто есть кто
 
-Актуальный состав и границы ролей ведутся в одном месте — [docs/team.md](../team.md). Подтверждены Денис / Developer и Борис / QA; PM — Марк, стратег — Алекс. Имя второго разработчика пока неизвестно. Подтверждение имени не создаёт claim и не означает возобновление работы.
+Актуальный состав и границы ролей ведутся в одном месте — [docs/team.md](../team.md). Подтверждены Денис и Игорь / Developer, Борис / QA; PM — Марк, стратег — Алекс. Подтверждение имени не создаёт claim и не означает возобновление работы.
 
 Марк работает только в перечисленной в team.md области продуктовых документов. Он не меняет приложение, миграции, CI/CD или инфраструктуру. Состав команды не расширяет доступы других ролей.
 
@@ -18,7 +18,7 @@
 
 | ID | Задача | Приоритет | Статус | Ответственный |
 | --- | --- | --- | --- | --- |
-| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | planned — назначена; claim ожидается | Денис / Developer; подготовка/frontend, backend после сверки с рефакторщиком |
+| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | planned — назначена; claim ожидается | Денис / Developer; backend handoff Игоря записан |
 | [PM-002](PM-002-link-publication.md) | Публикация внешней ссылки; PRODUCT-001 | P1 | blocked — decision | Не заявлен; решение ведёт Марк |
 | [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — QA access | Борис / QA; возобновление не подтверждено |
 | [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — нужен нативный ретест | Денис / Developer |
@@ -27,6 +27,9 @@
 | [PM-007](PM-007-mobile-acceptance.md) | Приёмка основных путей на мобильных | P1 | planned | Не заявлен |
 | [PM-008](PM-008-pilot.md) | План пилота и исходные показатели | P1 | planned | Марк / PM — постановка; запуск не начат |
 | [PM-009](PM-009-team-identity.md) | Состав команды и формат идентификации | P2 | done | Марк / Product Manager |
+| [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | later | planned — LATER | Не назначен |
+| [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | later | planned — LATER; после PM-001 | Не назначен |
+| [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
 
 Статусы задач: `planned`, `in progress`, `blocked`, `in review`, `done`, `rejected`. У `blocked` обязательно указаны причина и следующее действие. Статусы фич в roadmap используют отдельный короткий перечень из поручения владельца.
 
@@ -57,7 +60,7 @@
 
 ## Структура постановки
 
-Каждая задача содержит `Title`, `Goal`, `Problem`, `Context`, `Requirements`, `Acceptance criteria`, `Not doing`, `Dependencies`. Для новой фичи также фиксируются `User`, `Value`, `Solution`, `Alternatives`, `Rejected`, `Success criteria`. Отдельно записываются Owner/Status, Evidence и Discussion / Updates.
+Каждая новая или возобновляемая задача содержит `Title`, `Agent`, `Goal`, `Problem`, `Context`, `Requirements`, `Acceptance criteria`, `Not doing`, `Dependencies`, `Recommended model`, `Recommended reasoning` и `Reason`, плюс Owner/Status, Evidence, `Model check` и Discussion / Updates. Для новой фичи также фиксируются `User`, `Value`, `Solution`, `Alternatives`, `Rejected`, `Success criteria`. Завершённые задачи не меняются задним числом лишь ради рекомендации; для in-review рекомендация адресуется только следующему QA этапу. До основной работы исполнитель делает model check. Если мощности недостаточно — записывает, какой объём требует увеличения и почему, предлагает вариант и ждёт решения владельца продукта согласно [D005](../decisions/D005-ai-team-model-guidance.md).
 
 Критерии реализации и полезность различаются: прохождение проверки показывает корректность фичи, а реальные успешные контакты — ценность продукта. Числа, сроки, принятые решения и чужие claims не выдумываются.
 
