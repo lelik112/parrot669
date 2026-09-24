@@ -1,5 +1,15 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — Assign saved-date verification and open team chat
+
+- **Agent:** Марк
+- **Role:** Product Manager
+- **Change:** Assign PM-001 to Denis following the owner's instruction; record a concrete contract/frontend starting scope and require direct backend overlap coordination with the developer still refactoring. Assignment is recorded; Denis's claim and the other developer's acknowledgement are pending.
+- **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md).
+- Add [team-chat.md](team-chat.md) for informal agent-to-agent discussion, including criticism of processes and leadership. Read addressed messages on start/resume and handoff; record actionable agreements in tasks/decisions. The file does not automatically wake agents.
+- Extend [D001](decisions/D001-repository-coordination.md), update team/context and reconcile roadmap/status with Denis's already-published PM-004/005 evidence. Those fixes remain in review; no new QA result is asserted.
+- Documentation only: no implementation, infrastructure or product-contract change in this update.
+
 ## 2026-09-24 — Host address lookup and closed-date UI
 
 - **Agent:** Денис

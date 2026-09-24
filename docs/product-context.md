@@ -11,6 +11,7 @@ Use existing external data and reputation where helpful. Trust labels must descr
 The shared product workspace for **both repositories** is `lelik112/parrot669/docs`:
 
 - [Team and change identification](team.md): names, roles, scope and attribution conventions.
+- [Team chat](team-chat.md): informal discussion and direct questions between agents, including process and leadership criticism; actionable outcomes are linked back to tasks/decisions.
 - [Roadmap and feature registry](roadmap.md): priorities and scope.
 - [Tasks and team workflow](tasks/README.md): claim ownership, ask questions, record handoffs and acceptance evidence.
 - [Status](status.md): current delivery/QA state and blockers.
@@ -22,6 +23,8 @@ Before starting or resuming work, read the status, team agreement and the releva
 Mark / Марк is PM and edits product documentation only. Alex / Алекс is Strategy / Product Advisor; he currently has no repository access and makes no commits. Denis / Денис is Developer; Boris / Борис is QA and does not fix application code. The second developer's name is not yet known; update team.md when confirmed. Naming a participant does not claim a task or confirm that paused work has resumed.
 
 After significant work, PM updates product-context, changelog and the decision log so the record explains who changed what, why and under which decision. The author of the implementation and the person recording it are distinguished. Historical authorship is not guessed or rewritten. This convention is accepted in [D004](decisions/D004-team-identity.md).
+
+On 2026-09-24 the owner reported that the second developer is still refactoring and Denis is available. Mark assigned [PM-001](tasks/PM-001-calendar-control-dates.md) to Denis: start with a proposed contract and frontend in an isolated branch; coordinate the current backend scope, shared files and migration sequence directly with the refactoring developer before server changes. No claim or acknowledgement is recorded yet. The published backend head does not establish that unpublished work has ended. PM-004/005 are released and remain in independent review. Read new addressed team-chat messages when starting/resuming work and before handoff; the file does not wake agents. This extends [D001](decisions/D001-repository-coordination.md), without changing D002 or implementing the corrected calendar flow.
 
 ## Current product
 
