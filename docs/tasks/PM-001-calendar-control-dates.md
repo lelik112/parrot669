@@ -2,7 +2,7 @@
 
 **Title:** Airbnb calendar control: выбрать даты в PARROT и проверить сохранённое задание.
 
-**Status:** planned — назначена, начало не подтверждено. **Priority:** P1. **Owner:** Денис / Developer, назначен Марком по поручению Алексея; ожидается собственный claim Дениса.
+**Status:** in progress — Денис начал реализацию. **Priority:** P1. **Owner:** Денис / Developer, назначен Марком по поручению Алексея; claim Дениса ниже.
 
 **Agent:** Денис / Developer. **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** задача меняет связанный frontend/backend flow, сохраняемое контрольное задание и проверку календаря; нужно защитить существующую iCal-синхронизацию и проверить успешные/неуспешные сценарии, миграцию и восстановление после reload.
 
@@ -144,3 +144,13 @@ Implementation: не представлено. Deployment: не подтверж
 - **Change:** попросил занести будущие этапы extraction в backlog. Предложенный порядок: auth routes; затем внешний calendar connect/sync/enable/disable/delete после сверки с PM-001; затем legacy challenges с сохранением endpoints. Игорь не берёт эти файлы, назначения исполнителям не делал.
 - **Related task:** docs/tasks/PM-001-calendar-control-dates.md; backlog: PM-010, PM-011, PM-012; [D006](../decisions/D006-backend-refactor-backlog.md).
 - **Следующий шаг:** оставить задачи в LATER; активировать отдельно по приоритету и доступному исполнителю.
+
+### 2026-09-24 10:16 UTC — Денис / Developer → Марк, Игорь, Борис: claim PM-001
+
+- **Agent:** Денис
+- **Role:** Developer
+- **Scope:** backend `calendarverification/{VerificationModels,CalendarVerificationRepository,CalendarVerificationService,CalendarVerificationRoutes}.scala`, `src/test/scala/com/parrot669/calendarverification/*`, `db/migration/V25__calendar_verification_challenge.sql`, `docs/calendar-ownership-verification.md`; frontend `public/assets/calendar-verification.js`, `public/assets/styles.css`, `tests/calendar-verification.test.cjs`, `docs/changelog.md`. Общие Main/Routes/parser/sync оставлю нетронутыми, если не возникнет конкретной необходимости.
+- **Change:** приступаю к сохранённому заданию; оба main сверены (frontend `38d90d53a87f1df3c7759b506872641c2a3d3db7`, backend `f9d8ae7ab0b2d16a260a2ac64eeea3b9582f6696`, последняя миграция V24). Handoff Игоря от 08:33 и уточнение от 09:51 прочитаны: файлы свободны, дополнительных разрешений не требуется. Рабочие ветки `denis/pm001-calendar-challenge-20260924` в обоих репозиториях. Рекомендацию Sol/High считаю достаточной для этой задачи; повышение не требуется.
+- **Related task:** docs/tasks/PM-001-calendar-control-dates.md
+- **Контракт:** `POST /verification/start` с JSON `{from:"YYYY-MM-DD",to:"YYYY-MM-DD"}` (обе ночи включены). Сервер сохраняет эти даты, baseline и ожидаемое действие; `GET` возвращает те же даты и действие, пустые для старых v1 попыток. Полностью свободные ночи → действие `close`; полностью закрытые `Airbnb (Not available)` ночи без Reserved/unknown → `open`; смешанные/занятые/прошедшие ночи не дают готового задания. `POST /check` и фоновые повторы сравнивают **только сохранённый диапазон** с полной целевой доступностью. V1 verified без сохранённого задания не приравнивается к выполненной проверке.
+- **Следующий шаг:** реализовать backend с тестами A/B, fetch failure, частичного изменения, reload, повторов, cooldown и смены источника; затем UI с неизменяемой инструкцией и четырьмя языками. Не менять обычный iCal импорт, поиск, PM-002 и реальные брони. Backend→frontend публикация после CI; QA принимает независимо.
