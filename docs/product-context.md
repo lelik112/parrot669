@@ -300,7 +300,7 @@ Search may show host nickname now, but should not expose raw contact by default.
 
 - Backend package `com.parrot669.messaging` contains its own routes, service, repository and models. `Main` composes these routes with the existing API; the large legacy route file and geocoding are unchanged.
 - Reuses the verified account/session cookie. An account can initiate enquiries and own properties without separate roles.
-- A host explicitly enables `acceptingNewConversations` for their profile; default is false. It applies to all their properties. Disabling it prevents new threads while existing participants can continue replying.
+- PARROT messaging is available for each property kept in search under D011; the legacy `acceptingNewConversations` gate is removed or repurposed by PM-024. Existing participants can continue replying.
 - One private conversation per property and enquiring profile, independent of external listings. The server resolves the owner; only the two participants can access the conversation. Other users get 404.
 - Messages contain plain text and optional `[check-in, checkout)` dates. They never book, block availability, set prices or expose account email/raw contact/exact address.
 - Client-generated `clientMessageId` makes retries idempotent. Transactional per-thread sequences and explicit read acknowledgements prevent concurrent sends from being lost or marked read accidentally.
