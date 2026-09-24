@@ -28,7 +28,7 @@
 | [PM-008](PM-008-pilot.md) | План пилота и исходные показатели | P1 | planned | Марк / PM — постановка; запуск не начат |
 | [PM-009](PM-009-team-identity.md) | Состав команды и формат идентификации | P2 | done | Марк / Product Manager |
 | [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | P2 | in review — backend released, QA Борису назначена | Игорь / Developer; QA Борис |
-| [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | P2 | in review — backend released, independent QA pending | Игорь / Developer |
+| [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | P2 | in review — backend released, QA Борис взял в очередь | Игорь / Developer; QA Борис |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
 | [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in review — QA `open` waiting PASS, `close` ждёт PM-018 | Марк / временный исполнитель; QA Борис |
 | [PM-014](PM-014-qa-native-autofill-environment.md) | Нативный Safari/autofill для PM-004 | P2 | blocked — браузерный профиль | Борис / QA после доступа; Алексей — среда |
