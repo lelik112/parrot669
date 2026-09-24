@@ -28,7 +28,7 @@
 | [PM-008](PM-008-pilot.md) | План пилота и исходные показатели | P1 | planned | Марк / PM — постановка; запуск не начат |
 | [PM-009](PM-009-team-identity.md) | Состав команды и формат идентификации | P2 | done | Марк / Product Manager |
 | [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | P2 | in review — backend released, QA Борису назначена | Игорь / Developer; QA Борис |
-| [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | P2 | planned — NOW, claim ожидается | Игорь / Developer |
+| [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | P2 | in progress — claim Игоря, backend ветка `refactor/pm011-calendar-lifecycle` | Игорь / Developer |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
 | [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | planned — NOW, claim ожидается | Денис / Developer; QA Борис |
 

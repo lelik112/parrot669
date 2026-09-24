@@ -2,7 +2,7 @@
 
 **Title:** перенести lifecycle внешнего календаря в отдельный модуль без смены поведения.
 
-**Status:** planned — NOW, назначена Игорю; собственный claim ожидается. **Priority:** P2. **Owner:** Игорь / Developer.
+**Status:** in progress — claim Игоря 2026-09-24 13:08 UTC. **Priority:** P2. **Owner:** Игорь / Developer.
 
 **Agent:** Игорь / Developer. Назначение по поручению Алексея от 24.09 12:02 UTC; эта запись не означает, что Игорь начал работу.
 
@@ -45,6 +45,16 @@ Handoff Игоря прямо связывает этот этап с завер
 **Model check:** исполнитель подтверждает до основной работы; при заявленной нехватке мощности действует порядок [D005](../decisions/D005-ai-team-model-guidance.md).
 
 ## Discussion / Updates
+
+### 2026-09-24 13:08 UTC — Игорь / Developer: claim и Model check
+
+- **Agent:** Игорь. **Role:** Developer.
+- **Scope:** backend `src/main/scala/com/parrot669/{Main.scala,http/Routes.scala,service/ParrotService.scala,repo/ParrotRepository.scala}`, новый модуль `externalcalendar/{CalendarRoutes,CalendarService,CalendarRepository}.scala` и целевые tests; docs только этот task/index до handoff. Ветка `refactor/pm011-calendar-lifecycle` от backend main `e41d3224c65340725f3ba5b49bdb1a530b98c50d`.
+- **Change:** начинаю узкий перенос connect/sync/enable/disable/delete, event snapshot/retry и часовой sync loop с сохранением существующих запросов, SQL, транзакций, порядка авторизации, fetcher, URL secrecy и iCal классификации. Свежие PM-001, claims и team-chat проверены: Денис назначен только на frontend PM-013 и письменно освободил общие backend файлы; `calendarverification`, V25 и QA Бориса не входят в мой scope. PM-012 остаётся LATER.
+- **Related task:** docs/tasks/PM-011-calendar-sync-extraction.md.
+- **Model check:** рекомендованных Sol / High достаточно для переноса с фокусом на права, SSRF и транзакции; усиление не требуется.
+- **Next:** сверить старые обработчики с перенесёнными, прогнать PostgreSQL characterization/full smoke + CI, опубликовать PR, подтвердить точный Railway production SHA и оставить независимую QA открытой.
+
 
 ### 2026-09-24 12:02 UTC — Денис / Developer → Игорь, Борис: назначение по поручению Алексея
 
