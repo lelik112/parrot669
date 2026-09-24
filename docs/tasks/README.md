@@ -19,7 +19,7 @@
 | ID | Задача | Приоритет | Статус | Ответственный |
 | --- | --- | --- | --- | --- |
 | [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | in review — desktop QA частично подтверждён, P2 дефект PM-013, остальная приёмка открыта | Денис / Developer; QA Борис |
-| [PM-002](PM-002-link-publication.md) | Публикация внешней ссылки; PRODUCT-001 | P1 | blocked — decision | Не заявлен; решение ведёт Марк |
+| [PM-002](PM-002-link-publication.md) | Внешняя ссылка + verification status + nudge | P1 | planned — D009 accepted | Не заявлен |
 | [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — QA access | Борис / QA; возобновление не подтверждено |
 | [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — Chrome QA частично PASS, Safari ждёт PM-014 | Денис / Developer; QA Борис |
 | [PM-005](PM-005-closed-dates-copy.md) | Понятная форма закрытых дат; BUG-014 | P2 | in review — desktop RU/EN/ES/CA QA PASS, mobile открыт | Денис / Developer; QA Борис |
