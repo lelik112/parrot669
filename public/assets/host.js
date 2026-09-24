@@ -92,26 +92,26 @@ let authBusy = false;
 const expandedPropertyIds = new Set();
 
 const blockCopy = {
-  en: {availability:"Available", availabilityHelp:"Dates offered in search. Manual blocks and imported reservations take priority.", unavailable:"Unavailable · manual blocks", unavailableHelp:"Block dates for your own use or other bookings. No price. Existing availability and prices are kept; blocked nights are excluded from search.", blockFrom:"Unavailable from", blockTo:"Available again on", addBlock:"Block dates", noBlocks:"No manual blocks yet.", blockSaved:"Unavailable dates saved.", blockDeleted:"Block removed. Availability rules apply again.", blockOverlap:"These dates overlap an existing manual block. Edit that block instead.", deleteBlockConfirm:(from,to)=>`Remove the block ${from} → ${to}? These dates may appear in search again.`, blockDateError:"The end date must be after the start date. The end date is not blocked."},
-  es: {availability:"Disponible", availabilityHelp:"Fechas ofrecidas en la búsqueda. Los bloqueos manuales y las reservas importadas tienen prioridad.", unavailable:"No disponible · bloqueos manuales", unavailableHelp:"Bloquea fechas para uso propio u otras reservas. Sin precio. Se conservan la disponibilidad y los precios; las noches bloqueadas se excluyen de la búsqueda.", blockFrom:"No disponible desde", blockTo:"Disponible de nuevo el", addBlock:"Bloquear fechas", noBlocks:"No hay bloqueos manuales.", blockSaved:"Fechas no disponibles guardadas.", blockDeleted:"Bloqueo eliminado. Vuelven a aplicarse las reglas de disponibilidad.", blockOverlap:"Estas fechas se solapan con un bloqueo manual. Edita ese bloqueo.", deleteBlockConfirm:(from,to)=>`¿Eliminar el bloqueo ${from} → ${to}? Estas fechas podrían volver a aparecer en la búsqueda.`, blockDateError:"La fecha final debe ser posterior a la inicial. La fecha final no está bloqueada."},
-  ca: {availability:"Disponible", availabilityHelp:"Dates ofertes a la cerca. Els bloquejos manuals i les reserves importades tenen prioritat.", unavailable:"No disponible · bloquejos manuals", unavailableHelp:"Bloqueja dates per a ús propi o altres reserves. Sense preu. Es conserven la disponibilitat i els preus; les nits bloquejades s'exclouen de la cerca.", blockFrom:"No disponible des de", blockTo:"Disponible de nou el", addBlock:"Bloquejar dates", noBlocks:"Encara no hi ha bloquejos manuals.", blockSaved:"Dates no disponibles desades.", blockDeleted:"Bloqueig eliminat. Es tornen a aplicar les regles de disponibilitat.", blockOverlap:"Aquestes dates se solapen amb un bloqueig manual. Edita aquell bloqueig.", deleteBlockConfirm:(from,to)=>`Eliminar el bloqueig ${from} → ${to}? Aquestes dates podrien tornar a aparèixer a la cerca.`, blockDateError:"La data final ha de ser posterior a la inicial. La data final no està bloquejada."},
-  ru: {availability:"Доступно", availabilityHelp:"Даты для поиска. Ручные блокировки и брони из календаря имеют приоритет.", unavailable:"Недоступно · ручные блокировки", unavailableHelp:"Закройте даты для себя или других бронирований. Без цены. Свободные периоды и их цены сохраняются, но заблокированные ночи исключаются из поиска.", blockFrom:"Недоступно с", blockTo:"Снова доступно с", addBlock:"Заблокировать даты", noBlocks:"Ручных блокировок пока нет.", blockSaved:"Период недоступности сохранён.", blockDeleted:"Блокировка удалена. Снова действуют свободные периоды.", blockOverlap:"Эти даты пересекаются с уже добавленной ручной блокировкой. Отредактируйте её.", deleteBlockConfirm:(from,to)=>`Удалить блокировку ${from} → ${to}? Эти даты снова смогут появиться в поиске.`, blockDateError:"Дата окончания должна быть позже начала. Дата окончания не блокируется."}
+  en: {availability:"Available", availabilityHelp:"Dates offered in search. Manual blocks and imported reservations take priority.", unavailable:"Closed dates", unavailableHelp:"Block dates for your own use or other bookings. No price. Existing availability and prices are kept; blocked nights are excluded from search.", blockFrom:"Unavailable from", blockTo:"Available again on", addBlock:"Close dates", noBlocks:"No closed dates yet.", blockSaved:"Dates closed for search.", blockDeleted:"Dates reopened. Existing availability and reservation rules apply.", blockOverlap:"These dates overlap an existing manual block. Edit that block instead.", deleteBlockConfirm:(from,to)=>`Remove the block ${from} → ${to}? These dates may appear in search again.`, blockDateError:"The end date must be after the start date. The end date is not blocked."},
+  es: {availability:"Disponible", availabilityHelp:"Fechas ofrecidas en la búsqueda. Los bloqueos manuales y las reservas importadas tienen prioridad.", unavailable:"Fechas cerradas", unavailableHelp:"Bloquea fechas para uso propio u otras reservas. Sin precio. Se conservan la disponibilidad y los precios; las noches bloqueadas se excluyen de la búsqueda.", blockFrom:"No disponible desde", blockTo:"Disponible de nuevo el", addBlock:"Cerrar fechas", noBlocks:"Todavía no hay fechas cerradas.", blockSaved:"Fechas cerradas para la búsqueda.", blockDeleted:"Fechas reabiertas. Se aplican las reglas de disponibilidad y reservas existentes.", blockOverlap:"Estas fechas se solapan con un bloqueo manual. Edita ese bloqueo.", deleteBlockConfirm:(from,to)=>`¿Eliminar el bloqueo ${from} → ${to}? Estas fechas podrían volver a aparecer en la búsqueda.`, blockDateError:"La fecha final debe ser posterior a la inicial. La fecha final no está bloqueada."},
+  ca: {availability:"Disponible", availabilityHelp:"Dates ofertes a la cerca. Els bloquejos manuals i les reserves importades tenen prioritat.", unavailable:"Dates tancades", unavailableHelp:"Bloqueja dates per a ús propi o altres reserves. Sense preu. Es conserven la disponibilitat i els preus; les nits bloquejades s'exclouen de la cerca.", blockFrom:"No disponible des de", blockTo:"Disponible de nou el", addBlock:"Tancar dates", noBlocks:"Encara no hi ha dates tancades.", blockSaved:"Dates tancades per a la cerca.", blockDeleted:"Dates reobertes. S’apliquen les regles de disponibilitat i reserves existents.", blockOverlap:"Aquestes dates se solapen amb un bloqueig manual. Edita aquell bloqueig.", deleteBlockConfirm:(from,to)=>`Eliminar el bloqueig ${from} → ${to}? Aquestes dates podrien tornar a aparèixer a la cerca.`, blockDateError:"La data final ha de ser posterior a la inicial. La data final no està bloquejada."},
+  ru: {availability:"Доступно", availabilityHelp:"Даты для поиска. Ручные блокировки и брони из календаря имеют приоритет.", unavailable:"Закрытые даты", unavailableHelp:"Закройте даты для себя или других бронирований. Без цены. Свободные периоды и их цены сохраняются, но заблокированные ночи исключаются из поиска.", blockFrom:"Недоступно с", blockTo:"Снова доступно с", addBlock:"Закрыть даты", noBlocks:"Закрытых дат пока нет.", blockSaved:"Даты закрыты для поиска.", blockDeleted:"Закрытие снято. Снова учитываются свободные периоды и брони.", blockOverlap:"Эти даты пересекаются с уже добавленной ручной блокировкой. Отредактируйте её.", deleteBlockConfirm:(from,to)=>`Удалить блокировку ${from} → ${to}? Эти даты снова смогут появиться в поиске.`, blockDateError:"Дата окончания должна быть позже начала. Дата окончания не блокируется."}
 };
 Object.entries(blockCopy).forEach(([language, values]) => Object.assign(copy[language], values));
 
 const hostDateCopy = {
-  en: {firstNight:"First night", lastNight:"Last night (included)", availabilityHelp:"Both dates are included. The price applies to every selected night, including the last one. Manual blocks and imported reservations take priority.", unavailableHelp:"Both dates are blocked, including the last night. No price. Existing availability and prices are kept; these nights are excluded from search.", blockTo:"Unavailable through (included)", blockDateError:"The last date cannot be before the first date."},
-  es: {firstNight:"Primera noche", lastNight:"Última noche (incluida)", availabilityHelp:"Ambas fechas están incluidas. El precio se aplica a cada noche seleccionada, incluida la última. Los bloqueos manuales y las reservas importadas tienen prioridad.", unavailableHelp:"Ambas fechas están bloqueadas, incluida la última noche. Sin precio. Se conservan la disponibilidad y los precios; estas noches se excluyen de la búsqueda.", blockTo:"No disponible hasta (incluido)", blockDateError:"La fecha final no puede ser anterior a la inicial."},
-  ca: {firstNight:"Primera nit", lastNight:"Última nit (inclosa)", availabilityHelp:"Ambdues dates estan incloses. El preu s'aplica a cada nit seleccionada, inclosa l'última. Els bloquejos manuals i les reserves importades tenen prioritat.", unavailableHelp:"Ambdues dates estan bloquejades, inclosa l'última nit. Sense preu. Es conserven la disponibilitat i els preus; aquestes nits s'exclouen de la cerca.", blockTo:"No disponible fins al (inclòs)", blockDateError:"La data final no pot ser anterior a la inicial."},
-  ru: {firstNight:"Первая ночь", lastNight:"Последняя ночь (включительно)", availabilityHelp:"Обе даты включены. Цена действует на каждую выбранную ночь, включая последнюю. Ручные блокировки и брони из календаря имеют приоритет.", unavailableHelp:"Обе даты заблокированы, включая последнюю ночь. Без цены. Свободные периоды и цены сохраняются, но эти ночи исключаются из поиска.", blockTo:"Недоступно по (включительно)", blockDateError:"Последняя дата не может быть раньше первой."}
+  en: {firstNight:"First night", lastNight:"Last night (included)", availabilityHelp:"Both dates are included. The price applies to every selected night, including the last one. Manual blocks and imported reservations take priority.", unavailableHelp:"Select nights when the property is unavailable to guests, including the last night. They will be excluded from search; available periods and prices will be kept.", blockTo:"Unavailable through (included)", blockDateError:"The last date cannot be before the first date."},
+  es: {firstNight:"Primera noche", lastNight:"Última noche (incluida)", availabilityHelp:"Ambas fechas están incluidas. El precio se aplica a cada noche seleccionada, incluida la última. Los bloqueos manuales y las reservas importadas tienen prioridad.", unavailableHelp:"Indica las noches en las que la vivienda no estará disponible, incluida la última. No aparecerán en la búsqueda; se conservarán los períodos disponibles y los precios.", blockTo:"No disponible hasta (incluido)", blockDateError:"La fecha final no puede ser anterior a la inicial."},
+  ca: {firstNight:"Primera nit", lastNight:"Última nit (inclosa)", availabilityHelp:"Ambdues dates estan incloses. El preu s'aplica a cada nit seleccionada, inclosa l'última. Els bloquejos manuals i les reserves importades tenen prioritat.", unavailableHelp:"Indica les nits en què l’habitatge no estarà disponible, inclosa l’última. No apareixeran a la cerca; es conservaran els períodes disponibles i els preus.", blockTo:"No disponible fins al (inclòs)", blockDateError:"La data final no pot ser anterior a la inicial."},
+  ru: {firstNight:"Первая ночь", lastNight:"Последняя ночь (включительно)", availabilityHelp:"Обе даты включены. Цена действует на каждую выбранную ночь, включая последнюю. Ручные блокировки и брони из календаря имеют приоритет.", unavailableHelp:"Укажите ночи, когда жильё недоступно гостям, включая последнюю ночь. Они не попадут в поиск; свободные периоды и цены сохранятся.", blockTo:"Недоступно по (включительно)", blockDateError:"Последняя дата не может быть раньше первой."}
 };
 Object.entries(hostDateCopy).forEach(([language, values]) => Object.assign(copy[language], values));
 
 const periodUiCopy = {
-  en:{chooseDate:"Select date",priceLabel:"Price per night, €",priceOptional:"Optional",newPeriod:"Add available dates",savedPeriod:"Available period",savedBlock:"Blocked period"},
-  es:{chooseDate:"Elegir fecha",priceLabel:"Precio por noche, €",priceOptional:"Opcional",newPeriod:"Añadir fechas disponibles",savedPeriod:"Período disponible",savedBlock:"Período bloqueado"},
-  ca:{chooseDate:"Tria una data",priceLabel:"Preu per nit, €",priceOptional:"Opcional",newPeriod:"Afegir dates disponibles",savedPeriod:"Període disponible",savedBlock:"Període bloquejat"},
-  ru:{chooseDate:"Выберите дату",priceLabel:"Цена за ночь, €",priceOptional:"Необязательно",newPeriod:"Добавить свободные даты",savedPeriod:"Доступный период",savedBlock:"Период недоступности"}
+  en:{chooseDate:"Select date",priceLabel:"Price per night, €",priceOptional:"Optional",newPeriod:"Add available dates",savedPeriod:"Available period",savedBlock:"Closed for search",newBlock:"Close another period",addressCitySearch:"Search city",addressStreetSearch:"Search street"},
+  es:{chooseDate:"Elegir fecha",priceLabel:"Precio por noche, €",priceOptional:"Opcional",newPeriod:"Añadir fechas disponibles",savedPeriod:"Período disponible",savedBlock:"Cerrado para la búsqueda",newBlock:"Cerrar otro período",addressCitySearch:"Buscar ciudad",addressStreetSearch:"Buscar calle"},
+  ca:{chooseDate:"Tria una data",priceLabel:"Preu per nit, €",priceOptional:"Opcional",newPeriod:"Afegir dates disponibles",savedPeriod:"Període disponible",savedBlock:"Tancat per a la cerca",newBlock:"Tancar un altre període",addressCitySearch:"Cercar ciutat",addressStreetSearch:"Cercar carrer"},
+  ru:{chooseDate:"Выберите дату",priceLabel:"Цена за ночь, €",priceOptional:"Необязательно",newPeriod:"Добавить свободные даты",savedPeriod:"Доступный период",savedBlock:"Закрыто для поиска",newBlock:"Закрыть ещё период",addressCitySearch:"Поиск города",addressStreetSearch:"Поиск улицы"}
 };
 Object.entries(periodUiCopy).forEach(([language, values]) => Object.assign(copy[language], values));
 
@@ -875,7 +875,7 @@ async function saveUnavailability(property, form, period = null){
     });
     property.unavailability = [...(property.unavailability || []).filter(item => item.id !== saved.id), saved]
       .sort((a,b) => a.from.localeCompare(b.from) || a.to.localeCompare(b.to));
-    renderProperties();
+    renderProperties({propertyId:property.id,key:"blockSaved"});
     message(tr("blockSaved"), "success");
   } catch (error) {
     setFormError(form, error.message);
@@ -895,7 +895,7 @@ async function deleteUnavailability(property, period, form){
   try {
     await api(`/unavailability/${period.id}`, {method:"DELETE"});
     property.unavailability = (property.unavailability || []).filter(item => item.id !== period.id);
-    renderProperties();
+    renderProperties({propertyId:property.id,key:"blockDeleted"});
     message(tr("blockDeleted"), "success");
   } catch (error) {
     setFormError(form, error.message);
@@ -906,7 +906,7 @@ async function deleteUnavailability(property, period, form){
   }
 }
 
-function renderUnavailability(property){
+function renderUnavailability(property, feedbackKey = null){
   const panel = document.createElement("section");
   panel.className = "host-subpanel host-unavailability-panel";
   const title = document.createElement("h3");
@@ -915,20 +915,26 @@ function renderUnavailability(property){
   help.className = "host-inline-muted";
   help.textContent = tr("unavailableHelp");
   panel.append(title, help);
+  if(feedbackKey){
+    const feedback=document.createElement("p");
+    feedback.className="host-block-feedback";feedback.setAttribute("role","status");
+    feedback.textContent=tr(feedbackKey);panel.append(feedback);
+  }
 
   function dateForm(period = null){
     const form = document.createElement("form");
     form.className = period ? "host-period host-unavailability-period" : "host-inline-form host-unavailability-add";
     if (period) periodHeading(form, "savedBlock");
+    else if(property.unavailability?.length) periodHeading(form, "newBlock");
     function dateField(name, text, value){
       const input = document.createElement("input");
       input.name = name; input.type = "date"; input.required = true; input.value = value || "";
       form.append(hostDateLabel(input, text));
       return input;
     }
-    const from = dateField("from", "blockFrom", period?.from);
+    const from = dateField("from", "firstNight", period?.from);
     const lastNight = plusDays(period?.to, -1);
-    const to = dateField("to", "blockTo", lastNight);
+    const to = dateField("to", "lastNight", lastNight);
     to.min = from.value;
     from.addEventListener("change", () => {
       to.min = from.value;
@@ -974,7 +980,7 @@ function renderUnavailability(property){
   return panel;
 }
 
-function renderProperties(){
+function renderProperties(blockFeedback = null){
   if (!propertiesNode) return;
   calendarVerificationPanels.splice(0).forEach(panel=>panel.dispose());
   propertyAddressEditors.forEach(editor => editor.dispose());
@@ -1371,7 +1377,7 @@ function renderProperties(){
     card.append(settings, listing);
     if(property.listing) card.append(syncPanel);
     card.append(calendar);
-    card.append(renderUnavailability(property));
+    card.append(renderUnavailability(property, blockFeedback?.propertyId===property.id ? blockFeedback.key : null));
     const footer = document.createElement("div");
     footer.className = "host-property-footer";
     const deletePropertyButton = document.createElement("button");

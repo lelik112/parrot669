@@ -168,6 +168,53 @@ test('city then street without a house number can be chosen; house entry uses no
   assert.throws(()=>editor.getValue(),/house number/);
 });
 
+test('browser autofill text never submits a stale normalized selection in create or edit',async()=>{
+  const app=setup(lookupRoutes);await settle();
+  const create=app.run('newPropertyAddress');
+  propertyCard(app);
+  await settle();
+  const edit=app.run('Array.from(propertyAddressEditors.values())[0]');
+  await edit.change.emit('click');
+  for(const editor of [create,edit]){
+    await chooseStreet(app,editor);
+    editor.street.input.value='A saved browser address';
+    assert.throws(()=>editor.getValue(),/Select a street/);
+    editor.street.input.value=streetFixture.street;
+    editor.city.input.value='Madrid';
+    assert.throws(()=>editor.getValue(),/Select a city/);
+    editor.city.input.value=cityFixture.city;
+    editor.country.value='FR';
+    assert.throws(()=>editor.getValue(),/Select a city/);
+    editor.country.value='ES';
+    assert.deepEqual(JSON.parse(JSON.stringify(editor.getValue())),addressFixture);
+    editor.city.input.value='Saved city';await editor.city.input.emit('change');
+    assert.equal(editor.street.input.value,'');
+    assert.equal(editor.street.input.disabled,true);
+    assert.throws(()=>editor.getValue(),/Select a city/);
+  }
+});
+
+test('place search keeps keyboard selection and does not repeat lookups on change after input',async()=>{
+  const app=setup(lookupRoutes);await settle();
+  const editor=app.run('newPropertyAddress'),flush=await chooseCity(app);
+  assert.equal(editor.street.input.type,'search');
+  assert.equal(editor.street.input.name,'search-street');
+  editor.street.input.value='alfo';await editor.street.input.emit('input');await flush();
+  const count=app.calls.length;
+  await editor.street.input.emit('change');await flush();
+  assert.equal(app.calls.length,count);
+  await editor.street.input.emit('keydown',{key:'ArrowDown'});
+  assert.equal(editor.street.input.getAttribute('aria-activedescendant'),editor.street.node.querySelector('.host-address-option').id);
+  await editor.street.input.emit('keydown',{key:'Enter'});
+  editor.house.value='40';
+  assert.deepEqual(JSON.parse(JSON.stringify(editor.getValue())),addressFixture);
+  await editor.street.input.emit('change');await flush();
+  assert.equal(app.calls.length,count);
+  editor.street.input.value='alfo';await editor.street.input.emit('input');await flush();
+  await editor.street.input.emit('keydown',{key:'Escape'});
+  assert.equal(editor.street.input.getAttribute('aria-expanded'),'false');
+});
+
 test('changing country or city clears downstream selections and prevents mixed-address submission',async()=>{
   const app=setup(lookupRoutes);await settle();
   const editor=await chooseStreet(app);
@@ -372,6 +419,38 @@ test('manual blocks have a separate panel, send no price and preserve availabili
   assert.equal(app.run('state.properties[0].unavailability.length'), 0);
   assert.equal(app.run('JSON.stringify(state.properties[0].availability)'), original);
 });
+
+for(const [language,title,first,last,saved,removed] of [
+  ['en','Closed dates','First night','Last night (included)','Dates closed for search.','Dates reopened.'],
+  ['es','Fechas cerradas','Primera noche','Última noche (incluida)','Fechas cerradas para la búsqueda.','Fechas reabiertas.'],
+  ['ca','Dates tancades','Primera nit','Última nit (inclosa)','Dates tancades per a la cerca.','Dates reobertes.'],
+  ['ru','Закрытые даты','Первая ночь','Последняя ночь (включительно)','Даты закрыты для поиска.','Закрытие снято.']
+]){
+  test(`closed dates: ${language} separates draft, saved and removed states`,async()=>{
+    const app=setup({
+      '/properties/property-1/unavailability':options=>({status:201,body:{id:'block-1',...JSON.parse(options.body)}}),
+      '/unavailability/block-1':{status:204}
+    });await settle();propertyCard(app);
+    app.run(`lang=${JSON.stringify(language)}; renderProperties()`);
+    const panel=()=>app.nodes.get('host-properties').children[0].querySelector('.host-unavailability-panel');
+    assert.equal(panel().querySelector('h3').textContent,title);
+    assert.equal(panel().querySelector('.host-block-feedback'),undefined);
+    const form=panel().querySelector('.host-unavailability-add');
+    assert.deepEqual(form.querySelectorAll('.host-date-label').map(n=>n.children[0].textContent),[first,last]);
+    form.querySelectorAll('input').forEach(input=>input.value='2026-10-02');
+    const availability=app.run('JSON.stringify(state.properties[0].availability)');
+    await form.emit('submit');
+    assert.deepEqual(app.requests.find(r=>r.method==='POST').body,{from:'2026-10-02',to:'2026-10-03'});
+    assert.equal(panel().querySelector('.host-block-feedback').textContent,saved);
+    assert.ok(panel().querySelector('.host-unavailability-period').querySelector('.host-period-heading'));
+    assert.equal(panel().querySelector('.host-unavailability-add').querySelectorAll('input').every(n=>!n.value),true);
+    const row=panel().querySelector('.host-unavailability-period');
+    await row.querySelector('.danger').emit('click');
+    assert.equal(panel().querySelector('.host-unavailability-period'),undefined);
+    assert.ok(panel().querySelector('.host-block-feedback').textContent.startsWith(removed));
+    assert.equal(app.run('JSON.stringify(state.properties[0].availability)'),availability);
+  });
+}
 
 for (const action of ['add','edit']) {
   for (const status of [400,409]) {
