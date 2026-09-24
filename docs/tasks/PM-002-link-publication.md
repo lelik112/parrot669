@@ -2,7 +2,7 @@
 
 **Title:** унифицировать Airbnb-переход, calendar verification status и запрос владельцу пройти проверку.
 
-**Status:** implementation in progress — backend deployed, frontend production rollout and independent QA open. **Priority:** P1. **Owner:** Игорь / Developer.
+**Status:** in review — backend and frontend visible in production; partial QA PASS; BUG-017 copy finding; nudge and remaining verification states need isolated guest/session QA. **Priority:** P1. **Owner:** Игорь / Developer; QA Борис.
 
 **Implementation branches:** `feat/pm002-link-contract` in backend, `feat/pm002-guest` in frontend. Baselines: backend `59c046f`, frontend `2af2816`. Model: Sol, High. Scope: shared public link projection, search card and messaging draft; no calendar sync or future profile UI.
 
@@ -77,3 +77,17 @@ Backend `PublicLinks` reads latest D002 attempt and current calendar metadata wi
 
 
 - 2026-09-24 — **Борис / QA:** беру PM-002 на независимый live-прогон после merge frontend PR #19 и backend PR #24. **Scope:** production search-card для валидной опубликованной ссылки и доступного verification state; публичный текст/ссылка, nudge как несентнутый draft, условия показа по host messaging opt-in, отсутствие публикации для invalid/mismatch при доступных состояниях. Не отправляю сообщение, не меняю связь Airbnb и не читаю секретный iCal URL. **Следующий шаг:** подтвердить, что frontend PR #19 попал в production; затем проверить карточку через безопасный QA-период и убрать временную доступность. Недоступные состояния отмечу как «Нужна проверка». **Related task:** PM-002.
+
+
+### 2026-09-24 — Борис / QA — production-прогон
+
+**Среда:** production parrot669.com, desktop Chrome, owner profile lelik; PM-002 frontend live (merged PR #19) + deployed backend PR #24. Тестовая выдача: Barcelona, 2027-06-11—2027-06-14, QA-only property. Временный период доступности 2027-06-10—2027-06-15 (€123.45/night) после теста удалён. Исходные доступные и закрытые периоды сохранены; publish link и messaging opt-in возвращены в исходное состояние ON. Airbnb/iCal connection не менялась. Сообщения не отправлялись; secret iCal URL не читался.
+
+- **PASS — lost/reverification state:** карточка остаётся в результатах с валидной опубликованной Airbnb-ссылкой и статусом «Требуется повторная проверка». EN/ES/CA показывают соответствующие переводы; ни один язык не называет это подтверждённой проверкой.
+- **PASS — publication OFF:** после отключения «Показывать внешнюю ссылку в поиске» объект остался в выдаче; ссылка, trust status и nudge отсутствовали. После включения ссылка и потерянный статус вернулись.
+- **BUG-017 — P3: подпись при выключенной публикации говорит, что ссылка не добавлена.** Шаги: у объекта оставить сохранённый Airbnb URL, выключить публикацию и выполнить тот же поиск. Фактически в карточке показано «Внешняя ссылка пока не добавлена». Гость может понять это как отсутствие Airbnb-объявления, хотя владелец просто не публикует переход. Ожидаемо — нейтрально скрыть строку или написать, что ссылка недоступна гостям; не утверждать, что владелец её не добавил.
+- **Нужна проверка — nudge и no-messaging:** в единственном сеансе вошёл владелец этой же карточки, поэтому создать обращение к самому себе нельзя; CTA не появился. Второй независимый гостевой аккаунт/сеанс ждёт PM-016. Не проверены подготовленный текст и отсутствие скрытой отправки.
+- **Нужна проверка:** unverified, pending, verified D002, failed/blocked/expired отдельно, legacy v1, замена/удаление URL, invalid/mismatch. Не менял Airbnb и URL, потому что это затрагивает рабочее состояние календаря/источника.
+
+**Итог:** частичный PASS; полный acceptance PM-002 не подтверждён до проверки nudge и остальных статусов.  
+**Agent:** Борис. **Role:** QA. **Change:** production-прогон состояния lost и publish OFF; зарегистрирован BUG-017. **Related task:** PM-002.
