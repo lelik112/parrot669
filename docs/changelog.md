@@ -1,5 +1,15 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — Named team and mandatory change identification
+
+- **Agent:** Марк
+- **Role:** Product Manager
+- **Change:** Add the canonical team roster and boundaries in `docs/team.md`: Алекс / Strategy, Марк / PM, Денис / Developer, Борис / QA and a second developer whose name is pending. Require Agent/Role/Scope before work and Agent/Role/Change/Related task in commit messages, PR descriptions, task-status updates and changelog entries. Record PM's responsibility to preserve authorship, reasons and decisions after significant changes.
+- **Related task:** [PM-009](tasks/PM-009-team-identity.md)
+- **Decision:** [D004](decisions/D004-team-identity.md), accepted from the owner's instruction. Алекс prepared the proposal; Марк records and publishes the documentation.
+- Clarify Boris's identity in the existing paused QA task without claiming a restart or successful checks. Unknown developer names, claims and historical authors are not invented. Application behavior is unchanged.
+- Preserve Denis's concurrent claim of PM-004/005 (`d8dc6db`) and reflect their frontend-only `in progress` state in the roadmap/status. This records a start of work, not completed fixes or a release.
+
 ## 2026-09-24 — Product coordination and saved-date verification requirement
 
 - Establish a shared repository workflow for both frontend and backend work: roadmap/feature registry, task ownership and discussion, decision log and a status report. PM: Mark / Марк. Strategist: Alex / Алекс, currently without repository access. Other agent names and claims remain open until confirmed.

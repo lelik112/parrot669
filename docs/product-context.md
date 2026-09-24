@@ -10,15 +10,18 @@ Use existing external data and reputation where helpful. Trust labels must descr
 
 The shared product workspace for **both repositories** is `lelik112/parrot669/docs`:
 
+- [Team and change identification](team.md): names, roles, scope and attribution conventions.
 - [Roadmap and feature registry](roadmap.md): priorities and scope.
 - [Tasks and team workflow](tasks/README.md): claim ownership, ask questions, record handoffs and acceptance evidence.
 - [Status](status.md): current delivery/QA state and blockers.
 - [Decision log](decisions/README.md): accepted decisions and clearly marked proposals.
 - [Changelog](changelog.md): dated history; decisions, implementation and verification are separate events.
 
-Before starting or resuming work, read the status and the relevant task. Record a claim in the task before implementation; do not start a duplicate task already claimed by another agent. Repository updates are asynchronous records, not a mechanism that automatically starts another agent. The detailed agreement and known team identities are in [tasks/README.md](tasks/README.md).
+Before starting or resuming work, read the status, team agreement and the relevant task. State **Agent, Role, Scope** and record a claim before implementation; do not start a duplicate task already claimed by another agent. Every commit message, PR description, task-status update and changelog entry identifies **Agent, Role, Change, Related task**, even when the technical GitHub account is shared. Repository updates are asynchronous records, not a mechanism that automatically starts another agent. The workflow is in [tasks/README.md](tasks/README.md); the canonical team roster and formats are in [team.md](team.md).
 
-Mark / Марк is PM and edits product documentation only. Alex / Алекс is the strategist; he currently has no repository access. Developers own technical changes and QA owns independent verification. Names not yet supplied by the owner remain unassigned; an old branch or shared GitHub login does not identify the current worker.
+Mark / Марк is PM and edits product documentation only. Alex / Алекс is Strategy / Product Advisor; he currently has no repository access and makes no commits. Denis / Денис is Developer; Boris / Борис is QA and does not fix application code. The second developer's name is not yet known; update team.md when confirmed. Naming a participant does not claim a task or confirm that paused work has resumed.
+
+After significant work, PM updates product-context, changelog and the decision log so the record explains who changed what, why and under which decision. The author of the implementation and the person recording it are distinguished. Historical authorship is not guessed or rewritten. This convention is accepted in [D004](decisions/D004-team-identity.md).
 
 ## Current product
 
