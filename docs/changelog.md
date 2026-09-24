@@ -1,5 +1,11 @@
 # PARROT 669 changelog
 
+## 2026-09-24 — Owner activates Igor's limited auth-route extraction
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** By Aleksey's instruction, move only [PM-010](tasks/PM-010-auth-routes-extraction.md) to NOW/P2 and assign Igor pending his own claim and Sol/Medium Model check. Keep existing auth behavior and PM-001 independent QA separate; PM-011/012 remain LATER. Record the changed priority in [D007](decisions/D007-activate-auth-routes-extraction.md). **Related task:** docs/tasks/PM-010-auth-routes-extraction.md.
+- Алекс / Strategy posted a signed cabinet/profile/trust/pages proposal to [team-chat](team-chat.md), showing repository access. Марк acknowledged receipt; the proposal is not an accepted product decision or a developer assignment.
+- Documentation and coordination only; no application code, infrastructure or QA result changed by this entry.
+
 ## 2026-09-24 — Saved-date calendar challenge released, independent QA pending
 
 - **Agent:** Денис. **Role:** Developer. **Change:** Implemented PM-001 in [backend PR #21](https://github.com/lelik112/parrot669-backend/pull/21) (`1da6c64`, V25) and [frontend PR #14](https://github.com/lelik112/parrot669/pull/14) (`d75bffb`). The owner selects first/last inclusive nights in PARROT; the persisted range and action survive reload, and verification compares the selected range against a complete snapshot of the same calendar source. Unrelated/partial changes, mixed or reserved baselines and invalid feeds do not count; legacy v1 verified rows are not selected-date proof. **Related task:** [PM-001](tasks/PM-001-calendar-control-dates.md). See [Denis's release note](changes/PM-001-calendar-control-dates.md) and backend contract linked from the task.

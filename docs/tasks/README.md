@@ -27,7 +27,7 @@
 | [PM-007](PM-007-mobile-acceptance.md) | Приёмка основных путей на мобильных | P1 | planned | Не заявлен |
 | [PM-008](PM-008-pilot.md) | План пилота и исходные показатели | P1 | planned | Марк / PM — постановка; запуск не начат |
 | [PM-009](PM-009-team-identity.md) | Состав команды и формат идентификации | P2 | done | Марк / Product Manager |
-| [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | later | planned — LATER | Не назначен |
+| [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | P2 | planned — NOW, claim ожидается | Игорь / Developer |
 | [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | later | planned — LATER; после PM-001 | Не назначен |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
 
