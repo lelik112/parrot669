@@ -175,6 +175,7 @@ export default {
         (path === "/auth/logout" && request.method === "POST") ||
         (path === "/auth/me" && request.method === "GET") ||
         (path === "/dashboard" && request.method === "GET") ||
+        (path === "/profile" && request.method === "PATCH") ||
         (["/geocode/autocomplete", "/geocode/countries"].includes(path) && request.method === "GET") ||
         (path === "/properties" && request.method === "POST") ||
         (/^\/properties\/[0-9a-f-]+$/i.test(path) && ["PUT", "DELETE"].includes(request.method)) ||
@@ -195,7 +196,7 @@ export default {
       }
 
       try {
-        return await proxyBackend(request, `/api${path}`, qaSecret);
+        return await proxyBackend(request, path === "/profile" ? "/api/host/profile" : `/api${path}`, qaSecret);
       } catch (error) {
         console.error("Host API proxy failed", error?.message);
         return json({ error: "Host service unavailable" }, 502);

@@ -7,6 +7,30 @@ const source = fs.readFileSync(path.join(__dirname,'../src/index.js'),'utf8')
   .replace('export default {','globalThis.worker = {');
 const id='11111111-1111-4111-8111-111111111111';
 
+test('host profile PATCH reaches the backend route on production and QA origins', async () => {
+  const calls=[];
+  const sandbox={URL,Headers,Response,console,fetch:async(url,init)=>{
+    calls.push({url,init,body:await new Response(init.body).json()});
+    return new Response(JSON.stringify({displayName:'New host'}),{status:200});
+  }};
+  vm.createContext(sandbox); vm.runInContext(source,sandbox);
+  for (const host of ['parrot669.com','parrot669.cheltsov112.workers.dev']) {
+    const response=await sandbox.worker.fetch(new Request(`https://${host}/api/host/profile`,{
+      method:'PATCH',headers:{Origin:`https://${host}`,Cookie:'parrot_session=test-session','Content-Type':'application/json'},
+      body:JSON.stringify({displayName:'New host'})
+    }),{QA_WORKER_SECRET:'test-worker-secret-with-at-least-thirty-two-characters'});
+    assert.equal(response.status,200);
+  }
+  for (const {url,init,body} of calls) {
+    assert.equal(url,'https://api.parrot669.com/api/host/profile');
+    assert.equal(init.method,'PATCH');
+    assert.equal(init.headers.get('Cookie'),'parrot_session=test-session');
+    assert.deepEqual(body,{displayName:'New host'});
+  }
+  assert.equal(calls[0].init.headers.get('X-Parrot-QA-Origin'),null);
+  assert.equal(calls[1].init.headers.get('X-Parrot-QA-Origin'),'qa');
+});
+
 test('address autocomplete proxy preserves encoded query, session and provider error status', async () => {
   let forwarded;
   const sandbox={URL,Headers,Response,console,fetch:async(url,init)=>{
