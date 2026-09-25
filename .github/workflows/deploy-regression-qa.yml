@@ -1,9 +1,6 @@
 name: Deploy regression QA Workers
 
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/deploy-regression-qa.yml']
   workflow_dispatch:
 
 permissions:
