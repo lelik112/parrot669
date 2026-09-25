@@ -28,9 +28,9 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 
 ## Очередь разработки и границы
 
-- PM-027 сейчас у Игоря; PM-028 Дениса уже выпущена и находится в review.
-- **BUG-020** назначена Денису для диагностики unread API → polling → DOM/CSS. Реализация ждёт handoff PM-027 либо письменного согласования с Игорем по конкретным непересекающимся файлам: обе задачи могут менять Messages UI.
-- PM-028 уже выпущена и находится в review; дополнительная разработка по ней нужна только по результатам QA. После текущих PM-027/BUG-020 следующая продуктовая работа по профилю — PM-022, но её нельзя начинать до privacy/publication contract и закрытия зависимостей PM-002/PM-021.
+- PM-023, PM-027 и PM-028 опубликованы и находятся в review до независимой QA. Переходы PM-027/028 из Messages сохранены после совмещения изменений.
+- **BUG-020** назначена Денису для диагностики unread API → polling → DOM/CSS. Handoff PM-027 по разработке завершён; перед изменением общих Messages файлов сверить с опубликованным PM-027.
+- PM-028 уже выпущена и находится в review; дополнительная разработка по ней нужна только по результатам QA. Следующая продуктовая работа по профилю — PM-022, но её нельзя начинать до privacy/publication contract и закрытия зависимостей PM-002/PM-021.
 
 Внешние QA/device blockers не должны оставлять разработчиков без независимой подготовительной работы. Запись назначения в репозитории сама по себе не запускает агентский чат.
 
@@ -46,7 +46,7 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | [PM-021 — Личный профиль владельца](tasks/PM-021-private-host-profile.md) | P2 | in progress у Дениса: только существующее имя, новые поля отложены
 | [BUG-018 — End date после start date](tasks/BUG-018-calendar-end-date-mobile-safari.md) | P2 | in review; исправление опубликовано, реальный iPhone Safari и desktop QA открыты
 | [PM-026 — Убрать дублирующий Messages](tasks/PM-026-remove-duplicate-messages-link.md) | P2 | in review; Denis's change awaits independent QA |
-| [PM-027 — Открыть объект из диалога](tasks/PM-027-open-property-from-messages.md) | P2 | in progress у Игоря; локальные тесты готовы, CI/release/QA открыты |
+| [PM-027 — Открыть объект из диалога](tasks/PM-027-open-property-from-messages.md) | P2 | in review; frontend опубликован, независимая QA открыта |
 | [PM-028 — Профиль хозяина из Messages](tasks/PM-028-open-host-profile-from-messages.md) | P2 | in review: frontend выпущен, независимая host/guest и mobile QA открыта |
 | [PM-022 — Публичный профиль владельца](tasks/PM-022-public-host-profile.md) | P2 | после PM-021; отдельный privacy/public contract |
 
@@ -108,7 +108,7 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | F28 | Личный профиль | Управлять данными хозяина отдельно от учётной записи | planned | P2 | [PM-021](tasks/PM-021-private-host-profile.md), NEXT после PM-020 |
 | F29 | Публичный профиль | Показывать только разрешённые сведения и проверяемые сигналы | planned | P2 | [PM-022](tasks/PM-022-public-host-profile.md), после PM-021 |
 | F30 | Путь гостя к первому сообщению | Довести намерение написать до отправленного обращения: auth по месту, без потери черновика | planned | P1 | [PM-023](tasks/PM-023-guest-message-onboarding.md) |
-| F31 | Контекст диалога | Открыть связанный объект и собственный профиль из Messages | planned | P2 | [PM-027](tasks/PM-027-open-property-from-messages.md), [PM-028](tasks/PM-028-open-host-profile-from-messages.md) |
+| F31 | Контекст диалога | Открыть связанный объект и собственный профиль из Messages | in review | P2 | [PM-027](tasks/PM-027-open-property-from-messages.md), [PM-028](tasks/PM-028-open-host-profile-from-messages.md) |
 
 ## Приоритизация и измерения
 
