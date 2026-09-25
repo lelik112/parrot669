@@ -66,6 +66,19 @@
 - Актуальные QA записи Бориса.
 - PM-002, PM-021 и D009/D010/D011 как продуктовые зависимости следующего слоя.
 
+## Текущая классификация среды — 2026-09-25, Марк / PM
+
+По принятому [D015](../decisions/D015-qa-environment-blocked-status.md) историческая матрица ниже сохраняет сделанные PASS, но её ранние слова `in review` не являются актуальным статусом после этой сверки. Статус каждой карточки и [короткий индекс](README.md) обновлены.
+
+| Статус | Карточки | Почему / что делает Борис |
+| --- | --- | --- |
+| blocked — реальный мобильный Safari | [PM-015](PM-015-qa-mobile-device-environment.md) P1, [PM-007](PM-007-mobile-acceptance.md) P1, [PM-025](PM-025-search-contact-button-layout.md) P1, [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) P2 | PM-025 desktop web/CTA/языки уже частично PASS; BUG-018 выпущен, но его iPhone picker не ретестирован. Борис после реального автономного iPhone Safari/PM-039 проверяет touch, клавиатуру и picker; телефон Алексея давал только owner-assisted evidence. |
+| blocked — нативный сохранённый адрес | [PM-014](PM-014-qa-native-autofill-environment.md) P2, [PM-004](PM-004-street-autofill.md) P2 | Требуется профиль Safari с сохранённым адресом и исходным popup, а не просто мобильный viewport. Desktop Chrome PASS PM-004 сохранён. |
+| in review, mobile часть blocked | [PM-023](PM-023-guest-message-onboarding.md) P1, [PM-001](PM-001-calendar-control-dates.md) P1, [PM-026](PM-026-remove-duplicate-messages-link.md) P2, [BUG-020](BUG-020-unread-message-discoverability.md) P2, [BUG-019](BUG-019-search-account-context.md) P2, [PM-020](PM-020-host-cabinet-navigation.md) P2, [PM-028](PM-028-open-host-profile-from-messages.md) P2 | По этим карточкам есть оставшийся desktop/двухаккаунтный/внешний сценарий или подтверждённый отдельный BUG-022. Работать над доступными шагами; mobile критерий остаётся неподтверждённым, полный done не ставить. |
+| в работе PM | [PM-039](PM-039-browser-test-environments.md) P1/NOW | Марк claim-ил исследование: бесплатный responsive/browser smoke и недорогой real-device доступ для независимого QA; сервис не куплен, пробный доступ не подтверждён. |
+
+Статусы ниже в исторических записях относятся к прежним срезам. Никакая смена статуса не закрыла QA и не отменила ранее зафиксированный PASS.
+
 ## QA triage — срез 2026-09-25
 
 Источники: отдельные task files, последние записи Бориса, [индекс](README.md), [status](../status.md), [roadmap](../roadmap.md), релиз PM-029 и merged [BUG-016 PR #23](https://github.com/lelik112/parrot669/pull/23). Всего **20 задач `in review`** перед этой сверкой. Полный `done` ни для одной из них пока не доказан всеми критериями; частичный PASS сохраняется. Борис — один независимый QA, новая запись в очереди не является подтверждением, что он уже начал очередной прогон.
