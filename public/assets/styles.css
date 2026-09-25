@@ -1512,6 +1512,19 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-auth-link{padding:0;border:0;background:none;color:#cdd5d1;font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
 .host-auth-link:hover{color:var(--lime)}
 .host-lang-switcher{flex-shrink:0}
+.search-account-indicator{
+  display:inline-flex;align-items:center;min-height:32px;max-width:260px;box-sizing:border-box;
+  padding:0 10px;border:1px solid rgba(216,255,99,.28);border-radius:999px;
+  background:rgba(216,255,99,.07);color:#dfe8e2;font-size:12px;line-height:1.2;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.search-account-indicator[hidden],.availability-own-property[hidden]{display:none}
+.availability-own-property{
+  display:inline-flex;align-self:flex-start;max-width:100%;box-sizing:border-box;
+  padding:6px 10px;border:1px solid rgba(216,255,99,.28);border-radius:999px;
+  background:rgba(216,255,99,.08);color:#e2f2b0;font-size:12px;font-weight:600;line-height:1.25;
+  overflow-wrap:anywhere;
+}
 @media(max-width:640px){
   .host-topbar{align-items:flex-start}
   .host-topbar-actions{align-items:flex-end;flex-direction:column-reverse;gap:8px}
@@ -1519,6 +1532,7 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
   #host-auth-links,.host-account-session{gap:10px}
   .host-account-session span{max-width:150px}
   .host-lang-switcher{display:flex}
+  .search-account-indicator{max-width:min(190px,52vw);min-height:28px;font-size:11px}
 }
 
 .search-page{min-height:100vh;background:#050c0e}

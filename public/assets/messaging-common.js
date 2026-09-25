@@ -22,7 +22,7 @@
   };
   Object.entries(emailCopy).forEach(([key,value]) => Object.assign(texts[key],value));
   Object.entries({en:"Forgot password?",es:"¿Has olvidado la contraseña?",ca:"Has oblidat la contrasenya?",ru:"Забыли пароль?"}).forEach(([key,value])=>texts[key].forgotPassword=value);
-  let lang = "en", user, revision = 0, unreadBusy = false, unreadTotal = 0;
+  let lang = "en", user, revision = 0, unreadBusy = false, unreadTotal = 0, initialSearchSession = null;
   const subscribers = new Set(), languageSubscribers = new Set();
   const contactCache = new Map();
   let contactActive = 0;
@@ -167,11 +167,13 @@
       nudge.href = `/messages.html?${request}`;
       container.append(nudge);
     }
-    contactOptions(property.propertyId).then(options => {
-      const self = options.hostProfileId === user?.profile?.id;
+    const session = user === undefined ? (initialSearchSession || refreshSession().catch(() => null)) : Promise.resolve(user);
+    return Promise.all([contactOptions(property.propertyId), session]).then(([options,currentUser]) => {
+      const self = Boolean(currentUser?.profile?.id) && options.hostProfileId === currentUser.profile.id;
       link.hidden = self;
       if (nudge) nudge.hidden = self;
-    }).catch(() => {});
+      return self;
+    }).catch(() => false);
   }
   function resumeAfterVerification() {
     try {
@@ -201,5 +203,5 @@
     if (document.visibilityState === "visible") void refreshSession().then(refreshUnread).catch(() => {});
   });
 
-  if (document.body.classList.contains("search-page")) void refreshSession().catch(() => {});
+  if (document.body.classList.contains("search-page")) initialSearchSession = refreshSession().catch(() => null);
 })();
