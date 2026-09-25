@@ -2,7 +2,7 @@
 
 **Title:** продолжить CHECK-H11: поиск → первое сообщение → ответ владельца.
 
-**Status:** blocked — PM-029 origin доступен, но PM-016 самостоятельный A→B→A прогон Бориса ещё не подтверждён. **Priority:** P1.
+**Status:** in progress — PM-016 unblocked; basic qa→lelik search/contact/reply and unread/read PASS. Pair blocking and repeat-contact behavior remain to test. D011 supersedes old host-wide opt-in/out criteria. **Priority:** P1.
 
 **Owner:** Борис / QA; возобновление не подтверждено. **Area:** поиск / сообщения.
 
@@ -50,7 +50,13 @@
 
 ## Evidence
 
-Существующий прогон: CHECK-H11; сообщений не отправлено по последней записи. Новый результат: ожидается. Найденные дефекты передать PM отдельными наблюдениями; QA не исправляет их в рамках этой задачи.
+- 2026-09-25 — Борис / production Cloud Chrome, `qa` guest on Worker origin and `lelik` host on `parrot669.com`: search found `lelik` QA property for 2027-06-11 → 2027-06-14. First message reached owner, owner replied, and reply appeared to guest. Both tabs retained their respective accounts after reload. Full PM-003 continuation is in progress; pair block/unblock and repeat CTA behavior remain untested. No property, calendar or price data changed.
+
+Существующий прогон: CHECK-H11; prior messages had not been sent. Найденные дефекты передать PM отдельными наблюдениями; QA не исправляет их в рамках этой задачи.
+
+## Discussion / Updates
+
+- 2026-09-25 — **Борис / QA:** PM-016 is unblocked after PM-029 live session setup. Started CHECK-H11 with the allowed test accounts; basic search → contact → reply passes. Continue with pair block/unblock, repeat contact and final cleanup/state report. The former host-wide opt-in requirement is superseded by accepted D011/PM-024, which removed that control.
 
 ## Discussion / Updates
 
