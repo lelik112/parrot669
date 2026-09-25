@@ -523,7 +523,7 @@ hostProfileForm.addEventListener("submit", async event => {
   setFormError(hostProfileForm);
   setBusy(hostProfileForm, true);
   try {
-    const profile = await api("/host/profile", {
+    const profile = await api("/profile", {
       method:"PATCH",
       body:JSON.stringify({displayName:hostProfileForm.elements.displayName.value.trim()})
     });

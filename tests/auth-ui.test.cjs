@@ -102,7 +102,7 @@ function setup(routes = {}, search = '', {hash = '', sessionData = {}} = {}) {
     fetch: async (url, options) => {
       const route = url.replace('/api/host', '');
       calls.push(route);
-      requests.push({route, method: options.method || 'GET', body: options.body ? JSON.parse(options.body) : null});
+      requests.push({url, route, method: options.method || 'GET', body: options.body ? JSON.parse(options.body) : null});
       const result = typeof routes[route] === 'function' ? await routes[route](options) : routes[route];
       const status = result?.status ?? (!result && route === '/auth/me' ? 401 : 200);
       return {status, ok:status < 400, json:async () => result?.body ?? {error:'Test error'}};
@@ -121,7 +121,7 @@ test('host profile saves public name, keeps account identity private and retains
   const app = setup({
     '/auth/me':{body:{accountId:'owner-1',email:'private@example.test',username:'my-login',profile:{displayName:'Old host'}}},
     '/dashboard':{body:{profile:{displayName:'Old host'},properties:[]}},
-    '/host/profile':()=>fail ? {status:400,body:{error:'Invalid name'}} : {body:{parrotId:'PAR-TEST',displayName:'New host',createdAt:'2030-01-01'}}
+    '/profile':()=>fail ? {status:400,body:{error:'Invalid name'}} : {body:{parrotId:'PAR-TEST',displayName:'New host',createdAt:'2030-01-01'}}
   });
   await settle();
   assert.equal(app.nodes.get('host-profile').hidden,false);
@@ -133,6 +133,7 @@ test('host profile saves public name, keeps account identity private and retains
   await form.emit('submit');
   assert.equal(form.elements.displayName.value,'New host');
   assert.equal(app.requests.at(-1).method,'PATCH');
+  assert.equal(app.requests.at(-1).url,'/api/host/profile');
   assert.deepEqual(app.requests.at(-1).body,{displayName:'New host'});
   fail=false;
   await form.emit('submit');
