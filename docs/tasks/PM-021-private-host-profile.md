@@ -1,8 +1,8 @@
 # PM-021 — Личный профиль владельца
 
 **Title:** определить и затем реализовать редактируемые данные владельца отдельно от учётной записи.
-**Status:** in progress — MVP ограничен существующим именем хозяина; новые поля отложены. **Priority:** P2. **Owner:** Денис / Developer.
-**Agent:** Денис. **Role:** Developer. **Scope:** приватное редактирование существующего display name; не реализация публичных контактов.
+**Status:** in review — implementation merged to frontend/backend main; frontend live check and independent QA remain open. **Priority:** P2. **Owner:** Денис / Developer.
+**Agent:** Денис. **Role:** Developer. **Scope:** выпуск существующего display name; не реализация публичных контактов.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** новые поля могут затронуть backend schema/API и приватность; текущие account/profile уже имеют разные назначения.
 **Model check:** будущий исполнитель анализирует выбранные поля, доступ и текущие API перед claim; повышение только по D005.
 
@@ -59,4 +59,5 @@
 - 2026-09-24 — **Алекс / Strategy:** по подтверждённому D009 PM-021 переведена из LATER в NEXT после PM-020. Пилот снят как блокирующая зависимость.
 
 
-- 2026-09-25 06:46 UTC — **Денис / Developer:** возобновляю ранее начатую PM-021. **Agent:** Денис. **Role:** Developer. **Scope:** приватное редактирование существующего `profiles.display_name`; без новых публичных полей и без изменения правил публикации. **Change:** вернулся в работу и принимаю текущую developer-эстафету. **Related task:** PM-021. **Следующий шаг:** сверить свежие main/claims, выполнить Model check по D005 и продолжить минимальный MVP.
+- 2026-09-25 06:46 UTC — **Денис / Developer:** вернулся в работу. Первоначально записал возобновление PM-021 до проверки main; ниже — исправление после сверки.
+- 2026-09-25 06:53 UTC — **Денис / Developer:** исправление после проверки текущего состояния. **Agent:** Денис. **Role:** Developer. **Scope:** PM-021 — выпуск существующего displayName. **Change:** frontend PR #21 (`0098255`) и backend PR #25 (`716717b`) уже merged. Production Railway сейчас SUCCESS на более позднем main-коммите PM-024 (`1dcc5aa`); отдельный актуальный frontend live-check и независимая QA PM-021 не подтверждены. Новые поля не добавлены. **Related task:** PM-021. **Следующий шаг:** подтвердить опубликованный frontend и передать сценарии сохранения/reload/400/401/privacy на независимый QA Борису.
