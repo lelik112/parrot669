@@ -2,11 +2,13 @@
 
 **Title:** детально проверить backend находки обзорного [PM-034](PM-034-backend-frontend-refactoring-audit.md).
 
-**Status:** planned / NEXT — Игорь ещё не claim-ил. **Priority:** P2. **Owner:** Игорь — предполагаемый исполнитель; факт начала фиксируется только его подписанным claim.
+**Status:** in progress / NEXT — Игорь claim 2026-09-25 13:53 UTC. **Priority:** P2. **Owner:** Игорь / Developer.
 
-**Agent:** Игорь / Developer (handoff, до claim). **Role:** Developer. **Scope:** только read-only backend аудит в `lelik112/parrot669-backend`, отчёт; без реализации.
+**Agent:** Игорь. **Role:** Developer. **Scope:** только read-only backend аудит в `lelik112/parrot669-backend`, отчёт; без реализации. **Branch:** `igor/pm034-be-audit` в frontend docs; backend `main` только читается.
 
-**Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** поиск связывает запросы, доступность, обогащение ценой/ссылкой и ошибки, а legacy endpoints требуют осторожной сверки контрактов. **Model check:** Игорь подтверждает или мотивированно предлагает изменение до работы.
+**Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** поиск связывает запросы, доступность, обогащение ценой/ссылкой и ошибки, а legacy endpoints требуют осторожной сверки контрактов. **Model check, Игорь 2026-09-25 13:53 UTC:** текущий GPT-6 с высоким уровнем анализа достаточен для read-only проверки и отчёта; повышение не требуется.
+
+**Claim — 2026-09-25 13:53 UTC. Agent:** Игорь. **Role:** Developer. **Change:** сверил frontend `main` `59a3a99`, backend `main` `3e35c46`, P1 QA/PM-029 и BUG-021; беру только PM-034-BE, область Дениса PM-034-FE и пользовательские сценарии QA не трогаю. **Related task:** PM-034-BE. **Next:** проверить запросы/ошибки поиска, границы модулей и legacy callers; оформить доказательства и handoff Марку.
 
 ## Goal
 
