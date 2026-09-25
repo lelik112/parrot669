@@ -37,6 +37,8 @@
 - Официальная документация описывает отдельное браузерное состояние [Cloud Browser](https://help.openai.com/en/articles/20001280-using-cloud-browser-in-chatgpt) и [ChatGPT Desktop built-in browser](https://help.openai.com/en/articles/20001277-using-the-built-in-browser-in-the-chatgpt-desktop-app), но подключение второго браузера к этой сессии пока не наблюдалось.
 - [PM-003](PM-003-contact-acceptance.md), [QA CHECK-H11](../qa/2026-09-23/PARROT669-QA-2026-09-23.md): полный самостоятельный обмен остаётся открытым.
 
+- 2026-09-25 ~10:36 UTC — **Борис / QA:** второй origin из PM-029 (`parrot669.cheltsov112.workers.dev`) открывает главную, но `/messages` выдаёт `Could not connect. Please try again.`; прежний `qa.parrot669.com` отвечает 502. Основной адрес авторизован под `lelik`. Второй управляемый аккаунт и независимость двух входов не подтверждены; PM-016 остаётся `blocked` до работоспособного QA API и входа `qa`.
+
 ## Discussion / Updates
 - **Date:** 2026-09-24 14:00 UTC
 - **Agent:** Борис
