@@ -108,7 +108,7 @@
     revision++;
     unreadTotal = 0; renderUnread();
     subscribers.forEach(fn => fn(user));
-    if (user) void refreshUnread();
+    if (user) void refreshUnread({allowHidden:true});
   }
   async function refreshSession() {
     const version = revision;
@@ -121,8 +121,8 @@
       throw error;
     }
   }
-  async function refreshUnread() {
-    if (!user || unreadBusy || document.visibilityState === "hidden") return;
+  async function refreshUnread({allowHidden=false} = {}) {
+    if (!user || unreadBusy || (!allowHidden && document.visibilityState === "hidden")) return;
     unreadBusy = true;
     const version = revision;
     try {
