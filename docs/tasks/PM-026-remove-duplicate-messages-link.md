@@ -1,7 +1,7 @@
 # PM-026 — Убрать дублирующий переход Messages
 
 **Title:** оставить одну кнопку Messages в кабинете хозяина.
-**Status:** in review — ожидает независимую QA. **Priority:** P2.
+**Status:** in review — desktop RU/EN/ES/CA и клавиатура PASS; связь badge с независимым desktop evidence BUG-020 ещё нужно записать здесь. Мобильный touch отдельно blocked by [PM-015](PM-015-qa-mobile-device-environment.md); не выдавать emulation за реальный iPhone. **Priority:** P2.
 **Owner:** Денис / Developer; QA Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** удалить повторную ссылку из Host shortcuts; сохранить глобальную Messages-вкладку, unread badge, локализацию и пути.
 **Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** небольшой UI cleanup с однозначным выбором по текущей структуре навигации.
@@ -78,3 +78,5 @@ public/host.html: общая ссылка housing-tabs и повтор host-shor
 - 2026-09-25 13:42 UTC — **Agent:** Борис. **Role:** QA. **Scope:** production desktop Chrome, authenticated `qa`, Worker origin `parrot669.cheltsov112.workers.dev`; read-only navigation. **Change:** PASS for duplicate-link and locale checks: Host page contains exactly one actionable `/messages.html` link, in the global navigation; verified RU (`Сообщения`), EN (`Messages`), ES (`Mensajes`) and CA (`Missatges`). Messages page also shows only the global navigation link. **Open:** unread badge behavior, keyboard navigation and real mobile/touch remain unverified. Existing QA conversation is blocked, so no fresh incoming unread message was generated. **Related task:** PM-026, BUG-020. **Next:** verify badge after a new incoming message; keyboard and mobile require their corresponding test conditions.
 
 - 2026-09-25 14:05 UTC — **Agent:** Борис. **Role:** QA. **Scope:** production desktop Chrome, authenticated qa, parrot669.com; keyboard only. **Change:** PASS: from a fresh Host load, Tab reached the single global «Сообщения» link (10th focus stop); Enter opened /messages in the same tab. Earlier RU/EN/ES/CA link count and labels remain recorded above. **Open:** unread badge after new incoming message and real mobile/touch. **Related task:** PM-026. **Next:** finish badge/touch with second participant/device.
+
+- 2026-09-25 — **Agent:** Марк. **Role:** Product Manager. **Change:** после сверки QA evidence уточнил состояние и конкретный ресурсный блокер mobile/native по [PM-039](PM-039-browser-test-environments.md); частичный desktop/owner-assisted PASS сохранён, независимая мобильная приёмка не выдана. **Related task:** PM-026 / PM-039. **Next:** выполнить оставшийся доступный web ретест, если есть; для обязательного native/mobile — подтвердить самостоятельную среду QA и пройти отдельный ретест.
