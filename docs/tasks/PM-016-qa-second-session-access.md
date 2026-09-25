@@ -1,7 +1,7 @@
 # PM-016 — Второй независимый сеанс для переписки
 
 **Title:** обеспечить два одновременно различимых тестовых сеанса для [PM-003](PM-003-contact-acceptance.md) и auth QA [PM-010](PM-010-auth-routes-extraction.md).
-**Status:** in review — two independent qa/lelik sessions and A→B→A exchange confirmed again after test-pair unblock. Main origin=qa, QA Worker=lelik; remaining logout/relogin symmetry and guard cases are open. **Priority:** P1. **Owner:** Борис / QA.
+**Status:** in review — qa/lelik independent two-account exchange passed, then main qa session was observed signed out at ~14:43 UTC without a captured logout action; QA Worker lelik remains signed in. Cause and timing unknown. **Priority:** P1. **Owner:** Борис / QA.
 **Agent:** Борис. **Role:** QA. **Scope:** доступ к двум участникам и пользовательский прогон; без управления реальными чужими учётными записями.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** важно не спутать гостя и владельца, права/состояние диалога и сессионный logout.
 **Model check:** при возобновлении.
@@ -83,3 +83,5 @@
 - 2026-09-25 14:05 UTC — **Agent:** Борис. **Role:** QA. **Change:** для anonymous QA вышел из qa только на QA Worker origin. Основной parrot669.com остался авторизован под qa; независимость host-only cookies повторно видна. Текущее состояние: main=qa, QA Worker=anonymous, lelik не доступен, тестовая пара заблокирована. **Related task:** PM-016 / PM-029. **Next:** продолжить одиночные проверки; двухаккаунтный цикл требует контролируемого входа lelik.
 
 - 2026-09-25 ~14:30 UTC — **Agent:** Борис. **Role:** QA. **Change:** QA Worker secure login restored `lelik`; main origin remained `qa`. On the Worker `lelik` opened own property and profile from Messages, returned to the same conversation and unblocked `qa` without losing authentication. Main `qa` sent a follow-up; Worker `lelik` received/replied; main `qa` received answer after reload. Logout isolation had been observed earlier when Worker was logged out without affecting main. Test pair left unblocked. **Related task:** PM-016 / PM-029 / PM-003. **Open:** full inverse logout/relogin and third-account/forged-header guard not independently exercised; do not record as pass.
+
+- 2026-09-25 ~14:43 UTC — **Борис / QA:** while preparing another unread test, main `parrot669.com/messages` displayed “Войдите снова, чтобы продолжить. Черновик сохранён для вашего аккаунта.” and only login/register instead of `qa` conversation; search afterward had no account marker. QA Worker still showed authenticated `lelik` and its conversations. The last confirmed qa action was repeat contact at ~14:36 UTC; no intentional logout between that and the observation. Exact expiration cause is unknown; no new credentials requested. Main origin now anonymous, QA Worker=lelik. **Related task:** PM-016 / PM-010 / BUG-020. **Next:** continue public anonymous and one-account QA; re-establish qa only via safe auth if later needed.
