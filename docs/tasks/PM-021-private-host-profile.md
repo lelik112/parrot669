@@ -82,3 +82,7 @@ Authenticated `qa` on main origin and `lelik` on QA Worker each saw `Not found` 
 ### 2026-09-25 ~15:21 UTC — Борис / QA — сохранение имени PASS
 
 На основном `qa` и QA Worker `lelik` временное имя сохранилось с подтверждением и пережило переход на другую страницу и обратно; исходные `Qa` и `lelik` восстановлены и проверены. `Not found` отсутствует после PR #46. Пустое/пробельное имя остановлено native required validation до API; это не доказательство backend 400. Anonymous 401 и публичный JSON/privacy остаются отдельной проверкой. [BUG-023](BUG-023-host-profile-save-not-found.md) сохраняет `in review` до этих проверок.
+
+### 2026-09-25 ~15:30 UTC — Борис / QA — guest search privacy partial
+
+В гостевой выдаче Barcelona на main origin тестовый объект lelik показывает «Владелец: lelik», тип, цену, внешний переход и контакт; среди отображаемых полей карточки нет email, телефона, точного адреса или iCal. Это проверка видимого Search UI, не публичного JSON `/api/p/{parrotId}` и не отказа чужому аккаунту в private profile. Статус PM-021 остаётся `in review`.
