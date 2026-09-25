@@ -47,6 +47,36 @@ async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=tr
     input:(element,value)=>{element.value=value;element.dispatchEvent(new w.Event('input',{bubbles:true}));}};
 }
 
+test('only the conversation host sees a profile link and keeps the same-account thread return',async t=>{
+  const owner={accountId:'owner-account',username:'owner',profile:{id:'host-profile'}};
+  const handler=r=>{
+    if(r.path===`/api/messaging/conversations/${conversation}`) return detail(conversation,{hostProfileId:'host-profile',guestProfileId:profile});
+    if(r.path.endsWith(`/${conversation}/messages`)) return {items:[message()],nextAfterSequence:null};
+  };
+  const host=await harness(t,{url:`/messages.html?conversation=${conversation}`,sessionUser:owner,handler});
+  const link=host.$('msg-own-profile');
+  assert.equal(link.hidden,false);
+  assert.equal(link.getAttribute('href'),'/host.html?fromMessages=1#host-profile');
+  for(const [lang,label] of [['es','Mi perfil de anfitrión'],['ca',"El meu perfil d'amfitrió"],['ru','Мой профиль хозяина'],['en','My host profile']]) {
+    host.w.document.querySelector(`[data-msg-lang="${lang}"]`).click();
+    assert.equal(link.textContent,label);
+  }
+  link.addEventListener('click',event=>event.preventDefault()); // Keep the JSDOM tab while testing navigation intent.
+  link.click();
+  const saved=JSON.parse(host.w.sessionStorage.getItem('parrot669-profile-return'));
+  assert.equal(saved.accountId,owner.accountId);
+  assert.equal(saved.conversationId,conversation);
+  host.w.ParrotMessaging.setUser({...owner,accountId:'other-account'});
+  assert.equal(link.hidden,true);
+  assert.equal(host.w.sessionStorage.getItem('parrot669-profile-return'),null);
+
+  const guest=await harness(t,{url:`/messages.html?conversation=${conversation}`,handler});
+  assert.equal(guest.$('msg-own-profile').hidden,true);
+  const loggedOut=await harness(t,{loggedIn:false,url:`/messages.html?property=${property}`});
+  assert.equal(loggedOut.$('msg-own-profile').hidden,true);
+  assert.equal(loggedOut.calls.some(call=>call.path.includes('/conversations/')),false);
+});
+
 test('guest prepares an enquiry before login; sending waits for auth and preserves dates and body',async t=>{
   let sent=null;
   const h=await harness(t,{loggedIn:false,url:`/messages.html?property=${property}&from=2027-05-01&to=2027-05-04`,handler:r=>{

@@ -171,10 +171,10 @@ const qaCopy={
   ru:{heroLead:"Добавьте объект и укажите даты, когда он физически свободен. Объявление Airbnb и подключение календаря необязательны.",verifyFirst:"Подтвердите email по ссылке в письме, затем войдите. Проверьте также папку «Спам».",forgotPassword:"Забыли пароль?",titleRequired:"Укажите название объекта.",titleTooLong:"Название объекта — не более 160 символов."}
 };
 const profileCopy={
-  en:{navProfile:"Host profile",profileTitle:"Host profile",profileHelp:"Your host name is visible to guests. Your email and login stay private.",profileName:"Public host name",profileSave:"Save name",profileAccount:"Account",profileSaved:"Host name saved."},
-  es:{navProfile:"Perfil de anfitrión",profileTitle:"Perfil de anfitrión",profileHelp:"Los huéspedes pueden ver tu nombre de anfitrión. El email y el usuario de acceso son privados.",profileName:"Nombre público del anfitrión",profileSave:"Guardar nombre",profileAccount:"Cuenta",profileSaved:"Nombre guardado."},
-  ca:{navProfile:"Perfil d'amfitrió",profileTitle:"Perfil d'amfitrió",profileHelp:"Els hostes poden veure el nom d'amfitrió. El correu i l'usuari d'accés són privats.",profileName:"Nom públic de l'amfitrió",profileSave:"Desar el nom",profileAccount:"Compte",profileSaved:"Nom desat."},
-  ru:{navProfile:"Профиль хозяина",profileTitle:"Профиль хозяина",profileHelp:"Имя хозяина видно гостям. Email и логин остаются личными.",profileName:"Публичное имя хозяина",profileSave:"Сохранить имя",profileAccount:"Учётная запись",profileSaved:"Имя хозяина сохранено."}
+  en:{navProfile:"Host profile",profileTitle:"Host profile",profileHelp:"Your host name is visible to guests. Your email and login stay private.",profileName:"Public host name",profileSave:"Save name",profileAccount:"Account",profileSaved:"Host name saved.",profileReturn:"← Back to conversation"},
+  es:{navProfile:"Perfil de anfitrión",profileTitle:"Perfil de anfitrión",profileHelp:"Los huéspedes pueden ver tu nombre de anfitrión. El email y el usuario de acceso son privados.",profileName:"Nombre público del anfitrión",profileSave:"Guardar nombre",profileAccount:"Cuenta",profileSaved:"Nombre guardado.",profileReturn:"← Volver a la conversación"},
+  ca:{navProfile:"Perfil d'amfitrió",profileTitle:"Perfil d'amfitrió",profileHelp:"Els hostes poden veure el nom d'amfitrió. El correu i l'usuari d'accés són privats.",profileName:"Nom públic de l'amfitrió",profileSave:"Desar el nom",profileAccount:"Compte",profileSaved:"Nom desat.",profileReturn:"← Tornar a la conversa"},
+  ru:{navProfile:"Профиль хозяина",profileTitle:"Профиль хозяина",profileHelp:"Имя хозяина видно гостям. Email и логин остаются личными.",profileName:"Публичное имя хозяина",profileSave:"Сохранить имя",profileAccount:"Учётная запись",profileSaved:"Имя хозяина сохранено.",profileReturn:"← Вернуться к диалогу"}
 };
 Object.entries(profileCopy).forEach(([language,values])=>Object.assign(copy[language],values));
 Object.entries(qaCopy).forEach(([language,values])=>Object.assign(copy[language],values));
@@ -194,7 +194,18 @@ const hostAuthLinks = document.getElementById("host-auth-links");
 const hostAccountSession = document.getElementById("host-account-session");
 const propertyPanel = document.getElementById("property-panel");
 const hostProfilePanel = document.getElementById("host-profile");
+const hostProfileReturn = document.getElementById("host-profile-return");
 const hostProfileForm = document.getElementById("host-profile-form");
+const profileReturnKey = "parrot669-profile-return";
+const profileReturnId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+function profileReturnContext(){
+  if (!state.authenticated || new URLSearchParams(window.location.search).get("fromMessages") !== "1" || window.location.hash !== "#host-profile") return null;
+  try {
+    const saved=JSON.parse(sessionStorage.getItem(profileReturnKey)||"null");
+    return saved?.accountId === accountId && profileReturnId.test(saved.conversationId || "") &&
+      saved.savedAt > Date.now()-86400000 ? saved : null;
+  } catch { return null; }
+}
 const propertyForm = document.getElementById("property-form");
 const hostAccountEmail = document.getElementById("host-account-email");
 const propertiesNode = document.getElementById("host-properties");
@@ -347,6 +358,10 @@ function renderAuthState(){
   hostAccountSession.hidden = !ready;
   propertyPanel.hidden = !ready;
   hostProfilePanel.hidden = !ready;
+  const returnContext=ready ? profileReturnContext() : null;
+  hostProfileReturn.hidden = !returnContext;
+  if(returnContext)hostProfileReturn.href=`/messages.html?conversation=${encodeURIComponent(returnContext.conversationId)}`;
+  else hostProfileReturn.href="#host-profile";
   hostShortcuts.hidden = !ready;
   hostAccountEmail.textContent = ready ? (state.username || state.accountEmail) : "";
   hostAccountEmail.title = ready ? state.accountEmail : "";
@@ -403,9 +418,12 @@ async function syncDashboard(){
       unavailability: Array.isArray(property.unavailability) ? property.unavailability : [],
       calendars: Array.isArray(property.calendars) ? property.calendars : []
     }));
-    const previousScroll=restoreHostContext();
+    const returningFromMessages=profileReturnContext();
+    const previousScroll=returningFromMessages ? null : restoreHostContext();
     renderProperties();
-    if(previousScroll!==null && previousScroll!==undefined)
+    if(returningFromMessages)
+      requestAnimationFrame(()=>hostProfilePanel.scrollIntoView?.({block:"start"}));
+    else if(previousScroll!==null && previousScroll!==undefined)
       requestAnimationFrame(()=>window.scrollTo({top:previousScroll,behavior:"instant"}));
     message("");
   } catch (error) {
@@ -642,6 +660,7 @@ resetButton.addEventListener("click", async () => {
   }
   state = emptyState();
   if(accountId){try{sessionStorage.removeItem(returnKey(accountId));}catch{}}
+  try{sessionStorage.removeItem(profileReturnKey);}catch{}
   accountId=null;
     newPropertyAddress.reset();
     unsavedHostChanges=false;

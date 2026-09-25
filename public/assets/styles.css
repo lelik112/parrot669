@@ -1572,6 +1572,8 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .host-shortcuts a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid rgba(216,255,99,.3);border-radius:999px;color:var(--lime);font-size:14px;font-weight:600}
 .host-shortcuts a:hover,.host-shortcuts a:focus-visible{border-color:var(--lime);background:rgba(216,255,99,.1)}
 .host-profile-panel{margin-bottom:22px}
+.host-profile-return{display:inline-flex;margin:0 0 18px;color:var(--lime);min-height:44px;align-items:center}
+.host-profile-return[hidden]{display:none}
 .host-profile-form{max-width:520px;grid-template-columns:minmax(0,1fr)}
 .host-profile-form .button{justify-self:start}
 .host-profile-account{margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);color:#a8b2ae;font-size:14px;overflow-wrap:anywhere}

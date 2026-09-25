@@ -16,6 +16,7 @@
   const guestDraftKey = propertyId => `parrot669-guest-draft:property:${propertyId}`;
   const registrationDraftKey = "parrot669-registration-draft";
   const registrationTabKey = "parrot669-registration-intent";
+  const profileReturnKey = "parrot669-profile-return";
 
   function status(text = "", error = false, target = $("msg-status")) {
     target.textContent = text; target.classList.toggle("error", error);
@@ -121,6 +122,7 @@
   function renderContext() {
     $("msg-property").textContent = active?.propertyTitle || t("newEnquiry");
     $("msg-other").textContent = active?.otherDisplayName || "";
+    $("msg-own-profile").hidden = !actor?.accountId || !active?.id || active.hostProfileId !== actor.profile?.id;
     updateComposer();
   }
   function renderInbox() {
@@ -266,6 +268,9 @@
   }
   function activateSession(user) {
     saveDraft();
+    if (actor?.accountId && actor.accountId !== user?.accountId) {
+      try { sessionStorage.removeItem(profileReturnKey); } catch {}
+    }
     if (user && !actor) promoteGuestDraft(user);
     guestLoginAccount = null; authRequested = false;
     actor = user; accountVersion++; threadVersion++; inboxVersion++;
@@ -273,6 +278,7 @@
     active = null; inbox = []; nextCursor = null; messages = new Map(); pending = null; threadError = null;
     historyNode.replaceChildren(); $("msg-list").replaceChildren(); form.reset();
     $("msg-property").textContent = ""; $("msg-other").textContent = "";
+    $("msg-own-profile").hidden = true;
     const query = new URLSearchParams(window.location.search);
     const propertyId = query.get("property"), guestEnquiry = !user && uuid.test(propertyId || "");
     $("msg-auth").hidden = Boolean(user) || guestEnquiry;
@@ -333,9 +339,17 @@
   }
   $("msg-logout").addEventListener("click", async () => {
     const account = actor?.accountId; $("msg-logout").disabled = true;
-    try { await M.auth("/logout",{method:"POST"}); M.setUser(null); M.clearDrafts(account); status(); }
+    try { await M.auth("/logout",{method:"POST"}); M.setUser(null); M.clearDrafts(account); sessionStorage.removeItem(profileReturnKey); status(); }
     catch (error) { failed(error); }
     finally { $("msg-logout").disabled = false; }
+  });
+  $("msg-own-profile").addEventListener("click", event => {
+    if (!actor?.accountId || !active?.id || active.hostProfileId !== actor.profile?.id) {
+      event.preventDefault(); return;
+    }
+    saveDraft();
+    try { sessionStorage.setItem(profileReturnKey,JSON.stringify({accountId:actor.accountId,conversationId:active.id,savedAt:Date.now()})); }
+    catch { event.preventDefault(); status(t("errorNetwork"),true); }
   });
   document.querySelectorAll("[data-msg-auth]").forEach(button => button.addEventListener("click",() => switchAuth(button.dataset.msgAuth)));
   form.addEventListener("input", () => {

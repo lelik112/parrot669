@@ -41,6 +41,10 @@
   Object.assign(texts.es,{authLead:"Entra para ver tus conversaciones privadas. Para escribir a un propietario, empieza por una vivienda en la búsqueda.",authToSend:"Tu mensaje está listo. Entra o crea una cuenta para enviarlo; conservaremos el borrador aquí.",guestComposerHelp:"Escribe tu mensaje ahora. Entra o crea una cuenta para enviarlo y mantener privada la conversación.",findHousing:"Buscar vivienda"});
   Object.assign(texts.ca,{authLead:"Entra per veure les teves converses privades. Per escriure a un propietari, comença per un habitatge de la cerca.",authToSend:"El teu missatge és a punt. Entra o crea un compte per enviar-lo; conservarem l'esborrany aquí.",guestComposerHelp:"Escriu el missatge ara. Entra o crea un compte per enviar-lo i mantenir privada la conversa.",findHousing:"Cercar habitatge"});
   Object.assign(texts.ru,{authLead:"Войдите, чтобы читать личные диалоги. Чтобы написать владельцу, выберите жильё в поиске.",authToSend:"Сообщение готово. Войдите или создайте аккаунт для отправки — черновик сохранится здесь.",guestComposerHelp:"Напишите сообщение сейчас. Для отправки войдите или создайте аккаунт; переписка останется приватной.",findHousing:"Найти жильё"});
+  Object.assign(texts.en,{ownProfile:"My host profile"});
+  Object.assign(texts.es,{ownProfile:"Mi perfil de anfitrión"});
+  Object.assign(texts.ca,{ownProfile:"El meu perfil d'amfitrió"});
+  Object.assign(texts.ru,{ownProfile:"Мой профиль хозяина"});
   function t(key) { return texts[lang][key] || texts.en[key] || key; }
   function setLanguage(value) {
     lang = texts[value] ? value : "en";
