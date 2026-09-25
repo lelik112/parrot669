@@ -28,6 +28,7 @@
 | [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | in review | Борис; доступ к mobile |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM |
 | **NOW — P2** | | | |
+| [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review | Борис / QA |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
 | [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | reported — reproduced on two production origins after BUG-016 fix; developer diagnosis needed | Марк / PM triage; Борис / QA |
@@ -54,15 +55,16 @@
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
-| [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | in progress — PM overview готов | Марк / PM сводит два независимых аудита |
+| [PM-037](PM-037-search-date-range-bound.md) | P2 | in progress — D014: 366 ночей; замер/реализация/QA открыты | Марк / PM контракт done; Игорь dev candidate без claim, P1 раньше; Sol / High |
 
 | **LATER** | | | |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
-| [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | done — read-only backend report | Игорь / Developer; Марк сводит PM-034 |
-| [PM-034-FE](PM-034-FE-frontend-audit.md) | P2 | done — read-only frontend report submitted | Денис / Developer; Марк сводит PM-034 |
+| [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | done — PM synthesis, two follow-ups | Марк / PM |
+| [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | done — read-only backend report | Игорь / Developer; Марк завершил PM-034 |
+| [PM-034-FE](PM-034-FE-frontend-audit.md) | P2 | done — read-only frontend report submitted | Денис / Developer; Марк завершил PM-034 |
 | [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | done | Марк / PM |
 | [PM-009](PM-009-team-identity.md) | P2 | done | Марк / PM |
 | [PM-019](PM-019-host-cabinet-ia.md) | P2 | done | Марк / PM |
