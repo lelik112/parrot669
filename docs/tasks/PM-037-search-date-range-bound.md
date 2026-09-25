@@ -2,11 +2,11 @@
 
 **Title:** определить и ограничить число ночей в одном публичном запросе поиска.
 
-**Status:** in progress / NEXT — продуктовый контракт [D014](../decisions/D014-public-search-date-range.md) принят, реализация/замеры/QA не начаты и не claim-нуты. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **suggested developer:** Игорь / Developer для измерений и реализации после отдельного claim. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
+**Status:** in progress / NEXT — продуктовый контракт [D014](../decisions/D014-public-search-date-range.md) принят, Игорь принял разработку по поручению Алексея; изолированные замеры начаты, QA не начата. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **suggested developer:** Игорь / Developer для измерений и реализации после отдельного claim. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** контракт и критерии; реализацию и замеры проводит назначенный разработчик.
 
-**Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** публичный endpoint, ночные диапазоны, SQL `generate_series`, совместимость поиска, даты checkout-exclusive и риск нагрузки. **Model check:** до основной работы.
+**Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** публичный endpoint, ночные диапазоны, SQL `generate_series`, совместимость поиска, даты checkout-exclusive и риск нагрузки. **Model check — Игорь, 2026-09-25:** текущий GPT-6 Codex, высокий уровень анализа; соответствует сложности задачи.
 
 ## Goal
 
@@ -43,3 +43,8 @@
 ## PM update — 2026-09-25
 
 **Agent:** Марк. **Role:** Product Manager. **Change:** зафиксировал 1–366 ночей как лимит одного запроса, ошибку на 367+, сохранение пользовательского ввода и performance gate D014; техническая работа не начата. **Related task:** PM-037. **Next:** Игорь или назначенный разработчик после проверки своих P1 claims записывает model check/claim, проводит изолированный замер и сообщает, годится ли 366 для пилота; затем узкая реализация и независимая QA.
+
+
+## Developer claim — 2026-09-25
+
+**Agent:** Игорь. **Role:** Developer. **Change:** по прямому поручению Алексея беру PM-037: изолированный замер 7/30/90/366 ночей, backend validation до SQL и UI-ошибка EN/ES/CA/RU без потери дат. **Scope:** search package, SearchSuite/smoke/benchmark, public/assets/search.js и search UI tests; host/PM-038 не затрагиваю. **Related task:** PM-037 / D014. **Branches:** `igor/pm037-search-range` в обоих репозиториях. Production нагрузочно не тестирую. Измерения и вывод о 366 передаются PM; неприемлемый результат блокирует выпуск.
