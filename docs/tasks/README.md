@@ -18,7 +18,7 @@
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual sessions and A→B→A passed; block test signed out primary; currently both origins show qa | Борис / QA |
 | [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — dual sessions verified, but lelik session needs restoring after block test | Борис / QA |
 | [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
-| [PM-003](PM-003-contact-acceptance.md) | P1 | blocked — contact/unread passed; test pair blocked; lelik access required |
+| [PM-003](PM-003-contact-acceptance.md) | P1 | blocked — contact/unread PASS; test pair blocked, `lelik` login needed | Борис / QA после восстановления доступа |
 | [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review | Борис / QA |
 | [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
 | [PM-025](PM-025-search-contact-button-layout.md) | P1 | in review | Борис / QA |
