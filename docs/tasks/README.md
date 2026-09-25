@@ -30,7 +30,7 @@
 | [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 4 fixture-сценария × 3 проекта, CI 12/12 (PR #54/#57); web покрытие/QA открыты, ручной A↔B PASS, автоматический auth ждёт изоляции данных | Денис claim, Sol / Medium; Никита QA матрицы Luna / Medium и Борис acceptance Sol / Medium ожидают claims |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
-| [PM-037](PM-037-search-date-range-bound.md) | P2 | in progress — PM принял замер для малого пилота; PR #52 mergeable=false, выпуск/QA открыты | Игорь / Developer claim, Sol / High; current-head CI → backend/frontend release → Борис / QA |
+| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | in progress / NOW — одноразовый pilot пробуждения и проверка ограничений | Игорь / Developer claim по прямому поручению Алексея; Sol / High |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in progress — повторный FAIL глобального badge при непрочитанной строке | Денис / Developer, claim и Sol / Medium; Борис / QA после исправления |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
@@ -55,7 +55,7 @@
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | **NEXT — P2** | | | |
-| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | in progress — одноразовый pilot запуска существующего чата и проверка ограничений | Игорь / Developer claim по прямому поручению Алексея; Sol / High |
+| [PM-037](PM-037-search-date-range-bound.md) | P2 | paused / NEXT — performance gate принят; release/QA открыты | Игорь / Developer сохраняет незавершённый claim; вернётся после PM-043, Sol / High |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 
