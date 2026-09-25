@@ -8,7 +8,7 @@
 
 ## Кто есть кто
 
-[Состав и границы ролей](../team.md). Координатор задач — Марк / PM; Денис и Игорь — Developer, Борис — QA Lead / Acceptance QA, Никита — Regression QA Engineer (двухаккаунтный QA claim ожидается), Алекс — Strategy, Алексей — Product Owner.
+[Состав и границы ролей](../team.md). Координатор задач — Марк / PM; Денис и Игорь — Developer, Борис — QA Lead / Acceptance QA, Никита — Regression QA Engineer (двухаккаунтный ручной smoke PM-036 PASS; QA claims по другим задачам отдельно), Алекс — Strategy, Алексей — Product Owner.
 
 ## Индекс задач
 
@@ -27,7 +27,7 @@
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | очередь PM-041; Борис / QA после разблокировки; Luna / Medium |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
-| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 2 fixture-сценария × 3 проекта, CI 6/6; покрытие и QA открыты, A↔B blocked PM-036 | Денис claim, Sol / Medium; Никита QA матрицы Luna / Medium и Борис acceptance Sol / Medium ожидают claims |
+| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 4 fixture-сценария × 3 проекта, CI 12/12 (PR #54/#57); web покрытие/QA открыты, ручной A↔B PASS, автоматический auth ждёт изоляции данных | Денис claim, Sol / Medium; Никита QA матрицы Luna / Medium и Борис acceptance Sol / Medium ожидают claims |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
 | [PM-037](PM-037-search-date-range-bound.md) | P2 | in progress — PM принял замер для малого пилота; PR #52 mergeable=false, выпуск/QA открыты | Игорь / Developer claim, Sol / High; current-head CI → backend/frontend release → Борис / QA |
@@ -54,7 +54,7 @@
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
-| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in review — QA A→B→A/refresh/logout+relogin обоих PASS; security/Boris evidence открыты | Никита / Regression QA smoke; Игорь / security review; Марк / PM close; Sol / High (dev), Luna / Medium (QA) |
+| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in review — функциональный двухаккаунтный QA PASS; отдельно нужны проверка пары Бориса и полный live security evidence | Никита / Regression QA smoke; Игорь / security review; Марк / PM close; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
