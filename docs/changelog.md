@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — D013: separate critical acceptance and regression QA
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по поручению Алексея оформил [D013](decisions/D013-qa-acceptance-regression-split.md) и обновил [team](team.md), [ai-team](ai-team.md), [status](status.md), [roadmap](roadmap.md) и [QA-очередь PM-030](tasks/PM-030-qa-drain-next-stage.md): Борис — QA Lead / Acceptance QA ключевых сценариев; новая неназванная роль Regression QA Engineer — smoke, регресс, retest/UI/локализация и evidence. Кандидаты на короткие проверки выделены без смены текущих claims: новый агент ещё не подключён. Статусы функций и QA этим решением не закрыты. **Related task:** D013.
+
 ## 2026-09-25 — PM-034: independent backend/frontend audit cards
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** после уточнения владельца разделил техническую часть обзорного PM-034 на независимые [PM-034-BE](tasks/PM-034-BE-backend-audit.md) для Игоря (Sol/High) и [PM-034-FE](tasks/PM-034-FE-frontend-audit.md) для Дениса (Sol/Medium). Общая PM-034 остаётся сводной задачей PM. У обоих дочерних поручений статус planned и нет claims; дублирования кодового scope и автоматического запуска агентов нет. **Related task:** PM-034.
