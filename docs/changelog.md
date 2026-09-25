@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-034: independent backend/frontend audit cards
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** после уточнения владельца разделил техническую часть обзорного PM-034 на независимые [PM-034-BE](tasks/PM-034-BE-backend-audit.md) для Игоря (Sol/High) и [PM-034-FE](tasks/PM-034-FE-frontend-audit.md) для Дениса (Sol/Medium). Общая PM-034 остаётся сводной задачей PM. У обоих дочерних поручений статус planned и нет claims; дублирования кодового scope и автоматического запуска агентов нет. **Related task:** PM-034.
+
 ## 2026-09-25 — PM-034: PM overview and technical handoff
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по просьбе владельца выполнил обзорный аудит текущих frontend/backend main: выделил проверяемую гипотезу дополнительных запросов на каждый результат поиска, границы большого host.js и разные API/auth пути; отдельно отметил legacy PM-012 и недавние PM-010/011/029 как зоны без безусловного рефакторинга. В [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) записаны доказательства, неопределённости, приоритеты и ограниченные технические handoff Игорю (backend, Sol/High) и Денису (frontend, Sol/Medium). Developer claims и кодовых изменений нет, выводы требуют их проверки. **Related task:** PM-034.
