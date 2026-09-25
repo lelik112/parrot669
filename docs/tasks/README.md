@@ -33,7 +33,7 @@
 | [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in review — QA `open` waiting PASS, `close` ждёт PM-018 | Марк / временный исполнитель; QA Борис |
 | [PM-014](PM-014-qa-native-autofill-environment.md) | Нативный Safari/autofill для PM-004 | P2 | blocked — браузерный профиль | Борис / QA после доступа; Алексей — среда |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | iPhone Safari touch для PM-007 | P1 | in review — owner-assisted iPhone Safari check done for PM-001; full PM-007 mobile QA open | Борис / QA; Алексей — устройство/сеанс |
-| [PM-016](PM-016-qa-second-session-access.md) | Второй управляемый сеанс для PM-003/010 | P1 | blocked — у Бориса только один Cloud Chrome; Desktop/extension browser не подключён | Борис / QA после подключения; Алексей — разовый вход при необходимости |
+| [PM-016](PM-016-qa-second-session-access.md) | Второй управляемый сеанс для PM-003/010 | P1 | blocked — один Cloud Chrome; техническое решение предложено в PM-029 | Борис / QA после подключения; разработчик PM-029 не назначен |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | Тестовые ящики для PM-006 | P1 | blocked — почтовый доступ | Борис / QA после доступа; Алексей — ящик |
 | [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | in review — owner-assisted positive open and restore done; Boris independent remainder open | Борис / QA; Алексей — Airbnb |
 | [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | done — D009 принят владельцем | Марк / Product Manager |
@@ -46,6 +46,7 @@
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | Убрать дублирующий Messages shortcut | P2 | in review — Денис завершил frontend; ждёт независимый QA | Денис / Developer; QA Борис |
 | [PM-027](PM-027-open-property-from-messages.md) | Открыть карточку объекта из диалога | P2 | in review — frontend live, CI зелёный; независимая QA открыта | Игорь / Developer; QA Борис |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | in review — frontend выпущен, host/guest и mobile QA открыты | Денис / Developer; QA Борис |
+| [PM-029](PM-029-two-origin-qa-sessions.md) | Два независимых входа для QA через два origin | P1 | planned — NEXT, ждёт claim разработчика; гипотеза второго адреса | Не назначен; Марк координирует, QA Борис |
 | [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | Конечная дата не обновляется после выбора начала на iPhone Safari | P2 | in review — frontend выпущен, iPhone Safari и desktop QA впереди | Игорь / Developer; QA Борис |
 | [BUG-019](BUG-019-search-account-context.md) | Поиск не показывает аккаунт и не объясняет скрытый контакт | P2 | planned — NEXT; claim разработчика отсутствует | Не назначен; QA Борис |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | Новое сообщение не выделяется во входящих | P2 | in review — frontend выпущен; desktop/iPhone QA открыта | Денис / Developer; QA Борис |
