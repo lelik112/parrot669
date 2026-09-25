@@ -86,3 +86,7 @@ Authenticated `qa` on main origin and `lelik` on QA Worker each saw `Not found` 
 ### 2026-09-25 ~15:30 UTC — Борис / QA — guest search privacy partial
 
 В гостевой выдаче Barcelona на main origin тестовый объект lelik показывает «Владелец: lelik», тип, цену, внешний переход и контакт; среди отображаемых полей карточки нет email, телефона, точного адреса или iCal. Это проверка видимого Search UI, не публичного JSON `/api/p/{parrotId}` и не отказа чужому аккаунту в private profile. Статус PM-021 остаётся `in review`.
+
+### 2026-09-25 ~18:20 UTC — Борис / QA — public display name in search PASS
+
+Owner `lelik` on QA Worker changed `displayName` temporarily to `lelik QA visibility test` and saw success. Guest `qa` on the main origin refreshed Barcelona search 2027-06-11→14 and saw the same QA listing with “Владелец: lelik QA visibility test”. Owner restored `lelik`; guest search again showed “Владелец: lelik”. No account/login, calendar or object fields changed. This confirms public Search display follows the saved name. Backend public JSON and unauthorized/400/401 remain unverified; status stays `in review`. **Owner:** Денис / Developer; QA Борис.
