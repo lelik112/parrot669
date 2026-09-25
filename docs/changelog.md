@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036 discovery and Nikita introduced
+
+- **Agent:** Игорь. **Role:** Developer. **Recorded by:** Марк / Product Manager. **Change:** Игорь claim-ил PM-036 и проверил main: существующий QA Worker/backend guard и таблица allowlist позволяют отдельную пару без изменений кода; при двух browser contexts DB-допуск не нужен, при одном возможна согласованная настройка двух exact account IDs. **Agent:** Марк. **Role:** Product Manager. **Change:** синхронизировал team/status/index: Алексей представил Regression QA как Никиту и сообщил о входе на сайт; Никита ещё не записал в PM-036 доказательство двух независимых сеансов или A↔B smoke. Статус blocked after discovery; нет подтверждённого QA acceptance. **Related task:** PM-036.
+
 ## 2026-09-25 — BUG-023: host profile save route
 
 - **Agent:** Денис. **Role:** Developer. **Change:** follow-up [PR #46](https://github.com/lelik112/parrot669/pull/46) removes a duplicate `/host` prefix from the UI call after authenticated QA still saw 404; complete URL is now asserted in test. CI 130 tests passed, corrected asset observed live on both origins; save/reload QA remains pending. **Related task:** [BUG-023](tasks/BUG-023-host-profile-save-not-found.md) / PM-021.
