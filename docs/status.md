@@ -16,6 +16,8 @@
 
 ## In Progress
 
+- **[PM-039](tasks/PM-039-browser-test-environments.md) / P1 NOW, Марк / PM, claim:** исследую автономный и недорогой browser/mobile QA. Сравнение Playwright/Xcode Simulator/AWS Device Farm/BrowserStack с ценами зафиксировано; самостоятельный доступ Бориса к реальному iPhone Safari и PARROT через сервис ещё нужно проверить. Рекомендация Sol / Medium; подписка и техническое внедрение не начаты.
+
 - **[PM-029](tasks/PM-029-two-origin-qa-sessions.md), Игорь / Developer, P1, `in review`:** Борис прошёл qa/lelik A→B→A, reload и logout `qa` на двух origin; остались third-account/forged-request negative checks и обратный logout.
 - **[PM-030](tasks/PM-030-qa-drain-next-stage.md), Марк / PM, P1:** QA triage и пакет следующих продуктовых контрактов; рекомендация после первой QA-волны ещё ожидает результатов.
 - **[PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md) / P1 NEXT, in progress:** Chrome общий, одна cookie на hostname; Никитин вход на адресе Бориса может вытеснить его активный браузерный сеанс. Два отдельных Worker origin и секреты работают; точные ID `qa2`/`qa3` допущены с согласия владельца, оба входа и независимость при reload проверены. Открыты message A↔B, logout/relogin и независимый QA. Прежний вывод «код не нужен» исправлен; backend других сессий при login не удаляет.
@@ -29,9 +31,12 @@
 
 - **[PM-003](tasks/PM-003-contact-acceptance.md), `blocked`:** базовый контакт и unread/read PASS; block-тест оставил пару заблокированной и вход `lelik` потерян. Борис продолжит после безопасного восстановления входа; [BUG-021](tasks/BUG-021-blocking-signs-out-host.md) — единичное наблюдение P2, причина не установлена.
 - **[PM-017](tasks/PM-017-qa-test-mailbox-access.md) / PM-006:** требуются управляемые тестовые почтовые ящики; email ветки PM-010/023 тоже открыты.
-- **[PM-014](tasks/PM-014-qa-native-autofill-environment.md), [PM-015](tasks/PM-015-qa-mobile-device-environment.md), [PM-018](tasks/PM-018-qa-controlled-calendar.md):** нативный Safari/autofill, доступный Борису мобильный сеанс и контролируемый Airbnb/iCal; owner-assisted частичный PASS не равен независимой приёмке.
+- **[PM-015](tasks/PM-015-qa-mobile-device-environment.md), [PM-007](tasks/PM-007-mobile-acceptance.md), [PM-025](tasks/PM-025-search-contact-button-layout.md), [BUG-018](tasks/BUG-018-calendar-end-date-mobile-safari.md) — blocked:** после частичного desktop/owner-assisted PASS отсутствует самостоятельный реальный iPhone Safari для обязательных touch/date-picker критериев. [PM-039](tasks/PM-039-browser-test-environments.md) исследует недорогой автономный доступ; Марк отвечает за выбор, Борис — за ретест после среды.
+- **[PM-014](tasks/PM-014-qa-native-autofill-environment.md), [PM-004](tasks/PM-004-street-autofill.md) — blocked:** нужен Safari-профиль с сохранённым адресом и видимым нативным popup; remote iPhone сам по себе не гарантирует такого профиля. [PM-018](tasks/PM-018-qa-controlled-calendar.md) всё ещё зависит от контролируемого Airbnb/iCal и остаётся in review; owner-assisted частичный PASS не равен независимой приёмке.
 
 ## Decisions
+
+- [D015](decisions/D015-qa-environment-blocked-status.md): если оставшийся обязательный QA нельзя выполнить без отсутствующей среды, статус blocked с конкретным условием разблокировки; смешанная задача остаётся in review с пометкой о mobile-критерии.
 
 - [D014](decisions/D014-public-search-date-range.md) принят как продуктовый предел одного поиска (1–366 ночей), с проверкой затрат до выпуска и явным пересмотром при необходимости.
 - [D013](decisions/D013-qa-acceptance-regression-split.md) принят по поручению владельца: Борис — критический acceptance; новый Regression QA — повторяемый smoke/регресс и evidence, без автоматического переноса статусов.
@@ -42,16 +47,20 @@
 
 ## Risks
 
+- Без доступной Борису real-device среды мобильный acceptance основного пути и регресс BUG-018/PM-025 остаются blocked. Playwright/симулятор помогут найти UI дефекты, но не доказывают поведение нативного iPhone Safari; remote-device доступ, сайт/VPN и фактический счёт ещё не проверены.
+
 - Базовый путь «поиск → сообщение → ответ» подтверждён в независимом smoke; при block-тесте владелец потерял видимый вход. Это единичное наблюдение [BUG-021](tasks/BUG-021-blocking-signs-out-host.md), причина пока не установлена; полная контактная приёмка остановлена. Очередь QA растёт быстрее независимой приёмки. Новый Regression QA сократит повторные проверки после подключения и доступа, но не заменит Бориса и не снимет внешние блокеры.
 - Возврат QA Worker к 503 при потере секрета и внешние device/mail/calendar ресурсы могут оставить часть проверок заблокированной. Live 401 после повторной настройки уже подтверждён, но двухаккаунтная QA открыта.
 - Преждевременная публичная страница профиля может раскрыть данные хозяина шире согласованного; PM-022 требует явного product/privacy решения.
 
 ## Next Priorities
 
+0. Марк по [PM-039](tasks/PM-039-browser-test-environments.md) сверяет возможность 15–30-минутного удалённого iPhone Safari прогона для Бориса и бюджет; после реального доступа Борис claim-ит мобильный пакет PM-015→PM-007/BUG-018/PM-025. PM-004/014 отдельно требуют нативный сохранённый адрес. Покупку/настройку не запускать без согласованного расхода.
+
 1. Восстановить `lelik` на основном origin без передачи пароля в docs; Борис безопасно проверит/снимет блок, повторит BUG-021 и продолжит PM-003/016 и PM-029 security/reverse logout. Узкую dev диагностику назначать по подтверждённому дефекту.
 2. Никита использует готовую пару `qa2`/`qa3` на двух regression Worker origin и проходит [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md): QA claim, A→B→A, refresh/logout без секретов в отчёте.
 3. После появления и доступа Regression QA взять ограниченные UI/локализационные ретесты из [QA split PM-030](tasks/PM-030-qa-drain-next-stage.md#qa-split--новая-роль-2026-09-25-после-появления-исполнителя) с отдельными claims и evidence; Борис продолжает критический acceptance. До записи отдельного claim распределение задач не меняется.
-4. Борис идёт по [приоритетной QA-очереди PM-030](tasks/PM-030-qa-drain-next-stage.md#одна-очередь-бориса-после-pm-029pm-016): сначала PM-024/003, затем PM-023, PM-002, PM-025/001; короткие P2 ретесты и внешние условия отмечены отдельно.
+4. Борис идёт по доступной [QA-очереди PM-030](tasks/PM-030-qa-drain-next-stage.md): сначала PM-024/003, затем PM-023/002/001 и desktop P2. PM-025, BUG-018, PM-007/015 и PM-004/014 не помещать в исполнимую очередь до соответствующей среды; смешанные PM-023/026 и BUG-020 сохраняют доступную desktop QA.
 5. Алексей решает вопросы публичной видимости [PM-022](tasks/PM-022-public-host-profile.md); после первых результатов QA Марк рекомендует **одну** следующую dev-задачу. Текущий условный кандидат — PM-022, лишь после принятого контракта. PM-031 — редакционная подготовка; PM-032/033 — LATER.
 6. [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) закрыта как аудит. Никита — кандидат на QA узкого сценария [PM-038](tasks/PM-038-host-unsaved-drafts-rerender.md) без зависимости от PM-036; после подтверждения и отдельного claim Денис может взять исправление; для [PM-037](tasks/PM-037-search-date-range-bound.md) продуктовый предел 366 принят, следующий шаг — изолированный замер с последующей узкой реализацией после отдельного dev claim. Не запускать большой refactor.
 7. Готовить [PM-008](tasks/PM-008-pilot.md) как отдельный план измерения реальных добавлений, полезной выдачи и контакта без выдуманных базовых чисел.
