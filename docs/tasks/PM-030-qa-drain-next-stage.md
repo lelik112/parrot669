@@ -96,12 +96,12 @@
 
 ## Одна очередь Бориса после PM-029/PM-016
 
-PM-029 **in review**: Борис уже прошёл независимый A→B→A, refresh и logout `qa` на двух origin; [PM-016](PM-016-qa-second-session-access.md) **done**. У PM-029 остаются независимые negative checks для третьего аккаунта/подделки и обратный logout. [PM-003](PM-003-contact-acceptance.md) **in progress**: базовый контакт и ответ PASS, pair block/unblock и repeat contact ещё открыты. Двадцать задач в матрице — исходный срез до PM-029; сейчас 21 `in review`, PM-016 завершена.
+PM-029 **in review**: Борис подтвердил A→B→A, refresh и logout `qa` на двух origin; проверки третьего пользователя/подделки и обратный logout ещё открыты. При block-тесте основной origin потерял видимый `lelik`, тестовая пара заблокирована; [BUG-021](BUG-021-blocking-signs-out-host.md) — один случай, причина неизвестна. Поэтому [PM-016](PM-016-qa-second-session-access.md) **снова in review**, а [PM-003](PM-003-contact-acceptance.md) **blocked** до безопасного восстановления входа. Базовый контакт PASS; двадцать задач в матрице — исторический срез, сейчас 22 `in review`.
 
 | № | Приоритет | Пакет QA | Условие и выход |
 | --- | --- | --- | --- |
-| 0 | P1 gate | PM-029 → PM-016 | PM-016 done: два входа, A→B→A и reload/logout `qa` PASS; Борис завершает PM-029 third-account/forged-request и обратный logout |
-| 1 | P1 | PM-024 + PM-003 | Базовый поиск → сообщение → ответ PASS; добрать pair block/unblock, repeat CTA и limits, не объявляя полный PM-003 done |
+| 0 | P1 gate | PM-029 → PM-016 | Базовый A→B→A PASS; после block-теста восстановить `lelik`/PM-016, затем Борис завершает PM-029 negative security и обратный logout |
+| 1 | P1 | PM-024 + PM-003 | Базовый контакт PASS; PM-003 blocked из-за тестовой пары и входа `lelik`; воспроизвести BUG-021 после безопасного восстановления, затем repeat CTA/limits |
 | 2 | P1 | PM-023 | Черновик до входа, вход подтверждённого гостя, ручная отправка и ответ; регистрация с новым email после PM-017 |
 | 3 | P1 | PM-002 | Короткий BUG-017 copy ретест сейчас, затем nudge и D010 states в двух сеансах/с контролируемым календарём |
 | 4 | P1 | PM-025 | Завершить web-состояния ссылки/status/длинного текста и клавиатуры; mobile — внешний PM-015 |
