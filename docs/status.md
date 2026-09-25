@@ -11,6 +11,8 @@
 - Реализация PM-020/021/023/024/025/026/027/028 и BUG-019/020 выпущена, но задачи остаются `in review` до полного QA. Исправление BUG-016 в PM-020 слито в [frontend PR #23](https://github.com/lelik112/parrot669/pull/23); production ретест открытого UX-дефекта не записан.
 - Для следующего этапа предложен минимальный контракт [PM-022](tasks/PM-022-public-host-profile.md) и заведены [PM-031](tasks/PM-031-trust-terminology.md), [PM-032](tasks/PM-032-how-it-works.md), [PM-033](tasks/PM-033-faq.md). Это документация, не релиз и не утверждённое публичное раскрытие.
 
+- [PM-035](tasks/PM-035-documentation-structure-refactoring.md) / P2: Марк завершил аудит документации и предложил минимальную структуру и сохранение истории; сами файлы не перенесены. [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) / P2 — отдельный технический аудит, planned без claims Дениса/Игоря.
+
 ## In Progress
 
 - **[PM-029](tasks/PM-029-two-origin-qa-sessions.md), Игорь / Developer, P1, `in review`:** QA Worker теперь достигает production backend; анонимные auth/locations получают 401 после проверки секретов, формы входа работают. Борису проверить два управляемых аккаунта, запрет третьего, refresh/logout и A→B→A. Независимая приёмка ещё открыта.
