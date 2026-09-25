@@ -1,7 +1,7 @@
 # PM-029 — Два независимых PARROT-сеанса в одном управляемом браузере
 
 **Title:** дать Борису два одновременно авторизованных тестовых входа в PARROT через два разных origin.
-**Status:** in review — live qa/lelik sessions и A→B→A + refresh/logout isolation smoke PASS; independent third-account/forged-request checks and reverse logout remain open. **Priority:** P1.
+**Status:** in review — dual `qa`/`lelik` sessions and search→message→reply passed before block test; blocking the pair unexpectedly left the primary origin signed out. Current visible account is `qa` on both origins and the pair remains blocked; don't prompt another login until explicitly coordinated. **Priority:** P1.
 **Owner:** Игорь / Developer; Марк / PM координирует, Борис / QA принимает результат.
 **Agent:** Игорь. **Role:** Developer. **Scope:** frontend Worker, настройка второго Cloudflare origin и обязательная backend-проверка по account ID; действующий origin и обычные auth-права сохраняются.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** два origin, backend allowlist, доверие между Worker и backend, cookies и CSRF требуют совместной проверки без ослабления обычной авторизации.
@@ -91,6 +91,10 @@ QA-only master password, impersonation и отключение auth/CSRF в prod
 - Frontend `src/index.js`, `public/assets/host.js` и backend `src/main/scala/com/parrot669/http/AuthRoutes.scala` в main указывают на возможность разделения по host; поведение второго адреса ещё **не проверено**.
 
 - 2026-09-25 ~10:36 UTC — **Борис / QA:** повторно открыл прежний `qa.parrot669.com`: `502 Bad Gateway / [Errno 111] Connection refused`. После записи Игоря о смене origin открыл `https://parrot669.cheltsov112.workers.dev/`: главная страница отображается, но `/messages` после загрузки показывает `Could not connect. Please try again.` На основном `https://parrot669.com/search` по-прежнему виден авторизованный `@lelik`, а `/messages` показывает его диалоги. Второй аккаунт на Worker origin пока не вошёл; изоляция сессий и отрицательные проверки не проводились. Игорю проверить deployment Worker и конфигурацию секретов Worker/Railway, доступность QA API и передать работоспособный URL на повторную QA. Статус `in progress` сохраняется.
+
+## Discussion / Updates
+
+- 2026-09-25 — **Борис / QA:** уточнение после продолжения CHECK-H11: исходное состояние `qa` на Worker origin + `lelik` на основном было live-проверено; поиск, первое сообщение, ответ, unread/read, refresh обеих вкладок прошли. При следующей проверке block на основном origin после подтверждения завершился экраном входа; QA увидел статус «Собеседник заблокировал переписку». В ходе возврата пользователь ввёл `qa`, поэтому основной origin теперь тоже показывает `qa`; отдельный `lelik`-сеанс и снятие блока не восстановлены. Симптом выделен в [BUG-021](BUG-021-blocking-signs-out-host.md). Пары и данные объекта не менял после этого. **Next:** нужен безопасный возврат владельца, затем снять блок и продолжить PM-003.
 
 ## Discussion / Updates
 
