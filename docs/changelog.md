@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: qa2/qa3 access provisioned and two live sessions
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** after Aleksey approved the two exact existing account IDs, added their rows through Railway Database UI to `qa_origin_account_allowlist`. Read-back shows exactly four verified participants (`qa`, `lelik`, `qa2`, `qa3`). Owner entered credentials through secure sign-in; `qa2` on regression A and `qa3` on regression B both signed in and retained their own identities across alternating reloads. Updated the tester procedure with the actual account/origin mapping. Backend code and deployments were not changed. Messaging A↔B, logout/relogin and independent security/QA acceptance remain open. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
 ## 2026-09-25 — PM-037: public search date-range contract
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по поручению Алексея принял [D014](decisions/D014-public-search-date-range.md): один публичный поиск принимает 1–366 ночей включительно, 367+ должны давать 400 до основного SQL; UI не должен молча сокращать введённые даты или показывать частичный срок как полностью доступный. Обновил [PM-037](tasks/PM-037-search-date-range-bound.md): перед выпуском обязателен замер верхней границы на изолированной репрезентативной базе; при неприемлемой задержке решение пересматривается отдельно. Игорь — кандидат на замеры/реализацию Sol/High без claim; код, QA и production не менялись. **Related task:** PM-037.
