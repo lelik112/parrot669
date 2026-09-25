@@ -20,7 +20,7 @@
 | --- | --- | --- | --- | --- |
 | [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015/018 | P1 | in review — desktop partial PASS; owner-assisted iPhone Safari open 17–18.02.2027 passed; BUG-018 and remaining QA open | Денис / Developer; QA Борис |
 | [PM-002](PM-002-link-publication.md) | Внешняя ссылка + verification status + nudge | P1 | in review — BUG-017 code merged; Cloudflare/QA copy retest open; other states PM-016/open | Игорь / Developer; QA Борис |
-| [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — QA access | Борис / QA; возобновление не подтверждено |
+| [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — Борису требуется самостоятельный PM-016 двухаккаунтный прогон | Борис / QA; возобновление не подтверждено |
 | [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — Chrome QA частично PASS, Safari ждёт PM-014 | Денис / Developer; QA Борис |
 | [PM-005](PM-005-closed-dates-copy.md) | Понятная форма закрытых дат; BUG-014 | P2 | in review — desktop RU/EN/ES/CA QA PASS, mobile открыт | Денис / Developer; QA Борис |
 | [PM-006](PM-006-email-acceptance.md) | Письма и полный цикл восстановления | P1 | planned | Не заявлен |
