@@ -56,7 +56,7 @@
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 | [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | in progress — PM overview готов | Марк / PM сводит два независимых аудита |
 
-| [PM-034-FE](PM-034-FE-frontend-audit.md) | P2 | planned | Денис / frontend audit, handoff без claim; Sol / Medium |
+| [PM-034-FE](PM-034-FE-frontend-audit.md) | P2 | done — read-only frontend report submitted | Денис / Developer; Марк сводит PM-034 |
 | **LATER** | | | |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
