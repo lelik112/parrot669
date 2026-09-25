@@ -1,5 +1,9 @@
 # PARROT 669 product context
 
+## QA direction — D016 / PM-040 / PM-041 (2026-09-25)
+
+**Agent:** Марк. **Role:** Product Manager. **Related tasks:** [PM-040](tasks/PM-040-playwright-web-e2e.md), [PM-041](tasks/PM-041-real-device-qa-queue.md), [D016](decisions/D016-playwright-first-real-device-queue.md). Алексей выбрал Playwright для повторяемых браузерных проверок основного пути; реализация ещё planned и ждёт developer claim. Нативный iPhone Safari, экранная клавиатура, date picker и сохранённый адрес Safari остаются отдельными blocked критериями с [инструкцией для QA и очередью PM-041](tasks/PM-041-real-device-qa-queue.md). Playwright WebKit/mobile emulation не является независимой real-device приёмкой. Борис отвечает за критический acceptance, Никита — за назначенный регресс; рабочие результаты хранятся в исходных task cards. Исследование выбора [PM-039](tasks/PM-039-browser-test-environments.md) закрыто; покупка устройства/сервиса сейчас не запущена.
+
 This file is the handoff/source-of-truth for continuing product work if chat context is lost.
 
 **Quick route:** [product direction and team](#product-direction-and-team-coordination) → [current product](#current-product) → [guest and host flows](#current-user-flows) → [verification direction](#verification-direction) → [immediate TODO](#immediate-todo). For today's delivery/QA status use [status.md](status.md); for decisions use [decisions/](decisions/README.md). Historical implementation details below stay available by section and task ID.
