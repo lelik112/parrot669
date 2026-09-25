@@ -8,10 +8,11 @@
 
 | Приоритет | Задачи | Ответственный и выход |
 | --- | --- | --- |
-| P1 | [PM-029](tasks/PM-029-two-origin-qa-sessions.md) → [PM-016](tasks/PM-016-qa-second-session-access.md) | PM-016 done: Борис подтвердил qa/lelik обмен, reload и logout `qa`; PM-029 остаётся in review до отрицательных проверок и обратного logout |
-| P1 | [PM-024](tasks/PM-024-contact-from-every-search-result.md) + [PM-003](tasks/PM-003-contact-acceptance.md) + [PM-023](tasks/PM-023-guest-message-onboarding.md) | Базовый контакт и ответ PASS, PM-003 in progress (block/repeat ещё открыты); PM-023 independent QA следующей |
+| P1 | [PM-029](tasks/PM-029-two-origin-qa-sessions.md) → [PM-016](tasks/PM-016-qa-second-session-access.md) | Базовый qa/lelik обмен PASS, но после block-теста PM-016 снова in review до восстановления `lelik`; PM-029 security/reverse logout остаётся in review |
+| P1 | [PM-024](tasks/PM-024-contact-from-every-search-result.md) + [PM-003](tasks/PM-003-contact-acceptance.md) + [PM-023](tasks/PM-023-guest-message-onboarding.md) | Базовый контакт и ответ PASS; PM-003 blocked после block-теста/BUG-021 до восстановления `lelik`; PM-023 independent QA следующей |
 | P1 | [PM-002](tasks/PM-002-link-publication.md), [PM-025](tasks/PM-025-search-contact-button-layout.md), [PM-001](tasks/PM-001-calendar-control-dates.md) | Игорь/Денис выпустили соответствующие изменения; Борис закрывает copy/CTA и контролируемые календарные состояния, external PM-018/mobile PM-015 отдельно |
 | P1 | [PM-030](tasks/PM-030-qa-drain-next-stage.md) | Марк / PM сводит приёмку и договорится о следующем продукте после первой волны QA |
+| P2 | [BUG-021](tasks/BUG-021-blocking-signs-out-host.md) | Один QA случай потери видимого входа после block: reported, повтор после восстановления `lelik`; Марк решает узкий dev claim после evidence |
 | P2 | [BUG-020](tasks/BUG-020-unread-message-discoverability.md), [PM-026](tasks/PM-026-remove-duplicate-messages-link.md), [PM-027](tasks/PM-027-open-property-from-messages.md), [PM-028](tasks/PM-028-open-host-profile-from-messages.md) | Реализация in review; Борис проверяет unread и переходы в двух аккаунтах |
 | P2 | [PM-004](tasks/PM-004-street-autofill.md), [PM-005](tasks/PM-005-closed-dates-copy.md), [PM-010](tasks/PM-010-auth-routes-extraction.md), [PM-011](tasks/PM-011-calendar-sync-extraction.md), [PM-013](tasks/PM-013-calendar-waiting-instruction.md), [PM-020](tasks/PM-020-host-cabinet-navigation.md), [PM-021](tasks/PM-021-private-host-profile.md), [BUG-018](tasks/BUG-018-calendar-end-date-mobile-safari.md), [BUG-019](tasks/BUG-019-search-account-context.md) | In review, частичные PASS есть; короткие ретесты/внешняя среда расписаны в PM-030. BUG-016 исправлен в PR #23, production ретест открыт |
 
