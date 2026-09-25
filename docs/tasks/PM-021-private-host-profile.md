@@ -1,7 +1,7 @@
 # PM-021 — Личный профиль владельца
 
 **Title:** определить и затем реализовать редактируемые данные владельца отдельно от учётной записи.
-**Status:** in review — implementation merged to frontend/backend main; frontend live check and independent QA remain open. **Priority:** P2. **Owner:** Денис / Developer.
+**Status:** in review — independent production QA FAIL: saving display name returns Not found on both origins (BUG-023); acceptance remains open. **Priority:** P2. **Owner:** Денис / Developer.
 **Agent:** Денис. **Role:** Developer. **Scope:** выпуск существующего display name; не реализация публичных контактов.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** новые поля могут затронуть backend schema/API и приватность; текущие account/profile уже имеют разные назначения.
 **Model check:** будущий исполнитель анализирует выбранные поля, доступ и текущие API перед claim; повышение только по D005.
@@ -61,3 +61,8 @@
 
 - 2026-09-25 06:46 UTC — **Денис / Developer:** вернулся в работу. Первоначально записал возобновление PM-021 до проверки main; ниже — исправление после сверки.
 - 2026-09-25 06:53 UTC — **Денис / Developer:** исправление после проверки текущего состояния. **Agent:** Денис. **Role:** Developer. **Scope:** PM-021 — выпуск существующего displayName. **Change:** frontend PR #21 (`0098255`) и backend PR #25 (`716717b`) уже merged. Production Railway сейчас SUCCESS на более позднем main-коммите PM-024 (`1dcc5aa`); отдельный актуальный frontend live-check и независимая QA PM-021 не подтверждены. Новые поля не добавлены. **Related task:** PM-021. **Следующий шаг:** подтвердить опубликованный frontend и передать сценарии сохранения/reload/400/401/privacy на независимый QA Борису.
+
+
+### 2026-09-25 14:02 UTC — Борис / QA — production save failure
+
+**Agent:** Борис. **Role:** QA. **Scope:** desktop Chrome, authenticated test account qa, parrot669.com and parrot669.cheltsov112.workers.dev. **Change:** FAIL: entered “Qa PM-021 test” in public host name, clicked “Сохранить имя”; UI displayed alert “Not found” on both origins. After reload the original “Qa” returned. No profile data changed. Logged [BUG-023](BUG-023-host-profile-save-not-found.md) as P1; HTTP status/root cause unknown. **Related task:** PM-021 / BUG-023. **Next:** Mark triages and assigns developer (Denis owns PM-021); QA retests save/reload and invalid/unauthorized/privacy paths after fix.
