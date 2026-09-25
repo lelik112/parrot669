@@ -11,7 +11,7 @@
 - Реализация PM-020/021/023/024/025/026/027/028 и BUG-019/020 выпущена, но задачи остаются `in review` до полного QA. Исправление BUG-016 в PM-020 слито в [frontend PR #23](https://github.com/lelik112/parrot669/pull/23); production ретест открытого UX-дефекта не записан.
 - Для следующего этапа предложен минимальный контракт [PM-022](tasks/PM-022-public-host-profile.md) и заведены [PM-031](tasks/PM-031-trust-terminology.md), [PM-032](tasks/PM-032-how-it-works.md), [PM-033](tasks/PM-033-faq.md). Это документация, не релиз и не утверждённое публичное раскрытие.
 
-- [PM-035](tasks/PM-035-documentation-structure-refactoring.md) / P2: Марк завершил аудит документации и предложил минимальную структуру и сохранение истории; сами файлы не перенесены. [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) / P2 — отдельный технический аудит, planned без claims Дениса/Игоря.
+- [PM-035](tasks/PM-035-documentation-structure-refactoring.md) / P2: Марк завершил одобренную владельцем миграцию: короткие [индекс задач](tasks/README.md) и [вход в курилку](team-chat.md), отдельные [правила](tasks/workflow.md), [дневные логи](team-chat/2026-09-25.md), пилот [журнала PM-030](tasks/logs/PM-030.md). Исходные записи сохранены; продуктовые статусы задач этим не менялись. [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) / P2 — отдельный технический аудит, planned без claims Дениса/Игоря.
 
 ## In Progress
 
@@ -28,6 +28,7 @@
 
 ## Decisions
 
+- [D012](decisions/D012-documentation-current-history.md) принят владельцем 2026-09-25: текущий статус отделён от истории в документации; PM-035 реализована без изменений приложения.
 - Принятые продуктовые решения остаются [D009](decisions/D009-host-cabinet-ia.md), [D010](decisions/D010-external-link-independent-verification.md), [D011](decisions/D011-contact-always-available.md).
 - PM-022 — **предложение** о минимальном публичном профиле, с открытым решением владельца о приватности и о том, какие уже существующие поля показывать. Backend DTO не задаёт автоматически продуктовый контракт.
 - Запуск homepage, How it works и FAQ следует за принятым словарём проверяемых сигналов и первой QA-волной; legal/privacy остаётся pre-launch gate.
