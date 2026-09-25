@@ -14,7 +14,7 @@
 | [PM-003 — Поиск → обращение → ответ](tasks/PM-003-contact-acceptance.md) | P1 | Независимо подтверждён основной путь контакта | CHECK-H11 начат, приостановлен; нужен статус QA |
 | [PM-002 — Внешняя ссылка и verification status](tasks/PM-002-link-publication.md) | P1 | Публикация Airbnb-ссылки и честный verification status + nudge | in review: production `lost` + `publish OFF` частично PASS; BUG-017 copy; nudge и прочие состояния ждут изолированный QA/PM-016
 | [PM-024 — Контакт с хозяином из каждого результата](tasks/PM-024-contact-from-every-search-result.md) | P1 | D011; backend/frontend released, live search/contact path confirmed | in review: independent two-account QA by Boris pending |
-| [PM-023 — Путь гостя к первому сообщению](tasks/PM-023-guest-message-onboarding.md) | P1 | Гость пишет черновик до auth, затем продолжает после входа | назначен Игорю; claim/Model check ещё не зафиксированы в main |
+| [PM-023 — Путь гостя к первому сообщению](tasks/PM-023-guest-message-onboarding.md) | P1 | Гость пишет черновик до auth, затем продолжает после входа | in review: live frontend и CI подтверждены; независимая QA Бориса открыта |
 | [PM-025 — Расположение кнопки контакта](tasks/PM-025-search-contact-button-layout.md) | P1 | CTA остаётся внутри правильной карточки на web и mobile | Денис: in progress; claim и Sol/Medium записаны |
 | [PM-004 — Выбор улицы](tasks/PM-004-street-autofill.md) | P2 | Первый вариант не скрывается браузерной подсказкой | in review; выпущено Денисом, Борису нужен независимый нативный ретест |
 | [PM-005 — Закрытые даты](tasks/PM-005-closed-dates-copy.md) | P2 | Обычная форма не выглядит недоступной функцией | in review; выпущено Денисом, Борису нужен независимый визуальный ретест |
