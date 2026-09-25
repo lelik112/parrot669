@@ -1,7 +1,7 @@
 # PM-029 — Два независимых PARROT-сеанса в одном управляемом браузере
 
 **Title:** дать Борису два одновременно авторизованных тестовых входа в PARROT через два разных origin.
-**Status:** in progress — backend released; QA Worker currently returns 503 without its production secret binding; Борис awaits independent QA. **Priority:** P1.
+**Status:** in review — Worker and backend live; Борис проверяет два входа, безопасность и переписку. **Priority:** P1.
 **Owner:** Игорь / Developer; Марк / PM координирует, Борис / QA принимает результат.
 **Agent:** Игорь. **Role:** Developer. **Scope:** frontend Worker, настройка второго Cloudflare origin и обязательная backend-проверка по account ID; действующий origin и обычные auth-права сохраняются.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** два origin, backend allowlist, доверие между Worker и backend, cookies и CSRF требуют совместной проверки без ослабления обычной авторизации.
@@ -74,6 +74,8 @@ QA-only master password, impersonation и отключение auth/CSRF в prod
 [PM-016](PM-016-qa-second-session-access.md) — QA-блокировка; PM-003, PM-024, PM-010 и PM-028 — зависимые приёмки. Два уже существующих подтверждённых тестовых аккаунта `qa` и `lelik`, разрешённых backend allowlist; первая авторизация на втором origin может потребовать однократного безопасного входа.
 
 ## Evidence
+
+- 2026-09-25 ~12:30 UTC — Алексей восстановил production `QA_WORKER_SECRET` у Worker. После этого на `https://parrot669.cheltsov112.workers.dev/search.html` анонимный `/api/locations/countries` ответил 401; Railway HTTP logs deployment `f9ebe8cf-84eb-48c7-9904-32d1fe3a2367` показывают `/api/auth/me` и `/api/locations/countries` по 401. В backend `3e35c46` отсутствие/несовпадение аттестации даёт 403, поэтому этот live 401 подтверждает совпадение секретов Worker/Railway, не раскрывая их. QA `/messages.html` показывает форму входа, `/host.html?login=1` открывает вход без `Forbidden`; основной `parrot669.com/search.html` по-прежнему показывает `@lelik` и страны. Два аккаунта пока не залогинены одновременно: Борису проверить `qa` на QA hostname, `lelik` на основном, изоляцию сессий/refresh/logout, третий аккаунт и A→B→A по acceptance criteria. PM-029 переведена в `in review`; PM-016 остаётся `blocked` до результата Бориса.
 
 - 2026-09-25 ~12:10 UTC — [Backend PR #28](https://github.com/lelik112/parrot669-backend/pull/28) merged as `3e35c46`; [PR CI](https://github.com/lelik112/parrot669-backend/actions/runs/36132444075) and [main CI](https://github.com/lelik112/parrot669-backend/actions/runs/36132831445) SUCCESS (compile, PostgreSQL smoke, Docker). Railway does not auto-deploy this GitHub repo; exact-SHA deployment `f9ebe8cf-84eb-48c7-9904-32d1fe3a2367` now SUCCESS on `3e35c46`. New backend returns 401 only for unauthenticated/expired sessions after valid Worker attestation; malformed attestation and disallowed account remain 403. On a fresh browser load the QA Worker instead returns its own `QA site unavailable` 503 for Host/Search/Messages API, with no corresponding Railway HTTP request. The active Worker no longer receives a 32+ character `QA_WORKER_SECRET` binding; cannot claim the secrets match. Verify/reapply it on the production Worker using the private value already configured as `PARROT_QA_WORKER_SECRET` in Railway. Once QA API returns 401 rather than 503/403 for anonymous access, Boris can enter `qa` on the QA URL and `lelik` on the main domain and check the PM-029 acceptance criteria. PM-016 remains blocked.
 

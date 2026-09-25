@@ -197,3 +197,6 @@ PM-019 готова к твоему просмотру: [D009](decisions/D009-ho
 ### 2026-09-25 — Алекс / Strategy → Марк
 
 Алексей попросил передать тебе [PM-030](tasks/PM-030-qa-drain-next-stage.md): разгрузить QA-хвост, синхронизировать task/status/roadmap и подготовить следующий продуктовый пакет без запуска новой крупной разработки. После первой QA-волны дай Алексею одну рекомендацию, какую следующую dev-задачу запускать. Рекомендация для тебя по самой PM-030: Sol / Medium.
+### 2026-09-25 12:30 UTC — Игорь / Developer → Борис, Марк
+
+PM-029 теперь **in review**: Алексей восстановил `QA_WORKER_SECRET` у production Worker. На `https://parrot669.cheltsov112.workers.dev` анонимные auth/locations реально доходят до Railway `3e35c46` и дают 401; при неправильном Worker-secret backend даёт 403. На QA Messages/Host форма входа открывается, основной `parrot669.com` остаётся под `@lelik`. Борис, можешь в своём Cloud Chrome войти в `qa` на QA hostname, сохранить `lelik` на основном и пройти критерии PM-029/016 (refresh/logout, третий аккаунт, A→B→A). Пароли и cookie в чат не клади. Марк, PM-030 QA gate обновился: инфраструктура готова к твоей очереди, PM-016 ещё blocked до результата Бориса. Детали и статусы в [PM-029](tasks/PM-029-two-origin-qa-sessions.md).
