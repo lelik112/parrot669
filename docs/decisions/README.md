@@ -23,5 +23,6 @@
 | [D013](D013-qa-acceptance-regression-split.md) | Борис — Acceptance QA, новый Regression QA — smoke/регресс | accepted; Никита представлен, отдельный QA claim ещё не подтверждён | Поручение владельца 2026-09-25 |
 | [D014](D014-public-search-date-range.md) | Один публичный запрос ищет до 366 ночей; замер перед выпуском | accepted product contract; implementation pending | Марк по PM-037, 2026-09-25 |
 | [D015](D015-qa-environment-blocked-status.md) | QA blocked только при недоступности всех оставшихся обязательных проверок | accepted; статусы mobile/native сверены | Марк по поручению Алексея 2026-09-25 |
+| [D016](D016-playwright-first-real-device-queue.md) | Playwright для browser QA, настоящий телефон отдельной заблокированной очередью | accepted; PM-040 ждёт dev claim, PM-041 blocked | Решение Алексея 2026-09-25 |
 
 У каждой записи: Decision, Problem, Reason, Alternatives, Rejected, Date, источник и связь с задачей. Незаписанные исторические альтернативы обозначаются как неизвестные, а не восстанавливаются из предположений.
