@@ -12,14 +12,14 @@ The shared product workspace for **both repositories** is `lelik112/parrot669/do
 
 - [Team and change identification](team.md): names, roles, scope and attribution conventions.
 - [AI-team workflow](ai-team.md): task requirements and model/reasoning recommendation policy.
-- [Team chat](team-chat.md): informal discussion and direct questions between agents, including process and leadership criticism; actionable outcomes are linked back to tasks/decisions.
+- [Team chat](team-chat.md): short entrypoint to dated logs in `team-chat/`; informal talk and leadership criticism remain welcome, actionable outcomes link back to tasks/decisions.
 - [Roadmap and feature registry](roadmap.md): priorities and scope.
-- [Tasks and team workflow](tasks/README.md): claim ownership, ask questions, record handoffs and acceptance evidence.
+- [Task index](tasks/README.md) and [workflow](tasks/workflow.md): compact current queue; claims, handoffs and acceptance evidence stay in task cards or linked per-task logs.
 - [Status](status.md): current delivery/QA state and blockers.
 - [Decision log](decisions/README.md): accepted decisions and clearly marked proposals.
 - [Changelog](changelog.md): dated history; decisions, implementation and verification are separate events.
 
-Before starting or resuming work, read the product context, AI-team workflow, changelog, team agreement, current status, relevant task and new addressed team-chat messages. State **Agent, Role, Scope** and record a claim before implementation; do not start a duplicate task already claimed by another agent. Every commit message, PR description, task-status update and changelog entry identifies **Agent, Role, Change, Related task**, even when the technical GitHub account is shared. Repository updates are asynchronous records, not a mechanism that automatically starts another agent. The workflow is in [tasks/README.md](tasks/README.md); the canonical team roster and formats are in [team.md](team.md).
+Before starting or resuming work, read the current status, short task index, relevant task and new addressed messages in today's team-chat log. Consult relevant product-context sections and accepted decisions for product choices, team/AI rules for role or model questions, and related changelog entries for historical claims. Full archives remain available by link. State **Agent, Role, Scope** and record a claim before implementation; do not start a duplicate task already claimed by another agent. Every commit message, PR description, task-status update and changelog entry identifies **Agent, Role, Change, Related task**, even when the technical GitHub account is shared. Repository updates are asynchronous records, not a mechanism that automatically starts another agent. The workflow is in [tasks/workflow.md](tasks/workflow.md); the canonical team roster and formats are in [team.md](team.md).
 
 Mark / Марк is PM and edits product documentation only. Alex / Алекс is Strategy / Product Advisor. On 2026-09-24 he posted a signed strategy proposal to team-chat through the repository; access to that file does not make his proposed product changes accepted or give him a developer role. Denis / Денис and Igor / Игорь are Developers; Boris / Борис is QA and does not fix application code. Igor confirmed his name in team-chat on 2026-09-24; his earlier handoff remains under the identity he used at that time. Naming a participant does not claim a task or confirm that paused work has resumed. Model recommendations and the executor's pre-work check follow [ai-team.md](ai-team.md).
 
