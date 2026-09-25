@@ -6,6 +6,8 @@
 
 ## NOW
 
+QA capacity: [D013](decisions/D013-qa-acceptance-regression-split.md) разделяет критическую приёмку Бориса и короткий регресс нового QA. Имя и доступ нового исполнителя пока неизвестны; существующие claims и статусы не менялись. После подключения PM выделит ему ограниченные ретесты PM-025/026/020, BUG-019, PM-005 и copy/локализацию PM-002/013; Борис оставляет за собой контакт, календарь и auth/security/privacy. [Матрица передачи](tasks/PM-030-qa-drain-next-stage.md#qa-split--новая-роль-2026-09-25-после-появления-исполнителя).
+
 | Приоритет | Задачи | Ответственный и выход |
 | --- | --- | --- |
 | P1 | [PM-029](tasks/PM-029-two-origin-qa-sessions.md) → [PM-016](tasks/PM-016-qa-second-session-access.md) | Базовый qa/lelik обмен PASS, но после block-теста PM-016 снова in review до восстановления `lelik`; PM-029 security/reverse logout остаётся in review |
