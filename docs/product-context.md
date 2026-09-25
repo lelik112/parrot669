@@ -53,7 +53,7 @@ Current MVP principle:
    - compact accommodation type / bedrooms / sleeping-place facts,
    - optional indicative price when every requested night has a nightly price,
    - host nickname in a quieter footer,
-   - external Airbnb action when the host has attached and published one; otherwise a subdued note says that no external link is available yet.
+   - external Airbnb action when the host has attached and published one; otherwise a subdued neutral note says there is no public external link. Search cannot distinguish a missing listing from a host who chose not to publish its link (BUG-017).
    - **Write to host** for every property returned in search, independent of the old host-wide messages switch, Airbnb listing or calendar verification (D011). It opens `/messages.html` with the property and requested stay dates; login/registration is required before sending. Current production still has the old switch until PM-024 ships.
 4. Minimum stay is enforced by backend search but is not displayed as a separate field in guest results.
 4a. Guest can choose all results or only results with complete nightly pricing, and may filter by minimum/maximum estimated total price for the requested stay. Results with a known price are sorted cheapest first; results without a complete price come last. If any requested night lacks a price, no price estimate is shown and the property is excluded from priced-only and price-range search.
