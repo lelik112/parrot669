@@ -33,7 +33,7 @@
 | [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in review — QA `open` waiting PASS, `close` ждёт PM-018 | Марк / временный исполнитель; QA Борис |
 | [PM-014](PM-014-qa-native-autofill-environment.md) | Нативный Safari/autofill для PM-004 | P2 | blocked — браузерный профиль | Борис / QA после доступа; Алексей — среда |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | iPhone Safari touch для PM-007 | P1 | in review — owner-assisted iPhone Safari check done for PM-001; full PM-007 mobile QA open | Борис / QA; Алексей — устройство/сеанс |
-| [PM-016](PM-016-qa-second-session-access.md) | Второй изолированный сеанс для PM-003/010 | P1 | in review — отдельные Browser A/B (iPhone Safari `lelik112` + Cloud Chrome `lelik`) подтверждены; явный logout isolation test не проводился; PM-024 ответ хозяина открыт | Борис / QA; Алексей — owner-assisted действия на iPhone |
+| [PM-016](PM-016-qa-second-session-access.md) | Второй управляемый сеанс для PM-003/010 | P1 | blocked — у Бориса только один Cloud Chrome; Desktop/extension browser не подключён | Борис / QA после подключения; Алексей — разовый вход при необходимости |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | Тестовые ящики для PM-006 | P1 | blocked — почтовый доступ | Борис / QA после доступа; Алексей — ящик |
 | [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | in review — owner-assisted positive open and restore done; Boris independent remainder open | Борис / QA; Алексей — Airbnb |
 | [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | done — D009 принят владельцем | Марк / Product Manager |
