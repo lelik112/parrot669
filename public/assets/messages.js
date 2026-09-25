@@ -203,7 +203,7 @@
       }
       active = {id:null,propertyId,propertyTitle:options.propertyTitle,otherDisplayName:options.hostDisplayName,
         self:options.hostProfileId === actor.profile.id,
-        canReply:options.acceptingNewConversations && options.hostProfileId !== actor.profile.id};
+        canReply:options.hostProfileId !== actor.profile.id};
       restoreDraft(dates); renderContext(); status();
     } catch (error) { if (version === threadVersion) failed(error,$("msg-thread-notice")); }
   }

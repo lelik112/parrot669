@@ -121,7 +121,7 @@ test('late block metadata cannot overwrite another selected conversation; accoun
   assert.equal(h.$('msg-compose').elements.body.value,'');
 });
 
-test('existing conversation remains usable after host opts out; invalid checkout dates prevent sending',async t=>{
+test('existing conversation remains usable with legacy opt-out; invalid checkout dates prevent sending',async t=>{
   const h=await harness(t,{url:`/messages.html?property=${property}&from=2027-05-01&to=2027-05-04`,handler:r=>{
     if(r.path.includes('/contact-options/')) return {acceptingNewConversations:false};
     if(r.path.includes('/for-property/')) return detail();
@@ -148,24 +148,33 @@ test('read acknowledgements require visible focused history and the latest messa
   assert.equal(h.calls.find(r=>r.path.endsWith('/read')).body.throughSequence,1);
 });
 
-test('host opt-in is read from server; a failed change restores the saved value',async t=>{
-  const h=await harness(t,{page:'host.html',url:'/host.html',handler:r=>{
-    if(r.path==='/api/messaging/settings') return r.method==='GET'?{acceptingNewConversations:false}:response({error:'Unavailable'},503);
-  }});
+test('host has no switch that claims to disable guest enquiries',async t=>{
+  const h=await harness(t,{page:'host.html',url:'/host.html'});
   h.w.ParrotMessaging.setUser(user);await flush();
-  const toggle=h.$('messaging-host-enabled');assert.equal(toggle.checked,false);assert.equal(toggle.disabled,false);
-  toggle.checked=true;toggle.dispatchEvent(new h.w.Event('change'));await flush();
-  assert.equal(toggle.checked,false);assert.match(h.$('messaging-host-status').textContent,/connect/i);
-  h.w.ParrotMessaging.setUser(null);assert.equal(h.$('messaging-host-settings').hidden,true);
+  assert.equal(h.$('messaging-host-enabled'),null);
+  assert.equal(h.calls.filter(r=>r.path==='/api/messaging/settings').length,0);
 });
 
-test('search contact actions respect opt-in and pass the result dates without external listing dependencies',async t=>{
-  const h=await harness(t,{page:'search.html',url:'/search.html',loggedIn:false});
+test('search always shows contact and dates, even with legacy opt-out or failed options request',async t=>{
+  const h=await harness(t,{page:'search.html',url:'/search.html',loggedIn:false,handler:r=>{
+    if(r.path.includes('/contact-options/')) return {acceptingNewConversations:false,hostProfileId:'host'};
+  }});
   const container=h.w.document.createElement('div');h.w.document.body.append(container);
   h.w.ParrotMessaging.attachContact(container,{propertyId:property,availableFrom:'2027-05-01',availableTo:'2027-05-04',links:[]});
   await flush();const link=container.querySelector('a');assert.equal(link.hidden,false);
   assert.equal(new URL(link.href).searchParams.get('to'),'2027-05-04');
   h.w.ParrotMessaging.setLanguage('ru');assert.equal(link.textContent,'Написать владельцу');
+  const nudgeContainer=h.w.document.createElement('div');h.w.document.body.append(nudgeContainer);
+  h.w.ParrotMessaging.attachContact(nudgeContainer,{propertyId:property,links:[{calendarControlStatus:'unverified'}]});
+  await flush();assert.equal(nudgeContainer.querySelector('.availability-verify-nudge').hidden,false);
+});
+
+test('legacy opt-out cannot disable first message in the guest composer',async t=>{
+  const h=await harness(t,{url:`/messages.html?property=${property}`,handler:r=>{
+    if(r.path.includes('/contact-options/')) return {propertyTitle:'Apartment',hostDisplayName:'Host',hostProfileId:'host',acceptingNewConversations:false};
+  }});
+  assert.equal(h.$('msg-compose').hidden,false);
+  assert.equal(h.$('msg-send').disabled,false);
 });
 
 test('email settings persist both preference and language; failed changes restore server state',async t=>{
@@ -195,7 +204,7 @@ test('late email preference response is discarded after switching accounts',asyn
   assert.equal(h.$('msg-email-enabled').checked,false);assert.equal(h.$('msg-email-language').value,'ca');
 });
 
-test('PM-002: verification nudge prepares an unsent draft only for an accepting host',async t=>{
+test('PM-002: verification nudge prepares an unsent draft regardless of legacy opt-in',async t=>{
   const h=await harness(t,{url:`/messages.html?property=${property}&verifyCalendar=1`});
   const compose=h.$('msg-compose');
   assert.equal(compose.hidden,false);
