@@ -21,22 +21,23 @@ function harness() {
   return {worker:sandbox.worker,calls,env};
 }
 
-test('QA host forwards only its own cookie and attestation for every API family',async()=>{
+test('both QA hosts forward only their own cookie and attestation for every API family',async()=>{
   const {worker,calls,env}=harness();
-  for(const route of ['/api/host/auth/login','/api/host/auth/me','/api/host/dashboard',
+  const routes=['/api/host/auth/login','/api/host/auth/me','/api/host/dashboard',
     '/api/locations/countries','/api/search?country=ES','/api/messaging/conversations',
-    `/api/messaging/contact-options/${propertyId}`]) {
+    `/api/messaging/contact-options/${propertyId}`];
+  for(const host of ['qa.parrot669.com','parrot669.cheltsov112.workers.dev']) for(const route of routes) {
     const login=route.endsWith('/login');
-    const response=await worker.fetch(new Request('https://qa.parrot669.com'+route,{
+    const response=await worker.fetch(new Request('https://'+host+route,{
       method:login?'POST':'GET',
-      headers:{Origin:'https://qa.parrot669.com',Cookie:'other=x; parrot_session=qa-session',
+      headers:{Origin:'https://'+host,Cookie:'other=x; parrot_session=qa-session',
         'X-Parrot-QA-Origin':'forged','X-Parrot-QA-Worker':'forged'},
       ...(login?{body:'{}'}:{})
     }),env);
     assert.equal(response.status,200);
     assert.match(response.headers.get('Set-Cookie'),/second-session/);
   }
-  assert.equal(calls.length,7);
+  assert.equal(calls.length,routes.length*2);
   for(const {init} of calls){
     assert.equal(init.headers.get('Cookie'),'parrot_session=qa-session');
     assert.equal(init.headers.get('X-Parrot-QA-Origin'),'qa');
@@ -46,7 +47,7 @@ test('QA host forwards only its own cookie and attestation for every API family'
 
 test('QA origin fails closed without secret, rejects contact/unknown API and cross-origin writes',async()=>{
   const {worker,calls,env}=harness();
-  const base='https://qa.parrot669.com';
+  const base='https://parrot669.cheltsov112.workers.dev';
   assert.equal((await worker.fetch(new Request(base+'/host.html'),{...env,QA_WORKER_SECRET:undefined})).status,503);
   assert.equal((await worker.fetch(new Request(base+'/api/search'),{...env,QA_WORKER_SECRET:'short'})).status,503);
   assert.equal((await worker.fetch(new Request(base+'/api/contact',{method:'POST',body:'{}'}),env)).status,403);
@@ -66,4 +67,10 @@ test('ordinary origin keeps its existing proxy and never forwards QA headers',as
   assert.equal(calls[0].init.headers.get('Cookie'),'parrot_session=main-session');
   assert.equal(calls[0].init.headers.get('X-Parrot-QA-Origin'),null);
   assert.equal(calls[0].init.headers.get('X-Parrot-QA-Worker'),null);
+  const lookalike=await worker.fetch(new Request('https://parrot669.cheltsov112.workers.dev.evil.example/api/host/auth/me',{
+    headers:{'X-Parrot-QA-Origin':'qa','X-Parrot-QA-Worker':secret}
+  }),env);
+  assert.equal(lookalike.status,200);
+  assert.equal(calls[1].init.headers.get('X-Parrot-QA-Origin'),null);
+  assert.equal(calls[1].init.headers.get('X-Parrot-QA-Worker'),null);
 });

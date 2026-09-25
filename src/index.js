@@ -35,7 +35,9 @@ const escapeHtml = (value) =>
     "'": "&#39;",
   })[c]);
 
-const QA_HOSTNAME = "qa.parrot669.com";
+// The existing production workers.dev URL is a second, host-isolated QA origin.
+// Keep the planned custom domain ready if it is attached later.
+const QA_HOSTNAMES = new Set(["qa.parrot669.com", "parrot669.cheltsov112.workers.dev"]);
 
 const proxyBackend = async (request, targetPath, qaSecret) => {
   const sourceUrl = new URL(request.url);
@@ -85,7 +87,7 @@ const proxyBackend = async (request, targetPath, qaSecret) => {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const qaOrigin = url.hostname === QA_HOSTNAME;
+    const qaOrigin = QA_HOSTNAMES.has(url.hostname);
     const qaSecret = qaOrigin && typeof env.QA_WORKER_SECRET === "string" ? env.QA_WORKER_SECRET : "";
     if (qaOrigin && qaSecret.length < 32) return json({ error: "QA site unavailable" }, 503);
     if (qaOrigin && url.pathname === "/api/contact") return json({ error: "Forbidden" }, 403);
