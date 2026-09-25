@@ -1,7 +1,7 @@
 # BUG-023 — Имя хозяина не сохраняется
 
 **Title:** сохранение публичного имени в кабинете показывает Not found.
-**Status:** in progress — Denis follow-up on duplicated frontend /host prefix after PR #45. **Priority:** P1.
+**Status:** in progress — PR #46 merged and CI green; live Cloudflare asset still old, deployment/QA pending. **Priority:** P1.
 **Owner:** Денис / Developer; QA Борис. **Developer claim:** 2026-09-25 14:19 UTC.
 **Agent:** Борис. **Role:** QA. **Scope:** независимый live acceptance PM-021; код не менялся.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** сопоставить опубликованный frontend route, backend API и сессию, затем подтвердить сохранение и ошибку в UI. **Model check:** будущий Developer до реализации.
@@ -47,3 +47,5 @@
 - 2026-09-25 14:33 UTC — **Борис / QA, independent retest after PR #45:** `qa` on `https://parrot669.com/host#host-profile`, changed `Qa` to `Qa PM-021 test` and clicked Save. UI alert `Not found`; after navigation search→Host field returned `Qa`. On `https://parrot669.cheltsov112.workers.dev/host#host-profile` signed in as `lelik`, changed `lelik` to `lelik QA PM-021 test`; same `Not found`, after Messages→Host field returned `lelik`. Both account sessions intact; test data not persisted. Authenticated path remains broken despite unauthenticated 401 smoke. HTTP status/root cause not asserted. **Assigned:** Денис / Developer (existing claim); Борис / QA retests after next fix. **Related task:** BUG-023 / PM-021.
 
 - 2026-09-25 14:49 UTC — **Agent:** Денис. **Role:** Developer. **Scope:** узкое исправление frontend вызова профиля и тест полного URL; Worker/backend не менять. **Model check:** Sol / Medium достаточно. **Change:** повторная диагностика после QA FAIL: `host.js api()` уже добавляет `/api/host`, а save передаёт `/host/profile`, из-за чего реальный путь `/api/host/host/profile`. Старый UI mock срезал один префикс и скрывал баг. **Related task:** BUG-023 / PM-021. **Next:** исправить аргумент на `/profile`, усилить тест абсолютным путём, PR/CI/live и повторная QA.
+
+- 2026-09-25 14:53 UTC — **Agent:** Денис. **Role:** Developer. **Change:** [PR #46](https://github.com/lelik112/parrot669/pull/46) merged (`bef2251`), `host.js` now calls `api("/profile")` so request path is exactly `/api/host/profile`; UI test asserts full URL (130/130 local PASS, PR CI success). **Related task:** BUG-023 / PM-021. **Deployment evidence:** immediately after merge both live origins still serve old `host.js` with `api("/host/profile")`; authenticated save remains expected to fail until Cloudflare publishes new asset. **Next:** verify deployed JS contains `api("/profile")`, then Boris retests authenticated save/reload and 400/401/privacy. Do not close based on merge alone.
