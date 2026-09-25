@@ -22,17 +22,18 @@
 | [PM-003](PM-003-contact-acceptance.md) | P1 | in review — contact/reply, repeat CTA, unread and block/unblock passed; legacy state open | Борис / QA |
 | [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review — public anonymous draft/auth gate PASS; post-login/mobile open | Борис / QA |
 | [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
-| [PM-025](PM-025-search-contact-button-layout.md) | P1 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
+| [PM-025](PM-025-search-contact-button-layout.md) | P1 | blocked — web PASS, реальный touch ждёт PM-015/039 | Борис / QA после доступного iPhone; Sol / Medium из карточки |
 | [PM-001](PM-001-calendar-control-dates.md) | P1 | in review | Борис / QA |
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
-| [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | in review | Борис; доступ к mobile |
-| [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM |
+| [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | PM-039 → тест среды; Борис / QA после разблокировки; Luna / Medium |
+| [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
+| [PM-039](PM-039-browser-test-environments.md) | P1 | in progress — Марк claim, варианты/цены собраны; real-device feasibility открыта | Марк / PM; Sol / Medium; следующее: проверить AWS Device Farm доступ без покупки |
 | **NOW — P2** | | | |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review | Борис / QA |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
 | [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | reported — reproduced on two production origins after BUG-016 fix; developer diagnosis needed | Марк / PM triage; Борис / QA |
-| [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
+| [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review — desktop badge evidence проверить; mobile blocked by PM-015 | Борис / acceptance; Никита кандидат на короткий desktop ретест; Luna / Low из карточки |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-010](PM-010-auth-routes-extraction.md) | P2 | in review | Борис / QA |
@@ -42,14 +43,14 @@
 | [PM-005](PM-005-closed-dates-copy.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-011](PM-011-calendar-sync-extraction.md) | P2 | in review | Борис / QA |
 | [PM-013](PM-013-calendar-waiting-instruction.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
-| [PM-004](PM-004-street-autofill.md) | P2 | in review | Борис / QA |
-| [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | P2 | in review | Борис / QA |
+| [PM-004](PM-004-street-autofill.md) | P2 | blocked — нативный autofill ждёт PM-014 | Борис / QA после Safari с сохранённым адресом; Luna / Low |
+| [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | P2 | blocked — iPhone Safari picker ждёт PM-015 | Борис / QA после реального устройства; Sol / Medium из карточки |
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
 
 | **NEXT — P1** | | | |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked | Алексей → Борис: почта |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
-| [PM-007](PM-007-mobile-acceptance.md) | P1 | planned | —: после PM-015 |
+| [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/039 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in progress — qa2/qa3 допущены; оба входа/reload PASS, message A↔B/logout и независимый QA открыты | Игорь / Developer; Никита / QA evidence; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
