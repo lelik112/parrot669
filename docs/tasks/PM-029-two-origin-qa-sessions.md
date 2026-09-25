@@ -1,7 +1,7 @@
 # PM-029 — Два независимых PARROT-сеанса в одном управляемом браузере
 
 **Title:** дать Борису два одновременно авторизованных тестовых входа в PARROT через два разных origin.
-**Status:** in review — Worker and backend live; Борис проверяет два входа, безопасность и переписку. **Priority:** P1.
+**Status:** in review — live qa/lelik sessions и A→B→A + refresh/logout isolation smoke PASS; independent third-account/forged-request checks and reverse logout remain open. **Priority:** P1.
 **Owner:** Игорь / Developer; Марк / PM координирует, Борис / QA принимает результат.
 **Agent:** Игорь. **Role:** Developer. **Scope:** frontend Worker, настройка второго Cloudflare origin и обязательная backend-проверка по account ID; действующий origin и обычные auth-права сохраняются.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** два origin, backend allowlist, доверие между Worker и backend, cookies и CSRF требуют совместной проверки без ослабления обычной авторизации.
@@ -25,7 +25,7 @@
 
 ## Solution — гипотеза для проверки разработчиком
 
-Поднять второй стабильный HTTPS origin для **того же** frontend Worker и **того же** production backend, например `qa.parrot669.com` рядом с `parrot669.com`. Через него Host, Search, Messages и `/api/*` должны работать **только** для подтверждённых аккаунтов `qa` и `lelik`; backend обязан проверять это условие. Это не отдельная база и не QA-обход авторизации. Перед выбором имени убедиться, что он не занят и разрешён действующей конфигурацией Cloudflare.
+Подключить второй стабильный HTTPS origin к **тому же** frontend Worker и production backend. Для QA сейчас используется `https://parrot669.cheltsov112.workers.dev`; custom domain `qa.parrot669.com` не настроен и не используется. Через него Host, Search, Messages и `/api/*` должны работать **только** для подтверждённых аккаунтов `qa` и `lelik`; backend обязан проверять это условие. Это не отдельная база и не QA-обход авторизации. Перед выбором имени убедиться, что он не занят и разрешён действующей конфигурацией Cloudflare.
 
 Основание в текущем `main`: `AuthRoutes.scala` выдаёт `parrot_session` с `Path=/; HttpOnly; SameSite=Lax`, без `Domain`, то есть cookie должна быть привязана к конкретному host. `public/assets/host.js` использует `credentials: "same-origin"`, а `src/index.js` проксирует cookie к `api.parrot669.com` и возвращает `Set-Cookie`. Это **предположение об изоляции**, а не подтверждённый live-тест двух origin.
 
@@ -93,6 +93,9 @@ QA-only master password, impersonation и отключение auth/CSRF в prod
 - 2026-09-25 ~10:36 UTC — **Борис / QA:** повторно открыл прежний `qa.parrot669.com`: `502 Bad Gateway / [Errno 111] Connection refused`. После записи Игоря о смене origin открыл `https://parrot669.cheltsov112.workers.dev/`: главная страница отображается, но `/messages` после загрузки показывает `Could not connect. Please try again.` На основном `https://parrot669.com/search` по-прежнему виден авторизованный `@lelik`, а `/messages` показывает его диалоги. Второй аккаунт на Worker origin пока не вошёл; изоляция сессий и отрицательные проверки не проводились. Игорю проверить deployment Worker и конфигурацию секретов Worker/Railway, доступность QA API и передать работоспособный URL на повторную QA. Статус `in progress` сохраняется.
 
 ## Discussion / Updates
+
+- 2026-09-25 — **Борис / QA:** live acceptance на production в одном Cloud Chrome. Основной `parrot669.com` вошёл как `lelik`; альтернативный origin — `https://parrot669.cheltsov112.workers.dev`, вошёл как `qa`. После независимого входа оба заголовка одновременно показывали разные аккаунты. Под `qa` search загрузил Испанию/Barcelona и показал объект `lelik`; CTA открыл composer с выбранными датами. `qa` отправил тестовое обращение, `lelik` увидел badge «1 непрочитанное» и метку/счётчик в строке за ~17 секунд, открыл диалог (счётчик сбросился), ответил; ответ появился в том же разговоре у `qa`. Reload обеих вкладок сохранил `qa` и `lelik` соответственно. Logout `qa` показал анонимный экран без личных диалогов, а `lelik` остался авторизован; `qa` после этого восстановлен через secure sign-in, оба входа оставлены активными. На тестовом объекте уже существовал период 2027-06-11—14, его настройки не менялись; одно QA-обращение и ответ остаются в общей production переписке. Обратную проверку logout `lelik`, живой вход третьего аккаунта и forged-header checks не выполнял; backend negative paths проверялись CI Игоря, не независимым Борисом. Снимок диалога приложен к отчёту Бориса. Статус: **in review**, осталось независимое security-подтверждение и logout в обратную сторону при безопасном возврате.
+
 
 - 2026-09-25 — **Agent:** Игорь. **Role:** Developer. **Scope:** `igor/pm029` в frontend и backend; Worker proxy, QA-only backend middleware/auth, config и security regressions; Cloudflare/Railway настройка после CI. **Change:** беру PM-029 по прямому поручению Алексея. Сверил свежий main обоих репозиториев и PM-027/028; параллельный BUG-020 Дениса касается Messages UI, PM-029 не меняет его контроллеры. Текущий Worker проксирует только cookie, backend не различает второй origin; host-only cookie даёт изоляцию лишь после настройки второго адреса. **Related task:** PM-029 / PM-016. **Next:** безопасный backend guard по attestation и account IDs, Worker fail-closed; затем CI, конфигурация и независимая QA.
 
