@@ -1,7 +1,7 @@
 # PM-029 — Два независимых PARROT-сеанса в одном управляемом браузере
 
 **Title:** дать Борису два одновременно авторизованных тестовых входа в PARROT через два разных origin.
-**Status:** in review — production dual-session flow qa↔lelik and isolated logout/relogin confirmed; backend guard negatives and account-switch edge cases remain for independent acceptance. **Priority:** P1.
+**Status:** in review — independent qa↔lelik message/reply passed; main qa session later appeared signed out, while QA Worker lelik remained signed in. Cause unknown; negative guard tests still open. **Priority:** P1.
 **Owner:** Игорь / Developer; Марк / PM координирует, Борис / QA принимает результат.
 **Agent:** Игорь. **Role:** Developer. **Scope:** frontend Worker, настройка второго Cloudflare origin и обязательная backend-проверка по account ID; действующий origin и обычные auth-права сохраняются.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** два origin, backend allowlist, доверие между Worker и backend, cookies и CSRF требуют совместной проверки без ослабления обычной авторизации.
@@ -116,3 +116,5 @@ QA-only master password, impersonation и отключение auth/CSRF в prod
 - 2026-09-25 14:05 UTC — **Agent:** Борис. **Role:** QA. **Change:** logged qa out of QA Worker origin for anonymous QA; primary parrot669.com remained qa. Confirms logout isolation once more. Anonymous search on QA Worker is blocked by its intended QA-only guard, so it is not evidence about public anonymous search. Current state: primary=qa, QA Worker=anonymous; lelik unavailable and the test pair still blocked. **Related task:** PM-029 / PM-016 / BUG-019 / PM-023. **Next:** restore lelik in one origin when explicitly coordinated; continue single-account QA meanwhile.
 
 - 2026-09-25 ~14:30 UTC — **Agent:** Борис. **Role:** QA. **Change:** secure login restored `lelik` on QA Worker while main origin remained `qa`; both tabs independently retained identities during navigation/reload. Host `lelik` unblocked the QA conversation; both sessions stayed signed in. Guest `qa` sent a follow-up after unblock, owner received and replied, guest received reply, with unread indication. Pair now unblocked. No credentials or cookies recorded. **Related task:** PM-029 / PM-016 / PM-003. **Open:** negative QA-origin guard tests and full logout/relogin symmetry are not independently verified in this pass.
+
+- 2026-09-25 ~14:43 UTC — **Борис / QA:** main origin `qa` was observed at Messages auth prompt after previously successful contact/reply; no explicit logout action captured. Worker `lelik` remained authenticated. Isolation still evident; persistence duration/cause of main logout requires a separate check. Current state main=anonymous, QA Worker=lelik. **Related task:** PM-029 / PM-016.
