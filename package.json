@@ -4,7 +4,9 @@
   "scripts": {
     "test": "node --test tests/*.test.cjs",
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "deploy:regression-a": "wrangler deploy --env regression-a",
+    "deploy:regression-b": "wrangler deploy --env regression-b"
   },
   "devDependencies": {
     "jsdom": "^26.1.0",
