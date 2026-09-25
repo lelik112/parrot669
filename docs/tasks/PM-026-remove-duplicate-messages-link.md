@@ -1,7 +1,7 @@
 # PM-026 — Убрать дублирующий переход Messages
 
 **Title:** оставить одну кнопку Messages в кабинете хозяина.
-**Status:** in review — desktop RU/EN/ES/CA и клавиатура PASS; связь badge с независимым desktop evidence BUG-020 ещё нужно записать здесь. Мобильный touch отдельно blocked by [PM-015](PM-015-qa-mobile-device-environment.md); не выдавать emulation за реальный iPhone. **Priority:** P2.
+**Status:** in review — desktop RU/EN/ES/CA и клавиатура PASS; unread badge на единственной ссылке PASS по независимому BUG-020 desktop QA. Мобильный touch отдельно blocked by [PM-015](PM-015-qa-mobile-device-environment.md); не выдавать emulation за реальный iPhone. **Priority:** P2.
 **Owner:** Денис / Developer; QA Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** удалить повторную ссылку из Host shortcuts; сохранить глобальную Messages-вкладку, unread badge, локализацию и пути.
 **Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** небольшой UI cleanup с однозначным выбором по текущей структуре навигации.
@@ -80,3 +80,5 @@ public/host.html: общая ссылка housing-tabs и повтор host-shor
 - 2026-09-25 14:05 UTC — **Agent:** Борис. **Role:** QA. **Scope:** production desktop Chrome, authenticated qa, parrot669.com; keyboard only. **Change:** PASS: from a fresh Host load, Tab reached the single global «Сообщения» link (10th focus stop); Enter opened /messages in the same tab. Earlier RU/EN/ES/CA link count and labels remain recorded above. **Open:** unread badge after new incoming message and real mobile/touch. **Related task:** PM-026. **Next:** finish badge/touch with second participant/device.
 
 - 2026-09-25 — **Agent:** Марк. **Role:** Product Manager. **Change:** после сверки QA evidence уточнил состояние и конкретный ресурсный блокер mobile/native по [PM-039](PM-039-browser-test-environments.md); частичный desktop/owner-assisted PASS сохранён, независимая мобильная приёмка не выдана. **Related task:** PM-026 / PM-039. **Next:** выполнить оставшийся доступный web ретест, если есть; для обязательного native/mobile — подтвердить самостоятельную среду QA и пройти отдельный ретест.
+
+- 2026-09-25 ~18:55 UTC — **Борис / QA:** сопоставил PM-026 с прямым независимым тестом [BUG-020](BUG-020-unread-message-discoverability.md) от 15:22–15:24 UTC: новое входящее от `qa` вызвало `1 непрочитанное сообщение` именно на единственной глобальной ссылке Messages у `lelik` без reload; после чтения маркер исчез. Текущая Host-страница `lelik` по-прежнему содержит одну ссылку Messages и контекстные ссылки на объекты/профиль. Desktop badge/link/языки/keyboard PASS; **native mobile touch остаётся непроверенным, PM-039**. PM-026 in review до мобильной приёмки, owner Денис.

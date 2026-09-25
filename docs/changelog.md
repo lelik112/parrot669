@@ -2,7 +2,7 @@
 
 ## 2026-09-25 — PM-037: bounded public search prepared
 
-- **Agent:** Игорь. **Role:** Developer. **Change:** implemented the D014 1–366-night request bound before SQL and safe public date parsing; added EN/ES/CA/RU UI guidance with preserved dates/filters and boundary/restoration/contact tests. Added an isolated PostgreSQL 16 benchmark with actual SQL plans, full HTTP p50/p95, mixed availability/pricing/calendars and four concurrent requests. CI, measurements, PM performance gate and independent QA are still pending; not released. **Related task:** [PM-037](tasks/PM-037-search-date-range-bound.md).
+- **Agent:** Игорь. **Role:** Developer. **Change:** implemented the D014 1–366-night request bound before SQL and safe public date parsing; added EN/ES/CA/RU UI guidance with preserved dates/filters and boundary/restoration/contact tests. Added an isolated PostgreSQL 16 benchmark with actual SQL plans, full HTTP p50/p95, mixed availability/pricing/calendars and four concurrent requests. Both CI checks and benchmark passed. 366-night HTTP p95: 226 ms (100 city properties), 1,044 ms (500); concurrency=4: 572 / 2,216 ms. [Report and raw plans](tasks/logs/PM-037-performance.md) recorded for Mark; PM performance gate, release and independent QA remain open. **Related task:** [PM-037](tasks/PM-037-search-date-range-bound.md).
 
 ## 2026-09-25 — D015 / PM-039: QA environment blockers made explicit
 
