@@ -55,13 +55,14 @@
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 | [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | in progress — PM overview готов | Марк / PM сводит два независимых аудита |
-| [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | planned | Игорь / backend audit, handoff без claim; Sol / High |
+
 | [PM-034-FE](PM-034-FE-frontend-audit.md) | P2 | planned | Денис / frontend audit, handoff без claim; Sol / Medium |
 | **LATER** | | | |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | done — read-only backend report | Игорь / Developer; Марк сводит PM-034 |
 | [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | done | Марк / PM |
 | [PM-009](PM-009-team-identity.md) | P2 | done | Марк / PM |
 | [PM-019](PM-019-host-cabinet-ia.md) | P2 | done | Марк / PM |

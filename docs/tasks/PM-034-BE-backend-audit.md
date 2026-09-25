@@ -2,11 +2,13 @@
 
 **Title:** детально проверить backend находки обзорного [PM-034](PM-034-backend-frontend-refactoring-audit.md).
 
-**Status:** planned / NEXT — Игорь ещё не claim-ил. **Priority:** P2. **Owner:** Игорь — предполагаемый исполнитель; факт начала фиксируется только его подписанным claim.
+**Status:** done — read-only отчёт Игоря передан Марку 2026-09-25; PM-034 остаётся in progress до сводки Марка. **Priority:** P2. **Owner:** Игорь / Developer.
 
-**Agent:** Игорь / Developer (handoff, до claim). **Role:** Developer. **Scope:** только read-only backend аудит в `lelik112/parrot669-backend`, отчёт; без реализации.
+**Agent:** Игорь. **Role:** Developer. **Scope:** только read-only backend аудит в `lelik112/parrot669-backend`, отчёт; без реализации. **Branch:** `igor/pm034-be-audit` в frontend docs; backend `main` только читается.
 
-**Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** поиск связывает запросы, доступность, обогащение ценой/ссылкой и ошибки, а legacy endpoints требуют осторожной сверки контрактов. **Model check:** Игорь подтверждает или мотивированно предлагает изменение до работы.
+**Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** поиск связывает запросы, доступность, обогащение ценой/ссылкой и ошибки, а legacy endpoints требуют осторожной сверки контрактов. **Model check, Игорь 2026-09-25 13:53 UTC:** текущий GPT-6 с высоким уровнем анализа достаточен для read-only проверки и отчёта; повышение не требуется.
+
+**Claim — 2026-09-25 13:53 UTC. Agent:** Игорь. **Role:** Developer. **Change:** сверил frontend `main` `59a3a99`, backend `main` `3e35c46`, P1 QA/PM-029 и BUG-021; беру только PM-034-BE, область Дениса PM-034-FE и пользовательские сценарии QA не трогаю. **Related task:** PM-034-BE. **Next:** проверить запросы/ошибки поиска, границы модулей и legacy callers; оформить доказательства и handoff Марку.
 
 ## Goal
 
@@ -38,3 +40,7 @@
 ## Dependencies
 
 QA первой волны и безопасность текущих claims; frontend аудит [PM-034-FE](PM-034-FE-frontend-audit.md) идёт независимо по своей карточке. Репозиторий не будит Игоря автоматически.
+
+## Report / handoff — 2026-09-25
+
+**Agent:** Игорь. **Role:** Developer. **Change:** закончил read-only аудит backend `main` `3e35c46`; полный отчёт с permalink на код, выведенным числом SQL для 1/10/50, failure path, новым риском длинного интервала, границами модулей и legacy callers — в [PM-034-backend.md](logs/PM-034-backend.md). **Related task:** PM-034-BE. **Checks:** сверены код, миграции, существующие тесты/smoke и frontend Worker; runtime benchmark не выполнен (в среде нет sbt/PostgreSQL); production/CI/деплой не менялись. **Next:** Марк сверяет с PM-034-FE/QA, решает допустимую длительность поиска и открывает только узкие доказанные задачи. Кодовый рефакторинг не начинался.
