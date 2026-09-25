@@ -8,7 +8,7 @@
 
 | Приоритет | Задачи | Ответственный и выход |
 | --- | --- | --- |
-| P1 | [PM-029](tasks/PM-029-two-origin-qa-sessions.md) → [PM-016](tasks/PM-016-qa-second-session-access.md) | Игорь / Developer восстанавливает QA Worker 503, Борис / QA независимо подтверждает два входа; PM-016 пока blocked |
+| P1 | [PM-029](tasks/PM-029-two-origin-qa-sessions.md) → [PM-016](tasks/PM-016-qa-second-session-access.md) | QA Worker/backend отвечают 401 без сессии; Борис / QA независимо подтверждает два входа и переписку, PM-016 пока blocked |
 | P1 | [PM-024](tasks/PM-024-contact-from-every-search-result.md) + [PM-003](tasks/PM-003-contact-acceptance.md) + [PM-023](tasks/PM-023-guest-message-onboarding.md) | Разработка in review; Борис проверяет поиск → ручное сообщение → ответ, затем черновик до входа |
 | P1 | [PM-002](tasks/PM-002-link-publication.md), [PM-025](tasks/PM-025-search-contact-button-layout.md), [PM-001](tasks/PM-001-calendar-control-dates.md) | Игорь/Денис выпустили соответствующие изменения; Борис закрывает copy/CTA и контролируемые календарные состояния, external PM-018/mobile PM-015 отдельно |
 | P1 | [PM-030](tasks/PM-030-qa-drain-next-stage.md) | Марк / PM сводит приёмку и договорится о следующем продукте после первой волны QA |

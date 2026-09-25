@@ -33,7 +33,7 @@
 | [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in review — QA `open` waiting PASS, `close` ждёт PM-018 | Марк / временный исполнитель; QA Борис |
 | [PM-014](PM-014-qa-native-autofill-environment.md) | Нативный Safari/autofill для PM-004 | P2 | blocked — браузерный профиль | Борис / QA после доступа; Алексей — среда |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | iPhone Safari touch для PM-007 | P1 | in review — owner-assisted iPhone Safari check done for PM-001; full PM-007 mobile QA open | Борис / QA; Алексей — устройство/сеанс |
-| [PM-016](PM-016-qa-second-session-access.md) | Второй управляемый сеанс для PM-003/010 | P1 | blocked — QA Worker показывает 503, independent two-session QA не подтверждена | Борис / QA после завершения PM-029 Игорем |
+| [PM-016](PM-016-qa-second-session-access.md) | Второй управляемый сеанс для PM-003/010 | P1 | blocked — QA Worker отвечает 401 без сессии, Борису проверить два независимых входа | Борис / QA |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | Тестовые ящики для PM-006 | P1 | blocked — почтовый доступ | Борис / QA после доступа; Алексей — ящик |
 | [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | in review — owner-assisted positive open and restore done; Boris independent remainder open | Борис / QA; Алексей — Airbnb |
 | [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | done — D009 принят владельцем | Марк / Product Manager |
@@ -46,7 +46,7 @@
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | Убрать дублирующий Messages shortcut | P2 | in review — Денис завершил frontend; ждёт независимый QA | Денис / Developer; QA Борис |
 | [PM-027](PM-027-open-property-from-messages.md) | Открыть карточку объекта из диалога | P2 | in review — frontend live, CI зелёный; независимая QA открыта | Игорь / Developer; QA Борис |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | in review — frontend выпущен, host/guest и mobile QA открыты | Денис / Developer; QA Борис |
-| [PM-029](PM-029-two-origin-qa-sessions.md) | Два независимых входа для QA через два origin | P1 | in progress — Игорь; секреты настраивались, QA Worker снова 503; восстановить binding, проверить два входа | Игорь / Developer; QA Борис |
+| [PM-029](PM-029-two-origin-qa-sessions.md) | Два независимых входа для QA через два origin | P1 | in review — QA Worker/backend live 401; Борису проверить входы и A→B→A | Игорь / Developer; QA Борис |
 | [PM-030](PM-030-qa-drain-next-stage.md) | Разгрузить QA-хвост и подготовить следующий продуктовый этап | P1 | in progress — Марк; QA triage и следующие контракты документируются | Марк / Product Manager |
 | [PM-031](PM-031-trust-terminology.md) | Словарь проверяемых сигналов доверия | P2 | planned — NEXT, редакционный контракт | Марк / Product Manager, без dev claim |
 | [PM-032](PM-032-how-it-works.md) | How it works по проверяемым сценариям | later | planned — LATER после PM-031/QA | Не назначена; нет dev claim |
