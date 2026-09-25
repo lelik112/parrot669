@@ -54,9 +54,8 @@
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
-| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in review — A↔B Никиты PASS, сохранность пары Бориса PASS; live negative для постороннего подтверждённого аккаунта открыт | Никита / Regression QA smoke; Игорь / security review; Марк / PM close; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
-| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | planned — проверить реальный запуск нужного агента по назначению; встроенный scheduler ≤1/час, file-trigger нет | Без dev claim: Денис PM-040, Игорь PM-037/PM-036; Sol / High |
+| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | assigned / NEXT — техническая проверка реального запуска нужного агента; claim отсутствует | Игорь / Developer назначен Алексеем после PM-037; Sol / High |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 
@@ -65,6 +64,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | done — функциональный QA и пара Бориса PASS; live outsider login negative оставлен как явно принятое исключение | Марк / PM closure; Игорь / Developer, Никита / Regression QA, Борис / QA Lead |
 | [PM-042](PM-042-agent-check-in-process-audit.md) | P2 | done — аудит процесса Алекса; ошибочный второй PM-036 удалён | Марк / PM; Sol / Medium; реализация отдельно PM-043 |
 | [PM-039](PM-039-browser-test-environments.md) | P1 | done — выбор D016: Playwright first, телефон PM-041 | Марк / PM; внедрение отдельно PM-040 |
 | [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | done — PM synthesis, two follow-ups | Марк / PM |
