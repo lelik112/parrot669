@@ -30,6 +30,7 @@
 | [PM-040](PM-040-playwright-web-e2e.md) | P1 | planned / NOW — D016 принято, Playwright ещё не подключён | Денис — кандидат после BUG-020; dev claim нет, Sol / Medium; Борис и Никита — QA по отдельному claim |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
+| [PM-037](PM-037-search-date-range-bound.md) | P2 | in progress — PM принял замер для малого пилота; PR #52 mergeable=false, выпуск/QA открыты | Игорь / Developer claim, Sol / High; current-head CI → backend/frontend release → Борис / QA |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in progress — повторный FAIL глобального badge при непрочитанной строке | Денис / Developer, claim и Sol / Medium; Борис / QA после исправления |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
@@ -57,7 +58,6 @@
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
-| [PM-037](PM-037-search-date-range-bound.md) | P2 | in review — API/UI + CI + замер PASS; ждёт PM performance gate, затем release/QA | Марк / PM контракт done; Игорь / Developer; Марк — решение по замеру; Sol / High |
 
 | **LATER** | | | |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
