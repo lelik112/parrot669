@@ -18,7 +18,7 @@
 
 ## In Progress
 
-- **[PM-040](tasks/PM-040-playwright-web-e2e.md) / P1 NOW, planned:** Playwright для browser QA выбран [D016](decisions/D016-playwright-first-real-device-queue.md), разработка ещё не начата. Денис — кандидат после BUG-020; claim отсутствует, рекомендация Sol / Medium. Борис принимает критический путь, Никита — назначенные regression проверки.
+- **[PM-040](tasks/PM-040-playwright-web-e2e.md) / P1 NOW, in progress:** Денис claim-ил Sol / Medium и выпустил [PR #54](https://github.com/lelik112/parrot669/pull/54): 2 fixture-сценария × Chromium/WebKit/mobile emulation = 6/6 в PR CI, обычный `npm test` 132/132. [Матрица](qa/playwright-coverage.md) классифицирует 194 критерия 42 открытых задач, лишь 6 из них частично автоматизированы. Никита сверяет web-регресс (рекомендация Luna / Medium), Борис принимает критический контакт (Sol / Medium); их claims ещё не записаны. Host/browser расширение открыто, два аккаунта blocked PM-036, телефон PM-041.
 
 - **[PM-029](tasks/PM-029-two-origin-qa-sessions.md), Игорь / Developer, P1, `in review`:** Борис прошёл qa/lelik A→B→A, reload и logout `qa` на двух origin; остались third-account/forged-request negative checks и обратный logout.
 - **[PM-030](tasks/PM-030-qa-drain-next-stage.md), Марк / PM, P1:** QA triage и пакет следующих продуктовых контрактов; рекомендация после первой QA-волны ещё ожидает результатов.
@@ -27,7 +27,7 @@
 - По [D015](decisions/D015-qa-environment-blocked-status.md) PM-015/007/025, BUG-018 и PM-004/014 блокированы недоступной средой; смешанные задачи остаются `in review` с явным остатком QA, BUG-020 сейчас `in progress` у Дениса. [PM-030](tasks/PM-030-qa-drain-next-stage.md#сверка-семи-прогонов-бориса--2026-09-25-марк--pm) хранит актуальную сверку семи прогонов Бориса; историческое число 20 относится к прежнему срезу, не к сегодняшнему текущему статусу.
 - **[PM-038](tasks/PM-038-host-unsaved-drafts-rerender.md), P2 NOW:** Денис описал кодовый путь потери несохранённых правок при смене языка/dashboard refresh; Никита — кандидат на короткий независимый ретест (Luna/Medium), Денис — на узкое исправление (Sol/Medium), claims нет.
 - **[PM-037](tasks/PM-037-search-date-range-bound.md), P2 NOW, in progress:** Марк принял performance gate [D014](decisions/D014-public-search-date-range.md) для малого пилота: 366 ночей p95 226 мс при 100 объектах/город и 572 мс при четырёх запросах. 500 объектов: 1 044 / 2 216 мс — риск для большего масштаба, не основание менять лимит без отдельного решения. Игорь готовит выпуск, но backend PR #29 ещё открыт, frontend PR #52 открыт с `mergeable=false`; current-head CI/mergeability и фактический backend → frontend deploy нужно подтвердить. Независимая QA открыта. Sol / High.
-- **Денис / Developer:** BUG-020 уже в его claim. PM-040 — кандидат после этого handoff, до собственного claim Playwright не подключён; документация не запускает агента.
+- **Денис / Developer:** BUG-020 PR #53 передан на live QA Бориса; PM-040 claim подтверждён, первый smoke выпущен. Следующий ограниченный dev этап — после QA приоритизации добавить Host/Messages и web-регресс. Наличие fixture CI не закрывает реальный backend и мобильный Safari.
 
 ## Blocked
 
@@ -59,7 +59,7 @@
 
 ## Next Priorities
 
-1. После handoff Дениса по BUG-020 предложить ему claim [PM-040](tasks/PM-040-playwright-web-e2e.md), Sol / Medium: сначала безопасный browser smoke основного пути и эмуляция layout, затем расширение по QA evidence. Никита — regression, Борис — критический acceptance после отдельного QA claim. [PM-041](tasks/PM-041-real-device-qa-queue.md) хранит отложенные нативные проверки, PM-015→PM-007/BUG-018/PM-025; PM-004/014 дополнительно требуют сохранённый тестовый адрес. Покупку устройства/сервиса сейчас не запускать.
+1. [PM-040](tasks/PM-040-playwright-web-e2e.md): первый fixture smoke уже выпущен Денисом (Sol / Medium). Никита / Luna / Medium после собственного claim проверяет матрицу и повторяет web smoke, Борис / Sol / Medium сверяет критический контакт; затем Денис добавляет приоритетные безопасные Host/Messages и P1 browser сценарии. Двухаккаунтный A↔B ждёт PM-036. [PM-041](tasks/PM-041-real-device-qa-queue.md) держит нативные проверки, включая PM-015→PM-007/BUG-018/PM-025 и отдельный сохранённый адрес PM-004/014.
 
 2. Восстановить `lelik` на основном origin без передачи пароля в docs; Борис безопасно проверит/снимет блок, повторит BUG-021 и продолжит PM-003/016 и PM-029 security/reverse logout. Узкую dev диагностику назначать по подтверждённому дефекту.
 2. Никита использует готовую пару `qa2`/`qa3` на двух regression Worker origin и проходит [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md): QA claim, A→B→A, refresh/logout без секретов в отчёте.
