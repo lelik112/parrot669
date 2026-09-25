@@ -11,6 +11,11 @@
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** Updated the search-card fallback in EN/ES/CA/RU to say the public external link is unavailable, without asserting that the host never added one. The API correctly returns the same empty public `links` array for a missing link and publish OFF; the fallback no longer guesses which private state caused it. No backend, calendar or messaging changes. [PR #22](https://github.com/lelik112/parrot669/pull/22) merged as `7b46763`; [PR CI](https://github.com/lelik112/parrot669/actions/runs/36100467923) and [main CI](https://github.com/lelik112/parrot669/actions/runs/36100507398) passed. Cloudflare deployment of this SHA has not been independently verified; production copy awaits Boris's retest. **Related task:** [PM-002 / BUG-017](tasks/PM-002-link-publication.md).
 
+## 2026-09-25 — PM-024 assigned; PM-025 web/mobile scope clarified
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** PM-024 по прямому поручению Алексея назначена Игорю; это ещё не claim, подтверждение и Model check ожидаются. По PM-025 Алексей уточнил, что кнопка съезжает в веб-версии, а mobile он не проверял; задача обновлена, чтобы не приписывать мобильный баг без проверки. PM-026: Денис закончил frontend-изменение, задача ждёт независимый QA.
+- **Related tasks:** [PM-024](tasks/PM-024-contact-from-every-search-result.md), [PM-025](tasks/PM-025-search-contact-button-layout.md), [PM-026](tasks/PM-026-remove-duplicate-messages-link.md).
+
 ## 2026-09-25 — Постоянный PM-отчёт по задачам и backlog
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** По просьбе Алексея зафиксирован формат каждого PARROT-ответа о задачах/status/backlog: краткий статус новых и затронутых задач, фактическое назначение или причина отсутствия claim, затем полный открытый backlog по NOW/NEXT/LATER и P0/P1/P2 с моделью и reasoning. Для blocked задач указываются блокер и следующий шаг; ожидаемый исполнитель не выдаётся за подтверждённый claim.
@@ -19,7 +24,7 @@
 ## 2026-09-24 — D011: контакт доступен из каждого результата поиска
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** Алексей решил, что гость должен всегда иметь PARROT-путь связаться с хозяином объекта из поиска. Принято D011: прежний host-wide opt-in не может блокировать первое обращение; auth, подтверждение email, rate limits и блокировка участника сохраняются. Implementation pending в PM-024.
-- Созданы PM-024 (контакт из каждого результата), PM-025 (съехавшая мобильная CTA), PM-026 (убрать повтор Messages shortcut), PM-027 (открыть карточку жилья из диалога) и PM-028 (открыть свой профиль хозяина из Messages). PM-023 остаётся отдельной задачей о моменте auth и сохранении черновика.
+- Созданы PM-024 (контакт из каждого результата), PM-025 (съехавшая CTA в веб-версии; mobile не проверен), PM-026 (убрать повтор Messages shortcut), PM-027 (открыть карточку жилья из диалога) и PM-028 (открыть свой профиль хозяина из Messages). PM-023 остаётся отдельной задачей о моменте auth и сохранении черновика.
 - **Related docs:** [D011](decisions/D011-contact-always-available.md), [PM-024–PM-028](tasks/README.md), [roadmap](roadmap.md).
 
 ## 2026-09-24 — PM-023 guest message onboarding task

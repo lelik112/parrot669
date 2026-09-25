@@ -13,7 +13,7 @@
 | [PM-001 — Проверка сохранённых дат](tasks/PM-001-calendar-control-dates.md) | P1 | Проверяется конкретное задание пользователя | in review: Борис подтвердил часть desktop A/B и `close`; правка P2 инструкции опубликована, waiting `open`/reload/языки проверены Борисом; `close`/mobile/источник ещё открыты |
 | [PM-003 — Поиск → обращение → ответ](tasks/PM-003-contact-acceptance.md) | P1 | Независимо подтверждён основной путь контакта | CHECK-H11 начат, приостановлен; нужен статус QA |
 | [PM-002 — Внешняя ссылка и verification status](tasks/PM-002-link-publication.md) | P1 | Публикация Airbnb-ссылки и честный verification status + nudge | in review: production `lost` + `publish OFF` частично PASS; BUG-017 copy; nudge и прочие состояния ждут изолированный QA/PM-016
-| [PM-024 — Контакт с хозяином из каждого результата](tasks/PM-024-contact-from-every-search-result.md) | P1 | D011 accepted; implementation planned, old opt-in gate remains in production |
+| [PM-024 — Контакт с хозяином из каждого результата](tasks/PM-024-contact-from-every-search-result.md) | P1 | D011 accepted; assigned to Igor, claim/model check pending; old opt-in gate remains in production |
 | [PM-004 — Выбор улицы](tasks/PM-004-street-autofill.md) | P2 | Первый вариант не скрывается браузерной подсказкой | in review; выпущено Денисом, Борису нужен независимый нативный ретест |
 | [PM-005 — Закрытые даты](tasks/PM-005-closed-dates-copy.md) | P2 | Обычная форма не выглядит недоступной функцией | in review; выпущено Денисом, Борису нужен независимый визуальный ретест |
 | [PM-010 — Выделение AuthRoutes](tasks/PM-010-auth-routes-extraction.md) | P2 | Упростить поддержку auth routes без изменения поведения | in review: Игорь выпустил backend `e41d322`, CI/Railway SUCCESS; Борису назначен auth QA |
@@ -35,8 +35,8 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | [PM-020 — Навигация кабинета](tasks/PM-020-host-cabinet-navigation.md) | P2 | in review: desktop/keyboard partial PASS; BUG-016 открыт, touch ждёт PM-015
 | [PM-021 — Личный профиль владельца](tasks/PM-021-private-host-profile.md) | P2 | in progress у Дениса: только существующее имя, новые поля отложены
 | [PM-023 — Путь гостя к первому сообщению](tasks/PM-023-guest-message-onboarding.md) | P1 | planned after current PM-020/021 work; auth at send, preserve draft |
-| [PM-025 — Расположение кнопки контакта](tasks/PM-025-search-contact-button-layout.md) | P1 | planned after PM-024; owner-reported mobile layout bug |
-| [PM-026 — Убрать дублирующий Messages](tasks/PM-026-remove-duplicate-messages-link.md) | P2 | keep global nav, remove Host shortcut duplicate |
+| [PM-025 — Расположение кнопки контакта](tasks/PM-025-search-contact-button-layout.md) | P1 | planned after PM-024; web layout bug reported by owner, mobile unverified |
+| [PM-026 — Убрать дублирующий Messages](tasks/PM-026-remove-duplicate-messages-link.md) | P2 | in review; Denis's change awaits independent QA |
 | [PM-027 — Открыть объект из диалога](tasks/PM-027-open-property-from-messages.md) | P2 | planned after current PM-020/021 work |
 | [PM-028 — Профиль хозяина из Messages](tasks/PM-028-open-host-profile-from-messages.md) | P2 | planned after PM-021 |
 | [PM-022 — Публичный профиль владельца](tasks/PM-022-public-host-profile.md) | P2 | после PM-021; отдельный privacy/public contract |
