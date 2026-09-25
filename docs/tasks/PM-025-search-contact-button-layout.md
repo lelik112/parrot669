@@ -1,9 +1,9 @@
 # PM-025 — Исправить расположение кнопки контакта в веб-выдаче
 
 **Title:** исправить расположение «Написать владельцу» в веб-выдаче; отдельно проверить мобильную.
-**Status:** planned — NEXT после PM-024; исполнитель не назначен. **Priority:** P1.
-**Owner:** будущий Developer; QA Борис.
-**Agent:** будущий Developer. **Role:** Developer. **Scope:** отображение contact CTA и соседних действий в карточке результата поиска.
+**Status:** in progress — web layout fix; mobile check pending. **Priority:** P1.
+**Owner:** Денис / Developer; QA Борис.
+**Agent:** Денис. **Role:** Developer. **Scope:** frontend contact CTA и соседние действия внутри карточки поиска; без backend и contact/auth semantics.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** локальный responsive UI-дефект, но кнопку нужно проверить с несколькими состояниями карточки и языками.
 
 ## Goal
@@ -72,3 +72,5 @@
 
 - 2026-09-24 — **Марк / Product Manager:** создан отдельный bug task по сообщению о сдвиге кнопки; исходно поверхность была ошибочно указана как mobile.
 - 2026-09-25 — **Марк / Product Manager:** Алексей уточнил, что сдвиг наблюдается в веб-версии; мобильную не проверял. Исправлена поверхность дефекта, mobile оставлен отдельной проверкой. **Next:** воспроизвести web-дефект, зафиксировать viewport/evidence и проверить mobile отдельно.
+
+- 2026-09-25 07:12 UTC — **Денис / Developer:** беру PM-025 по прямому поручению Алексея. **Agent:** Денис. **Role:** Developer. **Scope:** frontend responsive layout кнопки контакта внутри search-result card, RU/EN/ES/CA, desktop/mobile и клавиатура; backend и правила сообщений вне scope. **Model check:** Sol / Medium достаточен: дефект локальный, нужны несколько состояний карточки и viewport. **Change:** claim, статус in progress. **Related task:** PM-025. **Branch:** `denis/pm025-contact-layout`. **Следующий шаг:** сверить свежий main, воспроизвести web-сдвиг, проверить mobile отдельно, затем исправить и передать Борису на QA.
