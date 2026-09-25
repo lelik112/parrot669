@@ -17,9 +17,9 @@
 | **NOW — P1** | | | |
 | [BUG-023](BUG-023-host-profile-save-not-found.md) | P1 | in review — authenticated save/reopen PASS after PR #46 on both origins; 401/privacy open | Денис / Developer; Борис / QA |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual exchange passed; main later anonymous, Worker=lelik | Борис / QA |
-| [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — dual exchange passed; main qa session later signed out, cause unknown | Борис / QA |
+| [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — qa/lelik restored; shared Chrome collision with Regression QA confirmed | Борис / QA |
 | [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
-| [PM-003](PM-003-contact-acceptance.md) | P1 | in review — pair unblocked, follow-up and reply passed; remaining acceptance open | Борис / QA |
+| [PM-003](PM-003-contact-acceptance.md) | P1 | in review — contact/reply, repeat CTA, unread and block/unblock passed; legacy state open | Борис / QA |
 | [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review — public anonymous draft/auth gate PASS; post-login/mobile open | Борис / QA |
 | [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
 | [PM-025](PM-025-search-contact-button-layout.md) | P1 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
@@ -29,7 +29,7 @@
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM |
 | **NOW — P2** | | | |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review | Борис / QA |
-| [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — one observation, reproduction needed | Марк / PM triage; Борис / QA |
+| [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
 | [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | reported — reproduced on two production origins after BUG-016 fix; developer diagnosis needed | Марк / PM triage; Борис / QA |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
