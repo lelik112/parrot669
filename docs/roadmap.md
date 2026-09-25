@@ -34,7 +34,7 @@ PM-004/005 опубликованы Денисом через [PR #13](https://g
 | [PM-019 — Контракт кабинета](tasks/PM-019-host-cabinet-ia.md) | P2 | done: D009 принят владельцем
 | [PM-020 — Навигация кабинета](tasks/PM-020-host-cabinet-navigation.md) | P2 | in review: desktop/keyboard partial PASS; BUG-016 открыт, touch ждёт PM-015
 | [PM-021 — Личный профиль владельца](tasks/PM-021-private-host-profile.md) | P2 | in progress у Дениса: только существующее имя, новые поля отложены
-| [BUG-018 — End date после start date](tasks/BUG-018-calendar-end-date-mobile-safari.md) | P2 | planned; наблюдалось на iPhone Safari, developer claim ожидает проверки Host/calendar overlap
+| [BUG-018 — End date после start date](tasks/BUG-018-calendar-end-date-mobile-safari.md) | P2 | in review; исправление опубликовано, реальный iPhone Safari и desktop QA открыты
 | [PM-023 — Путь гостя к первому сообщению](tasks/PM-023-guest-message-onboarding.md) | P1 | planned after current PM-020/021 work; auth at send, preserve draft |
 | [PM-025 — Расположение кнопки контакта](tasks/PM-025-search-contact-button-layout.md) | P1 | planned after PM-024; web layout bug reported by owner, mobile unverified |
 | [PM-026 — Убрать дублирующий Messages](tasks/PM-026-remove-duplicate-messages-link.md) | P2 | in review; Denis's change awaits independent QA |

@@ -5,7 +5,7 @@
 # PARROT 669 changelog
 ## 2026-09-25 — BUG-018: keep calendar challenge dates together
 
-- **Agent:** Игорь. **Role:** Developer. **Change:** When the owner changes the first night of a calendar verification challenge, set the last-night input's minimum and selected value to that new night. Safari's native date picker can then open on the correct date, and an obsolete end date cannot be submitted. Both nights remain inclusive; the backend verification and iCal sync stay unchanged. The regression checks the submitted range after moving between months. 117 frontend tests passed locally; CI, production and real iPhone Safari retest are tracked in [BUG-018](tasks/BUG-018-calendar-end-date-mobile-safari.md). **Related task:** BUG-018 / PM-001.
+- **Agent:** Игорь. **Role:** Developer. **Change:** When the owner changes the first night of a calendar verification challenge, set the last-night input's minimum and selected value to that new night. Safari's native date picker can then open on the correct date, and an obsolete end date cannot be submitted. Both nights remain inclusive; the backend verification and iCal sync stay unchanged. The regression checks the submitted range after moving between months. 117 frontend tests passed locally; [PR #27](https://github.com/lelik112/parrot669/pull/27) merged as `9a1bb54` with successful [PR CI](https://github.com/lelik112/parrot669/actions/runs/36105890529) and [main CI](https://github.com/lelik112/parrot669/actions/runs/36105928871). Public JS responded 200 and matched SHA-256 of merged code; real iPhone Safari retest remains for Boris in [BUG-018](tasks/BUG-018-calendar-end-date-mobile-safari.md). **Related task:** BUG-018 / PM-001.
 
 ## 2026-09-25 — PM-024: every search result leads to private contact
 
