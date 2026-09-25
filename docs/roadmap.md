@@ -15,7 +15,7 @@
 | [PM-002 — Внешняя ссылка и verification status](tasks/PM-002-link-publication.md) | P1 | Публикация Airbnb-ссылки и честный verification status + nudge | in review: production `lost` + `publish OFF` частично PASS; BUG-017 copy; nudge и прочие состояния ждут изолированный QA/PM-016
 | [PM-024 — Контакт с хозяином из каждого результата](tasks/PM-024-contact-from-every-search-result.md) | P1 | D011; backend/frontend released, live search/contact path confirmed | in review: independent two-account QA by Boris pending |
 | [PM-023 — Путь гостя к первому сообщению](tasks/PM-023-guest-message-onboarding.md) | P1 | Гость пишет черновик до auth, затем продолжает после входа | in review: live frontend и CI подтверждены; независимая QA Бориса открыта |
-| [PM-025 — Расположение кнопки контакта](tasks/PM-025-search-contact-button-layout.md) | P1 | CTA остаётся внутри правильной карточки на web и mobile | Денис: in progress; claim и Sol/Medium записаны |
+| [PM-025 — Расположение кнопки контакта](tasks/PM-025-search-contact-button-layout.md) | P1 | CTA остаётся внутри правильной карточки на web и mobile | in review: web выпущен и live проверен; mobile и независимая QA открыты |
 | [PM-004 — Выбор улицы](tasks/PM-004-street-autofill.md) | P2 | Первый вариант не скрывается браузерной подсказкой | in review; выпущено Денисом, Борису нужен независимый нативный ретест |
 | [PM-005 — Закрытые даты](tasks/PM-005-closed-dates-copy.md) | P2 | Обычная форма не выглядит недоступной функцией | in review; выпущено Денисом, Борису нужен независимый визуальный ретест |
 | [PM-010 — Выделение AuthRoutes](tasks/PM-010-auth-routes-extraction.md) | P2 | Упростить поддержку auth routes без изменения поведения | in review: Игорь выпустил backend `e41d322`, CI/Railway SUCCESS; Борису назначен auth QA |
@@ -26,12 +26,13 @@ PM-001 и PM-003 независимы. PM-002 использует смысл ve
 
 PM-004/005 опубликованы Денисом через [PR #13](https://github.com/lelik112/parrot669/pull/13), main `05a8189`; в задачах записаны 106 тестов, CI и Cloudflare release. Нативный autofill и авторизованный desktop/mobile-ретест остаются открытыми. Денис выпустил PM-001 после handoff Игоря: [backend PR #21](https://github.com/lelik112/parrot669-backend/pull/21) с V25 и [frontend PR #14](https://github.com/lelik112/parrot669/pull/14) слиты; backend Railway deployment успешен, опубликованные frontend файлы сверены по хэшам в [задаче](tasks/PM-001-calendar-control-dates.md). Борис провёл часть независимой проверки: A/B и полный `close` подтвердились, но найден [UX-баг PM-013](tasks/PM-013-calendar-waiting-instruction.md), `open` и mobile остаются открыты. Игорь отдельно выпустил [PM-010](tasks/PM-010-auth-routes-extraction.md), auth QA ещё ожидается.
 
-## Очередь после текущих задач
+## Очередь разработки и границы
 
-1. **PM-027 — открыть связанный объект из Messages (P2).** Следующий кандидат после PM-023 и QA/стабилизации возврата PM-020; не назначен.
-2. **PM-028 — открыть собственный профиль из Messages (P2).** Следом за PM-027 и независимой QA PM-021; не назначен.
+- PM-027 сейчас у Игоря; PM-028 Дениса уже выпущена и находится в review.
+- **BUG-020** назначена Денису для диагностики unread API → polling → DOM/CSS. Реализация ждёт handoff PM-027 либо письменного согласования с Игорем по конкретным непересекающимся файлам: обе задачи могут менять Messages UI.
+- После PM-027 и BUG-020 следующим кандидатом остаётся PM-028 только если QA выявит необходимость изменений; публичный профиль PM-022 не начинать без privacy/publication contract.
 
-PM-023, PM-027 и PM-028 затрагивают Messages UI. По PM-рекомендации не запускать эти изменения одновременно: перед следующим claim сверить файлы и дождаться handoff текущей задачи. Если задача заблокирована только внешним QA/устройством, разработчик может брать следующую независимую готовую задачу; блокер и возврат в QA ведутся отдельно. Запись назначения в репозитории сама по себе не запускает агентский чат.
+Внешние QA/device blockers не должны оставлять разработчиков без независимой подготовительной работы. Запись назначения в репозитории сама по себе не запускает агентский чат.
 
 ## NEXT
 
@@ -45,8 +46,8 @@ PM-023, PM-027 и PM-028 затрагивают Messages UI. По PM-реком�
 | [PM-021 — Личный профиль владельца](tasks/PM-021-private-host-profile.md) | P2 | in progress у Дениса: только существующее имя, новые поля отложены
 | [BUG-018 — End date после start date](tasks/BUG-018-calendar-end-date-mobile-safari.md) | P2 | in review; исправление опубликовано, реальный iPhone Safari и desktop QA открыты
 | [PM-026 — Убрать дублирующий Messages](tasks/PM-026-remove-duplicate-messages-link.md) | P2 | in review; Denis's change awaits independent QA |
-| [PM-027 — Открыть объект из диалога](tasks/PM-027-open-property-from-messages.md) | P2 | planned after current PM-020/021 work |
-| [PM-028 — Профиль хозяина из Messages](tasks/PM-028-open-host-profile-from-messages.md) | P2 | planned after PM-021 |
+| [PM-027 — Открыть объект из диалога](tasks/PM-027-open-property-from-messages.md) | P2 | in progress у Игоря; локальные тесты готовы, CI/release/QA открыты |
+| [PM-028 — Профиль хозяина из Messages](tasks/PM-028-open-host-profile-from-messages.md) | P2 | in review: frontend выпущен, независимая host/guest и mobile QA открыта |
 | [PM-022 — Публичный профиль владельца](tasks/PM-022-public-host-profile.md) | P2 | после PM-021; отдельный privacy/public contract |
 
 Пилот можно готовить параллельно; не нужно ждать карты или полного редизайна. Отсутствие внешней ссылки не убирает объект из поиска. Нужно измерить, сколько найденных объектов вообще имеют доступный путь связи: сообщения выключены по умолчанию.
