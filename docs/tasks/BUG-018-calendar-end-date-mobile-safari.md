@@ -1,9 +1,9 @@
 # BUG-018 — Конечная дата не обновляется после выбора начальной
 
 **Title:** исправить выбор конца диапазона после изменения начальной даты на iPhone Safari.
-**Status:** planned — NEXT; исполнитель не назначен, claim отсутствует. **Priority:** P2.
-**Owner:** не назначен; сначала сверить пересечение с активной работой в Host/calendar UI. QA: Борис.
-**Agent:** будущий Developer. **Role:** Developer. **Scope:** состояние выбора диапазона дат; без изменения календарной верификации или Airbnb sync.
+**Status:** in progress — Игорь взял frontend-исправление; независимый QA на iPhone Safari ожидается. **Priority:** P2.
+**Owner:** Игорь / Developer; QA: Борис.
+**Agent:** Игорь. **Role:** Developer. **Scope:** `public/assets/calendar-verification.js`, `tests/calendar-verification.test.cjs` и связанные документы; Host, backend и Airbnb sync не меняю.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** локальный UI-дефект, но требуется сохранить действующую семантику диапазона и воспроизвести поведение в iPhone Safari.
 
 ## Goal
@@ -58,3 +58,4 @@ Owner-assisted прогон с Борисом: iPhone Safari; после выб�
 ## Discussion / Updates
 
 - 2026-09-25 — **Марк / Product Manager:** завёл P2-дефект по сообщению владельца во время live QA PM-001. Веб-поведение отдельно не подтверждено. **Next:** разработчик воспроизводит на iPhone Safari; Борис проверяет критерии и регрессии.
+- 2026-09-25 07:00 UTC — **Agent:** Игорь. **Role:** Developer. **Scope:** только ввод первой/последней ночи в форме `calendar-verification.js`, её тесты и handoff; не трогаю общий `host.js` Дениса, PM-001 backend, iCal и PM-021. **Change:** беру BUG-018 в ветке `igor/bug018-calendar-end` после проверки свежего `main` и границ PM-021. В UI найдено отсутствие синхронизации `to` при смене `from`; на реальном iPhone Safari ещё не воспроизвёл, фактическое наблюдение владельца приведено в Evidence. **Model check:** Sol / Medium достаточно для локальной frontend-правки; отдельную Safari-проверку проведёт Борис/владелец на устройстве. **Related task:** BUG-018. **Next:** исправить сброс конца и старт нативного picker с новой даты, проверить отправляемый диапазон, локальные тесты и CI, затем передать QA.
