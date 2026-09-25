@@ -15,6 +15,7 @@
 | Задача | Приоритет | Статус | Текущий/следующий шаг |
 | --- | --- | --- | --- |
 | **NOW — P1** | | | |
+| [BUG-023](BUG-023-host-profile-save-not-found.md) | P1 | reported — host name save shows Not found; PM-021 acceptance failed | Марк / PM triage; Борис / QA; developer unassigned |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual sessions and A→B→A passed; block test signed out primary; currently both origins show qa | Борис / QA |
 | [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — dual sessions verified, but lelik session needs restoring after block test | Борис / QA |
 | [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
@@ -34,7 +35,7 @@
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-010](PM-010-auth-routes-extraction.md) | P2 | in review | Борис / QA |
-| [PM-021](PM-021-private-host-profile.md) | P2 | in review | Борис / QA |
+| [PM-021](PM-021-private-host-profile.md) | P2 | in review — save FAIL, BUG-023 | Борис / QA; Марк / PM triage |
 | [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [BUG-019](BUG-019-search-account-context.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-005](PM-005-closed-dates-copy.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
