@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: serve QA recovery redirect before Cloudflare assets
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** live check after PR #55 deploy found Cloudflare static assets handled `/recover.html` before the Worker and canonicalized it to `/recover`, so the first redirect was bypassed. Configured `run_worker_first` for both recovery paths on production and regression Workers, and redirected both paths on exact QA hosts. The ordinary origin still serves its recovery form; QA reset APIs still return 403. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
 ## 2026-09-25 — PM-040: первый Playwright smoke принят как этап
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** сверил [PR #54](https://github.com/lelik112/parrot669/pull/54) (merged `0993f67`), [CI 36180701745](https://github.com/lelik112/parrot669/actions/runs/36180701745) (обычные 132/132, browser smoke 6/6) и [матрицу 42 задач / 194 критериев](qa/playwright-coverage.md). В PM-040 признан завершённым первый узкий fixture smoke: 2 анонимных UI-сценария в Chromium desktop, WebKit desktop и mobile emulation. Из 194 критериев лишь 6 частично автоматизированы; остальные требуют web расширения, ручного QA, внешней среды или реального телефона. PM-040 остаётся P1 / in progress у Дениса (Sol / Medium); QA матрицы и критического контакта ожидает отдельных claims Никиты и Бориса, A↔B зависит от PM-036. Продуктовые задачи PM-023/024/026/BUG-020 fixture CI не закрывает. **Related task:** [PM-040](tasks/PM-040-playwright-web-e2e.md) / D016.
