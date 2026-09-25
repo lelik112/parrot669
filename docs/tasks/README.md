@@ -50,7 +50,7 @@
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | planned | —: после PM-015 |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
-| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in progress — оба Worker и secrets проверены; ID allowlist и QA A↔B smoke открыты | Игорь / Developer; Никита / QA evidence; Sol / High (dev), Luna / Medium (QA) |
+| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in progress — qa2/qa3 допущены; оба входа/reload PASS, message A↔B/logout и независимый QA открыты | Игорь / Developer; Никита / QA evidence; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |

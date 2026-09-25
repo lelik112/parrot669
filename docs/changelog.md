@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: qa2/qa3 access provisioned and two live sessions
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** after Aleksey approved the two exact existing account IDs, added their rows through Railway Database UI to `qa_origin_account_allowlist`. Read-back shows exactly four verified participants (`qa`, `lelik`, `qa2`, `qa3`). Owner entered credentials through secure sign-in; `qa2` on regression A and `qa3` on regression B both signed in and retained their own identities across alternating reloads. Updated the tester procedure with the actual account/origin mapping. Backend code and deployments were not changed. Messaging A↔B, logout/relogin and independent security/QA acceptance remain open. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
 ## 2026-09-25 — PM-036: regression Worker secrets live
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** after the owner configured each Cloudflare `QA_WORKER_SECRET`, independently probed both regression Worker origins: anonymous `GET /api/host/auth/me` returns 401 from the backend, and `GET /api/contact` returns 403 from the Worker. `NOTIFY_TO` and `RESEND_API_KEY` serve only the blocked Worker contact endpoint and are not needed on these QA Workers. Nikita's exact account-ID allowlist and A↔B login smoke remain open. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
