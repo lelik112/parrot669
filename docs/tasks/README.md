@@ -22,12 +22,13 @@
 | [PM-003](PM-003-contact-acceptance.md) | P1 | in review — contact/reply, repeat CTA, unread and block/unblock passed; legacy state open | Борис / QA |
 | [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review — anonymous draft/auth gate/4 языка PASS; login→send и account isolation открыты | Борис / QA: отдельный public сеанс; confirm после PM-017, mobile PM-039; dev Игорь только при FAIL |
 | [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
-| [PM-025](PM-025-search-contact-button-layout.md) | P1 | blocked — web PASS, реальный touch ждёт PM-015/039 | Борис / QA после доступного iPhone; Sol / Medium из карточки |
+| [PM-025](PM-025-search-contact-button-layout.md) | P1 | blocked — web PASS, реальный touch ждёт PM-015/041 | Борис / QA после доступного iPhone; Sol / Medium из карточки |
 | [PM-001](PM-001-calendar-control-dates.md) | P1 | in review — сохранённый статус и выбранные даты PASS; негативные/смена iCal и Safari открыты | Борис / QA: контролируемый PM-018 с Алексеем, mobile PM-039; Денис dev только при FAIL |
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
-| [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | PM-039 → тест среды; Борис / QA после разблокировки; Luna / Medium |
+| [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | очередь PM-041; Борис / QA после разблокировки; Luna / Medium |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
-| [PM-039](PM-039-browser-test-environments.md) | P1 | in progress — Марк claim, варианты/цены собраны; real-device feasibility открыта | Марк / PM; Sol / Medium; следующее: проверить AWS Device Farm доступ без покупки |
+| [PM-040](PM-040-playwright-web-e2e.md) | P1 | planned / NOW — D016 принято, Playwright ещё не подключён | Денис — кандидат после BUG-020; dev claim нет, Sol / Medium; Борис и Никита — QA по отдельному claim |
+| [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in progress — повторный FAIL глобального badge при непрочитанной строке | Денис / Developer, claim и Sol / Medium; Борис / QA после исправления |
@@ -63,6 +64,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [PM-039](PM-039-browser-test-environments.md) | P1 | done — выбор D016: Playwright first, телефон PM-041 | Марк / PM; внедрение отдельно PM-040 |
 | [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | done — PM synthesis, two follow-ups | Марк / PM |
 | [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | done — read-only backend report | Игорь / Developer; Марк завершил PM-034 |
 | [PM-034-FE](PM-034-FE-frontend-audit.md) | P2 | done — read-only frontend report submitted | Денис / Developer; Марк завершил PM-034 |
