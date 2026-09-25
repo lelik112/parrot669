@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: recovery redirect deployed and live checked
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** [PR #55](https://github.com/lelik112/parrot669/pull/55) and follow-up [PR #56](https://github.com/lelik112/parrot669/pull/56) merged after green frontend CI (133 unit tests and browser smoke); manual [regression deploy #3](https://github.com/lelik112/parrot669/actions/runs/36182550835) succeeded on frontend main `bf96140`. Live browser requests to regression A `/recover.html?lang=ru` and regression B `/recover?lang=ru` both land on `https://parrot669.com/recover?lang=ru`. No backend deploy or auth policy change. Repeat login `qa2` and B logout/relogin remain with Nikita. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
 ## 2026-09-25 — PM-036: serve QA recovery redirect before Cloudflare assets
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** live check after PR #55 deploy found Cloudflare static assets handled `/recover.html` before the Worker and canonicalized it to `/recover`, so the first redirect was bypassed. Configured `run_worker_first` for both recovery paths on production and regression Workers, and redirected both paths on exact QA hosts. The ordinary origin still serves its recovery form; QA reset APIs still return 403. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
