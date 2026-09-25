@@ -6,7 +6,7 @@
 
 ## NOW
 
-QA capacity: [D013](decisions/D013-qa-acceptance-regression-split.md) разделяет критическую приёмку Бориса и короткий регресс нового QA. Никита представлен владельцем; QA claims распределяются по карточкам, двухаккаунтный PM-036 ещё проверяется. После подключения PM выделит ему ограниченные ретесты PM-025/026/020, BUG-019, PM-005 и copy/локализацию PM-002/013; Борис оставляет за собой контакт, календарь и auth/security/privacy. [Матрица передачи](tasks/PM-030-qa-drain-next-stage.md#qa-split--новая-роль-2026-09-25-после-появления-исполнителя).
+QA capacity: [D013](decisions/D013-qa-acceptance-regression-split.md) разделяет критическую приёмку Бориса и регресс Никиты. Никита завершил функциональный A→B→A smoke своей пары PM-036; для закрытия карточки остаются отдельное подтверждение пары Бориса и live security review. Новые QA claims распределяются по карточкам; Борис оставляет за собой критические контакт, календарь и auth/security/privacy. [Матрица передачи](tasks/PM-030-qa-drain-next-stage.md#qa-split--новая-роль-2026-09-25-после-появления-исполнителя).
 
 | Приоритет | Задачи | Ответственный и выход |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ QA capacity: [D013](decisions/D013-qa-acceptance-regression-split.md) разде
 | P2 | [BUG-020](tasks/BUG-020-unread-message-discoverability.md), [PM-026](tasks/PM-026-remove-duplicate-messages-link.md), [PM-027](tasks/PM-027-open-property-from-messages.md), [PM-028](tasks/PM-028-open-host-profile-from-messages.md) | BUG-020 в работе Дениса (Sol / Medium): повторный QA нашёл пропадающий глобальный badge при непрочитанной строке; PM-026 ждёт общий ретест. PM-028 desktop owner/guest, языки и keyboard PASS; same-origin logout/switch/expiry и touch открыты. PM-027 — отдельная приёмка Бориса |
 | P2 | [PM-005](tasks/PM-005-closed-dates-copy.md), [PM-010](tasks/PM-010-auth-routes-extraction.md), [PM-011](tasks/PM-011-calendar-sync-extraction.md), [PM-013](tasks/PM-013-calendar-waiting-instruction.md), [PM-020](tasks/PM-020-host-cabinet-navigation.md), [PM-021](tasks/PM-021-private-host-profile.md), [BUG-019](tasks/BUG-019-search-account-context.md) | BUG-019 authenticated desktop self/other и четыре языка PASS; нужен отдельный anonymous public QA и iPhone. PM-020 глубокий scroll FAIL после BUG-016: BUG-022 без dev claim, затем ретест Бориса; прочие задачи — по карточкам |
 
-| P1 | [PM-040](tasks/PM-040-playwright-web-e2e.md) | in progress: Денис / Sol / Medium выпустил 2 локальных fixture-сценария, PR #54 merged, CI 6/6; 194 критерия классифицированы, 6 частично автоматизированы. Никита / Luna / Medium проверяет матрицу, Борис / Sol / Medium — критический контакт после claims; Host/Messages ещё расширить, A↔B ждёт PM-036 |
+| P1 | [PM-040](tasks/PM-040-playwright-web-e2e.md) | Денис / Sol / Medium выпустил PR #54/#57, 4 fixture-сценария × 3 проекта, CI 12/12; независимый QA и живой backend открыты. Никита / Luna / Medium и Борис / Sol / Medium берут свои QA claims; ручной A↔B PM-036 PASS, автоматический A↔B требует изолированных данных и разрешённого окружения |
 | P1 | [PM-041](tasks/PM-041-real-device-qa-queue.md) | blocked: Марк ведёт отдельную очередь real iPhone Safari, Борис / Никита после доступной среды; Luna / Medium; mobile PASS по Playwright не заявлять |
 | P1 | [PM-015](tasks/PM-015-qa-mobile-device-environment.md), [PM-025](tasks/PM-025-search-contact-button-layout.md) | blocked: без автономного iPhone Safari для Бориса; телефонные критерии в PM-041, browser smoke в PM-040; desktop PM-025 partial PASS сохраняется |
 | P2 | [PM-004](tasks/PM-004-street-autofill.md), [BUG-018](tasks/BUG-018-calendar-end-date-mobile-safari.md), [PM-014](tasks/PM-014-qa-native-autofill-environment.md) | blocked: PM-004/014 ждут Safari со сохранённым адресом; BUG-018 — реальный iPhone picker. PM-026/BUG-020 остаются in review для доступного desktop с отдельным mobile блокером |
@@ -29,7 +29,7 @@ QA capacity: [D013](decisions/D013-qa-acceptance-regression-split.md) разде
 
 ## NEXT
 
-- [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md) P1 — planned: Никита должен подтвердить отдельную тестовую пару и два управляемых сеанса. Игорь claim-ил техническое discovery: новый backend/Worker код не нужен. При двух browser contexts достаточно обычных входов на основном origin; при одном — после согласования exact account IDs возможна настройка существующего backend allowlist, затем live negative checks. Никитин A↔B smoke ещё не записан, пару Бориса не делить между агентами.
+- [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md) P1 — in review: Никита / Regression QA прошёл собственные A→B→A, refresh и logout/relogin обеих сессий. Игорь / Sol / High дополняет live negative/security evidence нового допуска, Борис / Sol / Medium подтверждает сохранность собственной пары; Марк / PM закрывает задачу после обоих отчётов. Ручной регресс на паре Никиты уже возможен.
 
 - [PM-006](tasks/PM-006-email-acceptance.md) P1 — независимый цикл email после PM-017. [PM-007](tasks/PM-007-mobile-acceptance.md) P1 — blocked, пока Борис не получает управляемый iPhone Safari по PM-015/041; полного QA claim нет.
 - [PM-008](tasks/PM-008-pilot.md) P1 — Марк / PM готовит план пилота и определения измерений; запуск и исходные показатели не подтверждены.
