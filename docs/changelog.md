@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: manual regression Worker deploy prepared
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** added a manually triggered, main-only GitHub Action to deploy the two regression Worker environments. Cloudflare deployment credentials stay in GitHub Actions secrets; the backend-matched `QA_WORKER_SECRET` is entered separately into each Worker in Cloudflare. The Action does not touch the existing production Worker or deploy automatically on a push. Worker creation, secret binding and live QA remain pending. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
 ## 2026-09-25 — PM-036: shared Chrome collision and independent regression origins
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** confirmed the agents' Chrome shares one cookie jar per hostname; two tabs on the same hostname cannot keep different accounts. Prepared two exact-match, secret-attested Workers for Nikita's A/B test pair and a conditional tester procedure. Backend retains independent server sessions and its immutable-ID QA allowlist. The earlier discovery that said no Worker code was necessary is superseded; Worker deployment, two verified account IDs, secrets and live QA are still pending. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).

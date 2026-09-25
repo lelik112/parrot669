@@ -17,7 +17,7 @@ The shared product workspace for **both repositories** is `lelik112/parrot669/do
 - [Team chat](team-chat.md): short entrypoint to dated logs in `team-chat/`; informal talk and leadership criticism remain welcome, actionable outcomes link back to tasks/decisions.
 - [Roadmap and feature registry](roadmap.md): priorities and scope.
 - [Task index](tasks/README.md) and [workflow](tasks/workflow.md): compact current queue; claims, handoffs and acceptance evidence stay in task cards or linked per-task logs.
-- [Regression QA two-account procedure](qa/pm036-testers.md): use after the two dedicated Workers and QA account IDs have been activated and live-checked.
+- [Regression QA two-account procedure](qa/pm036-testers.md): use after the two dedicated Workers and QA account IDs have been activated and live-checked. The two Workers can be deployed through the manual `Deploy regression QA Workers` GitHub Action; their `QA_WORKER_SECRET` values are entered in Cloudflare after initial deployment.
 - [Status](status.md): current delivery/QA state and blockers.
 - [Decision log](decisions/README.md): accepted decisions and clearly marked proposals.
 - [Changelog](changelog.md): dated history; decisions, implementation and verification are separate events.
