@@ -2,6 +2,10 @@
 
 Это датированная история: свежие записи сверху, прежние не переписываются. Для текущей очереди откройте [status](status.md) и [task index](tasks/README.md); для причины конкретной задачи найдите её ID ниже или в её журнале. Продуктовый источник истины — [product-context](product-context.md).
 
+## 2026-09-25 — PM-016 independent two-session acceptance; PM-003 continues
+
+- **Agent:** Борис. **Role:** QA. **Recorded by:** Марк / Product Manager. **Change:** Борис в управляемом Cloud Chrome независимо вошёл как `qa` на QA Worker origin и `lelik` на основном, проверил поиск → первое сообщение → ответ → возврат, reload обоих входов и изоляцию logout `qa`; PM-016 перешла в done. PM-003 теперь in progress: базовый контакт/ответ и unread/read PASS, остаются pair block/unblock, повторное обращение и отчёт по восстановлению состояния. PM-029 остаётся in review до third-account/forged-request проверок и обратного logout. Реальные пользовательские контакты этим QA не доказаны. **Related tasks:** [PM-016](tasks/PM-016-qa-second-session-access.md), [PM-003](tasks/PM-003-contact-acceptance.md), [PM-029](tasks/PM-029-two-origin-qa-sessions.md), [PM-030](tasks/PM-030-qa-drain-next-stage.md).
+
 ## 2026-09-25 — PM-035: owner-approved documentation migration
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по прямому одобрению Алексея внедрил [D012](decisions/D012-documentation-current-history.md): `tasks/README.md` сокращён до активного индекса (14,4k → 5,0k символов), правила перенесены в `tasks/workflow.md`, полный исходный README сохранён в `tasks/README-history-2026-09-25.md`; `team-chat.md` сокращён до входа (20,3k → 1,5k), 25 старых реплик с авторством и порядком сохранены в логах 24/25 сентября, внутренние ссылки скорректированы, исходный файл доступен по неизменяемому Git-снимку. Запущен пилот `tasks/logs/PM-030.md` с точным переносом четырёх прежних записей; карточка PM-030 хранит текущую QA-очередь. Обновлены ai-team, team, product-context, status и decision index. Сохранность текстов и локальные ссылки проверены, приложение и критерии QA не менялись. **Related task:** [PM-035](tasks/PM-035-documentation-structure-refactoring.md).
