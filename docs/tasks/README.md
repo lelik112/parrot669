@@ -27,7 +27,7 @@
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | очередь PM-041; Борис / QA после разблокировки; Luna / Medium |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
-| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #54 merged, CI browser smoke 6/6; QA сверяет матрицу и расширяет web coverage | Денис / Developer; Никита / Regression QA, Борис / Acceptance QA |
+| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 2 fixture-сценария × 3 проекта, CI 6/6; покрытие и QA открыты, A↔B blocked PM-036 | Денис claim, Sol / Medium; Никита QA матрицы Luna / Medium и Борис acceptance Sol / Medium ожидают claims |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
 | [PM-037](PM-037-search-date-range-bound.md) | P2 | in progress — PM принял замер для малого пилота; PR #52 mergeable=false, выпуск/QA открыты | Игорь / Developer claim, Sol / High; current-head CI → backend/frontend release → Борис / QA |
