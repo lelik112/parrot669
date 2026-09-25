@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-035: documentation structure audit completed
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** audited current docs sizes and mixed current/history paths; proposed a compact task index plus workflow file, short team-chat entrypoint with dated immutable logs, and optional task event logs, with staged copying and link/evidence checks before any truncation. PM-035's audit criteria are complete; no chat/task history, accepted decision, product behavior or application file was moved. The proposed `docs/team-chat/*` path is outside PM's currently enumerated writable paths, so migration requires a separately scoped executor. **Related task:** [PM-035](tasks/PM-035-documentation-structure-refactoring.md).
+
 ## 2026-09-25 — PM-029: QA origin reaches production backend
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** Aleksey re-added the Cloudflare production `QA_WORKER_SECRET`. Live `https://parrot669.cheltsov112.workers.dev` now forwards `/api/auth/me` and `/api/locations/countries` to Railway `3e35c46`, where anonymous requests return **401** (Railway HTTP logs confirm both). A missing or mismatched Worker attestation would return 403, so this confirms the two server-side secrets match without revealing them. QA Messages renders its login form; QA Host opens login without `Forbidden`. Main `parrot669.com/search.html` still shows the independent `@lelik` session and loads locations. Account `qa` login, third-account refusal and the two-way messaging/logout flow have not yet been tested live; handoff to Boris for independent PM-029/PM-016 QA. No application code changed. **Related task:** [PM-029](tasks/PM-029-two-origin-qa-sessions.md), [PM-016](tasks/PM-016-qa-second-session-access.md).
