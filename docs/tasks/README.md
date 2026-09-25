@@ -52,7 +52,7 @@
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/039 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
-| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in progress — QA A→B→A/refresh/logout A PASS; повторный вход qa2 отклонён, logout B открыт | Игорь / Developer; Никита / QA evidence; Sol / High (dev), Luna / Medium (QA) |
+| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | blocked — A→B→A/refresh/logout A PASS; повторный вход qa2 отклонён и после ручной попытки владельца, диагностика у Игоря | Игорь / Developer; Никита / QA после исправления; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
