@@ -8,6 +8,11 @@ const copy = {
   ru:{page:"PARROT 669 — Поиск свободного жилья",label:"СВОБОДНЫЕ ДАТЫ",back:"← Назад на сайт",tabSearch:"Найти жильё",tabHost:"Владельцам",owner:n=>`Владелец: ${n}`,eyebrow:"АКТУАЛЬНАЯ ДОСТУПНОСТЬ",title:"Найдите жильё, которое<br><span>реально свободно.</span>",lead:"Ищите свободные даты, указанные владельцами, а условия аренды смотрите в исходном объявлении Airbnb.",country:"Страна",chooseCountry:"Выберите страну",city:"Город",chooseCity:"Выберите город",locationError:"Список стран и городов временно недоступен.",from:"Заезд",to:"Выезд",bedrooms:"Спальни",sleeps:"Спальных мест",search:"Найти свободное",filters:"Фильтры",pricedOnly:"Только с ценой",priceFrom:"Цена от, €",priceTo:"Цена до, €",priceRangeError:"Цена «от» не может быть больше цены «до»",priceUnknown:"Цену уточняйте у владельца",priceNote:"Цена ориентировочная. Финальные условия и дополнительные платежи уточняйте у владельца.",priceEstimate:(amount,nights)=>`≈ €${amount} за ${nights} ноч.`,cleaning:n=>`включая €${n} уборки`,live:"Подключено к живому индексу доступности PARROT",disclaimer:"Здесь показывается физическая доступность жилья. Условия аренды и допустимый срок определяет владелец.",loading:"Ищем свободные даты…",empty:"Подходящих вариантов пока нет.",error:"Поиск временно недоступен.",bed:n=>n===1?"1 спальня":n<5?`${n} спальни`:`${n} спален`,sleep:n=>`${n} спальных мест`,min:n=>`минимум ${n} дн.`,period:(a,b)=>`Свободно ${a} → ${b}`,view:"Открыть на Airbnb"}
 };
 
+Object.assign(copy.en,{signedInAs:n=>`Signed in as @${n}`,yourProperty:"Your property"});
+Object.assign(copy.es,{signedInAs:n=>`Sesión: @${n}`,yourProperty:"Tu vivienda"});
+Object.assign(copy.ca,{signedInAs:n=>`Sessió: @${n}`,yourProperty:"El teu habitatge"});
+Object.assign(copy.ru,{signedInAs:n=>`Аккаунт: @${n}`,yourProperty:"Ваш объект"});
+
 const housingCopy = {
   en:{accommodationType:"Accommodation type",anyType:"Any type",entirePlace:"Entire place",privateRoom:"Private room",noExternalLink:"No external link available",lead:"Search host-reported physical availability. When an external listing is attached, continue there for rental terms.",searchChanged:"Search details changed. Search again to see matching properties."},
   es:{accommodationType:"Tipo de alojamiento",anyType:"Cualquier tipo",entirePlace:"Alojamiento entero",privateRoom:"Habitación privada",noExternalLink:"No hay enlace externo disponible",lead:"Busca disponibilidad física declarada por propietarios. Si hay un anuncio externo, continúa allí para consultar las condiciones.",searchChanged:"Has cambiado los datos de búsqueda. Vuelve a buscar para ver los alojamientos disponibles."},
@@ -31,6 +36,7 @@ const pricedOnlyFilter=document.getElementById("filter-priced-only");
 const minPriceFilter=document.getElementById("filter-price-from");
 const maxPriceFilter=document.getElementById("filter-price-to");
 const buttons=document.querySelectorAll("[data-search-lang]");
+const accountIndicator=document.getElementById("search-account-indicator");
 let lastSearchParams=null;
 let searchSequence=0;
 let hasSearched=false;
@@ -50,6 +56,12 @@ copy.ru.bed=n=>ruPlural(n,"спальня","спальни","спален");
 copy.ru.sleep=n=>ruPlural(n,"спальное место","спальных места","спальных мест");
 
 function t(key,...args){const v=(housingCopy[lang]||housingCopy.en)[key]??(copy[lang]||copy.en)[key];return typeof v==="function"?v(...args):v}
+function renderAccountIndicator(user=window.ParrotMessaging?.user){
+  if(!accountIndicator)return;
+  const username=String(user?.username||"").trim();
+  accountIndicator.hidden=!username;
+  accountIndicator.textContent=username?t("signedInAs",username):"";
+}
 function applyLanguage(next){
   lang=copy[next]?next:"en";
   localStorage.setItem(LANG_KEY,lang);
@@ -60,6 +72,7 @@ function applyLanguage(next){
   buttons.forEach(b=>b.classList.toggle("active",b.dataset.searchLang===lang));
   refreshLocationLabels();
   window.ParrotMessaging?.setLanguage(lang);
+  renderAccountIndicator();
   if(renderedItems) render(renderedItems);
   else if(resultState) state(resultState.key,resultState.kind);
 }
@@ -271,6 +284,10 @@ function render(items){
     const owner=document.createElement("div");
     owner.className="availability-owner";
     owner.textContent=t("owner",item.ownerDisplayName||"PARROT host");
+    const ownProperty=document.createElement("span");
+    ownProperty.className="availability-own-property";
+    ownProperty.hidden=true;
+    ownProperty.textContent=t("yourProperty");
 
     const links=document.createElement("div");
     links.className="availability-links";
@@ -302,8 +319,9 @@ function render(items){
       links.append(missing);
     }
 
-    window.ParrotMessaging?.attachContact(links,item);
-    footer.append(owner,links);
+    const contactState=window.ParrotMessaging?.attachContact(links,item);
+    contactState?.then?.(isOwn=>{ownProperty.hidden=!isOwn});
+    footer.append(owner,ownProperty,links);
     card.append(head,facts,priceBlock,footer);
     results.append(card);
   });
@@ -411,6 +429,10 @@ countrySelect.addEventListener("change",async()=>{
   }
 });
 buttons.forEach(b=>b.addEventListener("click",()=>applyLanguage(b.dataset.searchLang)));
+window.ParrotMessaging?.onSession(user=>{
+  renderAccountIndicator(user);
+  if(renderedItems) render(renderedItems);
+});
 applyLanguage(lang);
 const savedSearchState=restoreSearchState();
 loadLocations(savedSearchState).then(()=>{

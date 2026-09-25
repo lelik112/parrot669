@@ -10,7 +10,7 @@ const deferred = () => { let resolve; const promise=new Promise(r=>resolve=r); r
 const response = data => new Response(JSON.stringify(data));
 const property = city => ({propertyId:city,propertyTitle:`Home in ${city}`,city,bedrooms:1,sleeps:2,links:[]});
 
-async function harness(t, {handler=()=>undefined, saved=null, messaging=false}={}) {
+async function harness(t, {handler=()=>undefined, saved=null, messaging=false, sessionUser=null, ownerProfiles={}}={}) {
   const dom=new JSDOM(file('search.html'),{url:'https://parrot669.com/search',runScripts:'outside-only'});
   t.after(()=>dom.window.close());
   const w=dom.window, calls=[];
@@ -21,8 +21,11 @@ async function harness(t, {handler=()=>undefined, saved=null, messaging=false}={
     calls.push(url);
     const custom=await handler(url);
     if(custom!==undefined) return custom instanceof Response?custom:response(custom);
-    if(url.pathname==='/api/host/auth/me') return new Response(JSON.stringify({error:'unauthorized'}),{status:401});
-    if(url.pathname.startsWith('/api/messaging/contact-options/')) return response({acceptingNewConversations:false,hostProfileId:'host'});
+    if(url.pathname==='/api/host/auth/me') return sessionUser?response(sessionUser):new Response(JSON.stringify({error:'unauthorized'}),{status:401});
+    if(url.pathname.startsWith('/api/messaging/contact-options/')) {
+      const id=decodeURIComponent(url.pathname.split('/').at(-1));
+      return response({acceptingNewConversations:false,hostProfileId:ownerProfiles[id]||'host'});
+    }
     if(url.pathname==='/api/locations/countries') return response([{code:'ES',name:'Spain'},{code:'BY',name:'Belarus'}]);
     if(url.pathname==='/api/locations/cities') return response((url.searchParams.get('country')==='ES'?
       ['Barcelona','Sant Cugat del Vallès']:['Minsk']).map(name=>({name})));
@@ -63,6 +66,44 @@ test('PM-024: every search card has a working contact link when legacy opt-in is
   assert.equal(links.length,2);
   assert(links.every(link=>!link.hidden && new URL(link.href).searchParams.get('from')==='2026-10-01'));
   assert.equal(h.results.querySelectorAll('.availability-verify-nudge:not([hidden])').length,1);
+});
+
+test('BUG-019: signed-in username and owned property are clear in every language; other contact and sign-out stay correct',async t=>{
+  const ownId='own-property',otherId='other-property';
+  const h=await harness(t,{messaging:true,sessionUser:{accountId:'account',username:'lelik112',profile:{id:'owner-profile'}},
+    ownerProfiles:{[ownId]:'owner-profile',[otherId]:'other-profile'},handler:url=>url.pathname==='/api/search' ? [
+      {...property('Barcelona'),propertyId:ownId}, {...property('Barcelona'),propertyId:otherId}
+    ]:undefined});
+  await h.barcelona();
+  const indicator=h.$('search-account-indicator');
+  assert.equal(indicator.hidden,false);
+  assert.equal(indicator.textContent,'Аккаунт: @lelik112');
+  const cards=[...h.results.querySelectorAll('.availability-card')];
+  assert.equal(cards.length,2);
+  const own=cards.find(card=>card.querySelector('.message-property-link').href.includes(ownId));
+  const other=cards.find(card=>card.querySelector('.message-property-link').href.includes(otherId));
+  assert.equal(own.querySelector('.availability-own-property').hidden,false);
+  assert.equal(own.querySelector('.availability-own-property').textContent,'Ваш объект');
+  assert.equal(own.querySelector('.message-property-link').hidden,true);
+  assert.equal(other.querySelector('.availability-own-property').hidden,true);
+  assert.equal(other.querySelector('.message-property-link').hidden,false);
+
+  for(const [language,account,ownLabel] of [
+    ['en','Signed in as @lelik112','Your property'],['es','Sesión: @lelik112','Tu vivienda'],
+    ['ca','Sessió: @lelik112','El teu habitatge'],['ru','Аккаунт: @lelik112','Ваш объект']
+  ]){
+    h.language(language);
+    assert.equal(indicator.textContent,account);
+    const updatedOwn=[...h.results.querySelectorAll('.availability-card')].find(card=>card.querySelector('.message-property-link').href.includes(ownId));
+    assert.equal(updatedOwn.querySelector('.availability-own-property').textContent,ownLabel);
+  }
+
+  h.w.ParrotMessaging.setUser(null);await flush();
+  assert.equal(indicator.hidden,true);
+  assert.equal(indicator.textContent,'');
+  const signedOutOwn=[...h.results.querySelectorAll('.availability-card')].find(card=>card.querySelector('.message-property-link').href.includes(ownId));
+  assert.equal(signedOutOwn.querySelector('.availability-own-property').hidden,true);
+  assert.equal(signedOutOwn.querySelector('.message-property-link').hidden,false);
 });
 
 test('GEO-001: changing city hides old cards; filters cannot search the old city',async t=>{
