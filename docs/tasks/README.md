@@ -52,7 +52,7 @@
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 | [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | in progress — PM overview готов | Марк / PM сводит два независимых аудита |
-| [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | planned | Игорь / backend audit, handoff без claim; Sol / High |
+| [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | in progress — read-only backend audit | Игорь / Developer, claim 2026-09-25; Sol / High |
 | [PM-034-FE](PM-034-FE-frontend-audit.md) | P2 | planned | Денис / frontend audit, handoff без claim; Sol / Medium |
 | **LATER** | | | |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
