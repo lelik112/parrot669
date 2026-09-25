@@ -1,7 +1,7 @@
 # PM-016 — Второй независимый сеанс для переписки
 
 **Title:** обеспечить два одновременно различимых тестовых сеанса для [PM-003](PM-003-contact-acceptance.md) и auth QA [PM-010](PM-010-auth-routes-extraction.md).
-**Status:** in review — независимые `qa`/`lelik` входы и A→B→A были live-подтверждены; сейчас основной origin показывает `qa`, QA Worker origin анонимен после отдельного logout, пара остаётся заблокирована; для повторного управления нужен `lelik`. **Priority:** P1. **Owner:** Борис / QA.
+**Status:** in review — two independent qa/lelik sessions and A→B→A exchange confirmed again after test-pair unblock. Main origin=qa, QA Worker=lelik; remaining logout/relogin symmetry and guard cases are open. **Priority:** P1. **Owner:** Борис / QA.
 **Agent:** Борис. **Role:** QA. **Scope:** доступ к двум участникам и пользовательский прогон; без управления реальными чужими учётными записями.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** важно не спутать гостя и владельца, права/состояние диалога и сессионный logout.
 **Model check:** при возобновлении.
@@ -81,3 +81,5 @@
 - 2026-09-25 12:46 UTC — **Agent:** Марк. **Role:** Product Manager. **Change:** после handoff Игоря скорректировал blocker: второй origin доступен без сессии (401), но пользовательский двухаккаунтный цикл Бориса пока не подтверждён. **Related task:** PM-016 / PM-029. **Next:** Борис самостоятельно проверяет два входа и переписку, не передавая пароли в репозиторий.
 
 - 2026-09-25 14:05 UTC — **Agent:** Борис. **Role:** QA. **Change:** для anonymous QA вышел из qa только на QA Worker origin. Основной parrot669.com остался авторизован под qa; независимость host-only cookies повторно видна. Текущее состояние: main=qa, QA Worker=anonymous, lelik не доступен, тестовая пара заблокирована. **Related task:** PM-016 / PM-029. **Next:** продолжить одиночные проверки; двухаккаунтный цикл требует контролируемого входа lelik.
+
+- 2026-09-25 ~14:30 UTC — **Agent:** Борис. **Role:** QA. **Change:** QA Worker secure login restored `lelik`; main origin remained `qa`. On the Worker `lelik` opened own property and profile from Messages, returned to the same conversation and unblocked `qa` without losing authentication. Main `qa` sent a follow-up; Worker `lelik` received/replied; main `qa` received answer after reload. Logout isolation had been observed earlier when Worker was logged out without affecting main. Test pair left unblocked. **Related task:** PM-016 / PM-029 / PM-003. **Open:** full inverse logout/relogin and third-account/forged-header guard not independently exercised; do not record as pass.
