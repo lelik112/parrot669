@@ -45,7 +45,7 @@
 | [PM-025](PM-025-search-contact-button-layout.md) | Расположение кнопки контакта в веб-выдаче | P1 | in review — web выпущен и live проверен; mobile и независимая QA открыты | Денис / Developer; QA Борис |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | Убрать дублирующий Messages shortcut | P2 | in review — Денис завершил frontend; ждёт независимый QA | Денис / Developer; QA Борис |
 | [PM-027](PM-027-open-property-from-messages.md) | Открыть карточку объекта из диалога | P2 | planned — после стабилизации PM-020/021 | Не назначен |
-| [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | in progress — frontend переход и возврат в диалог | Денис / Developer; QA Борис |
+| [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | in review — frontend выпущен, host/guest и mobile QA открыты | Денис / Developer; QA Борис |
 | [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | Конечная дата не обновляется после выбора начала на iPhone Safari | P2 | in review — frontend выпущен, iPhone Safari и desktop QA впереди | Игорь / Developer; QA Борис |
 | [BUG-019](BUG-019-search-account-context.md) | Поиск не показывает аккаунт и не объясняет скрытый контакт | P2 | planned — NEXT; claim разработчика отсутствует | Не назначен; QA Борис |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | Новое сообщение не выделяется во входящих | P2 | planned — NEXT; claim разработчика отсутствует | Не назначен; QA Борис |
