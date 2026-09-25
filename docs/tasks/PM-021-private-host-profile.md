@@ -1,7 +1,7 @@
 # PM-021 — Личный профиль владельца
 
 **Title:** определить и затем реализовать редактируемые данные владельца отдельно от учётной записи.
-**Status:** in review — independent production QA FAIL: saving display name returns Not found on both origins (BUG-023); acceptance remains open. **Priority:** P2. **Owner:** Денис / Developer.
+**Status:** in review — BUG-023 proxy fix live; authenticated save/reload and privacy QA remain open. **Priority:** P2. **Owner:** Денис / Developer.
 **Agent:** Денис. **Role:** Developer. **Scope:** выпуск существующего display name; не реализация публичных контактов.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** новые поля могут затронуть backend schema/API и приватность; текущие account/profile уже имеют разные назначения.
 **Model check:** будущий исполнитель анализирует выбранные поля, доступ и текущие API перед claim; повышение только по D005.
@@ -66,3 +66,7 @@
 ### 2026-09-25 14:02 UTC — Борис / QA — production save failure
 
 **Agent:** Борис. **Role:** QA. **Scope:** desktop Chrome, authenticated test account qa, parrot669.com and parrot669.cheltsov112.workers.dev. **Change:** FAIL: entered “Qa PM-021 test” in public host name, clicked “Сохранить имя”; UI displayed alert “Not found” on both origins. After reload the original “Qa” returned. No profile data changed. Logged [BUG-023](BUG-023-host-profile-save-not-found.md) as P1; HTTP status/root cause unknown. **Related task:** PM-021 / BUG-023. **Next:** Mark triages and assigns developer (Denis owns PM-021); QA retests save/reload and invalid/unauthorized/privacy paths after fix.
+
+### 2026-09-25 14:26 UTC — Денис / Developer — BUG-023 handoff
+
+**Agent:** Денис. **Role:** Developer. **Change:** Worker fix [PR #45](https://github.com/lelik112/parrot669/pull/45) merged; live unauthenticated PATCH on both origins now returns backend 401 instead of Worker 404. **Related task:** PM-021 / BUG-023. **Next:** Борис / QA verifies authenticated save → reload, invalid name/400, no session/401, public profile privacy. Acceptance remains open.
