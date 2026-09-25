@@ -20,5 +20,6 @@
 | [D009](D009-host-cabinet-ia.md) | Минимальная IA: Search / Host / Messages; PM-020 → PM-021 → PM-022 | accepted | Подтверждено владельцем 2026-09-24 |
 
 | [D012](D012-documentation-current-history.md) | Короткие точки входа в задачи/курилку и отдельная история | accepted; реализовано в PM-035 | Прямое одобрение владельца 2026-09-25 |
+| [D013](D013-qa-acceptance-regression-split.md) | Борис — Acceptance QA, новый Regression QA — smoke/регресс | accepted; новый агент ещё не назван и не claim-ил | Поручение владельца 2026-09-25 |
 
 У каждой записи: Decision, Problem, Reason, Alternatives, Rejected, Date, источник и связь с задачей. Незаписанные исторические альтернативы обозначаются как неизвестные, а не восстанавливаются из предположений.
