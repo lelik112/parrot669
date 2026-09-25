@@ -54,7 +54,7 @@
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
-| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in review — функциональный двухаккаунтный QA PASS; отдельно нужны проверка пары Бориса и полный live security evidence | Никита / Regression QA smoke; Игорь / security review; Марк / PM close; Sol / High (dev), Luna / Medium (QA) |
+| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in review — A↔B Никиты PASS, сохранность пары Бориса PASS; live negative для постороннего подтверждённого аккаунта открыт | Никита / Regression QA smoke; Игорь / security review; Марк / PM close; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
 | [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | planned — проверить реальный запуск нужного агента по назначению; встроенный scheduler ≤1/час, file-trigger нет | Без dev claim: Денис PM-040, Игорь PM-037/PM-036; Sol / High |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
