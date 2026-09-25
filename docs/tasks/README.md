@@ -20,10 +20,10 @@
 | [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — qa/lelik restored; shared Chrome collision with Regression QA confirmed | Борис / QA |
 | [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
 | [PM-003](PM-003-contact-acceptance.md) | P1 | in review — contact/reply, repeat CTA, unread and block/unblock passed; legacy state open | Борис / QA |
-| [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review — anonymous draft/auth gate/4 языка PASS; login→send и account isolation открыты | Борис / QA: отдельный public сеанс; confirm после PM-017, mobile PM-039; dev Игорь только при FAIL |
+| [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review — anonymous draft/auth gate/4 языка PASS; login→send и account isolation открыты | Борис / QA: отдельный public сеанс; confirm после PM-017, mobile PM-041; dev Игорь только при FAIL |
 | [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
 | [PM-025](PM-025-search-contact-button-layout.md) | P1 | blocked — web PASS, реальный touch ждёт PM-015/041 | Борис / QA после доступного iPhone; Sol / Medium из карточки |
-| [PM-001](PM-001-calendar-control-dates.md) | P1 | in review — сохранённый статус и выбранные даты PASS; негативные/смена iCal и Safari открыты | Борис / QA: контролируемый PM-018 с Алексеем, mobile PM-039; Денис dev только при FAIL |
+| [PM-001](PM-001-calendar-control-dates.md) | P1 | in review — сохранённый статус и выбранные даты PASS; негативные/смена iCal и Safari открыты | Борис / QA: контролируемый PM-018 с Алексеем, mobile PM-041; Денис dev только при FAIL |
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | очередь PM-041; Борис / QA после разблокировки; Luna / Medium |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
@@ -34,13 +34,13 @@
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in progress — повторный FAIL глобального badge при непрочитанной строке | Денис / Developer, claim и Sol / Medium; Борис / QA после исправления |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
 | [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | reported — reproduced on two production origins after BUG-016 fix; developer diagnosis needed | Марк / PM triage; Борис / QA |
-| [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review — одна ссылка/языки/keyboard PASS; badge FAIL через BUG-020, touch blocked | Денис исправляет BUG-020 (Sol / Medium); Борис ретестирует badge; mobile PM-039 |
+| [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review — одна ссылка/языки/keyboard PASS; badge FAIL через BUG-020, touch blocked | Денис исправляет BUG-020 (Sol / Medium); Борис ретестирует badge; mobile PM-041 |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
-| [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review — owner/guest, возврат, языки и keyboard PASS | Борис / QA: same-origin logout/switch/expiry, затем touch PM-039; Denis dev только при FAIL |
+| [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review — owner/guest, возврат, языки и keyboard PASS | Борис / QA: same-origin logout/switch/expiry, затем touch PM-041; Denis dev только при FAIL |
 | [PM-010](PM-010-auth-routes-extraction.md) | P2 | in review | Борис / QA |
 | [PM-021](PM-021-private-host-profile.md) | P2 | in review — name save/reopen PASS; API negatives and privacy open | Денис / Developer; Борис / QA |
-| [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review — глубокий scroll FAIL после BUG-016, BUG-022 открыт | BUG-022 dev claim отсутствует; затем Борис / QA; touch PM-039 |
-| [BUG-019](BUG-019-search-account-context.md) | P2 | in review — authenticated desktop self/other и языки PASS | Борис / QA: отдельный anonymous public сеанс; iPhone PM-039; Денис dev только при FAIL |
+| [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review — глубокий scroll FAIL после BUG-016, BUG-022 открыт | BUG-022 dev claim отсутствует; затем Борис / QA; touch PM-041 |
+| [BUG-019](BUG-019-search-account-context.md) | P2 | in review — authenticated desktop self/other и языки PASS | Борис / QA: отдельный anonymous public сеанс; iPhone PM-041; Денис dev только при FAIL |
 | [PM-005](PM-005-closed-dates-copy.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-011](PM-011-calendar-sync-extraction.md) | P2 | in review | Борис / QA |
 | [PM-013](PM-013-calendar-waiting-instruction.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
@@ -51,7 +51,7 @@
 | **NEXT — P1** | | | |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked | Алексей → Борис: почта |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
-| [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/039 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
+| [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | blocked — A→B→A/refresh/logout A PASS; повторный вход qa2 отклонён и после ручной попытки владельца, диагностика у Игоря | Игорь / Developer; Никита / QA после исправления; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
