@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-023: write a guest enquiry before signing in
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** For a search result's Messages link, render the public property context and editable, property-scoped draft to signed-out guests. Send validates locally, then asks for login/registration; the server receives no anonymous send. After login or email verification for the registered username, move the draft into the account's existing 24-hour sessionStorage scope. Registration stores a temporary username/property-scoped copy for another tab in the same browser and removes it on continuation; a per-tab nonce prevents unrelated tabs from changing it. Direct Messages visits explain the private inbox and link to search. Inbox, history and notifications remain behind auth; EN/ES/CA/RU and mobile composer layout updated. Local frontend tests include register/verification continuation, account isolation and no anonymous POST. CI/release and independent two-account QA pending. **Related task:** [PM-023](tasks/PM-023-guest-message-onboarding.md).
+
 ## 2026-09-25 — Очередь разработчиков PM-023 / PM-025
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** чтобы команда не ждала постановки после завершения текущих работ, PM-023 назначена Игорю по поручению Алексея; в main ещё ожидаются его claim и Model check. Денис уже ведёт PM-025 (Sol / Medium). Следующий порядок для сообщений: PM-027, затем PM-028; не запускать их параллельно PM-023 из-за общей Messages UI области. QA/доступ-блокеры не блокируют независимую разработку. Документация назначения не запускает отдельные агентские чаты.
@@ -436,4 +440,3 @@
 - Search enforces both.
 - Hosts enter an Airbnb listing ID; PARROT generates the external URL.
 - Search moved from the homepage to `/search.html`.
-

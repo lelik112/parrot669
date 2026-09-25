@@ -48,7 +48,8 @@
     </details>
 
     <section id="msg-auth" class="messaging-auth" hidden>
-      <p data-msg-i18n="authLead">Log in to message hosts and see your conversations.</p>
+      <p id="msg-auth-lead" data-msg-i18n="authLead">Log in to see your private conversations. To contact a host, start from a property in search.</p>
+      <a id="msg-find-housing" href="/search.html" class="text-button" data-msg-i18n="findHousing">Find housing</a>
       <div class="host-auth-tabs">
         <button type="button" data-msg-auth="login" aria-pressed="true" aria-controls="msg-login-form" data-msg-i18n="login">Log in</button>
         <button type="button" data-msg-auth="register" aria-pressed="false" aria-controls="msg-register-form" data-msg-i18n="register">Create account</button>
@@ -71,7 +72,7 @@
     </section>
 
     <div class="messages-layout" id="messages-app" hidden>
-      <aside class="messages-inbox" aria-labelledby="msg-inbox-title">
+      <aside id="msg-inbox" class="messages-inbox" aria-labelledby="msg-inbox-title">
         <div class="messages-inbox-heading"><h2 id="msg-inbox-title" data-msg-i18n="conversations">Conversations</h2><button type="button" id="msg-refresh" class="text-button" data-msg-i18n="refresh">Refresh</button></div>
         <p id="msg-inbox-status" class="messaging-hint" role="status"></p>
         <div id="msg-list" class="messages-conversation-list"></div>
@@ -90,6 +91,7 @@
           <button type="button" id="msg-jump" class="messages-jump" data-msg-i18n="newMessages" hidden>New messages ↓</button>
           <p id="msg-thread-notice" class="messaging-status" role="status"></p>
           <form id="msg-compose" class="messages-compose" hidden>
+            <p id="msg-guest-hint" class="messaging-hint" data-msg-i18n="guestComposerHelp" hidden>Write your message now. Log in or create an account to send it and keep the conversation private.</p>
             <details id="msg-dates"><summary data-msg-i18n="datesOptional">Stay dates (optional)</summary><div class="messages-dates">
               <label><span data-msg-i18n="from">Check-in</span><input type="date" name="from" /></label>
               <label><span data-msg-i18n="to">Check-out</span><input type="date" name="to" /></label>

@@ -17,10 +17,12 @@ const flush = async () => { for(let i=0;i<8;i++) await new Promise(resolve=>setI
 const deferred = () => { let resolve; const promise=new Promise(r=>resolve=r); return {promise,resolve}; };
 const response = (data,status=200) => new Response(JSON.stringify(data),{status});
 
-async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=true,page='messages.html'}={}) {
+async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=true,page='messages.html',sessionData={},localData={},sessionUser=user}={}) {
   const dom = new JSDOM(file(page),{url:`https://parrot669.com${url}`,runScripts:'outside-only',pretendToBeVisual:true});
   t.after(()=>dom.window.close());
   const w=dom.window, calls=[], intervals=[];
+  for(const [key,value] of Object.entries(sessionData)) w.sessionStorage.setItem(key,value);
+  for(const [key,value] of Object.entries(localData)) w.localStorage.setItem(key,value);
   w.setInterval=fn=>{intervals.push(fn);return intervals.length;};
   w.confirm=()=>true;
   w.fetch=async(raw,options={})=>{
@@ -29,7 +31,7 @@ async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=tr
     calls.push(request);
     const custom=await handler(request);
     if(custom!==undefined) return custom instanceof Response?custom:response(custom);
-    if(request.path==='/api/host/auth/me') return loggedIn?response(user):response({error:'unauthorized'},401);
+    if(request.path==='/api/host/auth/me') return loggedIn?response(sessionUser):response({error:'unauthorized'},401);
     if(request.path==='/api/messaging/unread') return response({conversations:1,messages:1});
     if(request.path==='/api/messaging/notification-settings') return response({enabled:true,language:'en'});
     if(request.path==='/api/messaging/conversations') return response({items:[],nextCursor:null});
@@ -45,7 +47,7 @@ async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=tr
     input:(element,value)=>{element.value=value;element.dispatchEvent(new w.Event('input',{bubbles:true}));}};
 }
 
-test('login preserves enquiry and checkout dates; first send creates a thread and renders text safely',async t=>{
+test('guest prepares an enquiry before login; sending waits for auth and preserves dates and body',async t=>{
   let sent=null;
   const h=await harness(t,{loggedIn:false,url:`/messages.html?property=${property}&from=2027-05-01&to=2027-05-04`,handler:r=>{
     if(r.path==='/api/host/auth/login') return user;
@@ -53,17 +55,113 @@ test('login preserves enquiry and checkout dates; first send creates a thread an
     if(r.path===`/api/messaging/conversations/${conversation}`) return detail();
     if(r.path.endsWith(`/${conversation}/messages`)) return {items:[message(1,{...sent,senderProfileId:profile})],nextAfterSequence:null};
   }});
-  assert.equal(h.$('msg-auth').hidden,false);
-  const login=h.$('msg-login-form'); login.elements.login.value='guest';login.elements.password.value='test-password-123';
-  h.submit(login);await flush();
+  assert.equal(h.$('msg-auth').hidden,true);
+  assert.equal(h.$('msg-inbox').hidden,true);
+  assert.equal(h.$('msg-history').hidden,true);
+  assert.equal(h.calls.filter(c=>c.path.includes('/conversations/')).length,0);
   const form=h.$('msg-compose');
   assert.equal(form.hidden,false);assert.equal(form.elements.from.value,'2027-05-01');assert.equal(form.elements.to.value,'2027-05-04');
-  h.input(form.elements.body,'  <img src=x onerror=alert(1)>  ');h.submit(form);await flush();
+  h.input(form.elements.body,'  <img src=x onerror=alert(1)>  ');
+  h.submit(form);await flush();
+  assert.equal(h.$('msg-auth').hidden,false);
+  assert.match(h.$('msg-auth-lead').textContent,/draft will stay/);
+  assert.equal(h.calls.filter(c=>c.path==='/api/messaging/conversations' && c.method==='POST').length,0);
+  const login=h.$('msg-login-form'); login.elements.login.value='guest';login.elements.password.value='test-password-123';
+  h.submit(login);await flush();
+  assert.equal(h.$('msg-auth').hidden,true);assert.equal(h.$('msg-inbox').hidden,false);
+  assert.equal(form.elements.body.value,'  <img src=x onerror=alert(1)>  ');
+  assert.equal(form.elements.from.value,'2027-05-01');assert.equal(form.elements.to.value,'2027-05-04');
+  assert.equal(h.calls.filter(c=>c.path==='/api/messaging/conversations' && c.method==='POST').length,0);
+  h.submit(form);await flush();
   assert.equal(sent.propertyId,property);assert.equal(sent.body,'<img src=x onerror=alert(1)>');assert.equal(sent.to,'2027-05-04');
   assert.equal(h.$('msg-history').querySelector('img'),null);
   assert.match(h.$('msg-history').textContent,/<img src=x onerror=alert\(1\)>/);
   assert.equal(h.w.location.search,`?conversation=${conversation}`);
   assert.equal(login.elements.password.value,'');assert.equal(form.elements.body.value,'');
+});
+
+test('registration keeps the guest draft until email confirmation; a different account cannot inherit it',async t=>{
+  const url=`/messages.html?property=${property}&from=2027-05-01&to=2027-05-04&verifyCalendar=1`;
+  const h=await harness(t,{url,loggedIn:false,handler:r=>r.path==='/api/host/auth/register'?{message:'check email'}:undefined});
+  const form=h.$('msg-compose');
+  assert.match(form.elements.body.value,/calendar/);
+  h.input(form.elements.body,'Please confirm dates before I book');h.submit(form);await flush();
+  const registerTab=h.w.document.querySelector('[data-msg-auth="register"]');registerTab.click();
+  const register=h.$('msg-register-form');
+  register.elements.username.value='guest';register.elements.displayName.value='Guest';
+  register.elements.email.value='guest@example.test';register.elements.password.value='long-password-123';
+  h.submit(register);await flush();
+  assert.equal(h.calls.filter(c=>c.path==='/api/messaging/conversations' && c.method==='POST').length,0);
+  h.input(form.elements.body,'Latest draft after registration');
+  const saved=Object.fromEntries(Array.from({length:h.w.sessionStorage.length},(_,i)=>{
+    const key=h.w.sessionStorage.key(i);return [key,h.w.sessionStorage.getItem(key)];
+  }));
+  assert.match(saved[`parrot669-guest-draft:property:${property}`],/Latest draft after registration/);
+  const local=Object.fromEntries(Array.from({length:h.w.localStorage.length},(_,i)=>{
+    const key=h.w.localStorage.key(i);return [key,h.w.localStorage.getItem(key)];
+  }));
+  assert.equal(JSON.parse(local['parrot669-registration-draft']).username,'guest');
+  assert.equal(JSON.parse(local['parrot669-registration-draft']).draft.body,'Latest draft after registration');
+  assert.equal(JSON.parse(h.w.localStorage.getItem('parrot669-message-return')).path,url);
+
+  const anotherTab=await harness(t,{url,loggedIn:false,localData:local});
+  anotherTab.input(anotherTab.$('msg-compose').elements.body,'Unrelated tab');
+  assert.equal(JSON.parse(anotherTab.w.localStorage.getItem('parrot669-registration-draft')).draft.body,'Latest draft after registration');
+
+  const different=await harness(t,{url,sessionData:saved,sessionUser:{...user,accountId:'other-account',username:'other'}});
+  assert.notEqual(different.$('msg-compose').elements.body.value,'Latest draft after registration');
+  assert.equal(different.$('msg-inbox').hidden,false);
+
+  const differentLogin=await harness(t,{url,loggedIn:false,sessionData:saved,localData:local,
+    handler:r=>r.path==='/api/host/auth/login'?{...user,accountId:'other-account',username:'other'}:undefined});
+  differentLogin.$('msg-login-form').elements.login.value='other';
+  differentLogin.$('msg-login-form').elements.password.value='test-password-123';
+  differentLogin.submit(differentLogin.$('msg-login-form'));await flush();
+  assert.notEqual(differentLogin.$('msg-compose').elements.body.value,'Latest draft after registration');
+  assert.equal(JSON.parse(differentLogin.w.localStorage.getItem('parrot669-registration-draft')).draft.body,'Latest draft after registration');
+
+  const verified=await harness(t,{url,localData:local}); // Email link opened in a separate tab.
+  assert.equal(verified.$('msg-compose').elements.body.value,'Latest draft after registration');
+  assert.equal(verified.$('msg-compose').elements.from.value,'2027-05-01');
+  assert.equal(verified.$('msg-compose').elements.to.value,'2027-05-04');
+  assert.equal(verified.w.localStorage.getItem('parrot669-registration-draft'),null);
+  assert.equal(verified.calls.filter(c=>c.method==='POST').length,0);
+});
+
+test('direct Messages entry explains private inbox; guest composer and auth gate translate in four languages',async t=>{
+  const direct=await harness(t,{loggedIn:false});
+  assert.equal(direct.$('msg-auth').hidden,false);
+  assert.equal(direct.$('messages-app').hidden,true);
+  assert.match(direct.$('msg-auth-lead').textContent,/private conversations/);
+  assert.equal(direct.$('msg-find-housing').getAttribute('href'),'/search.html');
+  assert.equal(direct.calls.filter(c=>c.path.startsWith('/api/messaging/conversations')).length,0);
+  const h=await harness(t,{loggedIn:false,url:`/messages.html?property=${property}`});
+  const labels={en:/Log in or create an account/,es:/Entra o crea una cuenta/,ca:/Entra o crea un compte/,ru:/войдите или создайте аккаунт/i};
+  for(const [lang,expected] of Object.entries(labels)){
+    h.w.ParrotMessaging.setLanguage(lang);
+    assert.match(h.$('msg-guest-hint').textContent,expected);
+  }
+  h.input(h.$('msg-compose').elements.body,'Hello');h.submit(h.$('msg-compose'));await flush();
+  assert.match(h.$('msg-auth-lead').textContent,/Войдите или создайте аккаунт/);
+  assert.equal(h.$('msg-inbox').hidden,true);
+  assert.equal(h.calls.filter(c=>c.path.startsWith('/api/messaging/conversations')).length,0);
+});
+
+test('guest draft survives a same-tab reload for 24 hours and invalid dates do not open auth',async t=>{
+  const url=`/messages.html?property=${property}&from=2027-06-01&to=2027-06-04`;
+  const h=await harness(t,{url,loggedIn:false});
+  const form=h.$('msg-compose');h.input(form.elements.body,'A quiet room, please');
+  h.input(form.elements.to,'2027-05-31');h.submit(form);await flush();
+  assert.equal(h.$('msg-auth').hidden,true);
+  assert.equal(h.calls.filter(c=>c.method==='POST').length,0);
+  h.input(form.elements.to,'2027-06-04');
+  const key=`parrot669-guest-draft:property:${property}`;
+  const stored=h.w.sessionStorage.getItem(key);
+  const resumed=await harness(t,{url,loggedIn:false,sessionData:{[key]:stored}});
+  assert.equal(resumed.$('msg-compose').elements.body.value,'A quiet room, please');
+  assert.equal(resumed.$('msg-compose').elements.to.value,'2027-06-04');
+  const expired=await harness(t,{url,loggedIn:false,sessionData:{[key]:JSON.stringify({...JSON.parse(stored),savedAt:Date.now()-86400001})}});
+  assert.equal(expired.$('msg-compose').elements.body.value,'');
 });
 
 test('uncertain delivery retains a stable idempotency key; a rate error remains visible and editable',async t=>{
