@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-037: пилотный performance gate принят
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по [изолированному замеру](tasks/logs/PM-037-performance.md) принял [D014](decisions/D014-public-search-date-range.md) с границей 366 ночей для малого пилота: HTTP p95 226 мс при 100 объектах в городе, 572 мс при четырёх запросах; 367+ отсекается до SQL. При 500 объектах p95 1 044 / 2 216 мс — риск для будущего масштаба, не заявленная производительность production. [PM-037](tasks/PM-037-search-date-range-bound.md) теперь P2/NOW, in progress у Игоря (Sol / High): backend PR #29 и frontend PR #52 ещё открыты; frontend PR сейчас `mergeable=false`, Игорь сверяет причину/current-head CI, выпускает backend → frontend и передаёт Борису на независимую QA. Продуктовую границу не меняли; merge/deploy/QA этой записью не выполнены. **Related task:** PM-037 / D014.
+
 ## 2026-09-25 — D016: Playwright-first browser QA; real iPhone checks queued
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по решению Алексея выбран Playwright для автоматизации доступных web-сценариев. Созданы [PM-040](tasks/PM-040-playwright-web-e2e.md) (разработка, planned, кандидат Денис после BUG-020, claim ещё нет) и [PM-041](tasks/PM-041-real-device-qa-queue.md) (инструкция Борису/Никите и blocked очередь нативных проверок); [PM-039](tasks/PM-039-browser-test-environments.md) завершена как исследование выбора. [D016](decisions/D016-playwright-first-real-device-queue.md) фиксирует границу: web evidence не закрывает настоящий iPhone Safari/autofill/date picker. Приложение, CI и платные сервисы этим документальным изменением не затронуты. **Related task:** PM-039 / PM-040 / PM-041.
