@@ -1,7 +1,7 @@
 # PM-040 — Playwright для повторяемого браузерного QA
 
 **Title:** внедрить небольшой воспроизводимый Playwright smoke и путь расширения регрессии.
-**Status:** in progress — Денис внедряет первый локальный web smoke и CI; двухаккаунтный сценарий зависит от PM-036. **Priority:** P1.
+**Status:** in progress — первый Playwright smoke и матрица слиты в main; QA review матрицы и расширение браузерных сценариев открыты, двухаккаунтный сценарий зависит от PM-036. **Priority:** P1.
 **Owner:** Марк / PM — постановка; **кандидат на Developer:** Денис после handoff BUG-020 и сверки пересекающихся задач; **QA:** Никита / Regression QA для повторяемых сценариев, Борис / Acceptance QA для критического пути. Назначение в карточке не означает claim.
 **Agent:** Денис / Developer — claim 2026-09-25.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** настройка браузерных проектов, изоляции сеансов, стабильных E2E и CI в существующем frontend без переписывания приложения.
@@ -49,7 +49,7 @@
 
 ## Evidence
 
-План и QA evidence исполнитель добавляет после claim. По документации Playwright: [CI](https://playwright.dev/docs/ci), [браузеры](https://playwright.dev/docs/browsers), [эмуляция](https://playwright.dev/docs/emulation), [изолированные авторизованные контексты](https://playwright.dev/docs/auth).
+2026-09-25 19:37 UTC — [PR #54](https://github.com/lelik112/parrot669/pull/54) merged (`0993f67`): локальный публичный fixture и два smoke-сценария в Chromium desktop, WebKit desktop и WebKit mobile emulation. [Frontend CI](https://github.com/lelik112/parrot669/actions/runs/36180701745) на PR: `npm test` PASS (132/132), `browser-smoke` PASS (6/6, 15.9 s); failure trace/screenshot настроены на 3 дня. Документы: [инструкция](../qa/playwright.md), [матрица покрытия 42 открытых карточек / 194 критериев](../qa/playwright-coverage.md). В этой рабочей среде Playwright CDN вернул усечённый zip, поэтому локальный реальный запуск заблокирован; CI выполнил браузеры. Fixture анонимный, все `/api/*` ответы контролируются локально, незапланированные запросы получают 501, реальных сообщений нет. До независимой QA и дальнейшей автоматизации задача остаётся in progress; нативный Safari остаётся PM-041, обмен двух аккаунтов ждёт PM-036.\n\n**QA handoff:** Никита сверяет классификацию матрицы и повторяет безопасные web-регрессии; Борис проверяет основной путь контакта и отмечает остаток реального Safari, не закрывая PM-023/024/026 и BUG-020 по fixture PASS.\n\nПлан и QA evidence выше. По документации Playwright: [CI](https://playwright.dev/docs/ci), [браузеры](https://playwright.dev/docs/browsers), [эмуляция](https://playwright.dev/docs/emulation), [изолированные авторизованные контексты](https://playwright.dev/docs/auth).
 
 ## Discussion / Updates
 
