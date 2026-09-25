@@ -2,7 +2,7 @@
 
 **Title:** определить и ограничить число ночей в одном публичном запросе поиска.
 
-**Status:** in progress — Марк принял [изолированный performance gate](logs/PM-037-performance.md) для малого пилота; Игорь сверяет mergeability/current-head CI, затем выпускает backend → frontend и передаёт Борису. Код пока не merged/deployed, независимая QA открыта. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
+**Status:** paused / NEXT — владелец переключил Игоря на PM-043, где он уже записал claim. Performance gate для малого пилота принят; PM-037 не выпущена и не прошла QA. После PM-043 Игорь сверяет актуальные PR/CI, выпускает backend → frontend и передаёт Борису. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** контракт и критерии; реализацию и замеры проводит назначенный разработчик.
 
@@ -66,3 +66,9 @@
 **Agent:** Марк. **Role:** Product Manager. **Change:** принимаю замер [PM-037-performance](logs/PM-037-performance.md) для малого пилота и оставляю предел 366 ночей из [D014](../decisions/D014-public-search-date-range.md). Изолированный HTTP p95 на 366 ночах: 226 мс при 100 объектах в городе; 572 мс при concurrency=4. При 500 объектах — 1 044 / 2 216 мс соответственно, поэтому готовность к большему масштабу и production SLO этим не утверждаются. 367+ отклоняется до repository. Оптимизацию SQL и снижение предела в текущий scope не добавляю. **Related task:** PM-037 / D014.
 
 **Адресат: Игорь / Developer. Next:** PM gate снят. GitHub на момент решения показывает backend [PR #29](https://github.com/lelik112/parrot669-backend/pull/29) open/mergeable, frontend [PR #52](https://github.com/lelik112/parrot669/pull/52) open/`mergeable=false`. Проверь причину и current-head CI обоих PR; после устранения препятствия выпусти сначала backend validation, затем frontend UI, запиши фактические commit/deploy/smoke, отдай Борису на независимую QA 366/367 и сохранение дат. Если PR или live regression мешает выпуску — запиши блокер здесь, не считай PM gate техническим разрешением пропустить CI/QA. **Status:** in progress до выпуска; затем in review.
+
+## Priority switch — 2026-09-25
+
+**Agent:** Марк. **Role:** Product Manager. **Change:** по прямому поручению Алексея Игорь начал [PM-043](PM-043-agent-wake-up-feasibility.md) сейчас; этот незавершённый release claim PM-037 сохраняется, но работу ставим на паузу. **Related task:** PM-037 / PM-043.
+
+**Resume checkpoint:** приняты D014 и performance gate для малого пилота; backend PR #29 и frontend PR #52 в последнем документированном срезе ещё открыты, frontend `mergeable=false`, CI/release/live smoke/QA не подтверждены. Перед возобновлением Игорь перечитывает фактические PR heads и CI, фиксирует причину препятствия, затем выпускает backend → frontend и передаёт Борису критерии 366/367 и сохранения дат. Прежние ссылки/статусы PR могут измениться во время паузы; не считать их текущим фактом без проверки. Если в PM-043 появится более долгий scope, Марк отдельно пересмотрит загрузку.
