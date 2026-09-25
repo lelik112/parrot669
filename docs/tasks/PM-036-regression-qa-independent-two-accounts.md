@@ -2,7 +2,7 @@
 
 **Title:** дать новому Regression QA Engineer собственный управляемый A↔B сценарий без пересечения с аккаунтами Бориса.
 
-**Status:** in progress — общий Chrome требует отдельных hostname; оба Worker origin для Никиты развёрнуты, QA-секреты и допуск точных ID `qa2`/`qa3` проверены; оба входа и независимость при reload подтверждены. Открыты message A↔B, logout/relogin и независимая QA-проверка. Прежнее «код не нужен» неверно для двух QA в одном Chrome: двух существующих hostname недостаточно. **Priority:** P1. **Owner:** Марк / Product Manager (постановка и координация), Игорь / Developer (Worker и проверка доступа), Никита / Regression QA (независимый smoke на уже доступной паре).
+**Status:** in progress — два QA Worker origin и точный допуск `qa2`/`qa3` работают; независимый QA подтвердил A→B→A, refresh и то, что logout A не выводит B. Повторный вход A отклонён формой; logout/relogin B и проверка влияния на Бориса остаются открытыми. Прежнее «код не нужен» неверно для двух QA в одном Chrome: двух существующих hostname недостаточно. **Priority:** P1. **Owner:** Марк / Product Manager (постановка и координация), Игорь / Developer (Worker и проверка доступа), Никита / Regression QA (независимый smoke на уже доступной паре).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** постановка безопасного QA-доступа и критериев; без кода, аккаунтов, конфигурации или секретов.
 
@@ -113,3 +113,13 @@ Additional read-only live negative checks: direct backend `GET /api/auth/me` wit
 ## QA claim — 2026-09-25 18:37 UTC
 
 **Agent:** Никита. **Role:** Regression QA Engineer. **Scope:** independent live smoke of `qa2`/`qa3` on the dedicated regression A/B Worker origins: session identity, A→B→A messaging, refresh and logout/relogin isolation; regression evidence only, without code/config changes or Boris's acceptance. **Related task:** PM-036. **Model check:** current model/reasoning is sufficient for browser QA; no escalation needed. **Status:** in progress. **Next:** inspect both existing sessions, choose a safe `qa3` test property, run A→B→A and session isolation, record actual results and blockers without secrets.
+
+
+## Regression QA evidence — 2026-09-25 18:51 UTC
+
+**Agent:** Никита. **Role:** Regression QA Engineer. **Change:** independent live smoke на Chrome, `https://parrot669-regression-a.cheltsov112.workers.dev` (A=`qa2`) и `https://parrot669-regression-b.cheltsov112.workers.dev` (B=`qa3`); проверены переписка и часть изоляции сессий. **Related task:** PM-036. **Status:** in progress, repeat login A blocked. **Next:** восстановить A защищённым входом, затем проверить logout/relogin B и повторно обе личности; Марку/Игорю изучить ошибку повторного входа, если корректные данные вновь отклонены.
+
+- PASS: одновременно видны разные логины на двух origin; B не имеет старых объектов. Создан временный объект `QA TEST PM-036 — не бронировать` с периодом 2026-10-10…11. A нашёл его по поиску 2026-10-10…12, отправил тестовое сообщение; B увидел его и ответил; A увидел ответ. Обе стороны показывают ровно два тестовых сообщения. Во время обеих отправок кратко появлялось «Не удалось подтвердить отправку», затем сообщение подтвердилось в диалоге без повтора.
+- PASS: после reload обеих вкладок A остаётся `qa2`, B остаётся `qa3`, тестовая переписка на обеих сторонах сохраняется. Logout A показывает форму входа на A; B по-прежнему `qa3` и видит диалог.
+- BLOCKED: повторный защищённый вход на A вернул «Проверьте email/имя пользователя и пароль». Значения формы агенту недоступны; этот ответ сам по себе не устанавливает причину. Вторую попытку без выбора владельца не делал. Logout/relogin B не проверял, чтобы сохранить доступный B-сеанс.
+- Cleanup: временный объект и период удалены через кабинет B; кабинет снова показывает «Объектов пока нет». Тестовый диалог может остаться в истории; его наличие после удаления объекта отдельно не проверял. Борисовы `qa`/`lelik` origin и сеансы в этом прогоне не открывал и не переключал. Секреты, cookie, immutable IDs и личные адреса в evidence не записаны.
