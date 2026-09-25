@@ -2,6 +2,8 @@
 
 This file is the handoff/source-of-truth for continuing product work if chat context is lost.
 
+**Quick route:** [product direction and team](#product-direction-and-team-coordination) → [current product](#current-product) → [guest and host flows](#current-user-flows) → [verification direction](#verification-direction) → [immediate TODO](#immediate-todo). For today's delivery/QA status use [status.md](status.md); for decisions use [decisions/](decisions/README.md). Historical implementation details below stay available by section and task ID.
+
 ## Product direction and team coordination
 
 PARROT helps guests find housing that is available for their dates and reach its owner. The MVP must establish that owners add useful availability, guests find suitable housing, and contact takes place. Feature count is not evidence of those outcomes.
