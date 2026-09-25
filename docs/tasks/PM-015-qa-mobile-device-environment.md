@@ -1,7 +1,7 @@
 # PM-015 — Настоящий мобильный ввод: среда для QA
 
 **Title:** обеспечить наблюдаемый iPhone Safari touch/экранную клавиатуру для [PM-007](PM-007-mobile-acceptance.md).
-**Status:** blocked — управляемый браузер QA не предоставляет мобильный viewport, touch и iOS Simulator; тест на телефоне Алексей отложил из-за переключения VPN. **Priority:** P1. **Owner:** Борис / QA после разблокировки; устройство/сеанс — Алексей.
+**Status:** in review — owner-assisted iPhone Safari проверка PM-001 проведена; найден [BUG-018](BUG-018-calendar-end-date-mobile-safari.md). Полный mobile acceptance PM-007 и независимая QA Бориса остаются открыты. **Priority:** P1. **Owner:** Борис / QA; устройство/сеанс — Алексей.
 **Agent:** Борис. **Role:** QA. **Scope:** только доступная мобильная среда и evidence; продукт и код не меняются.
 **Recommended model:** Luna. **Recommended reasoning:** Medium. **Reason:** пошаговый основной путь с раздельной оценкой размеров, касаний, клавиатуры и нативного date picker.
 **Model check:** при возобновлении; облачный desktop не засчитывается за mobile.
@@ -37,3 +37,8 @@
 - **Change:** по поручению Алексея вынес недоступную мобильную среду в отдельный backlog; PM-007 остаётся задачей приёмки.
 - **Related task:** PM-015, PM-007, PM-001, PM-004
 - **Next:** при доступе к iPhone Safari принять evidence и пройти критерии PM-007.
+
+
+## Discussion / Updates
+
+- 2026-09-25 — **Agent:** Алексей / Product Owner; **QA guidance:** Борис / QA. **Change:** в реальной сессии iPhone Safari прошёл часть PM-001; при выборе начала диапазона конечная дата не обновилась. Это подтверждает доступ к мобильной среде для owner-assisted проверки, но не закрывает полный PM-007 и не считается независимым прогоном Бориса. **Related tasks:** PM-015, PM-001, [BUG-018](BUG-018-calendar-end-date-mobile-safari.md). **Next:** Борис записывает остальные mobile критерии при доступном сеансе.
