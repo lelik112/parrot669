@@ -177,6 +177,36 @@ test('direct Messages entry explains private inbox; guest composer and auth gate
   assert.equal(h.calls.filter(c=>c.path.startsWith('/api/messaging/conversations')).length,0);
 });
 
+test('only the owner sees a link to this conversation’s existing property',async t=>{
+  const owner={...user,accountId:'owner-account',username:'owner',profile:{id:'host'}};
+  const metadata=detail(conversation,{hostProfileId:'host',guestProfileId:profile});
+  const handler=r=>{
+    if(r.path===`/api/messaging/conversations/${conversation}`) return metadata;
+    if(r.path.endsWith(`/${conversation}/messages`)) return {items:[message()],nextAfterSequence:null};
+  };
+  const url=`/messages.html?conversation=${conversation}`;
+  const host=await harness(t,{url,sessionUser:owner,handler});
+  const link=host.$('msg-open-property');
+  assert.equal(link.hidden,false);
+  assert.equal(link.getAttribute('href'),`/host.html?property=${property}&conversation=${conversation}`);
+  for(const [language,label] of Object.entries({en:/Open property/,es:/Abrir vivienda/,ca:/Obrir habitatge/,ru:/Открыть объект/})){
+    host.w.ParrotMessaging.setLanguage(language);assert.match(link.textContent,label);
+  }
+  const guest=await harness(t,{url,handler});
+  assert.equal(guest.$('msg-open-property').hidden,true);
+  assert.equal(guest.$('msg-open-property').hasAttribute('href'),false);
+  const deleted=await harness(t,{url,sessionUser:owner,handler:r=>{
+    if(r.path===`/api/messaging/conversations/${conversation}`) return {...metadata,propertyId:null,canReply:false};
+    if(r.path.endsWith(`/${conversation}/messages`)) return {items:[message()],nextAfterSequence:null};
+  }});
+  assert.equal(deleted.$('msg-open-property').hidden,true);
+  assert.equal(deleted.$('msg-open-property').hasAttribute('href'),false);
+  host.w.ParrotMessaging.setUser(null);
+  await flush();
+  assert.equal(link.hidden,true);
+  assert.equal(link.hasAttribute('href'),false);
+});
+
 test('guest draft survives a same-tab reload for 24 hours and invalid dates do not open auth',async t=>{
   const url=`/messages.html?property=${property}&from=2027-06-01&to=2027-06-04`;
   const h=await harness(t,{url,loggedIn:false});

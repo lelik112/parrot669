@@ -1449,6 +1449,11 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .text-button:hover{color:var(--lime)}
 .text-button.danger:hover{color:#f2b5a8}
 .host-properties{display:grid;gap:24px;margin-top:24px}
+.host-property-context{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:12px 16px;border:1px solid rgba(216,255,99,.25);border-radius:12px;background:#102225;scroll-margin-top:84px}
+.host-property-context[hidden],.host-property-context .text-button[hidden]{display:none}
+.host-property-context p{margin:0;color:#d3e4d5;font-size:14px}
+.host-property-context .text-button{min-height:44px;display:inline-flex;align-items:center}
+.host-property[data-property-id]{scroll-margin-top:84px}
 .host-property{padding:20px;border:1px solid rgba(216,255,99,.14);border-radius:18px;background:#071214;box-shadow:inset 3px 0 0 rgba(216,255,99,.22)}
 .host-property-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
 .host-property.collapsed .host-property-head{margin-bottom:0}

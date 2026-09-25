@@ -47,6 +47,7 @@ function element(tag = 'div') {
         n.tagName === s.toUpperCase() || controls.includes(n) && ['input','button'].includes(s)));
     },
     focus() { this.focused = true; },
+    scrollIntoView(options) {this.scrollIntoViewOptions=options;},
     showModal() { this.open = true; },
     close() { this.open = false; void this.emit('close'); },
     getBoundingClientRect() { return {left:100, right:500, top:100, bottom:600}; }
@@ -934,4 +935,40 @@ test('return from Messages restores the saved position without smooth scrolling'
   assert.equal(app.run('window.scrollOptions.top'),3329);
   assert.equal(app.run('window.scrollOptions.behavior'),'instant');
   assert.equal(app.run('sessionStorage.getItem("parrot669-host-return:host-a")'),null);
+});
+
+test('Messages property deep link opens only the owned card and returns to its conversation',async()=>{
+  const first='11111111-1111-4111-8111-111111111111';
+  const second='22222222-2222-4222-8222-222222222222';
+  const conversation='33333333-3333-4333-8333-333333333333';
+  const routes={'/auth/me':{body:{accountId:'owner-a',email:'owner@example.test'}},
+    '/dashboard':{body:{properties:[{id:first,title:'First home',city:'Barcelona',bedrooms:1,sleeps:2},
+      {id:second,title:'Second home',city:'Barcelona',bedrooms:2,sleeps:3}]}}};
+  const app=setup(routes,`?property=${second}&conversation=${conversation}`);
+  await settle();
+  const cards=app.nodes.get('host-properties').children;
+  assert.equal(cards.length,2);
+  assert.equal(cards[0].dataset.propertyId,first);
+  assert.equal(cards[1].dataset.propertyId,second);
+  assert.equal(app.run(`expandedPropertyIds.has('${first}')`),false);
+  assert.equal(app.run(`expandedPropertyIds.has('${second}')`),true);
+  assert.equal(cards[1].focused,true);
+  assert.equal(cards[1].scrollIntoViewOptions.block,'start');
+  assert.equal(app.nodes.get('host-property-context').hidden,false);
+  assert.equal(app.nodes.get('host-property-return').href,`/messages.html?conversation=${conversation}`);
+  assert.match(app.nodes.get('host-property-context-status').textContent,/property from your conversation/);
+  assert.deepEqual(app.calls.filter(path=>path.startsWith('/properties/')),[]);
+
+  const other=setup({'/auth/me':routes['/auth/me'],'/dashboard':{body:{properties:[routes['/dashboard'].body.properties[0]]}}},
+    `?property=${second}&conversation=${conversation}`);
+  await settle();
+  assert.equal(other.run(`expandedPropertyIds.has('${first}')`),false);
+  assert.match(other.nodes.get('host-property-context-status').textContent,/no longer available in this account/);
+  assert.equal(other.nodes.get('host-properties').children[0].focused,undefined);
+  assert.equal(other.nodes.get('host-property-context').scrollIntoViewOptions.block,'start');
+  assert.equal(other.nodes.get('host-property-return').href,`/messages.html?conversation=${conversation}`);
+  const unauth=setup({},`?property=${second}&conversation=${conversation}`);
+  await settle();
+  assert.equal(unauth.nodes.get('property-panel').hidden,true);
+  assert.equal(unauth.nodes.get('host-property-context').hidden,true);
 });

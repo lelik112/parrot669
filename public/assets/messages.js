@@ -123,6 +123,12 @@
     $("msg-property").textContent = active?.propertyTitle || t("newEnquiry");
     $("msg-other").textContent = active?.otherDisplayName || "";
     $("msg-own-profile").hidden = !actor?.accountId || !active?.id || active.hostProfileId !== actor.profile?.id;
+    const propertyLink = $("msg-open-property");
+    const ownProperty = actor?.profile?.id && active?.hostProfileId === actor.profile.id &&
+      uuid.test(active?.propertyId || "") && uuid.test(active?.id || "");
+    propertyLink.hidden = !ownProperty;
+    if (ownProperty) propertyLink.href = `/host.html?property=${active.propertyId}&conversation=${active.id}`;
+    else propertyLink.removeAttribute("href");
     updateComposer();
   }
   function renderInbox() {
@@ -279,6 +285,7 @@
     historyNode.replaceChildren(); $("msg-list").replaceChildren(); form.reset();
     $("msg-property").textContent = ""; $("msg-other").textContent = "";
     $("msg-own-profile").hidden = true;
+    $("msg-open-property").hidden = true; $("msg-open-property").removeAttribute("href");
     const query = new URLSearchParams(window.location.search);
     const propertyId = query.get("property"), guestEnquiry = !user && uuid.test(propertyId || "");
     $("msg-auth").hidden = Boolean(user) || guestEnquiry;
