@@ -1,7 +1,7 @@
 # BUG-021 — Блокировка собеседника разлогинивает владельца
 
 **Title:** после блокировки переписки аккаунт владельца неожиданно теряет вход.
-**Status:** reported — один production QA случай; повтор и причина ожидают проверки. **Priority:** P2.
+**Status:** reported — one earlier signout observation; controlled block/unblock repeat on QA Worker did not reproduce it. Root cause of earlier observation remains unknown. **Priority:** P2.
 **Owner:** Марк / PM — назначить разработчика после подтверждения; QA: Борис.
 **Agent:** Борис. **Role:** QA. **Scope:** пользовательская проверка блокировки пары и состояния сессии; код не менялся.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** диагностика должна сопоставить состояние сессии и результат block API с UI Messages; причина пока неизвестна. Если подтвердится пересечение с PM-029 auth security, исполнитель обоснует повышение по D005. **Model check:** будущий Developer до реализации; claim отсутствует.
@@ -43,3 +43,5 @@
 ## PM triage — 2026-09-25
 
 **Agent:** Марк. **Role:** Product Manager. **Change:** сохраняю P2 до безопасного воспроизведения: единичное наблюдение, неизвестно, была ли потеря сессии результатом block API, UI или последующего входа `qa`. Влияние на основной путь и QA восстановление существенное; если подтверждается воспроизводимое разлогинивание владельца, поднять до P1. **Related task:** BUG-021 / PM-003 / PM-016 / PM-029. **Next:** Алексей помогает восстановить отдельный вход `lelik` без передачи пароля в docs; Борис повторяет block/unblock и фиксирует безопасные network status/версию; после evidence Марк отдаёт узкую диагностику свободному разработчику (кандидат Денис для Messages UI, при обнаружении backend/auth границы согласовать с Игорем). Нового claim разработчика этой записью нет.
+
+- 2026-09-25 ~15:25 UTC — **Agent:** Борис. **Role:** QA. **Scope:** production desktop Cloud Chrome; `lelik` host on QA Worker origin, `qa` guest on main, existing conversation. **Change:** clicked Block and accepted browser confirm. Host remained `lelik` with Logout and “Разблокировать собеседника”; after reload guest remained `qa` and saw “Собеседник заблокировал переписку.” Host clicked Unblock; host remained `lelik` with Block action restored, guest after reload regained message composer and Send. Pair left unblocked. **Result:** prior signout did not reproduce in this origin/account placement. Earlier single observation remains unresolved; shared browser cookie jar with another QA is a possible confounder, not established cause. **Assignment:** Марк / PM triage; developer not assigned; Борис / QA. **Related task:** BUG-021 / PM-003 / PM-016.
