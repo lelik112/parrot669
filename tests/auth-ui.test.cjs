@@ -53,9 +53,10 @@ function element(tag = 'div') {
   };
 }
 
-function setup(routes = {}, search = '') {
+function setup(routes = {}, search = '', {hash = '', sessionData = {}} = {}) {
   routes['/geocode/countries']??={body:[{code:'ES',name:'Spain'},{code:'FR',name:'France'},{code:'BY',name:'Belarus'}]};
   const nodes = new Map([...html.matchAll(/id="([^"]+)"/g)].map(match => [match[1], element()]));
+  nodes.get('host-profile-return').dataset.hostI18n='profileReturn';
   for (const id of ['login-form', 'register-form']) {
     const form = nodes.get(id);
     for (const key of ['login', 'username', 'email', 'password', 'displayName']) {
@@ -81,13 +82,14 @@ function setup(routes = {}, search = '') {
       ...element('document'),
       documentElement: {},
       getElementById: id => nodes.get(id),
-      querySelectorAll: selector => selector === '[data-auth-mode]' ? modes : [],
+      querySelectorAll: selector => selector === '[data-auth-mode]' ? modes :
+        selector === '[data-host-i18n]' ? [nodes.get('host-profile-return')] : [],
       createElement: element
     },
     navigator: {language:'en'},
     localStorage: {getItem() {return null;}, setItem() {}},
-    window: {location: {search, pathname:'/host', hash:'', origin:'https://parrot669.com'},addEventListener() {},scrollY:380,scrollTo(x,y){this.restoredScroll=y;this.scrollOptions=x;}},
-    sessionStorage: {values:new Map(),setItem(key,value){this.values.set(key,value);},getItem(key){return this.values.get(key)||null;},removeItem(key){this.values.delete(key);}},
+    window: {location: {search, pathname:'/host', hash, origin:'https://parrot669.com'},addEventListener() {},scrollY:380,scrollTo(x,y){this.restoredScroll=y;this.scrollOptions=x;}},
+    sessionStorage: {values:new Map(Object.entries(sessionData)),setItem(key,value){this.values.set(key,value);},getItem(key){return this.values.get(key)||null;},removeItem(key){this.values.delete(key);}},
     requestAnimationFrame: fn=>fn(),
     history: {replaceState() {}},
     Headers, URLSearchParams, AbortController, setTimeout, clearTimeout, confirm: () => true,
@@ -135,6 +137,38 @@ test('host profile saves public name, keeps account identity private and retains
   await form.emit('submit');
   assert.equal(form.elements.displayName.value,'New host');
   assert.equal(app.nodes.get('host-status').textContent,'Host name saved.');
+});
+
+test('profile return points to the same conversation only for the original signed-in account',async()=>{
+  const conversation='22222222-2222-4222-8222-222222222222';
+  const key='parrot669-profile-return';
+  const sessionData={[key]:JSON.stringify({accountId:'owner-1',conversationId:conversation,savedAt:Date.now()})};
+  const routes={
+    '/auth/me':{body:{accountId:'owner-1',email:'private@example.test',username:'owner',profile:{displayName:'Owner'}}},
+    '/dashboard':{body:{profile:{displayName:'Owner'},properties:[]}}
+  };
+  const owner=setup(routes,'?fromMessages=1',{hash:'#host-profile',sessionData});
+  await settle();
+  const back=owner.nodes.get('host-profile-return');
+  assert.equal(owner.nodes.get('host-profile').hidden,false);
+  assert.equal(back.hidden,false);
+  assert.equal(back.href,`/messages.html?conversation=${conversation}`);
+  owner.run("applyLanguage('ru')");
+  assert.equal(back.textContent,'← Вернуться к диалогу');
+  await owner.nodes.get('reset-host').emit('click');
+  assert.equal(back.hidden,true);
+  assert.equal(owner.run(`sessionStorage.getItem('${key}')`),null);
+
+  const different=setup({...routes,'/auth/me':{body:{...routes['/auth/me'].body,accountId:'other-account'}}},'?fromMessages=1',{hash:'#host-profile',sessionData});
+  await settle();
+  assert.equal(different.nodes.get('host-profile-return').hidden,true);
+  const anonymous=setup({},'?fromMessages=1',{hash:'#host-profile',sessionData});
+  await settle();
+  assert.equal(anonymous.nodes.get('host-profile').hidden,true);
+  assert.equal(anonymous.nodes.get('host-profile-return').hidden,true);
+  const stale=setup(routes,'?fromMessages=1',{hash:'#host-profile',sessionData:{[key]:JSON.stringify({accountId:'owner-1',conversationId:conversation,savedAt:Date.now()-86400001})}});
+  await settle();
+  assert.equal(stale.nodes.get('host-profile-return').hidden,true);
 });
 
 const cityId='locationiq:323126006243';

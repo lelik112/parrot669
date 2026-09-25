@@ -44,6 +44,8 @@
 .messages-thread-context{min-width:0;flex:1;overflow-wrap:anywhere}
 .messages-thread-context h2{margin:0;font-size:18px;line-height:1.3;color:var(--lime)}
 .messages-thread-context p{margin:5px 0 0;color:#aebdb5;font-size:13px}
+.messages-profile-link{flex-shrink:0;font-size:12px;text-align:center;min-height:44px;display:inline-flex;align-items:center}
+.messages-profile-link[hidden]{display:none}
 #msg-block{max-width:145px;text-align:right;font-size:11px}
 .messages-back{display:none}
 .messages-history{flex:1;min-height:80px;overflow-y:auto;overscroll-behavior:contain;padding:20px 22px;display:flex;flex-direction:column;gap:12px;overflow-anchor:none}
@@ -89,6 +91,7 @@
   .messages-thread-heading{padding:10px 12px;gap:10px;flex-wrap:wrap}
   .messages-back{display:block;flex-basis:100%;text-align:left}
   .messages-thread-context h2{font-size:16px}
+  .messages-profile-link{font-size:12px}
   #msg-block{max-width:105px;font-size:10px}
   .messages-history{padding:14px 12px}
   .message-bubble{max-width:90%;padding:10px 12px}
