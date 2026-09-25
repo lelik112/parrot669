@@ -15,9 +15,10 @@
 | Задача | Приоритет | Статус | Текущий/следующий шаг |
 | --- | --- | --- | --- |
 | **NOW — P1** | | | |
-| [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review | Борис / QA |
+| [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual sessions and A→B→A passed; block test signed out primary; currently both origins show qa | Борис / QA |
+| [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — dual sessions verified, but lelik session needs restoring after block test | Борис / QA |
 | [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
-| [PM-003](PM-003-contact-acceptance.md) | P1 | in progress | Борис: block/repeat contact |
+| [PM-003](PM-003-contact-acceptance.md) | P1 | blocked — contact/unread passed; test pair blocked; lelik access required |
 | [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review | Борис / QA |
 | [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
 | [PM-025](PM-025-search-contact-button-layout.md) | P1 | in review | Борис / QA |
@@ -27,6 +28,7 @@
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM |
 | **NOW — P2** | | | |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review | Борис / QA |
+| [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — one observation, reproduction needed | Марк / PM triage; Борис / QA |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review | Борис / QA |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review | Борис / QA |
@@ -55,7 +57,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
-| [PM-016](PM-016-qa-second-session-access.md) | P1 | done | Борис / QA || [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | done | Марк / PM |
+| [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | done | Марк / PM |
 | [PM-009](PM-009-team-identity.md) | P2 | done | Марк / PM |
 | [PM-019](PM-019-host-cabinet-ia.md) | P2 | done | Марк / PM |
 
