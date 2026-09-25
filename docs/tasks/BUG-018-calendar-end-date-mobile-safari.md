@@ -1,7 +1,7 @@
 # BUG-018 — Конечная дата не обновляется после выбора начальной
 
 **Title:** исправить выбор конца диапазона после изменения начальной даты на iPhone Safari.
-**Status:** in review — frontend выпущен, независимый QA на iPhone Safari ожидается. **Priority:** P2.
+**Status:** blocked — исправление выпущено, но обязательный ретест исходного нативного date picker на iPhone Safari недоступен Борису до [PM-015](PM-015-qa-mobile-device-environment.md)/[PM-039](PM-039-browser-test-environments.md). Доступную desktop регрессию можно выполнить отдельно; она не снимает блокер. **Priority:** P2.
 **Owner:** Игорь / Developer; QA: Борис.
 **Agent:** Игорь. **Role:** Developer. **Scope:** `public/assets/calendar-verification.js`, `tests/calendar-verification.test.cjs` и связанные документы; Host, backend и Airbnb sync не меняю.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** локальный UI-дефект, но требуется сохранить действующую семантику диапазона и воспроизвести поведение в iPhone Safari.
@@ -49,7 +49,7 @@
 
 ## Dependencies
 
-[PM-001](PM-001-calendar-control-dates.md), [PM-015](PM-015-qa-mobile-device-environment.md). Не менять код в общей Host области без сверки claim PM-021.
+[PM-001](PM-001-calendar-control-dates.md), [PM-015](PM-015-qa-mobile-device-environment.md), [PM-039](PM-039-browser-test-environments.md). Разблокировка: реальный управляемый iPhone Safari, шаги выбора дат, сохранение тестового задания без вмешательства в брони. Не менять код в общей Host области без сверки claim PM-021.
 
 ## Evidence
 
@@ -63,3 +63,5 @@ Owner-assisted прогон с Борисом: iPhone Safari; после выб�
 - 2026-09-25 07:00 UTC — **Agent:** Игорь. **Role:** Developer. **Scope:** только ввод первой/последней ночи в форме `calendar-verification.js`, её тесты и handoff; не трогаю общий `host.js` Дениса, PM-001 backend, iCal и PM-021. **Change:** беру BUG-018 в ветке `igor/bug018-calendar-end` после проверки свежего `main` и границ PM-021. В UI найдено отсутствие синхронизации `to` при смене `from`; на реальном iPhone Safari ещё не воспроизвёл, фактическое наблюдение владельца приведено в Evidence. **Model check:** Sol / Medium достаточно для локальной frontend-правки; отдельную Safari-проверку проведёт Борис/владелец на устройстве. **Related task:** BUG-018. **Next:** исправить сброс конца и старт нативного picker с новой даты, проверить отправляемый диапазон, локальные тесты и CI, затем передать QA.
 - 2026-09-25 — **Agent:** Игорь. **Role:** Developer. **Change:** исправил локальное состояние формы: при новом `from` выставляются `to.min` и `to.value` в первую выбранную ночь, при очистке обе даты снова пусты. Старый конец из другого месяца больше не сохраняется; отправка после выбора последней ночи использует новое значение. Локально прошли 117 frontend-тестов, в том числе регрессия с переходом ноябрь → февраль и JSON задания. Реальный iPhone Safari пока не воспроизведён разработчиком, поэтому acceptance по устройству открыт. **Related task:** BUG-018. **Next:** frontend CI/публикация, затем Борис проверяет выбор дат на настоящем iPhone Safari и desktop регрессию без изменения рабочего календаря.
 - 2026-09-25 07:06 UTC — **Agent:** Игорь. **Role:** Developer. **Change:** PR #27 слит как `9a1bb54`; PR/main CI зелёные, публичный JS побайтно совпал с изменённым файлом (`e8274a0…` SHA-256). Задача передана Борису в `in review` для реального iPhone Safari: выбрать первую ночь позже ранее выбранной последней (желательно в другом месяце), открыть picker последней ночи, проверить что он начинает с новой первой ночи без перелистывания, выбрать последнюю ночь и проверить сохранённое задание; desktop отдельно. Устройство/iOS/Safari версию записать. **Related task:** BUG-018 / PM-001. **Next:** Борис отмечает факты и остающиеся ограничения, не меняя реальные брони.
+
+- 2026-09-25 — **Agent:** Марк. **Role:** Product Manager. **Change:** после сверки QA evidence уточнил состояние и конкретный ресурсный блокер mobile/native по [PM-039](PM-039-browser-test-environments.md); частичный desktop/owner-assisted PASS сохранён, независимая мобильная приёмка не выдана. **Related task:** BUG-018 / PM-039. **Next:** выполнить оставшийся доступный web ретест, если есть; для обязательного native/mobile — подтвердить самостоятельную среду QA и пройти отдельный ретест.
