@@ -38,7 +38,7 @@
 | [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | blocked — внешнее изменение/источник | Борис / QA после доступа; Алексей — Airbnb |
 | [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | done — D009 принят владельцем | Марк / Product Manager |
 | [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | in review — desktop/keyboard partial PASS; BUG-016 по возврату позиции, touch ждёт PM-015 | Денис / Developer; QA Борис |
-| [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | P2 | in progress — MVP на существующем имени хозяина | Денис / Developer |
+| [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | P2 | in review — frontend PR #21 и backend PR #25 merged; frontend live check и независимая QA открыты | Денис / Developer; QA Борис |
 | [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | later | planned — LATER, зависит от PM-002/021 | Не назначен |
 | [PM-023](PM-023-guest-message-onboarding.md) | Путь гостя к первому сообщению | P1 | planned — после PM-024 и текущей работы PM-020/021 | Не назначен |
 | [PM-024](PM-024-contact-from-every-search-result.md) | Контакт с хозяином из каждого результата | P1 | in review — оба релиза и live search подтверждены; двухаккаунтная QA открыта | Игорь / Developer; QA Борис |
