@@ -144,3 +144,8 @@ Additional read-only live negative checks: direct backend `GET /api/auth/me` wit
 ## Recovery redirect follow-up — 2026-09-25
 
 **Agent:** Игорь. **Role:** Developer. **Related task:** PM-036. **Change:** после трёх 403 на QA `/api/auth/password-reset/request` первая версия редиректа recovery page (PR #55) прошла CI и была задеплоена, но live GET продолжал показывать форму на QA hostname: Cloudflare Assets перехватывает статический `/recover.html`, канонизирует его в `/recover` и Worker не выполняется. Follow-up включает оба адреса в `run_worker_first` и переадресует оба на основной `parrot669.com`. QA reset API остаётся закрытым. Проверить live A и B после деплоя; `qa2` пароль восстанавливает владелец через основную страницу, затем Никита повторяет вход и logout/relogin B.
+
+
+## QA recovery navigation release — 2026-09-25
+
+**Agent:** Игорь. **Role:** Developer. **Related task:** PM-036. **Change:** исправление в [PR #55](https://github.com/lelik112/parrot669/pull/55) и Cloudflare Assets follow-up в [PR #56](https://github.com/lelik112/parrot669/pull/56) прошли frontend CI и влиты в main `bf96140`. Manual [deploy run #3](https://github.com/lelik112/parrot669/actions/runs/36182550835) завершился SUCCESS; live browser открытие `/recover.html?lang=ru` на regression A и `/recover?lang=ru` на regression B привело к `https://parrot669.com/recover?lang=ru`. Запрет QA reset API (`403`) остаётся намеренным. Пользователь допустил, что повторно вводил `q2` вместо фактического username `qa2`; это объясняет 401, но требует проверки успешным входом. Никита проверяет login/logout A, затем B; пока не считать full PM-036 acceptance пройденным.
