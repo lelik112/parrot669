@@ -1,9 +1,9 @@
 # BUG-019 — Поиск не показывает аккаунт и не объясняет скрытый контакт
 
 **Title:** показать текущий аккаунт в поиске и явно пометить собственный объект.
-**Status:** planned — NEXT; claim разработчика отсутствует. **Priority:** P2.
-**Owner:** не назначен; нужен claim разработчика. QA: Борис.
-**Agent:** будущий Developer. **Role:** Developer. **Scope:** индикатор входа и подпись карточки собственного объекта на странице поиска; без изменения правил доступа к сообщениям.
+**Status:** in progress. **Priority:** P2.
+**Owner:** Денис / Developer; QA: Борис.
+**Agent:** Денис. **Role:** Developer. **Scope:** `public/search.html`, `public/assets/search.js`, `public/assets/messaging-common.js`, `public/assets/styles.css`, search/messaging UI tests, and this task/index; account indicator and own-property label only, with no changes to messaging access rules.
 **Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** небольшой локализованный UI-текст; важно сохранить публичный поиск и запрет писать самому себе.
 
 ## Problem
@@ -50,3 +50,4 @@
 ## Discussion / Updates
 
 - 2026-09-25 — **Борис / QA:** оформил P2 по owner-assisted наблюдению Алексея. Правило скрывать сообщение на собственной карточке подтверждено в коде и не считается функциональной ошибкой. **Next:** разработчик берёт claim после сверки области; добавить явную метку собственного объекта и индикатор аккаунта, затем передать на desktop/iPhone Safari QA.
+- 2026-09-25 09:26 UTC — **Agent:** Денис. **Role:** Developer. **Scope:** индикатор username текущей сессии в поиске и локализованная метка собственной карточки; правила контакта и доступа остаются прежними. **Change:** беру BUG-019 после сверки свежего `main`, незакрытых claims и файлов поиска. **Model check:** рекомендованные Luna / Low достаточно для локальной frontend-правки и UI-тестов; текущая конфигурация справляется, повышения не требуется. **Related task:** BUG-019. **Next:** реализовать account chip и метку `Your property` по фактическому owner-profile match, добавить RU/EN/ES/CA и signed-out/self/other regressions, затем открыть PR и передать Борису desktop/iPhone Safari QA.
