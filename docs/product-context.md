@@ -4,6 +4,12 @@ This file is the handoff/source-of-truth for continuing product work if chat con
 
 **Quick route:** [product direction and team](#product-direction-and-team-coordination) → [current product](#current-product) → [guest and host flows](#current-user-flows) → [verification direction](#verification-direction) → [immediate TODO](#immediate-todo). For today's delivery/QA status use [status.md](status.md); for decisions use [decisions/](decisions/README.md). Historical implementation details below stay available by section and task ID.
 
+## PM-037 — search range protection (implementation in review)
+
+**Agent:** Игорь. **Role:** Developer. **Related task:** [PM-037](tasks/PM-037-search-date-range-bound.md), [D014](decisions/D014-public-search-date-range.md). One public search accepts 1–366 checkout-exclusive nights. Backend rejects 367+ before repository access using the existing 400 `{error}` response and computes the difference as Long before narrowing. Public search dates use valid `YYYY-MM-DD` in years 0001–9999; signed/extended/year-zero and impossible dates return 400. Owner availability periods and rental duration are unaffected.
+
+The search UI explains the request limit in EN/ES/CA/RU, preserves dates and filters, and never substitutes a shorter stay. Boundary, restoration, language switching and date propagation to contact are tested. Isolated PostgreSQL performance measurements and CI are pending; this section describes the proposed implementation, **not a production release or independent QA acceptance**. Backend [PR #29](https://github.com/lelik112/parrot669-backend/pull/29) includes the reproducible benchmark.
+
 ## Product direction and team coordination
 
 PARROT helps guests find housing that is available for their dates and reach its owner. The MVP must establish that owners add useful availability, guests find suitable housing, and contact takes place. Feature count is not evidence of those outcomes.

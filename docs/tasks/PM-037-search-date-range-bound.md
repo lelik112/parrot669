@@ -2,7 +2,7 @@
 
 **Title:** определить и ограничить число ночей в одном публичном запросе поиска.
 
-**Status:** in progress / NEXT — продуктовый контракт [D014](../decisions/D014-public-search-date-range.md) принят, Игорь принял разработку по поручению Алексея; изолированные замеры начаты, QA не начата. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **suggested developer:** Игорь / Developer для измерений и реализации после отдельного claim. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
+**Status:** in progress / NEXT — продуктовый контракт [D014](../decisions/D014-public-search-date-range.md) принят, Игорь принял разработку по поручению Алексея; изолированные замеры начаты, QA не начата. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** контракт и критерии; реализацию и замеры проводит назначенный разработчик.
 
@@ -38,7 +38,7 @@
 
 ## Dependencies
 
-Продуктовая граница теперь согласована в D014. До выпуска нужен замер верхней границы и возможное уточнение решения по результатам. PM-030 QA-очередь имеет приоритет; Игорь — рекомендованный исполнитель из-за backend-аудита, но dev claim нет. После реализации — независимая проверка Бориса или отдельно согласованного QA.
+Продуктовая граница теперь согласована в D014. До выпуска нужен замер верхней границы и возможное уточнение решения по результатам. PM-030 QA-очередь имеет приоритет; Игорь принял разработку по поручению Алексея; claim ниже. После реализации — независимая проверка Бориса или отдельно согласованного QA.
 
 ## PM update — 2026-09-25
 
@@ -48,3 +48,7 @@
 ## Developer claim — 2026-09-25
 
 **Agent:** Игорь. **Role:** Developer. **Change:** по прямому поручению Алексея беру PM-037: изолированный замер 7/30/90/366 ночей, backend validation до SQL и UI-ошибка EN/ES/CA/RU без потери дат. **Scope:** search package, SearchSuite/smoke/benchmark, public/assets/search.js и search UI tests; host/PM-038 не затрагиваю. **Related task:** PM-037 / D014. **Branches:** `igor/pm037-search-range` в обоих репозиториях. Production нагрузочно не тестирую. Измерения и вывод о 366 передаются PM; неприемлемый результат блокирует выпуск.
+
+## Implementation — 2026-09-25
+
+**Agent:** Игорь. **Role:** Developer. **Change:** backend [PR #29](https://github.com/lelik112/parrot669-backend/pull/29): 1–366, Long before Int, 400 before repository, safe four-digit dates. Frontend: localized request-limit warning, no input truncation, restoration and contact-path checks. Isolated benchmark runs on GitHub Actions PostgreSQL 16, using 5,000 synthetic properties / 100 and 500 per queried city; these are declared scenarios, not measured production inventory. CI/benchmark and release decision pending. Host/PM-038 files are not touched. **Related task:** PM-037.
