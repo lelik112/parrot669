@@ -1,7 +1,7 @@
 # PM-025 — Исправить расположение кнопки контакта в веб-выдаче
 
 **Title:** исправить расположение «Написать владельцу» в веб-выдаче; отдельно проверить мобильную.
-**Status:** in progress — web layout fix; mobile check pending. **Priority:** P1.
+**Status:** in review — web fix deployed and live checked; mobile and independent QA pending. **Priority:** P1.
 **Owner:** Денис / Developer; QA Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** frontend contact CTA и соседние действия внутри карточки поиска; без backend и contact/auth semantics.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** локальный responsive UI-дефект, но кнопку нужно проверить с несколькими состояниями карточки и языками.
@@ -37,7 +37,7 @@
 
 ## Acceptance criteria
 
-- [ ] В веб-версии дефект воспроизведён до исправления; фактическое и ожидаемое положение зафиксированы viewport, шагами и скриншотом.
+- [x] В веб-версии дефект воспроизведён до исправления; фактическое и ожидаемое положение зафиксированы viewport, шагами и скриншотом.
 - [ ] Мобильная версия проверена отдельно; результат записан без предположения, что там был баг.
 - [ ] Contact CTA визуально находится внутри нужной карточки при всех проверенных состояниях.
 - [ ] Нажатие ведёт к обращению именно по этой карточке и сохраняет даты.
@@ -66,7 +66,7 @@
 
 ## Evidence
 
-Наблюдение владельца в веб-версии, уточнено 2026-09-25; мобильная версия им не проверялась. Оригинал скриншота не сохранён в docs.
+Наблюдение владельца в веб-версии, уточнено 2026-09-25; мобильная версия им не проверялась. Оригинал скриншота не сохранён в docs. Собственные production-снимки: [до](../evidence/PM-025-web-before.jpg), [после](../evidence/PM-025-web-after.jpg).
 
 ## Discussion / Updates
 
@@ -76,3 +76,5 @@
 - 2026-09-25 07:12 UTC — **Денис / Developer:** беру PM-025 по прямому поручению Алексея. **Agent:** Денис. **Role:** Developer. **Scope:** frontend responsive layout кнопки контакта внутри search-result card, RU/EN/ES/CA, desktop/mobile и клавиатура; backend и правила сообщений вне scope. **Model check:** Sol / Medium достаточен: дефект локальный, нужны несколько состояний карточки и viewport. **Change:** claim, статус in progress. **Related task:** PM-025. **Branch:** `denis/pm025-contact-layout`. **Следующий шаг:** сверить свежий main, воспроизвести web-сдвиг, проверить mobile отдельно, затем исправить и передать Борису на QA.
 
 - 2026-09-25 07:17 UTC — **Денис / Developer:** воспроизвёл на production `/search` в Chrome, viewport 1363×936, стандартный zoom, RU, Barcelona, 01–08.10.2026. Три карточки: у первой правая граница 463 px, у кнопки контакта — 512 px; она выступает на 49 px и заходит на соседнюю карточку. [Скриншот до исправления](../evidence/PM-025-web-before.jpg). Причина: в footer подпись владельца и `.availability-links` конкурируют за 345 px, а ссылки не сжимаются (`flex: 0 0 auto`, суммарная ширина footer 419 px). **Agent:** Денис. **Role:** Developer. **Change:** локально перестроил footer вертикально, ограничил ширину ссылок и сделал contact CTA на ширину карточки; property ID/даты и логику отправки не менял. **Related task:** PM-025. **Проверки:** `npm test` 117/117 PASS, `git diff --check` PASS. **Следующий шаг:** PR/CI и live web ретест; mobile отдельно остаётся для responsive и независимого touch QA.
+
+- 2026-09-25 07:32 UTC — **Денис / Developer:** PR [#29](https://github.com/lelik112/parrot669/pull/29) слит в `main` (`c7cd14d`); frontend CI и Cloudflare Workers build для PR и `main` завершились SUCCESS (production build `6ddbcfeb-3b32-4e59-95ae-733aaa1bbb71`). После выкладки проверил Chrome 1363×936, RU, Barcelona, 01–08.10.2026: три карточки; contact CTA у каждой заканчивается за 25 px до правого края своей карточки, footer `scrollWidth=width=345 px`. [Скриншот после](../evidence/PM-025-web-after.jpg). Переключил RU/EN/ES/CA: 3 CTA на каждом языке, без выхода за край. Ссылки сохранили разные property ID и даты `from=2026-10-01&to=2026-10-08`. **Agent:** Денис. **Role:** Developer. **Change:** web fix опубликован, статус in review. **Checks:** `npm test` 117/117 PASS, PR/main CI и Cloudflare SUCCESS, live web smoke PASS. **Handoff Борису / QA:** независимо проверить web с external link/verification status/длинным текстом, клавиатуру и переход по CTA; отдельно мобильный экран 390 px и фактический touch, зафиксировать, был ли там дефект. Мобильный результат не подтверждён этим web-smoke; acceptance оставлены открытыми до QA. **Related task:** PM-025.

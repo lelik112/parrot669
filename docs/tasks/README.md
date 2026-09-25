@@ -42,7 +42,7 @@
 | [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | later | planned — LATER, зависит от PM-002/021 | Не назначен |
 | [PM-023](PM-023-guest-message-onboarding.md) | Путь гостя к первому сообщению | P1 | in progress — Игорь взял frontend guest draft/auth flow | Игорь / Developer; QA Борис |
 | [PM-024](PM-024-contact-from-every-search-result.md) | Контакт с хозяином из каждого результата | P1 | in review — оба релиза и live search подтверждены; двухаккаунтная QA открыта | Игорь / Developer; QA Борис |
-| [PM-025](PM-025-search-contact-button-layout.md) | Расположение кнопки контакта в веб-выдаче | P1 | in progress — web-воспроизведение и mobile check | Денис / Developer; QA Борис |
+| [PM-025](PM-025-search-contact-button-layout.md) | Расположение кнопки контакта в веб-выдаче | P1 | in review — web выпущен и live проверен; mobile и независимая QA открыты | Денис / Developer; QA Борис |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | Убрать дублирующий Messages shortcut | P2 | in review — Денис завершил frontend; ждёт независимый QA | Денис / Developer; QA Борис |
 | [PM-027](PM-027-open-property-from-messages.md) | Открыть карточку объекта из диалога | P2 | planned — после стабилизации PM-020/021 | Не назначен |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | planned — после PM-021; private view | Не назначен |
