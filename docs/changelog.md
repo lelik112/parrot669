@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — D015 / PM-039: QA environment blockers made explicit
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по поручению Алексея принял [D015](decisions/D015-qa-environment-blocked-status.md) и отделил реально заблокированный real-device/native acceptance от доступной desktop QA: PM-015/007/025/BUG-018 и PM-014/004 получили `blocked` с конкретными условиями; PM-023/001/026/BUG-020/BUG-019/PM-020/PM-028 остаются `in review` с отдельными mobile-блокерами. Частичные PASS Бориса и owner-assisted наблюдения сохранены. В [PM-039](tasks/PM-039-browser-test-environments.md) Марк записал claim, сравнение бесплатного browser emulation и платных реальных устройств с ценами/источниками; ни одна подписка, техническая настройка или независимая мобильная QA не выполнена. Синхронизированы PM-030, индекс, status, roadmap, product-context. **Related tasks:** PM-030, PM-039.
+
 ## 2026-09-25 — PM-036: qa2/qa3 access provisioned and two live sessions
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** after Aleksey approved the two exact existing account IDs, added their rows through Railway Database UI to `qa_origin_account_allowlist`. Read-back shows exactly four verified participants (`qa`, `lelik`, `qa2`, `qa3`). Owner entered credentials through secure sign-in; `qa2` on regression A and `qa3` on regression B both signed in and retained their own identities across alternating reloads. Updated the tester procedure with the actual account/origin mapping. Backend code and deployments were not changed. Messaging A↔B, logout/relogin and independent security/QA acceptance remain open. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
