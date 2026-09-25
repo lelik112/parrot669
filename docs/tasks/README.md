@@ -48,7 +48,7 @@
 | [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | in review — frontend выпущен, host/guest и mobile QA открыты | Денис / Developer; QA Борис |
 | [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | Конечная дата не обновляется после выбора начала на iPhone Safari | P2 | in review — frontend выпущен, iPhone Safari и desktop QA впереди | Игорь / Developer; QA Борис |
 | [BUG-019](BUG-019-search-account-context.md) | Поиск не показывает аккаунт и не объясняет скрытый контакт | P2 | planned — NEXT; claim разработчика отсутствует | Не назначен; QA Борис |
-| [BUG-020](BUG-020-unread-message-discoverability.md) | Новое сообщение не выделяется во входящих | P2 | assigned — диагностика сейчас; кодовые изменения после handoff PM-027 | Денис / Developer; QA Борис |
+| [BUG-020](BUG-020-unread-message-discoverability.md) | Новое сообщение не выделяется во входящих | P2 | in progress — frontend unread presentation | Денис / Developer; QA Борис |
 
 Статусы задач: `planned`, `in progress`, `blocked`, `in review`, `done`, `rejected`. У `blocked` обязательно указаны причина и следующее действие. Статусы фич в roadmap используют отдельный короткий перечень из поручения владельца.
 

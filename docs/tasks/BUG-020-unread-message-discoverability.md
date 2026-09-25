@@ -1,7 +1,7 @@
 # BUG-020 — Новое сообщение не выделяется во входящих
 
 **Title:** ясно показывать непрочитанное сообщение в списке диалогов и пункте «Сообщения».
-**Status:** assigned to Денис / Developer — диагностика назначена; claim и Model check ожидаются. Кодовые изменения координировать с активной PM-027. **Priority:** P2.
+**Status:** in progress — Денис диагностирует и исправляет presentation unread. **Priority:** P2.
 **Owner:** Денис / Developer; QA: Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** индикация непрочитанного и исходное отображение строки диалога; не менять правила доступа, отправки или блокировок сообщений.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** root cause пока неизвестен; нужно пройти цепочку unread API → polling → состояние строки/вкладки, сохранив текущую семантику прочтения.
@@ -74,3 +74,5 @@
 - **Assignment:** Денису поручена диагностика, так как он освободился после PM-028. Claim и Model check Sol / Medium пока ожидаются от него. В начале проверить действительные ответы unread API и polling interval, затем состояние DOM/CSS до и после открытия треда. Не менять read semantics, приватность, messaging backend или rate limits в рамках минимального UI fix без отдельного решения.
 - **Coordination:** PM-027 Игоря ещё в работе и пересекается по Messages frontend. Диагностику можно вести сейчас; изменения общих файлов — после handoff PM-027 или явного согласования с Игорем.
 - **Next:** Denis records claim/model check, confirms exact files with Igor, reproduces the owner-assisted case, then implements smallest fix and hands off to Boris for desktop/iPhone Safari QA.
+
+- 2026-09-25 08:30 UTC — **Денис / Developer:** беру BUG-020 по прямому поручению Алексея. **Agent:** Денис. **Role:** Developer. **Scope:** frontend presentation пункта Messages и строки inbox, чтение существующего unread API/polling, без backend/read semantics или PM-027 deep link. **Model check:** Sol / Medium достаточно для сквозной диагностики и узкой UI-правки. **Change:** claim, статус in progress. **Related task:** BUG-020. **Branch:** `denis/bug020-unread`. PM-027 Игоря уже merged/in review ([PR #33](https://github.com/lelik112/parrot669/pull/33)); общие файлы доступны после её handoff. **Найдено:** мобильная активная вкладка и бейдж имеют одинаковый лаймовый фон; строка с unreadCount не имеет общего unread-оформления. Backend SQL считает лишь входящие выше read sequence, frontend опрашивает inbox раз в 15 секунд и общий unread раз в 30 секунд; прочтение подтверждается только при видимой истории в фокусе и прокрутке вниз. **Следующий шаг:** проверить live DOM/API, добавить явное состояние строки и контрастный badge без изменения read semantics; затем тесты и QA Бориса.
