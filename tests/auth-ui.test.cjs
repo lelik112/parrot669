@@ -691,6 +691,12 @@ test('mobile menu has one Housing entry opening search; search stays left of hos
     const tabs = page.match(/<nav class="housing-tabs"[^>]*>([\s\S]*?)<\/nav>/)[1];
     assert.deepEqual([...tabs.matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['/search.html', '/host.html', '/messages.html']);
   }
+  const messages = fs.readFileSync(path.join(root, 'public/messages.html'), 'utf8');
+  for (const page of [html, messages]) {
+    assert.equal((page.match(/href="\/messages\.html"/g) || []).length, 1);
+    assert.equal((page.match(/data-msg-unread/g) || []).length, 1);
+  }
+  assert.match(html, /<nav class="host-shortcuts"[^>]*>[\s\S]*href="#property-panel"[\s\S]*href="#host-profile"[\s\S]*<\/nav>/);
   assert.doesNotMatch(css, /\.housing-tabs[^{}]*\{[^}]*\border\s*:/);
   assert.match(css, /\.housing-tabs a\.active\{background:var\(--lime\)/);
   assert.match(html, /class="active housing-host-link" aria-current="page"/);
