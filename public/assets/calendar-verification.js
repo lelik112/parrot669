@@ -116,7 +116,14 @@
         busy=false;if(!disposed){render();schedule();}
       }
     }
-    from.addEventListener("input",()=>{formError="";text(notice,error);});
+    function alignLastNight(){
+      // The native date picker opens around its selected value, not just its min.
+      to.min=from.value;
+      to.value=from.value;
+      formError="";text(notice,error);
+    }
+    from.addEventListener("input",alignLastNight);
+    from.addEventListener("change",alignLastNight);
     to.addEventListener("input",()=>{formError="";text(notice,error);});
     button.addEventListener("click",()=>load(action));
     function visible(){if(document.visibilityState!=="hidden")void load();else clearTimeout(timer);}

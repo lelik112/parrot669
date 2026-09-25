@@ -326,6 +326,8 @@ Search may show host nickname now, but should not expose raw contact by default.
 
 ## Calendar control verification — v1 history and PM-001 implementation
 
+The owner-assisted iPhone Safari `open` test completed for 17–18 February 2027 and the original Airbnb block was restored. [BUG-018](tasks/BUG-018-calendar-end-date-mobile-safari.md) covers the observed native date-picker problem: changing the first night left the last-night picker on its previous date/month. The owner form now assigns the new first night to the last-night input and its minimum on `input`/`change`; both dates are inclusive as before. Production iPhone Safari retest and remaining independent PM-001 QA are open. This affects only the browser form, not the saved challenge or iCal semantics.
+
 Before PM-001, v1 started from a fresh iCal baseline and accepted any observed change in future unavailable ranges. PARROT did not store a user-selected challenge range in v1. A new or cancelled reservation on unrelated dates could therefore pass the check. Previously issued v1 statuses must not be treated as evidence that a specific user completed a specific date challenge.
 
 The owner's clarification on **2026-09-24** supersedes that behavior as the target requirement:
