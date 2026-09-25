@@ -1,8 +1,8 @@
 # PM-024 — Контакт с хозяином из каждого результата поиска
 
 **Title:** дать гостю действующий путь написать хозяину любого объекта, который PARROT показывает в поиске.
-**Status:** planned — NOW по D011; исполнитель не назначен. **Priority:** P1.
-**Owner:** будущий Developer; QA Борис.
+**Status:** planned — NOW по D011; назначена Игорю, claim и Model check ожидаются. **Priority:** P1.
+**Owner:** Игорь / Developer (назначен Алексеем 2026-09-25; claim не подтверждён); QA Борис.
 **Agent:** будущий Developer. **Role:** Developer. **Scope:** выдача поиска, contact options и правила первого сообщения; не публикация личных контактов.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** задача меняет связанный frontend/backend contract контакта, общий host opt-in и антиабьюзные границы.
 
@@ -76,4 +76,5 @@
 
 ## Discussion / Updates
 
-- 2026-09-24 — **Марк / Product Manager:** оформлено принятое владельцем решение D011 и задача реализации. **Next:** Developer делает claim и Model check; Борис проводит независимый end-to-end QA.
+- 2026-09-24 — **Марк / Product Manager:** оформлено принятое владельцем решение D011 и задача реализации.
+- 2026-09-25 — **Марк / Product Manager:** Алексей поручил PM-024 Игорю. Это назначение, не claim: перед началом Игорю нужно подтвердить claim и Model check по D005. **Next:** Игорь фиксирует claim/model check; Борис проводит независимый end-to-end QA.
