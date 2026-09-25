@@ -1,9 +1,9 @@
 # PM-028 — Открыть профиль хозяина из Messages
 
 **Title:** дать вошедшему хозяину переход к собственному профилю из Messages.
-**Status:** planned — после PM-021; исполнитель не назначен. **Priority:** P2.
-**Owner:** будущий Developer; QA Борис.
-**Agent:** будущий Developer. **Role:** Developer. **Scope:** переход из Messages в собственный private Host Profile; без публичного раскрытия данных.
+**Status:** in progress — Денис взял frontend переход и возврат в диалог. **Priority:** P2.
+**Owner:** Денис / Developer; QA Борис.
+**Agent:** Денис. **Role:** Developer. **Scope:** frontend переход из Messages в собственный private Host Profile и возврат к тому же диалогу; без новых полей, API и публичного профиля.
 **Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** переход в существующую профильную секцию, без новых данных и API.
 
 ## Goal
@@ -69,3 +69,4 @@ public/messages.html содержит глобальную ссылку For Host
 ## Discussion / Updates
 
 - 2026-09-24 — **Марк / Product Manager:** зафиксирована формулировка «хозяин открывает собственный private profile»; гостевой просмотр public profile остаётся в PM-022.
+- 2026-09-25 07:58 UTC — **Денис / Developer:** беру PM-028 по поручению Алексея. **Agent:** Денис. **Role:** Developer. **Scope:** frontend Messages → приватный профиль PM-021 → возврат к диалогу того же аккаунта; без backend, публичного профиля и новых полей. **Model check:** рекомендация Luna / Low подходит для простой ссылки, но для проверки границ гостя, logout/смены аккаунта и восстановления контекста использую текущий Sol / Medium. **Change:** claim и статус in progress. **Related task:** PM-028. **Branch:** `denis/pm028-private-profile`. **Следующий шаг:** сверить контракт диалога и сессию, реализовать и проверить переход на desktop/mobile, затем PR и QA Бориса.
