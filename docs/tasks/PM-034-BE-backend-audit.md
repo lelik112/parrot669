@@ -2,7 +2,7 @@
 
 **Title:** детально проверить backend находки обзорного [PM-034](PM-034-backend-frontend-refactoring-audit.md).
 
-**Status:** in progress / NEXT — Игорь claim 2026-09-25 13:53 UTC. **Priority:** P2. **Owner:** Игорь / Developer.
+**Status:** done — read-only отчёт Игоря передан Марку 2026-09-25; PM-034 остаётся in progress до сводки Марка. **Priority:** P2. **Owner:** Игорь / Developer.
 
 **Agent:** Игорь. **Role:** Developer. **Scope:** только read-only backend аудит в `lelik112/parrot669-backend`, отчёт; без реализации. **Branch:** `igor/pm034-be-audit` в frontend docs; backend `main` только читается.
 
@@ -40,3 +40,7 @@
 ## Dependencies
 
 QA первой волны и безопасность текущих claims; frontend аудит [PM-034-FE](PM-034-FE-frontend-audit.md) идёт независимо по своей карточке. Репозиторий не будит Игоря автоматически.
+
+## Report / handoff — 2026-09-25
+
+**Agent:** Игорь. **Role:** Developer. **Change:** закончил read-only аудит backend `main` `3e35c46`; полный отчёт с permalink на код, выведенным числом SQL для 1/10/50, failure path, новым риском длинного интервала, границами модулей и legacy callers — в [PM-034-backend.md](logs/PM-034-backend.md). **Related task:** PM-034-BE. **Checks:** сверены код, миграции, существующие тесты/smoke и frontend Worker; runtime benchmark не выполнен (в среде нет sbt/PostgreSQL); production/CI/деплой не менялись. **Next:** Марк сверяет с PM-034-FE/QA, решает допустимую длительность поиска и открывает только узкие доказанные задачи. Кодовый рефакторинг не начинался.
