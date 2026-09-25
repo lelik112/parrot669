@@ -1,7 +1,11 @@
 # PM-043 pilot — один безвредный check-in
 
-**State:** assigned.
+**State:** done.
 **Assigned to:** Игорь / Developer.
+**Claimed by:** Игорь / Developer.
+**Claimed at:** 2026-09-25 20:49:22 UTC.
+**Result:** test read + CAS write succeeded; one assigned task was claimed and completed by the scheduled run without a new user message.
+**Chat target:** scheduler returned the same existing conversation ID as this Igor chat (fingerprint: 6ab26f…6791); full ID intentionally omitted from this public repo.
 **Assignment ID:** PM-043-PILOT-20260925-2046.
 **Created:** 2026-09-25 20:46 UTC.
 **Scope:** только эта тестовая карточка. Никакого кода продукта, production/QA аккаунтов, секретов, задач других агентов или фонового цикла.
