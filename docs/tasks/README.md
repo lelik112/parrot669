@@ -1,6 +1,6 @@
 # Команда PARROT 669 и задачи
 
-Общая точка входа для `lelik112/parrot669` и `lelik112/parrot669-backend`. Координатор: **Марк / PM**. Обновлено: **2026-09-24**.
+Общая точка входа для `lelik112/parrot669` и `lelik112/parrot669-backend`. Координатор: **Марк / PM**. Обновлено: **2026-09-25**.
 
 Перед началом: [product-context](../product-context.md) → [правила AI-команды и моделей](../ai-team.md) → [changelog](../changelog.md) → [команда и идентификация](../team.md) → [status](../status.md) → выбранная задача. Приоритеты и фичи — в [roadmap](../roadmap.md), продуктовые решения — в [decisions](../decisions/README.md).
 
