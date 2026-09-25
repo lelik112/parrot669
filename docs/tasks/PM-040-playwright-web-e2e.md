@@ -1,11 +1,11 @@
 # PM-040 — Playwright для повторяемого браузерного QA
 
 **Title:** внедрить небольшой воспроизводимый Playwright smoke и путь расширения регрессии.
-**Status:** planned / NOW — решение принято, developer claim отсутствует. **Priority:** P1.
+**Status:** in progress — Денис внедряет первый локальный web smoke и CI; двухаккаунтный сценарий зависит от PM-036. **Priority:** P1.
 **Owner:** Марк / PM — постановка; **кандидат на Developer:** Денис после handoff BUG-020 и сверки пересекающихся задач; **QA:** Никита / Regression QA для повторяемых сценариев, Борис / Acceptance QA для критического пути. Назначение в карточке не означает claim.
-**Agent:** Денис / Developer — ожидаемый исполнитель, подтверждение claim отсутствует.
+**Agent:** Денис / Developer — claim 2026-09-25.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** настройка браузерных проектов, изоляции сеансов, стабильных E2E и CI в существующем frontend без переписывания приложения.
-**Model check:** исполнитель фиксирует до реализации и согласует расширение scope при необходимости.
+**Model check:** Sol / Medium достаточно для ограниченного Playwright smoke и CI; PM-036 security/backend в scope Игоря, здесь не расширяю права.
 
 ## Goal
 
@@ -53,4 +53,5 @@
 
 ## Discussion / Updates
 
+- 2026-09-25 19:23 UTC — **Денис / Developer claim:** беру PM-040 по поручению Алексея. **Scope:** frontend Playwright, локальный контролируемый API fixture для публичного поиска и guest draft, Chromium/WebKit/mobile emulation, безопасные короткие UI-проверки, CI и матрица открытых задач. Сверил BUG-020 (PR #53 merged, live QA ещё открыт), BUG-022 (reported, не исправляю здесь), PM-029 (in review), PM-036 (relogin qa2 blocked), существующий CI (`npm ci && npm test`). Изменений backend/QA Worker и общих функциональных файлов Игоря не требуется; тесты не затрагивают чужие аккаунты. **Model check:** Sol / Medium. **Next:** локальный fixture и исполняемый smoke, затем CI и handoff Никите/Борису.
 - 2026-09-25 — **Agent:** Марк. **Role:** Product Manager. **Change:** по решению Алексея поставил Playwright первым этапом автоматизации browser QA, а нативные проверки отложил в PM-041. **Related task:** PM-040. **Next:** после BUG-020 предложить Денису claim; Никита/Борис получают QA scope по явной записи, а не автоматически из имени в карточке.
