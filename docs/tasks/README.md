@@ -18,7 +18,7 @@
 
 | ID | Задача | Приоритет | Статус | Ответственный |
 | --- | --- | --- | --- | --- |
-| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015 | P1 | in review — desktop QA частично подтверждён, P2 дефект PM-013, остальная приёмка открыта | Денис / Developer; QA Борис |
+| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015/018 | P1 | in review — desktop partial PASS; owner-assisted iPhone Safari open 17–18.02.2027 passed; BUG-018 and remaining QA open | Денис / Developer; QA Борис |
 | [PM-002](PM-002-link-publication.md) | Внешняя ссылка + verification status + nudge | P1 | in review — BUG-017 code merged; Cloudflare/QA copy retest open; other states PM-016/open | Игорь / Developer; QA Борис |
 | [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — QA access | Борис / QA; возобновление не подтверждено |
 | [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — Chrome QA частично PASS, Safari ждёт PM-014 | Денис / Developer; QA Борис |
@@ -32,10 +32,10 @@
 | [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
 | [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in review — QA `open` waiting PASS, `close` ждёт PM-018 | Марк / временный исполнитель; QA Борис |
 | [PM-014](PM-014-qa-native-autofill-environment.md) | Нативный Safari/autofill для PM-004 | P2 | blocked — браузерный профиль | Борис / QA после доступа; Алексей — среда |
-| [PM-015](PM-015-qa-mobile-device-environment.md) | iPhone Safari touch для PM-007 | P1 | blocked — мобильная среда/VPN | Борис / QA после доступа; Алексей — устройство |
+| [PM-015](PM-015-qa-mobile-device-environment.md) | iPhone Safari touch для PM-007 | P1 | in review — owner-assisted iPhone Safari check done for PM-001; full PM-007 mobile QA open | Борис / QA; Алексей — устройство/сеанс |
 | [PM-016](PM-016-qa-second-session-access.md) | Второй изолированный сеанс для PM-003/010 | P1 | blocked — второй сеанс | Борис / QA после доступа; Алексей — участник |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | Тестовые ящики для PM-006 | P1 | blocked — почтовый доступ | Борис / QA после доступа; Алексей — ящик |
-| [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | blocked — внешнее изменение/источник | Борис / QA после доступа; Алексей — Airbnb |
+| [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | in review — owner-assisted positive open and restore done; Boris independent remainder open | Борис / QA; Алексей — Airbnb |
 | [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | done — D009 принят владельцем | Марк / Product Manager |
 | [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | in review — desktop/keyboard partial PASS; BUG-016 по возврату позиции, touch ждёт PM-015 | Денис / Developer; QA Борис |
 | [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | P2 | in review — frontend PR #21 и backend PR #25 merged; frontend live check и независимая QA открыты | Денис / Developer; QA Борис |
@@ -46,6 +46,7 @@
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | Убрать дублирующий Messages shortcut | P2 | in review — Денис завершил frontend; ждёт независимый QA | Денис / Developer; QA Борис |
 | [PM-027](PM-027-open-property-from-messages.md) | Открыть карточку объекта из диалога | P2 | planned — после стабилизации PM-020/021 | Не назначен |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | planned — после PM-021; private view | Не назначен |
+| [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | Конечная дата не обновляется после выбора начала на iPhone Safari | P2 | planned — NEXT; developer claim не выбран, сверить Host/calendar overlap | Не назначен |
 
 Статусы задач: `planned`, `in progress`, `blocked`, `in review`, `done`, `rejected`. У `blocked` обязательно указаны причина и следующее действие. Статусы фич в roadmap используют отдельный короткий перечень из поручения владельца.
 
