@@ -1762,23 +1762,24 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 .availability-price.unknown{font-size:13px}
 .availability-price-note{margin-top:0;max-width:360px}
 .availability-card-footer{
-  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+  display:flex;align-items:stretch;flex-direction:column;gap:10px;
   margin-top:auto;padding-top:21px;border-top:1px solid rgba(255,255,255,.065);
 }
 .availability-owner{margin-top:0;color:#73827d;font-size:11px;line-height:1.35}
-.availability-links{flex:0 0 auto;margin-top:0;justify-content:flex-end}
+.availability-links{min-width:0;width:100%;margin-top:0;justify-content:flex-start;align-items:flex-start}
+.availability-links>*{max-width:100%;box-sizing:border-box}
+.availability-links .message-property-link{
+  width:100%;justify-content:center;text-align:center;white-space:normal;overflow-wrap:anywhere;
+}
 .availability-link{
   min-height:40px;padding:0 16px;border:1px solid rgba(216,255,99,.26);background:rgba(216,255,99,.09);
 }
 .availability-link-missing{
-  display:inline-block;max-width:180px;color:#65746f;font-size:10px;line-height:1.35;text-align:right;
+  display:inline-block;color:#65746f;font-size:10px;line-height:1.35;text-align:left;
 }
 @media(max-width:640px){
   .availability-card{min-height:0;padding:20px}
-  .availability-card-footer{align-items:flex-start;flex-direction:column}
-  .availability-links{width:100%;justify-content:flex-start}
   .availability-link{justify-content:center;width:100%;box-sizing:border-box}
-  .availability-link-missing{max-width:none;text-align:left}
 }
 
 /* Keep native pickers, but size the closed controls consistently on iOS too.
