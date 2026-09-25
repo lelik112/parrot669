@@ -55,7 +55,7 @@
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | **NEXT — P2** | | | |
-| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | assigned / NEXT — техническая проверка реального запуска нужного агента; claim отсутствует | Игорь / Developer назначен Алексеем после PM-037; Sol / High |
+| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | in progress — одноразовый pilot запуска существующего чата и проверка ограничений | Игорь / Developer claim по прямому поручению Алексея; Sol / High |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 
