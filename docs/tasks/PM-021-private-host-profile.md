@@ -74,3 +74,7 @@
 ### 2026-09-25 14:33 UTC — Борис / QA — BUG-023 still fails after fix
 
 Authenticated `qa` on main origin and `lelik` on QA Worker each saw `Not found` when saving a temporary public name. On revisiting Host from another page, original names `Qa` and `lelik` remained; no test data persisted. Unauthenticated 401 smoke does not establish successful authenticated PATCH. [BUG-023](BUG-023-host-profile-save-not-found.md) remains open with Денис / Developer; 400/401/privacy acceptance waits for working save.
+
+### 2026-09-25 — Денис / Developer — BUG-023 second fix deployed
+
+**Agent:** Денис. **Role:** Developer. **Change:** after Boris's authenticated FAIL on PR #45, fixed duplicate `/host` prefix in frontend call via [PR #46](https://github.com/lelik112/parrot669/pull/46). CI green, both live origins serve corrected `host.js`. **Related task:** PM-021 / BUG-023. **Next:** Boris independently verifies save/reload under account and remaining 400/401/privacy cases. No acceptance claim yet.
