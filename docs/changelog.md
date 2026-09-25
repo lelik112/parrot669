@@ -5,7 +5,7 @@
 # PARROT 669 changelog
 ## 2026-09-25 — BUG-017: neutral copy for unavailable public links
 
-- **Agent:** Игорь. **Role:** Developer. **Change:** Updated the search-card fallback in EN/ES/CA/RU to say the public external link is unavailable, without asserting that the host never added one. The API correctly returns the same empty public `links` array for a missing link and publish OFF; the fallback no longer guesses which private state caused it. No backend, calendar or messaging changes. CI and release evidence pending. **Related task:** [PM-002 / BUG-017](tasks/PM-002-link-publication.md).
+- **Agent:** Игорь. **Role:** Developer. **Change:** Updated the search-card fallback in EN/ES/CA/RU to say the public external link is unavailable, without asserting that the host never added one. The API correctly returns the same empty public `links` array for a missing link and publish OFF; the fallback no longer guesses which private state caused it. No backend, calendar or messaging changes. [PR #22](https://github.com/lelik112/parrot669/pull/22) merged as `7b46763`; [PR CI](https://github.com/lelik112/parrot669/actions/runs/36100467923) and [main CI](https://github.com/lelik112/parrot669/actions/runs/36100507398) passed. Cloudflare deployment of this SHA has not been independently verified; production copy awaits Boris's retest. **Related task:** [PM-002 / BUG-017](tasks/PM-002-link-publication.md).
 
 ## 2026-09-25 — Постоянный PM-отчёт по задачам и backlog
 

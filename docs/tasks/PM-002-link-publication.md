@@ -2,7 +2,7 @@
 
 **Title:** унифицировать Airbnb-переход, calendar verification status и запрос владельцу пройти проверку.
 
-**Status:** in review — backend and frontend visible in production; partial QA PASS; BUG-017 copy finding; nudge and remaining verification states need isolated guest/session QA. **Priority:** P1. **Owner:** Игорь / Developer; QA Борис.
+**Status:** in review — previous production QA partial PASS; BUG-017 code merged, Cloudflare status and Boris retest open; nudge and remaining verification states need isolated guest/session QA. **Priority:** P1. **Owner:** Игорь / Developer; QA Борис.
 
 **Implementation branches:** `feat/pm002-link-contract` in backend, `feat/pm002-guest` in frontend. Baselines: backend `59c046f`, frontend `2af2816`. Model: Sol, High. Scope: shared public link projection, search card and messaging draft; no calendar sync or future profile UI.
 
@@ -95,3 +95,7 @@ Backend `PublicLinks` reads latest D002 attempt and current calendar metadata wi
 ### 2026-09-25 05:51 UTC — Игорь / Developer — BUG-017
 
 **Agent:** Игорь. **Role:** Developer. **Scope:** только нейтральный fallback-текст карточки поиска в EN/ES/CA/RU (`public/assets/search.js`), продуктовый контекст и запись результата; backend/API, статус D002, host/messaging и другие QA-сценарии не меняю. **Claim:** возобновляю свою PM-002 для BUG-017 в `fix/bug017-hidden-link-copy`. **Model check:** Sol / High соответствует PM-002; для этого узкого copy fix дополнительная модель не нужна. **Next:** прогнать frontend tests/CI, выпустить изменение и передать Борису ретест publish OFF. **Related task:** PM-002 / BUG-017.
+
+### 2026-09-25 05:54 UTC — Игорь / Developer — BUG-017 release handoff
+
+**Agent:** Игорь. **Role:** Developer. **Change:** заменил misleading fallback во всех четырёх локалях на нейтральное «внешний переход недоступен»; API и остальные действия карточки не менялись. [Frontend PR #22](https://github.com/lelik112/parrot669/pull/22) merged as `7b46763`; [PR CI](https://github.com/lelik112/parrot669/actions/runs/36100467923) and [main CI](https://github.com/lelik112/parrot669/actions/runs/36100507398) succeeded, locally 113/113 UI tests with cached jsdom. Cloudflare Worker deployment for this SHA not verified from current environment. **Next:** Борис / QA проверяет текст при publish OFF в production и EN/ES/CA/RU; остальные PM-002 сценарии (nudge, состояния D002) остаются открыты. **Related task:** PM-002 / BUG-017.
