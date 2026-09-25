@@ -1,7 +1,7 @@
 # PM-021 — Личный профиль владельца
 
 **Title:** определить и затем реализовать редактируемые данные владельца отдельно от учётной записи.
-**Status:** in review — BUG-023 proxy fix live; authenticated save/reload and privacy QA remain open. **Priority:** P2. **Owner:** Денис / Developer.
+**Status:** in review — BUG-023 remains reproducible after PR #45 on authenticated saves at both production origins; Denis / Developer follow-up. **Priority:** P2. **Owner:** Денис / Developer.
 **Agent:** Денис. **Role:** Developer. **Scope:** выпуск существующего display name; не реализация публичных контактов.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** новые поля могут затронуть backend schema/API и приватность; текущие account/profile уже имеют разные назначения.
 **Model check:** будущий исполнитель анализирует выбранные поля, доступ и текущие API перед claim; повышение только по D005.
@@ -70,3 +70,7 @@
 ### 2026-09-25 14:26 UTC — Денис / Developer — BUG-023 handoff
 
 **Agent:** Денис. **Role:** Developer. **Change:** Worker fix [PR #45](https://github.com/lelik112/parrot669/pull/45) merged; live unauthenticated PATCH on both origins now returns backend 401 instead of Worker 404. **Related task:** PM-021 / BUG-023. **Next:** Борис / QA verifies authenticated save → reload, invalid name/400, no session/401, public profile privacy. Acceptance remains open.
+
+### 2026-09-25 14:33 UTC — Борис / QA — BUG-023 still fails after fix
+
+Authenticated `qa` on main origin and `lelik` on QA Worker each saw `Not found` when saving a temporary public name. On revisiting Host from another page, original names `Qa` and `lelik` remained; no test data persisted. Unauthenticated 401 smoke does not establish successful authenticated PATCH. [BUG-023](BUG-023-host-profile-save-not-found.md) remains open with Денис / Developer; 400/401/privacy acceptance waits for working save.
