@@ -160,6 +160,24 @@ test('start requires inclusive dates and rejected booked nights can be selected 
   assert.match(h.text(),/2030-11-01 – 2030-11-02/);
 });
 
+test('changing the first night resets the last-night picker and submits the newly chosen inclusive range',async t=>{
+  const h=await harness(t);
+  const [from,to]=h.panel.node.querySelectorAll('.calendar-verification-dates input');
+  from.value='2030-11-01';to.value='2030-11-05';
+  from.value='2031-02-17';from.dispatchEvent(new h.w.Event('input',{bubbles:true}));
+  from.dispatchEvent(new h.w.Event('change',{bubbles:true}));
+  assert.equal(to.min,'2031-02-17');
+  assert.equal(to.value,'2031-02-17');
+  to.value='2031-02-18';
+  await h.click();
+  const start=h.calls.find(c=>c.path.endsWith('/start'));
+  assert.deepEqual(JSON.parse(start.body),{from:'2031-02-17',to:'2031-02-18'});
+
+  // Clearing the first night also removes the obsolete selected end date.
+  from.value='';from.dispatchEvent(new h.w.Event('change',{bubbles:true}));
+  assert.equal(to.min,'');assert.equal(to.value,'');
+});
+
 test('reloaded pending action remains precise and does not allow editing challenge dates',async t=>{
   const h=await harness(t,{handler:()=>({...ready,expectedAction:'open'})});
   assert.match(h.text(),/Откройте все выбранные ночи/);
