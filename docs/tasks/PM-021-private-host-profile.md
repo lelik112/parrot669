@@ -1,7 +1,7 @@
 # PM-021 — Личный профиль владельца
 
 **Title:** определить и затем реализовать редактируемые данные владельца отдельно от учётной записи.
-**Status:** in review — BUG-023 remains reproducible after PR #45 on authenticated saves at both production origins; Denis / Developer follow-up. **Priority:** P2. **Owner:** Денис / Developer.
+**Status:** in review — authenticated display-name save/reopen passed after BUG-023 PR #46 on both origins; unauthorized/invalid API and public privacy acceptance open. **Priority:** P2. **Owner:** Денис / Developer.
 **Agent:** Денис. **Role:** Developer. **Scope:** выпуск существующего display name; не реализация публичных контактов.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** новые поля могут затронуть backend schema/API и приватность; текущие account/profile уже имеют разные назначения.
 **Model check:** будущий исполнитель анализирует выбранные поля, доступ и текущие API перед claim; повышение только по D005.
@@ -78,3 +78,7 @@ Authenticated `qa` on main origin and `lelik` on QA Worker each saw `Not found` 
 ### 2026-09-25 — Денис / Developer — BUG-023 second fix deployed
 
 **Agent:** Денис. **Role:** Developer. **Change:** after Boris's authenticated FAIL on PR #45, fixed duplicate `/host` prefix in frontend call via [PR #46](https://github.com/lelik112/parrot669/pull/46). CI green, both live origins serve corrected `host.js`. **Related task:** PM-021 / BUG-023. **Next:** Boris independently verifies save/reload under account and remaining 400/401/privacy cases. No acceptance claim yet.
+
+### 2026-09-25 ~15:21 UTC — Борис / QA — сохранение имени PASS
+
+На основном `qa` и QA Worker `lelik` временное имя сохранилось с подтверждением и пережило переход на другую страницу и обратно; исходные `Qa` и `lelik` восстановлены и проверены. `Not found` отсутствует после PR #46. Пустое/пробельное имя остановлено native required validation до API; это не доказательство backend 400. Anonymous 401 и публичный JSON/privacy остаются отдельной проверкой. [BUG-023](BUG-023-host-profile-save-not-found.md) сохраняет `in review` до этих проверок.
