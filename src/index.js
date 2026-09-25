@@ -35,7 +35,9 @@ const escapeHtml = (value) =>
     "'": "&#39;",
   })[c]);
 
-const proxyBackend = async (request, targetPath) => {
+const QA_HOSTNAME = "qa.parrot669.com";
+
+const proxyBackend = async (request, targetPath, qaSecret) => {
   const sourceUrl = new URL(request.url);
   const upstream = new URL(`https://api.parrot669.com${targetPath}`);
   upstream.search = sourceUrl.search;
@@ -52,6 +54,10 @@ const proxyBackend = async (request, targetPath) => {
     if (sessionCookie) headers.set("Cookie", sessionCookie);
   }
   headers.set("Accept", "application/json");
+  if (qaSecret) {
+    headers.set("X-Parrot-QA-Origin", "qa");
+    headers.set("X-Parrot-QA-Worker", qaSecret);
+  }
 
   const init = {
     method: request.method,
@@ -79,6 +85,10 @@ const proxyBackend = async (request, targetPath) => {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const qaOrigin = url.hostname === QA_HOSTNAME;
+    const qaSecret = qaOrigin && typeof env.QA_WORKER_SECRET === "string" ? env.QA_WORKER_SECRET : "";
+    if (qaOrigin && qaSecret.length < 32) return json({ error: "QA site unavailable" }, 503);
+    if (qaOrigin && url.pathname === "/api/contact") return json({ error: "Forbidden" }, 403);
 
     if (url.pathname.startsWith("/api/messaging/")) {
       const path = url.pathname.slice("/api/messaging".length);
@@ -98,7 +108,7 @@ export default {
         if (origin && origin !== url.origin) return json({ error: "Forbidden" }, 403);
       }
       try {
-        return await proxyBackend(request, url.pathname);
+        return await proxyBackend(request, url.pathname, qaSecret);
       } catch {
         return json({ error: "Messaging service unavailable" }, 502);
       }
@@ -110,7 +120,7 @@ export default {
       }
 
       try {
-        return await proxyBackend(request, url.pathname);
+        return await proxyBackend(request, url.pathname, qaSecret);
       } catch (error) {
         console.error("Location API proxy failed", error?.message);
         return json({ error: "Location service unavailable" }, 502);
@@ -126,6 +136,7 @@ export default {
       upstream.search = url.search;
 
       try {
+        if (qaOrigin) return await proxyBackend(request, url.pathname, qaSecret);
         const response = await fetch(upstream.toString(), {
           method: "GET",
           headers: { "Accept": "application/json" },
@@ -182,7 +193,7 @@ export default {
       }
 
       try {
-        return await proxyBackend(request, `/api${path}`);
+        return await proxyBackend(request, `/api${path}`, qaSecret);
       } catch (error) {
         console.error("Host API proxy failed", error?.message);
         return json({ error: "Host service unavailable" }, 502);
@@ -190,6 +201,7 @@ export default {
     }
 
 
+    if (qaOrigin && url.pathname.startsWith("/api/")) return json({ error: "Not found" }, 404);
     if (url.pathname !== "/api/contact") {
       return env.ASSETS.fetch(request);
     }

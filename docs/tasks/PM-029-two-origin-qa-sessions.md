@@ -1,11 +1,11 @@
 # PM-029 — Два независимых PARROT-сеанса в одном управляемом браузере
 
 **Title:** дать Борису два одновременно авторизованных тестовых входа в PARROT через два разных origin.
-**Status:** planned — NEXT, ждёт claim разработчика. **Priority:** P1.
-**Owner:** не назначен; Марк / PM координирует claim, Борис / QA принимает результат.
-**Agent:** не назначен. **Role:** Developer. **Scope:** frontend/Cloudflare routing **и обязательная backend-проверка**, что второй origin обслуживает только тестовые аккаунты `qa` и `lelik`; обычный сайт и auth не расширять.
+**Status:** in progress — Игорь взял реализацию; независимая QA Бориса после релиза. **Priority:** P1.
+**Owner:** Игорь / Developer; Марк / PM координирует, Борис / QA принимает результат.
+**Agent:** Игорь. **Role:** Developer. **Scope:** frontend Worker, настройка второго Cloudflare origin и обязательная backend-проверка по account ID; действующий origin и обычные auth-права сохраняются.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** два origin, backend allowlist, доверие между Worker и backend, cookies и CSRF требуют совместной проверки без ослабления обычной авторизации.
-**Model check:** исполнитель сверяет при claim.
+**Model check:** security scope требует High; разделяю backend guard, Worker forwarding и настройки инфраструктуры, проверяю каждый границей CI и negative tests.
 
 ## Goal
 
@@ -75,10 +75,14 @@ QA-only master password, impersonation и отключение auth/CSRF в prod
 
 ## Evidence
 
+- 2026-09-25 — Worker QA-origin proxy/negative tests passed as part of 128/128 frontend unit tests. Backend PR #27 includes migration V26, verified-ID guard and PostgreSQL smoke; CI pending. Cloudflare account panel is blocked by a bot-check in the available cloud browser, so second hostname and Worker secret are **not configured** and two-origin acceptance remains open. No production QA behavior is claimed yet.
+
 - 2026-09-25: после просьбы Алексея «используй текущую страницу» доступный Борису browser API снова показывает только один Cloud Chrome, несмотря на открытую встроенную вкладку Desktop с PARROT. В Cloud Chrome виден вошедший `lelik`; открытый Desktop сам по себе не снимает PM-016.
 - Frontend `src/index.js`, `public/assets/host.js` и backend `src/main/scala/com/parrot669/http/AuthRoutes.scala` в main указывают на возможность разделения по host; поведение второго адреса ещё **не проверено**.
 
 ## Discussion / Updates
+
+- 2026-09-25 — **Agent:** Игорь. **Role:** Developer. **Scope:** `igor/pm029` в frontend и backend; Worker proxy, QA-only backend middleware/auth, config и security regressions; Cloudflare/Railway настройка после CI. **Change:** беру PM-029 по прямому поручению Алексея. Сверил свежий main обоих репозиториев и PM-027/028; параллельный BUG-020 Дениса касается Messages UI, PM-029 не меняет его контроллеры. Текущий Worker проксирует только cookie, backend не различает второй origin; host-only cookie даёт изоляцию лишь после настройки второго адреса. **Related task:** PM-029 / PM-016. **Next:** безопасный backend guard по attestation и account IDs, Worker fail-closed; затем CI, конфигурация и независимая QA.
 
 - 2026-09-25 09:13 UTC — **Agent:** Борис. **Role:** QA. **Scope:** постановка блокирующей среды, без изменения приложения и инфраструктуры. **Change:** по просьбе Алексея описал для разработчика минимальную гипотезу второго origin и критерии независимой QA; назначения/claim разработчика пока нет. **Related task:** PM-029, PM-016, PM-003. **Next:** Марку согласовать приоритет и исполнителя; разработчику проверить routing/cookie и оставить claim до реализации. Борис проверит оба сеанса после публикации.
 

@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-029: two independent QA sessions (implementation in progress)
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** Add a fail-closed QA-origin path to the existing frontend Worker and backend: the Worker sends a private attestation to the backend, which checks immutable allowlisted account IDs for all QA API routes. QA login checks membership after password verification and before creating a session; registration/recovery are blocked on the alias. PostgreSQL V26 seeds the allowlist from already confirmed `qa` and `lelik` records. The ordinary origin retains its existing session and public search behavior. 128 frontend tests passed locally; backend PR CI, domain/secret configuration, production checks and Boris's independent browser QA are pending. **Related task:** [PM-029](tasks/PM-029-two-origin-qa-sessions.md).
+
 ## 2026-09-25 — BUG-020 assigned for unread-state diagnosis
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** BUG-020 подтверждена owner-assisted проверкой на iPhone Safari: новый диалог появляется, но unread indicator не заметен на вкладке Messages и в строке. Статус остаётся P2: диалог виден, влияние на ответ/конверсию пока не измерено. Денису поручена диагностика; рекомендация Sol / Medium из-за неизвестной причины между API, polling и UI. PM-027 Игоря остаётся активной в Messages UI, поэтому изменения общих файлов ждут handoff либо явного согласования непересекающейся области. Backend/read semantics вне минимального fix без отдельного решения.

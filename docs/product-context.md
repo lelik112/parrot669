@@ -114,6 +114,10 @@ Search, host and messaging pages share three tabs:
 - For hosts
 - Messages
 
+## PM-029: isolated QA origin (implementation in progress)
+
+The planned `qa.parrot669.com` alias will use the same Worker, backend and production database as the main site. Browser cookies have no `Domain` attribute, so each hostname maintains its own session. The QA Worker sends a server-only attestation on proxied API requests; the backend rejects invalid attestations, requires an authenticated account for every QA API except login, and checks the account's immutable ID against the QA allowlist seeded from already verified `qa`/`lelik` accounts. QA login applies that ID check after password validation and before session issuance. Registration, email verification and password recovery through this alias are closed. Main-origin authorization remains unchanged. The second hostname and secret still require Cloudflare/Railway configuration and an independent two-session QA check before this feature can be called available. See [PM-029](tasks/PM-029-two-origin-qa-sessions.md).
+
 ## Backend
 
 Repository: `lelik112/parrot669-backend`
