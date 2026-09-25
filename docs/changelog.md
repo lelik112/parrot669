@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-037: public search date-range contract
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по поручению Алексея принял [D014](decisions/D014-public-search-date-range.md): один публичный поиск принимает 1–366 ночей включительно, 367+ должны давать 400 до основного SQL; UI не должен молча сокращать введённые даты или показывать частичный срок как полностью доступный. Обновил [PM-037](tasks/PM-037-search-date-range-bound.md): перед выпуском обязателен замер верхней границы на изолированной репрезентативной базе; при неприемлемой задержке решение пересматривается отдельно. Игорь — кандидат на замеры/реализацию Sol/High без claim; код, QA и production не менялись. **Related task:** PM-037.
+
 ## 2026-09-25 — PM-034: independent audits reconciled
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** закрыл сводную [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) после независимых read-only отчётов Игоря ([backend](tasks/logs/PM-034-backend.md)) и Дениса ([frontend](tasks/PM-034-FE-frontend-audit.md)). Зафиксировал кодовые риски: неограниченный диапазон публичного поиска и возможная потеря черновиков host форм; открыл [PM-037](tasks/PM-037-search-date-range-bound.md) P2/NEXT на выбор предела с замером и [PM-038](tasks/PM-038-host-unsaved-drafts-rerender.md) P2/NOW на QA до узкого исправления. Время работы поиска и случаи потери ввода в production не измерены/не воспроизведены независимо; общая перепись backend/frontend не назначена, dev/QA claims для новых задач отсутствуют. P1 QA контакта и сессий сохраняет приоритет. **Related task:** PM-034.
