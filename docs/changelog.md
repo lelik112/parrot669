@@ -2,6 +2,8 @@
 
 ## 2026-09-25 — BUG-023: host profile save route
 
+- **Agent:** Денис. **Role:** Developer. **Change:** follow-up [PR #46](https://github.com/lelik112/parrot669/pull/46) removes a duplicate `/host` prefix from the UI call after authenticated QA still saw 404; complete URL is now asserted in test. CI 130 tests passed, corrected asset observed live on both origins; save/reload QA remains pending. **Related task:** [BUG-023](tasks/BUG-023-host-profile-save-not-found.md) / PM-021.
+
 - **Agent:** Денис. **Role:** Developer. **Change:** frontend Worker now allows PATCH /api/host/profile and forwards it to the backend's exact route on both production and QA origins; regression test covers both. [PR #45](https://github.com/lelik112/parrot669/pull/45) merged, CI and 130 local tests passed. Live unauthenticated request returns 401 on both origins; authenticated save/reload awaits Boris QA. **Related task:** [BUG-023](tasks/BUG-023-host-profile-save-not-found.md) / PM-021.
 
 ## 2026-09-25 — PM-036: independent two-account environment for Regression QA
