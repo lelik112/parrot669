@@ -1,7 +1,7 @@
 # BUG-019 — Поиск не показывает аккаунт и не объясняет скрытый контакт
 
 **Title:** показать текущий аккаунт в поиске и явно пометить собственный объект.
-**Status:** in progress. **Priority:** P2.
+**Status:** in review — frontend merged; desktop/iPhone Safari QA open. **Priority:** P2.
 **Owner:** Денис / Developer; QA: Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** `public/search.html`, `public/assets/search.js`, `public/assets/messaging-common.js`, `public/assets/styles.css`, search/messaging UI tests, and this task/index; account indicator and own-property label only, with no changes to messaging access rules.
 **Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** небольшой локализованный UI-текст; важно сохранить публичный поиск и запрет писать самому себе.
@@ -46,9 +46,12 @@
 - **Наблюдение:** вошёл как `lelik112`; поиск показал три варианта; у собственной карточки `The therd` не было «Написать владельцу»; аккаунт в шапке поиска не отображался.
 - **Проверка реализации:** опубликованный `public/assets/messaging-common.js` скрывает контактную ссылку, если профиль владельца совпадает с профилем текущего пользователя. `public/search.html` не показывает имя текущего аккаунта. Следовательно, запрет самоконтакта выглядит намеренным; отсутствуют объяснение собственного объекта и индикатор аккаунта.
 - **QA ограничение:** iPhone Safari непосредственно тестировал Алексей; у Бориса доступен только desktop-браузер.
+- **Релиз:** frontend PR [#37](https://github.com/lelik112/parrot669/pull/37) слит в `main` как `1a2cd59c757a6c61135a01d7c30219fe22fa3e0a`; PR CI [#36119555922](https://github.com/lelik112/parrot669/actions/runs/36119555922) прошёл.
+- **Production smoke check:** публичный `/search.html` загрузился в cloud browser; локализованный индикатор показал `Аккаунт: @lelik`. Это не аккаунт хозяина `lelik112`, поэтому совпадение с собственным объектом и iPhone Safari остаются независимой QA.
 
 ## Discussion / Updates
 
 - 2026-09-25 — **Борис / QA:** оформил P2 по owner-assisted наблюдению Алексея. Правило скрывать сообщение на собственной карточке подтверждено в коде и не считается функциональной ошибкой. **Next:** разработчик берёт claim после сверки области; добавить явную метку собственного объекта и индикатор аккаунта, затем передать на desktop/iPhone Safari QA.
 - 2026-09-25 09:26 UTC — **Agent:** Денис. **Role:** Developer. **Scope:** индикатор username текущей сессии в поиске и локализованная метка собственной карточки; правила контакта и доступа остаются прежними. **Change:** беру BUG-019 после сверки свежего `main`, незакрытых claims и файлов поиска. **Model check:** рекомендованные Luna / Low достаточно для локальной frontend-правки и UI-тестов; текущая конфигурация справляется, повышения не требуется. **Related task:** BUG-019. **Next:** реализовать account chip и метку `Your property` по фактическому owner-profile match, добавить RU/EN/ES/CA и signed-out/self/other regressions, затем открыть PR и передать Борису desktop/iPhone Safari QA.
 - 2026-09-25 09:31 UTC — **Agent:** Денис. **Role:** Developer. **Change:** поиск показывает `@username` авторизованного пользователя; карточка помечается `Your property` только после совпадения host profile с профилем текущей сессии. Скрытие self-contact и API сообщений не менял. EN/ES/CA/RU, вход/выход, свой и чужой объект покрыты UI-тестом; локально `126/126` тестов PASS, `git diff --check` PASS. **Related task:** BUG-019. **Next:** открыть PR, дождаться CI, затем передать Борису desktop/iPhone Safari проверку.
+- 2026-09-25 09:39 UTC — **Agent:** Денис. **Role:** Developer. **Change:** PR #37 слит (`1a2cd59`), PR CI успешен; публичный `/search.html` показывает индикатор аккаунта в активной сессии. BUG-019 переведена в `in review`; owner-assisted сценарий `lelik112` на desktop/iPhone Safari не выдаю за проверенный. **Related task:** BUG-019. **Next:** Борис сверяет self-card/чужую contact CTA, signed-out поиск и четыре языка на desktop/iPhone Safari, записывает среду и результат.
