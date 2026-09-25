@@ -1,7 +1,7 @@
 # PM-015 — Настоящий мобильный ввод: среда для QA
 
 **Title:** обеспечить наблюдаемый iPhone Safari touch/экранную клавиатуру для [PM-007](PM-007-mobile-acceptance.md).
-**Status:** in review — owner-assisted iPhone Safari проверка PM-001 проведена; найден [BUG-018](BUG-018-calendar-end-date-mobile-safari.md). Полный mobile acceptance PM-007 и независимая QA Бориса остаются открыты. **Priority:** P1. **Owner:** Борис / QA; устройство/сеанс — Алексей.
+**Status:** blocked — доступ Бориса к управляемому реальному iPhone Safari не подтверждён; owner-assisted PM-001 дал частичный результат, но не независимый мобильный QA. Дальше [PM-039](PM-039-browser-test-environments.md): проверить самостоятельный удалённый сеанс/стоимость или другую доступную среду. **Priority:** P1. **Owner:** Борис / QA; устройство/сеанс — Алексей.
 **Agent:** Борис. **Role:** QA. **Scope:** только доступная мобильная среда и evidence; продукт и код не меняются.
 **Recommended model:** Luna. **Recommended reasoning:** Medium. **Reason:** пошаговый основной путь с раздельной оценкой размеров, касаний, клавиатуры и нативного date picker.
 **Model check:** при возобновлении; облачный desktop не засчитывается за mobile.
@@ -25,10 +25,10 @@
 Выдавать desktop-измерения или Safari Mac за iPhone QA, покупать устройство, менять frontend.
 
 ## Dependencies / Unblock
-Телефон у Алексея есть; требуется удобное окно доступа к PARROT при нужном VPN. После этого PM-007 продолжается, без ожидания новой фичи.
+Нужен самостоятельный управляемый реальный iPhone Safari с доступом к PARROT для Бориса либо явно согласованный owner-assisted прогон с ограниченной формулировкой результата. [PM-039](PM-039-browser-test-environments.md) ищет недорогой путь; наличие личного телефона у Алексея не снимает блокер независимого QA.
 
 ## Evidence
-[PM-007](PM-007-mobile-acceptance.md). Реального mobile/touch результата ещё нет.
+[PM-007](PM-007-mobile-acceptance.md). Есть owner-assisted iPhone Safari результат PM-001/BUG-018; независимого комплексного мобильного прогона Бориса нет.
 
 ## Discussion / Updates
 - **Date:** 2026-09-24 14:00 UTC
@@ -42,3 +42,4 @@
 ## Discussion / Updates
 
 - 2026-09-25 — **Agent:** Алексей / Product Owner; **QA guidance:** Борис / QA. **Change:** в реальной сессии iPhone Safari прошёл часть PM-001; при выборе начала диапазона конечная дата не обновилась. Это подтверждает доступ к мобильной среде для owner-assisted проверки, но не закрывает полный PM-007 и не считается независимым прогоном Бориса. **Related tasks:** PM-015, PM-001, [BUG-018](BUG-018-calendar-end-date-mobile-safari.md). **Next:** Борис записывает остальные mobile критерии при доступном сеансе.
+- 2026-09-25 — **Agent:** Марк. **Role:** Product Manager. **Change:** после сверки QA evidence уточнил состояние и конкретный ресурсный блокер mobile/native по [PM-039](PM-039-browser-test-environments.md); частичный desktop/owner-assisted PASS сохранён, независимая мобильная приёмка не выдана. **Related task:** PM-015 / PM-039. **Next:** выполнить оставшийся доступный web ретест, если есть; для обязательного native/mobile — подтвердить самостоятельную среду QA и пройти отдельный ретест.
