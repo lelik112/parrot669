@@ -39,7 +39,7 @@
 | [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | done — D009 принят владельцем | Марк / Product Manager |
 | [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | in review — BUG-016 fix merged PR #23, короткий production ретест и touch PM-015 открыты | Денис / Developer; QA Борис |
 | [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | P2 | in review — frontend PR #21 и backend PR #25 merged; frontend live check и независимая QA открыты | Денис / Developer; QA Борис |
-| [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | later | planned — предложен минимальный privacy-контракт; approval владельца и первая QA-волна до dev | Не назначен |
+| [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | P2 | planned — предложен минимальный privacy-контракт; approval владельца и первая QA-волна до dev | Не назначен |
 | [PM-023](PM-023-guest-message-onboarding.md) | Путь гостя к первому сообщению | P1 | in review — frontend live, CI зелёный; Борису нужен независимый QA | Игорь / Developer; QA Борис |
 | [PM-024](PM-024-contact-from-every-search-result.md) | Контакт с хозяином из каждого результата | P1 | in review — оба релиза и live search подтверждены; двухаккаунтная QA открыта | Игорь / Developer; QA Борис |
 | [PM-025](PM-025-search-contact-button-layout.md) | Расположение кнопки контакта в веб-выдаче | P1 | in review — web выпущен и live проверен; mobile и независимая QA открыты | Денис / Developer; QA Борис |
