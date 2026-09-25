@@ -50,7 +50,7 @@
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | planned | —: после PM-015 |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
-| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | planned — среда и отдельная пара неизвестны | Игорь / dev candidate без claim; новый QA / independent acceptance после подключения; Sol / High |
+| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in progress — Игорь проверяет доступность двух contexts; QA-пара ещё не выделена | Игорь / Developer, claim; новый QA / independent acceptance после подключения; Sol / High |
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
