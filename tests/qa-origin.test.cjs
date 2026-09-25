@@ -74,6 +74,18 @@ test('QA origin fails closed without secret, rejects contact/unknown API and cro
   assert.equal(calls.length,0);
 });
 
+test('QA recovery page leads to the ordinary origin while QA reset API stays closed',async()=>{
+  const {worker,calls,env}=harness();
+  for(const host of qaHosts){
+    const response=await worker.fetch(new Request(`https://${host}/recover.html?lang=ru`),env);
+    assert.equal(response.status,302);
+    assert.equal(response.headers.get('Location'),'https://parrot669.com/recover.html?lang=ru');
+  }
+  const main=await worker.fetch(new Request('https://parrot669.com/recover.html'),env);
+  assert.equal(main.status,200);
+  assert.equal(calls.length,0);
+});
+
 test('ordinary origin keeps its existing proxy and never forwards QA headers',async()=>{
   const {worker,calls,env}=harness();
   const response=await worker.fetch(new Request('https://parrot669.com/api/host/auth/me',{

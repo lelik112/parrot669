@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: QA password recovery navigation
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** Railway showed three 403 responses from `/api/auth/password-reset/request` on regression A after the user followed the recovery link. QA reset APIs are intentionally forbidden by the backend. The Worker now redirects the QA recovery page to `parrot669.com/recover.html`; the production origin shares the accounts and can perform the ordinary email recovery. QA API attestation and restrictions stay in force. Login A and independent logout/relogin B still need Nikita's retest after account recovery. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
 ## 2026-09-25 — PM-037: пилотный performance gate принят
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по [изолированному замеру](tasks/logs/PM-037-performance.md) принял [D014](decisions/D014-public-search-date-range.md) с границей 366 ночей для малого пилота: HTTP p95 226 мс при 100 объектах в городе, 572 мс при четырёх запросах; 367+ отсекается до SQL. При 500 объектах p95 1 044 / 2 216 мс — риск для будущего масштаба, не заявленная производительность production. [PM-037](tasks/PM-037-search-date-range-bound.md) теперь P2/NOW, in progress у Игоря (Sol / High): backend PR #29 и frontend PR #52 ещё открыты; frontend PR сейчас `mergeable=false`, Игорь сверяет причину/current-head CI, выпускает backend → frontend и передаёт Борису на независимую QA. Продуктовую границу не меняли; merge/deploy/QA этой записью не выполнены. **Related task:** PM-037 / D014.
