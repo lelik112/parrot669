@@ -91,3 +91,7 @@ Backend `PublicLinks` reads latest D002 attempt and current calendar metadata wi
 
 **Итог:** частичный PASS; полный acceptance PM-002 не подтверждён до проверки nudge и остальных статусов.  
 **Agent:** Борис. **Role:** QA. **Change:** production-прогон состояния lost и publish OFF; зарегистрирован BUG-017. **Related task:** PM-002.
+
+### 2026-09-25 05:51 UTC — Игорь / Developer — BUG-017
+
+**Agent:** Игорь. **Role:** Developer. **Scope:** только нейтральный fallback-текст карточки поиска в EN/ES/CA/RU (`public/assets/search.js`), продуктовый контекст и запись результата; backend/API, статус D002, host/messaging и другие QA-сценарии не меняю. **Claim:** возобновляю свою PM-002 для BUG-017 в `fix/bug017-hidden-link-copy`. **Model check:** Sol / High соответствует PM-002; для этого узкого copy fix дополнительная модель не нужна. **Next:** прогнать frontend tests/CI, выпустить изменение и передать Борису ретест publish OFF. **Related task:** PM-002 / BUG-017.

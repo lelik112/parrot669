@@ -3,6 +3,10 @@
 - **Agent:** Алекс. **Role:** Strategy / Product Advisor. **Change:** Алексей подтвердил [D009](decisions/D009-host-cabinet-ia.md). Принята последовательность кабинета **PM-020 → PM-021 → PM-022**. PM-021 private host profile больше не LATER и не ждёт пилота; пилот может влиять на дополнительные поля, но не блокирует сам профиль. PM-022 остаётся следующим после PM-021 с отдельным privacy/publication contract. **Related task:** [PM-019](tasks/PM-019-host-cabinet-ia.md), [PM-021](tasks/PM-021-private-host-profile.md), [PM-022](tasks/PM-022-public-host-profile.md).
 
 # PARROT 669 changelog
+## 2026-09-25 — BUG-017: neutral copy for unavailable public links
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** Updated the search-card fallback in EN/ES/CA/RU to say the public external link is unavailable, without asserting that the host never added one. The API correctly returns the same empty public `links` array for a missing link and publish OFF; the fallback no longer guesses which private state caused it. No backend, calendar or messaging changes. CI and release evidence pending. **Related task:** [PM-002 / BUG-017](tasks/PM-002-link-publication.md).
+
 ## 2026-09-25 — Постоянный PM-отчёт по задачам и backlog
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** По просьбе Алексея зафиксирован формат каждого PARROT-ответа о задачах/status/backlog: краткий статус новых и затронутых задач, фактическое назначение или причина отсутствия claim, затем полный открытый backlog по NOW/NEXT/LATER и P0/P1/P2 с моделью и reasoning. Для blocked задач указываются блокер и следующий шаг; ожидаемый исполнитель не выдаётся за подтверждённый claim.
