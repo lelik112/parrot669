@@ -1,7 +1,7 @@
 # BUG-020 — Новое сообщение не выделяется во входящих
 
 **Title:** ясно показывать непрочитанное сообщение в списке диалогов и пункте «Сообщения».
-**Status:** in review — frontend выпущен; независимая desktop/iPhone QA открыта. **Priority:** P2.
+**Status:** in review — desktop unread badge/row/read behavior and auto-refresh PASS in qa/lelik smoke; iPhone Safari, languages and repeat runs remain open. **Priority:** P2.
 **Owner:** Денис / Developer; QA: Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** индикация непрочитанного и исходное отображение строки диалога; не менять правила доступа, отправки или блокировок сообщений.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** root cause пока неизвестен; нужно пройти цепочку unread API → polling → состояние строки/вкладки, сохранив текущую семантику прочтения.
@@ -57,6 +57,8 @@
 [PM-024](PM-024-contact-from-every-search-result.md), messaging API и существующие правила read/unread. Игорь ведёт [PM-027](PM-027-open-property-from-messages.md) с изменениями Messages UI. Денис начинает с диагностики; до handoff/merge PM-027 не менять общие файлы `messages.js`, `messages.html` и `messaging-common.js`, если Игорь не подтвердит непересекающийся участок.
 
 ## Evidence
+
+- 2026-09-25 — Борис / production desktop Cloud Chrome, `qa` → `lelik` test thread: after first incoming message, the Messages navigation badge showed 1 unread and the inbox row showed “Не прочитано” plus count 1. The badge appeared without manual reload in about 17 seconds (the task’s polling interval is 30 seconds). Opening the conversation removed the unread marker; the owner reply did not create a false unread for the owner. Row retained object title, interlocutor and latest preview before opening. Desktop flow PASS; iPhone Safari and RU/EN/ES/CA not retested.
 
 - **Среда:** owner-assisted тест Алексея, iPhone Safari, 2026-09-25; пользователь был залогинен под `lelik112`, собеседник — тестовый аккаунт Минкс.
 - **Наблюдение:** после отправки сообщения с поиска диалог появился у хозяина. Алексей подтвердил отсутствие признака нового сообщения на пункте «Сообщения» и в самой строке диалога. Он сообщил, что строка выглядит плохо до открытия и становится лучше после клика. Скриншотов нет по предпочтению пользователя.
