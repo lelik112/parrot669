@@ -2,7 +2,7 @@
 
 **Title:** продолжить CHECK-H11: поиск → первое сообщение → ответ владельца.
 
-**Status:** in progress — PM-016 unblocked; basic qa→lelik search/contact/reply and unread/read PASS. Pair blocking and repeat-contact behavior remain to test. D011 supersedes old host-wide opt-in/out criteria. **Priority:** P1.
+**Status:** blocked — basic qa→lelik search/contact/reply and unread/read PASS; block action left the pair blocked and primary session signed out. Current origin sessions both show `qa`; separate `lelik` access is needed to restore and continue. See [BUG-021](BUG-021-blocking-signs-out-host.md). **Priority:** P1.
 
 **Owner:** Борис / QA; возобновил CHECK-H11 после PM-016, зафиксировал базовый цикл. **Area:** поиск / сообщения.
 
@@ -53,6 +53,10 @@
 - 2026-09-25 — Борис / production Cloud Chrome, `qa` guest on Worker origin and `lelik` host on `parrot669.com`: search found `lelik` QA property for 2027-06-11 → 2027-06-14. First message reached owner, owner replied, and reply appeared to guest. Both tabs retained their respective accounts after reload. Full PM-003 continuation is in progress; pair block/unblock and repeat CTA behavior remain untested. No property, calendar or price data changed.
 
 Существующий прогон: CHECK-H11; prior messages had not been sent. Найденные дефекты передать PM отдельными наблюдениями; QA не исправляет их в рамках этой задачи.
+
+## Discussion / Updates
+
+- 2026-09-25 — **Борис / QA:** продолжил CHECK-H11 после разблокировки PM-016. Поиск → первое обращение → ответ и unread/read подтверждены. При проверке блокировки подтверждение привело к экрану входа на основном origin; у второго участника показано «Собеседник заблокировал переписку». В последующей защищённой форме пользователь ввёл `qa`, поэтому сейчас оба origin показывают `qa`; тестовая пара осталась заблокирована. Продолжение PM-003 ждёт восстановления `lelik`; см. [BUG-021](BUG-021-blocking-signs-out-host.md).
 
 ## Discussion / Updates
 
