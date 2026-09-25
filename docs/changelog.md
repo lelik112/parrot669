@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-034: PM overview and technical handoff
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по просьбе владельца выполнил обзорный аудит текущих frontend/backend main: выделил проверяемую гипотезу дополнительных запросов на каждый результат поиска, границы большого host.js и разные API/auth пути; отдельно отметил legacy PM-012 и недавние PM-010/011/029 как зоны без безусловного рефакторинга. В [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) записаны доказательства, неопределённости, приоритеты и ограниченные технические handoff Игорю (backend, Sol/High) и Денису (frontend, Sol/Medium). Developer claims и кодовых изменений нет, выводы требуют их проверки. **Related task:** PM-034.
+
 Это датированная история: свежие записи сверху, прежние не переписываются. Для текущей очереди откройте [status](status.md) и [task index](tasks/README.md); для причины конкретной задачи найдите её ID ниже или в её журнале. Продуктовый источник истины — [product-context](product-context.md).
 
 ## 2026-09-25 — QA correction: PM-016 in review, PM-003 blocked after BUG-021
