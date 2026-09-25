@@ -2,7 +2,7 @@
 
 Срез индекса `docs/tasks/README.md` на 2026-09-25: 42 открытые задачи. Одна строка ниже — один acceptance criterion из карточки; у багов без чеклистов — Expected behavior. `Playwright автоматизировано (часть)` подтверждает только указанный fixture-путь; остальная часть критерия явно остаётся у QA. `browser manual` означает конкретную проверку на согласованной среде, а не зелёный skip. Статусы исходных задач эта матрица не меняет.
 
-Локальный fixture: `http://127.0.0.1:4173`, `tests/e2e/public-fixture.cjs`; четыре UI-теста в Chromium desktop, WebKit desktop и WebKit mobile emulation (первые два выпущены в PR #54, два Host/Messages ожидают CI). Для реальной пары аккаунтов PM-036 BLOCKED; физический Safari, почта и Airbnb отдельно. Первичный список требует сверки Никитой (regression) и Борисом (acceptance).
+Локальный fixture: `http://127.0.0.1:4173`, `tests/e2e/public-fixture.cjs`; четыре UI-теста в Chromium desktop, WebKit desktop и WebKit mobile emulation (первые два выпущены в PR #54, два Host/Messages прошли CI [PR #57](https://github.com/lelik112/parrot669/pull/57), 12/12 суммарно). Для реальной пары аккаунтов PM-036 BLOCKED; физический Safari, почта и Airbnb отдельно. Первичный список требует сверки Никитой (regression) и Борисом (acceptance).
 
 | Задача / критерий | Приоритет | Критерий из карточки | Покрытие | Остаток / действие | QA owner |
 | --- | --- | --- | --- | --- | --- |
