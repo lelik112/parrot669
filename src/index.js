@@ -35,8 +35,8 @@ const escapeHtml = (value) =>
     "'": "&#39;",
   })[c]);
 
-// Each QA address has its own browser cookie jar. Both regression Workers must
-// have QA_WORKER_SECRET configured; otherwise they fail closed before serving UI.
+// Each QA address has its own browser cookie jar. Without QA_WORKER_SECRET
+// the QA API returns 503; static assets may still render before API calls.
 const QA_HOSTNAMES = new Set([
   "qa.parrot669.com",
   "parrot669.cheltsov112.workers.dev",
