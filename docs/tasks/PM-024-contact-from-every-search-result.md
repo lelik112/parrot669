@@ -1,9 +1,9 @@
 # PM-024 — Контакт с хозяином из каждого результата поиска
 
 **Title:** дать гостю действующий путь написать хозяину любого объекта, который PARROT показывает в поиске.
-**Status:** planned — NOW по D011; исполнитель не назначен. **Priority:** P1.
-**Owner:** будущий Developer; QA Борис.
-**Agent:** будущий Developer. **Role:** Developer. **Scope:** выдача поиска, contact options и правила первого сообщения; не публикация личных контактов.
+**Status:** in progress — NOW по D011; реализация начата. **Priority:** P1.
+**Owner:** Игорь / Developer; QA Борис.
+**Agent:** Игорь. **Role:** Developer. **Scope:** выдача поиска, contact options и правила первого сообщения; не публикация личных контактов.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** задача меняет связанный frontend/backend contract контакта, общий host opt-in и антиабьюзные границы.
 
 ## Goal
@@ -77,3 +77,4 @@
 ## Discussion / Updates
 
 - 2026-09-24 — **Марк / Product Manager:** оформлено принятое владельцем решение D011 и задача реализации. **Next:** Developer делает claim и Model check; Борис проводит независимый end-to-end QA.
+- 2026-09-25 06:01 UTC — **Agent:** Игорь. **Role:** Developer. **Scope:** frontend поиск и настройки сообщений, backend messaging contract/первое обращение; без PM-021 профиля Дениса, PM-023 авторизации до отправки и PM-025 mobile layout. **Change:** беру PM-024, ветки `igor/pm024-contact` от актуальных main двух репозиториев. **Model check:** Sol / High достаточно для связанных frontend/backend изменений и регрессий авторизации, блокировок и rate limits. **Related task:** PM-024. **Next:** сверить текущие реализации, убрать общий gate и ввести регрессионные проверки, затем CI и релиз.

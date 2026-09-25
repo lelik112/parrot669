@@ -41,7 +41,7 @@
 | [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | P2 | in progress — MVP на существующем имени хозяина | Денис / Developer |
 | [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | later | planned — LATER, зависит от PM-002/021 | Не назначен |
 | [PM-023](PM-023-guest-message-onboarding.md) | Путь гостя к первому сообщению | P1 | planned — после PM-024 и текущей работы PM-020/021 | Не назначен |
-| [PM-024](PM-024-contact-from-every-search-result.md) | Контакт с хозяином из каждого результата | P1 | planned — NOW по D011; реализация не начата | Не назначен |
+| [PM-024](PM-024-contact-from-every-search-result.md) | Контакт с хозяином из каждого результата | P1 | in progress — NOW по D011 | Игорь / Developer; QA Борис |
 | [PM-025](PM-025-search-contact-button-layout.md) | Расположение кнопки контакта в mobile search | P1 | planned — NEXT после PM-024; mobile bug ждёт воспроизведения | Не назначен |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | Убрать дублирующий Messages shortcut | P2 | planned — оставить глобальную ссылку | Не назначен |
 | [PM-027](PM-027-open-property-from-messages.md) | Открыть карточку объекта из диалога | P2 | planned — после стабилизации PM-020/021 | Не назначен |
