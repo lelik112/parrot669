@@ -51,7 +51,7 @@
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
-| [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | planned | —: dev audit без claim |
+| [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | in progress — PM overview готов | Марк / PM; Игорь backend и Денис frontend — handoff, без dev claim |
 | **LATER** | | | |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
