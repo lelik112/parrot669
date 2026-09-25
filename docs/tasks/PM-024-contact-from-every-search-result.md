@@ -1,7 +1,7 @@
 # PM-024 — Контакт с хозяином из каждого результата поиска
 
 **Title:** дать гостю действующий путь написать хозяину любого объекта, который PARROT показывает в поиске.
-**Status:** in review — backend/frontend выпущены, независимая QA Бориса открыта. **Priority:** P1.
+**Status:** in review — live search CTA → first message → host reply PASS for one QA listing; all-result, no-link/unverified-calendar, block/rate-limit cases remain open. **Priority:** P1.
 **Owner:** Игорь / Developer (назначен Алексеем 2026-09-25, claim подтверждён); QA Борис.
 **Agent:** Игорь. **Role:** Developer. **Scope:** выдача поиска, contact options и правила первого сообщения; не публикация личных контактов.
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** задача меняет связанный frontend/backend contract контакта, общий host opt-in и антиабьюзные границы.
@@ -71,6 +71,8 @@
 [D011](../decisions/D011-contact-always-available.md), текущий messaging API, [PM-003](PM-003-contact-acceptance.md), [PM-023](PM-023-guest-message-onboarding.md). Перед началом сверить активные claims; PM-023 меняет только момент auth, PM-024 — доступность контакта.
 
 ## Evidence
+
+- 2026-09-25 — Борис / Cloud Chrome, `qa` guest on Worker origin and `lelik` host on primary origin. Barcelona search 2027-06-11 → 2027-06-14 showed `lelik` QA property with external Airbnb link and calendar-verification marker; CTA opened a composer with matching property and dates. `qa` sent the first message, `lelik` received and replied, and `qa` saw the reply after refresh. This confirms one object path only; no-link/unverified listing variants, third-party account denial, rate limit and pair block remain untested here. See [PM-003](PM-003-contact-acceptance.md).
 
 В public/assets/messaging-common.js contact link сейчас показывается только при acceptingNewConversations; public/host.html содержит общий переключатель с текстом «выключение запрещает новые обращения». Поиск и backend должны быть приведены к принятому D011.
 
