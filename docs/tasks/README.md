@@ -51,6 +51,8 @@
 | [PM-031](PM-031-trust-terminology.md) | Словарь проверяемых сигналов доверия | P2 | planned — NEXT, редакционный контракт | Марк / Product Manager, без dev claim |
 | [PM-032](PM-032-how-it-works.md) | How it works по проверяемым сценариям | later | planned — LATER после PM-031/QA | Не назначена; нет dev claim |
 | [PM-033](PM-033-faq.md) | FAQ на основе проверенных вопросов | later | planned — LATER после PM-031/QA | Не назначена; нет dev claim |
+| [PM-034](PM-034-backend-frontend-refactoring-audit.md) | Аудит техдолга backend/frontend, без реализации | P2 | planned — разработчики не claim-или; требуется отдельное согласование проверки | Марк / координация; Игорь и Денис — только предполагаемые исполнители |
+| [PM-035](PM-035-documentation-structure-refactoring.md) | Аудит структуры документации и план переноса истории | P2 | done — предложение подготовлено; миграция отдельно не начата | Марк / Product Manager |
 | [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | Конечная дата не обновляется после выбора начала на iPhone Safari | P2 | in review — frontend выпущен, iPhone Safari и desktop QA впереди | Игорь / Developer; QA Борис |
 | [BUG-019](BUG-019-search-account-context.md) | Поиск не показывает аккаунт и не объясняет скрытый контакт | P2 | in review — Борис desktop self/other + RU/EN/ES/CA PASS; signed-out/iPhone Safari открыты | Денис / Developer; QA Борис |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | Новое сообщение не выделяется во входящих | P2 | in review — frontend выпущен; desktop/iPhone QA открыта | Денис / Developer; QA Борис |
