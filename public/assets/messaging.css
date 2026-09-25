@@ -46,6 +46,8 @@
 .messages-thread-context p{margin:5px 0 0;color:#aebdb5;font-size:13px}
 .messages-profile-link{flex-shrink:0;font-size:12px;text-align:center;min-height:44px;display:inline-flex;align-items:center}
 .messages-profile-link[hidden]{display:none}
+.messages-property-action{display:inline-flex;align-items:center;margin-top:6px;font-size:12px}
+.messages-property-action[hidden]{display:none}
 #msg-block{max-width:145px;text-align:right;font-size:11px}
 .messages-back{display:none}
 .messages-history{flex:1;min-height:80px;overflow-y:auto;overscroll-behavior:contain;padding:20px 22px;display:flex;flex-direction:column;gap:12px;overflow-anchor:none}

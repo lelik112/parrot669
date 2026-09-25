@@ -1,9 +1,9 @@
 # PM-027 — Открыть карточку жилья из Messages
 
 **Title:** дать хозяину переход к своему объекту из диалога.
-**Status:** planned — NEXT после завершения активной навигации PM-020/PM-021; исполнитель не назначен. **Priority:** P2.
-**Owner:** будущий Developer; QA Борис.
-**Agent:** будущий Developer. **Role:** Developer. **Scope:** контекст конкретного диалога и переход к карточке связанного объекта; frontend-first.
+**Status:** in progress — frontend взял Игорь по прямому поручению владельца; независимая QA после релиза. **Priority:** P2.
+**Owner:** Игорь / Developer; QA Борис.
+**Agent:** Игорь. **Role:** Developer. **Scope:** owner-only переход Messages → конкретная карточка Host → тот же диалог; frontend и UI-тесты, без backend, публичной карточки и PM-028.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** надо сохранить conversation context и открыть правильный объект без путаницы между несколькими объявлениями и приватным/публичным представлением.
 
 ## Goal
@@ -65,8 +65,12 @@
 
 ## Evidence
 
-В public/messages.html и public/assets/messages.js контекст треда выводит название объекта текстом (msg-property); отдельного owner action к карточке нет.
+До PM-027 в public/messages.html и public/assets/messages.js контекст треда выводил название объекта текстом (msg-property); отдельного owner action к карточке не было.
+
+Реализация в ветке `igor/pm027-message-property` использует `hostProfileId` и nullable `propertyId` из существующего conversation DTO; Host раскрывает карточку только после загрузки owner dashboard. При удалении объекта Messages скрывает переход, а уже сохранённая ссылка Host показывает нейтральное состояние и безопасный путь обратно к диалогу. Возврат использует существующий URL `/messages.html?conversation=<id>` и не меняет отправку/read-состояние. После merge PM-028 в base и совмещения двух переходов локально 124/124 frontend-тестов; production и независимый QA после CI.
 
 ## Discussion / Updates
 
 - 2026-09-24 — **Марк / Product Manager:** отделено от ссылки на профиль хозяина, чтобы QA проверял два конкретных назначения.
+- 2026-09-25 — **Agent:** Игорь. **Role:** Developer. **Scope:** `public/assets/messages.js`, `messages.html`, `messaging-common.js`, `host.js`, `host.html`, относящиеся CSS/UI-тесты и handoff docs. **Change:** по поручению Алексея беру PM-027 на ветке `igor/pm027-message-property`. PM-023 уже merged/in review, PM-020/021 frontend выпущены, других активных claims на Messages/Host для этой задачи нет. Backend conversation DTO уже содержит `hostProfileId` и nullable `propertyId`; owner dashboard подтверждает принадлежность перед показом карточки. **Model check:** Sol / Medium достаточно для ограниченного frontend перехода и проверки owner/deleted/account boundary. **Related task:** PM-027. **Next:** добавить точный deep link, при недоступном объекте показать нейтральное состояние и возврат к диалогу; проверить mobile/desktop UI и CI.
+- 2026-09-25 — **Agent:** Игорь. **Role:** Developer. **Change:** Денис выпустил PM-028 (собственный private profile), поэтому PM-027 rebase сделан на его frontend main. Профильный переход сохранён; при загрузке Host явный `propertyId` выигрывает у сохранённой позиции, а профильный deep link по `fromMessages=1#host-profile` остаётся рабочим. Для owner/deleted/guest и выбора между двумя объектами добавлены UI regression checks; после совмещения локально 124/124. **Related task:** PM-027. **Next:** обновить PR, дождаться CI/main и проверить production, затем независимый QA Бориса на desktop и mobile.

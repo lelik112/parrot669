@@ -95,6 +95,11 @@ let accountId = null;
 let unsavedHostChanges = false;
 let confirmedExit = false;
 const returnKey = id => `parrot669-host-return:${id}`;
+const propertyNavigationParams = new URLSearchParams(window.location.search);
+const propertyNavigationUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const propertyNavigationId = propertyNavigationUuid.test(propertyNavigationParams.get("property") || "") ? propertyNavigationParams.get("property") : null;
+const propertyConversationId = propertyNavigationId && propertyNavigationUuid.test(propertyNavigationParams.get("conversation") || "") ? propertyNavigationParams.get("conversation") : null;
+let propertyNavigationPending = Boolean(propertyNavigationId);
 const navCopy = {
   en:{navProperties:"My properties",navTools:"Host tools",discardChanges:"Discard unsaved changes and leave this page?"},
   es:{navProperties:"Mis viviendas",navTools:"Herramientas del propietario",discardChanges:"¿Descartar los cambios sin guardar y salir de esta página?"},
@@ -102,6 +107,10 @@ const navCopy = {
   ru:{navProperties:"Мои объекты",navTools:"Инструменты владельца",discardChanges:"Сбросить несохранённые изменения и уйти с этой страницы?"}
 };
 Object.entries(navCopy).forEach(([language,values])=>Object.assign(copy[language],values));
+Object.assign(copy.en,{propertyFromConversation:"This is the property from your conversation.",propertyUnavailableHere:"This property is no longer available in this account.",backToConversation:"← Back to conversation"});
+Object.assign(copy.es,{propertyFromConversation:"Esta es la vivienda de tu conversación.",propertyUnavailableHere:"Esta vivienda ya no está disponible en esta cuenta.",backToConversation:"← Volver a la conversación"});
+Object.assign(copy.ca,{propertyFromConversation:"Aquest és l'habitatge de la teva conversa.",propertyUnavailableHere:"Aquest habitatge ja no està disponible en aquest compte.",backToConversation:"← Tornar a la conversa"});
+Object.assign(copy.ru,{propertyFromConversation:"Это объект из вашего диалога.",propertyUnavailableHere:"Этот объект больше недоступен в данном аккаунте.",backToConversation:"← Вернуться в диалог"});
 document.getElementById("property-panel").addEventListener("input", event=>{
   if(event.target.closest("form"))unsavedHostChanges=true;
 });
@@ -193,6 +202,7 @@ const closeAuthDialogButton = document.getElementById("close-auth-dialog");
 const hostAuthLinks = document.getElementById("host-auth-links");
 const hostAccountSession = document.getElementById("host-account-session");
 const propertyPanel = document.getElementById("property-panel");
+const propertyNavigationNode = document.getElementById("host-property-context");
 const hostProfilePanel = document.getElementById("host-profile");
 const hostProfileReturn = document.getElementById("host-profile-return");
 const hostProfileForm = document.getElementById("host-profile-form");
@@ -418,10 +428,22 @@ async function syncDashboard(){
       unavailability: Array.isArray(property.unavailability) ? property.unavailability : [],
       calendars: Array.isArray(property.calendars) ? property.calendars : []
     }));
-    const returningFromMessages=profileReturnContext();
-    const previousScroll=returningFromMessages ? null : restoreHostContext();
+    const navigateToProperty = propertyNavigationPending;
+    const returningFromMessages = !navigateToProperty && profileReturnContext();
+    let previousScroll = null;
+    if(navigateToProperty){
+      propertyNavigationPending = false;
+      expandedPropertyIds.clear();
+      if(state.properties.some(property=>property.id===propertyNavigationId)) expandedPropertyIds.add(propertyNavigationId);
+      try { sessionStorage.removeItem(returnKey(accountId)); } catch {}
+    }else if(!returningFromMessages) previousScroll=restoreHostContext();
     renderProperties();
-    if(returningFromMessages)
+    if(navigateToProperty) requestAnimationFrame(()=>{
+      const card=Array.from(propertiesNode.children).find(node=>node.dataset.propertyId===propertyNavigationId);
+      (card || propertyNavigationNode).scrollIntoView?.({block:"start",behavior:"auto"});
+      card?.focus?.({preventScroll:true});
+    });
+    else if(returningFromMessages)
       requestAnimationFrame(()=>hostProfilePanel.scrollIntoView?.({block:"start"}));
     else if(previousScroll!==null && previousScroll!==undefined)
       requestAnimationFrame(()=>window.scrollTo({top:previousScroll,behavior:"instant"}));
@@ -1092,9 +1114,24 @@ function renderUnavailability(property, feedbackKey = null){
   return panel;
 }
 
+function renderPropertyNavigation(){
+  const visible=Boolean(state.authenticated && propertyNavigationId);
+  propertyNavigationNode.hidden=!visible;
+  if(!visible)return;
+  const owned=state.properties.some(property=>property.id===propertyNavigationId);
+  document.getElementById("host-property-context-status").textContent=tr(owned?"propertyFromConversation":"propertyUnavailableHere");
+  const back=document.getElementById("host-property-return");
+  back.hidden=!propertyConversationId;
+  if(propertyConversationId){
+    back.href=`/messages.html?conversation=${propertyConversationId}`;
+    back.textContent=tr("backToConversation");
+  }else back.removeAttribute("href");
+}
+
 function renderProperties(blockFeedback = null){
   unsavedHostChanges=false;
   if (!propertiesNode) return;
+  renderPropertyNavigation();
   calendarVerificationPanels.splice(0).forEach(panel=>panel.dispose());
   propertyAddressEditors.forEach(editor => editor.dispose());
   propertyAddressEditors.clear();
@@ -1114,6 +1151,7 @@ function renderProperties(blockFeedback = null){
     const expanded=expandedPropertyIds.has(property.id);
     const card = document.createElement("article");
     card.className = `host-property ${expanded?"expanded":"collapsed"}`;
+    card.dataset.propertyId=property.id;
 
     const head = document.createElement("div");
     head.className = "host-property-head";

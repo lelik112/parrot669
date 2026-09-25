@@ -45,6 +45,10 @@
   Object.assign(texts.es,{ownProfile:"Mi perfil de anfitrión"});
   Object.assign(texts.ca,{ownProfile:"El meu perfil d'amfitrió"});
   Object.assign(texts.ru,{ownProfile:"Мой профиль хозяина"});
+  Object.assign(texts.en,{openProperty:"Open property ↗"});
+  Object.assign(texts.es,{openProperty:"Abrir vivienda ↗"});
+  Object.assign(texts.ca,{openProperty:"Obrir habitatge ↗"});
+  Object.assign(texts.ru,{openProperty:"Открыть объект ↗"});
   function t(key) { return texts[lang][key] || texts.en[key] || key; }
   function setLanguage(value) {
     lang = texts[value] ? value : "en";
