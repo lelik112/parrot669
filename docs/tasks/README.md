@@ -56,6 +56,7 @@
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | in review — функциональный двухаккаунтный QA PASS; отдельно нужны проверка пары Бориса и полный live security evidence | Никита / Regression QA smoke; Игорь / security review; Марк / PM close; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
+| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | planned — проверить реальный запуск нужного агента по назначению; встроенный scheduler ≤1/час, file-trigger нет | Без dev claim: Денис PM-040, Игорь PM-037/PM-036; Sol / High |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 
@@ -64,6 +65,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [PM-042](PM-042-agent-check-in-process-audit.md) | P2 | done — аудит процесса Алекса; ошибочный второй PM-036 удалён | Марк / PM; Sol / Medium; реализация отдельно PM-043 |
 | [PM-039](PM-039-browser-test-environments.md) | P1 | done — выбор D016: Playwright first, телефон PM-041 | Марк / PM; внедрение отдельно PM-040 |
 | [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | done — PM synthesis, two follow-ups | Марк / PM |
 | [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | done — read-only backend report | Игорь / Developer; Марк завершил PM-034 |
