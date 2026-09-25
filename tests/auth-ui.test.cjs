@@ -86,7 +86,7 @@ function setup(routes = {}, search = '') {
     },
     navigator: {language:'en'},
     localStorage: {getItem() {return null;}, setItem() {}},
-    window: {location: {search, pathname:'/host', hash:'', origin:'https://parrot669.com'},addEventListener() {},scrollY:380,scrollTo(x,y){this.restoredScroll=y;}},
+    window: {location: {search, pathname:'/host', hash:'', origin:'https://parrot669.com'},addEventListener() {},scrollY:380,scrollTo(x,y){this.restoredScroll=y;this.scrollOptions=x;}},
     sessionStorage: {values:new Map(),setItem(key,value){this.values.set(key,value);},getItem(key){return this.values.get(key)||null;},removeItem(key){this.values.delete(key);}},
     requestAnimationFrame: fn=>fn(),
     history: {replaceState() {}},
@@ -885,4 +885,13 @@ test('host navigation asks before dropping a draft and restores only this accoun
   assert.equal(app.run('sessionStorage.values.size'),0);
   app.run('sessionStorage.setItem("parrot669-host-return:host-a",JSON.stringify({ids:["property-1"],scrollY:300}));setAuthenticated({accountId:"host-b",email:"b@example.test"});expandedPropertyIds.clear();restoreHostContext()');
   assert.equal(app.run('expandedPropertyIds.size'),0);
+});
+
+test('return from Messages restores the saved position without smooth scrolling',async()=>{
+  const app=setup({'/dashboard':{body:{properties:[]}}});await settle();
+  app.run('setAuthenticated({accountId:"host-a",email:"host@example.test"});sessionStorage.setItem("parrot669-host-return:host-a",JSON.stringify({ids:[],scrollY:3329}))');
+  await app.run('syncDashboard()');
+  assert.equal(app.run('window.scrollOptions.top'),3329);
+  assert.equal(app.run('window.scrollOptions.behavior'),'instant');
+  assert.equal(app.run('sessionStorage.getItem("parrot669-host-return:host-a")'),null);
 });

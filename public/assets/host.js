@@ -405,7 +405,8 @@ async function syncDashboard(){
     }));
     const previousScroll=restoreHostContext();
     renderProperties();
-    if(previousScroll!==null && previousScroll!==undefined)requestAnimationFrame(()=>window.scrollTo(0,previousScroll));
+    if(previousScroll!==null && previousScroll!==undefined)
+      requestAnimationFrame(()=>window.scrollTo({top:previousScroll,behavior:"instant"}));
     message("");
   } catch (error) {
     if (error.status === 401) {
