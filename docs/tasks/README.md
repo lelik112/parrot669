@@ -8,7 +8,7 @@
 
 ## Кто есть кто
 
-[Состав и границы ролей](../team.md). Координатор задач — Марк / PM; Денис и Игорь — Developer, Борис — QA Lead / Acceptance QA, новая неназванная роль — Regression QA Engineer (пока без исполнителя и claims), Алекс — Strategy, Алексей — Product Owner.
+[Состав и границы ролей](../team.md). Координатор задач — Марк / PM; Денис и Игорь — Developer, Борис — QA Lead / Acceptance QA, Никита — Regression QA Engineer (двухаккаунтный QA claim ожидается), Алекс — Strategy, Алексей — Product Owner.
 
 ## Индекс задач
 
@@ -50,7 +50,7 @@
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | planned | —: после PM-015 |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
-| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | blocked after discovery — нет нового QA, browser capability и отдельной пары; backend/Worker change пока не нужен | Игорь / technical claim; Марк/Алексей → новый QA и доступ; Sol / High |
+| [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | blocked after discovery — Никита известен; два входа и browser capability не подтверждены | Игорь / technical claim; Никита / QA evidence ещё без claim; Sol / High (dev), Luna / Medium (QA) |
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
