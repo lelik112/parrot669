@@ -2,7 +2,7 @@
 
 **Title:** уменьшить технический долг документации и ускорить восстановление контекста команды.
 
-**Status:** planned. **Priority:** P2. **Owner:** Марк / Product Manager.
+**Status:** in progress — Марк / Product Manager. **Priority:** P2. **Owner:** Марк / Product Manager.
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** структура документации, процессы работы команды; без кода и изменений приложения.
 
@@ -118,6 +118,8 @@
 - [ ] Указано, какие документы не требуют изменения.
 
 ## Updates
+
+2026-09-25 12:40 UTC — **Agent:** Марк. **Role:** Product Manager. **Scope:** audit структуры docs и предложение минимального разделения current/history, без кода и миграции истории. **Change:** взял PM-035 по поручению Алексея; сверяю свежий main, размеры и обязанности документов. **Related task:** PM-035. **Model check:** Sol / Medium достаточно для сравнения процессов и структуры; повышение не требуется. **Next:** зафиксировать DOCUMENTATION AUDIT, риски и план обратимой миграции.
 
 2026-09-25 — Алекс / Strategy / Product Advisor
 
