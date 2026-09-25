@@ -1,8 +1,8 @@
 # BUG-023 — Имя хозяина не сохраняется
 
 **Title:** сохранение публичного имени в кабинете показывает Not found.
-**Status:** reported — повторено на двух production origins под аккаунтом qa. **Priority:** P1.
-**Owner:** Марк / PM — triage и назначение разработчика; QA Борис. **Developer claim:** отсутствует; вероятный исполнитель по области — Денис (PM-021).
+**Status:** in progress — Денис взял диагностику и узкое исправление Worker proxy. **Priority:** P1.
+**Owner:** Денис / Developer; QA Борис. **Developer claim:** 2026-09-25 14:19 UTC.
 **Agent:** Борис. **Role:** QA. **Scope:** независимый live acceptance PM-021; код не менялся.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** сопоставить опубликованный frontend route, backend API и сессию, затем подтвердить сохранение и ошибку в UI. **Model check:** будущий Developer до реализации.
 
@@ -37,3 +37,7 @@
 Марк назначает диагностику ответственному разработчику. После исправления Борис повторяет save → reload и проверяет ясную ошибку, пустое имя, права и приватность отдельно.
 
 **Related task:** PM-021.
+
+## Discussion / Updates
+
+- 2026-09-25 14:19 UTC — **Agent:** Денис. **Role:** Developer. **Scope:** BUG-023, только Worker route для PATCH /api/host/profile и тест proxy; backend/profile semantics не менять. **Model check:** Sol / Medium достаточно для локализованной диагностики и route fix. **Change:** claim по прямому поручению Алексея. Сверил frontend и backend main: Worker не пропускает PATCH /api/host/profile и для host путей убирает /host при proxy, тогда как backend ожидает /api/host/profile. **Related task:** BUG-023 / PM-021. **Next:** узкая правка proxy и тест на обоих origins, PR, релиз и QA Бориса.
