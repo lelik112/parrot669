@@ -47,6 +47,7 @@
 | [PM-027](PM-027-open-property-from-messages.md) | Открыть карточку объекта из диалога | P2 | in review — frontend live, CI зелёный; независимая QA открыта | Игорь / Developer; QA Борис |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | in review — frontend выпущен, host/guest и mobile QA открыты | Денис / Developer; QA Борис |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | Два независимых входа для QA через два origin | P1 | in progress — Игорь, backend guard + Worker; затем Cloudflare/Railway и QA | Игорь / Developer; QA Борис |
+| [PM-030](PM-030-qa-drain-next-stage.md) | Разгрузить QA-хвост и подготовить следующий продуктовый этап | P1 | planned — Марк, координация/документация | Марк / Product Manager |
 | [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | Конечная дата не обновляется после выбора начала на iPhone Safari | P2 | in review — frontend выпущен, iPhone Safari и desktop QA впереди | Игорь / Developer; QA Борис |
 | [BUG-019](BUG-019-search-account-context.md) | Поиск не показывает аккаунт и не объясняет скрытый контакт | P2 | in review — Борис desktop self/other + RU/EN/ES/CA PASS; signed-out/iPhone Safari открыты | Денис / Developer; QA Борис |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | Новое сообщение не выделяется во входящих | P2 | in review — frontend выпущен; desktop/iPhone QA открыта | Денис / Developer; QA Борис |
