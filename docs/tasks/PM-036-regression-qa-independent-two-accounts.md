@@ -2,11 +2,13 @@
 
 **Title:** дать новому Regression QA Engineer собственный управляемый A↔B сценарий без пересечения с аккаунтами Бориса.
 
-**Status:** planned / NEXT; код и настройка не начаты, developer claim отсутствует. **Priority:** P1 как инфраструктурный enabler двухсторонней регрессии, но текущий P1 acceptance Бориса и восстановление его пары остаются впереди. **Owner:** Марк / Product Manager (постановка и координация). **Suggested executor:** Игорь / Developer — после сверки действующего PM-029 и собственного [PM-034-BE](PM-034-BE-backend-audit.md); предложение не означает claim. Денис / Developer подключается к frontend/Worker только при подтверждённой необходимости и отдельном scope.
+**Status:** in progress — Игорь claim 2026-09-25 14:13 UTC; discovery/выбор двух session contexts, без расширения QA allowlist до подтверждения нужды. **Priority:** P1 как инфраструктурный enabler двухсторонней регрессии, но текущий P1 acceptance Бориса и восстановление его пары остаются впереди. **Owner:** Марк / Product Manager (постановка и координация), Игорь / Developer (technical discovery). Денис / Developer подключается к frontend/Worker только при подтверждённой необходимости и отдельном scope.
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** постановка безопасного QA-доступа и критериев; без кода, аккаунтов, конфигурации или секретов.
 
-**Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** изоляция двух тестовых сессий и двух QA-исполнителей затрагивает backend allowlist, Worker attestations, cookie/auth, тестовые данные и negative security checks. **Model check:** исполнитель подтверждает рекомендацию или обосновывает изменение до работы.
+**Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** изоляция двух тестовых сессий и двух QA-исполнителей затрагивает backend allowlist, Worker attestations, cookie/auth, тестовые данные и negative security checks. **Model check, Игорь 2026-09-25 14:13 UTC:** текущего GPT-6 с высоким уровнем анализа достаточно; область QA security проверяю отдельно, рекомендацию не меняю.
+
+**Claim — 2026-09-25 14:13 UTC. Agent:** Игорь. **Role:** Developer. **Scope:** PM-036, техническая проверка имеющейся PM-029 схемы, browser-context вариантов, account provisioning и узких backend изменений только если потребуется; branch `igor/pm036-regression-qa`. Текущую пару `qa`/`lelik`, frontend PM-034-FE и приемку Бориса не трогаю. **Change:** сверил свежий frontend `main` `0066f66`, PM-029/016, D013 и завершение PM-034-BE; приступил к discovery. **Related task:** PM-036. **Next:** установить реальную browser capability нового Regression QA и наличие отдельной подтверждённой пары, затем выбрать вариант без расширения допуска либо подготовить минимальное решение exact account IDs с согласованием до выпуска.
 
 ## Goal
 
