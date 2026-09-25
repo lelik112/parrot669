@@ -1,10 +1,10 @@
 # BUG-020 — Новое сообщение не выделяется во входящих
 
 **Title:** ясно показывать непрочитанное сообщение в списке диалогов и пункте «Сообщения».
-**Status:** planned — NEXT; claim разработчика отсутствует. **Priority:** P2.
-**Owner:** не назначен; нужен claim разработчика. QA: Борис.
-**Agent:** будущий Developer. **Role:** Developer. **Scope:** индикация непрочитанного и исходное отображение строки диалога; не менять правила доступа, отправки или блокировок сообщений.
-**Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** локализованная проверка состояния и визуального представления; сначала воспроизвести API/UI-поведение, затем выбрать минимальную правку.
+**Status:** assigned to Денис / Developer — диагностика назначена; claim и Model check ожидаются. Кодовые изменения координировать с активной PM-027. **Priority:** P2.
+**Owner:** Денис / Developer; QA: Борис.
+**Agent:** Денис. **Role:** Developer. **Scope:** индикация непрочитанного и исходное отображение строки диалога; не менять правила доступа, отправки или блокировок сообщений.
+**Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** root cause пока неизвестен; нужно пройти цепочку unread API → polling → состояние строки/вкладки, сохранив текущую семантику прочтения.
 
 ## Goal
 
@@ -54,7 +54,7 @@
 
 ## Dependencies
 
-[PM-024](PM-024-contact-from-every-search-result.md), messaging API и существующие правила read/unread. Сверить активные claims в frontend/backend перед работой.
+[PM-024](PM-024-contact-from-every-search-result.md), messaging API и существующие правила read/unread. Игорь ведёт [PM-027](PM-027-open-property-from-messages.md) с изменениями Messages UI. Денис начинает с диагностики; до handoff/merge PM-027 не менять общие файлы `messages.js`, `messages.html` и `messaging-common.js`, если Игорь не подтвердит непересекающийся участок.
 
 ## Evidence
 
@@ -66,3 +66,11 @@
 ## Discussion / Updates
 
 - 2026-09-25 — **Борис / QA:** зафиксировано owner-assisted наблюдение во время проверки PM-024. Контакт, создание диалога и отправка гостем прошли; видимость непрочитанного и исходный вид строки остаются открытыми. Не назначено, потому что разработчик ещё не подтвердил claim. **Next:** разработчик воспроизводит при новом входящем, проверяет API unread count, получение inbox, polling и стили строки; затем Борис повторяет критерии на desktop/iPhone Safari.
+
+
+### PM review and assignment — 2026-09-25
+
+- **Agent:** Марк / Product Manager. **Change:** симптом подтверждён владельцем на iPhone Safari: новое входящее приводит к появлению диалога, но хозяин не видит unread-сигнал ни на вкладке, ни в строке списка. Это проблема discoverability/read-state presentation; создание и отправка диалога в тесте прошли. Оставляю P2: диалог доступен, а факт влияния на долю ответов пока не измерен; повысить приоритет при подтверждении пропущенных обращений или неработающих email notifications.
+- **Assignment:** Денису поручена диагностика, так как он освободился после PM-028. Claim и Model check Sol / Medium пока ожидаются от него. В начале проверить действительные ответы unread API и polling interval, затем состояние DOM/CSS до и после открытия треда. Не менять read semantics, приватность, messaging backend или rate limits в рамках минимального UI fix без отдельного решения.
+- **Coordination:** PM-027 Игоря ещё в работе и пересекается по Messages frontend. Диагностику можно вести сейчас; изменения общих файлов — после handoff PM-027 или явного согласования с Игорем.
+- **Next:** Denis records claim/model check, confirms exact files with Igor, reproduces the owner-assisted case, then implements smallest fix and hands off to Boris for desktop/iPhone Safari QA.
