@@ -10,7 +10,7 @@ const deferred = () => { let resolve; const promise=new Promise(r=>resolve=r); r
 const response = data => new Response(JSON.stringify(data));
 const property = city => ({propertyId:city,propertyTitle:`Home in ${city}`,city,bedrooms:1,sleeps:2,links:[]});
 
-async function harness(t, {handler=()=>undefined, saved=null}={}) {
+async function harness(t, {handler=()=>undefined, saved=null, messaging=false}={}) {
   const dom=new JSDOM(file('search.html'),{url:'https://parrot669.com/search',runScripts:'outside-only'});
   t.after(()=>dom.window.close());
   const w=dom.window, calls=[];
@@ -21,12 +21,15 @@ async function harness(t, {handler=()=>undefined, saved=null}={}) {
     calls.push(url);
     const custom=await handler(url);
     if(custom!==undefined) return custom instanceof Response?custom:response(custom);
+    if(url.pathname==='/api/host/auth/me') return new Response(JSON.stringify({error:'unauthorized'}),{status:401});
+    if(url.pathname.startsWith('/api/messaging/contact-options/')) return response({acceptingNewConversations:false,hostProfileId:'host'});
     if(url.pathname==='/api/locations/countries') return response([{code:'ES',name:'Spain'},{code:'BY',name:'Belarus'}]);
     if(url.pathname==='/api/locations/cities') return response((url.searchParams.get('country')==='ES'?
       ['Barcelona','Sant Cugat del Vallès']:['Minsk']).map(name=>({name})));
     if(url.pathname==='/api/search') return response([property(url.searchParams.get('city'))]);
     throw Error(`Unexpected request: ${raw}`);
   };
+  if(messaging) w.eval(file('assets/messaging-common.js'));
   w.eval(file('assets/search.js'));
   await flush();
   const form=w.document.getElementById('availability-form');
@@ -47,6 +50,20 @@ async function harness(t, {handler=()=>undefined, saved=null}={}) {
   };
   return h;
 }
+
+test('PM-024: every search card has a working contact link when legacy opt-in is false',async t=>{
+  const h=await harness(t,{messaging:true,handler:url=>{
+    if(url.pathname==='/api/search') return [
+      {...property('Barcelona'),propertyId:'11111111-1111-4111-8111-111111111111',availableFrom:'2026-10-01',availableTo:'2026-10-08'},
+      {...property('Barcelona'),propertyId:'22222222-2222-4222-8222-222222222222',availableFrom:'2026-10-01',availableTo:'2026-10-08',links:[{url:'https://www.airbnb.com/rooms/42',externalId:'42',calendarControlStatus:'unverified'}]}
+    ];
+  }});
+  await h.barcelona();
+  const links=[...h.results.querySelectorAll('.message-property-link')];
+  assert.equal(links.length,2);
+  assert(links.every(link=>!link.hidden && new URL(link.href).searchParams.get('from')==='2026-10-01'));
+  assert.equal(h.results.querySelectorAll('.availability-verify-nudge:not([hidden])').length,1);
+});
 
 test('GEO-001: changing city hides old cards; filters cannot search the old city',async t=>{
   const h=await harness(t);await h.barcelona();
