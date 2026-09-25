@@ -1,99 +1,72 @@
-# Команда PARROT 669 и задачи
+# PARROT 669 — короткий индекс задач
 
-Общая точка входа для `lelik112/parrot669` и `lelik112/parrot669-backend`. Координатор: **Марк / PM**. Обновлено: **2026-09-25**.
+**Agent:** Марк. **Role:** Product Manager. **Change:** ежедневный индекс отделён от [правил claim и отчётов](workflow.md) по принятой [PM-035](PM-035-documentation-structure-refactoring.md). **Related task:** PM-035. Обновлено: 2026-09-25.
 
-Перед началом: [product-context](../product-context.md) → [правила AI-команды и моделей](../ai-team.md) → [changelog](../changelog.md) → [команда и идентификация](../team.md) → [status](../status.md) → выбранная задача. Приоритеты и фичи — в [roadmap](../roadmap.md), продуктовые решения — в [decisions](../decisions/README.md).
+Перед стартом: [текущий статус](../status.md) → этот индекс → **своя карточка задачи** → [сегодняшние адресованные сообщения](../team-chat.md). Продуктовые решения сверять с [product-context](../product-context.md) и [decisions](../decisions/README.md); история реализации — [changelog](../changelog.md), правила команды — [ai-team](../ai-team.md) и [team](../team.md). Описание и критерии берём из карточки, текущие приоритеты — из [roadmap](../roadmap.md).
 
-Свободное общение и вопросы команде — [курилка / team-chat](../team-chat.md). При старте/возобновлении и перед передачей результата прочитать новые адресованные сообщения. Договорённость о задаче фиксируется в самой задаче.
+Карточка — источник статуса, evidence, назначения и рекомендации модели. Здесь короткий указатель: `in review` означает следующий QA, прежний автор реализации указан в карточке. «—» означает отсутствие активного claim; ссылка в индексе не уведомляет исполнителя. Полный неизменённый [README до разделения](README-history-2026-09-25.md) сохранён.
 
 ## Кто есть кто
 
-Актуальный состав и границы ролей ведутся в одном месте — [docs/team.md](../team.md). Подтверждены Денис и Игорь / Developer, Борис / QA; PM — Марк, стратег — Алекс. Подтверждение имени не создаёт claim и не означает возобновление работы.
-
-Марк работает только в перечисленной в team.md области продуктовых документов. Он не меняет приложение, миграции, CI/CD или инфраструктуру. Состав команды не расширяет доступы других ролей.
+[Состав и границы ролей](../team.md). Координатор задач — Марк / PM; Денис и Игорь — Developer, Борис — QA, Алекс — Strategy, Алексей — Product Owner.
 
 ## Индекс задач
 
-Сам файл задачи — источник её назначения и состояния. Этот индекс — краткий указатель; исполнитель обновляет строку вместе с claim/переходом, PM согласует roadmap и status.
-
-| ID | Задача | Приоритет | Статус | Ответственный |
-| --- | --- | --- | --- | --- |
-| [PM-001](PM-001-calendar-control-dates.md) | Проверка сохранённых дат; BUG-015/018 | P1 | in review — desktop partial PASS; owner-assisted iPhone Safari open 17–18.02.2027 passed; BUG-018 and remaining QA open | Денис / Developer; QA Борис |
-| [PM-002](PM-002-link-publication.md) | Внешняя ссылка + verification status + nudge | P1 | in review — BUG-017 code merged; Cloudflare/QA copy retest open; other states PM-016/open | Игорь / Developer; QA Борис |
-| [PM-003](PM-003-contact-acceptance.md) | Независимый поиск → обращение → ответ; CHECK-H11 | P1 | blocked — Борису требуется самостоятельный PM-016 двухаккаунтный прогон | Борис / QA; возобновление не подтверждено |
-| [PM-004](PM-004-street-autofill.md) | Браузерный autofill перекрывает улицу; BUG-013 | P2 | in review — Chrome QA частично PASS, Safari ждёт PM-014 | Денис / Developer; QA Борис |
-| [PM-005](PM-005-closed-dates-copy.md) | Понятная форма закрытых дат; BUG-014 | P2 | in review — desktop RU/EN/ES/CA QA PASS, mobile открыт | Денис / Developer; QA Борис |
-| [PM-006](PM-006-email-acceptance.md) | Письма и полный цикл восстановления | P1 | planned | Не заявлен |
-| [PM-007](PM-007-mobile-acceptance.md) | Приёмка основных путей на мобильных | P1 | planned | Не заявлен |
-| [PM-008](PM-008-pilot.md) | План пилота и исходные показатели | P1 | planned | Марк / PM — постановка; запуск не начат |
-| [PM-009](PM-009-team-identity.md) | Состав команды и формат идентификации | P2 | done | Марк / Product Manager |
-| [PM-010](PM-010-auth-routes-extraction.md) | Выделение AuthRoutes без изменения поведения | P2 | in review — текущий сеанс сохраняется, полный auth ждёт PM-016/017 | Игорь / Developer; QA Борис |
-| [PM-011](PM-011-calendar-sync-extraction.md) | Выделение внешнего calendar lifecycle | P2 | in review — sync/toggle QA PASS, delete/connect/search открыты | Игорь / Developer; QA Борис |
-| [PM-012](PM-012-legacy-challenges-extraction.md) | Решение о размещении legacy challenges | later | planned — LATER; после PM-001 | Не назначен |
-| [PM-013](PM-013-calendar-waiting-instruction.md) | Текст ожидания ссылается на скрытую кнопку; QA-PM001-01 | P2 | in review — QA `open` waiting PASS, `close` ждёт PM-018 | Марк / временный исполнитель; QA Борис |
-| [PM-014](PM-014-qa-native-autofill-environment.md) | Нативный Safari/autofill для PM-004 | P2 | blocked — браузерный профиль | Борис / QA после доступа; Алексей — среда |
-| [PM-015](PM-015-qa-mobile-device-environment.md) | iPhone Safari touch для PM-007 | P1 | in review — owner-assisted iPhone Safari check done for PM-001; full PM-007 mobile QA open | Борис / QA; Алексей — устройство/сеанс |
-| [PM-016](PM-016-qa-second-session-access.md) | Второй управляемый сеанс для PM-003/010 | P1 | blocked — QA Worker отвечает 401 без сессии, Борису проверить два независимых входа | Борис / QA |
-| [PM-017](PM-017-qa-test-mailbox-access.md) | Тестовые ящики для PM-006 | P1 | blocked — почтовый доступ | Борис / QA после доступа; Алексей — ящик |
-| [PM-018](PM-018-qa-controlled-calendar.md) | Контролируемые Airbnb-состояния для PM-001 | P1 | in review — owner-assisted positive open and restore done; Boris independent remainder open | Борис / QA; Алексей — Airbnb |
-| [PM-019](PM-019-host-cabinet-ia.md) | Контракт навигации кабинета | P2 | done — D009 принят владельцем | Марк / Product Manager |
-| [PM-020](PM-020-host-cabinet-navigation.md) | Навигация действующих функций | P2 | in review — BUG-016 fix merged PR #23, короткий production ретест и touch PM-015 открыты | Денис / Developer; QA Борис |
-| [PM-021](PM-021-private-host-profile.md) | Личный профиль и видимость полей | P2 | in review — frontend PR #21 и backend PR #25 merged; frontend live check и независимая QA открыты | Денис / Developer; QA Борис |
-| [PM-022](PM-022-public-host-profile.md) | Публичный профиль и privacy | P2 | planned — предложен минимальный privacy-контракт; approval владельца и первая QA-волна до dev | Не назначен |
-| [PM-023](PM-023-guest-message-onboarding.md) | Путь гостя к первому сообщению | P1 | in review — frontend live, CI зелёный; Борису нужен независимый QA | Игорь / Developer; QA Борис |
-| [PM-024](PM-024-contact-from-every-search-result.md) | Контакт с хозяином из каждого результата | P1 | in review — оба релиза и live search подтверждены; двухаккаунтная QA открыта | Игорь / Developer; QA Борис |
-| [PM-025](PM-025-search-contact-button-layout.md) | Расположение кнопки контакта в веб-выдаче | P1 | in review — web выпущен и live проверен; mobile и независимая QA открыты | Денис / Developer; QA Борис |
-| [PM-026](PM-026-remove-duplicate-messages-link.md) | Убрать дублирующий Messages shortcut | P2 | in review — Денис завершил frontend; ждёт независимый QA | Денис / Developer; QA Борис |
-| [PM-027](PM-027-open-property-from-messages.md) | Открыть карточку объекта из диалога | P2 | in review — frontend live, CI зелёный; независимая QA открыта | Игорь / Developer; QA Борис |
-| [PM-028](PM-028-open-host-profile-from-messages.md) | Открыть свой профиль хозяина из Messages | P2 | in review — frontend выпущен, host/guest и mobile QA открыты | Денис / Developer; QA Борис |
-| [PM-029](PM-029-two-origin-qa-sessions.md) | Два независимых входа для QA через два origin | P1 | in review — QA Worker/backend live 401; Борису проверить входы и A→B→A | Игорь / Developer; QA Борис |
-| [PM-030](PM-030-qa-drain-next-stage.md) | Разгрузить QA-хвост и подготовить следующий продуктовый этап | P1 | in progress — Марк; QA triage и следующие контракты документируются | Марк / Product Manager |
-| [PM-031](PM-031-trust-terminology.md) | Словарь проверяемых сигналов доверия | P2 | planned — NEXT, редакционный контракт | Марк / Product Manager, без dev claim |
-| [PM-032](PM-032-how-it-works.md) | How it works по проверяемым сценариям | later | planned — LATER после PM-031/QA | Не назначена; нет dev claim |
-| [PM-033](PM-033-faq.md) | FAQ на основе проверенных вопросов | later | planned — LATER после PM-031/QA | Не назначена; нет dev claim |
-| [PM-034](PM-034-backend-frontend-refactoring-audit.md) | Аудит техдолга backend/frontend, без реализации | P2 | planned — разработчики не claim-или; требуется отдельное согласование проверки | Марк / координация; Игорь и Денис — только предполагаемые исполнители |
-| [PM-035](PM-035-documentation-structure-refactoring.md) | Аудит структуры документации и безопасный перенос истории | P2 | in progress — аудит принят владельцем; Марк выполняет миграцию | Марк / Product Manager |
-| [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | Конечная дата не обновляется после выбора начала на iPhone Safari | P2 | in review — frontend выпущен, iPhone Safari и desktop QA впереди | Игорь / Developer; QA Борис |
-| [BUG-019](BUG-019-search-account-context.md) | Поиск не показывает аккаунт и не объясняет скрытый контакт | P2 | in review — Борис desktop self/other + RU/EN/ES/CA PASS; signed-out/iPhone Safari открыты | Денис / Developer; QA Борис |
-| [BUG-020](BUG-020-unread-message-discoverability.md) | Новое сообщение не выделяется во входящих | P2 | in review — frontend выпущен; desktop/iPhone QA открыта | Денис / Developer; QA Борис |
-
-Статусы задач: `planned`, `in progress`, `blocked`, `in review`, `done`, `rejected`. У `blocked` обязательно указаны причина и следующее действие. Статусы фич в roadmap используют отдельный короткий перечень из поручения владельца.
+| Задача | Приоритет | Статус | Текущий/следующий шаг |
+| --- | --- | --- | --- |
+| **NOW — P1** | | | |
+| [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review | Борис / QA |
+| [PM-016](PM-016-qa-second-session-access.md) | P1 | blocked | Борис: два входа |
+| [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
+| [PM-003](PM-003-contact-acceptance.md) | P1 | blocked | Борис: после PM-016 |
+| [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review | Борис / QA |
+| [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
+| [PM-025](PM-025-search-contact-button-layout.md) | P1 | in review | Борис / QA |
+| [PM-001](PM-001-calendar-control-dates.md) | P1 | in review | Борис / QA |
+| [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
+| [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | in review | Борис; доступ к mobile |
+| [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM |
+| **NOW — P2** | | | |
+| [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review | Борис / QA |
+| [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review | Борис / QA |
+| [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
+| [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review | Борис / QA |
+| [PM-010](PM-010-auth-routes-extraction.md) | P2 | in review | Борис / QA |
+| [PM-021](PM-021-private-host-profile.md) | P2 | in review | Борис / QA |
+| [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review | Борис / QA |
+| [BUG-019](BUG-019-search-account-context.md) | P2 | in review | Борис / QA |
+| [PM-005](PM-005-closed-dates-copy.md) | P2 | in review | Борис / QA |
+| [PM-011](PM-011-calendar-sync-extraction.md) | P2 | in review | Борис / QA |
+| [PM-013](PM-013-calendar-waiting-instruction.md) | P2 | in review | Борис / QA |
+| [PM-004](PM-004-street-autofill.md) | P2 | in review | Борис / QA |
+| [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | P2 | in review | Борис / QA |
+| [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
+| [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | in progress | Марк / PM |
+| **NEXT — P1** | | | |
+| [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked | Алексей → Борис: почта |
+| [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
+| [PM-007](PM-007-mobile-acceptance.md) | P1 | planned | —: после PM-015 |
+| [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
+| **NEXT — P2** | | | |
+| [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
+| [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
+| [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | planned | —: dev audit без claim |
+| **LATER** | | | |
+| [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
+| [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
+| [PM-033](PM-033-faq.md) | later | planned | —: LATER |
+| **DONE** | | | |
+| [PM-009](PM-009-team-identity.md) | P2 | done | Марк / PM |
+| [PM-019](PM-019-host-cabinet-ia.md) | P2 | done | Марк / PM |
 
 ## PM-отчёт владельцу продукта
 
-После создания или изменения задач, а также в каждом ответе о статусе/backlog PM сообщает короткий статус затронутых задач и полный актуальный список открытых задач, отсортированный по **NOW → NEXT → LATER**, затем по **P0 → P1 → P2**. По каждой задаче указываются статус, фактический claim/исполнитель (или «не назначена»), причина отсутствия назначения/claim, и рекомендованные model/reasoning из task file. Для blocked задач указываются блокер и следующий шаг.
-
-`Owner` или ожидаемый исполнитель в задаче не считается фактическим назначением без явного claim/подтверждения. Если задача просто planned и пока никем не взята, так и писать; Markdown в репозитории не уведомляет агента. Done/rejected задачи не включаются в открытый backlog. Отсутствующие рекомендации не выдумываются.
-
-
-
-1. Обновить основную ветку документации и проверить актуальный `Owner`, журнал и зависимости. Не считать чужую старую ветку свободной задачей.
-2. До реализации указать **Agent, Role, Scope**, статус, время UTC и ближайший шаг по [формату team.md](../team.md). Обновить индекс. Зафиксировать claim в репозитории и убедиться, что текущая общая версия действительно содержит его.
-3. У задачи один ответственный за координацию. Если claim уже есть, сначала записать предложение о разделении, дождаться ответа и назвать границы соисполнителей. Конфликт двух claims решается явно; не перезаписывать чужое имя молча.
-4. Вопросы, предложения, блокировки и ответы добавлять в **Discussion / Updates** этой же задачи. Для обновления статуса обязательно указывать **Agent, Role, Change, Related task**, дату и следующий шаг; перед началом — также Scope. Для короткого обсуждения: `YYYY-MM-DD HH:MM UTC — Имя / роль — вопрос или ответ — следующий шаг`. Адресат указывается текстом, без придумывания GitHub-аккаунта.
-5. При смене scope отметить затронутые задачи и продуктовый контракт. Новое продуктовое решение фиксирует PM; технический выбор внутри согласованных требований остаётся за разработчиком.
-6. По завершении разработки указать репозиторий, PR/commit, что изменилось, проверки, статус публикации и оставшиеся ограничения; перевести в `in review`. Для изменения без релиза явно написать, что публикация не требуется и почему.
-7. QA записывает результат каждого существенного критерия, среду/версию и ссылку на доказательства. `done` — после проверки критериев; наличие кода, зелёного CI или push само по себе не равно приёмке.
-8. При остановке оставить понятный handoff: что сделано, что не сделано, блокировка и следующий шаг. После значимого изменения PM обновляет product-context, changelog и decision log с авторством и причинами; status и roadmap согласуются по фактам.
-
-Для параллельных записей сначала подтянуть изменения и разрешить конфликт с сохранением обеих записей. Не использовать force-push и не переписывать чужую историю. Не менять чужую рабочую папку. Отсутствие ответа означает ожидание, а не согласие.
-
-Репозиторий не будит агентов и не обеспечивает автоматическое прочтение. Агент проверяет задачу при старте/возобновлении, перед пересекающимся изменением и перед передачей результата. Ответ появляется отдельной подписанной записью. PM не утверждает, что задание получено, пока нет подтверждения.
+Формат отчёта и полный порядок работы — [workflow.md](workflow.md#pm-отчёт-владельцу-продукта).
 
 ## Авторство
 
-Обязательный единый блок **Agent / Role / Change / Related task** для коммита, PR, статуса задачи и changelog определён в [team.md](../team.md). Он применяется независимо от технического Git author.
-
-Каждый использует выбранное имя в Git author и подписи записей, когда доступный способ коммита позволяет задать автора. Не придумывать адрес существующего человека или отдельный GitHub-аккаунт для подписи агента.
-
-Общий авторизованный GitHub-аккаунт и Git author — разные вещи. Если используемый инструмент не позволяет задать author, это ограничение явно отмечается, а имя/роль обязательно остаются в сообщении коммита и документах. Не выдавать `lelik112` за отдельный аккаунт агента. Чужие глобальные Git-настройки не менять.
-
-При создании этого PM-пакета прямой Git push не имел авторизации, а доступный GitHub-инструмент не позволял задать author. Поэтому технический автор публикации остаётся общим аккаунтом; автор продуктовых документов явно указан как **Марк / PM** в документах и сообщении коммита.
+Действующие правила подписи — [workflow.md](workflow.md#авторство), [team.md](../team.md#идентификация-изменений).
 
 ## Структура постановки
 
-Каждая новая или возобновляемая задача содержит `Title`, `Agent`, `Goal`, `Problem`, `Context`, `Requirements`, `Acceptance criteria`, `Not doing`, `Dependencies`, `Recommended model`, `Recommended reasoning` и `Reason`, плюс Owner/Status, Evidence, `Model check` и Discussion / Updates. Для новой фичи также фиксируются `User`, `Value`, `Solution`, `Alternatives`, `Rejected`, `Success criteria`. Завершённые задачи не меняются задним числом лишь ради рекомендации; для in-review рекомендация адресуется только следующему QA этапу. До основной работы исполнитель делает model check. Если мощности недостаточно — записывает, какой объём требует увеличения и почему, предлагает вариант и ждёт решения владельца продукта согласно [D005](../decisions/D005-ai-team-model-guidance.md).
-
-Критерии реализации и полезность различаются: прохождение проверки показывает корректность фичи, а реальные успешные контакты — ценность продукта. Числа, сроки, принятые решения и чужие claims не выдумываются.
-
-- 2026-09-24 07:42 UTC — **Денис / Developer:** беру PM-004 и PM-005 по поручению Алексея. Только frontend: адресный combobox, оформление/тексты закрытых дат и их тесты. Backend и PM-001/002 не меняю: параллельно идёт серверный рефакторинг. Имена Денис и Борис подтверждены владельцем. GitHub-инструмент не задаёт Git author; авторство указано в сообщениях коммитов.
+Шаблон новой задачи и model check — [workflow.md](workflow.md#структура-постановки); прежние записи сохранены в [истории README](README-history-2026-09-25.md).
