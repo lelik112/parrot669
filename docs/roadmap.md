@@ -22,6 +22,8 @@ QA capacity: [D013](decisions/D013-qa-acceptance-regression-split.md) разде
 
 ## NEXT
 
+- [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md) P1 — planned: новый Regression QA должен получить отдельную тестовую пару и два управляемых сеанса. Игорь — кандидат в dev после проверки, нужен ли код; ни он, ни новый QA не claim-или. Сначала проверить доступность двух browser contexts, а если их нет — отдельно согласовать безопасное расширение backend allowlist PM-029 по точным account IDs. Текущую пару Бориса не делить между агентами.
+
 - [PM-006](tasks/PM-006-email-acceptance.md) P1 — независимый цикл email после PM-017; [PM-007](tasks/PM-007-mobile-acceptance.md) P1 — основной путь на touch после PM-015. Борис / QA, ожидают доступа; нет claim о начале полного цикла.
 - [PM-008](tasks/PM-008-pilot.md) P1 — Марк / PM готовит план пилота и определения измерений; запуск и исходные показатели не подтверждены.
 - [PM-022](tasks/PM-022-public-host-profile.md) P2 — предложен минимальный публичный контракт. Требуется отдельное решение владельца о privacy/visibility и первая волна QA; только после этого рассматривать **одну** следующую dev-задачу. Сейчас dev не назначен.
