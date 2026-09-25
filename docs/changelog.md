@@ -3,6 +3,12 @@
 - **Agent:** Алекс. **Role:** Strategy / Product Advisor. **Change:** Алексей подтвердил [D009](decisions/D009-host-cabinet-ia.md). Принята последовательность кабинета **PM-020 → PM-021 → PM-022**. PM-021 private host profile больше не LATER и не ждёт пилота; пилот может влиять на дополнительные поля, но не блокирует сам профиль. PM-022 остаётся следующим после PM-021 с отдельным privacy/publication contract. **Related task:** [PM-019](tasks/PM-019-host-cabinet-ia.md), [PM-021](tasks/PM-021-private-host-profile.md), [PM-022](tasks/PM-022-public-host-profile.md).
 
 # PARROT 669 changelog
+
+## 2026-09-25 — Очередь разработчиков PM-023 / PM-025
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** чтобы команда не ждала постановки после завершения текущих работ, PM-023 назначена Игорю по поручению Алексея; в main ещё ожидаются его claim и Model check. Денис уже ведёт PM-025 (Sol / Medium). Следующий порядок для сообщений: PM-027, затем PM-028; не запускать их параллельно PM-023 из-за общей Messages UI области. QA/доступ-блокеры не блокируют независимую разработку. Документация назначения не запускает отдельные агентские чаты.
+- **Related tasks:** [PM-023](tasks/PM-023-guest-message-onboarding.md), [PM-025](tasks/PM-025-search-contact-button-layout.md), [PM-027](tasks/PM-027-open-property-from-messages.md), [PM-028](tasks/PM-028-open-host-profile-from-messages.md).
+
 ## 2026-09-25 — BUG-018: keep calendar challenge dates together
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** When the owner changes the first night of a calendar verification challenge, set the last-night input's minimum and selected value to that new night. Safari's native date picker can then open on the correct date, and an obsolete end date cannot be submitted. Both nights remain inclusive; the backend verification and iCal sync stay unchanged. The regression checks the submitted range after moving between months. 117 frontend tests passed locally; [PR #27](https://github.com/lelik112/parrot669/pull/27) merged as `9a1bb54` with successful [PR CI](https://github.com/lelik112/parrot669/actions/runs/36105890529) and [main CI](https://github.com/lelik112/parrot669/actions/runs/36105928871). Public JS responded 200 and matched SHA-256 of merged code; real iPhone Safari retest remains for Boris in [BUG-018](tasks/BUG-018-calendar-end-date-mobile-safari.md). **Related task:** BUG-018 / PM-001.
