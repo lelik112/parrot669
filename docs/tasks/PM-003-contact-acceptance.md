@@ -4,7 +4,7 @@
 
 **Status:** in progress — PM-016 unblocked; basic qa→lelik search/contact/reply and unread/read PASS. Pair blocking and repeat-contact behavior remain to test. D011 supersedes old host-wide opt-in/out criteria. **Priority:** P1.
 
-**Owner:** Борис / QA; возобновление не подтверждено. **Area:** поиск / сообщения.
+**Owner:** Борис / QA; возобновил CHECK-H11 после PM-016, зафиксировал базовый цикл. **Area:** поиск / сообщения.
 
 **Agent:** Борис / QA. **Recommended model:** Luna. **Recommended reasoning:** Medium. **Reason:** существующий сценарий двух тестовых аккаунтов ограничен ясной последовательностью, но требует аккуратно восстановить доступ/opt-in и приложить доказательства без смешения с предположениями.
 
