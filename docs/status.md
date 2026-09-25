@@ -14,10 +14,11 @@
 
 - [PM-035](tasks/PM-035-documentation-structure-refactoring.md) / P2: Марк завершил одобренную владельцем миграцию: короткие [индекс задач](tasks/README.md) и [вход в курилку](team-chat.md), отдельные [правила](tasks/workflow.md), [дневные логи](team-chat/2026-09-25.md), пилот [журнала PM-030](tasks/logs/PM-030.md). Исходные записи сохранены; продуктовые статусы задач этим не менялись. [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) / P2 — сводка завершена: технические отчёты Игоря/Дениса готовы, [PM-037](tasks/PM-037-search-date-range-bound.md) и [PM-038](tasks/PM-038-host-unsaved-drafts-rerender.md) поставлены отдельно без dev claims.
 
+- **[PM-039](tasks/PM-039-browser-test-environments.md) / P1, done:** Марк завершил исследование и выбор; фактический real iPhone доступ не проверялся и переносится в PM-041/015.
+
 ## In Progress
 
 - **[PM-040](tasks/PM-040-playwright-web-e2e.md) / P1 NOW, planned:** Playwright для browser QA выбран [D016](decisions/D016-playwright-first-real-device-queue.md), разработка ещё не начата. Денис — кандидат после BUG-020; claim отсутствует, рекомендация Sol / Medium. Борис принимает критический путь, Никита — назначенные regression проверки.
-- **[PM-039](tasks/PM-039-browser-test-environments.md) / P1, done:** Марк завершил исследование и выбор; фактический real iPhone доступ не проверялся и переносится в PM-041/015.
 
 - **[PM-029](tasks/PM-029-two-origin-qa-sessions.md), Игорь / Developer, P1, `in review`:** Борис прошёл qa/lelik A→B→A, reload и logout `qa` на двух origin; остались third-account/forged-request negative checks и обратный logout.
 - **[PM-030](tasks/PM-030-qa-drain-next-stage.md), Марк / PM, P1:** QA triage и пакет следующих продуктовых контрактов; рекомендация после первой QA-волны ещё ожидает результатов.
