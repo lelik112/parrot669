@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: independent two-account environment for Regression QA
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** поставил [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md) P1/NEXT: новому Regression QA нужна отдельная управляемая пара аккаунтов, не пересекающаяся с qa/lelik Бориса. Исполнителю предстоит сначала проверить доступность двух browser contexts; если один, предложить строго ограниченное расширение QA origin/backend allowlist после решения о конкретных account IDs и с negative security checks. Игорь указан только кандидатом, новый QA без имени/доступа; developer и QA claims отсутствуют, код/инфраструктура не изменены. **Related task:** PM-036.
+
 ## 2026-09-25 — D013: separate critical acceptance and regression QA
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по поручению Алексея оформил [D013](decisions/D013-qa-acceptance-regression-split.md) и обновил [team](team.md), [ai-team](ai-team.md), [status](status.md), [roadmap](roadmap.md) и [QA-очередь PM-030](tasks/PM-030-qa-drain-next-stage.md): Борис — QA Lead / Acceptance QA ключевых сценариев; новая неназванная роль Regression QA Engineer — smoke, регресс, retest/UI/локализация и evidence. Кандидаты на короткие проверки выделены без смены текущих claims: новый агент ещё не подключён. Статусы функций и QA этим решением не закрыты. **Related task:** D013.

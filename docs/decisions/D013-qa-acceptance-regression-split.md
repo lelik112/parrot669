@@ -21,4 +21,4 @@
 - **Марк / PM:** разводит очередь и не назначает один и тот же ретест одновременно двум людям; владелец конкретной карточки и её acceptance criteria остаются явными. Отчёт второго QA может быть частью общего acceptance, но сам по себе не меняет `in review` → `done`.
 - Старт любого QA: конкретная карточка, `Agent / Role / Scope`, claim, model check, безопасная среда и доказательства. Роль не создаёт доступ к браузеру, тестовому аккаунту, Safari, почте или календарю.
 
-**Related:** [team](../team.md), [ai-team](../ai-team.md), [PM-030](../tasks/PM-030-qa-drain-next-stage.md), [status](../status.md).
+**Related:** [team](../team.md), [ai-team](../ai-team.md), [PM-030](../tasks/PM-030-qa-drain-next-stage.md), [PM-036](../tasks/PM-036-regression-qa-independent-two-accounts.md) (отдельная пара и два сеанса для нового QA; расширение старого allowlist ещё не решено), [status](../status.md).
