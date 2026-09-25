@@ -108,3 +108,8 @@ Owner-assisted secure login succeeded as `qa2` on `parrot669-regression-a.chelts
 Additional read-only live negative checks: direct backend `GET /api/auth/me` with `X-Parrot-QA-Origin: qa` and missing Worker attestation returns 403; the same request with an invalid attestation returns 403. No real secret was sent from the probe client.
 
 **Handoff:** use [the updated tester procedure](../qa/pm036-testers.md). Access is operational; do not describe message A→B→A, cross-account data isolation, logout/relogin or full independent acceptance as passed. Login without allowlist deliberately returns the same invalid-credentials text as a wrong password; the earlier rejected attempt is not conclusive negative evidence because the submitted password is never visible to the developer. **Related task:** PM-036.
+
+
+## QA claim — 2026-09-25 18:37 UTC
+
+**Agent:** Никита. **Role:** Regression QA Engineer. **Scope:** independent live smoke of `qa2`/`qa3` on the dedicated regression A/B Worker origins: session identity, A→B→A messaging, refresh and logout/relogin isolation; regression evidence only, without code/config changes or Boris's acceptance. **Related task:** PM-036. **Model check:** current model/reasoning is sufficient for browser QA; no escalation needed. **Status:** in progress. **Next:** inspect both existing sessions, choose a safe `qa3` test property, run A→B→A and session isolation, record actual results and blockers without secrets.
