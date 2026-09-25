@@ -2,7 +2,7 @@
 
 **Title:** определить и ограничить число ночей в одном публичном запросе поиска.
 
-**Status:** in progress / NEXT — продуктовый контракт [D014](../decisions/D014-public-search-date-range.md) принят, Игорь принял разработку по поручению Алексея; изолированные замеры начаты, QA не начата. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **suggested developer:** Игорь / Developer для измерений и реализации после отдельного claim. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
+**Status:** in review — API/UI и изолированный замер готовы; оба CI зелёные. **Release gate:** Марк должен принять результаты [замера](logs/PM-037-performance.md) по D014; merge/deploy и независимая QA ещё не выполнены. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** контракт и критерии; реализацию и замеры проводит назначенный разработчик.
 
@@ -38,7 +38,7 @@
 
 ## Dependencies
 
-Продуктовая граница теперь согласована в D014. До выпуска нужен замер верхней границы и возможное уточнение решения по результатам. PM-030 QA-очередь имеет приоритет; Игорь — рекомендованный исполнитель из-за backend-аудита, но dev claim нет. После реализации — независимая проверка Бориса или отдельно согласованного QA.
+Продуктовая граница теперь согласована в D014. До выпуска нужен замер верхней границы и возможное уточнение решения по результатам. PM-030 QA-очередь имеет приоритет; Игорь принял разработку по поручению Алексея; claim ниже. После реализации — независимая проверка Бориса или отдельно согласованного QA.
 
 ## PM update — 2026-09-25
 
@@ -48,3 +48,15 @@
 ## Developer claim — 2026-09-25
 
 **Agent:** Игорь. **Role:** Developer. **Change:** по прямому поручению Алексея беру PM-037: изолированный замер 7/30/90/366 ночей, backend validation до SQL и UI-ошибка EN/ES/CA/RU без потери дат. **Scope:** search package, SearchSuite/smoke/benchmark, public/assets/search.js и search UI tests; host/PM-038 не затрагиваю. **Related task:** PM-037 / D014. **Branches:** `igor/pm037-search-range` в обоих репозиториях. Production нагрузочно не тестирую. Измерения и вывод о 366 передаются PM; неприемлемый результат блокирует выпуск.
+
+## Implementation — 2026-09-25
+
+**Agent:** Игорь. **Role:** Developer. **Change:** backend [PR #29](https://github.com/lelik112/parrot669-backend/pull/29): 1–366, Long before Int, 400 before repository, safe four-digit dates. Frontend: localized request-limit warning, no input truncation, restoration and contact-path checks. Isolated benchmark runs on GitHub Actions PostgreSQL 16, using 5,000 synthetic properties / 100 and 500 per queried city; these are declared scenarios, not measured production inventory. CI/benchmark and release decision pending. Host/PM-038 files are not touched. **Related task:** PM-037.
+
+## Developer handoff — 2026-09-25 18:55 UTC
+
+**Agent:** Игорь. **Role:** Developer. **Change:** реализация и измерения готовы; [отчёт с raw JSON и EXPLAIN](logs/PM-037-performance.md). Backend [PR #29](https://github.com/lelik112/parrot669-backend/pull/29), frontend [PR #52](https://github.com/lelik112/parrot669/pull/52). Backend [CI 36175617171](https://github.com/lelik112/parrot669-backend/actions/runs/36175617171) PASS (113 tests, E2E, Docker); frontend [CI 36176047946](https://github.com/lelik112/parrot669/actions/runs/36176047946) PASS (134 tests); [benchmark 36175617454](https://github.com/lelik112/parrot669-backend/actions/runs/36175617454) PASS.
+
+366 ночей, 100 объектов в городе: p95 226 мс, при concurrency=4 — 572 мс. 500 объектов: 1 044 / 2 216 мс. 367 отклоняется за p95 4–5 мс, route tests подтверждают отсутствие repository calls. Границы/цены/стыки/null-priced/filters/contact dates PASS. Рекомендую сохранить 366 для малого пилота; для 500 объектов необходимо явно принять задержку или отдельно согласовать узкую оптимизацию. **PM acceptance не объявляю за Марка:** ожидаемый объём пилота/SLO не задан. Согласно acceptance выше выпуск ждёт его решения по замеру. Никакой нагрузки или изменения production.
+
+**Занятые файлы:** backend `search/SearchService.scala`, `search/SearchSuite.scala`, `.github/workflows/search-benchmark.yml`, `scripts/search-benchmark.py`; frontend `public/assets/search.js`, `tests/search-ui.test.cjs`. Документы PM-037 обновлены, host/PM-038 и аккаунты QA не менялись. Следующий исполнитель: Марк — решение по performance gate; затем Игорь — merge/release и отдельный QA claim. **Related task:** PM-037.

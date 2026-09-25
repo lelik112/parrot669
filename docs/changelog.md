@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-037: bounded public search prepared
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** implemented the D014 1–366-night request bound before SQL and safe public date parsing; added EN/ES/CA/RU UI guidance with preserved dates/filters and boundary/restoration/contact tests. Added an isolated PostgreSQL 16 benchmark with actual SQL plans, full HTTP p50/p95, mixed availability/pricing/calendars and four concurrent requests. Both CI checks and benchmark passed. 366-night HTTP p95: 226 ms (100 city properties), 1,044 ms (500); concurrency=4: 572 / 2,216 ms. [Report and raw plans](tasks/logs/PM-037-performance.md) recorded for Mark; PM performance gate, release and independent QA remain open. **Related task:** [PM-037](tasks/PM-037-search-date-range-bound.md).
+
 ## 2026-09-25 — D015 / PM-039: QA environment blockers made explicit
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по поручению Алексея принял [D015](decisions/D015-qa-environment-blocked-status.md) и отделил реально заблокированный real-device/native acceptance от доступной desktop QA: PM-015/007/025/BUG-018 и PM-014/004 получили `blocked` с конкретными условиями; PM-023/001/026/BUG-020/BUG-019/PM-020/PM-028 остаются `in review` с отдельными mobile-блокерами. Частичные PASS Бориса и owner-assisted наблюдения сохранены. В [PM-039](tasks/PM-039-browser-test-environments.md) Марк записал claim, сравнение бесплатного browser emulation и платных реальных устройств с ценами/источниками; ни одна подписка, техническая настройка или независимая мобильная QA не выполнена. Синхронизированы PM-030, индекс, status, roadmap, product-context. **Related tasks:** PM-030, PM-039.

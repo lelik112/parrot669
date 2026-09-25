@@ -56,7 +56,7 @@
 | **NEXT — P2** | | | |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
-| [PM-037](PM-037-search-date-range-bound.md) | P2 | in progress — D014: 366 ночей; замер/реализация/QA открыты | Марк / PM контракт done; Игорь dev candidate без claim, P1 раньше; Sol / High |
+| [PM-037](PM-037-search-date-range-bound.md) | P2 | in review — API/UI + CI + замер PASS; ждёт PM performance gate, затем release/QA | Марк / PM контракт done; Игорь / Developer; Марк — решение по замеру; Sol / High |
 
 | **LATER** | | | |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
