@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-040: первый Playwright smoke принят как этап
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** сверил [PR #54](https://github.com/lelik112/parrot669/pull/54) (merged `0993f67`), [CI 36180701745](https://github.com/lelik112/parrot669/actions/runs/36180701745) (обычные 132/132, browser smoke 6/6) и [матрицу 42 задач / 194 критериев](qa/playwright-coverage.md). В PM-040 признан завершённым первый узкий fixture smoke: 2 анонимных UI-сценария в Chromium desktop, WebKit desktop и mobile emulation. Из 194 критериев лишь 6 частично автоматизированы; остальные требуют web расширения, ручного QA, внешней среды или реального телефона. PM-040 остаётся P1 / in progress у Дениса (Sol / Medium); QA матрицы и критического контакта ожидает отдельных claims Никиты и Бориса, A↔B зависит от PM-036. Продуктовые задачи PM-023/024/026/BUG-020 fixture CI не закрывает. **Related task:** [PM-040](tasks/PM-040-playwright-web-e2e.md) / D016.
+
 ## 2026-09-25 — PM-036: QA password recovery navigation
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** Railway showed three 403 responses from `/api/auth/password-reset/request` on regression A after the user followed the recovery link. QA reset APIs are intentionally forbidden by the backend. The Worker now redirects the QA recovery page to `parrot669.com/recover.html`; the production origin shares the accounts and can perform the ordinary email recovery. QA API attestation and restrictions stay in force. Login A and independent logout/relogin B still need Nikita's retest after account recovery. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
