@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-034: independent audits reconciled
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** закрыл сводную [PM-034](tasks/PM-034-backend-frontend-refactoring-audit.md) после независимых read-only отчётов Игоря ([backend](tasks/logs/PM-034-backend.md)) и Дениса ([frontend](tasks/PM-034-FE-frontend-audit.md)). Зафиксировал кодовые риски: неограниченный диапазон публичного поиска и возможная потеря черновиков host форм; открыл [PM-037](tasks/PM-037-search-date-range-bound.md) P2/NEXT на выбор предела с замером и [PM-038](tasks/PM-038-host-unsaved-drafts-rerender.md) P2/NOW на QA до узкого исправления. Время работы поиска и случаи потери ввода в production не измерены/не воспроизведены независимо; общая перепись backend/frontend не назначена, dev/QA claims для новых задач отсутствуют. P1 QA контакта и сессий сохраняет приоритет. **Related task:** PM-034.
+
 ## 2026-09-25 — PM-036: regression Worker secrets live
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** after the owner configured each Cloudflare `QA_WORKER_SECRET`, independently probed both regression Worker origins: anonymous `GET /api/host/auth/me` returns 401 from the backend, and `GET /api/contact` returns 403 from the Worker. `NOTIFY_TO` and `RESEND_API_KEY` serve only the blocked Worker contact endpoint and are not needed on these QA Workers. Nikita's exact account-ID allowlist and A↔B login smoke remain open. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
