@@ -33,9 +33,30 @@ async function installPublicFixture(page) {
   return {seen, propertyId};
 }
 
+async function installHostFixture(page) {
+  const seen = [];
+  const user = {accountId:'fixture-owner', username:'fixture-owner', email:'fixture@example.invalid',
+    profile:{id:'22222222-2222-4222-8222-222222222222', displayName:'Fixture host'}};
+  await page.route('https://fonts.googleapis.com/**', route => route.fulfill({contentType:'text/css', body:''}));
+  await page.route('https://fonts.gstatic.com/**', route => route.abort());
+  await page.route('**/api/**', route => {
+    const request = route.request(), path = new URL(request.url()).pathname;
+    seen.push({path,method:request.method()});
+    const data = path === '/api/host/auth/me' ? user
+      : path === '/api/host/dashboard' ? {profile:user.profile,properties:[]}
+      : path === '/api/messaging/unread' ? {conversations:0,messages:0}
+      : path === '/api/messaging/conversations' ? {items:[],nextCursor:null}
+      : path === '/api/messaging/notification-settings' ? {enabled:false,language:'en'}
+      : null;
+    if (!data || request.method() !== 'GET') return route.fulfill({status:501,json:{error:`Unexpected fixture request: ${request.method()} ${path}`}});
+    return route.fulfill({json:data});
+  });
+  return {seen};
+}
+
 async function assertNoHorizontalOverflow(page) {
   const dimensions = await page.evaluate(() => ({width:document.documentElement.clientWidth, scrollWidth:document.documentElement.scrollWidth}));
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.width + 1);
 }
 
-module.exports = {installPublicFixture, assertNoHorizontalOverflow};
+module.exports = {installPublicFixture, installHostFixture, assertNoHorizontalOverflow};
