@@ -92,3 +92,7 @@
 - **Change:** после нескольких независимых reload страницы владельца сервер продолжает показывать авторизованный профиль и тестовый объект; активный сеанс сохранён. Это наблюдение `me`/загрузки кабинета, **не** подтверждение всего PM-010. Пять маршрутов, cookies, ошибки, logout, повторный login и почта пока не прошли независимый цикл. Текущий аккаунт не выведен из системы по прежней договорённости с Алексеем.
 - **Related task:** PM-010, PM-016, PM-017.
 - **Next:** с отдельным тестовым сеансом пройти register/verify/login/logout/me и ошибки; не закрывать PM-010 на основании CI/одного reload.
+
+### 2026-09-25 14:09 UTC — Борис / QA — session/logout partial retest
+
+**Agent:** Борис. **Role:** QA. **Scope:** production desktop Chrome, qa on primary parrot669.com and initially qa on separate QA Worker origin. **Change:** PARTIAL PASS: primary qa stayed authenticated through Host, Search, Messages navigation and repeated reloads. Logout on QA Worker origin showed «Вы вышли», removed its authenticated Host UI and left primary qa logged in. This independently covers visible me/session and logout isolation; no real credentials or new accounts were used. **Open:** register/verify-email/login/error codes, cookie flags and repeat sign-in remain unverified in live QA. QA Worker anonymous search is intentionally guarded and cannot stand in for the public logged-out route. **Related task:** PM-010 / PM-016 / PM-029. **Next:** test remaining auth routes in a controlled guest/public browser state; do not claim full PM-010 acceptance.
