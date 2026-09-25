@@ -12,7 +12,7 @@
 | --- | --- | --- | --- |
 | [PM-001 — Проверка сохранённых дат](tasks/PM-001-calendar-control-dates.md) | P1 | Проверяется конкретное задание пользователя | in review: Борис подтвердил часть desktop A/B и `close`; правка P2 инструкции опубликована, waiting `open`/reload/языки проверены Борисом; `close`/mobile/источник ещё открыты |
 | [PM-003 — Поиск → обращение → ответ](tasks/PM-003-contact-acceptance.md) | P1 | Независимо подтверждён основной путь контакта | CHECK-H11 начат, приостановлен; нужен статус QA |
-| [PM-002 — Внешняя ссылка и verification status](tasks/PM-002-link-publication.md) | P1 | Публикация Airbnb-ссылки и честный verification status + nudge | in review: backend в production; frontend и QA ещё требуют завершения
+| [PM-002 — Внешняя ссылка и verification status](tasks/PM-002-link-publication.md) | P1 | Публикация Airbnb-ссылки и честный verification status + nudge | in review: production `lost` + `publish OFF` частично PASS; BUG-017 copy; nudge и прочие состояния ждут изолированный QA/PM-016
 | [PM-024 — Контакт с хозяином из каждого результата](tasks/PM-024-contact-from-every-search-result.md) | P1 | D011 accepted; implementation planned, old opt-in gate remains in production |
 | [PM-004 — Выбор улицы](tasks/PM-004-street-autofill.md) | P2 | Первый вариант не скрывается браузерной подсказкой | in review; выпущено Денисом, Борису нужен независимый нативный ретест |
 | [PM-005 — Закрытые даты](tasks/PM-005-closed-dates-copy.md) | P2 | Обычная форма не выглядит недоступной функцией | in review; выпущено Денисом, Борису нужен независимый визуальный ретест |
