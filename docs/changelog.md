@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: both regression Workers deployed, QA secret pending
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** deployed `parrot669-regression-a` and `parrot669-regression-b` through [GitHub Actions run 36156127554](https://github.com/lelik112/parrot669/actions/runs/36156127554), then restored the workflow to manual-only; [main CI 36156242418](https://github.com/lelik112/parrot669/actions/runs/36156242418) succeeded. Both live host pages render; their APIs show `QA site unavailable` until `QA_WORKER_SECRET` is configured in both Cloudflare Workers. Exact QA account-ID provisioning and Nikita's A↔B smoke remain open. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
 ## 2026-09-25 — PM-036: manual regression Worker deploy prepared
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** added a manually triggered, main-only GitHub Action to deploy the two regression Worker environments. Cloudflare deployment credentials stay in GitHub Actions secrets; the backend-matched `QA_WORKER_SECRET` is entered separately into each Worker in Cloudflare. The Action does not touch the existing production Worker or deploy automatically on a push. Worker creation, secret binding and live QA remain pending. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
