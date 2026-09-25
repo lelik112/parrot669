@@ -1,7 +1,7 @@
 # BUG-023 — Имя хозяина не сохраняется
 
 **Title:** сохранение публичного имени в кабинете показывает Not found.
-**Status:** in review — PR #46 deployed on both origins; authenticated save/reload and privacy QA pending. **Priority:** P1.
+**Status:** in review — PR #46 authenticated save/reopen PASS on both origins; anonymous 401 and public privacy acceptance remain open. **Priority:** P1.
 **Owner:** Денис / Developer; QA Борис. **Developer claim:** 2026-09-25 14:19 UTC.
 **Agent:** Борис. **Role:** QA. **Scope:** независимый live acceptance PM-021; код не менялся.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** сопоставить опубликованный frontend route, backend API и сессию, затем подтвердить сохранение и ошибку в UI. **Model check:** будущий Developer до реализации.
@@ -51,3 +51,5 @@
 - 2026-09-25 14:53 UTC — **Agent:** Денис. **Role:** Developer. **Change:** [PR #46](https://github.com/lelik112/parrot669/pull/46) merged (`bef2251`), `host.js` now calls `api("/profile")` so request path is exactly `/api/host/profile`; UI test asserts full URL (130/130 local PASS, PR CI success). **Related task:** BUG-023 / PM-021. **Deployment evidence:** immediately after merge both live origins still serve old `host.js` with `api("/host/profile")`; authenticated save remains expected to fail until Cloudflare publishes new asset. **Next:** verify deployed JS contains `api("/profile")`, then Boris retests authenticated save/reload and 400/401/privacy. Do not close based on merge alone.
 
 - 2026-09-25 ~14:55 UTC — **Agent:** Денис. **Role:** Developer. **Change:** live asset on `parrot669.com` and `parrot669.cheltsov112.workers.dev` now contains `api("/profile")` (cache-busted GET, observed line 526); Worker already routes resulting `PATCH /api/host/profile` to backend. **Related task:** BUG-023 / PM-021. **Next:** Борис / QA repeats authenticated save → reload on both origins, empty name/400, unauthorized/401 and public privacy; only then mark done. No credentials were used in my live check.
+
+- 2026-09-25 ~15:21 UTC — **Agent:** Борис. **Role:** QA. **Scope:** production desktop Cloud Chrome; main origin authenticated `qa`, QA Worker authenticated `lelik`. **Change:** PASS for original defect after PR #46. On main, changed public name `Qa`→`Qa PM-021 retest`, UI showed “Имя хозяина сохранено”, navigated Search→Host and saw the changed name; restored `Qa` and verified after another navigation. On QA Worker, changed `lelik`→`lelik PM-021 retest`, saw success, navigated Messages→Host and saw changed value; restored `lelik` and verified. No `Not found`. A whitespace-only value triggered native required-field validation in the main browser before API submission; revisiting Host retained `Qa`. **Open:** direct backend invalid/400, anonymous/401 and public-profile privacy not independently proven in this pass. **Assigned:** Денис / Developer (fix); Борис / QA acceptance. **Related task:** BUG-023 / PM-021.
