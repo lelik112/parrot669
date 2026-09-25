@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-035: owner-approved documentation migration
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по прямому одобрению Алексея внедрил [D012](decisions/D012-documentation-current-history.md): `tasks/README.md` сокращён до активного индекса (14,4k → 5,0k символов), правила перенесены в `tasks/workflow.md`, полный исходный README сохранён в `tasks/README-history-2026-09-25.md`; `team-chat.md` сокращён до входа (20,3k → 1,5k), 25 старых реплик с авторством и порядком сохранены в логах 24/25 сентября, внутренние ссылки скорректированы, исходный файл доступен по неизменяемому Git-снимку. Запущен пилот `tasks/logs/PM-030.md` с точным переносом четырёх прежних записей; карточка PM-030 хранит текущую QA-очередь. Обновлены ai-team, team, product-context, status и decision index. Сохранность текстов и локальные ссылки проверены, приложение и критерии QA не менялись. **Related task:** [PM-035](tasks/PM-035-documentation-structure-refactoring.md).
+
 ## 2026-09-25 — PM-035: documentation structure audit completed
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** audited current docs sizes and mixed current/history paths; proposed a compact task index plus workflow file, short team-chat entrypoint with dated immutable logs, and optional task event logs, with staged copying and link/evidence checks before any truncation. PM-035's audit criteria are complete; no chat/task history, accepted decision, product behavior or application file was moved. The proposed `docs/team-chat/*` path is outside PM's currently enumerated writable paths, so migration requires a separately scoped executor. **Related task:** [PM-035](tasks/PM-035-documentation-structure-refactoring.md).
