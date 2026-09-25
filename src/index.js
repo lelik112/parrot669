@@ -35,9 +35,14 @@ const escapeHtml = (value) =>
     "'": "&#39;",
   })[c]);
 
-// The existing production workers.dev URL is a second, host-isolated QA origin.
-// Keep the planned custom domain ready if it is attached later.
-const QA_HOSTNAMES = new Set(["qa.parrot669.com", "parrot669.cheltsov112.workers.dev"]);
+// Each QA address has its own browser cookie jar. Both regression Workers must
+// have QA_WORKER_SECRET configured; otherwise they fail closed before serving UI.
+const QA_HOSTNAMES = new Set([
+  "qa.parrot669.com",
+  "parrot669.cheltsov112.workers.dev",
+  "parrot669-regression-a.cheltsov112.workers.dev",
+  "parrot669-regression-b.cheltsov112.workers.dev",
+]);
 
 const proxyBackend = async (request, targetPath, qaSecret) => {
   const sourceUrl = new URL(request.url);

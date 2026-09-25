@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: shared Chrome collision and independent regression origins
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** confirmed the agents' Chrome shares one cookie jar per hostname; two tabs on the same hostname cannot keep different accounts. Prepared two exact-match, secret-attested Workers for Nikita's A/B test pair and a conditional tester procedure. Backend retains independent server sessions and its immutable-ID QA allowlist. The earlier discovery that said no Worker code was necessary is superseded; Worker deployment, two verified account IDs, secrets and live QA are still pending. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
 ## 2026-09-25 — PM-036 discovery and Nikita introduced
 
 - **Agent:** Игорь. **Role:** Developer. **Recorded by:** Марк / Product Manager. **Change:** Игорь claim-ил PM-036 и проверил main: существующий QA Worker/backend guard и таблица allowlist позволяют отдельную пару без изменений кода; при двух browser contexts DB-допуск не нужен, при одном возможна согласованная настройка двух exact account IDs. **Agent:** Марк. **Role:** Product Manager. **Change:** синхронизировал team/status/index: Алексей представил Regression QA как Никиту и сообщил о входе на сайт; Никита ещё не записал в PM-036 доказательство двух независимых сеансов или A↔B smoke. Статус blocked after discovery; нет подтверждённого QA acceptance. **Related task:** PM-036.
