@@ -16,9 +16,8 @@
 | --- | --- | --- | --- |
 | **NOW — P1** | | | |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review | Борис / QA |
-| [PM-016](PM-016-qa-second-session-access.md) | P1 | blocked | Борис: два входа |
 | [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
-| [PM-003](PM-003-contact-acceptance.md) | P1 | blocked | Борис: после PM-016 |
+| [PM-003](PM-003-contact-acceptance.md) | P1 | in progress | Борис: block/repeat contact |
 | [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review | Борис / QA |
 | [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
 | [PM-025](PM-025-search-contact-button-layout.md) | P1 | in review | Борис / QA |
@@ -56,7 +55,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
-| [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | done | Марк / PM |
+| [PM-016](PM-016-qa-second-session-access.md) | P1 | done | Борис / QA || [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | done | Марк / PM |
 | [PM-009](PM-009-team-identity.md) | P2 | done | Марк / PM |
 | [PM-019](PM-019-host-cabinet-ia.md) | P2 | done | Марк / PM |
 
