@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036 закрыта владельцем; PM-043 назначена Игорю
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по явному поручению Алексея закрыл [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md): Никита прошёл A→B→A/refresh/relogin, Борис подтвердил сохранность своей пары, Игорь сверил точный allowlist, CI и частичные live negative checks. Live login постороннего подтверждённого аккаунта на новом QA origin **не проверялся** и оставлен в карточке непомеченным; владелец принял закрытие с этим известным исключением, PASS не заявлен. [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) / P2 NEXT поручена Игорю (Sol / High) после PM-037; claim и старт ещё не подтверждены. **Related tasks:** PM-036, PM-043.
+
 ## 2026-09-25 — duplicate PM-036 corrected; agent check-in audit
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** предложение Алекса об автономной проверке назначений ошибочно получило уже занятый ID PM-036. Перенёс его в [PM-042](tasks/PM-042-agent-check-in-process-audit.md), удалил ошибочный дубликат и завершил аудит процесса; [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) отдельно фиксирует техническую проверку пробуждения конкретного агента. Встроенные Automations доступны, но расписание ограничено одним запуском в час, GitHub trigger относится к PR; пятиминутное пробуждение чатов не реализовано. PM-043 P2 / planned без dev claim, пока Денис и Игорь выполняют текущие задачи. **Related tasks:** PM-042, PM-043; оригинальная PM-036 про два QA-аккаунта не меняет ID.
