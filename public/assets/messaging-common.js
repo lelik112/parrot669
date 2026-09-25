@@ -22,7 +22,7 @@
   };
   Object.entries(emailCopy).forEach(([key,value]) => Object.assign(texts[key],value));
   Object.entries({en:"Forgot password?",es:"¿Has olvidado la contraseña?",ca:"Has oblidat la contrasenya?",ru:"Забыли пароль?"}).forEach(([key,value])=>texts[key].forgotPassword=value);
-  let lang = "en", user, revision = 0, unreadBusy = false;
+  let lang = "en", user, revision = 0, unreadBusy = false, unreadTotal = 0;
   const subscribers = new Set(), languageSubscribers = new Set();
   const contactCache = new Map();
   let contactActive = 0;
@@ -49,11 +49,27 @@
   Object.assign(texts.es,{openProperty:"Abrir vivienda ↗"});
   Object.assign(texts.ca,{openProperty:"Obrir habitatge ↗"});
   Object.assign(texts.ru,{openProperty:"Открыть объект ↗"});
+  Object.assign(texts.en,{unreadShort:"Unread",unreadCount:n=>`${n} unread message${n===1?"":"s"}`});
+  Object.assign(texts.es,{unreadShort:"Sin leer",unreadCount:n=>`${n} mensaje${n===1?"":"s"} sin leer`});
+  Object.assign(texts.ca,{unreadShort:"Sense llegir",unreadCount:n=>`${n} missatge${n===1?"":"s"} sense llegir`});
+  Object.assign(texts.ru,{unreadShort:"Не прочитано",unreadCount:n=>`${n} ${n%10===1 && n%100!==11 ? "непрочитанное сообщение" : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? "непрочитанных сообщения" : "непрочитанных сообщений"}`});
   function t(key) { return texts[lang][key] || texts.en[key] || key; }
+  function renderUnread(){
+    document.querySelectorAll("[data-msg-unread]").forEach(el => {
+      el.textContent = unreadTotal ? unreadTotal > 99 ? "99+" : String(unreadTotal) : "";
+      el.hidden = !unreadTotal;
+      const link = el.closest(".messaging-nav-link");
+      if (link) {
+        link.classList.toggle("has-unread",Boolean(unreadTotal));
+        link.setAttribute("aria-label",unreadTotal ? `${t("messages")}, ${t("unreadCount")(unreadTotal)}` : t("messages"));
+      }
+    });
+  }
   function setLanguage(value) {
     lang = texts[value] ? value : "en";
     document.querySelectorAll("[data-msg-i18n]").forEach(el => el.textContent = t(el.dataset.msgI18n));
     document.querySelectorAll("[data-msg-placeholder]").forEach(el => el.placeholder = t(el.dataset.msgPlaceholder));
+    renderUnread();
     languageSubscribers.forEach(fn => fn(lang));
   }
   function errorText(error) {
@@ -90,7 +106,7 @@
     user = value || null;
     if (!changed) return;
     revision++;
-    document.querySelectorAll("[data-msg-unread]").forEach(el => { el.textContent = ""; el.hidden = true; });
+    unreadTotal = 0; renderUnread();
     subscribers.forEach(fn => fn(user));
     if (user) void refreshUnread();
   }
@@ -112,10 +128,8 @@
     try {
       const value = await api("/unread");
       if (version !== revision) return;
-      document.querySelectorAll("[data-msg-unread]").forEach(el => {
-        el.textContent = value.messages > 99 ? "99+" : String(value.messages);
-        el.hidden = !value.messages;
-      });
+      unreadTotal = Math.max(0,Number(value.messages) || 0);
+      renderUnread();
     } catch (error) { if (error.status === 401 && version === revision) setUser(null); }
     finally { unreadBusy = false; }
   }

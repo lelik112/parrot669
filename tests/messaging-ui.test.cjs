@@ -47,6 +47,47 @@ async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=tr
     input:(element,value)=>{element.value=value;element.dispatchEvent(new w.Event('input',{bubbles:true}));}};
 }
 
+test('polling highlights an incoming conversation before opening it and clears only after server read state changes',async t=>{
+  let unread=0, rows=[];
+  const h=await harness(t,{handler:r=>{
+    if(r.path==='/api/messaging/unread') return {conversations:unread?1:0,messages:unread};
+    if(r.path==='/api/messaging/conversations') return {items:rows,nextCursor:null};
+  }});
+  const nav=h.w.document.querySelector('.messaging-nav-link');
+  assert.equal(h.w.document.querySelector('[data-msg-unread]').hidden,true);
+  assert.equal(h.$('msg-list').children.length,0);
+
+  unread=1;
+  rows=[detail(conversation,{propertyTitle:'A long apartment name with several details',otherDisplayName:'Guest',
+    lastMessagePreview:'Is this place free next week?',unreadCount:1})];
+  h.intervals[1]();h.intervals[0]();await flush(); // Existing 15s inbox and 30s unread polls.
+  const row=h.$('msg-list').firstElementChild;
+  assert.equal(row.classList.contains('unread'),true);
+  assert.equal(row.getAttribute('aria-current'),'false');
+  assert.match(row.textContent,/A long apartment name.*Guest.*Is this place free.*Unread/s);
+  assert.equal(row.querySelector('.messaging-badge').textContent,'1');
+  assert.equal(h.w.document.querySelector('[data-msg-unread]').hidden,false);
+  assert.equal(nav.classList.contains('has-unread'),true);
+  assert.match(nav.getAttribute('aria-label'),/1 unread message/);
+  for(const [language,label] of [['es','Sin leer'],['ca','Sense llegir'],['ru','Не прочитано'],['en','Unread']]) {
+    h.w.ParrotMessaging.setLanguage(language);
+    assert.equal(h.$('msg-list').firstElementChild.querySelector('.messages-unread-label').textContent,label);
+    assert.ok(nav.getAttribute('aria-label').includes('1 '));
+  }
+
+  // A self-sent reply has no incoming unread count according to the existing API contract.
+  unread=0;
+  rows=[detail(conversation,{propertyTitle:'A long apartment name with several details',otherDisplayName:'Guest',
+    lastMessagePreview:'My reply',unreadCount:0})];
+  h.intervals[1]();h.intervals[0]();await flush();
+  const readRow=h.$('msg-list').firstElementChild;
+  assert.equal(readRow.classList.contains('unread'),false);
+  assert.equal(readRow.querySelector('.messaging-badge'),null);
+  assert.match(readRow.textContent,/Guest.*My reply/s);
+  assert.equal(h.w.document.querySelector('[data-msg-unread]').hidden,true);
+  assert.equal(nav.classList.contains('has-unread'),false);
+});
+
 test('only the conversation host sees a profile link and keeps the same-account thread return',async t=>{
   const owner={accountId:'owner-account',username:'owner',profile:{id:'host-profile'}};
   const handler=r=>{
