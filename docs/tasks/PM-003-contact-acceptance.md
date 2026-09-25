@@ -2,7 +2,7 @@
 
 **Title:** продолжить CHECK-H11: поиск → первое сообщение → ответ владельца.
 
-**Status:** in review — qa→lelik first contact/reply and unread/read previously passed; blocked pair has been unblocked, follow-up message/reply passed with both sessions intact. Remaining repeat CTA, complete block-side checks, restoration details. See [BUG-021](BUG-021-blocking-signs-out-host.md). **Priority:** P1.
+**Status:** in review — search→contact→reply, repeat CTA to same conversation, unread/read and controlled pair block/unblock passed with qa/lelik; initial QA-period restoration remains open. **Priority:** P1.
 
 **Owner:** Борис / QA; возобновил CHECK-H11 после PM-016, зафиксировал базовый цикл. **Area:** поиск / сообщения.
 
@@ -77,3 +77,5 @@
 - 2026-09-25 ~14:30 UTC — **Борис / QA:** main `parrot669.com` guest `qa`, QA Worker host `lelik`, desktop Cloud Chrome, same conversation and QA property. Host removed existing pair block; its composer returned and account remained `lelik`. Guest reloaded the conversation, saw composer, sent a PM-003 follow-up; owner received it with `1 непрочитанное сообщение`, replied; guest reloaded and saw answer with `1 непрочитанное сообщение`. Both origin accounts stayed distinct. Test pair left unblocked. **Open:** repeat CTA deduplication, complete blocking behavior/regression BUG-021, restoration of initial QA period and mobile are not claimed here.
 
 - 2026-09-25 ~14:36 UTC — **Борис / QA:** with guest `qa` still signed in, returned to Barcelona search preserving 2027-06-11→14, clicked «Написать владельцу» on the same QA property again. Route resolved to the pre-existing conversation `94a03a34-2177-4386-ac01-7b7fd6324b30`, showing both follow-up and owner reply; no duplicate conversation was opened in this checked path. **Related task:** PM-003 / PM-024. **Open:** initial QA-period restoration and complete block-side regression remain.
+
+- 2026-09-25 ~15:25 UTC — **Борис / QA:** controlled `lelik` host on QA Worker blocked `qa` guest; host stayed logged in with Unblock action. Main guest after reload saw blocked status, no composer. Host unblocked; guest reloaded and regained composer; both accounts retained identity. Pair left unblocked. Earlier signout BUG-021 did not reproduce in this placement. **Open:** original QA-period restoration details and any remaining account lifecycle edges. **Related task:** PM-003 / BUG-021.
