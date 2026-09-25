@@ -12,6 +12,10 @@
   let active = null, inbox = [], nextCursor = null, inboxBusy = false, pollBusy = false;
   let messages = new Map(), fetchedThrough = 0, readThrough = 0, readBusy = false;
   let sending = false, pending = null, authBusy = false, threadError = null;
+  let authRequested = false, guestLoginAccount = null;
+  const guestDraftKey = propertyId => `parrot669-guest-draft:property:${propertyId}`;
+  const registrationDraftKey = "parrot669-registration-draft";
+  const registrationTabKey = "parrot669-registration-intent";
 
   function status(text = "", error = false, target = $("msg-status")) {
     target.textContent = text; target.classList.toggle("error", error);
@@ -37,16 +41,47 @@
     return validDates(from,to) ? {from,to} : {from:"",to:""};
   }
   function draftKey(context = active) {
-    return actor && context ? `parrot669-draft:${actor.accountId}:${context.id || `property:${context.propertyId}`}` : null;
+    if (!context) return null;
+    return actor ? `parrot669-draft:${actor.accountId}:${context.id || `property:${context.propertyId}`}` :
+      context.propertyId ? guestDraftKey(context.propertyId) : null;
   }
   function saveDraft() {
     const key = draftKey(); if (!key) return;
+    const draft = {body:form.elements.body.value,from:form.elements.from.value,
+      to:form.elements.to.value,...(actor ? {pending} : {}),savedAt:Date.now()};
     try {
-      sessionStorage.setItem(key, JSON.stringify({body:form.elements.body.value,
-        from:form.elements.from.value, to:form.elements.to.value, pending, savedAt:Date.now()}));
+      sessionStorage.setItem(key, JSON.stringify(draft));
+    } catch {}
+    if (!actor) try {
+      const handoff = JSON.parse(localStorage.getItem(registrationDraftKey) || "null");
+      if (handoff?.propertyId === active?.propertyId && handoff.nonce === sessionStorage.getItem(registrationTabKey) &&
+          handoff.savedAt > Date.now() - 86400000)
+        localStorage.setItem(registrationDraftKey,JSON.stringify({...handoff,draft,savedAt:Date.now()}));
     } catch {}
   }
   function removeDraft(key) { try { if (key) sessionStorage.removeItem(key); } catch {} }
+  function promoteGuestDraft(user) {
+    const propertyId = new URLSearchParams(window.location.search).get("property");
+    if (!uuid.test(propertyId || "")) return;
+    try {
+      const marker = JSON.parse(localStorage.getItem(registrationDraftKey) || "null");
+      const fromRegistration = marker?.propertyId === propertyId && marker.savedAt > Date.now() - 86400000 &&
+        marker.username?.toLowerCase() === user.username?.toLowerCase();
+      // Once registration claims the guest draft, a different account must not inherit it via login.
+      if (marker?.propertyId === propertyId && marker.savedAt > Date.now() - 86400000 && !fromRegistration) return;
+      if (guestLoginAccount !== user.accountId && !fromRegistration) return;
+      const key = guestDraftKey(propertyId);
+      const localDraft = JSON.parse(sessionStorage.getItem(key) || "null");
+      const draft = localDraft?.savedAt > Date.now() - 86400000 ? localDraft : fromRegistration ? marker.draft : null;
+      if (typeof draft?.body === "string" && draft.savedAt > Date.now() - 86400000) {
+        sessionStorage.setItem(`parrot669-draft:${user.accountId}:property:${propertyId}`,
+          JSON.stringify({body:draft.body,from:draft.from || "",to:draft.to || "",pending:null,savedAt:Date.now()}));
+        sessionStorage.removeItem(key);
+      }
+      localStorage.removeItem(registrationDraftKey);
+      sessionStorage.removeItem(registrationTabKey);
+    } catch {}
+  }
   function restoreDraft(dates = {}) {
     let draft = null;
     try {
@@ -58,7 +93,7 @@
     form.elements.body.value = draft?.body || (prefill ? t("verifyCalendarDraft") : "");
     form.elements.from.value = draft?.from || dates.from || "";
     form.elements.to.value = draft?.to || dates.to || "";
-    pending = draft?.pending || null;
+    pending = actor ? draft?.pending || null : null;
     if (pending && !(uuid.test(pending.payload?.clientMessageId) &&
       (pending.endpoint === "/conversations" && pending.payload.propertyId === active.propertyId ||
        pending.endpoint === `/conversations/${active.id}/messages`))) pending = null;
@@ -207,6 +242,15 @@
       restoreDraft(dates); renderContext(); status();
     } catch (error) { if (version === threadVersion) failed(error,$("msg-thread-notice")); }
   }
+  async function openGuestEnquiry(propertyId, dates) {
+    const version = prepareThread();
+    try {
+      const options = await M.api(`/contact-options/${propertyId}`);
+      if (version !== threadVersion) return;
+      active = {id:null,propertyId,propertyTitle:options.propertyTitle,otherDisplayName:options.hostDisplayName,canReply:true};
+      restoreDraft(dates); renderContext(); status();
+    } catch (error) { if (version === threadVersion) failed(error,$("msg-thread-notice")); }
+  }
   async function poll() {
     if (!actor || pollBusy || document.hidden) return;
     pollBusy = true; const version = threadVersion, account = accountVersion;
@@ -221,18 +265,29 @@
     finally { if (account === accountVersion) pollBusy = false; }
   }
   function activateSession(user) {
-    saveDraft(); actor = user; accountVersion++; threadVersion++; inboxVersion++;
+    saveDraft();
+    if (user && !actor) promoteGuestDraft(user);
+    guestLoginAccount = null; authRequested = false;
+    actor = user; accountVersion++; threadVersion++; inboxVersion++;
     inboxBusy = false; pollBusy = false; readBusy = false; sending = false;
     active = null; inbox = []; nextCursor = null; messages = new Map(); pending = null; threadError = null;
     historyNode.replaceChildren(); $("msg-list").replaceChildren(); form.reset();
     $("msg-property").textContent = ""; $("msg-other").textContent = "";
-    $("msg-auth").hidden = Boolean(user); app.hidden = !user; $("msg-account").hidden = !user;
+    const query = new URLSearchParams(window.location.search);
+    const propertyId = query.get("property"), guestEnquiry = !user && uuid.test(propertyId || "");
+    $("msg-auth").hidden = Boolean(user) || guestEnquiry;
+    $("msg-auth-lead").textContent = t("authLead");
+    $("msg-find-housing").hidden = Boolean(user) || guestEnquiry;
+    app.hidden = !user && !guestEnquiry; app.classList.toggle("guest-enquiry",guestEnquiry);
+    $("msg-inbox").hidden = guestEnquiry;
+    historyNode.hidden = guestEnquiry; $("msg-back").hidden = guestEnquiry;
+    $("msg-guest-hint").hidden = !guestEnquiry;
+    $("msg-account").hidden = !user;
     $("msg-account-name").textContent = user?.username || "";
     $("msg-thread").hidden = true; $("msg-empty").hidden = false; app.classList.remove("has-thread");
-    if (!user) return;
+    if (!user) { if (guestEnquiry) void openGuestEnquiry(propertyId,queryDates()); return; }
     status(); $("msg-session-retry").hidden = true;
     void loadInbox();
-    const query = new URLSearchParams(window.location.search);
     if (uuid.test(query.get("conversation") || "")) void openConversation(query.get("conversation"));
     else if (uuid.test(query.get("property") || "")) void openEnquiry(query.get("property"),queryDates());
   }
@@ -257,9 +312,17 @@
       busyAuth(true); status(t("loading"));
       try {
         const result = await M.auth(path,{method:"POST",body:JSON.stringify(values)});
-        if (path === "/login") { M.setUser(result); status(); }
+        if (path === "/login") { guestLoginAccount = result.accountId; M.setUser(result); status(); }
         else {
           try { localStorage.setItem("parrot669-message-return",JSON.stringify({path:window.location.pathname+window.location.search,expires:Date.now()+86400000})); } catch {}
+          if (active?.propertyId) try {
+            saveDraft();
+            const nonce=crypto.randomUUID();
+            sessionStorage.setItem(registrationTabKey,nonce);
+            localStorage.setItem(registrationDraftKey,JSON.stringify({username:values.username,propertyId:active.propertyId,nonce,
+              draft:{body:form.elements.body.value,from:form.elements.from.value,to:form.elements.to.value,savedAt:Date.now()},
+              savedAt:Date.now()}));
+          } catch {}
           status(t("registered")); loginForm.elements.login.value = values.email;
           busyAuth(false); switchAuth("login");
         }
@@ -281,11 +344,20 @@
     if (!sending && !pending) saveDraft();
   });
   form.addEventListener("submit", async event => {
-    event.preventDefault(); if (sending || !actor || !active?.canReply) return;
+    event.preventDefault(); if (sending || !active?.canReply) return;
     const body = form.elements.body.value.trim(), from = form.elements.from.value, to = form.elements.to.value;
     form.elements.body.setCustomValidity(!body || [...body].length > 4000 ? t("characterLimit") : "");
     form.elements.to.setCustomValidity(validDates(from,to) ? "" : t("invalidDates"));
     if (!pending && !form.reportValidity()) return;
+    if (!actor) {
+      saveDraft(); authRequested = true;
+      $("msg-auth-lead").textContent = t("authToSend");
+      $("msg-find-housing").hidden = true;
+      $("msg-auth").hidden = false;
+      $("msg-auth").scrollIntoView?.({block:"center"});
+      loginForm.elements.login.focus();
+      return;
+    }
     if (!pending) {
       const payload = {clientMessageId:crypto.randomUUID(),body,...(from && to ? {from,to} : {})};
       if (!active.id) payload.propertyId = active.propertyId;
@@ -353,7 +425,9 @@
     $("msg-search-link").textContent = {en:"Find availability",es:"Buscar disponibilidad",ca:"Cercar disponibilitat",ru:"Найти жильё"}[value];
     $("msg-host-link").textContent = {en:"For hosts",es:"Para propietarios",ca:"Per a propietaris",ru:"Владельцам"}[value];
     document.querySelectorAll("[data-msg-lang]").forEach(button => button.classList.toggle("active",button.dataset.msgLang === value));
+    if (authRequested) $("msg-auth-lead").textContent = t("authToSend");
     if (actor) { renderInbox(); if (active) { renderContext(); renderMessages(); } }
+    else if (active) renderContext();
   }
   M.onLanguage(language);
   document.querySelectorAll("[data-msg-lang]").forEach(button => button.addEventListener("click",() => {
