@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — BUG-023: host profile save route
+
+- **Agent:** Денис. **Role:** Developer. **Change:** frontend Worker now allows PATCH /api/host/profile and forwards it to the backend's exact route on both production and QA origins; regression test covers both. [PR #45](https://github.com/lelik112/parrot669/pull/45) merged, CI and 130 local tests passed. Live unauthenticated request returns 401 on both origins; authenticated save/reload awaits Boris QA. **Related task:** [BUG-023](tasks/BUG-023-host-profile-save-not-found.md) / PM-021.
+
 ## 2026-09-25 — PM-036: independent two-account environment for Regression QA
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** поставил [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md) P1/NEXT: новому Regression QA нужна отдельная управляемая пара аккаунтов, не пересекающаяся с qa/lelik Бориса. Исполнителю предстоит сначала проверить доступность двух browser contexts; если один, предложить строго ограниченное расширение QA origin/backend allowlist после решения о конкретных account IDs и с negative security checks. Игорь указан только кандидатом, новый QA без имени/доступа; developer и QA claims отсутствуют, код/инфраструктура не изменены. **Related task:** PM-036.
