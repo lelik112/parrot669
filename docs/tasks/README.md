@@ -16,11 +16,11 @@
 | --- | --- | --- | --- |
 | **NOW — P1** | | | |
 | [BUG-023](BUG-023-host-profile-save-not-found.md) | P1 | in review — authenticated save still “Not found” on both origins after PR #45 | Денис / Developer; Борис / QA |
-| [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — main=qa, QA Worker=lelik; message/reply passed after unblock | Борис / QA |
-| [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — independent qa/lelik sessions restored; inverse logout/guard checks open | Борис / QA |
+| [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual exchange passed; main later anonymous, Worker=lelik | Борис / QA |
+| [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — dual exchange passed; main qa session later signed out, cause unknown | Борис / QA |
 | [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
 | [PM-003](PM-003-contact-acceptance.md) | P1 | in review — pair unblocked, follow-up and reply passed; remaining acceptance open | Борис / QA |
-| [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review — anonymous public browser state needed | Борис / QA |
+| [PM-023](PM-023-guest-message-onboarding.md) | P1 | in review — public anonymous draft/auth gate PASS; post-login/mobile open | Борис / QA |
 | [PM-002](PM-002-link-publication.md) | P1 | in review | Борис / QA |
 | [PM-025](PM-025-search-contact-button-layout.md) | P1 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-001](PM-001-calendar-control-dates.md) | P1 | in review | Борис / QA |
