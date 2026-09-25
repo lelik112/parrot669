@@ -136,8 +136,14 @@
     for (const item of inbox) {
       const button = node("button", "messages-conversation"); button.type = "button";
       button.setAttribute("aria-current", String(item.id === active?.id));
+      const unread = Number(item.unreadCount) > 0;
+      button.classList.toggle("unread",unread);
       button.append(node("strong", "", item.propertyTitle), node("span", "", item.otherDisplayName), node("small", "", item.lastMessagePreview));
-      if (item.unreadCount) button.append(node("span", "messaging-badge", item.unreadCount > 99 ? "99+" : item.unreadCount));
+      if (unread) {
+        button.append(node("span", "messages-unread-label", t("unreadShort")),
+          node("span", "messaging-badge", item.unreadCount > 99 ? "99+" : item.unreadCount));
+        button.setAttribute("aria-label",`${item.propertyTitle}, ${item.otherDisplayName}, ${t("unreadCount")(item.unreadCount)}. ${item.lastMessagePreview}`);
+      }
       button.addEventListener("click", () => void openConversation(item.id)); list.append(button);
     }
     $("msg-more").hidden = !nextCursor;
