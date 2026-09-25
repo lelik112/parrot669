@@ -97,7 +97,7 @@ export default {
     if (qaOrigin && qaSecret.length < 32) return json({ error: "QA site unavailable" }, 503);
     // QA origins deliberately reject password reset API requests. Send the
     // recovery page to the ordinary origin, which shares the same accounts.
-    if (qaOrigin && url.pathname === "/recover.html" && request.method === "GET") {
+    if (qaOrigin && ["/recover", "/recover.html"].includes(url.pathname) && request.method === "GET") {
       return Response.redirect(`https://parrot669.com/recover.html${url.search}`, 302);
     }
     if (qaOrigin && url.pathname === "/api/contact") return json({ error: "Forbidden" }, 403);
