@@ -29,6 +29,7 @@
 | **NOW — P2** | | | |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review | Борис / QA |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — one observation, reproduction needed | Марк / PM triage; Борис / QA |
+| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | reported — reproduced on two production origins after BUG-016 fix; developer diagnosis needed | Марк / PM triage; Борис / QA |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review | Борис / QA |
