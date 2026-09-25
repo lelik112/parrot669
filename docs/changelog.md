@@ -1,5 +1,11 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — BUG-020 assigned for unread-state diagnosis
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** BUG-020 подтверждена owner-assisted проверкой на iPhone Safari: новый диалог появляется, но unread indicator не заметен на вкладке Messages и в строке. Статус остаётся P2: диалог виден, влияние на ответ/конверсию пока не измерено. Денису поручена диагностика; рекомендация Sol / Medium из-за неизвестной причины между API, polling и UI. PM-027 Игоря остаётся активной в Messages UI, поэтому изменения общих файлов ждут handoff либо явного согласования непересекающейся области. Backend/read semantics вне минимального fix без отдельного решения.
+- **Related task:** [BUG-020](tasks/BUG-020-unread-message-discoverability.md), [PM-027](tasks/PM-027-open-property-from-messages.md).
+
+
 ## 2026-09-25 — PM-027: open the conversation's property in Host
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** The Messages thread offers the owner a link to its exact existing property; guests and threads whose property was removed get no Host link. Host opens that card from its authenticated dashboard and offers a return to the same conversation. A missing or unowned property shows a neutral unavailable state instead of focusing a different card. Links and states are localized EN/ES/CA/RU; backend and message data are unchanged. Rebased over Denis's shipped PM-028 profile navigation with both paths preserved; local tests pass 124/124. CI, production publication and independent desktop/mobile QA pending. **Related task:** [PM-027](tasks/PM-027-open-property-from-messages.md).
