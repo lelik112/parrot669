@@ -1,13 +1,13 @@
-## 2026-09-24 — Host cabinet IA approved; private profile moved next
-
-- **Agent:** Алекс. **Role:** Strategy / Product Advisor. **Change:** Алексей подтвердил [D009](decisions/D009-host-cabinet-ia.md). Принята последовательность кабинета **PM-020 → PM-021 → PM-022**. PM-021 private host profile больше не LATER и не ждёт пилота; пилот может влиять на дополнительные поля, но не блокирует сам профиль. PM-022 остаётся следующим после PM-021 с отдельным privacy/publication contract. **Related task:** [PM-019](tasks/PM-019-host-cabinet-ia.md), [PM-021](tasks/PM-021-private-host-profile.md), [PM-022](tasks/PM-022-public-host-profile.md).
-
 # PARROT 669 changelog
 
 ## 2026-09-25 — Очередь разработчиков PM-023 / PM-025
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** чтобы команда не ждала постановки после завершения текущих работ, PM-023 назначена Игорю по поручению Алексея; в main ещё ожидаются его claim и Model check. Денис уже ведёт PM-025 (Sol / Medium). Следующий порядок для сообщений: PM-027, затем PM-028; не запускать их параллельно PM-023 из-за общей Messages UI области. QA/доступ-блокеры не блокируют независимую разработку. Документация назначения не запускает отдельные агентские чаты.
 - **Related tasks:** [PM-023](tasks/PM-023-guest-message-onboarding.md), [PM-025](tasks/PM-025-search-contact-button-layout.md), [PM-027](tasks/PM-027-open-property-from-messages.md), [PM-028](tasks/PM-028-open-host-profile-from-messages.md).
+
+## 2026-09-24 — Host cabinet IA approved; private profile moved next
+
+- **Agent:** Алекс. **Role:** Strategy / Product Advisor. **Change:** Алексей подтвердил [D009](decisions/D009-host-cabinet-ia.md). Принята последовательность кабинета **PM-020 → PM-021 → PM-022**. PM-021 private host profile больше не LATER и не ждёт пилота; пилот может влиять на дополнительные поля, но не блокирует сам профиль. PM-022 остаётся следующим после PM-021 с отдельным privacy/publication contract. **Related task:** [PM-019](tasks/PM-019-host-cabinet-ia.md), [PM-021](tasks/PM-021-private-host-profile.md), [PM-022](tasks/PM-022-public-host-profile.md).
 
 ## 2026-09-25 — BUG-018: keep calendar challenge dates together
 
@@ -436,3 +436,4 @@
 - Search enforces both.
 - Hosts enter an Airbnb listing ID; PARROT generates the external URL.
 - Search moved from the homepage to `/search.html`.
+
