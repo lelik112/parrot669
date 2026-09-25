@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — приоритет Игоря изменён: PM-043 сейчас, PM-037 на паузе
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** исправил прежнее ошибочное «PM-043 после PM-037». Алексей прямо поручил Игорю взять PM-043 сейчас; Игорь подтвердил claim, scope и Sol / High в карточке. PM-037 остаётся незавершённой и не выпущенной, performance gate принят; её release/CI/QA возобновятся после PM-043 с новой проверкой текущих PR heads. Индекс, статус и roadmap обновлены. **Related tasks:** [PM-043](tasks/PM-043-agent-wake-up-feasibility.md), [PM-037](tasks/PM-037-search-date-range-bound.md).
+
 ## 2026-09-25 — PM-036 закрыта владельцем; PM-043 назначена Игорю
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по явному поручению Алексея закрыл [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md): Никита прошёл A→B→A/refresh/relogin, Борис подтвердил сохранность своей пары, Игорь сверил точный allowlist, CI и частичные live negative checks. Live login постороннего подтверждённого аккаунта на новом QA origin **не проверялся** и оставлен в карточке непомеченным; владелец принял закрытие с этим известным исключением, PASS не заявлен. [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) / P2 NEXT поручена Игорю (Sol / High) после PM-037; claim и старт ещё не подтверждены. **Related tasks:** PM-036, PM-043.
