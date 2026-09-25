@@ -1,7 +1,7 @@
 # PM-020 — Навигация существующего кабинета
 
 **Title:** дать владельцу согласованные точки входа к действующим функциям.
-**Status:** in review — PM-020 и исправление BUG-016 слиты; production desktop ретест возврата/позиции и touch остаются открыты. **Priority:** P2. **Owner:** Денис / Developer; QA Борис.
+**Status:** in review — production retest reproduced lost scroll position after Host → Messages → Host (BUG-022), despite merged BUG-016 fix; touch remains open. **Priority:** P2. **Owner:** Денис / Developer; QA Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** frontend навигация /host.html ↔ /messages.html и связанные UI-тесты.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** нужно удержать состояние существующих форм, маршруты, авторизацию и четыре языка; изменения ограничены интерфейсом.
 **Model check:** Денис, 2026-09-24 — Sol / Medium достаточно: работа ограничена переходами между двумя уже действующими экранами и локальным состоянием форм. Backend и модель данных не затрагиваются.
@@ -86,3 +86,8 @@
 ### 2026-09-25 — Марк / Product Manager: сверка BUG-016
 
 - **Agent:** Марк. **Role:** Product Manager. **Scope:** статус PM-020 по опубликованному PR; QA остаётся Борису. **Change:** обнаружил, что task handoff остановился на «CI, публикация»: frontend [PR #23](https://github.com/lelik112/parrot669/pull/23) с BUG-016 уже merged как [`e2451fd`](https://github.com/lelik112/parrot669/commit/e2451fd54a71418776915a1a71008bfc1d57995a). Запись о независимом production ретесте именно этого исправления отсутствует; его не засчитываю. **Related task:** PM-020 / BUG-016. **Next:** Борис повторяет Host → Messages → Host с глубокой позицией и клавиатурой на актуальном релизе, затем отдельно touch при доступной среде PM-015.
+
+
+### 2026-09-25 13:55 UTC — Борис / QA — ретест возврата из Messages
+
+**Agent:** Борис. **Role:** QA. **Change:** FAIL — после опубликованного BUG-016 ретест на desktop Chrome воспроизвёл потерю scroll position. На обоих production origins глубокий старт scrollY=2678 при возврате дважды дал scrollY=0; в одном проходе Worker origin вернул scrollY=2249. Карточка осталась раскрытой. Объект не редактировал и не сохранял. Создан [BUG-022](BUG-022-host-return-loses-scroll-position.md) для диагностики повторного дефекта; первопричина не установлена. **Related task:** PM-020 / BUG-016 / BUG-022. **Next:** Марк назначает разработчика; Борис повторяет после публикации, touch остаётся PM-015.

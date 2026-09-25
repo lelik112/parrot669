@@ -29,6 +29,7 @@
 | **NOW — P2** | | | |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review | Борис / QA |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — one observation, reproduction needed | Марк / PM triage; Борис / QA |
+| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | reported — reproduced on two production origins after BUG-016 fix; developer diagnosis needed | Марк / PM triage; Борис / QA |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review | Борис / QA |
@@ -52,13 +53,14 @@
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 | [PM-034](PM-034-backend-frontend-refactoring-audit.md) | P2 | in progress — PM overview готов | Марк / PM сводит два независимых аудита |
-| [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | in progress — read-only backend audit | Игорь / Developer, claim 2026-09-25; Sol / High |
+
 | [PM-034-FE](PM-034-FE-frontend-audit.md) | P2 | planned | Денис / frontend audit, handoff без claim; Sol / Medium |
 | **LATER** | | | |
 | [PM-012](PM-012-legacy-challenges-extraction.md) | later | planned | —: LATER |
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [PM-034-BE](PM-034-BE-backend-audit.md) | P2 | done — read-only backend report | Игорь / Developer; Марк сводит PM-034 |
 | [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | done | Марк / PM |
 | [PM-009](PM-009-team-identity.md) | P2 | done | Марк / PM |
 | [PM-019](PM-019-host-cabinet-ia.md) | P2 | done | Марк / PM |
