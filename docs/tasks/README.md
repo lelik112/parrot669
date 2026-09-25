@@ -41,7 +41,7 @@
 | [PM-004](PM-004-street-autofill.md) | P2 | in review | Борис / QA |
 | [BUG-018](BUG-018-calendar-end-date-mobile-safari.md) | P2 | in review | Борис / QA |
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
-| [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | in progress | Марк / PM |
+
 | **NEXT — P1** | | | |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked | Алексей → Борис: почта |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
@@ -56,6 +56,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [PM-035](PM-035-documentation-structure-refactoring.md) | P2 | done | Марк / PM |
 | [PM-009](PM-009-team-identity.md) | P2 | done | Марк / PM |
 | [PM-019](PM-019-host-cabinet-ia.md) | P2 | done | Марк / PM |
 
