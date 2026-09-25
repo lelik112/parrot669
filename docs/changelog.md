@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-25 — PM-036: независимый двухаккаунтный smoke PASS, закрытие review ожидает два отчёта
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** принял отчёт Никиты: отдельные `qa2`/`qa3` на regression Worker origin прошли A→B→A, refresh и независимый logout/relogin; прежний 401 при ошибочном логине не воспроизводится с верным логином. Рабочая пара доступна для назначенной ручной регрессии. PM-036 остаётся `in review`: Борис должен подтвердить сохранность собственной пары, Игорь — завершить live negative/security evidence на новых origin. Ни PM-029 security, ни live автоматический auth от этого не закрываются. Денис отдельно слил [PR #57](https://github.com/lelik112/parrot669/pull/57): второй fixture smoke PM-040, 4 сценария × 3 browser projects, CI 12/12; QA живого backend остаётся открытой. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md), [PM-040](tasks/PM-040-playwright-web-e2e.md).
+
 ## 2026-09-25 — PM-036: recovery redirect deployed and live checked
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** [PR #55](https://github.com/lelik112/parrot669/pull/55) and follow-up [PR #56](https://github.com/lelik112/parrot669/pull/56) merged after green frontend CI (133 unit tests and browser smoke); manual [regression deploy #3](https://github.com/lelik112/parrot669/actions/runs/36182550835) succeeded on frontend main `bf96140`. Live browser requests to regression A `/recover.html?lang=ru` and regression B `/recover?lang=ru` both land on `https://parrot669.com/recover?lang=ru`. No backend deploy or auth policy change. Repeat login `qa2` and B logout/relogin remain with Nikita. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
