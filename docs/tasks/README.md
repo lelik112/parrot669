@@ -51,7 +51,7 @@
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
 
 | **NEXT — P1** | | | |
-| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress — AgentMail Gate 1 PASS: 2 inbox + 4 plus-адреса, независимое чтение Никиты/Бориса; Gate 2 assigned | Денис / Sol / Medium — проверить PARROT `+` и перепривязать 4 QA-аккаунта после signed claim; затем Борис / Никита QA |
+| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress — AgentMail Gate 1 PASS: 2 inbox + 4 plus-адреса, независимое чтение Никиты/Бориса; Gate 2 claimed Денисом | Денис / Sol / Medium — `+` и уникальность проверены, готовит безопасную перепривязку 4 QA-аккаунтов; затем Борис / Никита QA |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked до PM-044 | Борис / QA после четырёх проверенных адресов и своего QA inbox |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
