@@ -15,7 +15,7 @@
 | Задача | Приоритет | Статус | Текущий/следующий шаг |
 | --- | --- | --- | --- |
 | **NOW — P1** | | | |
-| [PM-049](PM-049-shared-shell-host-cleanup.md) | P1 | in review — PR #69 с BFCache/history privacy fix released, CI 143/143 + 21/21; independent logout → Back retest required | Борис / QA — independent retest; Денис / Developer — fix released; Sol / Medium |
+| [PM-049](PM-049-shared-shell-host-cleanup.md) | P1 | in review / acceptance blocked — PR #69 fix released; exact logout → Back retest ждёт owner login `lelik` на QA Worker | Алексей — один безопасный вход; затем Борис / QA retest; Денис / Developer — fix released; Sol / Medium |
 | [PM-047](PM-047-design-trust-audit.md) | P1 | in progress — Марк начал аудит пяти экранов и первых 30 секунд доверия; пользовательская проверка и выбор правок открыты | Марк / PM claim, Sol / Medium; Денису и QA не назначено |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual exchange passed; main later anonymous, Worker=lelik | Борис / QA |
 | [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — qa/lelik restored; shared Chrome collision with Regression QA confirmed | Борис / QA |
@@ -31,7 +31,7 @@
 | [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта; Никита независимо перезапустил remote browser-smoke, 18/18 PASS; live/auth/native остаток открыт | Денис / Sol / Medium — fixture/runtime; Никита / Luna / Medium — remote QA PASS, локальный runtime blocked; Борис / Sol / Medium — acceptance-отчёт, полный live/auth acceptance открыт |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
-| [PM-048](PM-048-search-clarity-and-price-toggle.md) | P2 | in review — PR #67 released, CI/browser smoke PASS; независимый web review ожидается | Игорь / Developer выпустил; QA reviewer ещё не назначен; Sol / Medium |
+| [PM-048](PM-048-search-clarity-and-price-toggle.md) | P2 | in review — PR #67 released, CI/browser smoke PASS; Борису отправлен независимый web review, claim pending | Игорь / Developer выпустил; Борис / QA handoff; Sol / Medium |
 | [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in progress — #60–#64 active; #65 Алекс prepared/не беспокоить | Марк / PM, Sol / Medium; Никита #64 подтвердил delivery, но новая QA-работа ему пока не назначена; #65 только по явной просьбе Алекса |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review — PR #53 выпущен; hidden badge PASS, foreground/read-clear и iPhone открыты | Борис / QA следующий при доступной foreground среде; Денис / Sol / Medium только при новом FAIL |
@@ -43,7 +43,6 @@
 | [PM-010](PM-010-auth-routes-extraction.md) | P2 | in review | Борис / QA |
 | [PM-021](PM-021-private-host-profile.md) | P2 | in review — name save/reopen PASS; API negatives and privacy open | Денис / Developer; Борис / QA |
 | [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review — BUG-022 desktop retest PASS; touch remains blocked by PM-041 | Борис / QA; no dev return needed |
-| [BUG-019](BUG-019-search-account-context.md) | P2 | in review — authenticated desktop self/other и языки PASS | Борис / QA: отдельный anonymous public сеанс; iPhone PM-041; Денис dev только при FAIL |
 | [PM-005](PM-005-closed-dates-copy.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-011](PM-011-calendar-sync-extraction.md) | P2 | in review | Борис / QA |
 | [PM-013](PM-013-calendar-waiting-instruction.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
@@ -69,6 +68,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [BUG-019](BUG-019-search-account-context.md) | P2 | done — authenticated self/other и anonymous public desktop PASS в RU/EN/ES/CA; real iPhone/touch отдельно PM-041 | Денис / Developer; Борис / QA; Марк / closure |
 | [BUG-023](BUG-023-host-profile-save-not-found.md) | P1 | done — PR #46 save/reopen PASS; anonymous 401 и public privacy PASS на двух origins | Денис / Developer; Борис / QA; Марк / closure |
 | [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | done — одноразовый запуск и CAS доказаны, 5 минут не подтверждены | Марк / PM закрыл исследование; без постоянного scheduler |
 | [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | done — функциональный QA и пара Бориса PASS; live outsider login negative оставлен как явно принятое исключение | Марк / PM closure; Игорь / Developer, Никита / Regression QA, Борис / QA Lead |
