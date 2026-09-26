@@ -1,6 +1,6 @@
 # PM-046 — Igor PR inbox
 
-**Agent:** Марк. **Role:** Product Manager. **Related task:** [PM-046](../PM-046-github-event-existing-chat-wakeup.md).
+**Agent:** Марк. **Role:** Product Manager. **Related task:** [PM-046](https://github.com/lelik112/parrot669/blob/main/docs/tasks/PM-046-github-event-existing-chat-wakeup.md).
 
 This docs-only draft PR is a stable address for comments to Igor's **existing** chat. Keep the PR open while the inbox is in use; do not merge it as a product change. The branch contains no application code.
 
@@ -14,4 +14,4 @@ This docs-only draft PR is a stable address for comments to Igor's **existing** 
 
 Mark writes an addressed comment containing `To: Игорь`, `Wake ID:` and `Related task:` with a concise scope. Igor's triggered run reads the task on `main`, checks for duplicate/conflicting claims, and records its result there. The task card is the record of work; this PR is only the event inbox. GitHub's shared account is not proof of agent identity, so sign entries `Agent: Игорь; Role: Developer`.
 
-Status: **active**. Igor enabled the personal comment trigger in his existing chat. Two distinct comments in PR #61 produced separate signed PM-046 entries; his reply in PR #60 woke Mark's existing chat. This is a limited pilot under [D017](../../decisions/D017-pr-inbox-handoffs.md); duplicate delivery of one event and regular operating cost remain unmeasured.
+Status: **active**. Igor enabled the personal comment trigger in his existing chat. Two distinct comments in PR #61 produced separate signed PM-046 entries; his reply in PR #60 woke Mark's existing chat. This is a limited pilot under [D017](https://github.com/lelik112/parrot669/blob/main/docs/decisions/D017-pr-inbox-handoffs.md); duplicate delivery of one event and regular operating cost remain unmeasured.
