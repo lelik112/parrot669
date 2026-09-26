@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-26 — PM-043 feasibility handoff
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** в [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) записал evidence одноразового пробуждения существующего чата, реальный GitHub 409 при stale SHA, пропуск повторного `done`, локальные случаи `blocked`/неверного ID и расчёт 5 минут (8 640 запусков/30 дней на агента). Документация OpenAI допускает minute interval внутри чата, но доступный callable Automations ограничивает recurring одним запуском в час; прямого триггера на изменение Markdown нет. PM-043 передана Марку `in review` для выбора механизма; постоянный polling не включён, PM-037 остаётся на паузе до решения. **Related tasks:** PM-043 / PM-037.
+
 ## 2026-09-26 — PM-043: одноразовое пробуждение существующего чата прошло
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** сверил [пилот Игоря](tasks/logs/PM-043-pilot.md): scheduled run в существующем чате Игоря без нового сообщения владельца прочитал тестовую карточку GitHub и атомарно записал один claim/done. Это доказывает одноразовый check-in на одном агенте, не регулярные пять минут и не запуск всей команды. PM-043 остаётся P2 / in progress (Игорь / Sol / High); требуется оценить ограничения, стоимость и повторы. PM-037 остаётся paused до handoff PM-043. **Related tasks:** [PM-043](tasks/PM-043-agent-wake-up-feasibility.md), [PM-037](tasks/PM-037-search-date-range-bound.md).
