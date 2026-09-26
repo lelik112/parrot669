@@ -1,8 +1,8 @@
 # PM-049 — Единая шапка и спокойный кабинет хозяина
 
 **Title:** согласовать account/navigation и общий контейнер Search, Host, Messages; убрать лишнюю навигацию кабинета.
-**Status:** in review / P1 fix released — PR #69 merged after green unit and browser CI; independent logout → Back/BFCache retest required. **Priority:** P1.
-**Owner / expected Agent:** Денис / Developer — BFCache/history privacy fix; Борис / QA Lead — independent retest after release. PM-044 remains separate. **Role:** Developer / QA.
+**Status:** in review / acceptance BLOCKED — PR #69 fix released; exact logout → Back/BFCache retest waits for owner to restore the permitted `lelik` QA Worker session. **Priority:** P1.
+**Owner / expected Agent:** Денис / Developer — BFCache/history privacy fix released; Борис / QA Lead — independent retest after owner restores the permitted QA Worker session. PM-044 remains separate. **Role:** Developer / QA.
 **Recommended model:** Sol. **Recommended reasoning:** Medium (4/6 default; собственный Model check до claim). **Reason:** три страницы, auth/logout и responsive-навигация требуют аккуратной регрессии.
 **Scope:** общий header/container трёх страниц и визуальная иерархия Host; не менять auth API или сохранённые данные.
 
@@ -118,3 +118,5 @@
 **Evidence / blocker:** текущий production QA Worker `parrot669.cheltsov112.workers.dev/host#host-profile` показывает только anonymous `Log in / Create account`; canonical origin также anonymous. Это ожидаемое последствие обязательного Search logout в предыдущем PM-049 acceptance. У Бориса нет безопасно доступного пароля, а password-reset path PM-044 остаётся blocked. Старую pre-fix BFCache history нельзя использовать как acceptance нового deployment. Поэтому signed-in предусловие отсутствует; новый claim/start receipt и зависимый ретест не начаты. Это environment BLOCKED, не product FAIL и не опровержение PR #69.
 
 **Required owner action:** Алексей один раз входит под разрешённым `lelik` на QA Worker origin, не публикуя пароль. Условие возобновления: Host#host-profile на Worker снова показывает account marker `lelik`; затем Марк отправляет новый Wake ID Борису, Борис повторяет Model check, claim/start receipt и exact retest. До этого код, данные и инфраструктура не меняются.
+
+- 2026-09-26T14:13:00Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-049-BORIS-RETEST-BLOCKED-20260926-1412`. **Source:** [PR #60 comment #5846942363](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846942363). **Related task:** PM-049. **PM review / blocker:** Борис отдельно подписал environment blocker: после прежнего обязательного logout оба origin anonymous, безопасного пароля у него нет, а pre-fix history не является evidence для PR #69. Это не product FAIL. **Required owner action:** один раз войти как разрешённый `lelik` на QA Worker и подтвердить видимый account marker, не публикуя пароль; затем новый Wake ID на exact retest. **Owner notification:** письмо отправлено, message ID `<010001a0de1065bc-6b4d48d2-0e2c-400f-995f-ae2192578da9-000000@email.amazonses.com>`; по тому же task + действию не дублировать. **Continuation:** Борису передан независимый PM-048 web review [в PR #63](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846959341), Wake ID `PM-048-BORIS-WEB-REVIEW-20260926-1412`.
