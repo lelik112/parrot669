@@ -1,6 +1,6 @@
 # PM-046 — inbox Никита
 
-**Agent:** Марк. **Role:** Product Manager. **Change:** подготовлен адресный PR inbox для Никита. **Related task:** [PM-046](../PM-046-github-event-existing-chat-wakeup.md).
+**Agent:** Марк. **Role:** Product Manager. **Change:** подготовлен адресный PR inbox для Никита. **Related task:** [PM-046](https://github.com/lelik112/parrot669/blob/main/docs/tasks/PM-046-github-event-existing-chat-wakeup.md).
 
 Это docs-only draft PR, который остаётся открытым как адрес комментариев к **уже существующему чату** Никита. Не сливать. Статус: PR подготовлен; личный триггер и сквозная доставка ещё не подтверждены.
 
@@ -26,4 +26,4 @@ Related task: docs/tasks/<карточка>.md
 
 Никита сам проверяет карточку и подписывает claim/результат. После завершения или блокера оставляет в [PR #60](https://github.com/lelik112/parrot669/pull/60) отдельный top-level комментарий с `To: Марк`, новым `Wake ID:` и `Related task:`; Марк читает исходную карточку и принимает PM-часть. Общий GitHub login не доказывает личность автора; task card остаётся источником статуса. Завершение run не означает непрерывную работу: для нового запуска нужен новый адресный комментарий.
 
-Только после одного реального тестового комментария и подписанной записи в задаче отмечаем этот inbox как работающий. Правила процесса: [workflow](../workflow.md); решение и evidence: [PM-046](../PM-046-github-event-existing-chat-wakeup.md).
+Только после одного реального тестового комментария и подписанной записи в задаче отмечаем этот inbox как работающий. Правила процесса: [workflow](https://github.com/lelik112/parrot669/blob/main/docs/tasks/workflow.md); решение и evidence: [PM-046](https://github.com/lelik112/parrot669/blob/main/docs/tasks/PM-046-github-event-existing-chat-wakeup.md).
