@@ -302,7 +302,8 @@
     historyNode.hidden = guestEnquiry; $("msg-back").hidden = guestEnquiry;
     $("msg-guest-hint").hidden = !guestEnquiry;
     $("msg-account").hidden = !user;
-    $("msg-account-name").textContent = user?.username || "";
+    $("msg-login-link").hidden = Boolean(user);
+    $("msg-account-name").textContent = user ? (user.username || t("account")) : "";
     $("msg-thread").hidden = true; $("msg-empty").hidden = false; app.classList.remove("has-thread");
     if (!user) { if (guestEnquiry) void openGuestEnquiry(propertyId,queryDates()); return; }
     status(); $("msg-session-retry").hidden = true;
@@ -355,6 +356,12 @@
     try { await M.auth("/logout",{method:"POST"}); M.setUser(null); M.clearDrafts(account); sessionStorage.removeItem(profileReturnKey); status(); }
     catch (error) { failed(error); }
     finally { $("msg-logout").disabled = false; }
+  });
+  $("msg-login-link").addEventListener("click", event => {
+    if (!$('msg-auth').hidden) return;
+    event.preventDefault();
+    $('msg-auth').hidden = false;
+    loginForm.elements.login.focus();
   });
   $("msg-own-profile").addEventListener("click", event => {
     if (!actor?.accountId || !active?.id || active.hostProfileId !== actor.profile?.id) {
@@ -452,6 +459,7 @@
     $("msg-search-link").textContent = {en:"Find availability",es:"Buscar disponibilidad",ca:"Cercar disponibilitat",ru:"Найти жильё"}[value];
     $("msg-host-link").textContent = {en:"For hosts",es:"Para propietarios",ca:"Per a propietaris",ru:"Владельцам"}[value];
     document.querySelectorAll("[data-msg-lang]").forEach(button => button.classList.toggle("active",button.dataset.msgLang === value));
+    if (actor && !actor.username) $("msg-account-name").textContent = t("account");
     if (authRequested) $("msg-auth-lead").textContent = t("authToSend");
     if (actor) { renderInbox(); if (active) { renderContext(); renderMessages(); } }
     else if (active) renderContext();

@@ -17,7 +17,7 @@
 .messaging-email-language{display:flex;align-items:center;gap:10px;color:var(--muted)}
 .messaging-email-language select{padding:8px 12px;color:var(--text);background:var(--ink);border:1px solid rgba(255,255,255,.18);border-radius:8px;font-size:16px;color-scheme:dark}
 .messages-page{background:#050c0e;min-height:100dvh}
-.messages-shell{max-width:1280px;margin:0 auto;padding:28px 5vw 40px}
+.messages-shell{max-width:1280px;margin:24px auto 56px;padding:28px 5vw 40px;box-sizing:border-box;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:#172a2c}
 .messages-heading{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:20px}
 .messages-heading h1{font-family:"Space Grotesk",sans-serif;margin:0;font-size:32px;letter-spacing:-.03em}
 .messages-heading p{max-width:420px;margin:0;font-size:12px;color:#9eaea7}
@@ -83,7 +83,7 @@
 @media(max-width:700px){
   .housing-tabs{padding-left:12px;padding-right:12px;gap:4px}
   .housing-tabs a{padding:9px 8px;font-size:12px;min-width:0}
-  .messages-shell{padding:20px 12px}
+  .messages-shell{margin:12px 12px 32px;padding:20px 12px}
   .messages-heading{gap:12px;align-items:flex-start;margin-bottom:14px}
   .messages-heading h1{font-size:26px}
   .messages-heading p{max-width:180px;font-size:10px}

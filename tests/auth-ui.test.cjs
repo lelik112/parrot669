@@ -756,7 +756,7 @@ test('login sends either email or username in the login field', async () => {
     assert.equal(request.body.login, value.trim());
     assert.equal(request.body.email, undefined);
     assert.equal(app.nodes.get('host-account-email').textContent, 'My Name');
-    assert.equal(app.nodes.get('host-account-email').title, user.email);
+    assert.equal(app.nodes.get('host-account-email').getAttribute('title'), undefined);
   }
   assert.match(html, /name="login" type="text" autocomplete="username"/);
 });
@@ -790,7 +790,7 @@ test('session loading blocks opening auth; restored session hides guest controls
   await settle();
   assert.equal(app.nodes.get('host-auth-links').hidden, true);
   assert.equal(app.nodes.get('host-account-session').hidden, false);
-  assert.equal(app.nodes.get('host-account-email').textContent, user.email);
+  assert.equal(app.nodes.get('host-account-email').textContent, 'ACCOUNT');
   assert.equal(app.nodes.get('property-panel').hidden, false);
   app.run('openAuth("register")');
   assert.equal(app.nodes.get('auth-dialog').open, false);

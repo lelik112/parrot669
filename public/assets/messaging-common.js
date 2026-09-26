@@ -49,6 +49,10 @@
   Object.assign(texts.es,{openProperty:"Abrir vivienda ↗"});
   Object.assign(texts.ca,{openProperty:"Obrir habitatge ↗"});
   Object.assign(texts.ru,{openProperty:"Открыть объект ↗"});
+  Object.assign(texts.en,{backToSite:"← Back to site",account:"Account"});
+  Object.assign(texts.es,{backToSite:"← Volver al sitio",account:"Cuenta"});
+  Object.assign(texts.ca,{backToSite:"← Tornar al web",account:"Compte"});
+  Object.assign(texts.ru,{backToSite:"← Назад на сайт",account:"Аккаунт"});
   Object.assign(texts.en,{unreadShort:"Unread",unreadCount:n=>`${n} unread message${n===1?"":"s"}`});
   Object.assign(texts.es,{unreadShort:"Sin leer",unreadCount:n=>`${n} mensaje${n===1?"":"s"} sin leer`});
   Object.assign(texts.ca,{unreadShort:"Sense llegir",unreadCount:n=>`${n} missatge${n===1?"":"s"} sense llegir`});
