@@ -34,13 +34,13 @@
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review — PR #53 выпущен; hidden badge PASS, foreground/read-clear и iPhone открыты | Борис / QA следующий при доступной foreground среде; Денис / Sol / Medium только при новом FAIL |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
-| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | in progress — Игорь подтвердил узкий dev claim 2026-09-26; deep Host scroll lost after Messages on two origins | Игорь / Developer — Sol / Medium, narrow diagnosis/fix; Борис / QA after release |
+| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | in review — PR #66 released, CI PASS, asset live on two origins; independent QA pending | Игорь / Developer complete; Борис / QA handoff sent, claim pending; Sol / Medium |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review — одна ссылка/языки/keyboard PASS; badge FAIL через BUG-020, touch blocked | Денис исправляет BUG-020 (Sol / Medium); Борис ретестирует badge; mobile PM-041 |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review — owner/guest, возврат, языки и keyboard PASS | Борис / QA: same-origin logout/switch/expiry, затем touch PM-041; Denis dev только при FAIL |
 | [PM-010](PM-010-auth-routes-extraction.md) | P2 | in review | Борис / QA |
 | [PM-021](PM-021-private-host-profile.md) | P2 | in review — name save/reopen PASS; API negatives and privacy open | Денис / Developer; Борис / QA |
-| [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review — глубокий scroll FAIL после BUG-016, BUG-022 открыт | Игорь взял BUG-022; затем Борис / QA; touch PM-041 |
+| [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review — BUG-022 fix released; independent desktop retest pending | Борис / QA handoff sent; touch remains PM-041 |
 | [BUG-019](BUG-019-search-account-context.md) | P2 | in review — authenticated desktop self/other и языки PASS | Борис / QA: отдельный anonymous public сеанс; iPhone PM-041; Денис dev только при FAIL |
 | [PM-005](PM-005-closed-dates-copy.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-011](PM-011-calendar-sync-extraction.md) | P2 | in review | Борис / QA |
