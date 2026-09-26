@@ -1,8 +1,8 @@
 # PM-040 — Playwright для повторяемого браузерного QA
 
 **Title:** внедрить небольшой воспроизводимый Playwright smoke и путь расширения регрессии.
-**Status:** in progress — первый и второй Playwright smoke выпущены (PR #54 и #57; 12/12 в PR CI); QA матрицы и живого backend открыта. PM-036 A→B→A и повторный вход прошли вручную, автоматический двухконтекстный прогон ждёт согласованных тестовых данных и безопасной авторизации. **Priority:** P1.
-**Owner:** Денис / Developer — claim 2026-09-25 19:23 UTC, первый этап выпущен; Марк / PM — scope и приоритет; **QA:** Никита / Regression QA — матрица и web regression, Борис / Acceptance QA — критический контакт. Отдельные QA claims ещё не записаны.
+**Status:** in progress на этапе QA — Денис выпустил два Playwright smoke (PR #54 и #57; 12/12 в PR CI) и передал Никите, который записал QA claim 2026-09-26. Нового dev-этапа после PR #57 не подтверждено; QA матрицы и живого backend открыта. PM-036 A→B→A и повторный вход прошли вручную, автоматический двухконтекстный прогон ждёт согласованных тестовых данных и безопасной авторизации. **Priority:** P1.
+**Owner:** Денис / Developer — claim 2026-09-25 19:23 UTC, первый этап выпущен; Марк / PM — scope и приоритет; **QA:** Никита / Regression QA — матрица и web regression, Борис / Acceptance QA — критический контакт. Никита записал отдельный QA claim 2026-09-26; claim Бориса на PM-040 ещё не записан.
 **Agent:** Денис / Developer — claim 2026-09-25.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** настройка браузерных проектов, изоляции сеансов, стабильных E2E и CI в существующем frontend без переписывания приложения.
 **Model check:** Sol / Medium достаточно для ограниченного Playwright smoke и CI; PM-036 security/backend в scope Игоря, здесь не расширяю права.
