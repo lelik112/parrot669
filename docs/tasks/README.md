@@ -51,8 +51,8 @@
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
 
 | **NEXT — P1** | | | |
-| [PM-044](PM-044-qa-mailboxes.md) | P1 | blocked — Zoho и 4 inbox созданы, но independent QA inbox access упирается в human verification; owner login не QA PASS | Никита / Regression QA держит claim, Luna / Medium; нужен доступный tester-owned session/tool или решение владельца об owner-assisted evidence; Денис и Борис не стартуют |
-| [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked до PM-044 | Борис / QA после четырёх доступных ящиков |
+| [PM-044](PM-044-qa-mailboxes.md) | P1 | blocked — бесплатный AgentMail pilot: 2 tester inbox + 4 distinct plus-адреса; live delivery и PARROT `+` validation ещё не доказаны | Никита / Regression QA re-claim нового scope, Luna / Medium; Денис / Sol / Medium только после delivery gate; Борис / Sol / Medium после привязки |
+| [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked до PM-044 | Борис / QA после четырёх проверенных адресов и своего QA inbox |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
