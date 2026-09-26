@@ -51,7 +51,7 @@
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
 
 | **NEXT — P1** | | | |
-| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress — Zoho MX/SPF/DKIM verified, 4 inbox созданы; вход и внешняя доставка ожидают smoke, затем привязка аккаунтов | Никита / Regression QA claim — inbox smoke, Luna / Medium; Денис / Developer после отдельного claim — привязка, Sol / Medium; Борис / QA acceptance |
+| [PM-044](PM-044-qa-mailboxes.md) | P1 | blocked — Zoho и 4 inbox созданы, но independent QA inbox access упирается в human verification; owner login не QA PASS | Никита / Regression QA держит claim, Luna / Medium; нужен доступный tester-owned session/tool или решение владельца об owner-assisted evidence; Денис и Борис не стартуют |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked до PM-044 | Борис / QA после четырёх доступных ящиков |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
