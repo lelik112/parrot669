@@ -6,7 +6,7 @@
 
 ## Team operations — P2 / NEXT
 
-[PM-042](tasks/PM-042-agent-check-in-process-audit.md) закрыта как PM-аудит предложения Алекса после исправления коллизии ID с двухаккаунтной PM-036. [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) — NOW у Игоря / Developer (Sol / High), claim записан по прямому поручению Алексея; PM-037 временно на паузе до завершения узкого pilot. Здесь есть встроенный планировщик, но его расписание не чаще часа, а GitHub-триггер не реагирует на изменение карточки. Желание проверять назначения каждые пять минут требует другой подтверждённой среды; приоритет P2, не отвлекать команду от QA основного пути.
+[PM-042](tasks/PM-042-agent-check-in-process-audit.md) закрыта как PM-аудит предложения Алекса после исправления коллизии ID с двухаккаунтной PM-036. [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) — done: одноразовый wake-up и CAS доказаны; пятиминутный интервал и Markdown trigger недоступны в проверенной поверхности, массовый scheduler не включён. Игорь возвращается к PM-037 (Sol / High). Здесь есть встроенный планировщик, но его расписание не чаще часа, а GitHub-триггер не реагирует на изменение карточки. Желание проверять назначения каждые пять минут требует другой подтверждённой среды; приоритет P2, не отвлекать команду от QA основного пути.
 
 ## NEXT — почтовая приёмка P1
 
@@ -22,7 +22,7 @@ QA capacity: [D013](decisions/D013-qa-acceptance-regression-split.md) разде
 | P1 | [PM-024](tasks/PM-024-contact-from-every-search-result.md) + [PM-003](tasks/PM-003-contact-acceptance.md) + [PM-023](tasks/PM-023-guest-message-onboarding.md) | Базовый контакт и ответ PASS; PM-003 blocked после block-теста/BUG-021 до восстановления `lelik`; PM-023 independent QA следующей |
 | P1 | [PM-002](tasks/PM-002-link-publication.md), [PM-001](tasks/PM-001-calendar-control-dates.md) | Борис закрывает доступный copy/contact/calendar QA; контролируемый Airbnb/iCal PM-018 отдельно |
 | P1 | [PM-030](tasks/PM-030-qa-drain-next-stage.md) | Марк / PM сводит приёмку и договорится о следующем продукте после первой волны QA |
-| P2 | [PM-037](tasks/PM-037-search-date-range-bound.md) | NEXT / paused: performance gate D014 принят; Игорь возвращается после PM-043, сверяет свежие PR/CI, выпускает backend → frontend и передаёт Борису на QA |
+| P2 | [PM-037](tasks/PM-037-search-date-range-bound.md) | NEXT / resume: performance gate D014 принят; Игорь возвращается после закрытия PM-043, сверяет свежие PR/CI, выпускает backend → frontend и передаёт Борису на QA |
 | P2 | [PM-038](tasks/PM-038-host-unsaved-drafts-rerender.md) | Кодовый путь потери черновика подтверждён аудитом; Никита — кандидат на короткий QA без двух аккаунтов, Денис — dev кандидат после QA; claims не заявлены |
 | P2 | [BUG-021](tasks/BUG-021-blocking-signs-out-host.md) | Один QA случай потери видимого входа после block: reported, повтор после восстановления `lelik`; Марк решает узкий dev claim после evidence |
 | P2 | [BUG-020](tasks/BUG-020-unread-message-discoverability.md), [PM-026](tasks/PM-026-remove-duplicate-messages-link.md), [PM-027](tasks/PM-027-open-property-from-messages.md), [PM-028](tasks/PM-028-open-host-profile-from-messages.md) | BUG-020 в работе Дениса (Sol / Medium): повторный QA нашёл пропадающий глобальный badge при непрочитанной строке; PM-026 ждёт общий ретест. PM-028 desktop owner/guest, языки и keyboard PASS; same-origin logout/switch/expiry и touch открыты. PM-027 — отдельная приёмка Бориса |
