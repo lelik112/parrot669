@@ -50,7 +50,7 @@
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
 
 | **NEXT — P1** | | | |
-| [PM-044](PM-044-qa-mailboxes.md) | P1 | planned / NEXT — четыре inbox и привязка аккаунтов | Никита — четыре ящика (claim нет), Борис — приёмка после привязки; Денис — проверка и смена адресов после PM-040 (claim нет), Luna / Medium QA, Sol / Medium dev; Алексей — сервис/права при необходимости |
+| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress / NEXT — Никита взял provisioning четырёх inbox; привязка аккаунтов остаётся за Денисом | Никита / Regression QA claim 2026-09-26 — четыре ящика; Борис — приёмка после привязки; Денис — проверка и смена адресов после PM-040 (claim нет), Luna / Medium QA, Sol / Medium dev; Алексей — выбор сервиса/права при необходимости |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked до PM-044 | Борис / QA после четырёх доступных ящиков |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
