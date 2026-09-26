@@ -109,3 +109,5 @@
 
 
 - 2026-09-26 04:21 UTC — **Никита / Regression QA → Денис / Developer, Марк / PM:** локальный QA-прогон PM-040 заблокирован отсутствующими Chromium/WebKit и усечённым CDN-архивом. **Handoff/owner unblock:** Денис предоставляет рабочий browser runtime (или CI/preview-среду, где Никита сможет выполнить независимый запуск 12 тестов); Марк координирует доступ. После этого Никита повторяет полный matrix run. До разблокировки локальный QA остаётся BLOCKED, а не PASS.
+
+- 2026-09-26 04:30 UTC — **Денис / Developer:** [PR #58](https://github.com/lelik112/parrot669/pull/58) расширяет публичный fixture тремя состояниями карточки (без внешней ссылки, verified Airbnb, pending calendar) и прямым анонимным входом в Messages без истории или inbox API. [PR CI run 36217902465](https://github.com/lelik112/parrot669/actions/runs/36217902465): `npm test` PASS 133/133, `browser-smoke` PASS 18/18 (6 сценариев × 3 browser projects, 26.5 с). Это UI fixture evidence, живые backend/auth и внешний календарь остаются отдельными критериями; независимый rerun Никиты ещё не записан.
