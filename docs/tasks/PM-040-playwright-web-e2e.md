@@ -93,7 +93,7 @@
 
 **Agent:** Борис. **Role:** Acceptance QA. **Scope:** независимая сверка двух public-contact fixture-сценариев PR #54 и Host/Messages PR #57 с требованиями PM-023/024/003 и доступным live QA объектом; классификация доказанного и оставшихся auth/privacy/live критериев. Не пишу код и не подменяю матрицу/CI Никиты. **Model check:** Sol / Medium достаточен. **Next:** проверить безопасный живой путь на собственной паре `qa`/`lelik`, записать точные PASS/BLOCKED и вердикт о пригодности fixture для критического контакта.
 
-## Acceptance QA — Борис, 2026-09-26 ~04:20 UTC
+## Acceptance QA — Борис, 2026-09-26 ~04:11 UTC
 
 **Scope/evidence:** независимый review текущих `tests/e2e/public-contact.spec.cjs`, `public-fixture.cjs`, `host-messages.spec.cjs` после PR #54/#57; production Chrome в своей сессии `qa` на `parrot669.com`, собственный контролируемый объект `lelik` `1bba00dd-ade6-4860-af03-688ae7bd1eab`. Код и данные не менял, сообщений не отправлял. **Result:** первый Playwright fixture пригоден как узкий smoke публичной карточки и anonymous draft/auth gate, **не** как acceptance полного контакта.
 
