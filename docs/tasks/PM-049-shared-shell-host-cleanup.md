@@ -38,3 +38,5 @@
 - 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Scope:** постановка общего UI по пунктам Алексея. **Change:** объединил шапку, контейнер и навигационный шум Host; атрибуцию LocationIQ сохранил по условиям провайдера. **Related task:** PM-049. **Model check:** Sol 4/6 достаточно. **Next:** после P1 почты и PM-048 адресно передать Денису; его claim ещё нет.
 
 - 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Change:** PM-049 поставлена в NOW как независимая работа Дениса на время owner-blocker PM-044; PM-048 уже released, конфликт общих файлов проверять при claim. **Related task:** PM-049 / PM-044. **Next:** адресный handoff Денису, его Model check и отдельный signed claim; к PM-044 вернуться после Resend evidence.
+
+- 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Change:** [адресный handoff Денису #62](https://github.com/lelik112/parrot669/pull/62#issuecomment-5846614870), Wake ID `PM-049-DENIS-INDEPENDENT-20260926-1323`; это доставка, не signed claim. **Related task:** PM-049. **Next:** дождаться Model check и claim Дениса, затем реализация независимо от PM-044.
