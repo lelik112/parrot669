@@ -30,6 +30,7 @@
 | [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта, CI 18/18; Борис завершил узкий acceptance, независимый browser rerun Никиты ждёт рабочую среду | Денис / Sol / Medium — выпустил срез; Никита / Luna / Medium — QA claim, локальный runtime blocked; Борис / Sol / Medium — QA claim и отчёт, полный live/auth acceptance открыт |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
+| [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in progress — D017 team inbox rollout; #60 Марк/#61 Игорь active, #62 Денис/#63 Борис/#64 Никита/#65 Алекс prepared | Марк / PM координирует; каждый адресат один раз включает trigger в своём чате, затем Марк проверяет comment → claim; Sol / Medium для настройки; без активного product dev claim |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review — PR #53 выпущен; hidden badge PASS, foreground/read-clear и iPhone открыты | Борис / QA следующий при доступной foreground среде; Денис / Sol / Medium только при новом FAIL |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
@@ -55,7 +56,6 @@
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | **NEXT — P2** | | | |
-| [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in review — адресные comments в [PR #61](https://github.com/lelik112/parrot669/pull/61) → Игорь и [PR #60](https://github.com/lelik112/parrot669/pull/60) → Марк дали по одному подписанному PASS; оба trigger включены | Марк / PM ведёт ограниченный двусторонний пилот; дубли и регулярная стоимость открыты; Игорь / Developer завершил тест, нового dev claim нет; Sol / Medium |
 | [PM-045](PM-045-five-minute-agent-wake-up-pilot.md) | P2 | closed / parked — пятиминутный пилот недоступен в проверенном планировщике; не запускался | Марк / PM зафиксировал результат; активного исполнителя нет |
 | [PM-037](PM-037-search-date-range-bound.md) | P2 | in review — backend/frontend release и live smoke выполнены; независимая QA открыта | Борис / QA проверяет 366/367, сохранение ввода, обычный поиск; Игорь / Developer передал evidence |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
