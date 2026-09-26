@@ -10,7 +10,7 @@
 
 ## Blocked / Next — тестовая почта (2026-09-26)
 
-[PM-044](tasks/PM-044-qa-mailboxes.md) / P1 in progress: AgentMail Gate 1 PASS; Gate 2 PASS — Денис завершил контролируемую перепривязку четырёх существующих QA-аккаунтов к четырём уникальным plus-адресам, сохранил immutable IDs/allowlist и проверил rollback/cleanup. Gate 3 пока не начат: Борису достаточно Sol 4/6, Никите Sol 3/6, но фактические настройки их чатов ещё не подтверждены Алексеем по D019. После подтверждения Марк повторно будит обоих для Model check и claim. PM-017/006 остаются blocked до независимого delivery/login/dialog evidence.
+[PM-044](tasks/PM-044-qa-mailboxes.md) / P1 in progress: AgentMail Gate 1 PASS; Gate 2 PASS — Денис завершил перепривязку четырёх существующих QA-аккаунтов, сохранил immutable IDs/allowlist и проверил rollback/cleanup. Алексей подтвердил Sol 4/6 Борису и Sol 3/6 Никите; D019 blocker снят. Gate 3 передаётся обоим с новыми Wake ID: Борис — критический email acceptance `qa`/`lelik`, Никита — регресс `qa2`/`qa3`. До их собственных claim и независимого delivery/login/dialog evidence PM-017/006 остаются открытыми.
 
 ## Адресные PR inbox — D017 / PM-046 (2026-09-26)
 
