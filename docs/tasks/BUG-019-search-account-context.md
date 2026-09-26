@@ -61,3 +61,12 @@
 - 2026-09-25 14:05 UTC — **Agent:** Борис. **Role:** QA. **Scope:** attempt at signed-out search using QA Worker origin in Cloud Chrome; main parrot669.com remains logged in as qa. **Change:** after logout on Worker origin, the main qa session stayed authenticated, confirming origin isolation. Signed-out Worker search loaded its shell but disabled country/city and showed «Поиск временно недоступен», consistent with the QA-only origin guard; this cannot establish public signed-out search behavior. **Open:** independent anonymous public browser state and iPhone Safari remain required. **Related task:** BUG-019 / PM-029. **Next:** test anonymous search on public origin in a separate browser state; no product bug is inferred from QA Worker behavior.
 
 - 2026-09-25 ~18:58 UTC — **Борис / QA:** сверил текущий public search: шапка показывает `Аккаунт: @qa`, чужая QA-карточка `lelik` по сохранённому поиску Barcelona 11–14.06.2027 имеет CTA `Написать владельцу`; это подтверждает ранее записанный authenticated desktop PASS без изменений данных. Публичный signed-out поиск требует отдельного anonymous public browser state (QA Worker анонимный поиск намеренно блокирует); реальный iPhone Safari зависит от PM-039. Нового FAIL по BUG-019 нет; in review, owner Денис.
+
+
+## Boris signed-out desktop claim — 2026-09-26 14:12:05 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `BUG-019-BORIS-ANON-20260926-1412`. **Source:** workflow next-ready rule after PM-049 BFCache environment blocker. **Related task:** BUG-019.
+
+**Model check:** карточка рекомендует Luna / Low; подтверждённый дефолт Бориса Sol 4/6 достаточен с запасом, понижение не требуется.
+
+**Claim / scope:** беру оставшийся доступный signed-out public desktop acceptance BUG-019: canonical Search без фиктивного аккаунта, результаты и contact CTA остаются доступны, четыре языка не добавляют ложную identity. Реальный iPhone Safari/touch остаётся PM-041 и не заявляется. Код и данные не меняю. **Status:** in progress.
