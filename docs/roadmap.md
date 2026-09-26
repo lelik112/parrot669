@@ -10,7 +10,7 @@
 
 ## NEXT — почтовая приёмка P1
 
-[PM-044](tasks/PM-044-qa-mailboxes.md) — четыре управляемых QA inbox и контролируемая привязка старых аккаунтов; Никита четыре ящика (Luna / Medium), Борис — приёмка после привязки, Денис dev после PM-040 (Sol / Medium), claims нет. После этого [PM-017](tasks/PM-017-qa-test-mailbox-access.md) и [PM-006](tasks/PM-006-email-acceptance.md); личную почту владельца не используем. Провайдер и любые изменения DNS требуют выбора/прав Алексея.
+[PM-044](tasks/PM-044-qa-mailboxes.md) — четыре управляемых QA inbox и контролируемая привязка старых аккаунтов. Никита claim-ил provisioning (Luna / Medium), но заблокирован: Zoho Business создан Алексеем, а domain verification, четыре пользователя и доступ Никиты к поддерживаемой Admin Console сессии не подтверждены. Денис привязывает адреса после отдельного dev claim (Sol / Medium), Борис принимает после привязки; эти этапы ещё не начаты. После этого [PM-017](tasks/PM-017-qa-test-mailbox-access.md) и [PM-006](tasks/PM-006-email-acceptance.md); личную почту владельца не используем. DNS и human verification остаются только в зоне прав Алексея.
 
 ## NOW
 
