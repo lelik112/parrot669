@@ -1520,7 +1520,6 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
   letter-spacing:-.055em;
 }
 .standalone-search .availability-intro h1 span{color:var(--lime)}
-.search-form{grid-template-columns:repeat(6,minmax(0,1fr)) auto}
 .availability-stay{color:#81908c;font-size:12px;margin-top:-8px}
 .availability-type{
   align-self:flex-start;padding:5px 9px;border:1px solid rgba(216,255,99,.2);border-radius:999px;
@@ -1528,8 +1527,6 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
 }
 .availability-link-missing{align-self:center;color:#74837e;font-size:11px}
 .host-listing-help{margin:0 0 10px;line-height:1.5}
-@media(max-width:1280px){.search-form{grid-template-columns:repeat(3,minmax(0,1fr))}.search-form .availability-submit{grid-column:1/-1}}
-@media(max-width:700px){.search-form{grid-template-columns:1fr}.search-filters{align-items:stretch;flex-direction:column}.price-range-filter,.price-range-filter input{width:100%}}
 @media(max-width:640px){.search-shell{margin:12px 12px 32px}.standalone-search{padding:36px 20px 48px;min-height:0}}
 
 .host-property-form{grid-template-columns:1.35fr .8fr 1fr .55fr .65fr auto}
@@ -1587,7 +1584,7 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
   .host-listing-actions{align-items:flex-start;flex-direction:column}
 }
 
-.search-form{grid-template-columns:repeat(5,minmax(120px,1fr)) auto}
+.search-form{grid-template-columns:repeat(6,minmax(0,1fr)) auto}
 @media(max-width:1280px){.search-form{grid-template-columns:repeat(3,minmax(0,1fr))}.search-form .availability-submit{grid-column:1/-1}}
 @media(max-width:700px){.search-form{grid-template-columns:1fr}.search-filters{align-items:stretch;flex-direction:column}.price-range-filter,.price-range-filter input{width:100%}}
 
