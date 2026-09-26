@@ -1327,12 +1327,12 @@ footer{
   border-bottom:1px solid rgba(255,255,255,.075);
 }
 .host-shell{max-width:1280px;margin:24px auto 56px;padding:48px 5vw 70px;box-sizing:border-box;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:#172a2c}
-.host-hero{max-width:900px;margin-bottom:42px}
+.host-hero{max-width:100%;margin-bottom:36px}
 .host-hero h1{
   margin:8px 0 20px;
   font-family:"Space Grotesk",sans-serif;
-  font-size:clamp(46px,6vw,80px);
-  line-height:.98;
+  font-size:clamp(38px,4.5vw,62px);
+  line-height:1.05;
   letter-spacing:-.055em;
 }
 .host-hero h1 span{color:var(--lime)}
@@ -1520,7 +1520,7 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
   letter-spacing:-.055em;
 }
 .standalone-search .availability-intro h1 span{color:var(--lime)}
-.search-form{grid-template-columns:repeat(5,minmax(120px,1fr)) auto}
+.search-form{grid-template-columns:repeat(6,minmax(0,1fr)) auto}
 .availability-stay{color:#81908c;font-size:12px;margin-top:-8px}
 .availability-type{
   align-self:flex-start;padding:5px 9px;border:1px solid rgba(216,255,99,.2);border-radius:999px;
