@@ -1,8 +1,8 @@
 # PM-049 — Единая шапка и спокойный кабинет хозяина
 
 **Title:** согласовать account/navigation и общий контейнер Search, Host, Messages; убрать лишнюю навигацию кабинета.
-**Status:** planned / NEXT; developer claim ещё нет. **Priority:** P2.
-**Owner / expected Agent:** Денис / Developer после P1 PM-044 и после PM-048 в общих файлах. **Role:** Developer.
+**Status:** planned / NOW; developer claim ещё нет. **Priority:** P2.
+**Owner / expected Agent:** Денис / Developer; PM-044 ждёт отдельное evidence, PM-048 выпущена; PM-049 можно начать независимо. **Role:** Developer.
 **Recommended model:** Sol. **Recommended reasoning:** Medium (4/6 default; собственный Model check до claim). **Reason:** три страницы, auth/logout и responsive-навигация требуют аккуратной регрессии.
 **Scope:** общий header/container трёх страниц и визуальная иерархия Host; не менять auth API или сохранённые данные.
 
@@ -31,8 +31,10 @@
 
 ## Dependencies / Handoff
 
-Денис сначала завершает диагностику P1 PM-044; PM-048 не должен параллельно править общие HTML/CSS. После signed claim, PR и web smoke передать регресс QA; реальный Safari остаётся отдельной очередью PM-041.
+Диагностика P1 PM-044 остановлена на owner-доступе к Resend; её зависимая часть остаётся blocked. PM-048 выпущена и не правит общие HTML/CSS. Денис может взять PM-049 отдельно, не смешивая scopes; PM-050 Игоря в общих Messages файлах не вести параллельно до согласования порядка. После signed claim, PR и web smoke передать регресс QA; реальный Safari остаётся отдельной очередью PM-041.
 
 ## Evidence / Discussion / Updates
 
 - 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Scope:** постановка общего UI по пунктам Алексея. **Change:** объединил шапку, контейнер и навигационный шум Host; атрибуцию LocationIQ сохранил по условиям провайдера. **Related task:** PM-049. **Model check:** Sol 4/6 достаточно. **Next:** после P1 почты и PM-048 адресно передать Денису; его claim ещё нет.
+
+- 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Change:** PM-049 поставлена в NOW как независимая работа Дениса на время owner-blocker PM-044; PM-048 уже released, конфликт общих файлов проверять при claim. **Related task:** PM-049 / PM-044. **Next:** адресный handoff Денису, его Model check и отдельный signed claim; к PM-044 вернуться после Resend evidence.
