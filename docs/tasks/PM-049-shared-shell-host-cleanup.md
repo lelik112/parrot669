@@ -56,12 +56,32 @@
 - 2026-09-26T13:52:00Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-049-BORIS-CRITICAL-QA-20260926-1351`. **Source:** [PR #63 comment #5846807773](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846807773). **Related task:** PM-049. **Handoff:** Борису передан отдельный критический auth/privacy acceptance signed-in/anonymous/expired, logout и account context на двух доступных origins; mobile Safari исключён. Это доставка, не claim. **Next:** Model check и собственный signed claim Бориса; Никиту не переключать до освобождения.
 
 
-## Boris critical auth/privacy QA claim — 2026-09-26 13:52:49 UTC
+## Boris critical auth/privacy QA result — 2026-09-26 13:55:34 UTC
 
 **Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-049-BORIS-CRITICAL-QA-20260926-1351`. **Source:** [PR #63 comment #5846807773](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846807773). **Related task:** PM-049.
 
 **Model check:** карточка рекомендует Sol / Medium; подтверждённый Алексеем дефолт Бориса Sol 4/6 соответствует задаче и достаточен, повышение не требуется.
 
-**Claim / scope:** беру отдельный критический auth/privacy acceptance PM-049: signed-in/anonymous/доступный expired state в Search, Host и Messages; logout на Search; отсутствие ложной идентичности и утечки email; переходы между разделами и сохранность account context на canonical и QA Worker origin. Host save/deep link — только если текущая безопасная сессия позволяет. Реальный mobile touch/Safari, четыре языка и общий regression Никиты не заявляю. Код, данные и инфраструктуру не меняю. **Status:** in progress.
+**Scope / environment:** production canonical `parrot669.com` и production QA Worker `parrot669.cheltsov112.workers.dev` в Cloud Chrome; critical auth/privacy state Search / Host / Messages. Реальный mobile/Safari, четыре языка и код/data/infrastructure changes исключены.
 
-- 2026-09-26T13:53:30Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-049-BORIS-START-20260926-1353`. **Source:** [PR #60 comment #5846817100](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846817100). **Related task:** PM-049. **PM review:** Борис отдельно подписал claim и Model check Sol 4/6; scope совпадает с порученным критическим auth/privacy acceptance, не пересекается с будущим общим regression Никиты и исключает PM-041. Конфликтов claims и новой продуктовой развилки нет; работа начата без дополнительного одобрения. **Next:** anonymous/signed-in состояния на двух origins, безопасный Search logout и сохранность account context; результат с evidence вернуть в PM-049.
+**PASS — anonymous shell on canonical.** Search показывает только «Войти»; Host — «Войти / Создать аккаунт»; Messages — «Войти» и auth-form. Ни username, ни email, ни приватные диалоги/объекты не отображаются. Переходы между разделами сохраняют anonymous context.
+
+**PASS — signed-in shell and navigation on QA Worker before logout.** Search, Host и Messages одинаково показывали username `lelik`; Search/Messages не показывали email. Переход `Messages → Search → Host#host-profile → Messages` и reload deep link сохранили account context и существующие диалоги. Host private account section ожидаемо показывала email владельцу; значение в evidence не публикуется. Данные не сохранялись и не менялись.
+
+**PASS — direct state after Search logout.** Нажатие `Log out` на Search сразу заменило account marker на `Log in`. Последующие прямые открытия Host и Messages показали anonymous UI без username, email, объекта или диалогов. Messages back-link привёл в Search на том же origin.
+
+**FAIL — P1 privacy / false signed-in state through browser history after logout.**
+
+**Steps:**
+1. В авторизованном Worker-сеансе открыть `Host#host-profile`, затем другие разделы.
+2. На Search нажать `Log out`; убедиться, что прямые Host/Messages уже anonymous.
+3. Использовать browser Back по истории до ранее посещённой записи `Host#host-profile`.
+
+**Expected:** любая восстановленная из history страница повторно сверяет auth; Host остаётся anonymous, приватный email и данные объекта скрыты.
+
+**Actual:** browser Back восстановил старый signed-in Host DOM: шапка снова показывала `lelik`, private Account — email, ниже был виден объект и edit controls, хотя logout уже завершён и соседние страницы были anonymous. Обычный reload той же URL сразу очистил ложную идентичность и вернул anonymous Host. Изменение данных после logout не проверялось; backend authorization этим evidence не оспаривается. Это подтверждённая утечка приватных данных из client/history cache и ложный session indicator на общем устройстве.
+
+**BLOCKED / not accepted:** отдельное естественное server-expiry не воспроизводилось; logout-history FAIL уже покрывает обязательную границу invalidated session, но не доказывает поведение по TTL. Host save не выполнялся после privacy mismatch; реальный mobile/Safari остаётся PM-041.
+
+**Result: FAIL; PM-049 не принимать.** Следующий исполнитель: Денис / Developer в исходном PM-049 scope — инвалидировать/перерисовывать auth-sensitive Host state на `pageshow`/BFCache restore и проверить Search/Messages на тот же класс; после релиза новый независимый ретест Бориса. Код и данные Борис не менял.
+
