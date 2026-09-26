@@ -34,6 +34,8 @@
 
 ## Evidence / Discussion / Updates
 
-- 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Scope:** продуктовая постановка по замечаниям Алексея. **Change:** три избыточные строки, lead и фильтр объединены в одну задачу; код не менял. **Related task:** PM-048. **Model check:** Sol 4/6 достаточно. **Next:** адресный handoff Игорю, signed claim, узкий PR и web QA.
+- 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Scope:** продуктовая постановка по замечаниям Алексея. **Change:** три избыточные строки, lead и фильтр объединены в одну задачу; код не менял. **Related task:** PM-048. **Model check:** Sol 4/6 достаточно. **Next:** signed claim Игоря, узкий PR и web QA.
 
 - 2026-09-26 13:01:13 UTC — **Agent:** Игорь. **Role:** Developer. **Wake ID:** `PM-048-SEARCH-CLARITY-20260926-1300`. **Model check:** подтверждённый дефолт Sol 4/6 соответствует рекомендованному Sol / Medium и достаточен; повышение не требуется. **Developer claim:** беру PM-048 в согласованном узком scope: только `public/search.html`, переводимые тексты `public/assets/search.js` и связанные стили фильтра. Убираю три заданные строки, упрощаю lead, увеличиваю checkbox и его кликабельную область во всех четырёх локалях; API, расчёт цены, результаты, общую шапку, Messages, PM-049/050 и real-iPhone QA не трогаю. Конфликтов claim или блокеров по свежему main нет. **Next:** сверить текущую разметку/тесты, сделать узкий PR и browser smoke. **Related task:** PM-048 / PM-047.
+
+- 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Change:** отправлен [адресный handoff Игорю #61](https://github.com/lelik112/parrot669/pull/61#issuecomment-5846472099), Wake ID `PM-048-SEARCH-CLARITY-20260926-1300`. Это доставка, не подтверждённый старт; ожидается его Model check и signed claim. **Related task:** PM-048.
