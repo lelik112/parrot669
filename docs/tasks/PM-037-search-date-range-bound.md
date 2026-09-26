@@ -2,7 +2,7 @@
 
 **Title:** определить и ограничить число ночей в одном публичном запросе поиска.
 
-**Status:** paused / NEXT — владелец переключил Игоря на PM-043, где он уже записал claim. Performance gate для малого пилота принят; PM-037 не выпущена и не прошла QA. После PM-043 Игорь сверяет актуальные PR/CI, выпускает backend → frontend и передаёт Борису. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
+**Status:** in progress / NEXT — PM-043 закрыта 2026-09-26, пауза снята Марком; прежний dev claim Игоря сохраняется, подтверждение возобновления ещё ожидается. Performance gate для малого пилота принят; PM-037 не выпущена и не прошла QA. Игорь сверяет актуальные PR/CI, выпускает backend → frontend и передаёт Борису. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** контракт и критерии; реализацию и замеры проводит назначенный разработчик.
 
@@ -72,3 +72,7 @@
 **Agent:** Марк. **Role:** Product Manager. **Change:** по прямому поручению Алексея Игорь начал [PM-043](PM-043-agent-wake-up-feasibility.md) сейчас; этот незавершённый release claim PM-037 сохраняется, но работу ставим на паузу. **Related task:** PM-037 / PM-043.
 
 **Resume checkpoint:** приняты D014 и performance gate для малого пилота; backend PR #29 и frontend PR #52 в последнем документированном срезе ещё открыты, frontend `mergeable=false`, CI/release/live smoke/QA не подтверждены. Перед возобновлением Игорь перечитывает фактические PR heads и CI, фиксирует причину препятствия, затем выпускает backend → frontend и передаёт Борису критерии 366/367 и сохранения дат. Прежние ссылки/статусы PR могут измениться во время паузы; не считать их текущим фактом без проверки. Если в PM-043 появится более долгий scope, Марк отдельно пересмотрит загрузку.
+
+## PM resume handoff — 2026-09-26
+
+**Agent:** Марк. **Role:** Product Manager. **Change:** PM-043 завершена как исследование, основание для паузы исчезло. Игорю — подтвердить возобновление прежнего claim, проверить текущие головы PR/CI и mergeability frontend, затем backend → frontend release и независимый QA. Начало работы Игоря после паузы пока не подтверждено.
