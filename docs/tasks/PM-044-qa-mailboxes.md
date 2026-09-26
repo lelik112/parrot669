@@ -265,7 +265,17 @@
 
 **Claim / scope:** беру диагностику Gate 3 после signed FAIL Бориса и Никиты: без изменения данных подтвердить четыре фактические binding, eligibility recovery, создание reset token, попытку отправки, provider response и наличие/маршрутизацию сообщения в AgentMail; отделить нейтральный UI-ответ от реальной отправки. Также описать безопасный самостоятельный login path для `qa2`/`qa3` без передачи credentials через GitHub. Rollback, БД, код и инфраструктуру сейчас не меняю; при найденной причине любое исправление сначала получит отдельный scoped claim/план.
 
-**Next:** сопоставить timestamps QA-запросов с production application/provider logs и приватно проверить AgentMail; затем записать конкретный диагноз либо точный blocker.
+**Read-only result — BLOCKED at provider observability, 2026-09-26 13:02 UTC.** Railway HTTP evidence показывает три production `POST /api/auth/password-reset/request` со статусом `202`: 12:51:47, 12:51:57 и 12:53:23 UTC. Этот ответ подтверждает только приём в bounded in-memory queue; endpoint намеренно не раскрывает наличие аккаунта. Password recovery worker запущен, `RESEND_API_KEY` и `RESEND_FROM` присутствуют, deployment healthy. В searchable runtime logs нет `Password recovery email failed`; код пишет только warning при exception/non-2xx и не пишет успешный Resend response/message ID.
+
+Production binding четырёх exact targets ранее отдельно подтвердил verify deployment `9939045f-782b-439a-ad51-408f231589d3`. Ops apply перед сменой подтвердил verified/allowlisted accounts и отсутствие active reset/verification tokens; QA использовал назначенные точные plus-адреса. Поэтому наиболее вероятная граница — Resend принял запрос либо worker пропустил send из-за lookup/rate-limit, но текущая телеметрия не различает эти ветки. Это inference, не окончательный root cause: SQL/token state и Resend event log недоступны текущему Railway OAuth.
+
+AgentMail проверен независимо: после 12:45 UTC в обоих inbox нет новых сообщений, включая spam/trash; receive allow/block lists пусты. Следовательно, delivery в AgentMail не состоялась и локальная inbox-policy не объясняет отсутствие.
+
+**Exact blocker:** нужен read-only Resend delivery/request event для трёх timestamps (accepted/delivered/bounced/delayed и безопасная причина) и, если Resend event отсутствует, read-only проверка `password_reset_tokens` без значений token/email. В каталоге доступен Resend connector с delivery/request logs, но он не установлен; подключение требует владельца и не выполнялось автоматически. До этого rollback и повторные запросы бессмысленны.
+
+**Safe login path для `qa2`/`qa3`:** после восстановления доставки каждый тестер сам запрашивает reset на назначенный адрес, открывает ссылку в своём AgentMail и задаёт пароль локально; password/token не передаются через GitHub или чат. Существующие account/profile IDs и диалоги сохраняются. Пока reset-письмо не доставляется, независимого безопасного login path нет.
+
+**Next:** Марк запрашивает у Алексея подключение read-only Resend connector в этом чате либо безопасный event export ровно для указанных timestamps. После event evidence Денис либо закрывает provider/inbox диагноз, либо перед любым изменением пишет отдельный scoped claim на observability/fix.
 
 
 ## PM review — PM-044-BORIS-GATE3-FAIL-20260926-1256
