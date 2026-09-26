@@ -1,8 +1,8 @@
 # PM-048 — Поиск: короче текст и удобнее фильтр цены
 
 **Title:** убрать лишние пояснения из поиска и увеличить «Только с ценой».
-**Status:** in progress / implementation prepared; PR CI, browser smoke and independent review pending. **Priority:** P2.
-**Owner:** Игорь / Developer — claimed 2026-09-26. **Role:** Developer.
+**Status:** in review / production released; automated browser smoke passed, independent web review pending. **Priority:** P2.
+**Owner:** Игорь / Developer — implementation and release complete 2026-09-26; independent reviewer not yet assigned. **Role:** Developer.
 **Recommended model:** Sol. **Recommended reasoning:** Medium (4/6 default достаточен после собственного Model check). **Reason:** локальный UI и четыре локали, но важно не исказить значение доступности и цены.
 **Scope:** `public/search.html`, переводимые видимые тексты в `public/assets/search.js` и связанные стили фильтра; без API, цены, календаря и результатов.
 
@@ -19,10 +19,10 @@
 
 ## Acceptance criteria
 
-- [ ] Три строки исчезли в четырёх локалях; нет пустых полос и dangling accessibility references.
-- [ ] Lead однозначен: это поиск доступности на выбранные даты, не бронирование и не проверка условий сделки.
-- [ ] Фильтр срабатывает по label, клавиатуре и touch-sized области; Playwright desktop/mobile WebKit smoke, без заявления real iPhone PASS.
-- [ ] Поиск и сортировка по цене продолжают работать; контрольные результаты/контакт не меняют смысл.
+- [x] Три строки исчезли в четырёх локалях; нет пустых полос и dangling accessibility references.
+- [x] Lead однозначен: это поиск доступности на выбранные даты, не бронирование и не проверка условий сделки.
+- [x] Фильтр срабатывает по label, клавиатуре и touch-sized области; Playwright desktop/mobile WebKit smoke, без заявления real iPhone PASS.
+- [x] Поиск и сортировка по цене продолжают работать; контрольные результаты/контакт не меняют смысл.
 
 ## Not doing
 
@@ -43,3 +43,5 @@
 - 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-048-IGOR-START-20260926-1301`. **UTC:** 2026-09-26T13:01:50.275Z. **Source:** [PR #60 comment #5846479498](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846479498). **PM review:** signed claim Игоря в карточке и Sol 4/6 Model check подтверждены; scope Search/locales/checkbox не пересекается с PM-049/050, конфликтов нет. Работа начата без отдельного согласования. **Next:** узкий PR и browser smoke, затем QA. **Related task:** PM-048.
 
 - 2026-09-26 13:06:31 UTC — **Agent:** Игорь. **Role:** Developer. **Change:** подготовлена узкая frontend-реализация PM-048. Три заданные строки удалены вместе с неиспользуемыми locale keys, CSS wrappers и `aria-describedby`; lead сокращён в EN/ES/CA/RU. Checkbox `pricedOnly` увеличен до 22 px, label-area — до 52 px desktop / 56 px mobile, native keyboard focus явно виден. Добавлены unit и Playwright проверки локалей, label/keyboard toggle, размеров и overflow. **Verification:** `npm test` PASS 138/138; локальный focused Playwright обнаружил 3 проекта, но запуск BLOCKED отсутствующими Chromium/WebKit binaries — фактический browser run обязателен в CI. API, расчёт цены, карточки результатов, global header, Messages и real-iPhone scope не менялись. **Next:** узкий PR, зелёный CI, merge/deploy и независимый web smoke. **Related task:** PM-048 / PM-047.
+
+- 2026-09-26 13:15:38 UTC — **Agent:** Игорь. **Role:** Developer. **Release:** [PR #67](https://github.com/lelik112/parrot669/pull/67) merged as `61563d2`. PR CI [36244195339](https://github.com/lelik112/parrot669/actions/runs/36244195339) PASS; main CI [36244332329](https://github.com/lelik112/parrot669/actions/runs/36244332329) PASS, включая 21 browser case в Chromium desktop, WebKit desktop и mobile emulation. Live smoke на `parrot669.com` и `parrot669.cheltsov112.workers.dev` подтвердил новый lead в HTML/JS, отсутствие старых строк и CSS hit-area; API и search semantics не менялись. **Handoff:** Марку — назначить независимый короткий web review; real iPhone остаётся PM-041. **Related task:** PM-048 / PM-047.
