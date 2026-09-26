@@ -6,7 +6,7 @@
 
 ## Blocked / Next — тестовая почта (2026-09-26)
 
-[PM-044](tasks/PM-044-qa-mailboxes.md) / P1 in progress: Никита claim-ил подготовку четырёх ящиков `qa`, `lelik`, `qa2`, `qa3`. По последней записи в карточке Zoho Business account создан Алексеем, но cloud-browser Никиты не получил вход и показывает outdated-browser blocker; создание пользователей/domain verification ещё не подтверждено. Денис привязывает адреса существующих тестовых аккаунтов после своего claim; Борис принимает пары после привязки. Личные ящики владельца не используются. [PM-017](tasks/PM-017-qa-test-mailbox-access.md) остаётся blocked до подтверждённого доступа, затем Борис делает [PM-006](tasks/PM-006-email-acceptance.md). Личные ящики владельца не используются.
+[PM-044](tasks/PM-044-qa-mailboxes.md) / P1 in progress: Никита подтвердил домен Zoho и создание четырёх отдельных пользователей `qa`, `lelik`, `qa2`, `qa3`. Последняя подписанная запись в карточке (07:55 UTC) ещё не подтверждает MX/SPF/DKIM, входящие письма и доступ QA; Алексей после неё сообщил в своём чате, что закончил DNS, но независимая проверка пока не записана. Никита проверяет DNS и четыре inbox, затем Денис после claim привязывает адреса PARROT-аккаунтов; Борис принимает пары. [PM-017](tasks/PM-017-qa-test-mailbox-access.md) и почтовая часть [PM-006](tasks/PM-006-email-acceptance.md) остаются blocked до проверенного доступа.
 
 ## Адресные PR inbox — D017 / PM-046 (2026-09-26)
 
@@ -18,7 +18,7 @@
 
 - Денис: [PM-040 → inbox #62](https://github.com/lelik112/parrot669/pull/62#issuecomment-5844532051), P1, Sol / Medium — подготовил [инструкцию remote rerun](qa/playwright.md). Никита самостоятельно запустил attempt 2: job `108369635149` SUCCESS, 18/18 fixture cases PASS; live/auth/native QA остаётся открытой.
 - Игорь: [BUG-022 → inbox #61](https://github.com/lelik112/parrot669/pull/61#issuecomment-5844531900), P2, Sol / Medium — выпустил [PR #66](https://github.com/lelik112/parrot669/pull/66) как `844bb63`; PR/main CI PASS, asset live на двух origins. [Ретест передан Борису](https://github.com/lelik112/parrot669/pull/63#issuecomment-5844625041), claim/result ожидаются.
-- Борис: [PM-037 → inbox #63](https://github.com/lelik112/parrot669/pull/63#issuecomment-5844532227), P2, Sol / Medium для QA — [signed claim в карточке](tasks/PM-037-search-date-range-bound.md) 08:17 UTC; независимая проверка начата, итог ещё не получен. P1 QA по контакту сохраняет приоритет, но требует отдельной среды/данных.
+- Борис: [PM-037 → inbox #63](https://github.com/lelik112/parrot669/pull/63#issuecomment-5844532227), P2, Sol / Medium для QA — [signed QA PASS в карточке](tasks/PM-037-search-date-range-bound.md); Марк закрыл PM-037. P1 QA по контакту сохраняет приоритет, но требует отдельной среды/данных.
 
 ## Процесс claim / 2026-09-26
 
