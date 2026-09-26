@@ -10,7 +10,7 @@
 
 ## Blocked / Next — тестовая почта (2026-09-26)
 
-[PM-044](tasks/PM-044-qa-mailboxes.md) / P1 in progress: Zoho MX 10/20/50, SPF и DKIM независимо подтверждены Никитой; DNS-блокер снят, четыре inbox созданы. Никита проверяет вход, внешнюю доставку и отсутствие перекрёстной доставки, затем Денис после отдельного claim привязывает адреса старых PARROT QA-аккаунтов; Борис принимает критический путь. [PM-017](tasks/PM-017-qa-test-mailbox-access.md) и почтовая часть [PM-006](tasks/PM-006-email-acceptance.md) остаются blocked до проверенного доступа и привязки.
+[PM-044](tasks/PM-044-qa-mailboxes.md) / P1 blocked: Zoho MX 10/20/50, SPF и DKIM подтверждены, четыре inbox созданы, а Алексей сообщил о первом входе. Но Zoho cloud browser зацикливается на human verification, tester-owned сессии или доступного почтового инструмента нет; independent inbox reading и внешняя/перекрёстная доставка не доказаны. Никита удерживает provisioning claim. Денис не начинает привязку старых QA-аккаунтов, Борис не начинает acceptance. Нужен поддерживаемый QA-доступ к inbox либо явное решение владельца заменить independent evidence на owner-assisted; секреты в GitHub/чат не передаются. [PM-017](tasks/PM-017-qa-test-mailbox-access.md) и почтовая часть [PM-006](tasks/PM-006-email-acceptance.md) остаются blocked.
 
 ## Адресные PR inbox — D017 / PM-046 (2026-09-26)
 
