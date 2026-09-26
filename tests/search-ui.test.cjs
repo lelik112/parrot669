@@ -223,3 +223,58 @@ test('PM-002: Airbnb stays clickable while calendar status is honest; invalid li
   assert.match(h.results.textContent,/Владелец ещё не завершил проверку/);
   assert.equal(h.results.querySelector('.availability-link').href,`https://www.airbnb.com/rooms/${id}`);
 });
+
+
+test('PM-037: 367 nights preserve dates and filters, translate, restore and allow correction to 366',async t=>{
+  const h=await harness(t);await h.barcelona();
+  h.change(h.form.elements.from,'2028-01-01');
+  h.change(h.form.elements.to,'2029-01-02');
+  h.change(h.form.elements.bedrooms,'2');
+  const count=h.searches().length;
+  await h.submit();
+  assert.equal(h.searches().length,count);
+  assert.match(h.results.textContent,/366 ночей/);
+  assert.equal(h.results.querySelectorAll('.availability-card').length,0);
+  for(const [language,words] of [['en','366 nights'],['es','366 noches'],['ca','366 nits'],['ru','366 ночей']]){
+    h.language(language);
+    assert(h.results.textContent.includes(words));
+    assert.equal(h.form.elements.from.value,'2028-01-01');
+    assert.equal(h.form.elements.to.value,'2029-01-02');
+    assert.equal(h.form.elements.bedrooms.value,'2');
+  }
+  const restored=await harness(t,{saved:JSON.parse(h.w.localStorage.getItem('parrot669-search-state'))});
+  assert.equal(restored.searches().length,0);
+  assert.match(restored.results.textContent,/366 ночей/);
+  assert.equal(restored.form.elements.to.value,'2029-01-02');
+  h.change(h.form.elements.to,'2029-01-01');await h.submit();
+  assert.equal(h.searches().length,count+1);
+  assert.equal(h.searches().at(-1).searchParams.get('to'),'2029-01-01');
+  assert.equal(h.searches().at(-1).searchParams.get('bedrooms'),'2');
+});
+
+test('PM-037: backend range rejection uses localized message and keeps the form',async t=>{
+  const h=await harness(t,{handler:url=>url.pathname==='/api/search'?
+    new Response(JSON.stringify({error:'A search request can cover at most 366 nights'}),{status:400}):undefined});
+  await h.barcelona();
+  assert.match(h.results.textContent,/366 ночей/);
+  assert.equal(h.form.elements.from.value,'2026-10-01');
+  assert.equal(h.form.elements.to.value,'2026-10-08');
+  assert.equal(h.form.querySelector('button[type="submit"]').disabled,false);
+});
+
+
+test('PM-037: ordinary and leap-year boundary searches keep exact dates through contact links',async t=>{
+  const h=await harness(t,{messaging:true,handler:url=>url.pathname==='/api/search'?
+    [{...property('Barcelona'),availableFrom:url.searchParams.get('from'),availableTo:url.searchParams.get('to')}]:undefined});
+  await h.barcelona();
+  for(const [nights,end] of [[1,'2028-01-02'],[7,'2028-01-08'],[30,'2028-01-31'],[90,'2028-03-31'],[366,'2029-01-01']]){
+    h.change(h.form.elements.from,'2028-01-01');h.change(h.form.elements.to,end);
+    await h.submit();
+    const query=h.searches().at(-1).searchParams;
+    assert.equal(query.get('from'),'2028-01-01',`${nights} nights`);
+    assert.equal(query.get('to'),end);
+    const contact=new URL(h.results.querySelector('.message-property-link').href);
+    assert.equal(contact.searchParams.get('from'),'2028-01-01');
+    assert.equal(contact.searchParams.get('to'),end);
+  }
+});

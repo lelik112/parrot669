@@ -55,6 +55,14 @@ Object.entries(budgetCopy).forEach(([language,values])=>Object.assign(housingCop
 copy.ru.bed=n=>ruPlural(n,"спальня","спальни","спален");
 copy.ru.sleep=n=>ruPlural(n,"спальное место","спальных места","спальных мест");
 
+const dateRangeCopy={
+  en:{searchRangeTooLong:"One search can cover up to 366 nights. Choose a shorter period and ask the host about a longer stay."},
+  es:{searchRangeTooLong:"Cada búsqueda puede abarcar hasta 366 noches. Elige un periodo más corto y consulta al propietario sobre una estancia más larga."},
+  ca:{searchRangeTooLong:"Cada cerca pot abastar fins a 366 nits. Tria un període més curt i consulta al propietari sobre una estada més llarga."},
+  ru:{searchRangeTooLong:"За один раз можно искать жильё максимум на 366 ночей. Выберите более короткий период и уточните более долгий срок у хозяина."}
+};
+Object.entries(dateRangeCopy).forEach(([language,values])=>Object.assign(housingCopy[language],values));
+
 function t(key,...args){const v=(housingCopy[lang]||housingCopy.en)[key]??(copy[lang]||copy.en)[key];return typeof v==="function"?v(...args):v}
 function renderAccountIndicator(user=window.ParrotMessaging?.user){
   if(!accountIndicator)return;
@@ -357,6 +365,14 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
     return;
   }
   const params=new URLSearchParams(baseParams);
+  // UTC midnight avoids DST changing the count of checkout-exclusive nights.
+  const nights=(Date.parse(`${params.get("to")}T00:00:00Z`)-Date.parse(`${params.get("from")}T00:00:00Z`))/86400000;
+  if(nights>366){
+    state("searchRangeTooLong","error");
+    updateSearchSubmitState();
+    if(pricedOnlyFilter) pricedOnlyFilter.disabled=false;
+    return;
+  }
   const minPriceCents=eurosToCents(minPriceFilter?.value);
   const maxPriceCents=eurosToCents(maxPriceFilter?.value);
   params.set("accommodationType",String(accommodationTypeFilter?.value||"any"));
@@ -374,7 +390,14 @@ async function runSearch(baseParams,{disableSubmit=false}={}){
   state("loading","loading");
   try{
     const response=await fetch(`/api/search?${params}`,{headers:{Accept:"application/json"}});
-    if(!response.ok)throw new Error(`HTTP ${response.status}`);
+    if(!response.ok){
+      const body=await response.json().catch(()=>null);
+      if(response.status===400&&body?.error==="A search request can cover at most 366 nights"){
+        if(requestId===searchSequence) state("searchRangeTooLong","error");
+        return;
+      }
+      throw new Error(`HTTP ${response.status}`);
+    }
     const items=await response.json();
     if(requestId===searchSequence) render(Array.isArray(items)?items:[]);
   }catch(error){
