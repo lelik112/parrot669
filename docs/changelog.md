@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-26 — PM-043: одноразовое пробуждение существующего чата прошло
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** сверил [пилот Игоря](tasks/logs/PM-043-pilot.md): scheduled run в существующем чате Игоря без нового сообщения владельца прочитал тестовую карточку GitHub и атомарно записал один claim/done. Это доказывает одноразовый check-in на одном агенте, не регулярные пять минут и не запуск всей команды. PM-043 остаётся P2 / in progress (Игорь / Sol / High); требуется оценить ограничения, стоимость и повторы. PM-037 остаётся paused до handoff PM-043. **Related tasks:** [PM-043](tasks/PM-043-agent-wake-up-feasibility.md), [PM-037](tasks/PM-037-search-date-range-bound.md).
+
 ## 2026-09-25 — приоритет Игоря изменён: PM-043 сейчас, PM-037 на паузе
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** исправил прежнее ошибочное «PM-043 после PM-037». Алексей прямо поручил Игорю взять PM-043 сейчас; Игорь подтвердил claim, scope и Sol / High в карточке. PM-037 остаётся незавершённой и не выпущенной, performance gate принят; её release/CI/QA возобновятся после PM-043 с новой проверкой текущих PR heads. Индекс, статус и roadmap обновлены. **Related tasks:** [PM-043](tasks/PM-043-agent-wake-up-feasibility.md), [PM-037](tasks/PM-037-search-date-range-bound.md).
