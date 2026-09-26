@@ -1,9 +1,9 @@
 # PM-046 — запуск существующего агентского чата по событию GitHub
 
 **Title:** проверить событийное пробуждение существующего чата после назначения задачи в репозитории.
-**Status:** in progress / PR inbox pilot — PR #59 proved one `opened` → Igor's existing chat; PR #60 proved one addressed comment → Mark's existing chat. Igor's dedicated draft inbox PR #61 is prepared; Igor's PR #61 `enable_comments` trigger is enabled in his existing chat as of 2026-09-26 05:47 UTC; delivery of a matching test comment remains unverified. His old #59 trigger is disabled.
+**Status:** in review / one-way Igor PR inbox PASS — PR #59 proved one `opened` → Igor's existing chat; PR #60 proved one addressed comment → Mark's existing chat; PR #61 proved one addressed comment → Igor's same existing chat, with one signed CAS result. Igor's PR #61 trigger remains enabled for a limited pilot. Ordinary push to `main`, duplicate delivery and reverse handoff to Mark's general inbox are not established.
 **Priority:** P2.
-**Agent:** Игорь / Developer — completed the one-off technical run 2026-09-26 05:31 UTC; no active dev claim. **Owner / next:** Марк / Product Manager created PR #61 and instructions; Igor enabled the trigger in his existing chat; Mark sends one unique test comment and verifies a signed result. This is owner-directed PM-046 process pilot, not a new code assignment.
+**Agent:** Игорь / Developer — one-off technical run and PR #61 comment delivery complete; no active product dev claim. **Owner / next:** Марк / Product Manager — use PR #61 only for addressable handoffs to Igor under an existing task; assess repeated delivery, cost and reverse handoff before team-wide rollout.
 **Recommended model:** Sol. **Recommended reasoning:** Medium.
 **Reason:** нужно установить реальные границы GitHub event и Automations на одном существующем чате, без разработки продукта.
 
@@ -63,3 +63,5 @@
 
 
 - 2026-09-26 05:53:16 UTC — **Agent:** Игорь. **Role:** Developer. **Wake ID:** `PM-046-IGOR-COMMENT-20260926-0552`. **Result:** GitHub `issue_comment created` в [PR #61](https://github.com/lelik112/parrot669/pull/61), комментарий [#5843664191](https://github.com/lelik112/parrot669/pull/61#issuecomment-5843664191), разбудил этот существующий чат без нового сообщения Алексея. Run прочитал исходный комментарий, сверил точные строки адресата/Wake ID/Related task, перечитал PM-046 из `main` с blob SHA `10a5c57991ead7b4fc839f29af700eda2354ef27` и записал ровно один результат через CAS. Target conversation: `6ab26f…6791`. Код, другие задачи, PR и production не менялись; trigger PR #61 остаётся включённым. **Related task:** PM-046.
+
+- 2026-09-26 05:54 UTC — **Agent:** Марк. **Role:** Product Manager. **Change:** проверил подписанную запись Игоря для `PM-046-IGOR-COMMENT-20260926-0552`: тестовый [комментарий #5843664191](https://github.com/lelik112/parrot669/pull/61#issuecomment-5843664191) в PR #61 был создан в 05:51:40 UTC, запись в прежнем `conversation_id=6ab26f…6791` появилась в 05:53:16 UTC, интервал до записи 96 с (включает доставку и выполнение). По одному событию канал **Марк → Игорь** работает; разрешён ограниченный пилот с уникальным Wake ID и ссылкой на задачу. Триггер остаётся включённым. Обратный маршрут **Игорь → Марк** для произвольных новых сообщений, дубликаты и регулярная стоимость не проверены. **Related task:** PM-046.
