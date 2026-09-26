@@ -117,3 +117,17 @@
 **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-AGENTMAIL-DELIVERY-20260926-1207-NIKITA`. **Source:** [PR #60 comment #5846135139](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846135139). **Result:** live pilot Никиты принят как PASS доставки четырёх plus-адресов: два inbox, точный исходный адресат сохраняется, перекрёстной входящей доставки нет. Это снимает delivery blocker, но не является PARROT email-flow PASS. Общая OAuth-видимость двух служебных QA inbox допустима для MVP: требование — независимость от личной почты и участия владельца, а не секретность между тестерами. Публичный Free limit 3 inbox / 3 000 писем покрывает текущую схему из двух inbox; платный scope не согласован. **Next:** Борис независимо открывает одно полученное письмо и подтверждает поле `to`; затем Денис делает отдельный claim Gate 2.
 
 **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-BORIS-PREFLIGHT-RESULT-20260926-1207`. **Source:** [PR #60 comment #5846143211](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846143211). **Result:** доступ Бориса к AgentMail из его существующего чата подтверждён, но preflight по границам scope не проверял чтение письма и точный адресат. Отправлен узкий follow-up [PR #63 comment #5846147303](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846147303), **Luna / Medium**. До его signed result Денис не начинает перепривязку; owner action не требуется.
+
+## Boris AgentMail message-read evidence — 2026-09-26 12:10:08 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-044-BORIS-ADDRESS-READ-20260926-1212`. **Source:** [PR #63 comment #5846147303](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846147303). **Related task:** PM-044. **Model check:** Luna / Medium достаточно для узкой read-only проверки одного уже полученного письма.
+
+**Claim / scope:** только открыть одно существующее received-письмо в inbox роли `boris-qa` и проверить читаемость тела и сохранение plus-адресата. Ничего не создавать и не отправлять; PARROT-аккаунты, БД, DNS, Zoho, PM-006 и PM-017 не менять.
+
+**Environment / steps:** AgentMail connector в этом существующем чате Бориса. `list_messages(limit=20)` для inbox роли `boris-qa` вернул четыре сообщения: два `received` для назначенной пары и два `sent` к паре Никиты. Затем `get_message` открыл одно уже полученное контрольное письмо для псевдонима `lelik` от 2026-09-26 12:06:04 UTC.
+
+**Expected:** полное тело читается; поле `to` сохраняет назначенный plus-адрес, а сообщение помечено как входящее нужного inbox. **Actual / result: PASS.** Тело доступно и непустое; labels содержат `received`; поле `to` сохраняет plus-tag `+lelik`. Полные адреса, message/inbox IDs и содержимое письма в карточке не публикуются.
+
+**Access boundary:** текущий OAuth позволяет Борису видеть список обоих QA inbox. Для тестовых аккаунтов это явно принимается как общая организационная видимость и **не считается изоляцией прав** между тестерами. Физическая адресная маршрутизация пары подтверждается сообщениями; security/privacy isolation этим не доказана и не заявляется.
+
+**Blocker / next:** независимый доступ и чтение inbox Бориса подтверждены; создание/plus-доставка остаются evidence Никиты. Коннектор не показывает фактический billing/free-tier организации, поэтому решение о полном Gate 1 и запуске Дениса остаётся за Марком; это не PM-006/PM-017 acceptance. Борис ничего не изменял.
