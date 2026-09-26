@@ -27,7 +27,7 @@
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | очередь PM-041; Борис / QA после разблокировки; Luna / Medium |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
-| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта, CI 18/18; Борис завершил узкий acceptance, независимый browser rerun Никиты ждёт рабочую среду | Денис / Sol / Medium — выпустил срез; Никита / Luna / Medium — QA claim, локальный runtime blocked; Борис / Sol / Medium — QA claim и отчёт, полный live/auth acceptance открыт |
+| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта, CI 18/18; Денис подготовил remote rerun job для независимого QA, Никитин запуск/результат ждём | Денис / Sol / Medium — signed результат по runtime 08:19 UTC; Никита / Luna / Medium — QA claim, локальный runtime blocked, remote rerun ожидается после освобождения; Борис / Sol / Medium — QA claim и отчёт, полный live/auth acceptance открыт |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
 | [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in progress — #60–#64 active; #65 Алекс prepared/не беспокоить | Марк / PM, Sol / Medium; Никита #64 подтвердил delivery, но новая QA-работа ему пока не назначена; #65 только по явной просьбе Алекса |
