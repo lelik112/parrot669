@@ -20,7 +20,7 @@
 
 ## In Progress
 
-- **[PM-040](tasks/PM-040-playwright-web-e2e.md) / P1 NOW, in progress:** Денис / Sol / Medium выпустил [PR #54](https://github.com/lelik112/parrot669/pull/54) и [PR #57](https://github.com/lelik112/parrot669/pull/57): теперь 4 контролируемых fixture-сценария × 3 проекта, PR CI 12/12. [Матрица](qa/playwright-coverage.md) и живой backend/критический контакт ещё ждут независимой QA. Никита / Luna / Medium и Борис / Sol / Medium делают отдельные claims. Ручная пара Никиты PM-036 уже работает, автоматический auth A↔B требует изоляции данных и согласованного окружения; реальный телефон PM-041.
+- **[PM-040](tasks/PM-040-playwright-web-e2e.md) / P1 NOW, in progress:** Денис / Sol / Medium выпустил [PR #54](https://github.com/lelik112/parrot669/pull/54) и [PR #57](https://github.com/lelik112/parrot669/pull/57): теперь 4 контролируемых fixture-сценария × 3 проекта, PR CI 12/12. [Матрица](qa/playwright-coverage.md) и живой backend/критический контакт ещё ждут независимой QA. Никита / Luna / Medium назначен на независимую сверку матрицы и безопасный web smoke, ждём его claim; Борис / Sol / Medium отдельно принимает критический контакт, claim ещё нет. Ручная пара Никиты PM-036 уже работает, автоматический auth A↔B требует изоляции данных и согласованного окружения; реальный телефон PM-041.
 
 - **[PM-029](tasks/PM-029-two-origin-qa-sessions.md), Игорь / Developer, P1, `in review`:** Борис прошёл qa/lelik A→B→A, reload и logout `qa` на двух origin; остались third-account/forged-request negative checks и обратный logout.
 - **[PM-030](tasks/PM-030-qa-drain-next-stage.md), Марк / PM, P1:** QA triage и пакет следующих продуктовых контрактов; рекомендация после первой QA-волны ещё ожидает результатов.
