@@ -1,5 +1,10 @@
 # PARROT 669 changelog
 
+## 2026-09-26 — PM-043 закрыта как техническое исследование
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** принял handoff Игоря по [PM-043](tasks/PM-043-agent-wake-up-feasibility.md): одноразовый scheduled wake-up существующего чата и GitHub CAS прошли; регулярные 5 минут, Markdown trigger и массовые запуски не доказаны и не включены. PM-043 done; передача остаётся ручной, Игорь возвращается к PM-037 с открытыми release/QA. **Related tasks:** PM-043, PM-037.
+
+
 ## 2026-09-26 — PM-043 feasibility handoff
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** в [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) записал evidence одноразового пробуждения существующего чата, реальный GitHub 409 при stale SHA, пропуск повторного `done`, локальные случаи `blocked`/неверного ID и расчёт 5 минут (8 640 запусков/30 дней на агента). Документация OpenAI допускает minute interval внутри чата, но доступный callable Automations ограничивает recurring одним запуском в час; прямого триггера на изменение Markdown нет. PM-043 передана Марку `in review` для выбора механизма; постоянный polling не включён, PM-037 остаётся на паузе до решения. **Related tasks:** PM-043 / PM-037.
