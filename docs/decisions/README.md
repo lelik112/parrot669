@@ -26,5 +26,6 @@
 | [D016](D016-playwright-first-real-device-queue.md) | Playwright для browser QA, настоящий телефон отдельной заблокированной очередью | accepted; PM-040 ждёт dev claim, PM-041 blocked | Решение Алексея 2026-09-25 |
 | [D017](D017-pr-inbox-handoffs.md) | Один docs-only PR inbox на существующий чат агента; адресные comments и task card | accepted limited rollout; #60–#64 active, #65 prepared/не беспокоить | Поручение Алексея 2026-09-26; PM-046 |
 | [D018](D018-design-audit-before-redesign.md) | Аудит доверия пяти экранов до крупных визуальных изменений | accepted working direction; конкретные UI-правки не утверждены | Поручение Алексея после предложения Алекса 2026-09-26; PM-047 |
+| [D019](D019-default-agent-reasoning.md) | Sol и дефолтные уровни 1–6; агент сам проверяет достаточность, повышение через Марка | accepted, целевые настройки ждут однократного применения владельцем | Решение Алексея 2026-09-26; дополняет D005 |
 
 У каждой записи: Decision, Problem, Reason, Alternatives, Rejected, Date, источник и связь с задачей. Незаписанные исторические альтернативы обозначаются как неизвестные, а не восстанавливаются из предположений.
