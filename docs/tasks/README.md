@@ -27,7 +27,7 @@
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | очередь PM-041; Борис / QA после разблокировки; Luna / Medium |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
-| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта, CI 18/18; Денис подготовил remote rerun job для независимого QA, Никитин запуск/результат ждём | Денис / Sol / Medium — signed результат по runtime 08:19 UTC; Никита / Luna / Medium — QA claim, локальный runtime blocked, remote rerun ожидается после освобождения; Борис / Sol / Medium — QA claim и отчёт, полный live/auth acceptance открыт |
+| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта; Никита независимо перезапустил remote browser-smoke, 18/18 PASS; live/auth/native остаток открыт | Денис / Sol / Medium — fixture/runtime; Никита / Luna / Medium — remote QA PASS, локальный runtime blocked; Борис / Sol / Medium — acceptance-отчёт, полный live/auth acceptance открыт |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
 | [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in progress — #60–#64 active; #65 Алекс prepared/не беспокоить | Марк / PM, Sol / Medium; Никита #64 подтвердил delivery, но новая QA-работа ему пока не назначена; #65 только по явной просьбе Алекса |
@@ -57,7 +57,7 @@
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | **NEXT — P2** | | | |
 | [PM-045](PM-045-five-minute-agent-wake-up-pilot.md) | P2 | closed / parked — пятиминутный пилот недоступен в проверенном планировщике; не запускался | Марк / PM зафиксировал результат; активного исполнителя нет |
-| [PM-037](PM-037-search-date-range-bound.md) | P2 | in review — backend/frontend выпущены; Борис подтвердил независимый QA claim 2026-09-26 | Борис / QA назначен, Sol / Medium — 366/367, даты/фильтры/языки/contact; Игорь dev закончил |
+| [PM-037](PM-037-search-date-range-bound.md) | P2 | done — backend/frontend выпущены; независимый live QA PASS 2026-09-26 | Игорь / Developer; Борис / QA; Марк / PM closure |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 
