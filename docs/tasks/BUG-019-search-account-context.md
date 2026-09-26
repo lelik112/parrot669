@@ -63,10 +63,19 @@
 - 2026-09-25 ~18:58 UTC — **Борис / QA:** сверил текущий public search: шапка показывает `Аккаунт: @qa`, чужая QA-карточка `lelik` по сохранённому поиску Barcelona 11–14.06.2027 имеет CTA `Написать владельцу`; это подтверждает ранее записанный authenticated desktop PASS без изменений данных. Публичный signed-out поиск требует отдельного anonymous public browser state (QA Worker анонимный поиск намеренно блокирует); реальный iPhone Safari зависит от PM-039. Нового FAIL по BUG-019 нет; in review, owner Денис.
 
 
-## Boris signed-out desktop claim — 2026-09-26 14:12:05 UTC
+## Boris signed-out desktop result — 2026-09-26 14:13:32 UTC
 
 **Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `BUG-019-BORIS-ANON-20260926-1412`. **Source:** workflow next-ready rule after PM-049 BFCache environment blocker. **Related task:** BUG-019.
 
 **Model check:** карточка рекомендует Luna / Low; подтверждённый дефолт Бориса Sol 4/6 достаточен с запасом, понижение не требуется.
 
-**Claim / scope:** беру оставшийся доступный signed-out public desktop acceptance BUG-019: canonical Search без фиктивного аккаунта, результаты и contact CTA остаются доступны, четыре языка не добавляют ложную identity. Реальный iPhone Safari/touch остаётся PM-041 и не заявляется. Код и данные не меняю. **Status:** in progress.
+**Environment / scope:** production canonical `https://parrot669.com/search`, anonymous desktop Cloud Chrome; сохранённый Barcelona search 2027-06-11→14. Реальный iPhone Safari/touch остаётся PM-041 и не заявляется. Код и данные не менялись.
+
+**Steps:** открыть signed-out public Search; проверить header, live result и contact CTA; переключить EN → ES → CA → RU и повторить identity/contact check.
+
+**Expected:** вместо account chip показывается локализованный login; нет фиктивного username; публичные результаты и contact CTA остаются доступны.
+
+**Actual / result: PASS.** На всех четырёх языках отсутствует `search-account`/username marker; header показывает соответственно `Log in`, `Entrar`, `Entra`, `Войти`. Та же публичная карточка владельца `lelik` остаётся видимой и содержит локализованный contact CTA `Message host` / `Escribir al propietario` / `Escriure al propietari` / `Написать владельцу` с сохранёнными датами. Публичное имя владельца не выдано за текущий аккаунт.
+
+**Conclusion:** desktop criteria BUG-019 полностью подтверждены вместе с прежним authenticated self/other PASS и RU/EN/ES/CA. Открыт только реальный iPhone Safari/touch из PM-041; он не является desktop regression blocker. Рекомендация Марку: закрыть BUG-019 по web acceptance, оставив native mobile evidence в PM-041.
+
