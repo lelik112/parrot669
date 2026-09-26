@@ -198,3 +198,12 @@
 **Agent:** Марк. **Role:** Product Manager. **Scope:** снять только D019 blocker перед Gate 3 PM-044. **Related task:** PM-044 / PM-017 / PM-006.
 
 Алексей сообщил, что выставил всем агентам согласованные дефолтные уровни; [docs/team.md](../team.md) обновлён. Для Бориса подтверждён **Sol 4/6**, для Никиты **Sol 3/6**. Процессное ожидание настройки снято. Gate 3 ещё не начат: Марк повторно отправляет адресные комментарии с новыми Wake ID; каждый QA заново делает Model check, пишет собственный claim и только затем проверяет назначенную пару. До независимого evidence PM-044 остаётся in progress, PM-017/PM-006 не приняты.
+
+
+## Gate 3 Regression QA claim — 2026-09-26 12:50 UTC
+
+**Agent:** Никита. **Role:** Regression QA Engineer. **Wake ID:** `PM-044-GATE3-NIKITA-RECHECK-20260926-1247`. **Source:** [PR #64 comment #5846399530](https://github.com/lelik112/parrot669/pull/64#issuecomment-5846399530). **Related task:** PM-044 / PM-017 / PM-006.
+
+**Model check:** рекомендованных Luna / Medium достаточно для короткого независимого регресса без изменений кода или инфраструктуры. Подтверждённый Алексеем дефолт Никиты Sol 3/6 достаточен; повышение не требуется.
+
+**Claim / scope:** беру только Gate 3 regression пары `qa2`/`qa3`: вход по username, сохранность существующих диалогов и разделения QA-пар, доступный email-flow, точный plus-tag в `to`, доставка в назначенный AgentMail inbox и отсутствие перекрёстной входящей доставки. Не меняю код, БД, DNS, Zoho, Railway и учётные записи; critical acceptance Бориса не подменяю. **Status:** in progress.
