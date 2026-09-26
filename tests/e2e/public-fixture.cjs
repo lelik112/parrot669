@@ -7,7 +7,7 @@ const property = {
   availableFrom:'2026-11-10', availableTo:'2026-11-17', links:[]
 };
 
-async function installPublicFixture(page) {
+async function installPublicFixture(page, {items=[property]} = {}) {
   const seen = [];
   await page.route('https://fonts.googleapis.com/**', route => route.fulfill({contentType:'text/css', body:''}));
   await page.route('https://fonts.gstatic.com/**', route => route.abort());
@@ -20,9 +20,11 @@ async function installPublicFixture(page) {
       : path === '/api/search' && url.searchParams.get('country') === 'ES'
           && url.searchParams.get('city') === 'Barcelona'
           && url.searchParams.get('from') === property.availableFrom
-          && url.searchParams.get('to') === property.availableTo ? [property]
-      : path === `/api/messaging/contact-options/${propertyId}` ? {
-          propertyId, propertyTitle:property.propertyTitle, hostDisplayName:property.ownerDisplayName,
+          && url.searchParams.get('to') === property.availableTo ? items
+      : items.some(item => path === `/api/messaging/contact-options/${item.propertyId}`) ? {
+          propertyId:path.split('/').at(-1),
+          propertyTitle:items.find(item => path.endsWith(item.propertyId)).propertyTitle,
+          hostDisplayName:property.ownerDisplayName,
           hostProfileId:'fixture-host', acceptingNewConversations:true
         }
       : null;
