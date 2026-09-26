@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-26 — PM-037 search range released
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** [backend PR #29](https://github.com/lelik112/parrot669-backend/pull/29) merged as `90a4d90`; [CI 36218244078](https://github.com/lelik112/parrot669-backend/actions/runs/36218244078) PASS and Railway production deployment `63815f47` SUCCESS. Frontend [PR #52](https://github.com/lelik112/parrot669/pull/52) updated against current main and merged as `17a6d9c`; [CI 36218605734](https://github.com/lelik112/parrot669/actions/runs/36218605734) PASS. Live search displays the 367-night explanation while retaining dates, accepts 366 nights, and still finds the ordinary 3-night listing. Independent Boris QA is pending; no production load benchmark or direct raw-API smoke was performed. **Related task:** [PM-037](tasks/PM-037-search-date-range-bound.md) / D014.
+
 ## 2026-09-26 — PM-043 закрыта как техническое исследование
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** принял handoff Игоря по [PM-043](tasks/PM-043-agent-wake-up-feasibility.md): одноразовый scheduled wake-up существующего чата и GitHub CAS прошли; регулярные 5 минут, Markdown trigger и массовые запуски не доказаны и не включены. PM-043 done; передача остаётся ручной, Игорь возвращается к PM-037 с открытыми release/QA. **Related tasks:** PM-043, PM-037.
