@@ -85,3 +85,6 @@
 **Status:** in progress. **Time:** 2026-09-26 UTC. **Model check:** Luna / Medium достаточно для ограниченного QA-среза и классификации; увеличение мощности не требуется.
 
 **Next:** подтвердить, что PR #57/CI 12/12 покрывают только перечисленные fixture-пути, отметить остаток browser manual/PM-041 и вернуть короткий evidence для Никиты/Бориса.
+
+
+- 2026-09-26 04:08 UTC — **Никита / Regression QA:** независимый checkout текущего main выполнен. `npm ci` PASS; исходный `npm test` PASS **133/133**. `npm run test:e2e` обнаружил 12 тестов (4 сценария × 3 проекта), но все 12 BLOCKED до запуска браузера: локальные Chromium/WebKit отсутствуют. Повторная `npx playwright install chromium webkit` получила усечённый CDN-архив (0 MiB, `End of central directory record signature not found`), поэтому локальный browser PASS не заявляю. CI evidence PR #57 (12/12) подтверждает только synthetic fixture; live backend/auth, production messages, двухаккаунтный A↔B и native iPhone Safari остаются открытыми по PM-040/PM-036/PM-041. **Next:** после доступного browser runtime повторить 12 тестов; до этого считать локальный прогон BLOCKED средой.
