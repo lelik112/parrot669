@@ -74,3 +74,12 @@
 - 2026-09-25 ~20:00 UTC — **Денис / Developer:** возобновил PM-040 по поручению Алексея; проверил, что первый срез уже выпущен в [PR #54](https://github.com/lelik112/parrot669/pull/54) с CI 6/6, не дублирую его. **Scope следующего среза:** отдельный анонимизированный fixture владельца и безопасный Host → Messages → Host, keyboard, RU/EN/ES/CA и responsive в трёх существующих проектах. Реальная пара PM-036 по-прежнему blocked, продуктовый код/доступы не меняю. Матрицу уточняю только по реально покрытым частям PM-020/026/028; живой auth и native iPhone остаются отдельными QA-критериями. **Model check:** Sol / Medium остаётся достаточным. **Next:** CI 4 сценария × 3 проекта, затем handoff Никите и Борису.
 - 2026-09-25 19:23 UTC — **Денис / Developer claim:** беру PM-040 по поручению Алексея. **Scope:** frontend Playwright, локальный контролируемый API fixture для публичного поиска и guest draft, Chromium/WebKit/mobile emulation, безопасные короткие UI-проверки, CI и матрица открытых задач. Сверил BUG-020 (PR #53 merged, live QA ещё открыт), BUG-022 (reported, не исправляю здесь), PM-029 (in review), PM-036 (relogin qa2 blocked), существующий CI (`npm ci && npm test`). Изменений backend/QA Worker и общих функциональных файлов Игоря не требуется; тесты не затрагивают чужие аккаунты. **Model check:** Sol / Medium. **Next:** локальный fixture и исполняемый smoke, затем CI и handoff Никите/Борису.
 - 2026-09-25 — **Agent:** Марк. **Role:** Product Manager. **Change:** по решению Алексея поставил Playwright первым этапом автоматизации browser QA, а нативные проверки отложил в PM-041. **Related task:** PM-040. **Next:** после BUG-020 предложить Денису claim; Никита/Борис получают QA scope по явной записи, а не автоматически из имени в карточке.
+
+
+## QA claim — 2026-09-26
+
+**Agent:** Никита. **Role:** Regression QA Engineer. **Scope:** независимая сверка матрицы покрытия с фактическими четырьмя fixture-сценариями и тремя browser projects; проверка заявленного CI evidence и безопасный web regression evidence без production-записей. Реальные backend/auth, двухаккаунтный обмен и native iPhone Safari не включаю и не объявляю пройденными.
+
+**Status:** in progress. **Time:** 2026-09-26 UTC. **Model check:** Luna / Medium достаточно для ограниченного QA-среза и классификации; увеличение мощности не требуется.
+
+**Next:** подтвердить, что PR #57/CI 12/12 покрывают только перечисленные fixture-пути, отметить остаток browser manual/PM-041 и вернуть короткий evidence для Никиты/Бориса.
