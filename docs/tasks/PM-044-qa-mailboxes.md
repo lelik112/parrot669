@@ -217,15 +217,23 @@
 **Stop / next:** Gate 3 regression остановлен. До продолжения разработчику/PM нужно проверить production email delivery для новых plus-адресов и предоставить согласованный самостоятельный login path для `qa2`/`qa3`; никаких изменений аккаунтов, БД или инфраструктуры Никита не делал.
 
 
-## Boris Gate 3 Acceptance QA claim — 2026-09-26 12:50:33 UTC
+## Boris Gate 3 Acceptance QA result — 2026-09-26 12:55:41 UTC
 
 **Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-044-GATE3-BORIS-RECHECK-20260926-1247`. **Source:** [PR #63 comment #5846399453](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846399453). **Related task:** PM-044 / PM-017 / PM-006.
 
 **Model check:** карточки рекомендуют Luna или Sol / Medium; подтверждённый Алексеем и записанный в `docs/team.md` дефолт Бориса Sol 4/6 достаточен, повышение не требуется.
 
-**Claim / scope:** беру независимый Gate 3 acceptance пары `qa`/`lelik`: вход по username, сохранность существующих диалогов и разделение QA-пар, reset/verification, релевантное уведомление, точный plus-tag в `to`, доставка в назначенный inbox и отсутствие перекрёстной доставки. Критерии PM-017/PM-006 принимаю отдельно только по фактическому evidence. Не меняю код, БД, DNS, Zoho, Railway или учётные записи; секреты не публикую. **Status:** in progress.
+**Claim / scope:** независимый Gate 3 acceptance пары `qa`/`lelik`: username login, существующие диалоги и разделение QA-пар, reset/verification, релевантное уведомление, точный plus-tag в `to`, назначенный inbox и отсутствие перекрёстной доставки. Код, БД, DNS, Zoho, Railway и учётные записи не менялись; секреты не публикуются.
 
+**Environment:** production `parrot669.com` и production QA Worker `parrot669.cheltsov112.workers.dev` в одном Cloud Chrome с раздельными origin cookies; AgentMail connector, два QA inbox. В начале прогона main показывал `qa`, Worker — `lelik`.
 
+**PASS — сохранность пары и диалогов.** Шаги: открыть Messages на обоих origin и прочитать account marker и список диалогов. Expected: разные username и сохранённая история своей роли. Actual: main показывал `qa` с двумя прежними диалогами; Worker показывал `lelik` с тремя прежними диалогами, включая общий QA-диалог. Данные не редактировались.
+
+**FAIL — password-reset delivery для `qa`.** Шаги: на canonical `https://parrot669.com/recover` ввести назначенный новый plus-адрес `qa` и отправить один запрос; затем проверить оба QA inbox через AgentMail, включая spam. Expected: UI generic-success и одно reset-письмо в inbox Бориса с точным plus-tag `+qa`; inbox Никиты пуст. Actual: UI показал success-инструкцию «если аккаунт существует…», но в течение ~90 секунд после запроса ни один из двух inbox не получил нового сообщения. Перекрёстной доставки не наблюдалось, но intended delivery FAIL. Полный адрес, token и ссылка не публикуются. На Worker в Host profile одновременно отображалось прежнее значение email; это только дополнительное наблюдение, не доказательство причины.
+
+**BLOCKED / not accepted:** username re-login не доказан: после начального PASS main origin оказался анонимным в общем Cloud Chrome, а безопасно доступного пароля нет; Worker `lelik` остался авторизован. Полный переход reset по ссылке и новый пароль не выполнялись, поэтому учётная запись не изменялась. Verification существующих verified-аккаунтов нельзя повторить без нового аккаунта/смены состояния. Message notification не запускалась: исходный handoff требует остановиться при первом mismatch, а `qa`-сессия уже недоступна. Отсутствие писем в соседнем inbox не доказывает no-cross-delivery для всех типов писем.
+
+**Result: FAIL for Gate 3; PM-044 remains open.** Gate 2 migration не принимается как end-to-end email PASS. Нужна developer investigation фактического reset-recipient/отправки для `qa` без публикации адреса, затем новый независимый QA wake. Сохранить Worker-сеанс `lelik`; не просить владельца повторно вводить credentials до понятного плана.
 ## PM start receipt — PM-044-GATE3-NIKITA-START-20260926-1250
 
 **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-GATE3-NIKITA-START-20260926-1250`. **UTC:** 2026-09-26T12:52:10.817Z. **Source:** [PR #60 comment](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846407438). **Related task:** PM-044 / PM-017 / PM-006.
