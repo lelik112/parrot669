@@ -1584,7 +1584,7 @@ body:has(.host-auth-dialog[open]){overflow:hidden}
   .host-listing-actions{align-items:flex-start;flex-direction:column}
 }
 
-.search-form{grid-template-columns:repeat(6,minmax(0,1fr)) auto}
+.search-form{grid-template-columns:minmax(160px,1.2fr) minmax(165px,1.25fr) repeat(2,minmax(150px,1fr)) repeat(2,minmax(95px,.65fr)) minmax(185px,1.35fr)}
 @media(max-width:1280px){.search-form{grid-template-columns:repeat(3,minmax(0,1fr))}.search-form .availability-submit{grid-column:1/-1}}
 @media(max-width:700px){.search-form{grid-template-columns:1fr}.search-filters{align-items:stretch;flex-direction:column}.price-range-filter,.price-range-filter input{width:100%}}
 
