@@ -34,7 +34,7 @@
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review — PR #53 выпущен; hidden badge PASS, foreground/read-clear и iPhone открыты | Борис / QA следующий при доступной foreground среде; Денис / Sol / Medium только при новом FAIL |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
-| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | in review — PR #66 released, CI PASS, asset live on two origins; independent QA pending | Игорь / Developer complete; Борис / QA handoff sent, claim pending; Sol / Medium |
+| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | in review — PR #66 released, CI PASS, asset live on two origins; independent QA claimed, result pending | Игорь / Developer complete; Борис / QA claim 2026-09-26; Sol / Medium |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review — одна ссылка/языки/keyboard PASS; badge FAIL через BUG-020, touch blocked | Денис исправляет BUG-020 (Sol / Medium); Борис ретестирует badge; mobile PM-041 |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review — owner/guest, возврат, языки и keyboard PASS | Борис / QA: same-origin logout/switch/expiry, затем touch PM-041; Denis dev только при FAIL |
@@ -50,7 +50,7 @@
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
 
 | **NEXT — P1** | | | |
-| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress / NEXT — Никита взял provisioning четырёх inbox; привязка аккаунтов остаётся за Денисом | Никита / Regression QA claim 2026-09-26 — четыре ящика; Борис — приёмка после привязки; Денис — проверка и смена адресов после PM-040 (claim нет), Luna / Medium QA, Sol / Medium dev; Алексей — выбор сервиса/права при необходимости |
+| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress — Zoho домен подтверждён, 4 пользователя созданы; DNS и входящие ожидают проверки, затем привязка аккаунтов | Никита / Regression QA claim — inbox verification, Luna / Medium; Денис / Developer после отдельного claim — привязка, Sol / Medium; Борис / QA acceptance |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked до PM-044 | Борис / QA после четырёх доступных ящиков |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
