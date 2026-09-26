@@ -16,12 +16,13 @@ async function harness(t, {handler=()=>undefined, saved=null, messaging=false, s
   const w=dom.window, calls=[];
   w.localStorage.setItem('parrot669-language','ru');
   if(saved) w.localStorage.setItem('parrot669-search-state',JSON.stringify(saved));
-  w.fetch=async raw=>{
+  w.fetch=async (raw,options={})=>{
     const url=new URL(raw,w.location.origin);
     calls.push(url);
     const custom=await handler(url);
     if(custom!==undefined) return custom instanceof Response?custom:response(custom);
     if(url.pathname==='/api/host/auth/me') return sessionUser?response(sessionUser):new Response(JSON.stringify({error:'unauthorized'}),{status:401});
+    if(url.pathname==='/api/host/auth/logout' && options.method==='POST') return new Response(null,{status:204});
     if(url.pathname.startsWith('/api/messaging/contact-options/')) {
       const id=decodeURIComponent(url.pathname.split('/').at(-1));
       return response({acceptingNewConversations:false,hostProfileId:ownerProfiles[id]||'host'});
@@ -80,6 +81,20 @@ test('PM-048: search copy stays concise and the price-only label toggles its che
   assert.equal(checkbox.checked,true);
 });
 
+test('PM-049: Search logout clears identity and owned-card state without leaving the page',async t=>{
+  const h=await harness(t,{messaging:true,sessionUser:{accountId:'account',username:'tester',email:'private@example.test',profile:{id:'owner'}},
+    ownerProfiles:{owned:'owner'},handler:url=>url.pathname==='/api/search' ? [{...property('Barcelona'),propertyId:'owned'}] : undefined});
+  await h.barcelona();
+  assert.equal(h.$('search-account-indicator').textContent,'tester');
+  assert.equal(h.w.document.body.textContent.includes('private@example.test'),false);
+  assert.equal(h.results.querySelector('.availability-own-property').hidden,false);
+  h.$('search-logout').click();await flush();
+  assert.equal(h.$('search-account').hidden,true);
+  assert.equal(h.$('search-login').hidden,false);
+  assert.equal(h.results.querySelector('.availability-own-property').hidden,true);
+  assert.equal(h.calls.filter(url=>url.pathname==='/api/host/auth/logout').length,1);
+});
+
 test('PM-024: every search card has a working contact link when legacy opt-in is false',async t=>{
   const h=await harness(t,{messaging:true,handler:url=>{
     if(url.pathname==='/api/search') return [
@@ -102,8 +117,9 @@ test('BUG-019: signed-in username and owned property are clear in every language
     ]:undefined});
   await h.barcelona();
   const indicator=h.$('search-account-indicator');
-  assert.equal(indicator.hidden,false);
-  assert.equal(indicator.textContent,'Аккаунт: @lelik112');
+  assert.equal(h.$('search-account').hidden,false);
+  assert.equal(h.$('search-login').hidden,true);
+  assert.equal(indicator.textContent,'lelik112');
   const cards=[...h.results.querySelectorAll('.availability-card')];
   assert.equal(cards.length,2);
   const own=cards.find(card=>card.querySelector('.message-property-link').href.includes(ownId));
@@ -114,18 +130,20 @@ test('BUG-019: signed-in username and owned property are clear in every language
   assert.equal(other.querySelector('.availability-own-property').hidden,true);
   assert.equal(other.querySelector('.message-property-link').hidden,false);
 
-  for(const [language,account,ownLabel] of [
-    ['en','Signed in as @lelik112','Your property'],['es','Sesión: @lelik112','Tu vivienda'],
-    ['ca','Sessió: @lelik112','El teu habitatge'],['ru','Аккаунт: @lelik112','Ваш объект']
+  for(const [language,logout,ownLabel] of [
+    ['en','Log out','Your property'],['es','Cerrar sesión','Tu vivienda'],
+    ['ca','Tancar sessió','El teu habitatge'],['ru','Выйти','Ваш объект']
   ]){
     h.language(language);
-    assert.equal(indicator.textContent,account);
+    assert.equal(indicator.textContent,'lelik112');
+    assert.equal(h.$('search-logout').textContent,logout);
     const updatedOwn=[...h.results.querySelectorAll('.availability-card')].find(card=>card.querySelector('.message-property-link').href.includes(ownId));
     assert.equal(updatedOwn.querySelector('.availability-own-property').textContent,ownLabel);
   }
 
   h.w.ParrotMessaging.setUser(null);await flush();
-  assert.equal(indicator.hidden,true);
+  assert.equal(h.$('search-account').hidden,true);
+  assert.equal(h.$('search-login').hidden,false);
   assert.equal(indicator.textContent,'');
   const signedOutOwn=[...h.results.querySelectorAll('.availability-card')].find(card=>card.querySelector('.message-property-link').href.includes(ownId));
   assert.equal(signedOutOwn.querySelector('.availability-own-property').hidden,true);

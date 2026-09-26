@@ -60,6 +60,22 @@ test('initial unread badge loads when a Messages tab starts in the background',a
   assert.equal(h.calls.filter(call=>call.path==='/api/messaging/unread').length,1);
 });
 
+test('PM-049: Messages header has a stable search return and truthful guest and account states',async t=>{
+  const guest=await harness(t,{loggedIn:false,url:`/messages.html?property=${property}`});
+  assert.equal(guest.$('msg-login-link').hidden,false);
+  assert.equal(guest.$('msg-account').hidden,true);
+  assert.equal(guest.w.document.querySelector('[data-msg-i18n="backToSite"]').getAttribute('href'),'/search.html');
+  const member=await harness(t,{sessionUser:{...user,email:'private@example.test'}});
+  assert.equal(member.$('msg-login-link').hidden,true);
+  assert.equal(member.$('msg-account').hidden,false);
+  assert.equal(member.$('msg-account-name').textContent,'guest');
+  assert.equal(member.w.document.body.textContent.includes('private@example.test'),false);
+  for(const [language,label] of [['en','← Back to site'],['es','← Volver al sitio'],['ca','← Tornar al web'],['ru','← Назад на сайт']]){
+    member.w.ParrotMessaging.setLanguage(language);
+    assert.equal(member.w.document.querySelector('[data-msg-i18n="backToSite"]').textContent,label);
+  }
+});
+
 test('polling highlights an incoming conversation before opening it and clears only after server read state changes',async t=>{
   let unread=0, rows=[];
   const h=await harness(t,{handler:r=>{

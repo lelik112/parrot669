@@ -8,10 +8,10 @@ const copy = {
   ru:{page:"PARROT 669 — Поиск свободного жилья",label:"СВОБОДНЫЕ ДАТЫ",back:"← Назад на сайт",tabSearch:"Найти жильё",tabHost:"Владельцам",owner:n=>`Владелец: ${n}`,eyebrow:"АКТУАЛЬНАЯ ДОСТУПНОСТЬ",title:"Найдите жильё, которое<br><span>реально свободно.</span>",lead:"Найдите жильё, свободное на ваши даты.",country:"Страна",chooseCountry:"Выберите страну",city:"Город",chooseCity:"Выберите город",locationError:"Список стран и городов временно недоступен.",from:"Заезд",to:"Выезд",bedrooms:"Спальни",sleeps:"Спальных мест",search:"Найти свободное",filters:"Фильтры",pricedOnly:"Только с ценой",priceFrom:"Цена от, €",priceTo:"Цена до, €",priceRangeError:"Цена «от» не может быть больше цены «до»",priceUnknown:"Цену уточняйте у владельца",priceNote:"Цена ориентировочная. Финальные условия и дополнительные платежи уточняйте у владельца.",priceEstimate:(amount,nights)=>`≈ €${amount} за ${nights} ноч.`,cleaning:n=>`включая €${n} уборки`,loading:"Ищем свободные даты…",empty:"Подходящих вариантов пока нет.",error:"Поиск временно недоступен.",bed:n=>n===1?"1 спальня":n<5?`${n} спальни`:`${n} спален`,sleep:n=>`${n} спальных мест`,min:n=>`минимум ${n} дн.`,period:(a,b)=>`Свободно ${a} → ${b}`,view:"Открыть на Airbnb"}
 };
 
-Object.assign(copy.en,{signedInAs:n=>`Signed in as @${n}`,yourProperty:"Your property"});
-Object.assign(copy.es,{signedInAs:n=>`Sesión: @${n}`,yourProperty:"Tu vivienda"});
-Object.assign(copy.ca,{signedInAs:n=>`Sessió: @${n}`,yourProperty:"El teu habitatge"});
-Object.assign(copy.ru,{signedInAs:n=>`Аккаунт: @${n}`,yourProperty:"Ваш объект"});
+Object.assign(copy.en,{login:"Log in",logout:"Log out",account:"Account",logoutError:"Could not log out. Try again.",yourProperty:"Your property"});
+Object.assign(copy.es,{login:"Entrar",logout:"Cerrar sesión",account:"Cuenta",logoutError:"No se pudo cerrar sesión. Inténtalo de nuevo.",yourProperty:"Tu vivienda"});
+Object.assign(copy.ca,{login:"Entra",logout:"Tancar sessió",account:"Compte",logoutError:"No s'ha pogut tancar la sessió. Torna-ho a provar.",yourProperty:"El teu habitatge"});
+Object.assign(copy.ru,{login:"Войти",logout:"Выйти",account:"Аккаунт",logoutError:"Не удалось выйти. Повторите попытку.",yourProperty:"Ваш объект"});
 
 const housingCopy = {
   en:{accommodationType:"Accommodation type",anyType:"Any type",entirePlace:"Entire place",privateRoom:"Private room",noExternalLink:"No external link available",lead:"Find a place that's available for your dates.",searchChanged:"Search details changed. Search again to see matching properties."},
@@ -37,6 +37,10 @@ const minPriceFilter=document.getElementById("filter-price-from");
 const maxPriceFilter=document.getElementById("filter-price-to");
 const buttons=document.querySelectorAll("[data-search-lang]");
 const accountIndicator=document.getElementById("search-account-indicator");
+const accountSession=document.getElementById("search-account");
+const accountLogin=document.getElementById("search-login");
+const accountLogout=document.getElementById("search-logout");
+const accountFeedback=document.getElementById("search-account-feedback");
 let lastSearchParams=null;
 let searchSequence=0;
 let hasSearched=false;
@@ -65,11 +69,22 @@ Object.entries(dateRangeCopy).forEach(([language,values])=>Object.assign(housing
 
 function t(key,...args){const v=(housingCopy[lang]||housingCopy.en)[key]??(copy[lang]||copy.en)[key];return typeof v==="function"?v(...args):v}
 function renderAccountIndicator(user=window.ParrotMessaging?.user){
-  if(!accountIndicator)return;
   const username=String(user?.username||"").trim();
-  accountIndicator.hidden=!username;
-  accountIndicator.textContent=username?t("signedInAs",username):"";
+  accountSession.hidden=!user;
+  accountLogin.hidden=Boolean(user) || user===undefined;
+  accountIndicator.textContent=user ? (username || t("account")) : "";
 }
+accountLogout.addEventListener("click",async()=>{
+  accountLogout.disabled=true;
+  accountFeedback.textContent="";
+  try {
+    await window.ParrotMessaging.auth("/logout",{method:"POST"});
+    window.ParrotMessaging.setUser(null);
+  } catch(error) {
+    if(error.status===401) window.ParrotMessaging.setUser(null);
+    else accountFeedback.textContent=t("logoutError");
+  } finally { accountLogout.disabled=false; }
+});
 function applyLanguage(next){
   lang=copy[next]?next:"en";
   localStorage.setItem(LANG_KEY,lang);

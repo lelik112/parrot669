@@ -21,7 +21,11 @@
         <button type="button" data-msg-lang="en">EN</button><button type="button" data-msg-lang="es">ES</button>
         <button type="button" data-msg-lang="ca">CA</button><button type="button" data-msg-lang="ru">RU</button>
       </div>
-      <div class="host-account-session" id="msg-account" hidden><span id="msg-account-name"></span><button type="button" class="host-auth-link" id="msg-logout" data-msg-i18n="logout">Log out</button></div>
+      <div class="host-account-actions">
+        <a class="host-auth-link" id="msg-login-link" href="#msg-auth" data-msg-i18n="login" hidden>Log in</a>
+        <div class="host-account-session" id="msg-account" hidden><span id="msg-account-name"></span><button type="button" class="host-auth-link" id="msg-logout" data-msg-i18n="logout">Log out</button></div>
+      </div>
+      <a class="button button-ghost button-small" href="/search.html" data-msg-i18n="backToSite">← Back to site</a>
     </div>
   </header>
   <nav class="housing-tabs" aria-label="Housing">

@@ -19,12 +19,19 @@
       <span class="brand-copy"><strong>PARROT 669</strong><small data-search-i18n="label">AVAILABILITY</small></span>
     </a>
     <div class="host-topbar-actions">
-      <span id="search-account-indicator" class="search-account-indicator" hidden aria-live="polite"></span>
       <div class="lang-switcher host-lang-switcher" aria-label="Language">
         <button type="button" data-search-lang="en">EN</button>
         <button type="button" data-search-lang="es">ES</button>
         <button type="button" data-search-lang="ca">CA</button>
         <button type="button" data-search-lang="ru">RU</button>
+      </div>
+      <div class="host-account-actions" aria-live="polite">
+        <a id="search-login" class="host-auth-link" href="/host.html?login=1" data-search-i18n="login" hidden>Log in</a>
+        <div class="host-account-session" id="search-account" hidden>
+          <span id="search-account-indicator"></span>
+          <button class="host-auth-link" id="search-logout" type="button" data-search-i18n="logout">Log out</button>
+        </div>
+        <span class="host-account-feedback" id="search-account-feedback" role="status"></span>
       </div>
       <a class="button button-ghost button-small" href="/" data-search-i18n="back">← Back to site</a>
     </div>

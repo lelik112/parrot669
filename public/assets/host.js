@@ -90,7 +90,6 @@ let authMode = "login";
 let sessionLoading = true;
 let authBusy = false;
 const expandedPropertyIds = new Set();
-const hostShortcuts = document.getElementById("host-shortcuts");
 let accountId = null;
 let unsavedHostChanges = false;
 let confirmedExit = false;
@@ -248,6 +247,7 @@ const propertiesNode = document.getElementById("host-properties");
 const resetButton = document.getElementById("reset-host");
 const langButtons = document.querySelectorAll("[data-host-lang]");
 const authModeButtons = document.querySelectorAll("[data-auth-mode]");
+const hostShortcuts = document.getElementById("host-shortcuts");
 const propertyAddressEditors = new Map();
 const calendarVerificationPanels = [];
 const newPropertyAddress = window.ParrotAddress.create({
@@ -399,8 +399,8 @@ function renderAuthState(){
   if(returnContext)hostProfileReturn.href=`/messages.html?conversation=${encodeURIComponent(returnContext.conversationId)}`;
   else hostProfileReturn.href="#host-profile";
   hostShortcuts.hidden = !ready;
-  hostAccountEmail.textContent = ready ? (state.username || state.accountEmail) : "";
-  hostAccountEmail.title = ready ? state.accountEmail : "";
+  hostAccountEmail.textContent = ready ? (state.username || tr("accountLabel")) : "";
+  hostAccountEmail.removeAttribute("title");
   document.getElementById("host-profile-email").textContent = ready ? state.accountEmail : "";
   document.getElementById("host-profile-username").textContent = ready ? state.username : "";
   if (ready && state.profile) hostProfileForm.elements.displayName.value = state.profile.displayName || "";
@@ -1214,8 +1214,6 @@ function renderProperties(blockFeedback = null){
 
     const settings=document.createElement("div");
     settings.className="host-subpanel host-property-settings";
-    const settingsTitle=document.createElement("h3");
-    settingsTitle.textContent=tr("propertySettings");
     const settingsForm=document.createElement("form");
     settingsForm.className="host-settings-form";
     const titleLabel=document.createElement("label");
@@ -1258,7 +1256,7 @@ function renderProperties(blockFeedback = null){
     saveSettings.className="button button-small";saveSettings.type="submit";saveSettings.textContent=tr("savePropertySettings");
     settingsForm.append(titleLabel,addressEditor.node,accommodationLabel,bedroomsLabel,sleepsLabel,saveSettings);
     settingsForm.addEventListener("submit",event=>{event.preventDefault();updatePropertySettings(property,settingsForm)});
-    settings.append(settingsTitle,settingsForm);
+    settings.append(settingsForm);
 
     const listing = document.createElement("div");
     listing.className = "host-subpanel";
