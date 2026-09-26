@@ -54,3 +54,12 @@
 - 2026-09-26T13:51:00Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-049-DENIS-RELEASED-20260926-1349`. **Source:** [PR #60 comment #5846798966](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846798966). **Related task:** PM-049. **PM review:** выпуск PR #68, CI 140/140 + 21/21 и production guest smoke подтверждены записью Дениса; scope не расширен, PM-050 и PM-041 остаются отдельно. Статус — in review, не done: signed-in logout/session expiry, Host save/deep link, четыре языка и компактная ширина требуют независимого evidence; первый mobile-emulation tap был нестабилен. **Next:** Борису — отдельный критический auth/privacy claim; Никиту не переключать до освобождения, после чего короткий regression claim; реальный iPhone остаётся PM-041.
 
 - 2026-09-26T13:52:00Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-049-BORIS-CRITICAL-QA-20260926-1351`. **Source:** [PR #63 comment #5846807773](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846807773). **Related task:** PM-049. **Handoff:** Борису передан отдельный критический auth/privacy acceptance signed-in/anonymous/expired, logout и account context на двух доступных origins; mobile Safari исключён. Это доставка, не claim. **Next:** Model check и собственный signed claim Бориса; Никиту не переключать до освобождения.
+
+
+## Boris critical auth/privacy QA claim — 2026-09-26 13:52:49 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-049-BORIS-CRITICAL-QA-20260926-1351`. **Source:** [PR #63 comment #5846807773](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846807773). **Related task:** PM-049.
+
+**Model check:** карточка рекомендует Sol / Medium; подтверждённый Алексеем дефолт Бориса Sol 4/6 соответствует задаче и достаточен, повышение не требуется.
+
+**Claim / scope:** беру отдельный критический auth/privacy acceptance PM-049: signed-in/anonymous/доступный expired state в Search, Host и Messages; logout на Search; отсутствие ложной идентичности и утечки email; переходы между разделами и сохранность account context на canonical и QA Worker origin. Host save/deep link — только если текущая безопасная сессия позволяет. Реальный mobile touch/Safari, четыре языка и общий regression Никиты не заявляю. Код, данные и инфраструктуру не меняю. **Status:** in progress.
