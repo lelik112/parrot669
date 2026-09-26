@@ -105,3 +105,16 @@
 - 2026-09-26T14:10:00Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-049-DENIS-BFCACHE-RELEASED-20260926-1409`. **Source:** [PR #60 comment #5846923171](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846923171). **Related task:** PM-049. **PM review:** PR #69 merged as `ad50ab79fd54e97c042b9e37c2325c788643bc68`; unit 143/143 and CI browser-smoke 21/21 confirm the narrow persisted-`pageshow` clear/revalidation fix across Host/Search/Messages. Scope unchanged; automated evidence does not replace the original signed-in logout → Back acceptance path. Status — in review / P1 until independent retest. **Next:** Борису — exact BFCache regression retest; real iPhone/Safari remains PM-041, owner action is not required.
 
 - 2026-09-26T14:10:15Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-049-BORIS-BFCACHE-RETEST-20260926-1409`. **Source:** [PR #63 comment #5846930252](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846930252). **Related task:** PM-049. **Handoff:** Борису передан независимый exact retest signed-in Host#host-profile → Search logout → browser Back/BFCache с проверкой синхронного удаления username, private email, object/edit DOM и spot-check Search/Messages. Это доставка, не claim. **Next:** Model check, отдельный signed claim Бориса и PASS/FAIL evidence; mobile Safari отдельно в PM-041.
+
+
+## Boris BFCache retest environment blocker — 2026-09-26 14:11:24 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-049-BORIS-BFCACHE-RETEST-20260926-1409`. **Source:** [PR #63 comment #5846930252](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846930252). **Related task:** PM-049.
+
+**Model check:** карточка рекомендует Sol / Medium; подтверждённый дефолт Бориса Sol 4/6 достаточен, повышение не требуется.
+
+**Requested scope:** exact deployed retest `signed-in Host#host-profile → Search logout → browser Back/BFCache` плюс Search/Messages spot-check; mobile/Safari, backend и данные исключены.
+
+**Evidence / blocker:** текущий production QA Worker `parrot669.cheltsov112.workers.dev/host#host-profile` показывает только anonymous `Log in / Create account`; canonical origin также anonymous. Это ожидаемое последствие обязательного Search logout в предыдущем PM-049 acceptance. У Бориса нет безопасно доступного пароля, а password-reset path PM-044 остаётся blocked. Старую pre-fix BFCache history нельзя использовать как acceptance нового deployment. Поэтому signed-in предусловие отсутствует; новый claim/start receipt и зависимый ретест не начаты. Это environment BLOCKED, не product FAIL и не опровержение PR #69.
+
+**Required owner action:** Алексей один раз входит под разрешённым `lelik` на QA Worker origin, не публикуя пароль. Условие возобновления: Host#host-profile на Worker снова показывает account marker `lelik`; затем Марк отправляет новый Wake ID Борису, Борис повторяет Model check, claim/start receipt и exact retest. До этого код, данные и инфраструктура не меняются.
