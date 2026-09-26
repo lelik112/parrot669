@@ -62,3 +62,12 @@
 ## Уточнение PM-044 — 2026-09-26, Марк / PM
 
 По требованию Алексея о бесплатном долговременном решении без его участия прежние предложения выше о четырёх физических ящиках, Proton/Zoho/Outlook и помощи владельца в каждом тесте заменены проверяемым планом [PM-044](PM-044-qa-mailboxes.md): **четыре разных адреса для четырёх PARROT-аккаунтов, два отдельных AgentMail inbox — один у каждого QA, по два plus-адреса на tester inbox**. Это изменение критерия, а не свидетельство доставки. До живого теста четырёх адресов, явного re-claim Никиты и последующей привязки Денисом PM-017/006 остаются blocked. Борис самостоятельно подтверждает доступ к своему inbox и не принимает owner-assisted evidence как PASS. При неудаче plus-addressing не переходить молча на платный план или DNS-миграцию.
+
+
+## Gate 3 partial acceptance — 2026-09-26 12:55:41 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-044-GATE3-BORIS-RECHECK-20260926-1247`. **Source:** [PR #63 comment #5846399453](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846399453). **Related task:** PM-017 / PM-044 / PM-006. **Environment:** production canonical + QA Worker, Cloud Chrome, AgentMail.
+
+**Result: PARTIAL PASS / FAIL.** Доступ к inbox роли Бориса и сохранность plus-tag ранее подтверждены; в этом прогоне пара `qa`/`lelik` и прежние диалоги видны на двух origin. Один штатный password-reset request для назначенного адреса `qa` принят UI, но за ~90 секунд новое письмо не появилось ни в предназначенном, ни в соседнем QA inbox (spam включён). Поэтому критерий фактического получения reset-письма — **FAIL**, полный reset не начинался и аккаунт не изменялся. Verification и message notification не проверялись после первого mismatch. Полные адреса, ссылки и токены не публикуются.
+
+**Next:** PM-017 не закрывать; developer расследует фактического reset-recipient/отправку для `qa`, затем Борис повторяет end-to-end reset и остальные два сценария новым Wake ID.
