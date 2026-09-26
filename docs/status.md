@@ -2,7 +2,7 @@
 
 **Срез:** 2026-09-25. **Agent:** Марк. **Role:** Product Manager. **Change:** сверка QA-хвоста, PM-029/016 и следующих продуктовых контрактов. **Related task:** [PM-030](tasks/PM-030-qa-drain-next-stage.md).
 
-Статус отдельных задач и фактические claims — в [индексе](tasks/README.md) и самих задачах. [Одна QA-очередь и классификация 20 задач исходного среза in review](tasks/PM-030-qa-drain-next-stage.md#qa-triage--срез-2026-09-25) — в PM-030; запись в очереди сама по себе не означает, что Борис начал прогон.
+Статус отдельных задач и фактические claims — в [индексе](tasks/README.md) и самих задачах. BUG-023 закрыт 2026-09-26: authenticated save/reopen/restore, anonymous 401 и public privacy независимо подтверждены на двух production origins; отдельный logout/BFCache privacy defect остаётся в PM-049. [Одна QA-очередь и классификация 20 задач исходного среза in review](tasks/PM-030-qa-drain-next-stage.md#qa-triage--срез-2026-09-25) — в PM-030; запись в очереди сама по себе не означает, что Борис начал прогон.
 
 
 ## Минимализм Search/Host/Messages — PM-048–050 (2026-09-26)
