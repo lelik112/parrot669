@@ -27,7 +27,7 @@
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | очередь PM-041; Борис / QA после разблокировки; Luna / Medium |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
-| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 4 fixture-сценария × 3 проекта, CI 12/12 (PR #54/#57); web покрытие/QA открыты, ручной A↔B PASS, автоматический auth ждёт изоляции данных | Денис claim, Sol / Medium; Никита / Regression QA claim 2026-09-26 на матрицу и smoke, Luna / Medium; Борис / Sol / Medium — отдельный critical acceptance без claim |
+| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 4 fixture-сценария × 3 проекта, CI 12/12 (PR #54/#57); web покрытие/QA открыты, ручной A↔B PASS, автоматический auth ждёт изоляции данных | Денис claim, Sol / Medium; Никита / Regression QA claim 2026-09-26 на матрицу и smoke, Luna / Medium; Борис назначен на отдельный critical contact acceptance, Sol / Medium, ждём claim |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
 | [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | in review / NOW — одноразовый wake-up и GitHub CAS PASS; 5 минут не доказаны, handoff записан | Игорь / Developer → Марк / PM решение о механизме; Sol / High |
