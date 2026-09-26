@@ -24,10 +24,10 @@
 | --- | --- | --- | --- |
 | Марк / PM | [#60](https://github.com/lelik112/parrot669/pull/60) | active — ответ Игоря запустил прежний чат | Марк ведёт PM handoff |
 | Игорь / Developer | [#61](https://github.com/lelik112/parrot669/pull/61) | active — два отдельных комментария запустили прежний чат | Марк отправляет согласованные задачи |
-| Денис / Developer | [#62](https://github.com/lelik112/parrot669/pull/62) | prepared — trigger/доставка не подтверждены | Денис включает trigger в своём чате; Марк тестирует |
-| Борис / Acceptance QA | [#63](https://github.com/lelik112/parrot669/pull/63) | prepared — trigger/доставка не подтверждены | Борис включает trigger в своём чате; Марк тестирует |
-| Никита / Regression QA | [#64](https://github.com/lelik112/parrot669/pull/64) | prepared — trigger/доставка не подтверждены | Никита включает trigger в своём чате; Марк тестирует |
-| Алекс / Strategy | [#65](https://github.com/lelik112/parrot669/pull/65) | prepared — trigger/доставка не подтверждены | Алекс включает trigger в своём чате, если доступен; Марк тестирует |
+| Денис / Developer | [#62](https://github.com/lelik112/parrot669/pull/62) | prepared — trigger/доставка не подтверждены | Денис включает trigger в своём чате и сообщает Марку через #60; Марк автоматически тестирует |
+| Борис / Acceptance QA | [#63](https://github.com/lelik112/parrot669/pull/63) | prepared — trigger/доставка не подтверждены | Борис включает trigger в своём чате и сообщает Марку через #60; Марк автоматически тестирует |
+| Никита / Regression QA | [#64](https://github.com/lelik112/parrot669/pull/64) | prepared — trigger/доставка не подтверждены | Никита включает trigger в своём чате и сообщает Марку через #60; Марк автоматически тестирует |
+| Алекс / Strategy | [#65](https://github.com/lelik112/parrot669/pull/65) | prepared — trigger/доставка не подтверждены | Алекс включает trigger в своём чате и сообщает Марку через #60; Марк автоматически тестирует |
 
 Короткая инструкция есть в описании каждого PR и в его docs-only файле. Строки `To:`, `Wake ID:`, `Related task:` обязательны для обработки; фактический claim, решение и QA evidence остаются в карточке на `main`. Порядок: [workflow](tasks/workflow.md#адресные-pr-inbox--d017--pm-046). PR не сливают и не используют как PR реализации. Shared GitHub login не доказывает автора.
 
