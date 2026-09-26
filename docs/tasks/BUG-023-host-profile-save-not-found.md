@@ -55,10 +55,17 @@
 - 2026-09-25 ~15:21 UTC — **Agent:** Борис. **Role:** QA. **Scope:** production desktop Cloud Chrome; main origin authenticated `qa`, QA Worker authenticated `lelik`. **Change:** PASS for original defect after PR #46. On main, changed public name `Qa`→`Qa PM-021 retest`, UI showed “Имя хозяина сохранено”, navigated Search→Host and saw the changed name; restored `Qa` and verified after another navigation. On QA Worker, changed `lelik`→`lelik PM-021 retest`, saw success, navigated Messages→Host and saw changed value; restored `lelik` and verified. No `Not found`. A whitespace-only value triggered native required-field validation in the main browser before API submission; revisiting Host retained `Qa`. **Open:** direct backend invalid/400, anonymous/401 and public-profile privacy not independently proven in this pass. **Assigned:** Денис / Developer (fix); Борис / QA acceptance. **Related task:** BUG-023 / PM-021.
 
 
-## Boris follow-up claim — 2026-09-26 13:56:39 UTC
+## Boris negative/privacy follow-up result — 2026-09-26 13:57:39 UTC
 
 **Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `BUG-023-BORIS-PRIVACY-20260926-1357`. **Source:** workflow next-ready rule after PM-049 privacy FAIL; [PM-049 result](PM-049-shared-shell-host-cleanup.md). **Related task:** BUG-023 / PM-021.
 
 **Model check:** карточка рекомендует Sol / Medium; подтверждённый дефолт Бориса Sol 4/6 достаточен, повышение не требуется.
 
-**Claim / scope:** беру оставшийся независимый negative/privacy acceptance BUG-023: anonymous PATCH должен дать 401 на canonical и QA Worker, а публичный anonymous Search не должен раскрывать email/private host data. Authenticated save/reopen уже PASS и не повторяется без безопасной сессии. Код и данные не меняю. **Status:** in progress.
+**Scope / environment:** оставшийся независимый anonymous 401/privacy acceptance на production canonical и QA Worker; authenticated save/reopen уже PASS в предыдущем Boris evidence и не повторялся без безопасной сессии. Код и данные не менялись.
+
+**PASS — unauthenticated write rejection.** Выполнен один anonymous `PATCH /api/host/profile` с безопасным тестовым body на каждом origin: `https://parrot669.com` и `https://parrot669.cheltsov112.workers.dev`. Expected: 401 до обработки профиля, без изменения данных. Actual: оба ответа HTTP 401 с `authentication required`; сессии/cookies не передавались.
+
+**PASS — public privacy.** В anonymous canonical Search сохранённый live-запрос Barcelona 2027-06-11→14 показал карточку с публичным owner name `lelik`, но без email, account login или private host fields. Anonymous Host на обоих origin показывает только login/register shell и не возвращает профиль/объект. Полный email в evidence не публикуется.
+
+**Result: PASS for remaining BUG-023 scope.** В совокупности с прежним authenticated save→navigate→reopen→restore PASS на обоих origin исходный Not found не воспроизводится, anonymous 401 и public privacy подтверждены. Рекомендация Марку: закрыть BUG-023; отдельный BFCache/history privacy FAIL после logout относится к PM-049 и не переоткрывает route fix BUG-023.
+
