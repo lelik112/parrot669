@@ -1,7 +1,7 @@
 # PM-044 — Четыре QA-адреса с самостоятельным доступом тестеров
 
 **Title:** дать Борису и Никите самостоятельный доступ к входящим письмам четырёх QA-аккаунтов PARROT без платной почты и регулярного участия владельца.
-**Status:** in progress / Gate 3 QA — Gate 1 PASS; Gate 2 PASS: четыре существующих QA-аккаунта атомарно перепривязаны к четырём уникальным AgentMail plus-адресам, immutable ID/allowlist сохранены, post-change verify и healthy cleanup deploy пройдены. Борис принимает PM-017/PM-006, Никита делает регресс своей пары. **Priority:** P1 / NEXT, разблокирует [PM-017](PM-017-qa-test-mailbox-access.md) и [PM-006](PM-006-email-acceptance.md).
+**Status:** blocked / Gate 3 QA — Никита сообщил отсутствие письма восстановления для `qa2`/`qa3` и отсутствие самостоятельного login path; Gate 1 PASS; Gate 2 PASS: четыре существующих QA-аккаунта атомарно перепривязаны к четырём уникальным AgentMail plus-адресам, immutable ID/allowlist сохранены, post-change verify и healthy cleanup deploy пройдены. Борис принимает PM-017/PM-006, Никита делает регресс своей пары. **Priority:** P1 / NEXT, разблокирует [PM-017](PM-017-qa-test-mailbox-access.md) и [PM-006](PM-006-email-acceptance.md).
 **Agent:** Никита / Regression QA — после re-claim проверить два QA inbox и четыре plus-адреса в AgentMail, без DNS/паролей; Денис / Developer — после отдельного claim проверить и однократно привязать четыре тестовых адреса к существующим аккаунтам; Борис / QA Lead — подтвердить доступ к своей паре и принять критический email-flow после привязки. Алексей / Product Owner не участвует в регулярных проверках и не передаёт личную почту.
 **Recommended model:** QA — Luna / Medium; developer — Sol / Medium.
 **Reason:** создание и проверка ящиков рутинны; изменение привязок существующих аккаунтов затрагивает auth, почтовые уведомления и QA allowlist, нужен внимательный разбор.
@@ -238,3 +238,12 @@
 **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-BORIS-START-20260926-1251`. **UTC:** 2026-09-26T12:52:10.817Z. **Source:** [PR #60 comment](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846411946). **Related task:** PM-044 / PM-017 / PM-006.
 
 **PM review:** Борис сделал Model check на Sol 4/6 и подписал claim для `qa`/`lelik`. Scope согласован: независимые сессии, login, диалоги и почтовый критический путь PM-017/006. Работа начата; следующее действие — проверить две сессии и сохранность диалогов перед email-сценариями. Пересечения claims нет. PM-044 остаётся in progress до независимого evidence.
+
+
+## PM blocker review — PM-044-GATE3-NIKITA-FAIL-20260926-1254
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-GATE3-NIKITA-FAIL-20260926-1254`. **UTC:** 2026-09-26T12:55:40.718Z. **Source:** [PR #60 comment #5846434757](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846434757). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM review:** signed regression evidence Никиты подтверждает узкий FAIL/BLOCKED Gate 3: после двух recovery-запросов на `qa2`/`qa3` нет входящих в обоих AgentMail inbox спустя >1 минуты. Нейтральный UI-ответ не доказывает отправку; причина пока неизвестна. Самостоятельный login и сохранность диалогов этой пары не проверены из-за отсутствия доступного QA-сеанса/credentials. Это не доказательство поломки всех писем и не отмена Gate 1/2. Борис продолжает независимый scope `qa`/`lelik` и отдельно сообщает результат.
+
+**Next:** Денис / Developer проверяет production путь recovery для уже привязанных plus-адресов, состояние аккаунтов и исходящую доставку без публикации адресов, токенов или секретов; различает отсутствие генерации, отказ провайдера, задержку и ошибку inbox. Сначала read-only диагностика; изменение кода/БД/инфраструктуры — только по собственному scoped claim и evidence. Никите отдельно нужен безопасный самостоятельный вход в `qa2`/`qa3` без передачи паролей через PR/чат. PM-044 остаётся blocked до доказательства доставки и login path, PM-017/006 не приняты; rollback не запускать автоматически.
