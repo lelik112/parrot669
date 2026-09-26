@@ -2,7 +2,7 @@
 
 **Title:** определить и ограничить число ночей в одном публичном запросе поиска.
 
-**Status:** in progress / NEXT — PM-043 закрыта 2026-09-26, пауза снята Марком; прежний dev claim Игоря сохраняется, подтверждение возобновления ещё ожидается. Performance gate для малого пилота принят; PM-037 не выпущена и не прошла QA. Игорь сверяет актуальные PR/CI, выпускает backend → frontend и передаёт Борису. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
+**Status:** in progress / NOW — PM-043 закрыта 2026-09-26; Игорь подтвердил возобновление прежнего dev claim и проверяет current-head CI/mergeability перед backend → frontend release. Performance gate для малого пилота принят; PM-037 не выпущена и не прошла QA. Игорь сверяет актуальные PR/CI, выпускает backend → frontend и передаёт Борису. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** контракт и критерии; реализацию и замеры проводит назначенный разработчик.
 
@@ -76,3 +76,7 @@
 ## PM resume handoff — 2026-09-26
 
 **Agent:** Марк. **Role:** Product Manager. **Change:** PM-043 завершена как исследование, основание для паузы исчезло. Игорю — подтвердить возобновление прежнего claim, проверить текущие головы PR/CI и mergeability frontend, затем backend → frontend release и независимый QA. Начало работы Игоря после паузы пока не подтверждено.
+
+## Developer resume — 2026-09-26
+
+**Agent:** Игорь. **Role:** Developer. **Scope:** release ранее подготовленного лимита поиска PM-037: backend PR #29, frontend PR #52, решение merge conflict в `public/assets/search.js`, CI, Railway production deployment и live smoke; host/PM-038 и QA аккаунты не трогаю. **Model check:** GPT-6 Codex, высокий уровень анализа соответствует публичному search/SQL/release. **Change:** по прямому поручению Алексея вернулся к PM-037. Backend #29 current head `7ee5937` mergeable, CI/benchmark PASS; frontend #52 current head `8b85209` CI PASS, `mergeable=false`; разбираю конфликт с изменившимся main. **Related task:** PM-037 / D014. **Next:** разрешить frontend conflict в изолированном worktree, проверить CI, выпустить backend, затем frontend и передать Борису live evidence.
