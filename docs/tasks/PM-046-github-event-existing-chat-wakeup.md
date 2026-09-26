@@ -1,9 +1,9 @@
 # PM-046 — запуск существующего агентского чата по событию GitHub
 
 **Title:** проверить событийное пробуждение существующего чата после назначения задачи в репозитории.
-**Status:** in review / two-way PR inbox pilot PASS — PR #61 addressed comment → Igor's existing chat and PR #60 addressed reply → Mark's existing chat each produced one signed result. Both scoped comment triggers remain enabled for a limited pilot. Ordinary push to `main`, duplicate deliveries, regular cost and team-wide rollout remain unverified.
+**Status:** in progress / team PR inbox rollout — #60 Марк and #61 Игорь active with signed two-way PASS; a second distinct comment also woke Igor. #62 Денис, #63 Борис, #64 Никита and #65 Алекс are docs-only draft PRs in `prepared` state; each needs a trigger inside that agent's existing chat and one delivery test. Ordinary push to `main` remains unsupported; duplicate delivery and regular cost remain unmeasured.
 **Priority:** P2.
-**Agent:** Игорь / Developer — completed one-off technical tests and reply from PR #61 to #60; no active product dev claim. **Owner / next:** Марк / Product Manager — use addressable PR inboxes only for agreed task handoffs during a limited pilot; assess duplicate delivery and operating cost before extending the process.
+**Agent:** Марк / Product Manager — owner of D017 team rollout and documentation. **Next:** Денис, Борис, Никита and Алекс each perform one-time `enable_comments` setup in their own existing chat (no claim of product work implied); Марк sends one addressed test comment to each and verifies signed receipt. Игорь completed the technical pilot; no active dev claim.
 **Recommended model:** Sol. **Recommended reasoning:** Medium.
 **Reason:** нужно установить реальные границы GitHub event и Automations на одном существующем чате, без разработки продукта.
 
@@ -29,9 +29,11 @@
 ## Acceptance criteria
 
 - [x] Push на `main` не поддержан в текущей GitHub webhook schema: доступен только `pull_request`; PM-043 — отдельный одноразовый scheduled run.
-- [x] PR `opened` → прежний conversation ID → один CAS claim проверены. Для `opened` нужен отдельный PR на назначение (ветка + файл + PR + закрытие/merge); комментарий к PR #60 → существующий чат Марка проверен; отдельный inbox Игоря #61 ждёт его настройки и сквозной проверки.
+- [x] PR `opened` → прежний conversation ID → один CAS claim проверены. Для `opened` нужен отдельный PR на назначение; схема постоянного PR с comments проверена в #60/#61 без PR на каждую задачу.
 - [x] Нового агента и фонового механизма нет; временный PR #59 закрыт без merge, пилотный trigger отключён после проверки.
-- [ ] Игорь включил в прежнем чате GitHub PR #61 `enable_comments`; Марк ещё проверяет один уникальный адресный комментарий → тот же чат Игоря → одну запись в карточке. После этого PM фиксирует пригодность или отказ от постоянного inbox.
+- [x] Игорь включил #61 `enable_comments`; два разных комментария разбудили прежний чат с отдельными CAS-записями. Ответный comment в #60 разбудил прежний чат Марка. D017 принял ограниченный процесс.
+- [ ] Личные triggers и один подписанный сквозной тест для подготовленных #62 Денис, #63 Борис, #64 Никита, #65 Алекс. До теста статус каждого — `prepared`, не `active`.
+- [ ] Оценить дубли одного GitHub event и регулярные затраты/CI-шум после реальных handoff; не выдавать два разных комментария за тест дедупликации.
 
 ## Not doing
 
@@ -71,3 +73,5 @@
 - 2026-09-26 06:07 UTC — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-046-REVERSE-MARK-20260926-0606`. **Result:** новый адресный [комментарий #5843756979](https://github.com/lelik112/parrot669/pull/60#issuecomment-5843756979) в PR #60 создан в 06:07:04 UTC после ответного handoff Игоря из PR #61. GitHub `issue_comment created` запустил этот прежний чат Марка (target `conversation_id` при настройке: `6ab7591a…ac3f`); карточка PM-046 прочитана из `main`, конфликтов scope нет. Это PASS одного маршрута **Игорь → Марк**; вместе с предыдущим PASS **Марк → Игорь** двухсторонняя передача проверена по одному разу. Shared GitHub login сам по себе не подтверждает автора, связь с Игорем установлена по подписанной записи в PM-046 и последовательности событий. Повторная доставка и регулярная стоимость не измерены. **Related task:** PM-046.
 
 - 2026-09-26 06:11:30 UTC — **Agent:** Игорь. **Role:** Developer. **Wake ID:** `PM-046-IGOR-SECOND-20260926-0610`. **Result:** второй уникальный адресный GitHub comment event в [PR #61, комментарий #5843781895](https://github.com/lelik112/parrot669/pull/61#issuecomment-5843781895), после завершения предыдущего run снова разбудил тот же существующий чат Игоря (target `conversation_id=6ab26f…6791`). PM-046 перечитана из `main` с blob SHA `a01ab439cc3425a03ca90daca55c383b877e6fb4`; Wake ID ранее отсутствовал, конфликтов scope/claim нет. Это отдельный новый комментарий, **не** проверка повторной доставки одного события. Записан ровно один CAS-результат; код, другие задачи и PR не менялись, trigger остаётся включённым. **Related task:** PM-046.
+
+- 2026-09-26 06:19 UTC — **Agent:** Марк. **Role:** Product Manager. **Change:** по прямому поручению Алексея открыл docs-only draft PR inbox для [Дениса #62](https://github.com/lelik112/parrot669/pull/62), [Бориса #63](https://github.com/lelik112/parrot669/pull/63), [Никиты #64](https://github.com/lelik112/parrot669/pull/64) и [Алекса #65](https://github.com/lelik112/parrot669/pull/65). У каждого PR инструкция личного `pull_request` trigger с `enable_comments`, адресного Wake ID и обратного handoff Марку #60. [D017](../decisions/D017-pr-inbox-handoffs.md), [workflow](workflow.md#адресные-pr-inbox--d017--pm-046) и team roster закрепляют процесс. Автоматизации чужих существующих чатов нельзя создать из чата Марка через доступный create (нет target conversation ID); ни один из #62–#65 пока не подтвердил enabled или delivery. **Next:** адресаты один раз включают trigger в своих чатах, затем Марк тестирует; обычная работа по карточкам и claims не меняется. **Related task:** PM-046.
