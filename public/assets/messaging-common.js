@@ -206,6 +206,13 @@
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") void refreshSession().then(refreshUnread).catch(() => {});
   });
+  window.addEventListener("pageshow", event => {
+    if (!event.persisted || !document.body.matches(".search-page, .messages-page")) return;
+    // A BFCache snapshot may still contain private UI from a session that was
+    // invalidated in another history entry. Hide it before the network check.
+    setUser(null);
+    void refreshSession().then(refreshUnread).catch(() => {});
+  });
 
   if (document.body.classList.contains("search-page")) initialSearchSession = refreshSession().catch(() => null);
 })();
