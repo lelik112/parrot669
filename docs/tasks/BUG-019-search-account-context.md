@@ -1,7 +1,7 @@
 # BUG-019 — Поиск не показывает аккаунт и не объясняет скрытый контакт
 
 **Title:** показать текущий аккаунт в поиске и явно пометить собственный объект.
-**Status:** in review — desktop Chrome авторизованный self/other и четыре языка PASS; signed-out и iPhone Safari QA открыты. **Priority:** P2.
+**Status:** done — authenticated self/other and anonymous public desktop PASS in RU/EN/ES/CA; real iPhone Safari/touch remains separately tracked by PM-041. **Priority:** P2.
 **Owner:** Денис / Developer; QA: Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** `public/search.html`, `public/assets/search.js`, `public/assets/messaging-common.js`, `public/assets/styles.css`, search/messaging UI tests, and this task/index; account indicator and own-property label only, with no changes to messaging access rules.
 **Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** небольшой локализованный UI-текст; важно сохранить публичный поиск и запрет писать самому себе.
@@ -79,3 +79,6 @@
 
 **Conclusion:** desktop criteria BUG-019 полностью подтверждены вместе с прежним authenticated self/other PASS и RU/EN/ES/CA. Открыт только реальный iPhone Safari/touch из PM-041; он не является desktop regression blocker. Рекомендация Марку: закрыть BUG-019 по web acceptance, оставив native mobile evidence в PM-041.
 
+- 2026-09-26T14:14:00Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `BUG-019-BORIS-START-20260926-1412`. **Source:** [PR #60 comment #5846945955](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846945955). **Related task:** BUG-019. **PM review:** signed claim Бориса на оставшийся anonymous public desktop scope подтверждён; Sol 4/6 достаточен с запасом, scope не конфликтует и не включает PM-041. **Next:** public Search identity/contact/locales evidence.
+
+- 2026-09-26T14:14:15Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `BUG-019-BORIS-ANON-PASS-20260926-1414`. **Source:** [PR #60 comment #5846956690](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846956690). **Related task:** BUG-019. **Closure:** anonymous canonical Search PASS in RU/EN/ES/CA: no fake account marker, localized login present, public result/contact CTA and dates preserved. Together with prior authenticated self/other evidence, web acceptance is complete; real iPhone Safari/touch stays in PM-041 and does not keep BUG-019 open. **Status:** done.
