@@ -25,7 +25,7 @@
 | Марк / PM | [#60](https://github.com/lelik112/parrot669/pull/60) | active — ответ Игоря запустил прежний чат | Марк ведёт PM handoff |
 | Игорь / Developer | [#61](https://github.com/lelik112/parrot669/pull/61) | active — два отдельных комментария запустили прежний чат | Марк отправляет согласованные задачи |
 | Денис / Developer | [#62](https://github.com/lelik112/parrot669/pull/62) | active — личный trigger включён; комментарий #5844381912 дал signed receipt и handoff Марку | Марк отправляет согласованные задачи; Денис отвечает через #60 без ручной пересылки владельцем |
-| Борис / Acceptance QA | [#63](https://github.com/lelik112/parrot669/pull/63) | prepared — trigger/доставка не подтверждены | Борис включает trigger в своём чате и сообщает Марку через #60; Марк автоматически тестирует |
+| Борис / Acceptance QA | [#63](https://github.com/lelik112/parrot669/pull/63) | active — личный trigger включён; комментарий #5844381992 дал signed receipt и handoff Марку | Марк отправляет согласованные QA-задачи; Борис отвечает через #60 без ручной пересылки владельцем |
 | Никита / Regression QA | [#64](https://github.com/lelik112/parrot669/pull/64) | prepared — trigger/доставка не подтверждены | Никита включает trigger в своём чате и сообщает Марку через #60; Марк автоматически тестирует |
 | Алекс / Strategy | [#65](https://github.com/lelik112/parrot669/pull/65) | prepared — trigger/доставка не подтверждены | Алекс включает trigger в своём чате и сообщает Марку через #60; Марк автоматически тестирует |
 
