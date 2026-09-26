@@ -14,6 +14,7 @@ async function harness(t, {handler=()=>undefined, saved=null, messaging=false, s
   const dom=new JSDOM(file('search.html'),{url:'https://parrot669.com/search',runScripts:'outside-only'});
   t.after(()=>dom.window.close());
   const w=dom.window, calls=[];
+  let activeSessionUser=sessionUser;
   w.localStorage.setItem('parrot669-language','ru');
   if(saved) w.localStorage.setItem('parrot669-search-state',JSON.stringify(saved));
   w.fetch=async (raw,options={})=>{
@@ -21,7 +22,7 @@ async function harness(t, {handler=()=>undefined, saved=null, messaging=false, s
     calls.push(url);
     const custom=await handler(url);
     if(custom!==undefined) return custom instanceof Response?custom:response(custom);
-    if(url.pathname==='/api/host/auth/me') return sessionUser?response(sessionUser):new Response(JSON.stringify({error:'unauthorized'}),{status:401});
+    if(url.pathname==='/api/host/auth/me') return activeSessionUser?response(activeSessionUser):new Response(JSON.stringify({error:'unauthorized'}),{status:401});
     if(url.pathname==='/api/host/auth/logout' && options.method==='POST') return new Response(null,{status:204});
     if(url.pathname.startsWith('/api/messaging/contact-options/')) {
       const id=decodeURIComponent(url.pathname.split('/').at(-1));
@@ -42,7 +43,7 @@ async function harness(t, {handler=()=>undefined, saved=null, messaging=false, s
     control.dispatchEvent(new w.Event(event,{bubbles:true}));
   };
   const submit=async()=>{form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await flush();};
-  const h={w,form,calls,change,submit,$:id=>w.document.getElementById(id),
+  const h={w,form,calls,change,submit,$:id=>w.document.getElementById(id),setSessionUser:value=>{activeSessionUser=value;},
     results:w.document.getElementById('availability-results'),
     searches:()=>calls.filter(url=>url.pathname==='/api/search'),
     language:lang=>w.document.querySelector(`[data-search-lang="${lang}"]`).click()};
@@ -93,6 +94,20 @@ test('PM-049: Search logout clears identity and owned-card state without leaving
   assert.equal(h.$('search-login').hidden,false);
   assert.equal(h.results.querySelector('.availability-own-property').hidden,true);
   assert.equal(h.calls.filter(url=>url.pathname==='/api/host/auth/logout').length,1);
+});
+
+test('PM-049: Search clears a BFCache account snapshot before revalidating the session',async t=>{
+  const h=await harness(t,{messaging:true,sessionUser:{accountId:'account',username:'tester',profile:{id:'owner'}}});
+  assert.equal(h.$('search-account').hidden,false);
+  h.setSessionUser(null);
+  const event=new h.w.Event('pageshow');
+  Object.defineProperty(event,'persisted',{value:true});
+  h.w.dispatchEvent(event);
+  assert.equal(h.$('search-account').hidden,true);
+  assert.equal(h.$('search-account-indicator').textContent,'');
+  await flush();
+  assert.equal(h.$('search-login').hidden,false);
+  assert.equal(h.calls.filter(url=>url.pathname==='/api/host/auth/me').length,2);
 });
 
 test('PM-024: every search card has a working contact link when legacy opt-in is false',async t=>{
