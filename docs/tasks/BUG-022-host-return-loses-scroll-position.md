@@ -1,8 +1,8 @@
 # BUG-022 — Возврат в кабинет сбрасывает позицию страницы
 
 **Title:** после перехода в «Сообщения» кабинет владельца возвращается не к прежнему месту.
-**Status:** in progress / implementation prepared — узкое frontend-исправление и unit regression готовы; PR CI и независимый production-ретест Бориса ожидаются. **Priority:** P2.
-**Owner:** Игорь / Developer — claim 2026-09-26, implementation prepared; QA: Борис. **Developer claim:** active до выпуска и handoff.
+**Status:** in review / production released — PR #66 и main CI зелёные, новый asset доступен на двух origins; независимый production-ретест Бориса ожидается. **Priority:** P2.
+**Owner:** Игорь / Developer — implementation/release complete 2026-09-26; QA: Борис. **Developer claim:** complete, handoff sent.
 **Agent:** Борис. **Role:** QA. **Scope:** live-проверка Host → Messages → Host; код и данные объекта не менялись.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** нужно исследовать сохранение и восстановление UI-контекста при переходе между двумя страницами после выпуска исправления BUG-016. **Model check:** будущий Developer до реализации.
 
@@ -48,7 +48,7 @@
 
 ## Next
 
-Игорь выпускает узкое исправление после зелёного CI и передаёт Борису проверяемый результат. Борис повторяет сценарий на обоих production origins, включая неглубокий возврат и обычный reload; touch отдельно остаётся в PM-015.
+Борис повторяет сценарий на обоих production origins, включая неглубокий возврат и обычный reload; touch отдельно остаётся в PM-015. Игорь возвращается только при воспроизводимом FAIL.
 
 **Related task:** PM-020 / BUG-016 / PM-015.
 
@@ -60,3 +60,5 @@
 - 2026-09-26 08:16:24 UTC — **Agent:** Игорь. **Role:** Developer. **Wake ID:** `BUG-022-IGOR-ASSIGN-20260926-0814`. **Developer claim:** беру BUG-022 в согласованном P2 scope: только восстановление глубокой позиции Host после перехода Messages → Host, без PM-038, auth/API/calendar/mobile и без тестовой работы Дениса в PM-040. Свежие status/task/D017/PM-040 сверены; Денис работает в Playwright fixture/coverage и отдельно отметил BUG-022 вне своего scope, конфликта claim нет. **Model check:** Sol / Medium достаточно для узкой frontend-диагностики и исправления. **Next:** воспроизвести логику на обоих origins по коду/доступному UI, добавить регрессионные проверки, выпустить через CI и передать Борису независимый ретест. **Related task:** BUG-022 / PM-020.
 
 - 2026-09-26 — **Agent:** Игорь. **Role:** Developer. **Change:** диагностика подтвердила timing/layout race: сохранённая позиция была корректной, но одноразовый `scrollTo` выполнялся до позднего роста Host layout и зажимался временным max scroll. Подготовлено bounded retry до трёх секунд с немедленной отменой при пользовательском вводе; обычная навигация и другие состояния не меняются. Добавлен unit regression 1200 px → 3614 px → `scrollY=2678`; локально `npm test` PASS 137/137, `npm run test:e2e -- --list` обнаруживает 18 сценариев. Фактический browser run локально BLOCKED отсутствующим Playwright Chromium executable; это известное ограничение среды, CI должен выполнить browser-smoke. **Next:** PR CI, merge/release, затем handoff Борису на два origins. **Related task:** BUG-022 / PM-020.
+
+- 2026-09-26 08:28 UTC — **Agent:** Игорь. **Role:** Developer. **Release:** [PR #66](https://github.com/lelik112/parrot669/pull/66) merged as `844bb63`. PR CI [36229648159](https://github.com/lelik112/parrot669/actions/runs/36229648159) PASS; main CI [36229732675](https://github.com/lelik112/parrot669/actions/runs/36229732675) PASS (137 unit checks and 18 browser scenarios). Live asset smoke found `restoreHostScroll` on both `https://parrot669.com/assets/host.js` and `https://parrot669.cheltsov112.workers.dev/assets/host.js`. **Handoff:** Борису — same-tab desktop Host → Messages → Host on both origins, deep and shallow positions plus ordinary reload; record exact before/after `scrollY`. **Related task:** BUG-022 / PM-020.
