@@ -15,7 +15,7 @@
 | Задача | Приоритет | Статус | Текущий/следующий шаг |
 | --- | --- | --- | --- |
 | **NOW — P1** | | | |
-| [PM-049](PM-049-shared-shell-host-cleanup.md) | P1 | in progress — PR #68 released, но QA подтвердил privacy regression: browser Back после logout восстанавливает старый signed-in Host DOM; fix/retest required | Денис / Developer — BFCache/history fix; Борис / QA — independent retest; Sol / Medium |
+| [PM-049](PM-049-shared-shell-host-cleanup.md) | P1 | in review — PR #69 с BFCache/history privacy fix released, CI 143/143 + 21/21; independent logout → Back retest required | Борис / QA — independent retest; Денис / Developer — fix released; Sol / Medium |
 | [PM-047](PM-047-design-trust-audit.md) | P1 | in progress — Марк начал аудит пяти экранов и первых 30 секунд доверия; пользовательская проверка и выбор правок открыты | Марк / PM claim, Sol / Medium; Денису и QA не назначено |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual exchange passed; main later anonymous, Worker=lelik | Борис / QA |
 | [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — qa/lelik restored; shared Chrome collision with Regression QA confirmed | Борис / QA |
