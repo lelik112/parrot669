@@ -1,9 +1,9 @@
 # PM-046 — запуск существующего агентского чата по событию GitHub
 
 **Title:** проверить событийное пробуждение существующего чата после назначения задачи в репозитории.
-**Status:** in progress / team PR inbox rollout — #60 Марк, #61 Игорь, #62 Денис and #63 Борис are active with signed delivery PASS; #61 also passed a second distinct comment. #64 Никита has enabled the personal trigger (delivery test pending); #65 Алекс remains prepared with rollout paused at his request. Neither has confirmed delivery. Ordinary push to `main` remains unsupported; duplicate delivery and regular cost remain unmeasured.
+**Status:** in progress / team PR inbox rollout — #60 Марк, #61 Игорь, #62 Денис, #63 Борис и #64 Никита active with signed delivery PASS; #61 also passed a second distinct comment. #64 test was initiated by Nikita and does not assign product QA while he is busy. #65 Алекс remains prepared with rollout paused at his request. Ordinary push to `main` remains unsupported; duplicate delivery and regular cost remain unmeasured.
 **Priority:** P2.
-**Agent:** Марк / Product Manager — owner of D017 rollout and documentation. **Next:** use active #60–#63 for agreed handoffs. Test #64 once after Nikita's setup handoff; do not contact or test Alex #65 unless he explicitly asks to resume. Igor completed the technical pilot; no active product dev claim.
+**Agent:** Марк / Product Manager — owner of D017 rollout and documentation. **Next:** use active #60–#64 for agreed handoffs, but do not assign Nikita new product QA while he is busy; do not contact or test Alex #65 unless he explicitly asks to resume. Igor completed the technical pilot; no active product dev claim.
 **Recommended model:** Sol. **Recommended reasoning:** Medium.
 **Reason:** нужно установить реальные границы GitHub event и Automations на одном существующем чате, без разработки продукта.
 
@@ -33,7 +33,8 @@
 - [x] Нового агента и фонового механизма нет; временный PR #59 закрыт без merge, пилотный trigger отключён после проверки.
 - [x] Игорь включил #61 `enable_comments`; два разных комментария разбудили прежний чат с отдельными CAS-записями. Ответный comment в #60 разбудил прежний чат Марка. D017 принял ограниченный процесс.
 - [x] Личные triggers и один подписанный сквозной тест для #62 Денис и #63 Борис; оба inbox `active`.
-- [ ] #64 Никита: trigger enabled, `prepared` до подписанного теста доставки; #65 Алекс: `prepared`, не тестировать без его явной просьбы.
+- [x] #64 Никита: trigger enabled, один signed delivery receipt и handoff в #60, inbox `active`.
+- [ ] #65 Алекс: `prepared`, не тестировать без его явной просьбы.
 - [ ] Оценить дубли одного GitHub event и регулярные затраты/CI-шум после реальных handoff; не выдавать два разных комментария за тест дедупликации.
 
 ## Not doing
@@ -102,3 +103,5 @@
 
 
 - 2026-09-26 08:12:22 UTC — **Agent:** Никита. **Role:** Regression QA Engineer. **Wake ID:** `PM-046-NIKITA-TEST-FROM-SETUP-20260926-0810`. **Claim / result:** один согласованный docs-only тест личного inbox D017 / PM-046, без claim продуктовой QA-задачи. Человеческий [комментарий #5844512014](https://github.com/lelik112/parrot669/pull/64#issuecomment-5844512014) в [PR #64](https://github.com/lelik112/parrot669/pull/64) содержит отдельные точные строки `To: Никита`, Wake ID и `Related task: docs/tasks/PM-046-github-event-existing-chat-wakeup.md`. Событие `issue_comment created` разбудило этот существующий чат; карточка прочитана из `main` с blob SHA `e49d54cc5ad154409b761e947d748087b13cd62f`, scope и назначение одного теста согласованы. Target conversation при setup `6ab682f0…1441`. **Expected:** адресный комментарий будит прежний чат и даёт одну подписанную запись. **Actual:** PASS одного события; дубликат того же события и регулярная стоимость не проверены. Код, CI/CD, инфраструктура и другие задачи не менялись; trigger PR #64 остаётся включённым. **Next:** один handoff Марку в PR #60 с новым Wake ID для PM-сверки. **Related task:** PM-046 / D017.
+
+- 2026-09-26 08:13 UTC — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-046-NIKITA-RECEIPT-20260926-0812`. **Result:** проверил [handoff Никиты #5844516855](https://github.com/lelik112/parrot669/pull/60#issuecomment-5844516855) и отдельный signed receipt Никиты `PM-046-NIKITA-TEST-FROM-SETUP-20260926-0810` в PM-046: [тестовый комментарий #5844512014](https://github.com/lelik112/parrot669/pull/64#issuecomment-5844512014) разбудил его существующий чат `6ab682f0…1441`. Inbox Никиты [PR #64](https://github.com/lelik112/parrot669/pull/64) переведён из `prepared` в `active` по D017. Это delivery PASS одного события и не claim новой QA-задачи; Никита пока занят. Алекс #65 остаётся prepared/пауза. **Related task:** PM-046.
