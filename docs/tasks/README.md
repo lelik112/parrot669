@@ -34,13 +34,13 @@
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review — PR #53 выпущен; hidden badge PASS, foreground/read-clear и iPhone открыты | Борис / QA следующий при доступной foreground среде; Денис / Sol / Medium только при новом FAIL |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
-| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | in review — PR #66 released, CI PASS, asset live on two origins; independent QA claimed, result pending | Игорь / Developer complete; Борис / QA claim 2026-09-26; Sol / Medium |
+| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | done — PR #66 released; independent production QA PASS on two origins | Игорь / Developer; Борис / QA; Марк / closure |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review — одна ссылка/языки/keyboard PASS; badge FAIL через BUG-020, touch blocked | Денис исправляет BUG-020 (Sol / Medium); Борис ретестирует badge; mobile PM-041 |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review — owner/guest, возврат, языки и keyboard PASS | Борис / QA: same-origin logout/switch/expiry, затем touch PM-041; Denis dev только при FAIL |
 | [PM-010](PM-010-auth-routes-extraction.md) | P2 | in review | Борис / QA |
 | [PM-021](PM-021-private-host-profile.md) | P2 | in review — name save/reopen PASS; API negatives and privacy open | Денис / Developer; Борис / QA |
-| [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review — BUG-022 fix released; independent desktop retest pending | Борис / QA handoff sent; touch remains PM-041 |
+| [PM-020](PM-020-host-cabinet-navigation.md) | P2 | in review — BUG-022 desktop retest PASS; touch remains blocked by PM-041 | Борис / QA; no dev return needed |
 | [BUG-019](BUG-019-search-account-context.md) | P2 | in review — authenticated desktop self/other и языки PASS | Борис / QA: отдельный anonymous public сеанс; iPhone PM-041; Денис dev только при FAIL |
 | [PM-005](PM-005-closed-dates-copy.md) | P2 | in review | Борис / acceptance; короткий ретест — кандидат Regression QA после появления и claim |
 | [PM-011](PM-011-calendar-sync-extraction.md) | P2 | in review | Борис / QA |
@@ -50,7 +50,7 @@
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
 
 | **NEXT — P1** | | | |
-| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress — Zoho домен подтверждён, 4 пользователя созданы; DNS и входящие ожидают проверки, затем привязка аккаунтов | Никита / Regression QA claim — inbox verification, Luna / Medium; Денис / Developer после отдельного claim — привязка, Sol / Medium; Борис / QA acceptance |
+| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress — Zoho MX/SPF/DKIM verified, 4 inbox созданы; вход и внешняя доставка ожидают smoke, затем привязка аккаунтов | Никита / Regression QA claim — inbox smoke, Luna / Medium; Денис / Developer после отдельного claim — привязка, Sol / Medium; Борис / QA acceptance |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked до PM-044 | Борис / QA после четырёх доступных ящиков |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
