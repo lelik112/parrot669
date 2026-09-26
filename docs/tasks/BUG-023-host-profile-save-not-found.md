@@ -1,7 +1,7 @@
 # BUG-023 — Имя хозяина не сохраняется
 
 **Title:** сохранение публичного имени в кабинете показывает Not found.
-**Status:** in review — PR #46 authenticated save/reopen PASS on both origins; anonymous 401 and public privacy acceptance remain open. **Priority:** P1.
+**Status:** done — PR #46 authenticated save/reopen/restore PASS on both origins; anonymous PATCH returns 401 on both origins and public Search/Host expose no private host fields. **Priority:** P1 (closed).
 **Owner:** Денис / Developer; QA Борис. **Developer claim:** 2026-09-25 14:19 UTC.
 **Agent:** Борис. **Role:** QA. **Scope:** независимый live acceptance PM-021; код не менялся.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** сопоставить опубликованный frontend route, backend API и сессию, затем подтвердить сохранение и ошибку в UI. **Model check:** будущий Developer до реализации.
@@ -34,7 +34,7 @@
 
 ## Next
 
-Борис повторяет под qa сохранение имени → reload на обоих origins, затем пустое имя/400, отсутствие сессии/401 и отсутствие приватных полей в публичном профиле. Статус done только после независимой QA.
+Закрыто по независимому QA. Отдельный BFCache/history privacy FAIL после logout ведётся в [PM-049](PM-049-shared-shell-host-cleanup.md) и не переоткрывает этот route/save defect.
 
 **Related task:** PM-021.
 
@@ -69,3 +69,7 @@
 
 **Result: PASS for remaining BUG-023 scope.** В совокупности с прежним authenticated save→navigate→reopen→restore PASS на обоих origin исходный Not found не воспроизводится, anonymous 401 и public privacy подтверждены. Рекомендация Марку: закрыть BUG-023; отдельный BFCache/history privacy FAIL после logout относится к PM-049 и не переоткрывает route fix BUG-023.
 
+
+- 2026-09-26T13:58:15Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `BUG-023-BORIS-START-20260926-1357`. **Source:** [PR #60 comment #5846840931](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846840931). **Related task:** BUG-023. **PM review:** Борис сам взял следующую готовую P1-проверку по workflow; отдельный signed claim и Model check Sol 4/6 записаны, scope — только anonymous 401/public privacy, без кода и данных. Работа начата без дополнительного одобрения; конфликтов claims нет.
+
+- 2026-09-26T13:58:45Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `BUG-023-BORIS-PASS-20260926-1358`. **Source:** [PR #60 comment #5846848194](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846848194). **Related task:** BUG-023 / PM-021. **PM review / closure:** independent PASS подтверждает anonymous PATCH 401 на canonical и QA Worker и отсутствие private email/login/profile fields в public Search/anonymous Host. Вместе с прежним authenticated save/reopen/restore PASS исходный `Not found` закрыт. PM-049 BFCache privacy FAIL остаётся отдельным P1. **Next:** active work по BUG-023 отсутствует.
