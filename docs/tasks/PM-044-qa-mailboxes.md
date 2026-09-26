@@ -160,3 +160,13 @@
 **Model check / blocker:** поручен короткий независимый регресс пары `qa2`/`qa3`; рекомендованных Luna / Medium и целевого дефолта Никиты Sol 3/6 для него достаточно, повышение не требуется. Однако по D019 и актуальному `docs/team.md` Sol 3/6 пока указан только как целевой: подтверждения Алексея, что настройка фактически применена в этом чате, нет. Поэтому новый claim и Gate 3 не начинаю; это не start receipt и не результат регресса.
 
 **Required:** Алексей подтверждает применённую настройку Никиты Sol 3/6, Марк фиксирует статус в `docs/team.md` и будит Никиту новым адресным комментарием. После этого повторить Model check, записать claim/start receipt и проверить только назначенный scope: username login, сохранность диалогов и разделения пары, доступный email-flow, точный plus-tag, доставку в назначенный inbox и отсутствие перекрёстной входящей доставки. Код, БД, DNS, Zoho, Railway и аккаунты не менять; critical acceptance Бориса не подменять.
+
+## Boris Gate 3 model-check blocker — 2026-09-26 12:37:28 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-044-GATE3-BORIS-20260926-1237`. **Source:** [PR #63 comment #5846321775](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846321775). **Related task:** PM-044 / PM-017 / PM-006.
+
+**Requested scope:** independent acceptance пары `qa`/`lelik`: username login, existing dialogs/pair separation, reset/verification, relevant notification, exact plus-tag in `to`, intended inbox delivery and no cross-delivery; no code/data/infrastructure changes.
+
+**Model check:** карточки рекомендуют Luna или Sol / Medium; целевой default Бориса по D019 — Sol 4/6, чего достаточно с запасом и понижение не требуется. Однако [docs/team.md](../team.md) прямо говорит, что настройки считаются только целевыми до подтверждения Алексея; фактическое применение Sol 4/6 для чата Бориса там не подтверждено.
+
+**Status: BLOCKED before claim.** По D019 зависимую acceptance не начинаю и start receipt не отправляю, пока Алексей не подтвердит фактическую настройку Бориса **Sol, уровень 4/6**, а Марк не зафиксирует это в `docs/team.md` и не разбудит новым адресным комментарием для повторного Model check. Это process/model blocker, не product FAIL; Gate 2 evidence Дениса не оспаривается. БД, DNS, Zoho, Railway, аккаунты и письма не изменялись.
