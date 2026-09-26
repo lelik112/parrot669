@@ -8,7 +8,7 @@ npx playwright install --with-deps chromium webkit
 npm run test:e2e
 ```
 
-Playwright сам запускает локальный static server на `127.0.0.1:4173`. Публичный UI `/search.html` и `/messages.html` получает контролируемые ответы `/api/*` из `tests/e2e/public-fixture.cjs`: один объект в Барселоне на 10–17 ноября 2026 года, анонимную сессию, контакт владельца. Отдельный синтетический владелец `fixture-owner` с пустым dashboard проверяет навигацию Host → Messages → Host без входа в реальные аккаунты. Любой незапланированный API-запрос возвращает 501; нет production-запросов, реальных сообщений и credentials. `npm test` остаётся отдельным быстрым набором.
+Playwright сам запускает локальный static server на `127.0.0.1:4173`. Публичный UI `/search.html` и `/messages.html` получает контролируемые ответы `/api/*` из `tests/e2e/public-fixture.cjs`: по умолчанию один объект в Барселоне на 10–17 ноября 2026 года, анонимную сессию, контакт владельца. Дополнительный fixture показывает три карточки без внешней ссылки, с verified и pending ссылками; прямой anonymous Messages проверяется без inbox. Отдельный синтетический владелец `fixture-owner` с пустым dashboard проверяет навигацию Host → Messages → Host без входа в реальные аккаунты. Любой незапланированный API-запрос возвращает 501; нет production-запросов, реальных сообщений и credentials. `npm test` остаётся отдельным быстрым набором.
 
 Проекты: `chromium-desktop`, `webkit-desktop`, `mobile-emulation` (WebKit, профиль iPhone 13). Последний проверяет адаптивный web UI и touch emulation, **не** является тестом физического iPhone Safari, нативного picker/keyboard/autofill. Такие критерии остаются в PM-041.
 
