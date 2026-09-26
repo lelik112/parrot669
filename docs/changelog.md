@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-26 — PM-047: focused design trust audit started
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по переданному Алексеем предложению Алекса открыл [PM-047](tasks/PM-047-design-trust-audit.md) и [D018](decisions/D018-design-audit-before-redesign.md): пять экранов, первые 30 секунд хозяина/гостя, проверяемые evidence и не более трёх точечных правок после аудита. Первые read-only desktop-наблюдения отделены от пользовательских выводов. Разработчики и QA не назначены; PM-041 остаётся отдельной очередью реального телефона. **Related task:** PM-047 / PM-041.
+
 ## 2026-09-26 — BUG-022: retry Host scroll restoration while layout settles
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** diagnosed the Host → Messages → Host jump as a one-shot scroll restore performed before asynchronous Host widgets finish changing document height. Replaced it with a bounded three-second retry that targets the saved absolute position, uses the currently reachable maximum while the page is shorter and cancels on wheel/touch/pointer/keyboard input. Added a controller regression for late growth from a 1200 px document to the observed 3614 px height and restoration to `scrollY=2678`. [PR #66](https://github.com/lelik112/parrot669/pull/66) merged as `844bb63`; PR CI [36229648159](https://github.com/lelik112/parrot669/actions/runs/36229648159) and main CI [36229732675](https://github.com/lelik112/parrot669/actions/runs/36229732675) passed with 137 unit checks and 18 browser scenarios. Both production origins now serve the new `host.js`. Boris independently verified deep and shallow restoration, expanded-card state and one-shot reload behavior on both production origins; BUG-022 is accepted and closed. Auth, API, drafts, calendars and PM-040 fixture scope are unchanged. **Related task:** [BUG-022](tasks/BUG-022-host-return-loses-scroll-position.md) / PM-020.
