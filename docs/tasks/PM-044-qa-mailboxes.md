@@ -216,3 +216,17 @@
 **Model check:** карточки рекомендуют Luna или Sol / Medium; подтверждённый Алексеем и записанный в `docs/team.md` дефолт Бориса Sol 4/6 достаточен, повышение не требуется.
 
 **Claim / scope:** беру независимый Gate 3 acceptance пары `qa`/`lelik`: вход по username, сохранность существующих диалогов и разделение QA-пар, reset/verification, релевантное уведомление, точный plus-tag в `to`, доставка в назначенный inbox и отсутствие перекрёстной доставки. Критерии PM-017/PM-006 принимаю отдельно только по фактическому evidence. Не меняю код, БД, DNS, Zoho, Railway или учётные записи; секреты не публикую. **Status:** in progress.
+
+
+## PM start receipt — PM-044-GATE3-NIKITA-START-20260926-1250
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-GATE3-NIKITA-START-20260926-1250`. **UTC:** 2026-09-26T12:52:10.817Z. **Source:** [PR #60 comment](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846407438). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM review:** Никита сделал Model check на Sol 3/6 и подписал claim для регресса `qa2`/`qa3`. Scope согласован: login, диалоги, адресная доставка. Работа начата; следующее действие — проверки в UI и AgentMail. Критический acceptance остаётся у Бориса. Пересечения claims нет. PM-044 остаётся in progress до независимого evidence.
+
+
+## PM start receipt — PM-044-BORIS-START-20260926-1251
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-BORIS-START-20260926-1251`. **UTC:** 2026-09-26T12:52:10.817Z. **Source:** [PR #60 comment](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846411946). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM review:** Борис сделал Model check на Sol 4/6 и подписал claim для `qa`/`lelik`. Scope согласован: независимые сессии, login, диалоги и почтовый критический путь PM-017/006. Работа начата; следующее действие — проверить две сессии и сохранность диалогов перед email-сценариями. Пересечения claims нет. PM-044 остаётся in progress до независимого evidence.
