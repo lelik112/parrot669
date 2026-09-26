@@ -15,6 +15,7 @@
 | Задача | Приоритет | Статус | Текущий/следующий шаг |
 | --- | --- | --- | --- |
 | **NOW — P1** | | | |
+| [PM-047](PM-047-design-trust-audit.md) | P1 | in progress — Марк начал аудит пяти экранов и первых 30 секунд доверия; пользовательская проверка и выбор правок открыты | Марк / PM claim, Sol / Medium; Денису и QA не назначено |
 | [BUG-023](BUG-023-host-profile-save-not-found.md) | P1 | in review — authenticated save/reopen PASS after PR #46 on both origins; 401/privacy open | Денис / Developer; Борис / QA |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual exchange passed; main later anonymous, Worker=lelik | Борис / QA |
 | [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — qa/lelik restored; shared Chrome collision with Regression QA confirmed | Борис / QA |
