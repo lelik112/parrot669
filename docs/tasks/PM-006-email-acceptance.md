@@ -53,3 +53,14 @@
 ## Discussion / Updates
 
 - 2026-09-24 07:23 UTC — **Марк / PM:** выделена незакрытая приёмка; задача не означает повторную реализацию писем.
+
+
+## Boris Gate 3 email acceptance — 2026-09-26 12:55:41 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-044-GATE3-BORIS-RECHECK-20260926-1247`. **Source:** [PR #63 comment #5846399453](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846399453). **Related task:** PM-006 / PM-017 / PM-044. **Environment:** production canonical + QA Worker, Cloud Chrome, AgentMail.
+
+- **Password reset: FAIL at delivery.** Один запрос для назначенного нового адреса `qa` получил generic-success UI, но за ~90 секунд ни intended inbox Бориса, ни соседний QA inbox не получили письма, включая spam. Ссылку не открывали, пароль/сессии не меняли, repeat-token semantics не проверяли.
+- **Registration / verification: BLOCKED / not run.** Оба назначенных аккаунта уже verified; новый аккаунт или смена состояния не согласованы.
+- **Unread message notification: BLOCKED / not run.** После первого mismatch по инструкции остановились; кроме того main `qa`-сеанс в общем Cloud Chrome стал anonymous, Worker `lelik` остался авторизован. Opt-out/read/privacy и переход в диалог не принимаются.
+
+**Result:** PM-006 acceptance не пройдена. Сохранность существующих диалогов пары — отдельный PASS в PM-044 и не заменяет email evidence. Полные адреса, пароли, ссылки, токены и приватный текст не опубликованы. Нужен developer investigation reset delivery и новый QA wake.
