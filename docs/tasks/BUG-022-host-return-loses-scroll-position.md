@@ -1,7 +1,7 @@
 # BUG-022 — Возврат в кабинет сбрасывает позицию страницы
 
 **Title:** после перехода в «Сообщения» кабинет владельца возвращается не к прежнему месту.
-**Status:** in review / production released — PR #66 и main CI зелёные, новый asset доступен на двух origins; независимый production-ретест Бориса ожидается. **Priority:** P2.
+**Status:** done — PR #66 и main CI зелёные; независимый production-ретест Бориса PASS на двух origins 2026-09-26. **Priority:** P2.
 **Owner:** Игорь / Developer — implementation/release complete 2026-09-26; QA: Борис. **Developer claim:** complete, handoff sent.
 **Agent:** Борис. **Role:** QA. **Scope:** live-проверка Host → Messages → Host; код и данные объекта не менялись.
 **Recommended model:** Sol. **Recommended reasoning:** Medium. **Reason:** нужно исследовать сохранение и восстановление UI-контекста при переходе между двумя страницами после выпуска исправления BUG-016. **Model check:** будущий Developer до реализации.
@@ -48,7 +48,7 @@
 
 ## Next
 
-Борис повторяет сценарий на обоих production origins, включая неглубокий возврат и обычный reload; touch отдельно остаётся в PM-015. Игорь возвращается только при воспроизводимом FAIL.
+BUG-022 принят и закрыт. Дальнейшая touch/mobile-проверка остаётся в PM-015/PM-041 и не переоткрывает этот desktop-дефект без нового воспроизведения.
 
 **Related task:** PM-020 / BUG-016 / PM-015.
 
@@ -79,3 +79,5 @@
 
 
 - 2026-09-26 08:32 UTC — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `BUG-022-IGOR-RELEASE-20260926-0831`. **Source:** [PR #60 comment #5844625117](https://github.com/lelik112/parrot669/pull/60#issuecomment-5844625117). **PM review:** release Игоря соответствует согласованному BUG-022 scope: PR #66 merged как `844bb63`, PR/main CI PASS, новый asset виден на обоих production origins. [Адресный handoff Борису #5844625041](https://github.com/lelik112/parrot669/pull/63#issuecomment-5844625041) содержит оба origins, deep/shallow scroll, раскрытую карточку, reload, точные before/after `scrollY` и исключает PM-038/mobile. Конфликта scope и продуктовой развилки нет. **Status:** in review; dev complete, QA claim/result pending. **Next:** Борис подтверждает claim и делает независимый production-ретест; Игорь возвращается только при воспроизводимом FAIL. **Related task:** BUG-022 / PM-020.
+
+- 2026-09-26 08:37 UTC — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `BUG-022-BORIS-QA-PASS-20260926-0836`. **Source:** [PR #60 comment #5844654760](https://github.com/lelik112/parrot669/pull/60#issuecomment-5844654760). **PM review:** независимый production-ретест Бориса соответствует acceptance BUG-022: оба origins, deep/shallow позиции, раскрытая карточка и одноразовый контекст после reload проверены; результат PASS, дефектов и блокеров нет. **Decision:** BUG-022 принят и закрыт как done; Игорь свободен, возврат к задаче не нужен. Touch/mobile остаётся отдельным scope PM-015/PM-041. **Related task:** BUG-022 / PM-020.
