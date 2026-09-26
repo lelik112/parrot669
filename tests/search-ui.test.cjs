@@ -54,6 +54,32 @@ async function harness(t, {handler=()=>undefined, saved=null, messaging=false, s
   return h;
 }
 
+test('PM-048: search copy stays concise and the price-only label toggles its checkbox in every language',async t=>{
+  const h=await harness(t);
+  const document=h.w.document;
+  assert.equal(document.getElementById('search-budget-help'),null);
+  assert.equal(document.querySelector('.availability-meta'),null);
+  assert.equal(h.$('filter-price-from').hasAttribute('aria-describedby'),false);
+  assert.equal(h.$('filter-price-to').hasAttribute('aria-describedby'),false);
+
+  const expected={
+    en:["Find a place that's available for your dates.",'Only with a price'],
+    es:['Encuentra un alojamiento disponible para tus fechas.','Solo con precio'],
+    ca:['Troba un allotjament disponible per a les teves dates.','Només amb preu'],
+    ru:['Найдите жильё, свободное на ваши даты.','Только с ценой']
+  };
+  for(const [language,[lead,label]] of Object.entries(expected)){
+    h.language(language);
+    assert.equal(document.querySelector('[data-search-i18n="lead"]').textContent,lead);
+    assert.equal(document.querySelector('.price-filter span').textContent,label);
+  }
+
+  const checkbox=h.$('filter-priced-only');
+  assert.equal(checkbox.checked,false);
+  document.querySelector('label.price-filter').click();
+  assert.equal(checkbox.checked,true);
+});
+
 test('PM-024: every search card has a working contact link when legacy opt-in is false',async t=>{
   const h=await harness(t,{messaging:true,handler:url=>{
     if(url.pathname==='/api/search') return [

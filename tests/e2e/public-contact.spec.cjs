@@ -1,6 +1,41 @@
 const {test, expect} = require('@playwright/test');
 const {installPublicFixture, assertNoHorizontalOverflow} = require('./public-fixture.cjs');
 
+test('PM-048: concise localized search copy and price-only control remain keyboard and touch friendly', async ({page}) => {
+  await installPublicFixture(page);
+  await page.goto('/search.html');
+
+  await expect(page.locator('#search-budget-help')).toHaveCount(0);
+  await expect(page.locator('.availability-meta')).toHaveCount(0);
+  await expect(page.locator('#filter-price-from')).not.toHaveAttribute('aria-describedby',/.+/);
+  await expect(page.locator('#filter-price-to')).not.toHaveAttribute('aria-describedby',/.+/);
+
+  const label=page.locator('label.price-filter');
+  const checkbox=page.locator('#filter-priced-only');
+  const labelBox=await label.boundingBox();
+  const checkboxBox=await checkbox.boundingBox();
+  expect(labelBox.height).toBeGreaterThanOrEqual(52);
+  expect(checkboxBox.width).toBeGreaterThanOrEqual(20);
+  expect(checkboxBox.height).toBeGreaterThanOrEqual(20);
+  await label.click();
+  await expect(checkbox).toBeChecked();
+  await checkbox.focus();
+  await page.keyboard.press('Space');
+  await expect(checkbox).not.toBeChecked();
+
+  for(const [language,lead,priceOnly] of [
+    ['en',"Find a place that's available for your dates.",'Only with a price'],
+    ['es','Encuentra un alojamiento disponible para tus fechas.','Solo con precio'],
+    ['ca','Troba un allotjament disponible per a les teves dates.','Només amb preu'],
+    ['ru','Найдите жильё, свободное на ваши даты.','Только с ценой']
+  ]){
+    await page.locator(`[data-search-lang="${language}"]`).click();
+    await expect(page.locator('[data-search-i18n="lead"]')).toHaveText(lead);
+    await expect(label).toContainText(priceOnly);
+  }
+  await assertNoHorizontalOverflow(page);
+});
+
 test('PM-024/PM-023: public search reaches guest draft and auth gate without sending', async ({page}) => {
   const fixture = await installPublicFixture(page);
   await page.goto('/search.html');
