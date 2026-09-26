@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-26 — PM-048: simplify search copy and enlarge price-only control
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** removed the three redundant search explanations together with their unused locale keys, wrapper CSS and dangling `aria-describedby` references; replaced the lead with a short availability statement in EN/ES/CA/RU. Enlarged the native price-only checkbox to 22 px and its label hit area to 52 px on desktop / 56 px on narrow screens, with visible keyboard focus. Added unit and Playwright coverage for localization, label/keyboard operation, dimensions and overflow. Local `npm test` passes 138/138; the focused browser run is blocked locally only by absent Playwright binaries and remains a CI requirement. Search requests, price calculation/results, global header, Messages and real-iPhone acceptance are unchanged. **Related task:** [PM-048](tasks/PM-048-search-clarity-and-price-toggle.md) / PM-047.
+
 ## 2026-09-26 — PM-047: focused design trust audit started
 
 - **Agent:** Марк. **Role:** Product Manager. **Change:** по переданному Алексеем предложению Алекса открыл [PM-047](tasks/PM-047-design-trust-audit.md) и [D018](decisions/D018-design-audit-before-redesign.md): пять экранов, первые 30 секунд хозяина/гостя, проверяемые evidence и не более трёх точечных правок после аудита. Первые read-only desktop-наблюдения отделены от пользовательских выводов. Разработчики и QA не назначены; PM-041 остаётся отдельной очередью реального телефона. **Related task:** PM-047 / PM-041.
