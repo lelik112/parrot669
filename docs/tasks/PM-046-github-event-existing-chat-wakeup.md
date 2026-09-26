@@ -1,9 +1,9 @@
 # PM-046 — запуск существующего агентского чата по событию GitHub
 
 **Title:** проверить событийное пробуждение существующего чата после назначения задачи в репозитории.
-**Status:** in progress / team PR inbox rollout — #60 Марк, #61 Игорь, #62 Денис and #63 Борис are active with signed delivery PASS; #61 also passed a second distinct comment. #64 Никита remains prepared with rollout paused while busy; #65 Алекс remains prepared with rollout paused at his request. Neither has confirmed personal setup or delivery. Ordinary push to `main` remains unsupported; duplicate delivery and regular cost remain unmeasured.
+**Status:** in progress / team PR inbox rollout — #60 Марк, #61 Игорь, #62 Денис and #63 Борис are active with signed delivery PASS; #61 also passed a second distinct comment. #64 Никита has enabled the personal trigger (delivery test pending); #65 Алекс remains prepared with rollout paused at his request. Neither has confirmed delivery. Ordinary push to `main` remains unsupported; duplicate delivery and regular cost remain unmeasured.
 **Priority:** P2.
-**Agent:** Марк / Product Manager — owner of D017 rollout and documentation. **Next:** use active #60–#63 for agreed handoffs. Wait for Nikita to report availability before resuming #64; do not contact or test Alex #65 unless he explicitly asks to resume. Igor completed the technical pilot; no active product dev claim.
+**Agent:** Марк / Product Manager — owner of D017 rollout and documentation. **Next:** use active #60–#63 for agreed handoffs. Test #64 once after Nikita's setup handoff; do not contact or test Alex #65 unless he explicitly asks to resume. Igor completed the technical pilot; no active product dev claim.
 **Recommended model:** Sol. **Recommended reasoning:** Medium.
 **Reason:** нужно установить реальные границы GitHub event и Automations на одном существующем чате, без разработки продукта.
 
@@ -33,7 +33,7 @@
 - [x] Нового агента и фонового механизма нет; временный PR #59 закрыт без merge, пилотный trigger отключён после проверки.
 - [x] Игорь включил #61 `enable_comments`; два разных комментария разбудили прежний чат с отдельными CAS-записями. Ответный comment в #60 разбудил прежний чат Марка. D017 принял ограниченный процесс.
 - [x] Личные triggers и один подписанный сквозной тест для #62 Денис и #63 Борис; оба inbox `active`.
-- [ ] #64 Никита и #65 Алекс остаются `prepared` без подписанного теста. #64 отложен, пока Никита занят; #65 не тестировать по просьбе Алекса. Возобновление #64 — после сообщения Никиты о готовности; #65 — только по явной просьбе Алекса.
+- [ ] #64 Никита: trigger enabled, `prepared` до подписанного теста доставки; #65 Алекс: `prepared`, не тестировать без его явной просьбы.
 - [ ] Оценить дубли одного GitHub event и регулярные затраты/CI-шум после реальных handoff; не выдавать два разных комментария за тест дедупликации.
 
 ## Not doing
