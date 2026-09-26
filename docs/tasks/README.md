@@ -27,7 +27,7 @@
 | [PM-018](PM-018-qa-controlled-calendar.md) | P1 | in review | Борис; Airbnb — Алексей |
 | [PM-015](PM-015-qa-mobile-device-environment.md) | P1 | blocked — нет управляемого iPhone Safari для Бориса | очередь PM-041; Борис / QA после разблокировки; Luna / Medium |
 | [PM-030](PM-030-qa-drain-next-stage.md) | P1 | in progress | Марк / PM; Sol / Medium |
-| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 4 fixture-сценария × 3 проекта, CI 12/12 (PR #54/#57); web покрытие/QA открыты, ручной A↔B PASS, автоматический auth ждёт изоляции данных | Денис claim, Sol / Medium; Никита / Regression QA claim 2026-09-26 на матрицу и smoke, Luna / Medium; Борис назначен на отдельный critical contact acceptance, Sol / Medium, ждём claim |
+| [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта, CI 18/18; Борис завершил узкий acceptance, независимый browser rerun Никиты ждёт рабочую среду | Денис / Sol / Medium — выпустил срез; Никита / Luna / Medium — QA claim, локальный runtime blocked; Борис / Sol / Medium — QA claim и отчёт, полный live/auth acceptance открыт |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
