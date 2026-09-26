@@ -30,7 +30,6 @@
 | [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 4 fixture-сценария × 3 проекта, CI 12/12 (PR #54/#57); web покрытие/QA открыты, ручной A↔B PASS, автоматический auth ждёт изоляции данных | Денис claim, Sol / Medium; Никита / Regression QA claim 2026-09-26 на матрицу и smoke, Luna / Medium; Борис назначен на отдельный critical contact acceptance, Sol / Medium, ждём claim |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
-| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | in review / NOW — одноразовый wake-up и GitHub CAS PASS; 5 минут не доказаны, handoff записан | Игорь / Developer → Марк / PM решение о механизме; Sol / High |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review — PR #53 выпущен; hidden badge PASS, foreground/read-clear и iPhone открыты | Борис / QA следующий при доступной foreground среде; Денис / Sol / Medium только при новом FAIL |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
@@ -56,7 +55,7 @@
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | **NEXT — P2** | | | |
-| [PM-037](PM-037-search-date-range-bound.md) | P2 | paused / NEXT — performance gate принят; release/QA открыты | Игорь / Developer сохраняет незавершённый claim; вернётся после PM-043, Sol / High |
+| [PM-037](PM-037-search-date-range-bound.md) | P2 | in progress / NEXT — performance gate принят; release/QA открыты | Игорь / Developer возобновляет после закрытия PM-043: PR heads/CI → backend/frontend release → QA, Sol / High |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 
@@ -65,6 +64,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | done — одноразовый запуск и CAS доказаны, 5 минут не подтверждены | Марк / PM закрыл исследование; без постоянного scheduler |
 | [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | done — функциональный QA и пара Бориса PASS; live outsider login negative оставлен как явно принятое исключение | Марк / PM closure; Игорь / Developer, Никита / Regression QA, Борис / QA Lead |
 | [PM-042](PM-042-agent-check-in-process-audit.md) | P2 | done — аудит процесса Алекса; ошибочный второй PM-036 удалён | Марк / PM; Sol / Medium; реализация отдельно PM-043 |
 | [PM-039](PM-039-browser-test-environments.md) | P1 | done — выбор D016: Playwright first, телефон PM-041 | Марк / PM; внедрение отдельно PM-040 |
