@@ -15,6 +15,7 @@
 | Задача | Приоритет | Статус | Текущий/следующий шаг |
 | --- | --- | --- | --- |
 | **NOW — P1** | | | |
+| [PM-049](PM-049-shared-shell-host-cleanup.md) | P1 | in progress — PR #68 released, но QA подтвердил privacy regression: browser Back после logout восстанавливает старый signed-in Host DOM; fix/retest required | Денис / Developer — BFCache/history fix; Борис / QA — independent retest; Sol / Medium |
 | [PM-047](PM-047-design-trust-audit.md) | P1 | in progress — Марк начал аудит пяти экранов и первых 30 секунд доверия; пользовательская проверка и выбор правок открыты | Марк / PM claim, Sol / Medium; Денису и QA не назначено |
 | [BUG-023](BUG-023-host-profile-save-not-found.md) | P1 | in review — authenticated save/reopen PASS after PR #46 on both origins; 401/privacy open | Денис / Developer; Борис / QA |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual exchange passed; main later anonymous, Worker=lelik | Борис / QA |
@@ -31,7 +32,6 @@
 | [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта; Никита независимо перезапустил remote browser-smoke, 18/18 PASS; live/auth/native остаток открыт | Денис / Sol / Medium — fixture/runtime; Никита / Luna / Medium — remote QA PASS, локальный runtime blocked; Борис / Sol / Medium — acceptance-отчёт, полный live/auth acceptance открыт |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
-| [PM-049](PM-049-shared-shell-host-cleanup.md) | P2 | in review / released — PR #68 merged, CI и production guest smoke PASS; независимый auth/mobile web QA открыт | Денис / Developer выпустил; Никита / Regression QA кандидат на отдельный claim; Sol / Medium |
 | [PM-048](PM-048-search-clarity-and-price-toggle.md) | P2 | in review — PR #67 released, CI/browser smoke PASS; независимый web review ожидается | Игорь / Developer выпустил; QA reviewer ещё не назначен; Sol / Medium |
 | [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in progress — #60–#64 active; #65 Алекс prepared/не беспокоить | Марк / PM, Sol / Medium; Никита #64 подтвердил delivery, но новая QA-работа ему пока не назначена; #65 только по явной просьбе Алекса |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
