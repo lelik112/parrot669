@@ -34,7 +34,7 @@
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review — PR #53 выпущен; hidden badge PASS, foreground/read-clear и iPhone открыты | Борис / QA следующий при доступной foreground среде; Денис / Sol / Medium только при новом FAIL |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
-| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | reported — reproduced on two production origins after BUG-016 fix; developer diagnosis needed | Марк / PM triage; Борис / QA |
+| [BUG-022](BUG-022-host-return-loses-scroll-position.md) | P2 | assigned / claim pending — deep Host scroll lost after Messages on two origins | Игорь / Developer — Sol / Medium, narrow diagnosis/fix; Борис / QA after release |
 | [PM-026](PM-026-remove-duplicate-messages-link.md) | P2 | in review — одна ссылка/языки/keyboard PASS; badge FAIL через BUG-020, touch blocked | Денис исправляет BUG-020 (Sol / Medium); Борис ретестирует badge; mobile PM-041 |
 | [PM-027](PM-027-open-property-from-messages.md) | P2 | in review | Борис / QA |
 | [PM-028](PM-028-open-host-profile-from-messages.md) | P2 | in review — owner/guest, возврат, языки и keyboard PASS | Борис / QA: same-origin logout/switch/expiry, затем touch PM-041; Denis dev только при FAIL |
@@ -57,7 +57,7 @@
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | **NEXT — P2** | | | |
 | [PM-045](PM-045-five-minute-agent-wake-up-pilot.md) | P2 | closed / parked — пятиминутный пилот недоступен в проверенном планировщике; не запускался | Марк / PM зафиксировал результат; активного исполнителя нет |
-| [PM-037](PM-037-search-date-range-bound.md) | P2 | in review — backend/frontend release и live smoke выполнены; независимая QA открыта | Борис / QA проверяет 366/367, сохранение ввода, обычный поиск; Игорь / Developer передал evidence |
+| [PM-037](PM-037-search-date-range-bound.md) | P2 | in review — backend/frontend выпущены; независимый QA claim pending | Борис / QA назначен, Sol / Medium — 366/367, даты/фильтры/языки/contact; Игорь dev закончил |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 
