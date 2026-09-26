@@ -10,7 +10,7 @@
 
 ## NEXT — почтовая приёмка P1
 
-[PM-044](tasks/PM-044-qa-mailboxes.md) — четыре управляемых QA inbox и контролируемая привязка старых аккаунтов; Борис/Никита по два ящика (Luna / Medium), Денис dev после PM-040 (Sol / Medium), claims нет. После этого [PM-017](tasks/PM-017-qa-test-mailbox-access.md) и [PM-006](tasks/PM-006-email-acceptance.md); личную почту владельца не используем. Провайдер и любые изменения DNS требуют выбора/прав Алексея.
+[PM-044](tasks/PM-044-qa-mailboxes.md) — четыре управляемых QA inbox и контролируемая привязка старых аккаунтов; Никита четыре ящика (Luna / Medium), Борис — приёмка после привязки, Денис dev после PM-040 (Sol / Medium), claims нет. После этого [PM-017](tasks/PM-017-qa-test-mailbox-access.md) и [PM-006](tasks/PM-006-email-acceptance.md); личную почту владельца не используем. Провайдер и любые изменения DNS требуют выбора/прав Алексея.
 
 ## NOW
 
