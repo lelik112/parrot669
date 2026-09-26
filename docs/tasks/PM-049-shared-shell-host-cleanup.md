@@ -1,8 +1,8 @@
 # PM-049 — Единая шапка и спокойный кабинет хозяина
 
 **Title:** согласовать account/navigation и общий контейнер Search, Host, Messages; убрать лишнюю навигацию кабинета.
-**Status:** in review / released; PM-049 code shipped, independent QA remains open. **Priority:** P2.
-**Owner / expected Agent:** Денис / Developer; PM-044 ждёт отдельное evidence, PM-048 выпущена; PM-049 выпущена отдельно; QA остаётся открытым. **Role:** Developer.
+**Status:** in progress / P1 privacy regression — PR #68 shipped, but QA reproduced stale signed-in Host DOM after logout via browser Back/BFCache; fix and independent retest required. **Priority:** P1.
+**Owner / expected Agent:** Денис / Developer — BFCache/history privacy fix; Борис / QA Lead — independent retest after release. PM-044 remains separate. **Role:** Developer / QA.
 **Recommended model:** Sol. **Recommended reasoning:** Medium (4/6 default; собственный Model check до claim). **Reason:** три страницы, auth/logout и responsive-навигация требуют аккуратной регрессии.
 **Scope:** общий header/container трёх страниц и визуальная иерархия Host; не менять auth API или сохранённые данные.
 
@@ -85,3 +85,5 @@
 
 **Result: FAIL; PM-049 не принимать.** Следующий исполнитель: Денис / Developer в исходном PM-049 scope — инвалидировать/перерисовывать auth-sensitive Host state на `pageshow`/BFCache restore и проверить Search/Messages на тот же класс; после релиза новый независимый ретест Бориса. Код и данные Борис не менял.
 
+
+- 2026-09-26T13:56:30Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-049-BORIS-PRIVACY-FAIL-20260926-1356`. **Source:** [PR #60 comment #5846835741](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846835741). **Related task:** PM-049. **PM review:** Борис подтвердил P1 client-side privacy regression в согласованном scope: после Search logout прямые страницы anonymous, но browser Back восстанавливает прежний Host DOM с username, private email, объектом и edit controls; reload очищает его. Backend write после logout не проверялся, поэтому серверную авторизацию не объявляем сломанной. Статус возвращён в progress/P1. **Next:** Денису — revalidate/clear auth-sensitive state на `pageshow`/BFCache restore и проверить тот же класс на Search/Messages; после выпуска новый независимый ретест Бориса. Владелец не требуется.
