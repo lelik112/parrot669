@@ -31,7 +31,7 @@
 | [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — PR #58 merged: 6 fixture-сценариев × 3 проекта; Никита независимо перезапустил remote browser-smoke, 18/18 PASS; live/auth/native остаток открыт | Денис / Sol / Medium — fixture/runtime; Никита / Luna / Medium — remote QA PASS, локальный runtime blocked; Борис / Sol / Medium — acceptance-отчёт, полный live/auth acceptance открыт |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
-| [PM-048](PM-048-search-clarity-and-price-toggle.md) | P2 | in review — PR #67 released, CI/browser smoke PASS; Борису отправлен независимый web review, claim pending | Игорь / Developer выпустил; Борис / QA handoff; Sol / Medium |
+| [PM-048](PM-048-search-clarity-and-price-toggle.md) | P2 | in review — PR #67 released, CI/browser smoke PASS; независимый web review начат | Игорь / Developer выпустил; Борис / QA claim, Sol / Medium |
 | [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in progress — #60–#64 active; #65 Алекс prepared/не беспокоить | Марк / PM, Sol / Medium; Никита #64 подтвердил delivery, но новая QA-работа ему пока не назначена; #65 только по явной просьбе Алекса |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in review — PR #53 выпущен; hidden badge PASS, foreground/read-clear и iPhone открыты | Борис / QA следующий при доступной foreground среде; Денис / Sol / Medium только при новом FAIL |
