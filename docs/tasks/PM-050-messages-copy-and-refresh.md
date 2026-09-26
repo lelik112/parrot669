@@ -1,8 +1,8 @@
 # PM-050 — Сообщения: убрать лишний текст и ручное обновление
 
 **Title:** упростить Messages без нового механизма опроса.
-**Status:** planned / NEXT; developer claim ещё нет. **Priority:** P2.
-**Owner / expected Agent:** Игорь / Developer после PM-048; в общих файлах согласовать порядок с PM-049. **Role:** Developer.
+**Status:** prepared / NOW; address handoff sent, developer claim pending. **Priority:** P2.
+**Owner / expected Agent:** Игорь / Developer — PM-048 complete; address handoff sent, claim pending; verify shared-file state after PM-049 PR #69. **Role:** Developer.
 **Recommended model:** Sol. **Recommended reasoning:** Medium (4/6 default; собственный Model check). **Reason:** небольшой UI, но автообновление и auth edge cases требуют проверки.
 **Scope:** Messages email help и кнопка Refresh; текущую частоту опроса менять только при доказанной проблеме нагрузки/задержки.
 
@@ -35,3 +35,5 @@ WebSockets, push, новый scheduler, backend email, смена частоты
 ## Evidence / Discussion / Updates
 
 - 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Scope:** UI постановка по замечаниям Алексея. **Change:** автообновление уже существует с интервалом 15 секунд; убираем обманчивую ручную кнопку, не плодим новый polling. **Related task:** PM-050. **Model check:** Sol 4/6 достаточно. **Next:** после PM-048 передать Игорю; claim ещё нет.
+
+- 2026-09-26T14:24:15Z — **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-050-IGOR-MESSAGES-CLEANUP-20260926-1427`. **Source:** [PR #61 comment #5847030797](https://github.com/lelik112/parrot669/pull/61#issuecomment-5847030797). **Related task:** PM-050. **Handoff:** после закрытия PM-048 Игорю передана узкая Messages cleanup: убрать email-help и обычный Refresh, сохранить polling 15 секунд, focus/visibility resume, error recovery и auth-state clearing; общий header PM-049, BUG-020/PM-026, backend email и смена частоты исключены. Это доставка, не claim. **Next:** fresh shared-file check, Model check Sol 4/6, отдельный signed claim и узкий PR.
