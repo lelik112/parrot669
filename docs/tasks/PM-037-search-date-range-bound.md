@@ -2,10 +2,10 @@
 
 **Title:** определить и ограничить число ночей в одном публичном запросе поиска.
 
-**Status:** in review — backend и frontend выпущены 2026-09-26, current-head CI PASS, Railway SUCCESS и UI live smoke пройден. Независимая QA Бориса по 366/367, сохранению дат/фильтров и обычному поиску открыта. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
+**Status:** done — backend и frontend выпущены 2026-09-26, current-head CI PASS, Railway SUCCESS; независимая live QA Бориса прошла для 366/367, обычных диапазонов, сохранения дат/фильтров, четырёх языков и contact dates. Raw production HTTP 400 не наблюдался независимо из-за `ERR_BLOCKED_BY_CLIENT`; серверное 400-before-SQL подтверждено route tests и benchmark evidence. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** контракт и критерии; реализацию и замеры проводит назначенный разработчик.
-**QA assignment:** Борис / Acceptance QA — направлено 2026-09-26, личный claim и независимый PASS ожидаются. **Recommended QA model/reasoning:** Sol / Medium для браузерных границ, локализации и дат контакта; исходный Sol / High выше относится к dev/SQL этапу.
+**QA:** Борис / Acceptance QA — независимый browser PASS записан 2026-09-26; raw HTTP status ограничен средой, не является product FAIL. **Recommended QA model/reasoning:** Sol / Medium для браузерных границ, локализации и дат контакта; исходный Sol / High выше относится к dev/SQL этапу.
 
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** публичный endpoint, ночные диапазоны, SQL `generate_series`, совместимость поиска, даты checkout-exclusive и риск нагрузки. **Model check — Игорь, 2026-09-25:** текущий GPT-6 Codex, высокий уровень анализа; соответствует сложности задачи.
 
@@ -28,10 +28,10 @@
 ## Acceptance criteria
 
 - [x] Марк принял число **366 ночей** для одного запроса и документировал основание, альтернативы и технический gate в [D014](../decisions/D014-public-search-date-range.md); acceptance реализации пока открыт.
-- [ ] На границе 366 ночей выдача и цены корректны; на 367 сервер возвращает 400 до основного SQL и UI показывает ясное сообщение на четырёх языках, не теряя введённые даты.
-- [ ] Обычные 1/7/30/90 ночей, смена даты, сохранённые фильтры, выбранные даты в пути до сообщения и PM-001 semantics не меняются.
+- [x] На границе 366 ночей запрос принимается; на 367 route tests подтверждают 400 до основного SQL, а независимая live QA подтверждает ясное UI-сообщение на четырёх языках без потери дат/фильтров. Raw production status не наблюдался из-за блокировки Cloud Browser.
+- [x] Обычные 1/7/30/90 ночей, смена даты, сохранённые фильтры и выбранные даты в пути до сообщения прошли независимую live QA; изменение PM-001 semantics не обнаружено.
 - [x] Изолированный замер верхней границы зафиксирован и признан Марком допустимым **для малого пилота** 2026-09-25; наблюдения при 500 объектах и production не объявлены пройденным SLO.
-- [ ] Границы дат/переполнения и 400 вместо 500 покрыты проверками; независимая QA отдельно проверила нормальный поиск и ошибку длинного интервала.
+- [x] Границы дат/переполнения и 400 вместо 500 покрыты автоматическими route tests; независимая QA отдельно проверила нормальный поиск и пользовательскую ошибку длинного интервала.
 
 ## Not doing
 
@@ -111,3 +111,8 @@ Live `parrot669.com/search`: with Barcelona and 2027-06-11 → 2028-06-12 (367 n
 6. **Прямой API.** Безопасная top-level навигация к `/api/search` с теми же 367 ночами не дошла до ответа: Cloud Browser вернул `net::ERR_BLOCKED_BY_CLIENT`. Поэтому production HTTP 400 независимо не наблюдался; это граница среды, не product FAIL. Серверный status/repository short-circuit остаются подтверждены только опубликованными route tests и benchmark evidence разработчика.
 
 **Blocker / next:** для закрытия именно независимого raw-HTTP evidence нужна среда, не блокирующая прямую навигацию к `/api/search`; повторять в этом Cloud Browser бессмысленно. Для пользовательского live flow и локализаций — PASS. **Related task:** PM-037 / D014.
+
+
+## PM closure — 2026-09-26 08:21 UTC
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-037-BORIS-QA-RESULT-20260926-0819`. **Source:** [PR #60 comment #5844558409](https://github.com/lelik112/parrot669/pull/60#issuecomment-5844558409). **Decision:** PM-037 закрыта как **done**. Независимый live PASS покрывает пользовательскую ценность и регрессию: 366/367, 1/7/30/90, даты/фильтры, EN/ES/CA/RU и contact dates. Raw production HTTP 400 не был независимо считан из Cloud Browser из-за `ERR_BLOCKED_BY_CLIENT`; это принято как граница evidence, поскольку серверное 400-before-SQL уже подтверждено опубликованными route tests и benchmark, а повтор того же браузерного шага ничего не добавит. **Not claimed:** production load SLO на 500 объектов и ручной raw-HTTP smoke. При росте пилота производительность пересматривается отдельно по D014. **Related task:** PM-037 / D014.
