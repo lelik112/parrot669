@@ -1,9 +1,9 @@
 # PM-046 — запуск существующего агентского чата по событию GitHub
 
 **Title:** проверить событийное пробуждение существующего чата после назначения задачи в репозитории.
-**Status:** in progress / team PR inbox rollout — #60 Марк, #61 Игорь, #62 Денис and #63 Борис are active with signed delivery PASS; #61 also passed a second distinct comment. #64 Никита and #65 Алекс remain prepared pending personal setup and delivery. Ordinary push to `main` remains unsupported; duplicate delivery and regular cost remain unmeasured.
+**Status:** in progress / team PR inbox rollout — #60 Марк, #61 Игорь, #62 Денис and #63 Борис are active with signed delivery PASS; #61 also passed a second distinct comment. #64 Никита remains prepared with rollout paused while busy; #65 Алекс remains prepared with rollout paused at his request. Neither has confirmed personal setup or delivery. Ordinary push to `main` remains unsupported; duplicate delivery and regular cost remain unmeasured.
 **Priority:** P2.
-**Agent:** Марк / Product Manager — owner of D017 rollout and documentation. **Next:** Nikita and Alex each complete one-time setup, then Mark tests automatically. Denis #62 and Boris #63 are active and may receive agreed task handoffs without owner relay. Igor completed the technical pilot; no active product dev claim.
+**Agent:** Марк / Product Manager — owner of D017 rollout and documentation. **Next:** use active #60–#63 for agreed handoffs. Wait for Nikita to report availability before resuming #64; do not contact or test Alex #65 unless he explicitly asks to resume. Igor completed the technical pilot; no active product dev claim.
 **Recommended model:** Sol. **Recommended reasoning:** Medium.
 **Reason:** нужно установить реальные границы GitHub event и Automations на одном существующем чате, без разработки продукта.
 
@@ -32,7 +32,8 @@
 - [x] PR `opened` → прежний conversation ID → один CAS claim проверены. Для `opened` нужен отдельный PR на назначение; схема постоянного PR с comments проверена в #60/#61 без PR на каждую задачу.
 - [x] Нового агента и фонового механизма нет; временный PR #59 закрыт без merge, пилотный trigger отключён после проверки.
 - [x] Игорь включил #61 `enable_comments`; два разных комментария разбудили прежний чат с отдельными CAS-записями. Ответный comment в #60 разбудил прежний чат Марка. D017 принял ограниченный процесс.
-- [ ] Личные triggers и один подписанный сквозной тест для подготовленных #62 Денис, #63 Борис, #64 Никита, #65 Алекс. До теста статус каждого — `prepared`, не `active`.
+- [x] Личные triggers и один подписанный сквозной тест для #62 Денис и #63 Борис; оба inbox `active`.
+- [ ] #64 Никита и #65 Алекс остаются `prepared` без подписанного теста. #64 отложен, пока Никита занят; #65 не тестировать по просьбе Алекса. Возобновление #64 — после сообщения Никиты о готовности; #65 — только по явной просьбе Алекса.
 - [ ] Оценить дубли одного GitHub event и регулярные затраты/CI-шум после реальных handoff; не выдавать два разных комментария за тест дедупликации.
 
 ## Not doing
@@ -44,6 +45,8 @@
 [PM-043](PM-043-agent-wake-up-feasibility.md) done как исследование и [PM-045](PM-045-five-minute-agent-wake-up-pilot.md) closed как пятиминутный пилот. Технический исполнитель подтверждает claim перед опытом; текущая продуктовая и QA-работа P1 выше по приоритету.
 
 ## Discussion / Updates
+
+- 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Change:** Алексей передал просьбу Алекса не беспокоить его, а Никита сейчас занят. Поэтому rollout #65 отложен без исходящих адресных комментариев, #64 отложен до сообщения Никиты о готовности. Действующие #60 Марк, #61 Игорь, #62 Денис и #63 Борис готовы к согласованным handoff. Это изменение доступности участников не означает, что #64/#65 включили trigger или прошли тест. **Related task:** PM-046.
 
 - 2026-09-26 — **Марк / PM:** после уточнения Алексея сохранил открытую цель автоматического запуска **существующих** чатов отдельно от закрытого пятиминутного варианта. GitHub push пока не доказан; PR event описан платформой, но сквозной тест для PARROT не проводился. Игорь — предлагаемый исполнитель, а не подтверждённый claim.
 
