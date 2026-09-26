@@ -1,7 +1,17 @@
-# PM-046 — тест PR-комментария для чата Марка
+# PM-046 — адресный inbox Марка
 
-Agent: Марк
-Role: Product Manager
-Related task: PM-046
+**Agent:** Марк. **Role:** Product Manager. **Change:** тестовый PR #60 стал адресным inbox существующего чата PM. **Related task:** [PM-046](../PM-046-github-event-existing-chat-wakeup.md).
 
-Эта карточка существует только в тестовой ветке. Открытый draft PR используется для проверки: новое адресное сообщение в комментарии будит существующий чат Марка. Код и рабочие настройки PARROT не меняются. До результата PR не сливать.
+Этот docs-only draft PR #60 остаётся открытым и не сливается. Личный GitHub `pull_request` trigger на `lelik112/parrot669`, `pull_request_number=60`, `enable_comments=true` включён в прежнем чате Марка. Ответный комментарий Игоря [#5843756979](https://github.com/lelik112/parrot669/pull/60#issuecomment-5843756979) разбудил этот чат и дал подписанную запись PM-046.
+
+Для handoff после работы оставь top-level conversation comment:
+
+```text
+To: Марк
+Wake ID: <новый уникальный ID>
+Related task: docs/tasks/<карточка>.md
+
+Короткий результат, evidence и следующий шаг.
+```
+
+Марк читает свежую карточку из `main`, отличает собственную обработанную запись от чужого упоминания Wake ID и обновляет только PM-документы по необходимости. Не отвечать комментарием в своём PR, не публиковать секреты; завершение run не означает фоновую непрерывную работу. [Решение D017](../../decisions/D017-pr-inbox-handoffs.md), [процедура](../workflow.md#адресные-pr-inbox--d017--pm-046), [адреса команды](../../team.md#адресные-pr-inbox).
