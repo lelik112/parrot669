@@ -54,7 +54,7 @@ function element(tag = 'div') {
   };
 }
 
-function setup(routes = {}, search = '', {hash = '', sessionData = {}} = {}) {
+function setup(routes = {}, search = '', {hash = '', sessionData = {}, layout = {}} = {}) {
   routes['/geocode/countries']??={body:[{code:'ES',name:'Spain'},{code:'FR',name:'France'},{code:'BY',name:'Belarus'}]};
   const nodes = new Map([...html.matchAll(/id="([^"]+)"/g)].map(match => [match[1], element()]));
   nodes.get('host-profile-return').dataset.hostI18n='profileReturn';
@@ -81,7 +81,7 @@ function setup(routes = {}, search = '', {hash = '', sessionData = {}} = {}) {
   const sandbox = {
     document: {
       ...element('document'),
-      documentElement: {},
+      documentElement: {scrollHeight:layout.scrollHeight||0},
       getElementById: id => nodes.get(id),
       querySelectorAll: selector => selector === '[data-auth-mode]' ? modes :
         selector === '[data-host-i18n]' ? [nodes.get('host-profile-return')] : [],
@@ -89,7 +89,12 @@ function setup(routes = {}, search = '', {hash = '', sessionData = {}} = {}) {
     },
     navigator: {language:'en'},
     localStorage: {getItem() {return null;}, setItem() {}},
-    window: {location: {search, pathname:'/host', hash, origin:'https://parrot669.com'},addEventListener() {},scrollY:380,scrollTo(x,y){this.restoredScroll=y;this.scrollOptions=x;}},
+    window: {location: {search, pathname:'/host', hash, origin:'https://parrot669.com'},addEventListener() {},removeEventListener() {},innerHeight:layout.innerHeight||800,scrollY:380,scrollTo(x,y){
+      const requested=typeof x==='object'?x.top:y;
+      const height=Number(sandbox.document.documentElement.scrollHeight)||requested+this.innerHeight;
+      this.scrollY=Math.min(requested,Math.max(0,height-this.innerHeight));
+      this.restoredScroll=this.scrollY;this.scrollOptions=typeof x==='object'?x:{top:y};
+    }},
     sessionStorage: {values:new Map(Object.entries(sessionData)),setItem(key,value){this.values.set(key,value);},getItem(key){return this.values.get(key)||null;},removeItem(key){this.values.delete(key);}},
     requestAnimationFrame: fn=>fn(),
     history: {replaceState() {}},
@@ -936,6 +941,17 @@ test('return from Messages restores the saved position without smooth scrolling'
   assert.equal(app.run('window.scrollOptions.top'),3329);
   assert.equal(app.run('window.scrollOptions.behavior'),'instant');
   assert.equal(app.run('sessionStorage.getItem("parrot669-host-return:host-a")'),null);
+});
+
+test('return from Messages retries the saved position after late host layout growth',async()=>{
+  const app=setup({'/dashboard':{body:{properties:[]}}},'',{layout:{scrollHeight:1200,innerHeight:600}});await settle();
+  app.run('setAuthenticated({accountId:"host-a",email:"host@example.test"});sessionStorage.setItem("parrot669-host-return:host-a",JSON.stringify({ids:[],scrollY:2678}))');
+  await app.run('syncDashboard()');
+  assert.equal(app.run('window.scrollY'),600);
+  app.run('document.documentElement.scrollHeight=3614');
+  await new Promise(resolve=>setTimeout(resolve,80));
+  assert.equal(app.run('window.scrollY'),2678);
+  assert.equal(app.run('window.scrollOptions.behavior'),'instant');
 });
 
 test('Messages property deep link opens only the owned card and returns to its conversation',async()=>{

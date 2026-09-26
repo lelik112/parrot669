@@ -141,6 +141,32 @@ function restoreHostContext(){
   }catch{}
 }
 
+function restoreHostScroll(scrollY){
+  const target=Number(scrollY);
+  if(!Number.isFinite(target) || target<0)return;
+  let retryTimer=null,deadlineTimer=null,stopped=false;
+  const cancelEvents=["wheel","touchstart","pointerdown","keydown"];
+  const cleanup=()=>{
+    if(stopped)return;
+    stopped=true;
+    clearTimeout(retryTimer);
+    clearTimeout(deadlineTimer);
+    cancelEvents.forEach(type=>window.removeEventListener?.(type,cleanup));
+  };
+  const attempt=()=>{
+    if(stopped)return;
+    const viewport=Number(window.innerHeight)||0;
+    const height=Number(document.documentElement?.scrollHeight)||0;
+    const reachable=height && viewport ? Math.min(target,Math.max(0,height-viewport)) : target;
+    window.scrollTo({top:reachable,behavior:"instant"});
+    if(Math.abs(window.scrollY-target)<=1){cleanup();return;}
+    retryTimer=setTimeout(()=>requestAnimationFrame(attempt),50);
+  };
+  cancelEvents.forEach(type=>window.addEventListener(type,cleanup,{passive:true}));
+  deadlineTimer=setTimeout(cleanup,3000);
+  requestAnimationFrame(attempt);
+}
+
 const blockCopy = {
   en: {availability:"Available", availabilityHelp:"Dates offered in search. Manual blocks and imported reservations take priority.", unavailable:"Closed dates", unavailableHelp:"Block dates for your own use or other bookings. No price. Existing availability and prices are kept; blocked nights are excluded from search.", blockFrom:"Unavailable from", blockTo:"Available again on", addBlock:"Close dates", noBlocks:"No closed dates yet.", blockSaved:"Dates closed for search.", blockDeleted:"Dates reopened. Existing availability and reservation rules apply.", blockOverlap:"These dates overlap an existing manual block. Edit that block instead.", deleteBlockConfirm:(from,to)=>`Remove the block ${from} → ${to}? These dates may appear in search again.`, blockDateError:"The end date must be after the start date. The end date is not blocked."},
   es: {availability:"Disponible", availabilityHelp:"Fechas ofrecidas en la búsqueda. Los bloqueos manuales y las reservas importadas tienen prioridad.", unavailable:"Fechas cerradas", unavailableHelp:"Bloquea fechas para uso propio u otras reservas. Sin precio. Se conservan la disponibilidad y los precios; las noches bloqueadas se excluyen de la búsqueda.", blockFrom:"No disponible desde", blockTo:"Disponible de nuevo el", addBlock:"Cerrar fechas", noBlocks:"Todavía no hay fechas cerradas.", blockSaved:"Fechas cerradas para la búsqueda.", blockDeleted:"Fechas reabiertas. Se aplican las reglas de disponibilidad y reservas existentes.", blockOverlap:"Estas fechas se solapan con un bloqueo manual. Edita ese bloqueo.", deleteBlockConfirm:(from,to)=>`¿Eliminar el bloqueo ${from} → ${to}? Estas fechas podrían volver a aparecer en la búsqueda.`, blockDateError:"La fecha final debe ser posterior a la inicial. La fecha final no está bloqueada."},
@@ -446,7 +472,7 @@ async function syncDashboard(){
     else if(returningFromMessages)
       requestAnimationFrame(()=>hostProfilePanel.scrollIntoView?.({block:"start"}));
     else if(previousScroll!==null && previousScroll!==undefined)
-      requestAnimationFrame(()=>window.scrollTo({top:previousScroll,behavior:"instant"}));
+      restoreHostScroll(previousScroll);
     message("");
   } catch (error) {
     if (error.status === 401) {
