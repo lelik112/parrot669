@@ -1,9 +1,13 @@
 # PM-046 pilot — GitHub PR event → текущий чат Игоря
 
-**State:** assigned.
+**State:** done.
+**Claimed by:** Игорь / Developer.
+**Claimed at:** 2026-09-26 05:15:33 UTC.
+**Trigger:** GitHub PR #59 opened event; automation run без нового сообщения Алексея.
+**Conversation:** тот же existing chat ID `6ab26f…6791` (полный ID доступен из automation creation, намеренно сокращён в публичном репозитории; совпадает с PM-043).
 **Assigned to:** Игорь / Developer.
 **Assignment ID:** PM-046-PILOT-20260926-0516.
-**Created:** 2026-09-26 05:16 UTC.
+**Created:** 2026-09-26 05:14 UTC.
 **Scope:** только этот тестовый файл, не приложение и не production. Один GitHub PR event должен разбудить этот же чат, прочитать карточку и записать один claim.
 
 ## Claim protocol
