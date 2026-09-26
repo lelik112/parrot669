@@ -30,7 +30,7 @@
 | [PM-040](PM-040-playwright-web-e2e.md) | P1 | in progress — 4 fixture-сценария × 3 проекта, CI 12/12 (PR #54/#57); web покрытие/QA открыты, ручной A↔B PASS, автоматический auth ждёт изоляции данных | Денис claim, Sol / Medium; Никита QA матрицы Luna / Medium и Борис acceptance Sol / Medium ожидают claims |
 | [PM-041](PM-041-real-device-qa-queue.md) | P1 | blocked — очередь реальных iPhone/Safari критериев; браузерный QA продолжается | Марк ведёт очередь, Борис / Никита после доступа; Luna / Medium |
 | **NOW — P2** | | | |
-| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | in progress / NOW — одноразовый pilot пробуждения и проверка ограничений | Игорь / Developer claim по прямому поручению Алексея; Sol / High |
+| [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | in progress / NOW — одноразовый scheduled pilot в существующем чате Игоря PASS; частота/цена/повторы открыты | Игорь / Developer claim по прямому поручению Алексея; Sol / High |
 | [PM-038](PM-038-host-unsaved-drafts-rerender.md) | P2 | reported from code — focused QA needed | Марк triage; Никита / QA candidate, Денис / dev candidate, claims нет; Luna / Medium QA, Sol / Medium dev |
 | [BUG-020](BUG-020-unread-message-discoverability.md) | P2 | in progress — повторный FAIL глобального badge при непрочитанной строке | Денис / Developer, claim и Sol / Medium; Борис / QA после исправления |
 | [BUG-021](BUG-021-blocking-signs-out-host.md) | P2 | reported — controlled block/unblock repeat did not reproduce earlier signout | Марк / PM triage; Борис / QA |
