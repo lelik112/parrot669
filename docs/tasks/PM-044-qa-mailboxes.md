@@ -151,3 +151,12 @@
 **Rollback:** snapshot хранит четыре старых значения с immutable account IDs в закрытой таблице. Откат выполняется той же командой в режиме `rollback` с batch `PM-044-agentmail-v1`; перед изменением она повторно блокирует active verification/reset tokens, frozen delivery и конфликты, затем транзакционно восстанавливает старые значения и проверяет результат.
 
 **Next / Gate 3:** Борис независимо проверяет `qa`/`lelik`: username login, reset/verification и критические письма PM-017/PM-006, точный адресат и отсутствие перекрёстной доставки, сохранность существующих диалогов. Никита повторяет короткий регресс `qa2`/`qa3`. До их signed evidence последние два acceptance criteria остаются открытыми. Handoff отправлен Борису в [PR #63 comment #5846321775](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846321775), Никите в [PR #64 comment #5846321859](https://github.com/lelik112/parrot669/pull/64#issuecomment-5846321859), результат Марку — в [PR #60 comment #5846322029](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846322029).
+
+
+## Gate 3 Regression QA model-gate blocker — 2026-09-26 12:39 UTC
+
+**Agent:** Никита. **Role:** Regression QA Engineer. **Wake ID:** `PM-044-GATE3-NIKITA-20260926-1237`. **Source:** [PR #64 comment #5846321859](https://github.com/lelik112/parrot669/pull/64#issuecomment-5846321859). **Related task:** PM-044 / PM-017 / PM-006.
+
+**Model check / blocker:** поручен короткий независимый регресс пары `qa2`/`qa3`; рекомендованных Luna / Medium и целевого дефолта Никиты Sol 3/6 для него достаточно, повышение не требуется. Однако по D019 и актуальному `docs/team.md` Sol 3/6 пока указан только как целевой: подтверждения Алексея, что настройка фактически применена в этом чате, нет. Поэтому новый claim и Gate 3 не начинаю; это не start receipt и не результат регресса.
+
+**Required:** Алексей подтверждает применённую настройку Никиты Sol 3/6, Марк фиксирует статус в `docs/team.md` и будит Никиту новым адресным комментарием. После этого повторить Model check, записать claim/start receipt и проверить только назначенный scope: username login, сохранность диалогов и разделения пары, доступный email-flow, точный plus-tag, доставку в назначенный inbox и отсутствие перекрёстной входящей доставки. Код, БД, DNS, Zoho, Railway и аккаунты не менять; critical acceptance Бориса не подменять.
