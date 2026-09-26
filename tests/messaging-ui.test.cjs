@@ -76,6 +76,25 @@ test('PM-049: Messages header has a stable search return and truthful guest and 
   }
 });
 
+test('PM-049: Messages clears private BFCache content before session revalidation',async t=>{
+  let session=user;
+  const h=await harness(t,{handler:r=>{
+    if(r.path==='/api/host/auth/me') return session ? session : response({error:'unauthorized'},401);
+    if(r.path==='/api/messaging/conversations') return {items:[detail()],nextCursor:null};
+  }});
+  assert.equal(h.$('msg-account').hidden,false);
+  assert.equal(h.$('msg-list').children.length,1);
+  session=null;
+  const event=new h.w.Event('pageshow');
+  Object.defineProperty(event,'persisted',{value:true});
+  h.w.dispatchEvent(event);
+  assert.equal(h.$('msg-account').hidden,true);
+  assert.equal(h.$('msg-list').children.length,0);
+  await flush();
+  assert.equal(h.$('msg-login-link').hidden,false);
+  assert.equal(h.calls.filter(call=>call.path==='/api/host/auth/me').length,2);
+});
+
 test('polling highlights an incoming conversation before opening it and clears only after server read state changes',async t=>{
   let unread=0, rows=[];
   const h=await harness(t,{handler:r=>{
