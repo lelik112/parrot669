@@ -3,7 +3,7 @@
 **Title:** проверить событийное пробуждение существующего чата после назначения задачи в репозитории.
 **Status:** in progress / team PR inbox rollout — #60 Марк and #61 Игорь active with signed two-way PASS; a second distinct comment also woke Igor. #62 Денис, #63 Борис, #64 Никита and #65 Алекс are docs-only draft PRs in `prepared` state; each needs a trigger inside that agent's existing chat and one delivery test. Ordinary push to `main` remains unsupported; duplicate delivery and regular cost remain unmeasured.
 **Priority:** P2.
-**Agent:** Марк / Product Manager — owner of D017 team rollout and documentation. **Next:** Денис, Борис, Никита and Алекс each perform one-time `enable_comments` setup in their own existing chat (no claim of product work implied); Марк sends one addressed test comment to each and verifies signed receipt. Игорь completed the technical pilot; no active dev claim.
+**Agent:** Марк / Product Manager — owner of D017 team rollout and documentation. **Next:** Денис, Борис, Никита and Алекс each perform one-time `enable_comments` setup in their own existing chat (no claim of product work implied), record enabled here and send a setup handoff to PR #60. Марк's active inbox handles that comment, posts one addressed test to their PR and verifies signed receipt before marking `active`; no owner relay is needed after the one-time setup prompt. Игорь completed the technical pilot; no active dev claim.
 **Recommended model:** Sol. **Recommended reasoning:** Medium.
 **Reason:** нужно установить реальные границы GitHub event и Automations на одном существующем чате, без разработки продукта.
 
