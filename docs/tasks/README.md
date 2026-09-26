@@ -17,7 +17,6 @@
 | **NOW — P1** | | | |
 | [PM-049](PM-049-shared-shell-host-cleanup.md) | P1 | in progress — PR #68 released, но QA подтвердил privacy regression: browser Back после logout восстанавливает старый signed-in Host DOM; fix/retest required | Денис / Developer — BFCache/history fix; Борис / QA — independent retest; Sol / Medium |
 | [PM-047](PM-047-design-trust-audit.md) | P1 | in progress — Марк начал аудит пяти экранов и первых 30 секунд доверия; пользовательская проверка и выбор правок открыты | Марк / PM claim, Sol / Medium; Денису и QA не назначено |
-| [BUG-023](BUG-023-host-profile-save-not-found.md) | P1 | in review — authenticated save/reopen PASS after PR #46 on both origins; 401/privacy open | Денис / Developer; Борис / QA |
 | [PM-029](PM-029-two-origin-qa-sessions.md) | P1 | in review — dual exchange passed; main later anonymous, Worker=lelik | Борис / QA |
 | [PM-016](PM-016-qa-second-session-access.md) | P1 | in review — qa/lelik restored; shared Chrome collision with Regression QA confirmed | Борис / QA |
 | [PM-024](PM-024-contact-from-every-search-result.md) | P1 | in review | Борис / QA |
@@ -70,6 +69,7 @@
 | [PM-032](PM-032-how-it-works.md) | later | planned | —: LATER |
 | [PM-033](PM-033-faq.md) | later | planned | —: LATER |
 | **DONE** | | | |
+| [BUG-023](BUG-023-host-profile-save-not-found.md) | P1 | done — PR #46 save/reopen PASS; anonymous 401 и public privacy PASS на двух origins | Денис / Developer; Борис / QA; Марк / closure |
 | [PM-043](PM-043-agent-wake-up-feasibility.md) | P2 | done — одноразовый запуск и CAS доказаны, 5 минут не подтверждены | Марк / PM закрыл исследование; без постоянного scheduler |
 | [PM-036](PM-036-regression-qa-independent-two-accounts.md) | P1 | done — функциональный QA и пара Бориса PASS; live outsider login negative оставлен как явно принятое исключение | Марк / PM closure; Игорь / Developer, Никита / Regression QA, Борис / QA Lead |
 | [PM-042](PM-042-agent-check-in-process-audit.md) | P2 | done — аудит процесса Алекса; ошибочный второй PM-036 удалён | Марк / PM; Sol / Medium; реализация отдельно PM-043 |
