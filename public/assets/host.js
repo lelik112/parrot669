@@ -496,6 +496,29 @@ async function boot(){
   }
 }
 
+async function revalidateRestoredPage(){
+  // BFCache restores the previous DOM verbatim. Clear every auth-sensitive
+  // value synchronously, then rebuild it only from a fresh server session.
+  sessionLoading = true;
+  state = emptyState();
+  accountId = null;
+  expandedPropertyIds.clear();
+  unsavedHostChanges = false;
+  renderAuthState();
+  renderProperties();
+  message("");
+  try {
+    await restoreSession();
+  } finally {
+    sessionLoading = false;
+    renderAuthState();
+  }
+}
+
+window.addEventListener("pageshow", event => {
+  if (event.persisted) void revalidateRestoredPage();
+});
+
 async function restoreSession(){
   const params = new URLSearchParams(window.location.search);
   const verificationToken = params.get("verifyEmail");
