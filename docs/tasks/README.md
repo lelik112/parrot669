@@ -55,7 +55,7 @@
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | **NEXT — P2** | | | |
-| [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in progress — PR #61 comment trigger Игоря включён; сквозная доставка ещё не проверена | Марк / PM отправляет уникальный `To: Игорь` + Wake ID в [PR #61](https://github.com/lelik112/parrot669/pull/61), сверяет запись в карточке; Игорь / Developer настроил inbox |
+| [PM-046](PM-046-github-event-existing-chat-wakeup.md) | P2 | in review — адресный комментарий в [PR #61](https://github.com/lelik112/parrot669/pull/61) → прежний чат Игоря → один CAS результат PASS; trigger включён | Марк / PM ведёт ограниченный пилот; Игорь / Developer откликнулся на тест, нового dev claim нет; Sol / Medium |
 | [PM-045](PM-045-five-minute-agent-wake-up-pilot.md) | P2 | closed / parked — пятиминутный пилот недоступен в проверенном планировщике; не запускался | Марк / PM зафиксировал результат; активного исполнителя нет |
 | [PM-037](PM-037-search-date-range-bound.md) | P2 | in review — backend/frontend release и live smoke выполнены; независимая QA открыта | Борис / QA проверяет 366/367, сохранение ввода, обычный поиск; Игорь / Developer передал evidence |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
