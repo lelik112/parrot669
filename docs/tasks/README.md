@@ -51,7 +51,7 @@
 | [PM-014](PM-014-qa-native-autofill-environment.md) | P2 | blocked | Алексей → Борис: Safari |
 
 | **NEXT — P1** | | | |
-| [PM-044](PM-044-qa-mailboxes.md) | P1 | in progress — Gates 1–2 PASS; Gate 3 claimed обоими QA, evidence pending | Борис / Sol 4/6 — acceptance `qa`/`lelik`; Никита / Sol 3/6 — регресс `qa2`/`qa3` |
+| [PM-044](PM-044-qa-mailboxes.md) | P1 | blocked — Gates 1–2 PASS; Gate 3 `qa2`/`qa3` не получает recovery email, нет самостоятельного login path; Борис проверяет свою пару | Денис / Sol 4/6 — диагноз delivery; Никита / Sol 3/6 — FAIL/blocked; Борис / Sol 4/6 — acceptance in progress |
 | [PM-017](PM-017-qa-test-mailbox-access.md) | P1 | blocked до PM-044 | Борис / QA после четырёх проверенных адресов и своего QA inbox |
 | [PM-006](PM-006-email-acceptance.md) | P1 | planned | —: после PM-017 |
 | [PM-007](PM-007-mobile-acceptance.md) | P1 | blocked — управляемый iPhone Safari ждёт PM-015/041 | Борис / QA после среды, нет claim полного прогона; Luna / Medium |
