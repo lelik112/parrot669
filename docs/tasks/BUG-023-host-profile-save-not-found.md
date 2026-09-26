@@ -53,3 +53,12 @@
 - 2026-09-25 ~14:55 UTC — **Agent:** Денис. **Role:** Developer. **Change:** live asset on `parrot669.com` and `parrot669.cheltsov112.workers.dev` now contains `api("/profile")` (cache-busted GET, observed line 526); Worker already routes resulting `PATCH /api/host/profile` to backend. **Related task:** BUG-023 / PM-021. **Next:** Борис / QA repeats authenticated save → reload on both origins, empty name/400, unauthorized/401 and public privacy; only then mark done. No credentials were used in my live check.
 
 - 2026-09-25 ~15:21 UTC — **Agent:** Борис. **Role:** QA. **Scope:** production desktop Cloud Chrome; main origin authenticated `qa`, QA Worker authenticated `lelik`. **Change:** PASS for original defect after PR #46. On main, changed public name `Qa`→`Qa PM-021 retest`, UI showed “Имя хозяина сохранено”, navigated Search→Host and saw the changed name; restored `Qa` and verified after another navigation. On QA Worker, changed `lelik`→`lelik PM-021 retest`, saw success, navigated Messages→Host and saw changed value; restored `lelik` and verified. No `Not found`. A whitespace-only value triggered native required-field validation in the main browser before API submission; revisiting Host retained `Qa`. **Open:** direct backend invalid/400, anonymous/401 and public-profile privacy not independently proven in this pass. **Assigned:** Денис / Developer (fix); Борис / QA acceptance. **Related task:** BUG-023 / PM-021.
+
+
+## Boris follow-up claim — 2026-09-26 13:56:39 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `BUG-023-BORIS-PRIVACY-20260926-1357`. **Source:** workflow next-ready rule after PM-049 privacy FAIL; [PM-049 result](PM-049-shared-shell-host-cleanup.md). **Related task:** BUG-023 / PM-021.
+
+**Model check:** карточка рекомендует Sol / Medium; подтверждённый дефолт Бориса Sol 4/6 достаточен, повышение не требуется.
+
+**Claim / scope:** беру оставшийся независимый negative/privacy acceptance BUG-023: anonymous PATCH должен дать 401 на canonical и QA Worker, а публичный anonymous Search не должен раскрывать email/private host data. Authenticated save/reopen уже PASS и не повторяется без безопасной сессии. Код и данные не меняю. **Status:** in progress.
