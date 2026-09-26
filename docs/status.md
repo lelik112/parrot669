@@ -30,7 +30,7 @@
 - **[PM-037](tasks/PM-037-search-date-range-bound.md), P2 NEXT, paused:** performance gate D014 принят для малого пилота; выпуск backend PR #29 → frontend PR #52 и независимая QA остаются открытыми. Алексей переключил Игоря на PM-043. Незавершённый release claim сохранён, после PM-043 Игорь сверяет свежие PR/CI и возобновляет выпуск. Sol / High.
 - **Денис / Developer:** BUG-020 PR #53 передан на live QA Бориса; PM-040 PR #54/#57 выпущены, Host/Messages fixture добавлен. Следующий шаг — независимый web QA и приоритизация оставшихся P1 критериев; fixture CI не проверяет живой backend и мобильный Safari.
 
-- **[PM-043](tasks/PM-043-agent-wake-up-feasibility.md) / P2 NOW, in progress:** Игорь / Developer по прямому поручению Алексея записал claim, scope и Model check (Sol / High) и начал одноразовую проверку механизма пробуждения нужного агента. PM-037 на паузе, автоматическое пятиминутное пробуждение ещё не доказано.
+- **[PM-043](tasks/PM-043-agent-wake-up-feasibility.md) / P2 NOW, in progress:** Игорь / Developer (Sol / High) провёл [одноразовый pilot](tasks/logs/PM-043-pilot.md): scheduled run вернулся в его существующий чат, прочитал тестовую карточку и записал один claim/done без сообщения Алексея. Частота 5 минут, стоимость пустых проверок, повтор/коллизии и запуск других чатов остаются открыты. PM-037 на паузе.
 
 ## Blocked
 
