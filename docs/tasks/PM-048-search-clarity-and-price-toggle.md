@@ -2,7 +2,7 @@
 
 **Title:** убрать лишние пояснения из поиска и увеличить «Только с ценой».
 **Status:** in review / production released; automated browser smoke passed, independent web review pending. **Priority:** P2.
-**Owner:** Игорь / Developer — implementation and release complete 2026-09-26; independent reviewer not yet assigned. **Role:** Developer.
+**Owner:** Игорь / Developer — implementation and release complete 2026-09-26; Борис / QA Lead — independent web review handoff sent, claim pending. **Role:** Developer / QA.
 **Recommended model:** Sol. **Recommended reasoning:** Medium (4/6 default достаточен после собственного Model check). **Reason:** локальный UI и четыре локали, но важно не исказить значение доступности и цены.
 **Scope:** `public/search.html`, переводимые видимые тексты в `public/assets/search.js` и связанные стили фильтра; без API, цены, календаря и результатов.
 
