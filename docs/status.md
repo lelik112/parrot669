@@ -10,7 +10,7 @@
 
 ## Blocked / Next — тестовая почта (2026-09-26)
 
-[PM-044](tasks/PM-044-qa-mailboxes.md) / P1 in progress: AgentMail Gate 1 PASS; Gate 2 PASS — четыре QA-аккаунта перепривязаны. Gate 3 начат по отдельным signed claims: Борис / Sol 4/6 принимает `qa`/`lelik` и критический email-flow PM-017/006; Никита / Sol 3/6 проверяет регресс `qa2`/`qa3`. Claims не пересекаются. До независимого delivery/login/dialog evidence PM-017/006 остаются открытыми.
+[PM-044](tasks/PM-044-qa-mailboxes.md) / P1 blocked at Gate 3: AgentMail Gate 1 PASS, Gate 2 PASS — четыре QA-аккаунта перепривязаны. Никита / Sol 3/6 получил FAIL/BLOCKED на `qa2`/`qa3`: recovery UI принял запросы, но писем в обоих inbox не видно спустя >1 минуты; самостоятельного login path для его пары нет. Денису передана диагностика production delivery; Борис / Sol 4/6 отдельно продолжает acceptance `qa`/`lelik`. Причина отсутствия писем не установлена; PM-017/006 открыты.
 
 ## Адресные PR inbox — D017 / PM-046 (2026-09-26)
 
