@@ -5,6 +5,7 @@
 **Status:** in review — backend и frontend выпущены 2026-09-26, current-head CI PASS, Railway SUCCESS и UI live smoke пройден. Независимая QA Бориса по 366/367, сохранению дат/фильтров и обычному поиску открыта. **Priority:** P2; повысить при подтверждённой деградации или воспроизводимом отказе. **Owner:** Марк / Product Manager — контракт завершён; **Developer:** Игорь / Developer — claim принят. **Origin:** [PM-034-BE](PM-034-BE-backend-audit.md), [backend report](logs/PM-034-backend.md).
 
 **Agent:** Марк. **Role:** Product Manager. **Scope:** контракт и критерии; реализацию и замеры проводит назначенный разработчик.
+**QA assignment:** Борис / Acceptance QA — направлено 2026-09-26, личный claim и независимый PASS ожидаются. **Recommended QA model/reasoning:** Sol / Medium для браузерных границ, локализации и дат контакта; исходный Sol / High выше относится к dev/SQL этапу.
 
 **Recommended model:** Sol. **Recommended reasoning:** High. **Reason:** публичный endpoint, ночные диапазоны, SQL `generate_series`, совместимость поиска, даты checkout-exclusive и риск нагрузки. **Model check — Игорь, 2026-09-25:** текущий GPT-6 Codex, высокий уровень анализа; соответствует сложности задачи.
 
@@ -88,3 +89,8 @@
 Live `parrot669.com/search`: with Barcelona and 2027-06-11 → 2028-06-12 (367 nights), UI displayed the Russian request-limit explanation and retained the input; changing checkout to 2028-06-11 (366 nights) searched successfully and showed no matching listings; returning to 2027-06-14 (3 nights) showed the existing QA listing with price, Airbnb and contact link with original dates. The Cloudflare dashboard's bot check prevented reading its exact Worker version; live UI behavior confirms the new code is served. Direct top-level API navigation in this browser returned `ERR_BLOCKED_BY_CLIENT`, so raw production 400 was not independently observed; automated route tests assert 400 before repository access, isolated benchmark confirms this. No production load test.
 
 **Next — Борис / independent QA:** 367 nights returns a clear message and preserves dates/filters, 366 is accepted, 1/7/30/90 and regular listing/contact dates remain correct, EN/ES/CA/RU wording does not imply a rental cap. Verify raw 400 if your environment permits direct API requests. QA result belongs here; developer smoke is not QA acceptance. **Related task:** PM-037 / D014.
+
+
+## PM QA assignment — 2026-09-26
+
+**Agent:** Марк. **Role:** Product Manager. **Change:** по поручению Алексея поставил Борису узкий независимый QA-прогон PM-037 как готовую к проверке задачу после релиза; P1 сценарии почты/отдельного анонимного сеанса/реального телефона сохраняют свои блокеры и приоритет. **Scope:** публичный поиск 366/367, обычный 1/7/30/90, сохранение дат/фильтров, EN/ES/CA/RU и даты перехода к контакту. Прямой 400 проверять только доступным безопасным способом; если клиент блокирует запрос, записать эту границу evidence. **Recommended QA model/reasoning:** Sol / Medium. **Related task:** PM-037 / D014. **Next:** Борис записывает QA claim и результат в этой карточке; Игорь подключается лишь при подтверждённом дефекте.
