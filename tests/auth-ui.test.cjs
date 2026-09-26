@@ -78,6 +78,7 @@ function setup(routes = {}, search = '', {hash = '', sessionData = {}, layout = 
   });
   const calls = [];
   const requests = [];
+  const windowListeners = new Map();
   const sandbox = {
     document: {
       ...element('document'),
@@ -89,7 +90,7 @@ function setup(routes = {}, search = '', {hash = '', sessionData = {}, layout = 
     },
     navigator: {language:'en'},
     localStorage: {getItem() {return null;}, setItem() {}},
-    window: {location: {search, pathname:'/host', hash, origin:'https://parrot669.com'},addEventListener() {},removeEventListener() {},innerHeight:layout.innerHeight||800,scrollY:380,scrollTo(x,y){
+    window: {location: {search, pathname:'/host', hash, origin:'https://parrot669.com'},addEventListener(type,fn){windowListeners.set(type,[...(windowListeners.get(type)||[]),fn]);},removeEventListener(type,fn){windowListeners.set(type,(windowListeners.get(type)||[]).filter(listener=>listener!==fn));},innerHeight:layout.innerHeight||800,scrollY:380,scrollTo(x,y){
       const requested=typeof x==='object'?x.top:y;
       const height=Number(sandbox.document.documentElement.scrollHeight)||requested+this.innerHeight;
       this.scrollY=Math.min(requested,Math.max(0,height-this.innerHeight));
@@ -116,7 +117,9 @@ function setup(routes = {}, search = '', {hash = '', sessionData = {}, layout = 
   vm.createContext(sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, 'public/assets/host-address.js'), 'utf8'), sandbox);
   vm.runInContext(source, sandbox);
-  return {nodes, modes, calls, requests, run: code => vm.runInContext(code, sandbox)};
+  return {nodes, modes, calls, requests, run: code => vm.runInContext(code, sandbox),emitWindow:async(type,event={})=>{
+    for(const listener of windowListeners.get(type)||[]) await listener(event);
+  }};
 }
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const user = {email:'test@example.test'};
@@ -144,6 +147,25 @@ test('host profile saves public name, keeps account identity private and retains
   await form.emit('submit');
   assert.equal(form.elements.displayName.value,'New host');
   assert.equal(app.nodes.get('host-status').textContent,'Host name saved.');
+});
+
+test('PM-049: Host clears private BFCache DOM before session revalidation',async()=>{
+  let current={accountId:'owner-1',email:'private@example.test',username:'owner',profile:{displayName:'Host'}};
+  const app=setup({
+    '/auth/me':()=>current ? {body:current} : {status:401,body:{error:'unauthorized'}},
+    '/dashboard':{body:{profile:{displayName:'Host'},properties:[]}}
+  });
+  await settle();
+  assert.equal(app.nodes.get('host-profile').hidden,false);
+  assert.equal(app.nodes.get('host-profile-email').textContent,'private@example.test');
+  current=null;
+  const pending=app.emitWindow('pageshow',{persisted:true});
+  assert.equal(app.nodes.get('host-profile').hidden,true);
+  assert.equal(app.nodes.get('host-profile-email').textContent,'');
+  assert.equal(app.nodes.get('host-properties').children.length,0);
+  await pending; await settle();
+  assert.equal(app.nodes.get('host-auth-links').hidden,false);
+  assert.equal(app.calls.filter(route=>route==='/auth/me').length,2);
 });
 
 test('profile return points to the same conversation only for the original signed-in account',async()=>{
