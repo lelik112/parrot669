@@ -1,8 +1,8 @@
 # PM-049 — Единая шапка и спокойный кабинет хозяина
 
 **Title:** согласовать account/navigation и общий контейнер Search, Host, Messages; убрать лишнюю навигацию кабинета.
-**Status:** planned / NOW; developer claim ещё нет. **Priority:** P2.
-**Owner / expected Agent:** Денис / Developer; PM-044 ждёт отдельное evidence, PM-048 выпущена; PM-049 можно начать независимо. **Role:** Developer.
+**Status:** in progress / NOW; Денис signed claim. **Priority:** P2.
+**Owner / expected Agent:** Денис / Developer; PM-044 ждёт отдельное evidence, PM-048 выпущена; PM-049 начата независимо. **Role:** Developer.
 **Recommended model:** Sol. **Recommended reasoning:** Medium (4/6 default; собственный Model check до claim). **Reason:** три страницы, auth/logout и responsive-навигация требуют аккуратной регрессии.
 **Scope:** общий header/container трёх страниц и визуальная иерархия Host; не менять auth API или сохранённые данные.
 
@@ -40,3 +40,5 @@
 - 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Change:** PM-049 поставлена в NOW как независимая работа Дениса на время owner-blocker PM-044; PM-048 уже released, конфликт общих файлов проверять при claim. **Related task:** PM-049 / PM-044. **Next:** адресный handoff Денису, его Model check и отдельный signed claim; к PM-044 вернуться после Resend evidence.
 
 - 2026-09-26 — **Agent:** Марк. **Role:** Product Manager. **Change:** [адресный handoff Денису #62](https://github.com/lelik112/parrot669/pull/62#issuecomment-5846614870), Wake ID `PM-049-DENIS-INDEPENDENT-20260926-1323`; это доставка, не signed claim. **Related task:** PM-049. **Next:** дождаться Model check и claim Дениса, затем реализация независимо от PM-044.
+
+- 2026-09-26T13:25:14.683Z — **Agent:** Денис. **Role:** Developer. **Wake ID:** `PM-049-DENIS-INDEPENDENT-20260926-1323`. **Source:** [PR #62 comment #5846614870](https://github.com/lelik112/parrot669/pull/62#issuecomment-5846614870). **Related task:** PM-049. **Model check:** подтверждённый Алексеем в `docs/team.md` Sol 4/6 соответствует Sol / Medium карточки; фактически достаточно для трёх страниц, auth state и responsive regression. **Claim / scope:** беру только общий header/account/language/logout/back и Host container/navigation copy в Search, Host, Messages; не меняю auth API, данные, polling и PM-050 email-help/Refresh. PM-048 выпущена; PM-050 ещё без claim и прямо исключает общий header, пересечение общих файлов ограничиваю разными участками. **Status:** in progress. **Next:** проверить main и существующие реализации, внести узкие UI изменения в отдельной ветке/PR, выполнить тесты и web smoke, затем QA handoff.
