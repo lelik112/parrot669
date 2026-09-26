@@ -1,7 +1,7 @@
 # PM-015 — Настоящий мобильный ввод: среда для QA
 
 **Title:** обеспечить наблюдаемый iPhone Safari touch/экранную клавиатуру для [PM-007](PM-007-mobile-acceptance.md).
-**Status:** blocked — доступ Бориса к управляемому реальному iPhone Safari не подтверждён; owner-assisted PM-001 дал частичный результат, но не независимый мобильный QA. Дальше [PM-039](PM-039-browser-test-environments.md): проверить самостоятельный удалённый сеанс/стоимость или другую доступную среду. **Priority:** P1. **Owner:** Борис / QA; устройство/сеанс — Алексей.
+**Status:** blocked — доступ Бориса к управляемому реальному iPhone Safari не подтверждён; owner-assisted PM-001 дал частичный результат, но не независимый мобильный QA. Проверки стоят в [очереди PM-041](PM-041-real-device-qa-queue.md); продуктовый выбор Playwright для web записан в [D016](../decisions/D016-playwright-first-real-device-queue.md). Доступ к реальному телефону и стоимость позже решаются отдельно. **Priority:** P1. **Owner:** Борис / QA; устройство/сеанс — Алексей.
 **Agent:** Борис. **Role:** QA. **Scope:** только доступная мобильная среда и evidence; продукт и код не меняются.
 **Recommended model:** Luna. **Recommended reasoning:** Medium. **Reason:** пошаговый основной путь с раздельной оценкой размеров, касаний, клавиатуры и нативного date picker.
 **Model check:** при возобновлении; облачный desktop не засчитывается за mobile.

@@ -2,7 +2,7 @@
 
 **Title:** проверить поиск, кабинет и контакт при мобильном вводе.
 
-**Status:** blocked — независимый mobile acceptance ждёт управляемый iPhone Safari [PM-015](PM-015-qa-mobile-device-environment.md); браузерная альтернатива исследуется в [PM-039](PM-039-browser-test-environments.md). **Priority:** P1. **Owner:** Борис / QA после разблокировки; QA claim на полный прогон нет.
+**Status:** blocked — независимый mobile acceptance ждёт управляемый iPhone Safari [PM-015](PM-015-qa-mobile-device-environment.md); доступные браузерные сценарии вынесены в [PM-040](PM-040-playwright-web-e2e.md), нативный остаток — в [PM-041](PM-041-real-device-qa-queue.md). **Priority:** P1. **Owner:** Борис / QA после разблокировки; QA claim на полный прогон нет.
 
 **Agent (ожидаемый):** Борис / QA; claim не подтверждён. **Recommended model:** Luna. **Recommended reasoning:** Medium. **Reason:** проверяется ограниченный перечень мобильных пользовательских путей на фактическом устройстве/браузере; важно точно отметить touch, клавиатуру и эмуляцию.
 

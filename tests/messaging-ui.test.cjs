@@ -17,10 +17,11 @@ const flush = async () => { for(let i=0;i<8;i++) await new Promise(resolve=>setI
 const deferred = () => { let resolve; const promise=new Promise(r=>resolve=r); return {promise,resolve}; };
 const response = (data,status=200) => new Response(JSON.stringify(data),{status});
 
-async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=true,page='messages.html',sessionData={},localData={},sessionUser=user}={}) {
+async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=true,page='messages.html',sessionData={},localData={},sessionUser=user,initialVisibility='visible'}={}) {
   const dom = new JSDOM(file(page),{url:`https://parrot669.com${url}`,runScripts:'outside-only',pretendToBeVisual:true});
   t.after(()=>dom.window.close());
   const w=dom.window, calls=[], intervals=[];
+  Object.defineProperty(w.document,'visibilityState',{configurable:true,value:initialVisibility});
   for(const [key,value] of Object.entries(sessionData)) w.sessionStorage.setItem(key,value);
   for(const [key,value] of Object.entries(localData)) w.localStorage.setItem(key,value);
   w.setInterval=fn=>{intervals.push(fn);return intervals.length;};
@@ -46,6 +47,18 @@ async function harness(t,{url='/messages.html',handler=()=>undefined,loggedIn=tr
   return {w,calls,intervals,$:id=>w.document.getElementById(id),submit:form=>form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})),
     input:(element,value)=>{element.value=value;element.dispatchEvent(new w.Event('input',{bubbles:true}));}};
 }
+
+test('initial unread badge loads when a Messages tab starts in the background',async t=>{
+  const h=await harness(t,{initialVisibility:'hidden',handler:r=>{
+    if(r.path==='/api/messaging/conversations') return {items:[detail()],nextCursor:null};
+  }});
+  assert.match(h.$('msg-list').textContent,/Unread/);
+  assert.equal(h.w.document.querySelector('[data-msg-unread]').hidden,false);
+  assert.equal(h.w.document.querySelector('[data-msg-unread]').textContent,'1');
+  assert.equal(h.calls.filter(call=>call.path==='/api/messaging/unread').length,1);
+  h.intervals[0](); await flush();
+  assert.equal(h.calls.filter(call=>call.path==='/api/messaging/unread').length,1);
+});
 
 test('polling highlights an incoming conversation before opening it and clears only after server read state changes',async t=>{
   let unread=0, rows=[];

@@ -95,6 +95,11 @@ export default {
     const qaOrigin = QA_HOSTNAMES.has(url.hostname);
     const qaSecret = qaOrigin && typeof env.QA_WORKER_SECRET === "string" ? env.QA_WORKER_SECRET : "";
     if (qaOrigin && qaSecret.length < 32) return json({ error: "QA site unavailable" }, 503);
+    // QA origins deliberately reject password reset API requests. Send the
+    // recovery page to the ordinary origin, which shares the same accounts.
+    if (qaOrigin && ["/recover", "/recover.html"].includes(url.pathname) && request.method === "GET") {
+      return Response.redirect(`https://parrot669.com/recover.html${url.search}`, 302);
+    }
     if (qaOrigin && url.pathname === "/api/contact") return json({ error: "Forbidden" }, 403);
 
     if (url.pathname.startsWith("/api/messaging/")) {

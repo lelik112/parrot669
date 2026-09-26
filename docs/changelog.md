@@ -1,5 +1,58 @@
 # PARROT 669 changelog
 
+## 2026-09-26 — PM-043 закрыта как техническое исследование
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** принял handoff Игоря по [PM-043](tasks/PM-043-agent-wake-up-feasibility.md): одноразовый scheduled wake-up существующего чата и GitHub CAS прошли; регулярные 5 минут, Markdown trigger и массовые запуски не доказаны и не включены. PM-043 done; передача остаётся ручной, Игорь возвращается к PM-037 с открытыми release/QA. **Related tasks:** PM-043, PM-037.
+
+
+## 2026-09-26 — PM-043 feasibility handoff
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** в [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) записал evidence одноразового пробуждения существующего чата, реальный GitHub 409 при stale SHA, пропуск повторного `done`, локальные случаи `blocked`/неверного ID и расчёт 5 минут (8 640 запусков/30 дней на агента). Документация OpenAI допускает minute interval внутри чата, но доступный callable Automations ограничивает recurring одним запуском в час; прямого триггера на изменение Markdown нет. PM-043 передана Марку `in review` для выбора механизма; постоянный polling не включён, PM-037 остаётся на паузе до решения. **Related tasks:** PM-043 / PM-037.
+
+## 2026-09-26 — PM-043: одноразовое пробуждение существующего чата прошло
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** сверил [пилот Игоря](tasks/logs/PM-043-pilot.md): scheduled run в существующем чате Игоря без нового сообщения владельца прочитал тестовую карточку GitHub и атомарно записал один claim/done. Это доказывает одноразовый check-in на одном агенте, не регулярные пять минут и не запуск всей команды. PM-043 остаётся P2 / in progress (Игорь / Sol / High); требуется оценить ограничения, стоимость и повторы. PM-037 остаётся paused до handoff PM-043. **Related tasks:** [PM-043](tasks/PM-043-agent-wake-up-feasibility.md), [PM-037](tasks/PM-037-search-date-range-bound.md).
+
+## 2026-09-25 — приоритет Игоря изменён: PM-043 сейчас, PM-037 на паузе
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** исправил прежнее ошибочное «PM-043 после PM-037». Алексей прямо поручил Игорю взять PM-043 сейчас; Игорь подтвердил claim, scope и Sol / High в карточке. PM-037 остаётся незавершённой и не выпущенной, performance gate принят; её release/CI/QA возобновятся после PM-043 с новой проверкой текущих PR heads. Индекс, статус и roadmap обновлены. **Related tasks:** [PM-043](tasks/PM-043-agent-wake-up-feasibility.md), [PM-037](tasks/PM-037-search-date-range-bound.md).
+
+## 2026-09-25 — PM-036 закрыта владельцем; PM-043 назначена Игорю
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по явному поручению Алексея закрыл [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md): Никита прошёл A→B→A/refresh/relogin, Борис подтвердил сохранность своей пары, Игорь сверил точный allowlist, CI и частичные live negative checks. Live login постороннего подтверждённого аккаунта на новом QA origin **не проверялся** и оставлен в карточке непомеченным; владелец принял закрытие с этим известным исключением, PASS не заявлен. [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) / P2 NEXT поручена Игорю (Sol / High) после PM-037; claim и старт ещё не подтверждены. **Related tasks:** PM-036, PM-043.
+
+## 2026-09-25 — duplicate PM-036 corrected; agent check-in audit
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** предложение Алекса об автономной проверке назначений ошибочно получило уже занятый ID PM-036. Перенёс его в [PM-042](tasks/PM-042-agent-check-in-process-audit.md), удалил ошибочный дубликат и завершил аудит процесса; [PM-043](tasks/PM-043-agent-wake-up-feasibility.md) отдельно фиксирует техническую проверку пробуждения конкретного агента. Встроенные Automations доступны, но расписание ограничено одним запуском в час, GitHub trigger относится к PR; пятиминутное пробуждение чатов не реализовано. PM-043 P2 / planned без dev claim, пока Денис и Игорь выполняют текущие задачи. **Related tasks:** PM-042, PM-043; оригинальная PM-036 про два QA-аккаунта не меняет ID.
+
+## 2026-09-25 — PM-036: независимый двухаккаунтный smoke PASS, закрытие review ожидает два отчёта
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** принял отчёт Никиты: отдельные `qa2`/`qa3` на regression Worker origin прошли A→B→A, refresh и независимый logout/relogin; прежний 401 при ошибочном логине не воспроизводится с верным логином. Рабочая пара доступна для назначенной ручной регрессии. PM-036 остаётся `in review`: Борис должен подтвердить сохранность собственной пары, Игорь — завершить live negative/security evidence на новых origin. Ни PM-029 security, ни live автоматический auth от этого не закрываются. Денис отдельно слил [PR #57](https://github.com/lelik112/parrot669/pull/57): второй fixture smoke PM-040, 4 сценария × 3 browser projects, CI 12/12; QA живого backend остаётся открытой. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md), [PM-040](tasks/PM-040-playwright-web-e2e.md).
+
+## 2026-09-25 — PM-036: recovery redirect deployed and live checked
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** [PR #55](https://github.com/lelik112/parrot669/pull/55) and follow-up [PR #56](https://github.com/lelik112/parrot669/pull/56) merged after green frontend CI (133 unit tests and browser smoke); manual [regression deploy #3](https://github.com/lelik112/parrot669/actions/runs/36182550835) succeeded on frontend main `bf96140`. Live browser requests to regression A `/recover.html?lang=ru` and regression B `/recover?lang=ru` both land on `https://parrot669.com/recover?lang=ru`. No backend deploy or auth policy change. Repeat login `qa2` and B logout/relogin remain with Nikita. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
+## 2026-09-25 — PM-036: serve QA recovery redirect before Cloudflare assets
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** live check after PR #55 deploy found Cloudflare static assets handled `/recover.html` before the Worker and canonicalized it to `/recover`, so the first redirect was bypassed. Configured `run_worker_first` for both recovery paths on production and regression Workers, and redirected both paths on exact QA hosts. The ordinary origin still serves its recovery form; QA reset APIs still return 403. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
+## 2026-09-25 — PM-040: первый Playwright smoke принят как этап
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** сверил [PR #54](https://github.com/lelik112/parrot669/pull/54) (merged `0993f67`), [CI 36180701745](https://github.com/lelik112/parrot669/actions/runs/36180701745) (обычные 132/132, browser smoke 6/6) и [матрицу 42 задач / 194 критериев](qa/playwright-coverage.md). В PM-040 признан завершённым первый узкий fixture smoke: 2 анонимных UI-сценария в Chromium desktop, WebKit desktop и mobile emulation. Из 194 критериев лишь 6 частично автоматизированы; остальные требуют web расширения, ручного QA, внешней среды или реального телефона. PM-040 остаётся P1 / in progress у Дениса (Sol / Medium); QA матрицы и критического контакта ожидает отдельных claims Никиты и Бориса, A↔B зависит от PM-036. Продуктовые задачи PM-023/024/026/BUG-020 fixture CI не закрывает. **Related task:** [PM-040](tasks/PM-040-playwright-web-e2e.md) / D016.
+
+## 2026-09-25 — PM-036: QA password recovery navigation
+
+- **Agent:** Игорь. **Role:** Developer. **Change:** Railway showed three 403 responses from `/api/auth/password-reset/request` on regression A after the user followed the recovery link. QA reset APIs are intentionally forbidden by the backend. The Worker now redirects the QA recovery page to `parrot669.com/recover.html`; the production origin shares the accounts and can perform the ordinary email recovery. QA API attestation and restrictions stay in force. Login A and independent logout/relogin B still need Nikita's retest after account recovery. **Related task:** [PM-036](tasks/PM-036-regression-qa-independent-two-accounts.md).
+
+## 2026-09-25 — PM-037: пилотный performance gate принят
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по [изолированному замеру](tasks/logs/PM-037-performance.md) принял [D014](decisions/D014-public-search-date-range.md) с границей 366 ночей для малого пилота: HTTP p95 226 мс при 100 объектах в городе, 572 мс при четырёх запросах; 367+ отсекается до SQL. При 500 объектах p95 1 044 / 2 216 мс — риск для будущего масштаба, не заявленная производительность production. [PM-037](tasks/PM-037-search-date-range-bound.md) теперь P2/NOW, in progress у Игоря (Sol / High): backend PR #29 и frontend PR #52 ещё открыты; frontend PR сейчас `mergeable=false`, Игорь сверяет причину/current-head CI, выпускает backend → frontend и передаёт Борису на независимую QA. Продуктовую границу не меняли; merge/deploy/QA этой записью не выполнены. **Related task:** PM-037 / D014.
+
+## 2026-09-25 — D016: Playwright-first browser QA; real iPhone checks queued
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** по решению Алексея выбран Playwright для автоматизации доступных web-сценариев. Созданы [PM-040](tasks/PM-040-playwright-web-e2e.md) (разработка, planned, кандидат Денис после BUG-020, claim ещё нет) и [PM-041](tasks/PM-041-real-device-qa-queue.md) (инструкция Борису/Никите и blocked очередь нативных проверок); [PM-039](tasks/PM-039-browser-test-environments.md) завершена как исследование выбора. [D016](decisions/D016-playwright-first-real-device-queue.md) фиксирует границу: web evidence не закрывает настоящий iPhone Safari/autofill/date picker. Приложение, CI и платные сервисы этим документальным изменением не затронуты. **Related task:** PM-039 / PM-040 / PM-041.
+
 ## 2026-09-25 — PM-037: bounded public search prepared
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** implemented the D014 1–366-night request bound before SQL and safe public date parsing; added EN/ES/CA/RU UI guidance with preserved dates/filters and boundary/restoration/contact tests. Added an isolated PostgreSQL 16 benchmark with actual SQL plans, full HTTP p50/p95, mixed availability/pricing/calendars and four concurrent requests. Both CI checks and benchmark passed. 366-night HTTP p95: 226 ms (100 city properties), 1,044 ms (500); concurrency=4: 572 / 2,216 ms. [Report and raw plans](tasks/logs/PM-037-performance.md) recorded for Mark; PM performance gate, release and independent QA remain open. **Related task:** [PM-037](tasks/PM-037-search-date-range-bound.md).

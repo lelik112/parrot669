@@ -1,0 +1,90 @@
+const {test, expect} = require('@playwright/test');
+const {installPublicFixture, assertNoHorizontalOverflow} = require('./public-fixture.cjs');
+
+test('PM-024/PM-023: public search reaches guest draft and auth gate without sending', async ({page}) => {
+  const fixture = await installPublicFixture(page);
+  await page.goto('/search.html');
+  await page.locator('select[name="country"]').selectOption('ES');
+  await page.locator('select[name="city"]').selectOption('Barcelona');
+  await page.locator('input[name="from"]').fill('2026-11-10');
+  await page.locator('input[name="to"]').fill('2026-11-17');
+  await page.locator('#availability-form button[type="submit"]').click();
+  const card = page.locator('.availability-card');
+  await expect(card).toHaveCount(1);
+  await expect(card).toContainText('Fixture apartment');
+  await expect(card).toContainText('Barcelona');
+  const link = card.locator('.message-property-link');
+  await expect(link).toBeVisible();
+  await expect(link).toHaveAttribute('href', new RegExp(`property=${fixture.propertyId}.*from=2026-11-10.*to=2026-11-17`));
+  await assertNoHorizontalOverflow(page);
+  await link.click();
+  await expect(page).toHaveURL(new RegExp(`/messages.html\\?property=${fixture.propertyId}`));
+  await expect(page.locator('#msg-property')).toHaveText('Fixture apartment');
+  await expect(page.locator('#msg-compose')).toBeVisible();
+  await page.locator('#msg-dates').evaluate(node => node.open = true);
+  await expect(page.locator('#msg-compose input[name="from"]')).toHaveValue('2026-11-10');
+  await expect(page.locator('#msg-compose input[name="to"]')).toHaveValue('2026-11-17');
+  await page.locator('#msg-compose textarea[name="body"]').fill('Is this fixture available?');
+  await page.locator('#msg-send').click();
+  await expect(page.locator('#msg-auth')).toBeVisible();
+  await expect(page.locator('#msg-compose textarea[name="body"]')).toHaveValue('Is this fixture available?');
+  expect(fixture.seen.every(call => call.method === 'GET')).toBe(true);
+  await assertNoHorizontalOverflow(page);
+});
+
+test('PM-026/PM-023: Messages has one keyboard reachable link and language switch', async ({page}) => {
+  const fixture = await installPublicFixture(page);
+  await page.goto('/search.html');
+  await expect(page.locator('nav.housing-tabs a.messaging-nav-link')).toHaveCount(1);
+  await page.locator('nav.housing-tabs a.messaging-nav-link').focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/messages.html$/);
+  await expect(page.locator('#msg-auth')).toBeVisible();
+  await page.locator('[data-msg-lang="ru"]').click();
+  await expect(page.locator('#msg-find-housing')).toHaveText('Найти жильё');
+  await expect(page.locator('nav.housing-tabs a.messaging-nav-link')).toHaveCount(1);
+  expect(fixture.seen.every(call => call.method === 'GET')).toBe(true);
+  await assertNoHorizontalOverflow(page);
+});
+
+test('PM-024: contact stays available with no external link, verified link and pending calendar', async ({page}) => {
+  const base = {city:'Barcelona',ownerDisplayName:'Fixture host',accommodationType:'entire_place',
+    bedrooms:1,sleeps:2,availableFrom:'2026-11-10',availableTo:'2026-11-17'};
+  const items = [
+    {...base,propertyId:'11111111-1111-4111-8111-111111111111',propertyTitle:'No external link',links:[]},
+    {...base,propertyId:'22222222-2222-4222-8222-222222222222',propertyTitle:'Verified listing',
+      links:[{externalId:'123456',url:'https://www.airbnb.com/rooms/123456',calendarControlStatus:'verified'}]},
+    {...base,propertyId:'33333333-3333-4333-8333-333333333333',propertyTitle:'Pending verification',
+      links:[{externalId:'234567',url:'https://www.airbnb.com/rooms/234567',calendarControlStatus:'pending'}]}
+  ];
+  const fixture = await installPublicFixture(page,{items});
+  await page.goto('/search.html');
+  await page.locator('select[name="country"]').selectOption('ES');
+  await page.locator('select[name="city"]').selectOption('Barcelona');
+  await page.locator('input[name="from"]').fill(base.availableFrom);
+  await page.locator('input[name="to"]').fill(base.availableTo);
+  await page.locator('#availability-form button[type="submit"]').click();
+  await expect(page.locator('.availability-card')).toHaveCount(3);
+  for (const item of items) {
+    const card = page.locator('.availability-card').filter({hasText:item.propertyTitle});
+    const contact = card.locator('.message-property-link');
+    await expect(contact).toBeVisible();
+    await expect(contact).toHaveAttribute('href',new RegExp(`property=${item.propertyId}.*from=${base.availableFrom}.*to=${base.availableTo}`));
+  }
+  await expect(page.locator('.availability-link-missing')).toHaveCount(1);
+  await expect(page.locator('.availability-verification-status')).toHaveCount(2);
+  await assertNoHorizontalOverflow(page);
+  expect(fixture.seen.every(call => call.method === 'GET')).toBe(true);
+});
+
+test('PM-023: direct anonymous Messages entry shows auth guidance without private inbox', async ({page}) => {
+  const fixture = await installPublicFixture(page);
+  await page.goto('/messages.html');
+  await expect(page.locator('#msg-auth')).toBeVisible();
+  await expect(page.locator('#msg-find-housing')).toBeVisible();
+  await expect(page.locator('#messages-app')).toBeHidden();
+  await expect(page.locator('#msg-history')).toBeEmpty();
+  expect(fixture.seen.some(call => call.path === '/api/messaging/conversations')).toBe(false);
+  expect(fixture.seen.every(call => call.method === 'GET')).toBe(true);
+  await assertNoHorizontalOverflow(page);
+});

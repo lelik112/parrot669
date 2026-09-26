@@ -1,7 +1,7 @@
 # PM-026 — Убрать дублирующий переход Messages
 
 **Title:** оставить одну кнопку Messages в кабинете хозяина.
-**Status:** in review — desktop RU/EN/ES/CA и клавиатура PASS; unread badge на единственной ссылке PASS по независимому BUG-020 desktop QA. Мобильный touch отдельно blocked by [PM-015](PM-015-qa-mobile-device-environment.md); не выдавать emulation за реальный iPhone. **Priority:** P2.
+**Status:** in review — desktop RU/EN/ES/CA и клавиатура PASS; ссылка одна; badge нестабилен по повторному BUG-020 desktop QA. Мобильный touch отдельно blocked by [PM-015](PM-015-qa-mobile-device-environment.md); не выдавать emulation за реальный iPhone. **Priority:** P2.
 **Owner:** Денис / Developer; QA Борис.
 **Agent:** Денис. **Role:** Developer. **Scope:** удалить повторную ссылку из Host shortcuts; сохранить глобальную Messages-вкладку, unread badge, локализацию и пути.
 **Recommended model:** Luna. **Recommended reasoning:** Low. **Reason:** небольшой UI cleanup с однозначным выбором по текущей структуре навигации.
@@ -82,3 +82,5 @@ public/host.html: общая ссылка housing-tabs и повтор host-shor
 - 2026-09-25 — **Agent:** Марк. **Role:** Product Manager. **Change:** после сверки QA evidence уточнил состояние и конкретный ресурсный блокер mobile/native по [PM-039](PM-039-browser-test-environments.md); частичный desktop/owner-assisted PASS сохранён, независимая мобильная приёмка не выдана. **Related task:** PM-026 / PM-039. **Next:** выполнить оставшийся доступный web ретест, если есть; для обязательного native/mobile — подтвердить самостоятельную среду QA и пройти отдельный ретест.
 
 - 2026-09-25 ~18:55 UTC — **Борис / QA:** сопоставил PM-026 с прямым независимым тестом [BUG-020](BUG-020-unread-message-discoverability.md) от 15:22–15:24 UTC: новое входящее от `qa` вызвало `1 непрочитанное сообщение` именно на единственной глобальной ссылке Messages у `lelik` без reload; после чтения маркер исчез. Текущая Host-страница `lelik` по-прежнему содержит одну ссылку Messages и контекстные ссылки на объекты/профиль. Desktop badge/link/языки/keyboard PASS; **native mobile touch остаётся непроверенным, PM-039**. PM-026 in review до мобильной приёмки, owner Денис.
+
+- 2026-09-25 ~18:57 UTC — **Борис / QA:** поправка к записи ~18:55: новый входящий `qa`→`lelik` на повторном desktop прогоне дал непрочитанную строку, но **не дал badge на единственной глобальной ссылке** ни на Host, ни на Messages после загрузки. Подробные шаги в [BUG-020](BUG-020-unread-message-discoverability.md). Значит критерий сохранения badge PM-026 нельзя считать стабильно пройденным; Денис расследует связанный дефект, затем QA повторяет. Остальные desktop проверки ссылки остаются PASS; mobile PM-039 открыт.

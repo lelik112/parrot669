@@ -14,6 +14,8 @@ const qaHosts=['qa.parrot669.com','parrot669.cheltsov112.workers.dev',
 
 test('regression Workers get separate addresses and the same proxied assets',()=>{
   const config=JSON.parse(fs.readFileSync(path.join(__dirname,'../wrangler.jsonc'),'utf8'));
+  assert.ok(config.assets.run_worker_first.includes("/recover"));
+  assert.ok(config.assets.run_worker_first.includes("/recover.html"));
   for(const slot of ['a','b']) {
     const environment=config.env[`regression-${slot}`];
     assert.equal(environment.workers_dev,true);
@@ -71,6 +73,18 @@ test('QA origin fails closed without secret, rejects contact/unknown API and cro
   assert.equal((await worker.fetch(new Request(base+'/api/host/auth/logout',{
     method:'POST',headers:{Origin:'https://evil.example'}
   }),env)).status,403);
+  assert.equal(calls.length,0);
+});
+
+test('QA recovery page leads to the ordinary origin while QA reset API stays closed',async()=>{
+  const {worker,calls,env}=harness();
+  for(const host of qaHosts) for(const page of ["/recover", "/recover.html"]){
+    const response=await worker.fetch(new Request(`https://${host}${page}?lang=ru`),env);
+    assert.equal(response.status,302);
+    assert.equal(response.headers.get('Location'),'https://parrot669.com/recover.html?lang=ru');
+  }
+  const main=await worker.fetch(new Request('https://parrot669.com/recover.html'),env);
+  assert.equal(main.status,200);
   assert.equal(calls.length,0);
 });
 
