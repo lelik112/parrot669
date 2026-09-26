@@ -290,3 +290,10 @@ AgentMail проверен независимо: после 12:45 UTC в обо�
 **Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-GATE3-TRIAGE-DENIS-START-20260926-1257`. **UTC:** 2026-09-26T12:58:39.358Z. **Source:** [PR #60 comment #5846453232](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846453232). **Related task:** PM-044 / PM-017 / PM-006.
 
 **PM review:** Денис сделал Model check на подтверждённом Sol 4/6 и signed claim для read-only triage в своём Gate 2/3 scope. Claims QA завершились FAIL/BLOCKED, конфликтов нет. Следующий шаг Дениса — сопоставить production binding, recovery/token/send/provider и AgentMail без записи секретов; исправления требуют отдельного scoped claim после диагноза. PM-044 остаётся blocked до нового end-to-end QA evidence.
+
+
+## PM blocker review — PM-044-GATE3-TRIAGE-BLOCKED-20260926-1302
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-GATE3-TRIAGE-BLOCKED-20260926-1302`. **UTC:** 2026-09-26T13:00:50.859Z. **Source:** [PR #60 comment #5846469665](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846469665). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM result:** Денис подтвердил 202 для трёх recovery POST, живой worker и отсутствие новых писем в обоих AgentMail inbox; 202 не доказывает отправку и не показывает, был ли match/token/provider accepted. У текущих логов нет Resend message ID и SQL/token evidence, поэтому root cause не определена. Это blocker видимости у provider, не разрешение отката или кодового исправления наугад. Нужен read-only Resend delivery/request event за 12:51:47, 12:51:57, 12:53:23 UTC (без адресов/токенов в отчёте); если событий нет — read-only token-state check через назначенного разработчика. Resend connector в текущем чате не доступен; Алексей может подключить его либо предоставить безопасный export этих событий. После evidence Денис продолжит диагноз в своём scope, а QA получат новый handoff на reset/login. PM-044/017/006 остаются blocked.
