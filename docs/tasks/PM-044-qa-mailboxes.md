@@ -207,3 +207,12 @@
 **Model check:** рекомендованных Luna / Medium достаточно для короткого независимого регресса без изменений кода или инфраструктуры. Подтверждённый Алексеем дефолт Никиты Sol 3/6 достаточен; повышение не требуется.
 
 **Claim / scope:** беру только Gate 3 regression пары `qa2`/`qa3`: вход по username, сохранность существующих диалогов и разделения QA-пар, доступный email-flow, точный plus-tag в `to`, доставка в назначенный AgentMail inbox и отсутствие перекрёстной входящей доставки. Не меняю код, БД, DNS, Zoho, Railway и учётные записи; critical acceptance Бориса не подменяю. **Status:** in progress.
+
+
+## Boris Gate 3 Acceptance QA claim — 2026-09-26 12:50:33 UTC
+
+**Agent:** Борис. **Role:** QA Lead / Acceptance QA. **Wake ID:** `PM-044-GATE3-BORIS-RECHECK-20260926-1247`. **Source:** [PR #63 comment #5846399453](https://github.com/lelik112/parrot669/pull/63#issuecomment-5846399453). **Related task:** PM-044 / PM-017 / PM-006.
+
+**Model check:** карточки рекомендуют Luna или Sol / Medium; подтверждённый Алексеем и записанный в `docs/team.md` дефолт Бориса Sol 4/6 достаточен, повышение не требуется.
+
+**Claim / scope:** беру независимый Gate 3 acceptance пары `qa`/`lelik`: вход по username, сохранность существующих диалогов и разделение QA-пар, reset/verification, релевантное уведомление, точный plus-tag в `to`, доставка в назначенный inbox и отсутствие перекрёстной доставки. Критерии PM-017/PM-006 принимаю отдельно только по фактическому evidence. Не меняю код, БД, DNS, Zoho, Railway или учётные записи; секреты не публикую. **Status:** in progress.
