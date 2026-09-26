@@ -170,3 +170,24 @@
 **Model check:** карточки рекомендуют Luna или Sol / Medium; целевой default Бориса по D019 — Sol 4/6, чего достаточно с запасом и понижение не требуется. Однако [docs/team.md](../team.md) прямо говорит, что настройки считаются только целевыми до подтверждения Алексея; фактическое применение Sol 4/6 для чата Бориса там не подтверждено.
 
 **Status: BLOCKED before claim.** По D019 зависимую acceptance не начинаю и start receipt не отправляю, пока Алексей не подтвердит фактическую настройку Бориса **Sol, уровень 4/6**, а Марк не зафиксирует это в `docs/team.md` и не разбудит новым адресным комментарием для повторного Model check. Это process/model blocker, не product FAIL; Gate 2 evidence Дениса не оспаривается. БД, DNS, Zoho, Railway, аккаунты и письма не изменялись.
+
+
+## PM review — Gate 2 завершён — 2026-09-26 12:39 UTC
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-GATE2-RESULT-MARK-20260926-1237`. **Source:** [PR #60 comment #5846322029](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846322029). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM result:** Gate 2 принят как PASS в согласованном scope: четыре существующих QA-аккаунта перепривязаны к четырём уникальным AgentMail plus-адресам, immutable IDs и ID-based QA allowlist сохранены, rollback подготовлен, cleanup deployment healthy. Это не закрывает почтовый acceptance: Gate 3 остаётся обязательным. Следующий шаг — независимые проверки Бориса и Никиты после прохождения D019 model gate.
+
+
+## PM review — blocker Никиты перед Gate 3 — 2026-09-26 12:39 UTC
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-GATE3-NIKITA-MODEL-BLOCKED-20260926-1239`. **Source:** [PR #60 comment #5846329009](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846329009). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM result:** blocker подтверждён как процессный, не продуктовый FAIL. Для регресса Никиты достаточно целевого дефолта **Sol 3/6**; повышение не требуется. Работа не считается начатой, пока Алексей не подтвердит фактическую настройку чата. После подтверждения Марк обновляет `docs/team.md` и отправляет Никите один новый Wake ID для повторного Model check и claim.
+
+
+## PM review — blocker Бориса перед Gate 3 — 2026-09-26 12:39 UTC
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-BORIS-MODEL-BLOCKER-20260926-1238`. **Source:** [PR #60 comment #5846331447](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846331447). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM result:** blocker подтверждён как процессный, не продуктовый FAIL. Для acceptance Бориса достаточно целевого дефолта **Sol 4/6**; повышение не требуется. Работа не считается начатой, пока Алексей не подтвердит фактическую настройку чата. После подтверждения Марк обновляет `docs/team.md` и отправляет Борису один новый Wake ID для повторного Model check и claim.
