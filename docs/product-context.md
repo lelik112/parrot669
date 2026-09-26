@@ -1,5 +1,9 @@
 # PARROT 669 product context
 
+## Design trust direction — PM-047 (2026-09-26)
+
+Aleksey relayed Alex's proposal for a focused audit before major visual changes. Mark claimed [PM-047](tasks/PM-047-design-trust-audit.md): examine five MVP screens and whether an unfamiliar host understands availability and the first action within 30 seconds. [D018](decisions/D018-design-audit-before-redesign.md) records the limited direction; specific UI changes remain unapproved. The existing Barcelona local-service homepage and the housing Search/Host/Messages flow should be evaluated as one entry journey while retaining the documented evolution of the business. Real-device functional QA in PM-041 keeps its separate resource blocker.
+
 ## BUG-022 — stable Host scroll return (done)
 
 **Agent:** Игорь. **Role:** Developer. **Related task:** [BUG-022](tasks/BUG-022-host-return-loses-scroll-position.md). The Host cabinet still stores the expanded property IDs and absolute `scrollY` only for same-tab navigation to Messages. The defect was the one-shot restore immediately after dashboard rendering: asynchronous address/calendar widgets could increase the document height later, so the browser clamped a saved deep position to the temporary maximum (for example 2249 instead of 2678) and never retried.
