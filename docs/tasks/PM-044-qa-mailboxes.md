@@ -266,3 +266,17 @@
 **Claim / scope:** беру диагностику Gate 3 после signed FAIL Бориса и Никиты: без изменения данных подтвердить четыре фактические binding, eligibility recovery, создание reset token, попытку отправки, provider response и наличие/маршрутизацию сообщения в AgentMail; отделить нейтральный UI-ответ от реальной отправки. Также описать безопасный самостоятельный login path для `qa2`/`qa3` без передачи credentials через GitHub. Rollback, БД, код и инфраструктуру сейчас не меняю; при найденной причине любое исправление сначала получит отдельный scoped claim/план.
 
 **Next:** сопоставить timestamps QA-запросов с production application/provider logs и приватно проверить AgentMail; затем записать конкретный диагноз либо точный blocker.
+
+
+## PM review — PM-044-BORIS-GATE3-FAIL-20260926-1256
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-BORIS-GATE3-FAIL-20260926-1256`. **UTC:** 2026-09-26T12:58:39.358Z. **Source:** [PR #60 comment #5846450831](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846450831). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM result:** Борис отдельно подтвердил сохранность двух ролей и прежних диалогов на разных origins (узкий PASS), но recovery-письмо для `qa` не пришло ни в один QA inbox за ~90 секунд после generic-success UI. Поэтому Gate 3 email delivery FAIL уже и у Бориса, и у Никиты; почтовый acceptance PM-017/006 остаётся открытым. Наблюдение старого email в Host profile не доказывает причину, его также проверить в read-only triage. Re-login/verification/notification не приняты. Денису передана диагностика; секреты не передавать, rollback не запускать без диагноза.
+
+
+## PM start receipt — PM-044-GATE3-TRIAGE-DENIS-START-20260926-1257
+
+**Agent:** Марк. **Role:** Product Manager. **Wake ID:** `PM-044-GATE3-TRIAGE-DENIS-START-20260926-1257`. **UTC:** 2026-09-26T12:58:39.358Z. **Source:** [PR #60 comment #5846453232](https://github.com/lelik112/parrot669/pull/60#issuecomment-5846453232). **Related task:** PM-044 / PM-017 / PM-006.
+
+**PM review:** Денис сделал Model check на подтверждённом Sol 4/6 и signed claim для read-only triage в своём Gate 2/3 scope. Claims QA завершились FAIL/BLOCKED, конфликтов нет. Следующий шаг Дениса — сопоставить production binding, recovery/token/send/provider и AgentMail без записи секретов; исправления требуют отдельного scoped claim после диагноза. PM-044 остаётся blocked до нового end-to-end QA evidence.
