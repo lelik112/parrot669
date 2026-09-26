@@ -56,7 +56,7 @@
 | [PM-008](PM-008-pilot.md) | P1 | planned | —: пилот не запущен |
 | **NEXT — P2** | | | |
 | [PM-045](PM-045-five-minute-agent-wake-up-pilot.md) | P2 | blocked / NEXT — callable ограничен часом; Cloud Browser ChatGPT ждёт безопасного входа, пилот не запущен | Марк / PM готовит, Алексей помогает с авторизованным UI при необходимости; агент пилота позже, Luna / Low для check-in |
-| [PM-037](PM-037-search-date-range-bound.md) | P2 | in progress / NEXT — performance gate принят; release/QA открыты | Игорь / Developer возобновляет после закрытия PM-043: PR heads/CI → backend/frontend release → QA, Sol / High |
+| [PM-037](PM-037-search-date-range-bound.md) | P2 | in review — backend/frontend release и live smoke выполнены; независимая QA открыта | Борис / QA проверяет 366/367, сохранение ввода, обычный поиск; Игорь / Developer передал evidence |
 | [PM-022](PM-022-public-host-profile.md) | P2 | planned | —: privacy approval + QA |
 | [PM-031](PM-031-trust-terminology.md) | P2 | planned | —: без claim редактора |
 
