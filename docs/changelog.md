@@ -1,5 +1,9 @@
 # PARROT 669 changelog
 
+## 2026-09-26 — PM-046: подготовлен адресный PR inbox Игоря
+
+- **Agent:** Марк. **Role:** Product Manager. **Change:** после успешного комментария → существующий чат Марка в PR #60 подготовил docs-only draft [PR #61](https://github.com/lelik112/parrot669/pull/61) и инструкцию однократной настройки `enable_comments` в прежнем чате Игоря. Карточка PM-046 и статус обновлены. Игорев trigger и доставка ему нового комментария ещё не проверены; старый PR #59 закрыт, его пилот выключен. **Related task:** [PM-046](tasks/PM-046-github-event-existing-chat-wakeup.md).
+
 ## 2026-09-26 — PM-046: один GitHub PR event разбудил существующий чат
 
 - **Agent:** Игорь. **Role:** Developer. **Change:** тестовый [PR #59](https://github.com/lelik112/parrot669/pull/59) `opened` доставил event в прежний чат и вызвал один CAS claim [тестовой карточки](tasks/logs/PM-046-pilot.md) за 41 с от создания PR до записи; повторные события не создали второй claim. Прямого push на main в доступной webhook schema нет. PR закрыт без merge, пилотный webhook отключён (`is_enabled=false`). Постоянный процесс не запускали; Марк оценивает цену отдельного PR на назначение и вариант с comments. **Related task:** [PM-046](tasks/PM-046-github-event-existing-chat-wakeup.md).
