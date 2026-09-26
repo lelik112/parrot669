@@ -24,6 +24,7 @@
 | [D014](D014-public-search-date-range.md) | Один публичный запрос ищет до 366 ночей; замер перед выпуском | accepted product contract; implementation pending | Марк по PM-037, 2026-09-25 |
 | [D015](D015-qa-environment-blocked-status.md) | QA blocked только при недоступности всех оставшихся обязательных проверок | accepted; статусы mobile/native сверены | Марк по поручению Алексея 2026-09-25 |
 | [D016](D016-playwright-first-real-device-queue.md) | Playwright для browser QA, настоящий телефон отдельной заблокированной очередью | accepted; PM-040 ждёт dev claim, PM-041 blocked | Решение Алексея 2026-09-25 |
-| [D017](D017-pr-inbox-handoffs.md) | Один docs-only PR inbox на существующий чат агента; адресные comments и task card | accepted limited rollout; #60/#61 PASS, #62–#65 ждут личного trigger и теста | Поручение Алексея 2026-09-26; PM-046 |
+| [D017](D017-pr-inbox-handoffs.md) | Один docs-only PR inbox на существующий чат агента; адресные comments и task card | accepted limited rollout; #60–#64 active, #65 prepared/не беспокоить | Поручение Алексея 2026-09-26; PM-046 |
+| [D018](D018-design-audit-before-redesign.md) | Аудит доверия пяти экранов до крупных визуальных изменений | accepted working direction; конкретные UI-правки не утверждены | Поручение Алексея после предложения Алекса 2026-09-26; PM-047 |
 
 У каждой записи: Decision, Problem, Reason, Alternatives, Rejected, Date, источник и связь с задачей. Незаписанные исторические альтернативы обозначаются как неизвестные, а не восстанавливаются из предположений.
